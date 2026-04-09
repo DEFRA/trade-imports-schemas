@@ -104,49 +104,69 @@ flowchart TD
 
 ### Journey-Specific Document Type Restriction
 
-Common  (`common-v1.schema.json`):
+The architecture uses inline restriction at point-of-use to provide schema-enforced type safety without requiring the common layer to pre-categorize document types by journey.
+
+**Common Layer** (`common-v1.schema.json`):
 ```json
 {
-  "AccompanyingDocumentsCommon": {
+  "DocumentType": {
+    "type": "string",
+    "description": "All document types. Journey-specific validation at point-of-use.",
+    "enum": [
+      "airWaybill",
+      "billOfLading",
+      "veterinaryHealthCertificate",
+      "phytosanitaryCertificate",
+      "..."
+    ]
+  },
+  "AccompanyingDocument": {
     "type": "object",
     "properties": {
-      "documentType": { "type": "string" },
+      "documentType": { "$ref": "#/$defs/DocumentType" },
       "documentReference": { "type": "string" },
       "documentIssueDate": { "type": "string", "format": "date" }
     }
-  },
-  "GenericDocumentType": {
-    "enum": ["airWaybill", "billOfLading", "commercialInvoice", ...]
-  },
-  "AnimalDocumentType": {
-    "enum": ["veterinaryHealthCertificate", "itahc", ...]
-  },
-  "PlantDocumentType": {
-    "enum": ["phytosanitaryCertificate", "heatTreatmentCertificate", ...]
   }
 }
 ```
 
-Journey-Specific (`impv2-v1.schema.json`):
+**Journey Layer** (`impv2-v1.schema.json`):
 ```json
 {
-  "AccompanyingDocument": {
-    "allOf": [
-      { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocumentsCommon" },
-      {
-        "properties": {
-          "documentType": {
-            "anyOf": [
-              { "$ref": "common-v1.schema.json#/$defs/GenericDocumentType" },
-              { "$ref": "common-v1.schema.json#/$defs/AnimalDocumentType" }
-            ]
-          }
+  "VeterinaryInformation": {
+    "properties": {
+      "accompanyingDocuments": {
+        "items": {
+          "allOf": [
+            { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument" },
+            {
+              "properties": {
+                "documentType": {
+                  "description": "Subset valid for animal imports",
+                  "enum": [
+                    "airWaybill",
+                    "billOfLading",
+                    "veterinaryHealthCertificate",
+                    "itahc",
+                    "journeyLog"
+                  ]
+                }
+              }
+            }
+          ]
         }
       }
-    ]
+    }
   }
 }
 ```
+
+**Key benefits:**
+- Common layer doesn't need to know which types belong to which journey
+- Each journey independently declares valid documents for its context
+- Schema-enforced type safety (phytosanitary certs rejected for animals)
+- Easy to add new document types (add to common, journeys opt-in)
 
 ## Versioning Strategy
 
