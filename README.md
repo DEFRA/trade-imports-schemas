@@ -104,14 +104,14 @@ flowchart TD
 
 ### Journey-Specific Document Type Restriction
 
-The architecture uses inline restriction at point-of-use to provide schema-enforced type safety without requiring the common layer to pre-categorize document types by journey.
+The journey schemas use inline restriction at point-of-use to provide schema-enforced type safety without requiring the common schema to pre-categorize document types by journey.
 
 **Common Layer** (`common-v1.schema.json`):
 ```json
 {
   "DocumentType": {
     "type": "string",
-    "description": "All document types. Journey-specific validation at point-of-use.",
+    "description": "Complete superset of all document types across all journeys",
     "enum": [
       "airWaybill",
       "billOfLading",
@@ -137,13 +137,14 @@ The architecture uses inline restriction at point-of-use to provide schema-enfor
   "VeterinaryInformation": {
     "properties": {
       "accompanyingDocuments": {
+        "description": "Restricts to animal-relevant document types only",
         "items": {
           "allOf": [
             { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument" },
             {
               "properties": {
                 "documentType": {
-                  "description": "Subset valid for animal imports",
+                  "description": "Journey-specific subset valid for animal imports",
                   "enum": [
                     "airWaybill",
                     "billOfLading",
