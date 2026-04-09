@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-event-created-v1.schema.json",
+  "title": "IMPv2 NotificationCreated Event",
+  "description": "Published when a new live animals (IMPv2) notification draft is created. Payload reflects the minimal state known at creation time. The data section is a flattened projection of the notification — partOne is not used in the event contract.",
+
+  "allOf": [
+    { "$ref": "event-envelope-v1.schema.json" },
+    {
+      "properties": {
+        "aggregateType": {
+          "const": "Notification",
+          "description": "Fixed aggregate type for notification events"
+        },
+        "subType": {
+          "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+          "description": "Certificate type discriminator (IMPv2, CVEDA, etc.)"
+        },
+        "eventType": {
+          "const": "uk.gov.defra.imports.notification.NotificationCreated",
+          "description": "Fully-qualified event type for created events"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "referenceNumber",
+            "type",
+            "status",
+            "commodities"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "referenceNumber": {
+              "$ref": "impv2-v1.schema.json#/$defs/ReferenceNumber",
+              "description": "The unique reference number allocated to this notification"
+            },
+            "type": {
+              "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+              "description": "The Type of notification that has been created"
+            },
+            "status": {
+              "const": "DRAFT",
+              "description": "Lifecycle status — always DRAFT for a created event"
+            },
+            "consignor": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that sends shipment"
+            },
+            "consignee": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that receives shipment"
+            },
+            "importer": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that is importing the consignment"
+            },
+            "commodities": {
+              "allOf": [
+                { "$ref": "impv2-v1.schema.json#/$defs/Commodities"},
+                {
+                  "required": [
+                    "commodityComplement",
+                    "countryOfOrigin"
+                  ],
+                  "properties": {
+                    "commodityComplement": {
+                      "minItems": 1,
+                      "description": "At least one commodity required at creation to determine routing"
+                    }
+                  }
+                }
+              ],
+              "description": "Commodity and origin required at creation to determine field config and routing"
+            },
+            "purpose": {
+              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
+              "description": "Purpose of consignment details"
+            },
+            "pointOfEntry": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 30,
+              "description": "Border Inspection Post or Designated Point of Entry, e.g. GBFXT1"
+            },
+            "arrivalDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Date when consignment arrives"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-v1.schema.json",
+  "title": "IMPv2 Domain Model v1",
+  "description": "Domain definitions for IMPv2 (live animals) import notifications. Extends imports-common-v1 with animal-specific types. Structurally compatible with DEFRA/ipaffs-imports-notification-schema, curated for the published event contract.",
+
+  "$defs": {
+    "ReferenceNumber": {
+      "$ref": "common-v1.schema.json#/$defs/ReferenceNumber"
+    },
+
+    "NotificationType": {
+      "$ref": "common-v1.schema.json#/$defs/NotificationType"
+    },
+
+    "NotificationStatus": {
+      "$ref": "common-v1.schema.json#/$defs/NotificationStatus"
+    },
+
+    "EconomicOperator": {
+      "$ref": "common-v1.schema.json#/$defs/EconomicOperator"
+    },
+
+    "EconomicOperatorAddress": {
+      "$ref": "common-v1.schema.json#/$defs/EconomicOperatorAddress"
+    },
+
+    "Country": {
+      "$ref": "common-v1.schema.json#/$defs/Country"
+    },
+
+    "CommodityComplement": {
+      "$ref": "common-v1.schema.json#/$defs/CommodityComplement"
+    },
+
+    "ComplementParameterSet": {
+      "$ref": "common-v1.schema.json#/$defs/ComplementParameterSet"
+    },
+
+    "Identifier": {
+      "$ref": "common-v1.schema.json#/$defs/Identifier"
+    },
+
+    "Purpose": {
+      "$ref": "common-v1.schema.json#/$defs/Purpose"
+    },
+
+    "ApprovedEstablishment": {
+      "$ref": "common-v1.schema.json#/$defs/ApprovedEstablishment"
+    },
+
+    "NominatedContact": {
+      "$ref": "common-v1.schema.json#/$defs/NominatedContact"
+    },
+
+    "AnimalCertification": {
+      "type": "string",
+      "description": "Certification for animal. Compatible with ipaffs-imports-notification-schema AnimalCertification.",
+      "enum": [
+        "Animal feeding stuff",
+        "Approved",
+        "Artificial reproduction",
+        "Breeding",
+        "Circus",
+        "Commercial sale",
+        "Commercial sale or change of ownership",
+        "Fattening",
+        "Game restocking",
+        "Human consumption",
+        "Internal market",
+        "Other",
+        "Personally owned pets not for rehoming",
+        "Pets",
+        "Production",
+        "Quarantine",
+        "Racing/Competition",
+        "Registered equidae",
+        "Registered",
+        "Rejected or Returned consignment",
+        "Relaying",
+        "Rescue/Rehoming",
+        "Research",
+        "Slaughter",
+        "Technical/Pharmaceutical use",
+        "Transit",
+        "Zoo/Collection"
+      ]
+    },
+
+    "AccompanyingDocument": {
+      "description": "Accompanying document for live animal imports. Restricts document types to generic + animal-specific types.",
+      "allOf": [
+        { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocumentsCommon"},
+        {
+          "properties": {
+            "documentType": {
+              "anyOf": [
+                { "$ref": "common-v1.schema.json#/$defs/GenericDocumentType"},
+                { "$ref": "common-v1.schema.json#/$defs/AnimalDocumentType"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    "VeterinaryInformation": {
+      "type": "object",
+      "description": "Veterinary checks and document details",
+      "additionalProperties": false,
+      "properties": {
+        "establishmentsOfOrigin": {
+          "type": "array",
+          "description": "List of approved establishments which issued veterinary documents",
+          "items": { "$ref": "#/$defs/ApprovedEstablishment" }
+        },
+        "veterinaryDocument": {
+          "type": "string",
+          "description": "Veterinary document identification"
+        },
+        "veterinaryDocumentIssueDate": {
+          "type": "string",
+          "description": "Veterinary document issue date"
+        },
+        "accompanyingDocuments": {
+          "type": "array",
+          "description": "Accompanying documents",
+          "items": { "$ref": "#/$defs/AccompanyingDocument" }
+        }
+      }
+    },
+
+    "Commodities": {
+      "description": "Commodities for live animal imports. Extends common Commodities with animal-specific certification.",
+      "allOf": [
+        { "$ref": "common-v1.schema.json#/$defs/Commodities"},
+        {
+          "properties": {
+            "animalsCertifiedAs": {
+              "$ref": "#/$defs/AnimalCertification"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

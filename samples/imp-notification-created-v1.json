@@ -1,0 +1,28 @@
+{
+  "eventId": "f3a4b5c6-d7e8-9012-3456-789abcdef012",
+  "aggregateType": "Notification",
+  "subType": "IMPv2",
+  "aggregateId": "Imports.Notification.IMPv2.DRAFT.GB.2024.1234",
+  "aggregateVersion": 1,
+  "eventType": "uk.gov.defra.imports.notification.NotificationCreated",
+  "timestamp": "2024-10-15T09:30:00.000Z",
+  "data": {
+    "referenceNumber": "DRAFT.GB.2024.1234",
+    "type": "IMPv2",
+    "status": "DRAFT",
+    "commodities": {
+      "commodityComplement": [
+        {
+          "commodityID": "0101210000",
+          "complementName": "Live horses, pure-bred breeding animals"
+        }
+      ],
+      "countryOfOrigin": "FR"
+    }
+  },
+  "metadata": {
+    "correlationId": "cid-20241015-093000",
+    "schemaVersion": 1,
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-event-created-v1.schema.json"
+  }
+}

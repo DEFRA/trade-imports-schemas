@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-event-submitted-v1.schema.json",
+  "title": "IMPv2 NotificationSubmitted Event",
+  "description": "Published when a live animals (IMPv2) notification is submitted for processing. All mandatory fields validated at submission time. The data section is a flattened projection of the notification — partOne is not used in the event contract.",
+
+  "allOf": [
+    { "$ref": "event-envelope-v1.schema.json" },
+    {
+      "properties": {
+        "aggregateType": {
+          "const": "Notification",
+          "description": "Fixed aggregate type for notification events"
+        },
+        "subType": {
+          "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+          "description": "Certificate type discriminator (IMPv2, CVEDA, etc.)"
+        },
+        "eventType": {
+          "const": "uk.gov.defra.imports.notification.NotificationSubmitted",
+          "description": "Fully-qualified event type for submitted events"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "referenceNumber",
+            "type",
+            "status",
+            "consignor",
+            "consignee",
+            "importer",
+            "placeOfDestination",
+            "commodities",
+            "purpose",
+            "pointOfEntry",
+            "arrivalDate",
+            "veterinaryInformation",
+            "submissionDate"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "referenceNumber": {
+              "$ref": "impv2-v1.schema.json#/$defs/ReferenceNumber",
+              "description": "The unique reference number - must match the status in the reference"
+            },
+            "type": {
+              "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+              "description": "The Type of notification that has been submitted"
+            },
+            "status": {
+              "const": "SUBMITTED",
+              "description": "Lifecycle status — always SUBMITTED for a submitted event"
+            },
+            "consignor": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that sends shipment"
+            },
+            "consignee": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that receives shipment"
+            },
+            "importer": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Person or Company that is importing the consignment"
+            },
+            "placeOfDestination": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Where the shipment is to be sent. For IMP minimum 48 hour accommodation/holding location."
+            },
+            "cphNumber": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "description": "County Parish Holding number. Conditional on commodity type (live animals only)."
+            },
+            "commodities": {
+              "allOf": [
+                { "$ref": "impv2-v1.schema.json#/$defs/Commodities"},
+                {
+                  "required": [
+                    "commodityComplement",
+                    "complementParameterSet",
+                    "countryOfOrigin"
+                  ],
+                  "properties": {
+                    "commodityComplement": { "minItems": 1 },
+                    "complementParameterSet": { "minItems": 1 }
+                  }
+                }
+              ],
+              "description": "Commodity details — must include at least one complement and parameter set at submission"
+            },
+            "purpose": {
+              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
+              "description": "Purpose of consignment details"
+            },
+            "pointOfEntry": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 30,
+              "description": "Border Inspection Post or Designated Point of Entry, e.g. GBFXT1"
+            },
+            "arrivalDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Date when consignment arrives"
+            },
+            "transporter": {
+              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "description": "Transporter of consignment details"
+            },
+            "veterinaryInformation": {
+              "$ref": "impv2-v1.schema.json#/$defs/VeterinaryInformation",
+              "description": "Veterinary checks and document details"
+            },
+            "portOfExit": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255,
+              "description": "Exit Port for EU Import Notification"
+            },
+            "nominatedContacts": {
+              "type": "array",
+              "description": "List of nominated contacts to receive text and email notifications",
+              "items": { "$ref": "impv2-v1.schema.json#/$defs/NominatedContact"}
+            },
+            "submissionDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Date and time when the notification was submitted"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

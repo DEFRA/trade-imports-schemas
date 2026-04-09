@@ -1,0 +1,141 @@
+{
+  "eventId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "aggregateType": "Notification",
+  "subType": "IMPv2",
+  "aggregateId": "Imports.Notification.IMPv2.IMP.GB.2025.1009045",
+  "aggregateVersion": 2,
+  "eventType": "uk.gov.defra.imports.notification.NotificationSubmitted",
+  "timestamp": "2025-02-20T14:12:03.456Z",
+  "data": {
+    "type": "IMPv2",
+    "status": "SUBMITTED",
+    "referenceNumber":"IMP.GB.2025.1009045",
+    "consignor": {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "type": "exporter",
+      "companyName": "Van der Berg Equine BV",
+      "address": {
+        "addressLine1": "Paardenlaan 7",
+        "city": "Utrecht",
+        "postalZipCode": "3500 AA",
+        "countryISOCode": "NL"
+      }
+    },
+    "consignee": {
+      "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "type": "consignee",
+      "companyName": "Cheltenham Stud Farm Ltd",
+      "address": {
+        "addressLine1": "Manor Road",
+        "city": "Cheltenham",
+        "postalZipCode": "GL50 2QH",
+        "countryISOCode": "GB"
+      }
+    },
+    "importer": {
+      "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "type": "importer",
+      "companyName": "Cheltenham Stud Farm Ltd",
+      "address": {
+        "addressLine1": "Manor Road",
+        "city": "Cheltenham",
+        "postalZipCode": "GL50 2QH",
+        "countryISOCode": "GB"
+      }
+    },
+    "placeOfDestination": {
+      "id": "9a3b5c7d-1234-4e6f-8a9b-0c1d2e3f4a5b",
+      "type": "destination",
+      "companyName": "Cheltenham Stud Farm Ltd",
+      "address": {
+        "addressLine1": "Manor Road",
+        "city": "Cheltenham",
+        "postalZipCode": "GL50 2QH",
+        "countryISOCode": "GB"
+      }
+    },
+    "cphNumber": "12/345/6789",
+    "commodities": {
+      "commodityComplement": [
+        {
+          "commodityID": "010121",
+          "complementID": 1,
+          "complementName": "Pure-bred breeding horses",
+          "speciesName": "Equus caballus",
+          "speciesTypeName": "Horses",
+          "speciesClass": "Equidae"
+        }
+      ],
+      "complementParameterSet": [
+        {
+          "complementID": 1,
+          "speciesID": "010121",
+          "keyDataPair": [
+            { "key": "netweight", "data": "6000" },
+            { "key": "number_animal", "data": "12" }
+          ],
+          "identifiers": [
+            {
+              "speciesNumber": 1,
+              "data": {
+                "passport": "NL-528-00123456",
+                "microchip": "528210004567890"
+              },
+              "isPlaceOfDestinationThePermanentAddress": true
+            },
+            {
+              "speciesNumber": 2,
+              "data": {
+                "passport": "NL-528-00123457",
+                "microchip": "528210004567891"
+              },
+              "isPlaceOfDestinationThePermanentAddress": true
+            }
+          ]
+        }
+      ],
+      "countryOfOrigin": "NL",
+      "animalsCertifiedAs": "Breeding"
+    },
+    "purpose": {
+      "purposeGroup": "For Import",
+      "internalMarketPurpose": "Breeding"
+    },
+    "pointOfEntry": "GBFXT1",
+    "arrivalDate": "2025-02-22",
+    "transporter": {
+      "type": "commercial transporter",
+      "companyName": "EuroHorse Transport NV",
+      "address": {
+        "addressLine1": "Transportweg 12",
+        "city": "Antwerpen",
+        "countryISOCode": "BE"
+      }
+    },
+    "veterinaryInformation": {
+      "veterinaryDocument": "NL-HC-2025-88431",
+      "veterinaryDocumentIssueDate": "2025-02-18",
+      "accompanyingDocuments": [
+        {
+          "documentType": "veterinaryHealthCertificate",
+          "documentReference": "NL-HC-2025-88431",
+          "documentIssueDate": "2025-02-18"
+        }
+      ]
+    },
+    "portOfExit": "Rotterdam",
+    "nominatedContacts": [
+      {
+        "name": "James Morrison",
+        "email": "j.morrison@cheltenhamstud.co.uk",
+        "telephone": "07700900123"
+      }
+    ],
+    "submissionDate": "2025-02-20T14:12:03.456Z"
+  },
+  "metadata": {
+    "correlationId": "cid-20250220-141203",
+    "schemaVersion": 1,
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-event-submitted-v1.schema.json"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/event-envelope-v1.schema.json",
+  "title": "Trade Imports Event Envelope",
+  "description": "Event envelope for Trade Imports CDP Microservice Architecture",
+
+  "type": "object",
+  "required": [
+    "eventId",
+    "aggregateType",
+    "subType",
+    "aggregateId",
+    "aggregateVersion",
+    "eventType",
+    "timestamp",
+    "data",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for deduplication, tracing, and replay"
+    },
+    "aggregateType": {
+      "type": "string",
+      "description": "Type of aggregate  (e.g., Notification, Export)"
+    },
+    "subType": {
+      "type": "string",
+      "description": "Discriminator for aggregate sub-types (e.g., IMP, CVEDA)"
+    },
+    "aggregateId": {
+      "type": "string",
+      "description": "Unique identifier for the aggregate instance (compound key format varies by aggregate type)"
+    },
+    "aggregateVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonic version for ordering events within an aggregate instance"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Fully-qualified event type name (e.g., uk.gov.defra.imports.notification.NotificationCreated)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC time the business event occurred (YYYY-MM-DDTHH:mm:ss.sssZ milliseconds precision)"
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload (structure defined by individual event schemas)"
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "schemaUri"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation identifier propagated from the request boundary"
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Structural schema version for this event type"
+        },
+        "schemaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Reference to the governing event schema definition (e.g., event-submitted-v1.schema.json for live animals submitted, plants-event-submitted-v1.schema.json for plants)"
+        }
+      }
+    }
+  }
+}
