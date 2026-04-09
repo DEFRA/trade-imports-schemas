@@ -148,6 +148,42 @@ Journey-Specific (`impv2-v1.schema.json`):
 }
 ```
 
+## Versioning Strategy
+
+This repository uses two versioning concepts:
+
+### Git Release Versions (Semantic Versioning)
+
+Git tags (`v1.0.0`, `v1.1.0`, `v2.0.0`) represent snapshots of the entire repository:
+- **MAJOR** (v2.0.0): Breaking change to any schema (removed fields, changed semantics)
+- **MINOR** (v1.1.0): New schemas, backward-compatible additions (new event types, expanded enums)
+- **PATCH** (v1.0.1): Documentation updates, tooling fixes, no schema changes
+
+### Schema File Versions
+
+Filenames include version suffix (`common-v1.schema.json`, `impv2-v1.schema.json`) that changes ONLY on breaking changes to that specific schema contract.
+
+**Key principle:** Schema file versions change rarely. Multiple versions can coexist during migration periods.
+
+**Examples:**
+- Release **v1.0.0** contains: `common-v1`, `impv2-v1`
+- Release **v1.1.0** contains: `common-v1` (expanded enum), `impv2-v1` (new event type added)
+- Release **v2.0.0** contains: `common-v1`, `common-v2`, `impv2-v1`, `impv2-v2` (all versions coexist)
+
+**When to create a new schema file version (e.g., common-v2.schema.json):**
+- ❌ Removing required fields
+- ❌ Making optional fields required
+- ❌ Changing field semantics (e.g., `amount` changes from pence to pounds)
+- ❌ Removing enum values
+
+**When to update existing schema file in place:**
+- ✅ Adding optional fields
+- ✅ Expanding enum values (with defensive consumer handling)
+- ✅ Adding new event types (different schema files)
+- ✅ Clarifying descriptions
+
+**Changelog:** All changes documented in [CHANGELOG.md](./CHANGELOG.md) following [Keep a Changelog](https://keepachangelog.com/) format.
+
 ## Validation
 
 ### Schema Validation
