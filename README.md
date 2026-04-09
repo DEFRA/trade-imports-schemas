@@ -58,7 +58,7 @@ The schemas are structured for reusability across import journeys:
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
+    'theme': 'default',
     'themeVariables': {
       'fontSize': '14px'
     },
@@ -161,26 +161,24 @@ Git tags (`v1.0.0`, `v1.1.0`, `v2.0.0`) represent snapshots of the entire reposi
 
 ### Schema File Versions
 
-Filenames include version suffix (`common-v1.schema.json`, `impv2-v1.schema.json`) that changes ONLY on breaking changes to that specific schema contract.
-
-**Key principle:** Schema file versions change rarely. Multiple versions can coexist during migration periods.
+Filenames include version suffix (`common-v1.schema.json`, `impv2-v1.schema.json`) that changes only on breaking changes to that specific schema.
 
 **Examples:**
 - Release **v1.0.0** contains: `common-v1`, `impv2-v1`
 - Release **v1.1.0** contains: `common-v1` (expanded enum), `impv2-v1` (new event type added)
 - Release **v2.0.0** contains: `common-v1`, `common-v2`, `impv2-v1`, `impv2-v2` (all versions coexist)
 
-**When to create a new schema file version (e.g., common-v2.schema.json):**
-- ❌ Removing required fields
-- ❌ Making optional fields required
-- ❌ Changing field semantics (e.g., `amount` changes from pence to pounds)
-- ❌ Removing enum values
+Create a new schema file version when making breaking changes:
+- Removing required fields
+- Making optional fields required
+- Changing field semantics (e.g., `amount` changes from pence to pounds)
+- Removing enum values
 
-**When to update existing schema file in place:**
-- ✅ Adding optional fields
-- ✅ Expanding enum values (with defensive consumer handling)
-- ✅ Adding new event types (different schema files)
-- ✅ Clarifying descriptions
+Update existing schema file in place when:
+- Adding optional fields
+- Expanding enum values (with defensive consumer handling)
+- Adding new event types (different schema files)
+- Clarifying descriptions
 
 **Changelog:** All changes documented in [CHANGELOG.md](./CHANGELOG.md) following [Keep a Changelog](https://keepachangelog.com/) format.
 
