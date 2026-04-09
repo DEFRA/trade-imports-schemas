@@ -13,7 +13,7 @@
           "description": "Fixed aggregate type for notification events"
         },
         "subType": {
-          "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+          "$ref": "common-v1.schema.json#/$defs/NotificationType",
           "description": "Certificate type discriminator (IMPv2, CVEDA, etc.)"
         },
         "eventType": {
@@ -40,11 +40,11 @@
           "additionalProperties": false,
           "properties": {
             "referenceNumber": {
-              "$ref": "impv2-v1.schema.json#/$defs/ReferenceNumber",
+              "$ref": "common-v1.schema.json#/$defs/ReferenceNumber",
               "description": "The unique reference number - must match the status in the reference"
             },
             "type": {
-              "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+              "$ref": "common-v1.schema.json#/$defs/NotificationType",
               "description": "The Type of notification that has been submitted"
             },
             "status": {
@@ -52,19 +52,19 @@
               "description": "Lifecycle status — always SUBMITTED for a submitted event"
             },
             "consignor": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that sends shipment"
             },
             "consignee": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that receives shipment"
             },
             "importer": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that is importing the consignment"
             },
             "placeOfDestination": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Where the shipment is to be sent. For IMP minimum 48 hour accommodation/holding location."
             },
             "cphNumber": {
@@ -91,7 +91,7 @@
               "description": "Commodity details — must include at least one complement and parameter set at submission"
             },
             "purpose": {
-              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
+              "$ref": "common-v1.schema.json#/$defs/Purpose",
               "description": "Purpose of consignment details"
             },
             "pointOfEntry": {
@@ -106,7 +106,7 @@
               "description": "Date when consignment arrives"
             },
             "transporter": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Transporter of consignment details"
             },
             "veterinaryInformation": {
@@ -122,7 +122,7 @@
             "nominatedContacts": {
               "type": "array",
               "description": "List of nominated contacts to receive text and email notifications",
-              "items": { "$ref": "impv2-v1.schema.json#/$defs/NominatedContact"}
+              "items": { "$ref": "common-v1.schema.json#/$defs/NominatedContact"}
             },
             "submissionDate": {
               "type": "string",

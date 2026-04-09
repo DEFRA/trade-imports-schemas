@@ -13,7 +13,7 @@
           "description": "Fixed aggregate type for notification events"
         },
         "subType": {
-          "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+          "$ref": "common-v1.schema.json#/$defs/NotificationType",
           "description": "Certificate type discriminator (IMPv2, CVEDA, etc.)"
         },
         "eventType": {
@@ -31,11 +31,11 @@
           "additionalProperties": false,
           "properties": {
             "referenceNumber": {
-              "$ref": "impv2-v1.schema.json#/$defs/ReferenceNumber",
+              "$ref": "common-v1.schema.json#/$defs/ReferenceNumber",
               "description": "The unique reference number allocated to this notification"
             },
             "type": {
-              "$ref": "impv2-v1.schema.json#/$defs/NotificationType",
+              "$ref": "common-v1.schema.json#/$defs/NotificationType",
               "description": "The Type of notification that has been created"
             },
             "status": {
@@ -43,15 +43,15 @@
               "description": "Lifecycle status — always DRAFT for a created event"
             },
             "consignor": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that sends shipment"
             },
             "consignee": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that receives shipment"
             },
             "importer": {
-              "$ref": "impv2-v1.schema.json#/$defs/EconomicOperator",
+              "$ref": "common-v1.schema.json#/$defs/EconomicOperator",
               "description": "Person or Company that is importing the consignment"
             },
             "commodities": {
@@ -73,7 +73,7 @@
               "description": "Commodity and origin required at creation to determine field config and routing"
             },
             "purpose": {
-              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
+              "$ref": "common-v1.schema.json#/$defs/Purpose",
               "description": "Purpose of consignment details"
             },
             "pointOfEntry": {

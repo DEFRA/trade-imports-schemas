@@ -497,67 +497,53 @@
       }
     },
 
-    "GenericDocumentType": {
+    "DocumentType": {
       "type": "string",
-      "description": "Document types common to all import journeys",
+      "description": "Document types for import notifications. Journey-specific validation performed at application layer.",
       "enum": [
         "airWaybill",
         "billOfLading",
         "cargoManifest",
+        "catchCertificate",
         "commercialDocument",
         "commercialInvoice",
+        "conformityCertificate",
         "containerManifest",
         "customsDeclaration",
+        "docom",
+        "healthCertificate",
+        "heatTreatmentCertificate",
+        "importPermit",
         "inspectionCertificate",
+        "itahc",
         "journeyLog",
+        "laboratorySamplingResultsForAflatoxin",
+        "latestVeterinaryHealthCertificate",
         "letterOfAuthority",
         "licenseOrAuthorisation",
         "listOfIngredients",
+        "mycotoxinCertification",
         "originCertificate",
         "other",
         "packingList",
+        "phytosanitaryCertificate",
+        "processingStatement",
+        "proofOfStorage",
         "railwayBill",
         "roadConsignmentNote",
-        "seaWaybill"
-      ]
-    },
-
-    "AnimalDocumentType": {
-      "type": "string",
-      "description": "Document types specific to live animal imports",
-      "enum": [
-        "catchCertificate",
-        "docom",
-        "healthCertificate",
-        "itahc",
-        "latestVeterinaryHealthCertificate",
+        "seaWaybill",
         "veterinaryHealthCertificate"
       ]
     },
 
-    "PlantDocumentType": {
-      "type": "string",
-      "description": "Document types specific to plant imports",
-      "enum": [
-        "conformityCertificate",
-        "heatTreatmentCertificate",
-        "importPermit",
-        "laboratorySamplingResultsForAflatoxin",
-        "mycotoxinCertification",
-        "phytosanitaryCertificate",
-        "processingStatement",
-        "proofOfStorage"
-      ]
-    },
-
-    "AccompanyingDocumentsCommon": {
+    "AccompanyingDocument": {
       "type": "object",
-      "description": "Base structure for accompanying documents. Compatible with ipaffs-imports-notification-schema AccompanyingDocument. Document type enums are defined per journey.",
+      "description": "Accompanying document for import notifications. Compatible with ipaffs-imports-notification-schema AccompanyingDocument.",
       "additionalProperties": false,
       "properties": {
         "documentType": {
-          "type": "string",
-          "description": "Document type - restricted by journey-specific schema"
+          "$ref": "#/$defs/DocumentType",
+          "description": "Type of accompanying document"
         },
         "documentReference": {
           "type": "string",

@@ -5,54 +5,6 @@
   "description": "Domain definitions for IMPv2 (live animals) import notifications. Extends imports-common-v1 with animal-specific types. Structurally compatible with DEFRA/ipaffs-imports-notification-schema, curated for the published event contract.",
 
   "$defs": {
-    "ReferenceNumber": {
-      "$ref": "common-v1.schema.json#/$defs/ReferenceNumber"
-    },
-
-    "NotificationType": {
-      "$ref": "common-v1.schema.json#/$defs/NotificationType"
-    },
-
-    "NotificationStatus": {
-      "$ref": "common-v1.schema.json#/$defs/NotificationStatus"
-    },
-
-    "EconomicOperator": {
-      "$ref": "common-v1.schema.json#/$defs/EconomicOperator"
-    },
-
-    "EconomicOperatorAddress": {
-      "$ref": "common-v1.schema.json#/$defs/EconomicOperatorAddress"
-    },
-
-    "Country": {
-      "$ref": "common-v1.schema.json#/$defs/Country"
-    },
-
-    "CommodityComplement": {
-      "$ref": "common-v1.schema.json#/$defs/CommodityComplement"
-    },
-
-    "ComplementParameterSet": {
-      "$ref": "common-v1.schema.json#/$defs/ComplementParameterSet"
-    },
-
-    "Identifier": {
-      "$ref": "common-v1.schema.json#/$defs/Identifier"
-    },
-
-    "Purpose": {
-      "$ref": "common-v1.schema.json#/$defs/Purpose"
-    },
-
-    "ApprovedEstablishment": {
-      "$ref": "common-v1.schema.json#/$defs/ApprovedEstablishment"
-    },
-
-    "NominatedContact": {
-      "$ref": "common-v1.schema.json#/$defs/NominatedContact"
-    },
-
     "AnimalCertification": {
       "type": "string",
       "description": "Certification for animal. Compatible with ipaffs-imports-notification-schema AnimalCertification.",
@@ -87,32 +39,15 @@
       ]
     },
 
-    "AccompanyingDocument": {
-      "description": "Accompanying document for live animal imports. Restricts document types to generic + animal-specific types.",
-      "allOf": [
-        { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocumentsCommon"},
-        {
-          "properties": {
-            "documentType": {
-              "anyOf": [
-                { "$ref": "common-v1.schema.json#/$defs/GenericDocumentType"},
-                { "$ref": "common-v1.schema.json#/$defs/AnimalDocumentType"}
-              ]
-            }
-          }
-        }
-      ]
-    },
-
     "VeterinaryInformation": {
       "type": "object",
-      "description": "Veterinary checks and document details",
+      "description": "Veterinary checks and document details for live animal imports",
       "additionalProperties": false,
       "properties": {
         "establishmentsOfOrigin": {
           "type": "array",
           "description": "List of approved establishments which issued veterinary documents",
-          "items": { "$ref": "#/$defs/ApprovedEstablishment" }
+          "items": { "$ref": "common-v1.schema.json#/$defs/ApprovedEstablishment" }
         },
         "veterinaryDocument": {
           "type": "string",
@@ -124,8 +59,44 @@
         },
         "accompanyingDocuments": {
           "type": "array",
-          "description": "Accompanying documents",
-          "items": { "$ref": "#/$defs/AccompanyingDocument" }
+          "description": "Accompanying documents valid for live animal imports. Uses allOf to inherit common AccompanyingDocument structure while restricting documentType enum to only animal-relevant types (veterinary certificates, transport documents, etc). This provides schema-level type safety without requiring the common layer to pre-categorize document types by journey.",
+          "items": {
+            "allOf": [
+              { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument" },
+              {
+                "properties": {
+                  "documentType": {
+                    "description": "Document types valid for live animal imports (IMPv2, CVEDA). Subset of common DocumentType enum.",
+                    "enum": [
+                      "airWaybill",
+                      "billOfLading",
+                      "cargoManifest",
+                      "catchCertificate",
+                      "commercialDocument",
+                      "commercialInvoice",
+                      "containerManifest",
+                      "customsDeclaration",
+                      "docom",
+                      "healthCertificate",
+                      "inspectionCertificate",
+                      "itahc",
+                      "journeyLog",
+                      "latestVeterinaryHealthCertificate",
+                      "letterOfAuthority",
+                      "licenseOrAuthorisation",
+                      "originCertificate",
+                      "other",
+                      "packingList",
+                      "railwayBill",
+                      "roadConsignmentNote",
+                      "seaWaybill",
+                      "veterinaryHealthCertificate"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
         }
       }
     },
