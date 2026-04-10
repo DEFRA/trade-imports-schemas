@@ -24,12 +24,7 @@
 
     "NotificationStatus": {
       "type": "string",
-      "enum": [
-        "DRAFT",
-        "SUBMITTED",
-        "VALIDATED",
-        "REJECTED"
-      ],
+      "enum": ["DRAFT", "AMENDED", "SUBMITTED", "CANCELLED", "REJECTED"],
       "description": "Lifecycle status of the notification"
     },
 
@@ -284,11 +279,6 @@
           "type": "string",
           "description": "Species identifier"
         },
-        "eppoCode": {
-          "type": "string",
-          "maxLength": 10,
-          "description": "EPPO code (from upstream schema, primarily for plants)"
-        },
         "isCdsMatched": {
           "type": "boolean",
           "description": "Whether commodity was matched via CDS (from upstream schema)"
@@ -370,7 +360,7 @@
 
     "Purpose": {
       "type": "object",
-      "description": "Purpose of consignment details. Compatible with ipaffs-imports-notification-schema Purpose. Includes upstream fields beyond the EU live animals subset for forward-compatibility with other journeys.",
+      "description": "Purpose of consignment including purpose group and internal market purpose. Journey-specific schemas may restrict valid enum values.",
       "additionalProperties": false,
       "properties": {
         "purposeGroup": {
@@ -412,94 +402,18 @@
             "Registered Horses"
           ]
         },
-        "conformsToEU": {
-          "type": "boolean",
-          "description": "Whether consignment conforms to EU requirements"
-        },
-        "forNonConforming": {
-          "type": "string",
-          "description": "Destination type for non-conforming consignments",
-          "enum": [
-            "Customs Warehouse",
-            "Free Zone or Free Warehouse",
-            "Ship Supplier",
-            "Ship"
-          ]
-        },
-        "forImportOrAdmission": {
-          "type": "string",
-          "description": "Import or admission type",
-          "enum": [
-            "Definitive import",
-            "Horses Re-entry",
-            "Temporary admission horses"
-          ]
-        },
         "exitBIP": {
           "type": "string",
           "minLength": 1,
           "maxLength": 15,
           "description": "Exit Border Inspection Post"
-        },
-        "finalBIP": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 15,
-          "description": "Final Border Inspection Post"
-        },
-        "thirdCountry": {
-          "type": "string",
-          "description": "Third country destination"
-        },
-        "thirdCountryTranshipment": {
-          "type": "string",
-          "description": "Third country transhipment destination"
-        },
-        "transitThirdCountries": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Transit third countries"
-        },
-        "regNumber": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 20,
-          "description": "Registration number"
-        },
-        "shipName": {
-          "type": "string",
-          "description": "Ship name"
-        },
-        "shipPort": {
-          "type": "string",
-          "description": "Ship port"
-        },
-        "exitDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Exit date"
-        },
-        "estimatedArrivalDateAtPortOfExit": {
-          "type": "string",
-          "format": "date",
-          "description": "Estimated arrival date at port of exit"
-        },
-        "estimatedArrivalTimeAtPortOfExit": {
-          "type": "string",
-          "description": "Estimated arrival time at port of exit"
-        },
-        "pointOfExit": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 255,
-          "description": "Point of exit"
         }
       }
     },
 
     "DocumentType": {
       "type": "string",
-      "description": "Document types for import notifications. Journey-specific validation performed at application layer.",
+      "description": "Complete superset of all document types across all journeys. Journey-specific schemas restrict to valid subsets at point-of-use.",
       "enum": [
         "airWaybill",
         "billOfLading",
@@ -635,8 +549,7 @@
 
     "Commodities": {
       "type": "object",
-      "description": "Commodities container with complement and parameter arrays. Flattened from partOne.commodities.",
-      "additionalProperties": false,
+      "description": "Commodities container with complement and parameter arrays. Flattened from partOne.commodities. Journey-specific schemas may extend with additional fields.",
       "properties": {
         "commodityComplement": {
           "type": "array",
@@ -660,10 +573,6 @@
           "minLength": 1,
           "maxLength": 10,
           "description": "Region of country"
-        },
-        "animalsCertifiedAs": {
-          "type": "string",
-          "description": "Certification of animals (breeding, slaughter, etc.) - restricted by journey-specific schema"
         }
       }
     }
