@@ -13,8 +13,8 @@
           "description": "Fixed aggregate type for notification events"
         },
         "subType": {
-          "$ref": "common-v1.schema.json#/$defs/NotificationType",
-          "description": "Certificate type discriminator (IMPv2, CVEDA, etc.)"
+          "const": "IMPv2",
+          "description": "Certificate type for IMPv2 journey"
         },
         "eventType": {
           "const": "uk.gov.defra.imports.notification.NotificationSubmitted",
@@ -44,8 +44,8 @@
               "description": "The unique reference number - must match the status in the reference"
             },
             "type": {
-              "$ref": "common-v1.schema.json#/$defs/NotificationType",
-              "description": "The Type of notification that has been submitted"
+              "const": "IMPv2",
+              "description": "Notification type for IMPv2 journey"
             },
             "status": {
               "const": "SUBMITTED",
