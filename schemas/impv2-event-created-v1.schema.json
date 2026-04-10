@@ -73,7 +73,7 @@
               "description": "Commodity and origin required at creation to determine field config and routing"
             },
             "purpose": {
-              "$ref": "common-v1.schema.json#/$defs/Purpose",
+              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
               "description": "Purpose of consignment details"
             },
             "pointOfEntry": {

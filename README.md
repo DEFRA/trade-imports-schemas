@@ -6,15 +6,15 @@ JSON Schema definitions for EUDP notification events
 
 ## Schema Arrangement
 
-The schemas are structured for reusability across import journeys:
+The schemas are structured for reusability and progressive specificity:
 
 ### Common Domain
 
 `common-v1.schema.json`
-- Shared business domain types across all import journeys (animals, plants, poao)
+- Shared business domain types across all import journeys (animals, plants, POAO)
 - Journey-agnostic types: EconomicOperator, Commodities, Purpose, ApprovedEstablishment, etc.
 - Shared and discriminated types such as Documents
-- Agnostic to events
+- Agnostic to journey specific events (this is still an event and not a domain schema)
 
 ### Event Specification
 

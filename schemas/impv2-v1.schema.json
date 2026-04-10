@@ -5,6 +5,59 @@
   "description": "Domain definitions for IMPv2 (live animals) import notifications. Extends imports-common-v1 with animal-specific types. Structurally compatible with DEFRA/ipaffs-imports-notification-schema, curated for the published event contract.",
 
   "$defs": {
+    "Purpose": {
+      "type": "object",
+      "description": "Purpose of consignment details for live animals journey.",
+      "additionalProperties": false,
+      "properties": {
+        "purposeGroup": {
+          "type": "string",
+          "description": "Purpose group of consignment (general purpose)",
+          "enum": [
+            "For Import",
+            "For NON-Conforming Consignments",
+            "For Transhipment to",
+            "For Transit to 3rd Country",
+            "For Re-Import",
+            "For Private Import",
+            "For Transfer To",
+            "For Import Re-Conformity Check",
+            "For Import Non-Internal Market"
+          ]
+        },
+        "internalMarketPurpose": {
+          "type": "string",
+          "description": "Detailed purpose of internal market purpose group",
+          "enum": [
+            "Animal Feeding Stuff",
+            "Human Consumption",
+            "Pharmaceutical Use",
+            "Technical Use",
+            "Other",
+            "Commercial Sale",
+            "Commercial sale or change of ownership",
+            "Rescue",
+            "Breeding",
+            "Research",
+            "Racing or Competition",
+            "Approved Premises or Body",
+            "Companion Animal not for Resale or Rehoming",
+            "Production",
+            "Slaughter",
+            "Fattening",
+            "Game Restocking",
+            "Registered Horses"
+          ]
+        },
+        "exitBIP": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 15,
+          "description": "Exit Border Inspection Post"
+        }
+      }
+    },
+
     "AnimalCertification": {
       "type": "string",
       "description": "Certification for animal. Compatible with ipaffs-imports-notification-schema AnimalCertification.",
@@ -107,6 +160,10 @@
         { "$ref": "common-v1.schema.json#/$defs/Commodities"},
         {
           "properties": {
+            "includeNonAblactedAnimals": {
+              "type": "boolean",
+              "description": "Does consignment contain non-ablacted (unweaned) animals"
+            },
             "animalsCertifiedAs": {
               "$ref": "#/$defs/AnimalCertification"
             }

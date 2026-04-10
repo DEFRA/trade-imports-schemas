@@ -358,59 +358,6 @@
       }
     },
 
-    "Purpose": {
-      "type": "object",
-      "description": "Purpose of consignment including purpose group and internal market purpose. Journey-specific schemas may restrict valid enum values.",
-      "additionalProperties": false,
-      "properties": {
-        "purposeGroup": {
-          "type": "string",
-          "description": "Purpose group of consignment (general purpose)",
-          "enum": [
-            "For Import",
-            "For NON-Conforming Consignments",
-            "For Transhipment to",
-            "For Transit to 3rd Country",
-            "For Re-Import",
-            "For Private Import",
-            "For Transfer To",
-            "For Import Re-Conformity Check",
-            "For Import Non-Internal Market"
-          ]
-        },
-        "internalMarketPurpose": {
-          "type": "string",
-          "description": "Detailed purpose of internal market purpose group",
-          "enum": [
-            "Animal Feeding Stuff",
-            "Human Consumption",
-            "Pharmaceutical Use",
-            "Technical Use",
-            "Other",
-            "Commercial Sale",
-            "Commercial sale or change of ownership",
-            "Rescue",
-            "Breeding",
-            "Research",
-            "Racing or Competition",
-            "Approved Premises or Body",
-            "Companion Animal not for Resale or Rehoming",
-            "Production",
-            "Slaughter",
-            "Fattening",
-            "Game Restocking",
-            "Registered Horses"
-          ]
-        },
-        "exitBIP": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 15,
-          "description": "Exit Border Inspection Post"
-        }
-      }
-    },
-
     "DocumentType": {
       "type": "string",
       "description": "Complete superset of all document types across all journeys. Journey-specific schemas restrict to valid subsets at point-of-use.",
@@ -559,10 +506,6 @@
           "type": "array",
           "description": "Additional data for commodityComplement containing quantity and identifier data",
           "items": { "$ref": "#/$defs/ComplementParameterSet" }
-        },
-        "includeNonAblactedAnimals": {
-          "type": "boolean",
-          "description": "Does consignment contain non-ablacted (unweaned) animals"
         },
         "countryOfOrigin": {
           "$ref": "#/$defs/Country",

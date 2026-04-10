@@ -91,7 +91,7 @@
               "description": "Commodity details — must include at least one complement and parameter set at submission"
             },
             "purpose": {
-              "$ref": "common-v1.schema.json#/$defs/Purpose",
+              "$ref": "impv2-v1.schema.json#/$defs/Purpose",
               "description": "Purpose of consignment details"
             },
             "pointOfEntry": {
