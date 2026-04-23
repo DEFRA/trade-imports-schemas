@@ -97,11 +97,11 @@ async function main() {
   // Step 1: Load all schemas
   console.log('\n📂 Loading schemas...')
   const schemaFiles = [
-    'event-envelope-v1.schema.json',
-    'common-v1.schema.json',
-    'impv2-v1.schema.json',
-    'impv2-event-created-v1.schema.json',
-    'impv2-event-submitted-v1.schema.json'
+    'eudp/event-envelope-v1.schema.json',
+    'eudp/common-v1.schema.json',
+    'eudp/impv2-v1.schema.json',
+    'eudp/impv2-event-created-v1.schema.json',
+    'eudp/impv2-event-submitted-v1.schema.json'
   ]
 
   for (const filename of schemaFiles) {

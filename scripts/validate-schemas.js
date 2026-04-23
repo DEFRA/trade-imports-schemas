@@ -182,11 +182,11 @@ async function main() {
   // Step 0: Load all schemas first
   console.log('\n📂 Loading schemas...')
   const schemaFiles = [
-    'event-envelope-v1.schema.json',
-    'common-v1.schema.json',
-    'impv2-v1.schema.json',
-    'impv2-event-created-v1.schema.json',
-    'impv2-event-submitted-v1.schema.json'
+    'eudp/event-envelope-v1.schema.json',
+    'eudp/common-v1.schema.json',
+    'eudp/impv2-v1.schema.json',
+    'eudp/impv2-event-created-v1.schema.json',
+    'eudp/impv2-event-submitted-v1.schema.json'
   ]
 
   const loadedSchemas = {}
@@ -207,19 +207,19 @@ async function main() {
   console.log('\n📦 Step 1: Validating Schema Structure')
   console.log('-'.repeat(60))
 
-  const envelopeResult = validateSchemaStructure(ajv, 'event-envelope-v1.schema.json', loadedSchemas['event-envelope-v1.schema.json'])
+  const envelopeResult = validateSchemaStructure(ajv, 'eudp/event-envelope-v1.schema.json', loadedSchemas['eudp/event-envelope-v1.schema.json'])
   results.push({ name: 'envelope', ...envelopeResult })
 
-  const commonResult = validateSchemaStructure(ajv, 'common-v1.schema.json', loadedSchemas['common-v1.schema.json'])
+  const commonResult = validateSchemaStructure(ajv, 'eudp/common-v1.schema.json', loadedSchemas['eudp/common-v1.schema.json'])
   results.push({ name: 'common', ...commonResult })
 
-  const domainResult = validateSchemaStructure(ajv, 'impv2-v1.schema.json', loadedSchemas['impv2-v1.schema.json'])
+  const domainResult = validateSchemaStructure(ajv, 'eudp/impv2-v1.schema.json', loadedSchemas['eudp/impv2-v1.schema.json'])
   results.push({ name: 'domain', ...domainResult })
 
-  const createdResult = validateSchemaStructure(ajv, 'impv2-event-created-v1.schema.json', loadedSchemas['impv2-event-created-v1.schema.json'])
+  const createdResult = validateSchemaStructure(ajv, 'eudp/impv2-event-created-v1.schema.json', loadedSchemas['eudp/impv2-event-created-v1.schema.json'])
   results.push({ name: 'created', ...createdResult })
 
-  const submittedResult = validateSchemaStructure(ajv, 'impv2-event-submitted-v1.schema.json', loadedSchemas['impv2-event-submitted-v1.schema.json'])
+  const submittedResult = validateSchemaStructure(ajv, 'eudp/impv2-event-submitted-v1.schema.json', loadedSchemas['eudp/impv2-event-submitted-v1.schema.json'])
   results.push({ name: 'submitted', ...submittedResult })
 
   // Step 2: Test schemas with sample data
