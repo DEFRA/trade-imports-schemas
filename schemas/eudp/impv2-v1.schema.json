@@ -100,7 +100,7 @@
         "establishmentsOfOrigin": {
           "type": "array",
           "description": "List of approved establishments which issued veterinary documents",
-          "items": { "$ref": "common-v1.schema.json#/$defs/ApprovedEstablishment" }
+          "items": { "$ref": "common-v1.schema.json#/$defs/ApprovedEstablishment"}
         },
         "veterinaryDocument": {
           "type": "string",
@@ -115,7 +115,7 @@
           "description": "Accompanying documents valid for live animal imports. Uses allOf to inherit common AccompanyingDocument structure while restricting documentType enum to only animal-relevant types (veterinary certificates, transport documents, etc). This provides schema-level type safety without requiring the common layer to pre-categorize document types by journey.",
           "items": {
             "allOf": [
-              { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument" },
+              { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument"},
               {
                 "properties": {
                   "documentType": {

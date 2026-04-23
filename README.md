@@ -1,5 +1,8 @@
 # Trade Imports Schemas
 
+Please read the problem statement for more information about the project:
+[problem-statement.md](docs/problem-statement.md)
+
 ## EUDP Event Schemas
 
 JSON Schema definitions for EUDP notification events

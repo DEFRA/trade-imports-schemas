@@ -5,7 +5,7 @@
   "description": "Published when a live animals (IMPv2) notification is submitted for processing. All mandatory fields validated at submission time. The data section is a flattened projection of the notification — partOne is not used in the event contract.",
 
   "allOf": [
-    { "$ref": "event-envelope-v1.schema.json" },
+    { "$ref": "event-envelope-v1.schema.json"},
     {
       "properties": {
         "aggregateType": {
