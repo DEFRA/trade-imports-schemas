@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/event-envelope-v1.schema.json",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/event-envelope-v1.schema.json",
   "title": "Trade Imports Event Envelope",
   "description": "Event envelope for Trade Imports CDP Microservice Architecture",
 

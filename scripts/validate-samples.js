@@ -167,7 +167,7 @@ async function main() {
 
     // Get schema and validate
     try {
-      const schemaId = `https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/${schemaFile}`
+      const schemaId = `https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/${schemaFile}`
       const validate = ajv.getSchema(schemaId)
 
       if (!validate) {

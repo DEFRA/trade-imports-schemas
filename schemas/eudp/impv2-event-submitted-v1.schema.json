@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-event-submitted-v1.schema.json",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/impv2-event-submitted-v1.schema.json",
   "title": "IMPv2 NotificationSubmitted Event",
   "description": "Published when a live animals (IMPv2) notification is submitted for processing. All mandatory fields validated at submission time. The data section is a flattened projection of the notification — partOne is not used in the event contract.",
 

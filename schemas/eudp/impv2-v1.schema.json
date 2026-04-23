@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/impv2-v1.schema.json",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/impv2-v1.schema.json",
   "title": "IMPv2 Domain Model v1",
   "description": "Domain definitions for IMPv2 (live animals) import notifications. Extends imports-common-v1 with animal-specific types. Structurally compatible with DEFRA/ipaffs-imports-notification-schema, curated for the published event contract.",
 

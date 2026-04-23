@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/common-v1.schema.json",
+  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/common-v1.schema.json",
   "title": "Trade Imports Common Domain Model",
   "description": "Shared domain definitions for all import notification journeys (IMPv2, CVEDA, CVEDP, etc.). W",
 
