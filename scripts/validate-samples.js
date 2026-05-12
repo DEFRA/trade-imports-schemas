@@ -1,220 +1,129 @@
 #!/usr/bin/env node
 /**
- * Validates sample event JSON files against their corresponding schemas
+ * Validate sample payloads against their schemas.
  *
- * Requirements:
- * - Sample files must be complete events (not just data payloads)
- * - Must include: eventId, aggregateType, subType, aggregateId, aggregateVersion, eventType, timestamp, metadata, data
- * - Must include metadata with schemaVersion and schemaUri
+ * Today only one sample exists: samples/gbn-ag-v1-example.json validated
+ * against schemas/imports/gbn-ag-v1.schema.json.
  *
- * Conventions:
- * - Sample files in /samples/ directory
- * - Naming: {journey}-notification-{event}-v{version}.json
- *   Examples:
- *     imp-notification-created-v1.json -> validates against event-created-v1.schema.json
- *     imp-notification-submitted-v1.json -> validates against event-submitted-v1.schema.json
- *     plants-notification-created-v1.json -> validates against plants-event-created-v1.schema.json
+ * The sample carries authorial _comment / _mapping_note keys that intentionally
+ * violate additionalProperties:false; these are stripped recursively before
+ * validation.
+ *
+ * The gbn-ag schema has one external $ref into BSP D23B's BasicComponents (for
+ * indicatorType). The vendor file is fetched on first run and cached at
+ * build/vendor/uncefact/UNECE-BasicComponents.json.
  */
 
-import Ajv from 'ajv'
+import Ajv2020 from 'ajv/dist/2020.js'
 import addFormats from 'ajv-formats'
-import { readFile, readdir } from 'fs/promises'
+import { readFile, writeFile, mkdir, access } from 'fs/promises'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const SCHEMAS_DIR = join(__dirname, '../schemas')
-const SAMPLES_DIR = join(__dirname, '../samples')
+const ROOT = join(__dirname, '..')
 
-/**
- * Load a schema file
- */
-async function loadSchema(filename) {
-  const path = join(SCHEMAS_DIR, filename)
-  const content = await readFile(path, 'utf-8')
-  return { path, schema: JSON.parse(content) }
+const SAMPLE_TO_SCHEMA = {
+  'samples/gbn-ag-v1-example.json': 'schemas/imports/gbn-ag-v1.schema.json'
+}
+
+const BSP_BASICCOMPONENTS_URL = 'https://raw.githubusercontent.com/uncefact/spec-JSONschema/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/BasicComponents'
+const BSP_VENDOR_PATH = join(ROOT, 'build/vendor/uncefact/UNECE-BasicComponents.json')
+
+async function loadJson(path) {
+  return JSON.parse(await readFile(path, 'utf-8'))
+}
+
+async function ensureBspBasicComponents() {
+  try {
+    await access(BSP_VENDOR_PATH)
+  } catch {
+    process.stdout.write(`  Fetching BSP BasicComponents from raw.githubusercontent.com ... `)
+    const response = await fetch(BSP_BASICCOMPONENTS_URL)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} fetching ${BSP_BASICCOMPONENTS_URL}`)
+    }
+    const body = await response.text()
+    await mkdir(dirname(BSP_VENDOR_PATH), { recursive: true })
+    await writeFile(BSP_VENDOR_PATH, body)
+    console.log('cached')
+  }
+  const bsp = await loadJson(BSP_VENDOR_PATH)
+  delete bsp.$schema
+  return bsp
 }
 
 /**
- * Load a sample file
+ * Remove keys starting with `_` recursively. Used to strip authorial comments
+ * and mapping notes from sample payloads before schema validation.
  */
-async function loadSample(filename) {
-  const path = join(SAMPLES_DIR, filename)
-  const content = await readFile(path, 'utf-8')
-  return { path, sample: JSON.parse(content) }
+function stripAuthorialKeys(value) {
+  if (Array.isArray(value)) {
+    return value.map(stripAuthorialKeys)
+  }
+  if (value && typeof value === 'object') {
+    const out = {}
+    for (const [k, v] of Object.entries(value)) {
+      if (k.startsWith('_')) continue
+      out[k] = stripAuthorialKeys(v)
+    }
+    return out
+  }
+  return value
 }
 
-/**
- * Create AJV instance
- */
-function createValidator() {
-  const ajv = new Ajv({
+async function main() {
+  console.log('Validating samples')
+  console.log('='.repeat(60))
+
+  const bsp = await ensureBspBasicComponents()
+
+  const ajv = new Ajv2020({
     strict: false,
     allErrors: true,
-    verbose: true,
     validateFormats: true,
-    validateSchema: true,
+    validateSchema: true
   })
   addFormats(ajv)
-  return ajv
-}
+  ajv.addSchema(bsp)
 
-/**
- * Determine which schema to use for a sample file
- *
- * Naming conventions:
- * - imp-notification-created-v1.json -> impv2-event-created-v1.schema.json (animals)
- * - imp-notification-submitted-v1.json -> impv2-event-submitted-v1.schema.json (animals)
- * - plants-notification-created-v1.json -> plants-event-created-v1.schema.json
- * - plants-notification-submitted-v1.json -> plants-event-submitted-v1.schema.json
- */
-function determineSchema(sampleFilename) {
-  // Extract components from sample filename
-  const match = sampleFilename.match(/^([a-z]+)-notification-(created|submitted)(?:-v(\d+))?\.json$/)
-
-  if (!match) {
-    return null
-  }
-
-  const [, journey, eventType, version = '1'] = match
-
-  // Map journey to schema prefix
-  const schemaPrefix = journey === 'imp' ? 'impv2-' : `${journey}-`
-
-  return `${schemaPrefix}event-${eventType}-v${version}.schema.json`
-}
-
-
-/**
- * Main validation routine
- */
-async function main() {
-  console.log('🔍 Sample Event Validation Report')
-  console.log('='.repeat(60))
-
-  const ajv = createValidator()
-
-  // Step 1: Load all schemas
-  console.log('\n📂 Loading schemas...')
-  const schemaFiles = [
-    'eudp/event-envelope-v1.schema.json',
-    'eudp/common-v1.schema.json',
-    'eudp/impv2-v1.schema.json',
-    'eudp/impv2-event-created-v1.schema.json',
-    'eudp/impv2-event-submitted-v1.schema.json'
-  ]
-
-  for (const filename of schemaFiles) {
+  let failures = 0
+  let total = 0
+  for (const [samplePath, schemaPath] of Object.entries(SAMPLE_TO_SCHEMA)) {
+    total += 1
+    process.stdout.write(`  ${samplePath} ⇢ ${schemaPath} ... `)
     try {
-      const { schema } = await loadSchema(filename)
-      ajv.addSchema(schema)
-      console.log(`   ✅ Loaded ${filename}`)
-    } catch (error) {
-      console.error(`   ❌ Failed to load ${filename}: ${error.message}`)
-    }
-  }
-
-  // Step 2: Find and validate sample files
-  console.log('\n📝 Validating sample files...')
-  console.log('-'.repeat(60))
-
-  let sampleFiles
-  try {
-    sampleFiles = await readdir(SAMPLES_DIR)
-    sampleFiles = sampleFiles.filter(f => f.endsWith('.json'))
-  } catch (error) {
-    console.error(`❌ Could not read samples directory: ${error.message}`)
-    process.exit(1)
-  }
-
-  if (sampleFiles.length === 0) {
-    console.log('⚠️  No sample files found in /samples directory')
-    process.exit(0)
-  }
-
-  const results = []
-
-  for (const sampleFile of sampleFiles) {
-    console.log(`\n📄 ${sampleFile}`)
-
-    // Determine which schema to use
-    const schemaFile = determineSchema(sampleFile)
-    if (!schemaFile) {
-      console.log(`   ⚠️  Could not determine schema (unknown naming pattern)`)
-      results.push({ file: sampleFile, valid: false, reason: 'Unknown naming pattern' })
-      continue
-    }
-
-    console.log(`   → Using schema: ${schemaFile}`)
-
-    // Load the sample
-    let sample
-    try {
-      const loaded = await loadSample(sampleFile)
-      sample = loaded.sample
-    } catch (error) {
-      console.log(`   ❌ Failed to load: ${error.message}`)
-      results.push({ file: sampleFile, valid: false, reason: error.message })
-      continue
-    }
-
-    // Validate the sample as-is (must be a complete event)
-    if (!sample.eventId || !sample.metadata) {
-      console.log(`   ❌ Invalid: Sample must be a complete event with eventId and metadata`)
-      results.push({ file: sampleFile, valid: false, reason: 'Missing eventId or metadata - samples must be complete events' })
-      continue
-    }
-
-    // Get schema and validate
-    try {
-      const schemaId = `https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/eudp/${schemaFile}`
-      const validate = ajv.getSchema(schemaId)
-
-      if (!validate) {
-        console.log(`   ❌ Schema not found: ${schemaFile}`)
-        results.push({ file: sampleFile, valid: false, reason: 'Schema not found' })
-        continue
-      }
-
-      const isValid = validate(sample)
-
-      if (isValid) {
-        console.log(`   ✅ Valid`)
-        results.push({ file: sampleFile, valid: true })
+      const schema = await loadJson(join(ROOT, schemaPath))
+      const sample = await loadJson(join(ROOT, samplePath))
+      const cleaned = stripAuthorialKeys(sample)
+      const validate = ajv.compile(schema)
+      const ok = validate(cleaned)
+      if (ok) {
+        console.log('ok')
       } else {
-        console.log(`   ❌ Invalid:`)
-        for (const error of validate.errors) {
-          console.log(`      • ${error.instancePath || '/'} ${error.message}`)
+        console.log('FAIL')
+        for (const err of validate.errors) {
+          console.error(`    ${err.instancePath || '/'} ${err.message}`)
         }
-        results.push({ file: sampleFile, valid: false, errors: validate.errors })
+        failures += 1
       }
-    } catch (error) {
-      console.log(`   ❌ Validation failed: ${error.message}`)
-      results.push({ file: sampleFile, valid: false, reason: error.message })
+    } catch (err) {
+      console.log('FAIL')
+      console.error(`    ${err.message}`)
+      failures += 1
     }
   }
 
-  // Summary
-  console.log('\n' + '='.repeat(60))
-  console.log('📊 Summary')
   console.log('='.repeat(60))
-
-  const validCount = results.filter(r => r.valid).length
-  const totalCount = results.length
-
-  console.log(`\nSamples validated: ${validCount}/${totalCount}`)
-
-  if (validCount === totalCount) {
-    console.log('\n✅ All sample events are valid')
+  if (failures === 0) {
+    console.log(`All ${total} samples valid.`)
     process.exit(0)
-  } else {
-    console.log('\n❌ Some samples have validation errors - see details above')
-    process.exit(1)
   }
+  console.log(`${failures} of ${total} samples failed.`)
+  process.exit(1)
 }
 
-// Run validation
-main().catch(error => {
-  console.error('\n💥 Unexpected error:', error)
+main().catch(err => {
+  console.error('Unexpected error:', err.message)
   process.exit(1)
 })

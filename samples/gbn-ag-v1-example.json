@@ -1,0 +1,291 @@
+{
+  "_comment": "Worked example: translation of docs/ipaffs/example-cheda-ipaffs.json into GBN-AG shape (schemas/eudp/gbn-ag/gbn-ag-v1.schema.json). Field-by-field mapping rationale documented inline via _mapping_note keys (NOTE: those keys violate additionalProperties:false — strip them before validation). For review with the TIG team.",
+  "exchangedDocument": {
+    "id": { "content": "GBN-AG-26-0000001-8" },
+    "issuer": {
+      "name": [{ "content": "Kai Inc." }],
+      "specifiedTradeAddress": {
+        "lineOne": { "content": "UNCANNY COMICS" },
+        "lineTwo": { "content": "3 TARRING ROAD" },
+        "cityName": { "content": "WORTHING" },
+        "postcodeCode": { "content": "BN11 4SS" },
+        "countryId": { "content": "GB" }
+      },
+      "definedTradeContact": [
+        {
+          "personName": { "content": "Kai Atkinson" },
+          "emailURIUniversalCommunication": { "content": "kaiatkinson@jourrapide.com" },
+          "telephoneUniversalCommunication": { "content": "0123456788" }
+        }
+      ]
+    },
+    "firstSignatoryDocumentAuthentication": {
+      "includedDocumentClause": [
+        {
+          "id": { "content": "PURPOSE", "schemeId": "ched_consignment_clause" },
+          "content": [{ "content": "INTERNAL_MARKET" }]
+        },
+        {
+          "id": { "content": "GOODS_CERTIFIED_AS", "schemeId": "ched_consignment_clause" },
+          "content": [{ "content": "BREEDING_AND_PRODUCTION" }]
+        }
+      ]
+    },
+    "referenceReferencedDocument": [
+      {
+        "typeCode": { "content": "853" },
+        "id": { "content": "doc-ref" },
+        "issueDateTime": "2026-04-01",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+            "filename": "1.6_Discernment_Summary.pdf",
+            "mimeCode": "application/pdf"
+          }
+        ]
+      },
+      {
+        "typeCode": { "content": "916" },
+        "id": { "content": "journey-log" },
+        "issueDateTime": "2026-05-09",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
+            "filename": "1.5_Description_Summary.pdf",
+            "mimeCode": "application/pdf"
+          }
+        ]
+      }
+    ]
+  },
+  "specifiedConsignment": [
+    {
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "specifiedTradeProduct": [
+                {
+                  "designatedProductClassification": [
+                    {
+                      "systemId": { "content": "CN" },
+                      "classCode": { "content": "01020000" }
+                    }
+                  ],
+                  "scientificName": [
+                    { "content": "Bos taurus", "languageId": "la" }
+                  ],
+                  "originTradeCountry": [
+                    {
+                      "id": { "content": "FR" },
+                      "subordinateTradeCountrySubDivision": [
+                        {
+                          "id": { "content": "FR-12345" },
+                          "functionTypeCode": { "content": "106" }
+                        }
+                      ]
+                    }
+                  ],
+                  "individualTradeProductInstance": [
+                    {
+                      "id": { "schemeId": "EAR_TAG", "content": "et1" }
+                    },
+                    {
+                      "id": { "schemeId": "PASSPORT", "content": "passport1" }
+                    }
+                  ]
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": { "content": 20, "unitCode": "H87" }
+                }
+              ],
+              "generalInformationDescription": [
+                { "content": "Live bovine animals" }
+              ]
+            }
+          ]
+        }
+      ],
+      "isOrHasUnweanedAnimals": true,
+      "despatch": {
+        "name": [{ "content": "Astra Rosales" }],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "43 East Hague Extension" },
+          "lineTwo": { "content": "Delectus sit odio p" },
+          "lineThree": { "content": "Laborum Odio tempor" },
+          "cityName": { "content": "Quas occaecat ut ear" },
+          "postcodeCode": { "content": "30055" },
+          "countryId": { "content": "CH" }
+        }
+      },
+      "consignor": {
+        "name": [{ "content": "Astra Rosales" }],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "43 East Hague Extension" },
+          "lineTwo": { "content": "Delectus sit odio p" },
+          "lineThree": { "content": "Laborum Odio tempor" },
+          "cityName": { "content": "Quas occaecat ut ear" },
+          "postcodeCode": { "content": "30055" },
+          "countryId": { "content": "CH" }
+        }
+      },
+      "consignee": {
+        "name": [{ "content": "Linus George Ltd" }],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "558 Oak Street" },
+          "lineTwo": { "content": "Ut aperiam in volupt" },
+          "lineThree": { "content": "Nisi tempore aliqua" },
+          "cityName": { "content": "Eligendi et beatae p" },
+          "postcodeCode": { "content": "24271" },
+          "countryId": { "content": "CH" }
+        }
+      },
+      "importer": {
+        "name": [{ "content": "Importerporter" }],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "186 Ditchling Road" },
+          "lineTwo": { "content": "BRIGHTON" },
+          "cityName": { "content": "Brighton" },
+          "postcodeCode": { "content": "BN17DD" },
+          "countryId": { "content": "FR" }
+        }
+      },
+      "delivery": {
+        "name": [{ "content": "Linus George Ltd" }],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "558 Oak Street" },
+          "lineTwo": { "content": "Ut aperiam in volupt" },
+          "lineThree": { "content": "Nisi tempore aliqua" },
+          "cityName": { "content": "Eligendi et beatae p" },
+          "postcodeCode": { "content": "24271" },
+          "countryId": { "content": "CH" }
+        }
+      },
+      "finalDestinationLogisticsLocation": {
+        "id": [
+          {
+            "content": "CPH19876",
+            "schemeId": "cph_number",
+            "schemeName": "County Parish Holding Number",
+            "schemeAgencyId": "defra",
+            "schemeAgencyName": "DEFRA"
+          }
+        ],
+        "name": [{ "content": "Linus George Ltd" }],
+        "postalTradeAddress": {
+          "lineOne": { "content": "558 Oak Street" },
+          "lineTwo": { "content": "Ut aperiam in volupt" },
+          "lineThree": { "content": "Nisi tempore aliqua" },
+          "cityName": { "content": "Eligendi et beatae p" },
+          "postcodeCode": { "content": "24271" },
+          "countryId": { "content": "CH" }
+        }
+      },
+      "applicableCrossBorderRegulatoryProcedure": [
+        {
+          "typeCode": {
+            "content": "SPS_INSPECTION",
+            "listId": "regulatory_procedure_type",
+            "listName": "Cross-border regulatory procedure type"
+          },
+          "entryCustomsOfficeSpecifiedLogisticsLocation": {
+            "id": [
+              {
+                "content": "GBDVR1",
+                "schemeId": "bcp_reference",
+                "schemeName": "UK Border Control Post reference",
+                "schemeAgencyId": "defra",
+                "schemeAgencyName": "DEFRA"
+              }
+            ],
+            "name": [{ "content": "Dover BCP", "languageId": "en" }],
+            "postalTradeAddress": {
+              "lineOne": { "content": "Border Control Post, Port of Dover" },
+              "cityName": { "content": "Dover" },
+              "postcodeCode": { "content": "CT17 9TF" },
+              "countryId": { "content": "GB" }
+            }
+          }
+        }
+      ],
+      "unloadingBaseportLogisticsLocation": {
+        "id": [
+          {
+            "content": "GBDVR",
+            "schemeId": "un_locode",
+            "schemeName": "UN/LOCODE",
+            "schemeAgencyId": "un",
+            "schemeAgencyName": "United Nations"
+          }
+        ],
+        "name": [{ "content": "Dover", "languageId": "en" }],
+        "postalTradeAddress": {
+          "lineOne": { "content": "Port of Dover" },
+          "cityName": { "content": "Dover" },
+          "postcodeCode": { "content": "CT17 9TF" },
+          "countryId": { "content": "GB" }
+        }
+      },
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "id": [
+            {
+              "content": "SHIPPY",
+              "schemeId": "vessel_name_after_bcp",
+              "schemeName": "Vessel name (after BCP)"
+            }
+          ],
+          "modeCode": { "content": "1" },
+          "transportContractRelatedReferencedDocument": [
+            {
+              "typeCode": { "content": "705" },
+              "id": { "content": "doc-ref-BOL" }
+            }
+          ],
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
+            }
+          ]
+        }
+      ],
+      "carrier": {
+        "name": [{ "content": "ALISTAIR WILSON" }],
+        "id": [
+          {
+            "content": "UK/INVER/T1/00091851",
+            "schemeId": "private_transporter_approval_number",
+            "schemeName": "Private transporter approval number",
+            "schemeAgencyId": "defra",
+            "schemeAgencyName": "DEFRA"
+          }
+        ],
+        "typeCode": [
+          {
+            "content": "COMMERCIAL_TRANSPORTER",
+            "listId": "operator_activity_type",
+            "listName": "Operator activity type"
+          },
+          {
+            "content": "TRANSPORTER",
+            "listId": "classification_section_code",
+            "listName": "Operator classification section code"
+          }
+        ],
+        "specifiedTradeAddress": {
+          "lineOne": { "content": "AUCHENBLAE" },
+          "lineTwo": { "content": "INVER SHIN" },
+          "lineThree": { "content": "LAIRG" },
+          "cityName": { "content": "SUTHERLAND" },
+          "postcodeCode": { "content": "IV27 4ET" },
+          "countryId": { "content": "GB" }
+        }
+      },
+      "transitTradeCountry": [
+        { "id": { "content": "BE" } }
+      ]
+    }
+  ]
+}

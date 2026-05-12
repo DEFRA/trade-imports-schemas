@@ -1,7 +1,7 @@
 {
   "name": "trade-imports-schemas",
   "version": "1.0.0",
-  "description": "JSON Schema definitions for EUDP notification events",
+  "description": "Defra JSON Schema definitions for CDP trade import journeys, aligned to UN/CEFACT Buy-Ship-Pay (BSP) D23B",
   "type": "module",
   "scripts": {
     "validate-schemas": "node scripts/validate-schemas.js",
@@ -9,10 +9,12 @@
   },
   "keywords": [
     "json-schema",
-    "eudp",
+    "defra",
+    "cdp",
     "imports",
-    "notifications",
-    "events"
+    "uncefact",
+    "buy-ship-pay",
+    "gbn-ag"
   ],
   "author": "DEFRA",
   "license": "UNLICENSED",

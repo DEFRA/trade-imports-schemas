@@ -1,225 +1,72 @@
 # Trade Imports Schemas
 
-Please read the problem statement for more information about the project:
-[problem-statement.md](docs/problem-statement.md)
+Defra JSON Schema definitions for Trade Import journeys, built against the UN/CEFACT Buy-Ship-Pay (BSP) D23B reference model. The first journey covered is live animals and germinals (`gbn-ag-v1`). Other import journeys (plants, products of animal origin) will follow as sibling schema families.
 
-## EUDP Event Schemas
+**Status:** WIP proposal, in active design review with the TIG (TRACES Integration Gateway) team. The slot-by-slot walkthrough of the worked example is in [`docs/TIG-GBN-AG-Analysis.md`](docs/TIG-GBN-AG-Analysis.md).
 
-JSON Schema definitions for EUDP notification events
+## Why UN/CEFACT BSP
 
-## Schema Arrangement
+The strategic choice is to define internal notification payloads against UN/CEFACT Buy-Ship-Pay. BSP is the international standard for cross-border trade documents; aligning on it gives Defra data interoperability with UN/CEFACT-aware peers and a canonical shape that is stable across any single regulatory regime.
 
-The schemas are structured for reusability and progressive specificity:
+## Repository layout
 
-### Common Domain
-
-`common-v1.schema.json`
-- Shared business domain types across all import journeys (animals, plants, POAO)
-- Journey-agnostic types: EconomicOperator, Commodities, Purpose, ApprovedEstablishment, etc.
-- Shared and discriminated types such as Documents
-- Agnostic to journey specific events (this is still an event and not a domain schema)
-
-### Event Specification
-
-`event-envelope-v1.schema.json`
-- Generic event envelope designed to frame events emitted by all user journeys
-- Reusable across all aggregate types
-- Contains:
-  - eventId
-  - aggregateType
-  - subType
-  - aggregateId
-  - aggregateVersion
-  - eventType
-  - timestamp
-  - metadata
-
-### Journey-Specific Domain Description
-
-`impv2-v1.schema.json`
-- Extends common domain with live animals (IMPv2) specific types
-- Animal-specific types: AnimalCertification, VeterinaryInformation
-- Restricts AccompanyingDocument to allow only generic and animal document types
-- Extends Commodities with AnimalCertification for animalsCertifiedAs field
-- Compatible with DEFRA/ipaffs-imports-notification-schema
-
-
-### Journey Specific Events
-
-`impv2-event-created-v1.schema.json`
-- Composes envelope + journey-specific domain model
-- Published when a notification draft is created
-- Minimal required fields: referenceNumber, type, status (DRAFT), commodities (with at least one commodity and countryOfOrigin)
-
-`impv2-event-submitted-v1.schema.json`
-- Composes envelope + journey-specific domain model
-- Published when a notification is submitted for processing
-- All mandatory business fields are required (13 fields including veterinaryInformation)
-
-## Schema Arrangement
-
-```mermaid
-%%{
-  init: {
-    'theme': 'default',
-    'themeVariables': {
-      'fontSize': '14px'
-    },
-    'flowchart': {
-      'padding': 20
-    }
-  }
-}%%
-flowchart TD
-    subgraph Infrastructure["1. Event Infrastructure (generic, reusable)"]
-        envelope[event-envelope-v1.schema.json<br/>eventId, aggregateType, subType,<br/>aggregateId, eventType, timestamp, metadata]
-    end
-
-    subgraph Common["2. Common Domain (shared across all journeys)"]
-        common[common-v1.schema.json<br/>EconomicOperator, Commodities base,<br/>Purpose, GenericDocumentType, etc.]
-    end
-
-    subgraph JourneyDomain["3. Journey-Specific Domain"]
-        impv2[impv2-v1.schema.json<br/>AnimalCertification,<br/>VeterinaryInformation]
-        plants[plants-v1.schema.json<br/>future: PhytosanitaryInformation]
-    end
-
-    subgraph Events["4. Event  (specific, composed)"]
-        created[impv2-event-created-v1.schema.json<br/>DRAFT notifications]
-        submitted[impv2-event-submitted-v1.schema.json<br/>SUBMITTED notifications]
-    end
-
-    common -->|"$ref<br/>(extends)"| impv2
-    common -->|"$ref<br/>(extends)"| plants
-    envelope -->|"allOf<br/>(inherits)"| created
-    envelope -->|"allOf<br/>(inherits)"| submitted
-    impv2 -->|"$ref<br/>(uses types)"| created
-    impv2 -->|"$ref<br/>(uses types)"| submitted
-
-    style envelope fill:#e1f5ff
-    style common fill:#f3e5f5
-    style impv2 fill:#fff4e1
-    style plants fill:#fff4e1,stroke-dasharray: 5 5
-    style created fill:#e8f5e9
-    style submitted fill:#e8f5e9
+```
+schemas/imports/
+  event-envelope-v1.schema.json     Generic event envelope (transport-layer; payload-agnostic)
+  gbn-ag-v1.schema.json             Payload schema for the GBN-AG live-animals journey
+samples/
+  gbn-ag-v1-example.json            Worked CHED-A → GBN-AG example payload
+scripts/
+  validate-schemas.js               Compile both schemas; report structural errors
+  validate-samples.js               Validate the worked example against gbn-ag-v1
+docs/
+  TIG-GBN-AG-Analysis.md            Slot-by-slot walkthrough; joint-review reference
 ```
 
+## The two schemas
 
-### Journey-Specific Document Type Restriction
+**`event-envelope-v1.schema.json`** - the transport-layer envelope for events emitted by every import-journey service. Journeys publish via a transactional outbox onto a journey-specific SNS topic; consumers subscribe via SQS. The envelope carries `eventId`, `aggregateType`, `subType`, `aggregateId`, `aggregateVersion`, `eventType`, `timestamp`, `metadata`, and a payload `data` field. The envelope is deliberately payload-agnostic - `data` is a generic object - so adding a new journey does not require an envelope change.
 
-The journey schemas use inline restriction at point-of-use to provide schema-enforced type safety without requiring the common schema to pre-categorize document types by journey.
+**`gbn-ag-v1.schema.json`** - example payload that goes inside the envelope's `data` field.
 
-**Common Layer** (`common-v1.schema.json`):
-```json
-{
-  "DocumentType": {
-    "type": "string",
-    "description": "Complete superset of all document types across all journeys",
-    "enum": [
-      "airWaybill",
-      "billOfLading",
-      "veterinaryHealthCertificate",
-      "phytosanitaryCertificate",
-      "..."
-    ]
-  },
-  "AccompanyingDocument": {
-    "type": "object",
-    "properties": {
-      "documentType": { "$ref": "#/$defs/DocumentType" },
-      "documentReference": { "type": "string" },
-      "documentIssueDate": { "type": "string", "format": "date" }
-    }
-  }
-}
 ```
-
-**Journey Layer** (`impv2-v1.schema.json`):
-```json
-{
-  "VeterinaryInformation": {
-    "properties": {
-      "accompanyingDocuments": {
-        "description": "Restricts to animal-relevant document types only",
-        "items": {
-          "allOf": [
-            { "$ref": "common-v1.schema.json#/$defs/AccompanyingDocument" },
-            {
-              "properties": {
-                "documentType": {
-                  "description": "Journey-specific subset valid for animal imports",
-                  "enum": [
-                    "airWaybill",
-                    "billOfLading",
-                    "veterinaryHealthCertificate",
-                    "itahc",
-                    "journeyLog"
-                  ]
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
-  }
-}
+event-envelope-v1 ─── data ──▶ gbn-ag-v1
+                  (one envelope, many possible payload schemas - one per journey)
 ```
-
-**Key benefits:**
-- Common layer doesn't need to know which types belong to which journey
-- Each journey independently declares valid documents for its context
-- Schema-enforced type safety (phytosanitary certs rejected for animals)
-- Easy to add new document types (add to common, journeys opt-in)
-
-## Versioning Strategy
-
-This repository uses two versioning concepts:
-
-### Git Release Versions (Semantic Versioning)
-
-Git tags (`v1.0.0`, `v1.1.0`, `v2.0.0`) represent snapshots of the entire repository:
-- **MAJOR** (v2.0.0): Breaking change to any schema (removed fields, changed semantics)
-- **MINOR** (v1.1.0): New schemas, backward-compatible additions (new event types, expanded enums)
-- **PATCH** (v1.0.1): Documentation updates, tooling fixes, no schema changes
-
-### Schema File Versions
-
-Filenames include version suffix (`common-v1.schema.json`, `impv2-v1.schema.json`) that changes only on breaking changes to that specific schema.
-
-**Examples:**
-- Release **v1.0.0** contains: `common-v1`, `impv2-v1`
-- Release **v1.1.0** contains: `common-v1` (expanded enum), `impv2-v1` (new event type added)
-- Release **v2.0.0** contains: `common-v1`, `common-v2`, `impv2-v1`, `impv2-v2` (all versions coexist)
-
-Create a new schema file version when making breaking changes:
-- Removing required fields
-- Making optional fields required
-- Changing field semantics (e.g., `amount` changes from pence to pounds)
-- Removing enum values
-
-Update existing schema file in place when:
-- Adding optional fields
-- Expanding enum values (with defensive consumer handling)
-- Adding new event types (different schema files)
-- Clarifying descriptions
-
-**Changelog:** All changes documented in [CHANGELOG.md](./CHANGELOG.md) following [Keep a Changelog](https://keepachangelog.com/) format.
 
 ## Validation
 
-### Schema Validation
-
-Run the validation suite to verify schema correctness:
-
 ```bash
-npm run validate-schemas
+npm install
+npm run validate-schemas     # compile both schemas, report structural errors
+npm run validate-samples     # validate the worked example against gbn-ag-v1
 ```
 
-### Sample Event Validation
+The schemas declare different JSON Schema drafts - envelope uses draft-07; gbn-ag uses 2020-12 - and the validators handle both.
 
-Validate sample event JSON files in `/samples` directory:
+The gbn-ag schema has one external `$ref` into BSP D23B's `BasicComponents` schema (for `indicatorType`). On first run, the validator fetches that file from `raw.githubusercontent.com/uncefact/spec-JSONschema` and caches it under `build/vendor/uncefact/`. Subsequent runs use the cached copy. Offline environments need to pre-populate the vendor directory or be online for the first run.
 
-```bash
-npm run validate-samples
-```
+The worked example carries authorial `_comment` / `_mapping_note` keys that intentionally violate `additionalProperties: false`; the sample validator strips underscore-prefixed keys recursively before validating.
+
+## Adding a new journey
+
+This repository is set up to grow. To add a new import journey (plants, POAO) or an export journey:
+
+1. Add a payload schema under `schemas/imports/` or `schemas/exports/`, named `<journey>-v<n>.schema.json`. Use the same BSP-grounded approach: inline primitives, open codelist strings, mirror BSP composite names.
+2. Add at least one worked example under `samples/`, named `<journey>-v<n>-example.json`.
+3. Register the schema + sample pair in `scripts/validate-schemas.js` and `scripts/validate-samples.js`.
+4. The envelope does not need to change; consumers route on `aggregateType` / `subType` / `eventType`.
+
+## Versioning
+
+Two version axes, managed independently.
+
+**Git releases (semver).** Tags (`v1.0.0`, `v1.1.0`, …) snapshot the whole repository. MAJOR for any breaking schema change, MINOR for new schemas or backward-compatible additions, PATCH for doc and tooling changes only.
+
+**Per-file version suffix.** Filenames carry a major version (`gbn-ag-v1.schema.json`). A new suffix (`gbn-ag-v2.schema.json`) is introduced only for breaking changes to that specific schema; both versions coexist in the repo during the deprecation window. In-place edits are reserved for additive, backward-compatible changes.
+
+Full history in [`CHANGELOG.md`](./CHANGELOG.md), formatted per [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
+
+## Commit conventions
+
+Conventional commits (`feat:`, `fix:`, `refactor:`, `docs:`…). Subject line ≤50 chars, imperative mood, capitalised, no trailing period. No emojis. Body wrapped at 72 chars; explain *what* and *why* (the code shows *how*). See the project-level `CLAUDE.md` for the full rules.
