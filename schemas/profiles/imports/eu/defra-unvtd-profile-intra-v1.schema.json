@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-profile-intra-v1.schema.json",
+  "title": "Defra UNVTD INTRA profile",
+  "allOf": [
+    {
+      "$ref": "defra-unvtd-canonical-core-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "$model": {
+          "const": "defra/certificate-internal/1"
+        },
+        "$type": {
+          "const": "intra"
+        },
+        "exchangedDocument": {
+          "type": "object",
+          "properties": {
+            "documentTypeCode": {
+              "enum": [
+                "666",
+                "856"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "$model",
+        "$type",
+        "exchangedDocument",
+        "specifiedConsignment"
+      ]
+    }
+  ]
+}

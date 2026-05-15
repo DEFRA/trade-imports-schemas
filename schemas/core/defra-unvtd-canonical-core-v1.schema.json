@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-canonical-core-v1.schema.json",
+  "title": "Defra UNVTD canonical core",
+  "description": "Canonical component schema for Defra internal models using UN/CEFACT/UNVTD building blocks. Property names and value kinds follow the UN/CEFACT D23B JSON-LD vocabulary (https://vocabulary.uncefact.org/unece-context-D23B.jsonld): xsd:string-typed terms are JSON strings; @vocab-typed terms are JSON strings; @id-typed terms are JSON objects or strings per JSON-LD. That file defines the RDF types ExchangedDocument and Consignment (PascalCase keys) and many association properties, but it does not currently declare the BSP assembly property keys exchangedDocument or specifiedConsignment (camelCase) used on the JSON root alongside UN JSON Schemas (e.g. UNECE-BSPMaster D23B). defra-unvtd-bsp-document.context.jsonld adds only those two missing keys as Defra profile aliases (not unece terms), so we avoid minting unofficial vocabulary entries while preserving a stable JSON-LD expansion for TRACES-oriented payload shape. If UN later publishes exchangedDocument/specifiedConsignment in the official context, remove the Defra aliases and use the official mapping directly.",
+  "$defs": {
+    "UneceMeasureType": {
+      "type": "object",
+      "anyOf": [
+        {
+          "required": [
+            "content"
+          ]
+        },
+        {
+          "required": [
+            "value"
+          ]
+        }
+      ],
+      "properties": {
+        "content": {
+          "type": "string",
+          "pattern": "^[+-]?(0|[1-9][0-9]*)(\\.\\d+)?$"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[+-]?(0|[1-9][0-9]*)(\\.\\d+)?$"
+        },
+        "unitCode": {
+          "type": "string"
+        },
+        "unitCodeListVersionId": {
+          "type": "string"
+        }
+      }
+    },
+    "Authentication": {
+      "type": "object",
+      "properties": {
+        "typeCode": {
+          "type": "string",
+          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "actualDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "governmentActionTypeCode": {
+          "type": "string",
+          "description": "unece:governmentActionTypeCode is @vocab in unece-context-D23B.jsonld; use a string code or vocabulary token."
+        },
+        "providerParty": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "includedClause": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Clause"
+          }
+        }
+      }
+    },
+    "Clause": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string",
+          "description": "unece:content is xsd:string in unece-context-D23B.jsonld."
+        }
+      }
+    },
+    "TradeAddress": {
+      "type": "object",
+      "properties": {
+        "postcodeCode": {
+          "type": "string",
+          "description": "unece:postcodeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "lineOne": {
+          "type": "string"
+        },
+        "lineTwo": {
+          "type": "string"
+        },
+        "cityName": {
+          "type": "string"
+        },
+        "countryId": {
+          "type": "string",
+          "description": "unece:countryId is @vocab in unece-context-D23B.jsonld (e.g. ISO 3166-1 alpha-2 as a vocabulary-relative token)."
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "countrySubDivisionName": {
+          "type": "string"
+        }
+      }
+    },
+    "TradeParty": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "unece:name is xsd:string in unece-context-D23B.jsonld."
+        },
+        "partyRoleCode": {
+          "type": "string",
+          "description": "unece:partyRoleCode is @vocab in unece-context-D23B.jsonld."
+        },
+        "partyTypeCode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "unece:partyTypeCode is @vocab in unece-context-D23B.jsonld."
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "postalAddress": {
+          "$ref": "#/$defs/TradeAddress"
+        },
+        "definedContact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "personName": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "IncludedNote": {
+      "type": "object",
+      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): unece:content, unece:contentCode, and unece:noteSubjectCode are xsd:string in unece-context-D23B.jsonld — use a single string per property, not single-element arrays.",
+      "properties": {
+        "type": {
+          "const": "Note",
+          "description": "JSON-LD @type for unece:Note when using unece-context-D23B.jsonld (type aliases to @type)."
+        },
+        "noteSubjectCode": {
+          "type": "string",
+          "description": "unece:noteSubjectCode — xsd:string in unece-context-D23B.jsonld."
+        },
+        "content": {
+          "type": "string",
+          "description": "unece:content — xsd:string in unece-context-D23B.jsonld."
+        },
+        "contentCode": {
+          "type": "string",
+          "description": "unece:contentCode — xsd:string in unece-context-D23B.jsonld."
+        }
+      }
+    },
+    "ReferencedDocument": {
+      "type": "object",
+      "properties": {
+        "typeCode": {
+          "type": "string",
+          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "relationshipTypeCode": {
+          "type": "string",
+          "description": "unece:relationshipTypeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "attachmentBinaryObject": {
+          "type": "object"
+        },
+        "information": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExchangedDocument": {
+      "type": "object",
+      "required": [
+        "identifier",
+        "documentTypeCode"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "unece:name is xsd:string in unece-context-D23B.jsonld."
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "documentTypeCode": {
+          "type": "string",
+          "description": "Document type: unece:typeCode is xsd:string in unece-context-D23B.jsonld (use lexical string for numeric codes)."
+        },
+        "documentStatusCode": {
+          "type": "string",
+          "description": "Status code as string per UN vocabulary typing for coded strings."
+        },
+        "issueDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "includedNote": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IncludedNote"
+          }
+        },
+        "referenceDocument": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReferencedDocument"
+          }
+        },
+        "firstSignatoryAuthentication": {
+          "$ref": "#/$defs/Authentication"
+        },
+        "secondSignatoryAuthentication": {
+          "$ref": "#/$defs/Authentication"
+        },
+        "thirdSignatoryAuthentication": {
+          "$ref": "#/$defs/Authentication"
+        },
+        "fourthSignatoryAuthentication": {
+          "$ref": "#/$defs/Authentication"
+        }
+      }
+    },
+    "Consignment": {
+      "type": "object",
+      "properties": {
+        "availabilityDueDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exportExitDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "consignorParty": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "consigneeParty": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "despatchParty": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "customsTransitAgentParty": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "unloadingBaseportLocation": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "includedConsignmentItem": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "CertificatePayload": {
+      "type": "object",
+      "required": [
+        "$model",
+        "$type",
+        "exchangedDocument",
+        "specifiedConsignment"
+      ],
+      "properties": {
+        "$model": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string"
+        },
+        "exchangedDocument": {
+          "$ref": "#/$defs/ExchangedDocument"
+        },
+        "specifiedConsignment": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Consignment"
+          }
+        },
+        "laboratoryObservationResult": {
+          "type": "array",
+          "description": "UN vocabulary-aligned laboratory observations/results collection."
+        }
+      }
+    }
+  },
+  "$ref": "#/$defs/CertificatePayload"
+}

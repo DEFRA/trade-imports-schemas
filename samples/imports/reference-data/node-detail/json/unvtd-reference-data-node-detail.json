@@ -1,0 +1,54 @@
+{
+  "$schema": "defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse.schema.json",
+  "@context": "https://vocabulary.uncefact.org/unece-context-D23B.jsonld",
+  "source": "traces",
+  "treeId": "chedpp",
+  "nodePath": "R/N-10000/N-10102",
+  "node": {
+    "cnCode": "0102",
+    "selectable": true,
+    "nodeType": "nomenclature"
+  },
+  "classificationSections": [
+    {
+      "classCode": "I",
+      "descriptions": [
+        "Live animals; animal products"
+      ],
+      "scope": "ALL"
+    }
+  ],
+  "taxons": [
+    {
+      "taxonId": 12345,
+      "eppoCode": "BOVINAE",
+      "names": [
+        "Bos taurus"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "key": "minimumTemperature",
+      "value": {
+        "content": "2.0",
+        "unitCode": "CEL"
+      }
+    },
+    {
+      "key": "requiresLaboratoryTest",
+      "value": true
+    }
+  ],
+  "resolvedProductClassification": {
+    "systemId": {
+      "content": "CN",
+      "schemeId": "classification_system"
+    },
+    "classCode": "0102",
+    "className": [
+      "Live bovine animals"
+    ]
+  },
+  "retrievedAt": "2026-05-12T09:40:00Z"
+}

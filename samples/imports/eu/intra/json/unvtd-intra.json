@@ -1,0 +1,320 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "defra-unvtd-profile-intra.schema.json",
+  "@context": "../../../../schemas/imports/EU/defra-unvtd-bsp-document.context.jsonld",
+  "$type": "intra",
+  "exchangedDocument": {
+    "name": "64/432 (2016/2008) F1 Bovine",
+    "issueDateTime": "2021-02-18T16:09:51.000+01:00",
+    "includedNote": [
+      {
+        "type": "Note",
+        "content": "2021-03-09T12:27:16.000+01:00",
+        "noteSubjectCode": "LAST_UPDATE_DATETIME"
+      },
+      {
+        "type": "Note",
+        "content": "1",
+        "noteSubjectCode": "ESTIMATED_JOURNEY_TIME"
+      },
+      {
+        "type": "Note",
+        "contentCode": "NO",
+        "noteSubjectCode": "JOURNEY_LOG"
+      }
+    ],
+    "firstSignatoryAuthentication": {
+      "actualDateTime": "2021-02-18T16:10:29.000+01:00",
+      "providerParty": {
+        "name": "Agropoli Vet Office",
+        "identifier": "IT123VET",
+        "partyRoleCode": "VJ",
+        "partyTypeCode": [
+          "VETERINARY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "84043",
+          "lineOne": "street",
+          "cityName": "Agropoli",
+          "countryId": "IT",
+          "countryName": "Italy",
+          "countrySubDivisionName": "Campania"
+        },
+        "definedContact": [
+          {
+            "personName": "Chuck Norris"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "content": [
+            "RELAYING"
+          ],
+          "identifier": "CERTIFIED_AS_OR_FOR"
+        },
+        {
+          "content": [
+            "chucknorris@texasranger.com"
+          ],
+          "identifier": "SIGNATORY_PERSON_EMAIL"
+        }
+      ],
+      "governmentActionTypeCode": "4"
+    },
+    "secondSignatoryAuthentication": {
+      "actualDateTime": "2021-02-18T16:13:39.000+01:00",
+      "providerParty": {
+        "name": "Netherlands Food and Consumer Product Safety Authority",
+        "identifier": "NL0002",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ]
+      },
+      "governmentActionTypeCode": "1"
+    },
+    "thirdSignatoryAuthentication": {
+      "actualDateTime": "2021-03-09T12:27:16.000+01:00",
+      "providerParty": {
+        "name": "Netherlands Food and Consumer Product Safety Authority",
+        "identifier": "NL0002",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ]
+      },
+      "includedClause": [
+        {
+          "content": "YES",
+          "identifier": "DOCUMENTARY_CHECK"
+        },
+        {
+          "content": "LAP-000000915-INTRA.EU.NL.2021.0000001",
+          "identifier": "LABORATORY_TEST_REFERENCES"
+        }
+      ],
+      "governmentActionTypeCode": "8"
+    },
+    "identifier": "INTRA.EU.NL.2021.0000001",
+    "documentTypeCode": "856",
+    "documentStatusCode": "70",
+    "referenceDocument": [
+      {
+        "relationshipTypeCode": "CAW",
+        "attachmentBinaryObject": {
+          "format": "url",
+          "mimeCode": "text/url",
+          "uri": "http://DESKTOP-19:7001/tracesnt/certificate/eu-intra/INTRA.EU.NL.2021.0000001"
+        },
+        "identifier": "INTRA.EU.NL.2021.0000001",
+        "documentTypeCode": "856"
+      },
+      {
+        "relationshipTypeCode": "BM",
+        "information": [
+          "123456"
+        ],
+        "identifier": "222222",
+        "documentTypeCode": "730"
+      }
+    ]
+  },
+  "specifiedConsignment": [
+    {
+      "availabilityDueDateTime": "2021-02-20T16:07:00.000+01:00",
+      "exportExitDateTime": "2021-02-18T16:07:00.000+01:00",
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "modeCode": 3,
+          "identifier": "123456"
+        }
+      ],
+      "utilizedLogisticsTransportEquipment": [
+        {
+          "affixedLogisticsSeal": [
+            {
+              "identifier": "MSKU907032"
+            }
+          ],
+          "identifier": ""
+        }
+      ],
+      "includedConsignmentItem": [
+        {
+          "natureIdCargo": [
+            {
+              "typeCode": "12"
+            }
+          ],
+          "includedTradeLineItem": [
+            {
+              "sequenceNumeric": 0,
+              "description": [
+                "Consignment totals and summary"
+              ],
+              "netWeight": {
+                "value": "33",
+                "unitCode": "KGM"
+              },
+              "grossWeight": {
+                "value": "222",
+                "unitCode": "KGM"
+              },
+              "physicalReferencedLogisticsPackage": [
+                {
+                  "levelCode": 4,
+                  "typeCode": "BG",
+                  "itemQuantity": 22
+                }
+              ]
+            },
+            {
+              "sequenceNumeric": 1,
+              "description": [
+                ""
+              ],
+              "netWeight": {
+                "value": "33",
+                "unitCode": "KGM"
+              },
+              "grossWeight": {
+                "value": "100",
+                "unitCode": "KGM"
+              },
+              "applicableProductClassification": [
+                {
+                  "systemId": "CN",
+                  "systemName": "CN Code (Combined Nomenclature)",
+                  "classCode": 102,
+                  "className": [
+                    "LIVE ANIMALS",
+                    "Live bovine animals"
+                  ]
+                }
+              ],
+              "physicalReferencedLogisticsPackage": [
+                {
+                  "levelCode": 4,
+                  "typeCode": "BG",
+                  "itemQuantity": 22
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "consignorParty": {
+        "name": "B&S GTC Customs B.V.",
+        "identifier": "1234567",
+        "partyRoleCode": "CZ",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ]
+      },
+      "consigneeParty": {
+        "name": "Test EU lms",
+        "identifier": "BE-IMP-123",
+        "partyRoleCode": "CN",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ]
+      },
+      "despatchParty": {
+        "name": "B&S GTC Customs B.V.",
+        "identifier": "1234567",
+        "partyRoleCode": "PW"
+      },
+      "customsTransitAgentParty": {
+        "name": "B&S GTC Customs B.V.",
+        "identifier": "1234567",
+        "partyRoleCode": "CB"
+      }
+    }
+  ],
+  "laboratoryObservationResult": [
+    {
+      "natureIdCargo": {
+        "typeCode": "12"
+      },
+      "productLaboratoryTest": [
+        {
+          "applicableProductClassification": {
+            "systemId": "CN",
+            "systemName": "CN Code (Combined Nomenclature)",
+            "className": [
+              "LIVE ANIMALS",
+              "Live bovine animals"
+            ]
+          },
+          "laboratoryTest": [
+            {
+              "reference": "LAP-000000915-INTRA.EU.NL.2021.0000001",
+              "testDescriptor": {
+                "description": {
+                  "value": "ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES",
+                  "languageId": "en"
+                },
+                "categoryCode": "RESIDUES_B2B",
+                "identifier": "11221"
+              },
+              "testMotivationCode": "RANDOM",
+              "inspectorConclusionCode": "SATISFACTORY",
+              "analysis": {
+                "analysisTypeCode": "INITIAL",
+                "samplingDateTime": "2021-03-09T00:00:00.000+01:00",
+                "sampleBatchNumber": 1223,
+                "numberOfSamples": 2,
+                "sampleTypeCode": "LARVA",
+                "sampleConservationCode": "CHILLED",
+                "laboratory": {
+                  "name": "Test Lab in NL",
+                  "identifier": "NLCODE123",
+                  "partyRoleCode": "DCW"
+                },
+                "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
+                "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",
+                "laboratoryTestMethod": "test met",
+                "laboratoryResults": "ok",
+                "laboratoryConclusionCode": "SATISFACTORY"
+              }
+            },
+            {
+              "reference": "LAP-000000914-INTRA.EU.NL.2021.0000001",
+              "testDescriptor": {
+                "description": {
+                  "value": "ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES",
+                  "languageId": "en"
+                },
+                "categoryCode": "RESIDUES_B2B",
+                "identifier": "11221"
+              },
+              "testMotivationCode": "RANDOM",
+              "inspectorConclusionCode": "SATISFACTORY",
+              "analysis": {
+                "analysisTypeCode": "INITIAL",
+                "samplingDateTime": "2021-03-09T00:00:00.000+01:00",
+                "sampleBatchNumber": 1223,
+                "numberOfSamples": 2,
+                "sampleTypeCode": "LARVA",
+                "sampleConservationCode": "CHILLED",
+                "laboratory": {
+                  "name": "Test Lab in NL",
+                  "identifier": "NLCODE123",
+                  "partyRoleCode": "DCW"
+                },
+                "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
+                "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",
+                "laboratoryTestMethod": "test met",
+                "laboratoryResults": "ok",
+                "laboratoryConclusionCode": "SATISFACTORY"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
