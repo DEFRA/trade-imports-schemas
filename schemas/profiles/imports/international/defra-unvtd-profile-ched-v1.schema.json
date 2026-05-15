@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "defra-unvtd-profile-ched.schema.json",
+  "$id": "defra-unvtd-profile-ched-v1.schema.json",
   "title": "Defra UNVTD CHED profile",
   "allOf": [
     {
-      "$ref": "defra-unvtd-canonical-core.schema.json"
+      "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
     },
     {
       "type": "object",

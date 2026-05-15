@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "defra-unvtd-canonical-core-v1.schema.json",
   "title": "Defra UNVTD canonical core",
-  "description": "Canonical component schema for Defra internal models using UN/CEFACT/UNVTD building blocks. Property names and value kinds follow the UN/CEFACT D23B JSON-LD vocabulary (https://vocabulary.uncefact.org/unece-context-D23B.jsonld): xsd:string-typed terms are JSON strings; @vocab-typed terms are JSON strings; @id-typed terms are JSON objects or strings per JSON-LD. That file defines the RDF types ExchangedDocument and Consignment (PascalCase keys) and many association properties, but it does not currently declare the BSP assembly property keys exchangedDocument or specifiedConsignment (camelCase) used on the JSON root alongside UN JSON Schemas (e.g. UNECE-BSPMaster D23B). defra-unvtd-bsp-document.context.jsonld adds only those two missing keys as Defra profile aliases (not unece terms), so we avoid minting unofficial vocabulary entries while preserving a stable JSON-LD expansion for TRACES-oriented payload shape. If UN later publishes exchangedDocument/specifiedConsignment in the official context, remove the Defra aliases and use the official mapping directly.",
+  "description": "Canonical component schema for Defra internal models using UN/CEFACT/UNVTD building blocks. Property names and value kinds follow the UN/CEFACT D23B JSON-LD vocabulary (https://vocabulary.uncefact.org/unece-context-D23B.jsonld): xsd:string-typed terms are JSON strings; @vocab-typed terms are JSON strings; @id-typed terms are JSON objects or strings per JSON-LD. That file defines the RDF types ExchangedDocument and Consignment (PascalCase keys) and many association properties, but it does not currently declare the BSP assembly property keys exchangedDocument or specifiedConsignment (camelCase) used on the JSON root alongside UN JSON Schemas (e.g. UNECE-BSPMaster D23B). defra-unvtd-core-v1.context.jsonld adds only those two missing keys as Defra profile aliases (not unece terms), so we avoid minting unofficial vocabulary entries while preserving a stable JSON-LD expansion for TRACES-oriented payload shape. If UN later publishes exchangedDocument/specifiedConsignment in the official context, remove the Defra aliases and use the official mapping directly.",
   "$defs": {
     "UneceMeasureType": {
       "type": "object",
@@ -182,12 +182,179 @@
           "type": "string"
         },
         "attachmentBinaryObject": {
-          "type": "object"
+          "$ref": "#/$defs/AttachmentBinaryObject"
         },
         "information": {
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "AttachmentBinaryObject": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string"
+        },
+        "mimeCode": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      }
+    },
+    "LogisticsLocation": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        }
+      }
+    },
+    "CargoNature": {
+      "type": "object",
+      "properties": {
+        "typeCode": {
+          "type": "string",
+          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        }
+      }
+    },
+    "LogisticsPackage": {
+      "type": "object",
+      "properties": {
+        "levelCode": {
+          "type": "integer"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "itemQuantity": {
+          "type": "integer"
+        }
+      }
+    },
+    "ProductClassification": {
+      "type": "object",
+      "properties": {
+        "systemId": {
+          "type": "string"
+        },
+        "systemName": {
+          "type": "string"
+        },
+        "classCode": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "className": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TradeLineItem": {
+      "type": "object",
+      "properties": {
+        "sequenceNumeric": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "netWeight": {
+          "$ref": "#/$defs/UneceMeasureType"
+        },
+        "grossWeight": {
+          "$ref": "#/$defs/UneceMeasureType"
+        },
+        "applicableProductClassification": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProductClassification"
+          }
+        },
+        "physicalReferencedLogisticsPackage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LogisticsPackage"
+          }
+        }
+      }
+    },
+    "ConsignmentItem": {
+      "type": "object",
+      "properties": {
+        "natureIdCargo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CargoNature"
+          }
+        },
+        "includedTradeLineItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TradeLineItem"
+          }
+        }
+      }
+    },
+    "LaboratoryObservationResult": {
+      "type": "object",
+      "properties": {
+        "natureIdCargo": {
+          "$ref": "#/$defs/CargoNature"
+        },
+        "productLaboratoryTest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProductLaboratoryTest"
+          }
+        }
+      }
+    },
+    "ProductLaboratoryTest": {
+      "type": "object",
+      "properties": {
+        "applicableProductClassification": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ProductClassification"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ProductClassification"
+              }
+            }
+          ]
+        },
+        "laboratoryTest": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
         }
       }
@@ -270,13 +437,13 @@
         "unloadingBaseportLocation": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/$defs/LogisticsLocation"
           }
         },
         "includedConsignmentItem": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/$defs/ConsignmentItem"
           }
         }
       }
@@ -308,7 +475,10 @@
         },
         "laboratoryObservationResult": {
           "type": "array",
-          "description": "UN vocabulary-aligned laboratory observations/results collection."
+          "description": "UN vocabulary-aligned laboratory observations/results collection.",
+          "items": {
+            "$ref": "#/$defs/LaboratoryObservationResult"
+          }
         }
       }
     }

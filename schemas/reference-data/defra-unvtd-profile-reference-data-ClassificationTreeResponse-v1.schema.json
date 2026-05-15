@@ -15,13 +15,13 @@
       ],
       "properties": {
         "source": {
-          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ReferenceDataSource"
+          "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/ReferenceDataSource"
         },
         "treeId": {
-          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ClassificationTreeId"
+          "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/ClassificationTreeId"
         },
         "root": {
-          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ClassificationTreeNode"
+          "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/ClassificationTreeNode"
         },
         "retrievedAt": {
           "type": "string",

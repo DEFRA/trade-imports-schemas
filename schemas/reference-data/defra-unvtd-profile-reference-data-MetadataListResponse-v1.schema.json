@@ -15,15 +15,15 @@
       ],
       "properties": {
         "source": {
-          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ReferenceDataSource"
+          "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/ReferenceDataSource"
         },
         "metadataType": {
-          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/MetadataType"
+          "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/MetadataType"
         },
         "items": {
           "type": "array",
           "items": {
-            "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/MetadataCode"
+            "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/MetadataCode"
           }
         },
         "retrievedAt": {

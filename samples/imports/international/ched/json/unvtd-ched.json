@@ -1,7 +1,7 @@
 {
   "$model": "defra/certificate-internal/1",
-  "$schema": "defra-unvtd-profile-ched.schema.json",
-  "@context": "../../../../schemas/imports/EU/defra-unvtd-bsp-document.context.jsonld",
+  "$schema": "../../../../../schemas/profiles/imports/international/defra-unvtd-profile-ched-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
   "$type": "ched",
   "exchangedDocument": {
     "name": "CHED-PP Common Health Entry Document",

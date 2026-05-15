@@ -1,7 +1,7 @@
 {
   "$model": "defra/certificate-internal/1",
-  "$schema": "defra-unvtd-profile-intra.schema.json",
-  "@context": "../../../../schemas/imports/EU/defra-unvtd-bsp-document.context.jsonld",
+  "$schema": "../../../../../schemas/profiles/imports/eu/defra-unvtd-profile-intra-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
   "$type": "intra",
   "exchangedDocument": {
     "name": "64/432 (2016/2008) F1 Bovine",

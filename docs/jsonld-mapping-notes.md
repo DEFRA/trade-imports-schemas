@@ -1,6 +1,6 @@
 # JSON-LD Mapping Notes (EU UNVTD Profiles)
 
-This note explains why `schemas/imports/EU/defra-unvtd-bsp-document.context.jsonld` exists and how it should evolve.
+This note explains why `schemas/contexts/defra-unvtd-core-v1.context.jsonld` exists and how it should evolve.
 
 ## Current approach
 
@@ -34,4 +34,4 @@ These are different roles (type vs edge/property), so one does not replace the o
 
 ## Future cleanup rule
 
-If UNECE publishes official D23B mappings for `exchangedDocument` and `specifiedConsignment`, remove the two Defra aliases from `defra-unvtd-bsp-document.context.jsonld` and use the official context directly.
+If UNECE publishes official D23B mappings for `exchangedDocument` and `specifiedConsignment`, remove the two Defra aliases from `defra-unvtd-core-v1.context.jsonld` and use the official context directly.

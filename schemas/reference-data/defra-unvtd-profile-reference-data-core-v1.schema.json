@@ -5,7 +5,7 @@
   "description": "Canonical reference-data components built from UNVTD/UN-CEFACT primitives.",
   "$defs": {
     "UneceMeasureType": {
-      "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceMeasureType"
+      "$ref": "../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceMeasureType"
     },
     "ReferenceDataSource": {
       "type": "string",

@@ -4,7 +4,7 @@
   "title": "Defra UNVTD DOCOM profile",
   "allOf": [
     {
-      "$ref": "defra-unvtd-canonical-core-v1.schema.json"
+      "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
     },
     {
       "type": "object",

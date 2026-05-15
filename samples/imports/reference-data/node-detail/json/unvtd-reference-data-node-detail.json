@@ -1,5 +1,5 @@
 {
-  "$schema": "defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse.schema.json",
+  "$schema": "../../../../../schemas/reference-data/defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse-v1.schema.json",
   "@context": "https://vocabulary.uncefact.org/unece-context-D23B.jsonld",
   "source": "traces",
   "treeId": "chedpp",
