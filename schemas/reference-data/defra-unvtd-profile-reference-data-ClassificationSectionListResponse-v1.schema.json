@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-profile-reference-data-ClassificationSectionListResponse-v1.schema.json",
+  "title": "Defra UNVTD profile — ClassificationSectionListResponse",
+  "allOf": [
+    {
+      "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "source",
+        "sections"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ReferenceDataSource"
+        },
+        "treeId": {
+          "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ClassificationTreeId"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "defra-unvtd-profile-reference-data-core.schema.json#/$defs/ClassificationSection"
+          }
+        },
+        "retrievedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  ]
+}

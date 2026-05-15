@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-profile-ched.schema.json",
+  "title": "Defra UNVTD CHED profile",
+  "allOf": [
+    {
+      "$ref": "defra-unvtd-canonical-core.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "$model": {
+          "const": "defra/certificate-internal/1"
+        },
+        "$type": {
+          "const": "ched"
+        },
+        "exchangedDocument": {
+          "type": "object",
+          "properties": {
+            "documentTypeCode": {
+              "const": "636"
+            }
+          }
+        }
+      },
+      "required": [
+        "$model",
+        "$type",
+        "exchangedDocument",
+        "specifiedConsignment"
+      ]
+    }
+  ]
+}

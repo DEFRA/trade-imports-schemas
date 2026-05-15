@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-profile-reference-data-core-v1.schema.json",
+  "title": "Defra UNVTD reference-data canonical components",
+  "description": "Canonical reference-data components built from UNVTD/UN-CEFACT primitives.",
+  "$defs": {
+    "UneceMeasureType": {
+      "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceMeasureType"
+    },
+    "ReferenceDataSource": {
+      "type": "string",
+      "enum": [
+        "traces",
+        "mdm"
+      ]
+    },
+    "ClassificationTreeId": {
+      "type": "string",
+      "enum": [
+        "cheda",
+        "chedd",
+        "chedp",
+        "chedpp",
+        "coi",
+        "dispatch_authorisation",
+        "docom",
+        "eu_export",
+        "eu_import",
+        "intra_trade",
+        "journey_log",
+        "noa",
+        "phyto"
+      ]
+    },
+    "MetadataType": {
+      "type": "string",
+      "enum": [
+        "OPERATOR_ACTIVITY_TYPE",
+        "PACKAGE_TYPE",
+        "PRODUCT_TYPE",
+        "ACCOMPANYING_DOCUMENT_TYPE",
+        "TREATMENT_TYPE",
+        "ANIMAL_GENDER",
+        "IDENTIFICATION_SYSTEM",
+        "LABORATORY_TEST_MOTIVATION",
+        "REFUSAL_REASON"
+      ]
+    },
+    "CnCodeQualified": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]{2,8}$"
+        },
+        {
+          "type": "object",
+          "required": [
+            "content"
+          ],
+          "properties": {
+            "content": {
+              "type": "string",
+              "pattern": "^[0-9]{2,8}$"
+            }
+          }
+        }
+      ]
+    },
+    "NodeAttributeValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "#/$defs/UneceMeasureType"
+        }
+      ]
+    },
+    "NodeAttribute": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/NodeAttributeValue"
+        }
+      }
+    },
+    "ClassificationSection": {
+      "type": "object",
+      "required": [
+        "classCode",
+        "descriptions"
+      ],
+      "properties": {
+        "classCode": {
+          "type": "string"
+        },
+        "chapter": {
+          "type": "string"
+        },
+        "lms": {
+          "type": "boolean"
+        },
+        "descriptions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "Taxon": {
+      "type": "object",
+      "required": [
+        "taxonId",
+        "names"
+      ],
+      "properties": {
+        "taxonId": {
+          "type": "integer"
+        },
+        "eppoCode": {
+          "type": "string"
+        },
+        "faoCode": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClassificationTreeSummary": {
+      "type": "object",
+      "required": [
+        "treeId",
+        "treeName"
+      ],
+      "properties": {
+        "treeId": {
+          "$ref": "#/$defs/ClassificationTreeId"
+        },
+        "treeName": {
+          "type": "string"
+        }
+      }
+    },
+    "ClassificationTreeNode": {
+      "type": "object",
+      "required": [
+        "path",
+        "label",
+        "nodeType",
+        "selectable"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "nodeType": {
+          "type": "string",
+          "enum": [
+            "nomenclature",
+            "label",
+            "group",
+            "root",
+            "other"
+          ]
+        },
+        "selectable": {
+          "type": "boolean"
+        },
+        "cnCode": {
+          "$ref": "#/$defs/CnCodeQualified"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClassificationTreeNode"
+          }
+        }
+      }
+    },
+    "MetadataCode": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "mappedValue": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "displayNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
