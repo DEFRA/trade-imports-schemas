@@ -1,60 +1,89 @@
 #!/usr/bin/env node
 /**
- * Validate JSON Schema files for structural correctness.
- *
- * Schemas in scope:
- *   - schemas/imports/event-envelope-v1.schema.json  (JSON Schema draft-07)
- *   - schemas/imports/gbn-ag-v1.schema.json          (JSON Schema 2020-12)
- *
- * The gbn-ag schema has one external $ref into BSP D23B's BasicComponents
- * (for indicatorType). The vendor file is fetched on first run and cached at
- * build/vendor/uncefact/UNECE-BasicComponents.json; subsequent runs use the
- * cached copy.
+ * Validate all JSON Schemas in /schemas against each other,
+ * including external UNECE dependencies and vocabulary context checks.
  */
 
 import Ajv from 'ajv'
 import Ajv2020 from 'ajv/dist/2020.js'
 import addFormats from 'ajv-formats'
-import { readFile, writeFile, mkdir, access } from 'fs/promises'
-import { join, dirname } from 'path'
+import { readFile, writeFile, mkdir, access, readdir } from 'fs/promises'
+import { join, dirname, relative } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
+const SCHEMAS_DIR = join(ROOT, 'schemas')
 
-const SCHEMAS = [
-  { path: 'schemas/imports/event-envelope-v1.schema.json', draft: 'draft-07' },
-  { path: 'schemas/imports/gbn-ag-v1.schema.json',         draft: '2020-12' }
-]
+const UNECE_CONTEXT_URL = 'https://vocabulary.uncefact.org/unece-context-D23B.jsonld'
+const BSP_BASICCOMPONENTS_URL =
+  'https://raw.githubusercontent.com/uncefact/spec-JSONschema/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/UNECE-BasicComponents.json'
+const BSP_BASICCOMPONENTS_LEGACY_URL =
+  'https://raw.githubusercontent.com/uncefact/spec-JSONschema/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/BasicComponents'
 
-const BSP_BASICCOMPONENTS_URL = 'https://raw.githubusercontent.com/uncefact/spec-JSONschema/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/BasicComponents'
-const BSP_VENDOR_PATH = join(ROOT, 'build/vendor/uncefact/UNECE-BasicComponents.json')
+const VENDOR_DIR = join(ROOT, 'build/vendor/uncefact')
+const BSP_VENDOR_PATH = join(VENDOR_DIR, 'UNECE-BasicComponents.json')
+const CONTEXT_VENDOR_PATH = join(VENDOR_DIR, 'unece-context-D23B.jsonld')
+const LOCAL_CONTEXT_PATH = join(ROOT, 'schemas/contexts/defra-unvtd-core-v1.context.jsonld')
+
+function toPosix(p) {
+  return p.split('\\').join('/')
+}
 
 async function loadJson(path) {
   return JSON.parse(await readFile(path, 'utf-8'))
 }
 
-async function ensureBspBasicComponents() {
+async function fileExists(path) {
   try {
-    await access(BSP_VENDOR_PATH)
+    await access(path)
+    return true
   } catch {
-    process.stdout.write(`  Fetching BSP BasicComponents from raw.githubusercontent.com ... `)
-    const response = await fetch(BSP_BASICCOMPONENTS_URL)
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} fetching ${BSP_BASICCOMPONENTS_URL}`)
-    }
-    const body = await response.text()
-    await mkdir(dirname(BSP_VENDOR_PATH), { recursive: true })
-    await writeFile(BSP_VENDOR_PATH, body)
-    console.log('cached')
+    return false
   }
-  const bsp = await loadJson(BSP_VENDOR_PATH)
-  delete bsp.$schema
-  return bsp
 }
 
-function makeValidator(draft) {
-  const Ctor = draft === '2020-12' ? Ajv2020 : Ajv
+async function walkFiles(dir, predicate, acc = []) {
+  const entries = await readdir(dir, { withFileTypes: true })
+  for (const entry of entries) {
+    const full = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      await walkFiles(full, predicate, acc)
+    } else if (predicate(full)) {
+      acc.push(full)
+    }
+  }
+  return acc
+}
+
+function safeAddSchema(ajv, schema, key) {
+  if (!key) return
+  try {
+    ajv.addSchema(schema, key)
+  } catch {
+    // Duplicate aliases are fine.
+  }
+}
+
+function registerSchemaAliases(ajv, schema, schemaAbsPath) {
+  const relFromRoot = toPosix(relative(ROOT, schemaAbsPath))
+  const relFromSchemas = relFromRoot.startsWith('schemas/')
+    ? relFromRoot.slice('schemas/'.length)
+    : null
+
+  safeAddSchema(ajv, schema, relFromRoot)
+  safeAddSchema(ajv, schema, relFromSchemas)
+  safeAddSchema(ajv, schema, schema.$id)
+}
+
+function draftForSchema(schema) {
+  const declared = String(schema.$schema || '')
+  if (declared.includes('draft-07')) return 'draft-07'
+  return '2020-12'
+}
+
+function makeAjv(draft) {
+  const Ctor = draft === 'draft-07' ? Ajv : Ajv2020
   const ajv = new Ctor({
     strict: false,
     allErrors: true,
@@ -65,22 +94,74 @@ function makeValidator(draft) {
   return ajv
 }
 
+async function ensureRemoteJson(url, targetPath, label) {
+  if (!(await fileExists(targetPath))) {
+    process.stdout.write(`  Fetching ${label} ... `)
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} fetching ${url}`)
+    }
+    const body = await response.text()
+    await mkdir(dirname(targetPath), { recursive: true })
+    await writeFile(targetPath, body)
+    console.log('cached')
+  }
+  return loadJson(targetPath)
+}
+
+function localContextIncludesOfficial(localContext) {
+  const ctx = localContext?.['@context']
+  if (Array.isArray(ctx)) {
+    return ctx.some(item => item === UNECE_CONTEXT_URL)
+  }
+  return ctx === UNECE_CONTEXT_URL
+}
+
 async function main() {
   console.log('Validating schemas')
-  console.log('='.repeat(60))
+  console.log('='.repeat(70))
 
-  const bsp = await ensureBspBasicComponents()
+  const [bspBasicComponents] = await Promise.all([
+    ensureRemoteJson(BSP_BASICCOMPONENTS_URL, BSP_VENDOR_PATH, 'UNECE BasicComponents'),
+    ensureRemoteJson(UNECE_CONTEXT_URL, CONTEXT_VENDOR_PATH, 'UNECE D23B context')
+  ])
+
+  const schemaPaths = (await walkFiles(
+    SCHEMAS_DIR,
+    p => p.endsWith('.schema.json')
+  )).sort()
+
+  const schemaEntries = []
+  for (const schemaPath of schemaPaths) {
+    const schema = await loadJson(schemaPath)
+    schemaEntries.push({
+      path: schemaPath,
+      rel: toPosix(relative(ROOT, schemaPath)),
+      schema,
+      draft: draftForSchema(schema)
+    })
+  }
+
+  const ajv07 = makeAjv('draft-07')
+  const ajv2020 = makeAjv('2020-12')
+
+  // External schema used by gbn-ag profile.
+  safeAddSchema(ajv2020, bspBasicComponents, BSP_BASICCOMPONENTS_URL)
+  safeAddSchema(ajv2020, bspBasicComponents, BSP_BASICCOMPONENTS_LEGACY_URL)
+  safeAddSchema(ajv2020, bspBasicComponents, bspBasicComponents.$id)
+
+  // Register all schemas first so refs resolve.
+  for (const entry of schemaEntries) {
+    const targetAjv = entry.draft === 'draft-07' ? ajv07 : ajv2020
+    registerSchemaAliases(targetAjv, entry.schema, entry.path)
+  }
 
   let failures = 0
-  for (const { path, draft } of SCHEMAS) {
-    process.stdout.write(`  ${path} (${draft}) ... `)
+  for (const entry of schemaEntries) {
+    process.stdout.write(`  ${entry.rel} (${entry.draft}) ... `)
     try {
-      const schema = await loadJson(join(ROOT, path))
-      const ajv = makeValidator(draft)
-      if (draft === '2020-12') {
-        ajv.addSchema(bsp)
-      }
-      ajv.compile(schema)
+      const targetAjv = entry.draft === 'draft-07' ? ajv07 : ajv2020
+      targetAjv.compile(entry.schema)
       console.log('ok')
     } catch (err) {
       console.log('FAIL')
@@ -89,12 +170,28 @@ async function main() {
     }
   }
 
-  console.log('='.repeat(60))
+  // Validate local context wiring against official context URL.
+  if (await fileExists(LOCAL_CONTEXT_PATH)) {
+    process.stdout.write(`  ${toPosix(relative(ROOT, LOCAL_CONTEXT_PATH))} (context linkage) ... `)
+    try {
+      const localContext = await loadJson(LOCAL_CONTEXT_PATH)
+      if (!localContextIncludesOfficial(localContext)) {
+        throw new Error(`@context does not include ${UNECE_CONTEXT_URL}`)
+      }
+      console.log('ok')
+    } catch (err) {
+      console.log('FAIL')
+      console.error(`    ${err.message}`)
+      failures += 1
+    }
+  }
+
+  console.log('='.repeat(70))
   if (failures === 0) {
-    console.log(`All ${SCHEMAS.length} schemas compiled cleanly.`)
+    console.log(`All ${schemaEntries.length} schemas compiled cleanly.`)
     process.exit(0)
   }
-  console.log(`${failures} of ${SCHEMAS.length} schemas failed.`)
+  console.log(`${failures} validation checks failed.`)
   process.exit(1)
 }
 

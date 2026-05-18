@@ -48,15 +48,11 @@
       },
       "includedClause": [
         {
-          "content": [
-            "RELAYING"
-          ],
+          "content": "RELAYING",
           "identifier": "CERTIFIED_AS_OR_FOR"
         },
         {
-          "content": [
-            "chucknorris@texasranger.com"
-          ],
+          "content": "chucknorris@texasranger.com",
           "identifier": "SIGNATORY_PERSON_EMAIL"
         }
       ],

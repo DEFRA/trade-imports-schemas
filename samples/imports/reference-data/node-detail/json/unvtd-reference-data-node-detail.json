@@ -41,10 +41,7 @@
     }
   ],
   "resolvedProductClassification": {
-    "systemId": {
-      "content": "CN",
-      "schemeId": "classification_system"
-    },
+    "systemId": "CN",
     "classCode": "0102",
     "className": [
       "Live bovine animals"
