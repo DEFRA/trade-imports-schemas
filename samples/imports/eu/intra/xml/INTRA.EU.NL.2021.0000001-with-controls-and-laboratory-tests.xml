@@ -1,0 +1,972 @@
+<ns3:GetEuIntraCertificateResponse xmlns:ns2="http://ec.europa.eu/sanco/tracesnt/base/v4" xmlns:ns3="http://ec.europa.eu/tracesnt/certificate/euintra/v1" xmlns:ns4="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21" xmlns:ns5="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21" xmlns:ns6="urn:un:unece:uncefact:data:standard:SPSCertificate:17" xmlns:ns7="http://ec.europa.eu/tracesnt/certificate/laboratorytest/v1" xmlns:ns8="http://ec.europa.eu/tracesnt/referencedata/laboratorytest/v1" xmlns:ns9="http://ec.europa.eu/tracesnt/certificate/base/v01" xmlns:ns10="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns11="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:ns12="http://www.w3.org/2000/09/xmldsig#" xmlns:ns13="http://ec.europa.eu/sanco/tracesnt/error/v01" xmlns:ns14="http://ec.europa.eu/tracesnt/body/v3" xmlns:ns15="urn:un:unece:uncefact:codelist:standard:EDIFICAS-EU:CertificateType:D11A" xmlns:ns16="urn:un:unece:uncefact:codelist:standard:ISO:ISO2AlphaLanguageCode:2006-10-27" xmlns:ns17="urn:un:unece:uncefact:codelist:standard:UNECE:AddressType:D16B" xmlns:ns18="urn:un:unece:uncefact:codelist:standard:UNECE:CargoTypeClassificationCode:D16B" xmlns:ns19="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D16B" xmlns:ns20="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentStatusCode:D16B" xmlns:ns21="urn:un:unece:uncefact:codelist:standard:UNECE:GovernmentActionCode:D16B" xmlns:ns22="urn:un:unece:uncefact:codelist:standard:UNECE:LocationFunctionCode:D16B" xmlns:ns23="urn:un:unece:uncefact:codelist:standard:UNECE:PackageTypeCode:2006" xmlns:ns24="urn:un:unece:uncefact:codelist:standard:UNECE:PackagingLevelCode:D16B" xmlns:ns25="urn:un:unece:uncefact:codelist:standard:UNECE:ProcessTypeCode:D16B" xmlns:ns26="urn:un:unece:uncefact:codelist:standard:UNECE:StatusCode:D16B" xmlns:ns27="urn:un:unece:uncefact:codelist:standard:UNECE:TemperatureTypeCode:D16B" xmlns:ns28="urn:un:unece:uncefact:codelist:standard:UNECE:TransportMeansTypeCode:2007" xmlns:ns29="urn:un:unece:uncefact:codelist:standard:UNECE:TransportModeCode:2">
+ <ns3:SPSCertificate>
+	<ns6:SPSExchangedDocument>
+	   <ns4:Name>64/432 (2016/2008) F1 Bovine</ns4:Name>
+	   <ns4:ID>INTRA.EU.NL.2021.0000001</ns4:ID>
+	   <ns4:TypeCode name="Inspection certificate (EU Intra Certificate)">856</ns4:TypeCode>
+	   <ns4:StatusCode name="Issued (Valid)">70</ns4:StatusCode>
+	   <ns4:IssueDateTime>
+		  <ns5:DateTime>2021-02-18T16:09:51.000+01:00</ns5:DateTime>
+	   </ns4:IssueDateTime>
+	   <ns4:IncludedSPSNote>
+		  <ns4:Content>2021-03-09T12:27:16.000+01:00</ns4:Content>
+		  <ns4:SubjectCode listID="eu_intra_note_subject_code" listName="EU-Intra Note SubjectCode list" name="Last updated">LAST_UPDATE_DATETIME</ns4:SubjectCode>
+	   </ns4:IncludedSPSNote>
+	   <ns4:IncludedSPSNote>
+		  <ns4:Content>1</ns4:Content>
+		  <ns4:SubjectCode listID="eu_intra_note_subject_code" listName="EU-Intra Note SubjectCode list" name="Estimated journey time">ESTIMATED_JOURNEY_TIME</ns4:SubjectCode>
+	   </ns4:IncludedSPSNote>
+	   <ns4:IncludedSPSNote>
+		  <ns4:ContentCode listID="boolean" listName="Boolean (yes/no)">NO</ns4:ContentCode>
+		  <ns4:Content/>
+		  <ns4:SubjectCode listID="eu_intra_note_subject_code" listName="EU-Intra Note SubjectCode list" name="Journey log">JOURNEY_LOG</ns4:SubjectCode>
+	   </ns4:IncludedSPSNote>
+	   <ns4:IncludedSPSNote>
+		  <ns4:ContentCode listID="product_temperature" listName="Product temperature" name="Ambient">AMBIENT</ns4:ContentCode>
+		  <ns4:Content/>
+		  <ns4:SubjectCode listID="certificate_note_subject_code" listName="Certificate Note SubjectCode list" name="Transport conditions">TRANSPORT_CONDITIONS</ns4:SubjectCode>
+	   </ns4:IncludedSPSNote>
+	   <ns4:ReferenceSPSReferencedDocument>
+		  <ns4:TypeCode name="Inspection certificate (EU Intra Certificate)">856</ns4:TypeCode>
+		  <ns4:RelationshipTypeCode name="Document reference, internal (Document reference, internal)">CAW</ns4:RelationshipTypeCode>
+		  <ns4:ID>INTRA.EU.NL.2021.0000001</ns4:ID>
+		  <ns4:AttachmentBinaryObject format="url" mimeCode="text/url" uri="http://DESKTOP-19:7001/tracesnt/certificate/eu-intra/INTRA.EU.NL.2021.0000001"/>
+	   </ns4:ReferenceSPSReferencedDocument>
+	   <ns4:ReferenceSPSReferencedDocument>
+		  <ns4:TypeCode name="Road consignment note (International transport document for Road Vehicle)">730</ns4:TypeCode>
+		  <ns4:RelationshipTypeCode name="Bill of lading number (International transport document)">BM</ns4:RelationshipTypeCode>
+		  <ns4:ID>222222</ns4:ID>
+		  <ns4:Information>123456</ns4:Information>
+	   </ns4:ReferenceSPSReferencedDocument>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Inspection (Identification of Applicant)">4</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-02-18T16:10:29.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="veterinary_office_identifier" schemeName="Veterinary office identifier" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IT123VET</ns4:ID>
+			 <ns4:Name>Agropoli Vet Office</ns4:Name>
+			 <ns4:RoleCode name="Officer (Identification of Applicant)">VJ</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Veterinary">VETERINARY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>84043</ns4:PostcodeCode>
+				<ns4:LineOne>street</ns4:LineOne>
+				<ns4:CityName languageID="en">Agropoli</ns4:CityName>
+				<ns4:CountryID>IT</ns4:CountryID>
+				<ns4:CountryName languageID="en">Italy</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Campania</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Chuck Norris</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_consignment_clause" schemeName="EU Intra consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CERTIFIED_AS_OR_FOR</ns4:ID>
+			 <ns4:Content>RELAYING</ns4:Content>
+			 <ns4:Content languageID="en">Relaying</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_consignment_clause" schemeName="EU Intra consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>chucknorris@texasranger.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Clearance (Certification by certifying officer)">1</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-02-18T16:13:39.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_certification_clause" schemeName="EU Intra certification's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_certification_clause" schemeName="EU Intra certification's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_CLAUSES</ns4:ID>
+			 <ns4:Content languageID="en">(1)either - [x] [I, the undersigned official veterinarian, hereby certify, that all applicable provisions of Directive 64/432/EEC are fulfilled and that in particular the animals described in Part I meet the following requirements:]  
+(1)(2)or - [ ] ~~[Based on the information provided either in an official document or a certificate in which Sections A and B were completed by the official veterinarian or the approved veterinarian responsible for the holding of origin, I, the undersigned official veterinarian, hereby certify, that all applicable provisions of Directive 64/432/EEC are fulfilled and that in particular the animals described in Part I meet the following requirements:]~~  
+II.1. Section A 
+II.1.1. The animals come from holding/s of origin and area/s which, in conformity with Union or national legislation, is/are not subject to any prohibition or restriction for reasons of animal diseases affecting bovine animals. 
+(1)either - [ ] ~~[II.1.2.~~  ~~The animals are bovine animals for breeding or production, and~~  
+~~II.1.2.1.~~  ~~have been resident, as far as can be ascertained, on the holding/s of origin during the last 30 days, or since birth, if they are less than 30 days of age, and no animal imported from a third country was introduced into that/those holding/s during this period, unless it was isolated from all other animals on the holding/s;~~  
+~~II.1.2.2.~~  ~~come from herd/s which is/are officially tuberculosis-free, and~~  
+~~(1)either~~  - [ ] ~~[II.1.2.2.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.2.2~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially tuberculosis-free in accordance with point 4 of Annex A(I) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.2.3.~~  ~~are animals less than 6 weeks of age;]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.2.4.~~  ~~are animals 6 weeks of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(a) of Directive 64/432/EEC for tuberculosis on~~ null~~(insert date);]~~  
+~~II.1.2.3.~~  ~~come from herd/s which is/are officially brucellosis-free, and~~  
+~~(1)either~~  - [ ] ~~[II.1.2.3.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.3.2.~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially brucellosis-free in accordance with point 7 of Annex A(II) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.3.3.~~  ~~are castrated animals and/or less than 12 months of age;]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.3.4.~~  ~~are animals 12 months of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(b) of Directive 64/432/EEC for brucellosis on~~ null~~(insert date);]~~  
+~~II.1.2.4.~~  ~~come from herd/s which is/are officially enzootic bovine leukosis-free, and~~  
+~~(1)either~~  - [ ] ~~[II.1.2.4.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.4.2.~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially enzootic bovine leukosis-free in accordance with point E of Annex D(I) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.4.3.~~  ~~are animals less than 12 months of age;]~~  
+~~(1)and/or~~  - [ ] ~~[II.1.2.4.4.~~  ~~are animals 12 months of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(c) of Directive 64/432/EEC for enzootic bovine leukosis on~~ null~~(insert date).]~~ ~~]~~  
+(1)or - [x] [II.1.2.  The animals are animals for slaughter coming from officially tuberculosis-free and officially enzootic bovine leukosis-free herd/s, and  
+(1)either  - [x] [II.1.2.1.  come from officially brucellosis-free herd/s;]  
+(1)and/or  - [ ] ~~[II.1.2.2.~~  ~~are castrated.]~~ ]  
+II.2. Section B 
+The description of the consignment in this Section corresponds to the information entered in Points I.15., I.16.(3), I.17.(3), I.20. and I.31. 
+(4)- [ ] ~~[II.3.~~  ~~Section C~~  
+~~II.3.1.~~  ~~The animals had been inspected in accordance with Article 5(2) of Directive 64/432/EEC on~~ null~~(insert date) during the 24 hours before scheduled departure and had not shown clinical signs of infectious or contagious disease.~~  
+~~II.3.2.~~  ~~The animals come from the holding/s and, where applicable, an approved assembly centre, and the area/s which, in conformity with Union or national legislation, is/are not subject to any prohibitions or restrictions for reasons of animal diseases affecting bovine animals.~~  
+~~(1)~~  - [ ] ~~[II.3.3.~~  ~~The animals meet the additional guarantees for infectious bovine rhinotracheitis in accordance with Article~~ null~~(insert article number) of Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number).]~~  
+~~II.3.4.~~  ~~The animals did not remain more than six days in the approved assembly centre.~~  
+~~II.3.5.~~  ~~Arrangements are made to transport the animals in means of transport which are constructed in such a way that the animal faeces, litter or feed cannot leak or fall out of the vehicle, and which had been cleansed and disinfected immediately after the transport of animals, or of any product which could affect animal health, and where necessary before loading of the animals, using disinfectants officially authorised by the competent authority.~~  
+~~(5)(6)II.3.6.~~  ~~At the time of inspection, the animals covered by this health certificate were fit to be transported in accordance with the provisions of Council Regulation (EC) No 1/2005 on the intended journey due to start on~~ null~~(insert date).~~  
+~~II.3.7.~~  ~~This certificate~~  
+~~(1)either~~  - [ ] ~~[II.3.7.1.~~  ~~is valid for 10 days from the date of inspection on the holding of origin, or in the approved assembly centre in the Member State of origin;]~~  
+~~(1)or~~  - [ ] ~~[II.3.7.1.~~  ~~expires in accordance with Article 5(5) of Directive 64/432/EEC on~~ null~~(insert date).]~~ ~~]~~  
+
+(1) - [ ] ~~[II.3.8.~~  ~~The animals come directly from a semen collection centre complying with Directive 88/407/EEC;]~~  
+(1) - [ ] ~~[II.3.9.~~  ~~The animals are to be dispatched to Switzerland and they:~~  
+~~are identified by a permanent identification system enabling them to be traced back to the dam and herd of origin and making it possible to establish that they are not the progeny of BSE suspect or confirmed females born during the two years preceding the diagnosis;~~  
+~~do not come from herds where a suspected case of BSE is under investigation;~~  
+~~were born after 1 June 2001.]~~  
+
+(1) - [ ] ~~[II.4. ‘~~ null~~(Animals) in compliance with~~ null~~(Article 4(1)(a) or 4(1)(b) or 4(1)(c), indicate as appropriate) of Commission Implementing Decision (EU) 2016/2008 concerning animal health control measures relating to lumpy skin disease in certain Member States’.]~~  
+(1) - [ ] ~~[II.5. ‘~~ null~~(Animals) in compliance with Article 5(1) of Commission Implementing Decision (EU) 2016/2008 concerning animal health control measures relating to lumpy skin disease in certain Member States’.]~~  
+
+
+Blue Tongue(BT): exemption from the exit ban 
+-BT-1:- [ ] ~~Animals in compliance with Article~~ - [ ] ~~7(1)~~ ~~or~~ - [ ] ~~7(2)(a)~~ ~~or~~ - [ ] ~~7(2)(b)~~ ~~or~~ - [ ] ~~7(2)(c)~~ ~~or~~ - [ ] ~~7(2a)(a)~~ ~~or~~ - [ ] ~~7(2a)(b)~~ ~~or~~ - [ ] ~~7(2a)(c)~~ ~~, (indicate as appropriate) of Regulation (EC) No 1266/2007.~~  
+-BT-2:- [ ] - [ ] ~~Animals~~ ~~,~~ - [ ] ~~semen~~ ~~,~~ - [ ] ~~ova~~ ~~and~~ - [ ] ~~embryos~~ ~~, (indicate as appropriate) in compliance with Article~~ - [ ] ~~8(1)(a)~~ ~~or~~ - [ ] ~~8(1)(b)~~ ~~or~~ - [ ] ~~8(4)~~ ~~or~~ - [ ] ~~8(5a)~~ ~~,(indicate as appropriate) of Regulation (EC) No1266/2007.~~  
+-BT-3:- [ ] ~~Insecticide/repellent treatment with~~ null~~(insert name of the product) on~~ null~~(insert date) in conformity with Article 9 of Regulation (EC) No 1266/2007.~~  
+-BTA1:- [ ] ~~Animal(s) were kept until dispatch in a bluetongue seasonally-free zone during the seasonally vector-free period that started on~~ null~~(insert date) since birth or for at least 60 days~~ - [ ] ~~and, if appropriate (indicate as appropriate), were then subjected to an agent identification test according to the OIE Terrestrial Manual on samples taken within seven days prior to dispatch, with negative results , in conformity with Regulation (EC) No 1266/2007 Annex III.A(1) to Regulation (EC) No 1266/2007.~~  
+-BTA2:- [ ] ~~Animal(s) in conformity with Annex III.A(2) to Regulation (EC) No 1266/2007~~  
+-BTA3:- [ ] ~~Animal(s) in conformity with Annex III.A(3) to Regulation (EC) No 1266/2007~~  
+-BTA4:- [ ] ~~Animal(s) in conformity with Annex III.A(4) to Regulation (EC) No 1266/2007~~  
+-BTA5:- [ ] ~~Animal(s) vaccinated against bluetongue serotype/s~~ null~~(insert serotype/s) with~~ null~~(insert name of the vaccine) with a~~ - [ ] ~~inactivated~~ ~~/~~ - [ ] ~~modified live~~ ~~vaccine (indicate, as appropriate) in conformity with Annex III.A(5) to Regulation (EC) No 1266/2007.~~  
+-BTA6:- [ ] ~~Animal(s) subjected to a serological test according to the OIE Terrestrial Manual to detect antibodies against the bluetongue virus serotype~~ null~~(indicate serotype) in conformity with Annex III.A(6) to Regulation (EC) No 1266/2007.~~  
+-BTA7:- [ ] ~~Animal(s) subjected to a specific serological test according to the OIE Terrestrial Manual to detect antibodies against all the bluetongue virus serotypes~~ null~~(indicate serotypes) present or likely to be present in conformity with Annex III.A(7) to Regulation (EC) No 1266/2007.~~  
+-BTA8:- [ ] - [ ] ~~"Animal(s) is (are) not pregnant"~~ ~~or~~ - [ ] ~~"Animal(s) may be pregnant and complies (comply) with the condition(s)~~ null~~(set out in points~~ - [ ] ~~5~~ ~~,~~ - [ ] ~~6~~ ~~and~~ - [ ] ~~7~~ ~~before insemination or mating, or~~ - [ ] ~~set out in point 3~~ ~~; indicate as appropriate)".~~  
+
+
+Notes 
+·               Section A and B of the certificate shall be stamped and signed by: 
+o     either the official veterinarian of the holding of origin, if different from the official veterinarian signing Section C; or 
+o     the approved veterinarian of the holding of origin where the Member State of origin has introduced a surveillance network system approved in accordance with Article 14(5) of Directive 64/432/EEC; or 
+o     the official veterinarian responsible for the approved assembly centre at the date of departure of the animals. 
+·               Section C shall be stamped and signed by the official veterinarian of: 
+o     either the holding of origin; or 
+o     the approved assembly centre situated in the Member State of origin; or 
+o     the approved assembly centre situated in one Member State of transit when completing the certificate for dispatch of animals to the Member State of destination. 
+Part I: 
+• Box reference I.6.: Indicate the serial number(s) of the health certificate(s) drawn up on the day of health inspection on the holding(s) of origin in the Member State(s) of origin and accompanying the animals forming the consignment for which this health certificate is issued in an assembly centre situated in the Member State of transit, as described in Article 5(5) of Directive 64/432/EEC. 
+• Box reference I.7.: Fill in if applicable. 
+• Box reference I.12.: Dealer’s premises shall only be marked as a Place of origin in the case of animals for slaughter. 
+• Box reference I.13.: In the case of animals for slaughter either Assembly centre or Establishment shall be marked as a Place of destination as described in Article 7 of Directive 64/432/EEC. 
+• Box reference I.23.: For containers or boxes, the container number and the seal number (if applicable) shall be included. 
+• Box reference I.31.: Official identification: Indicate for each animal of the consignment the unique identification code, as described in Article 1(2) of Regulation (EC) No 911/2004, displayed on the visible means of identification applied in accordance with Regulation (EC) No 1760/2000. 
+Passport number: If temporary passports for animals less than 4 weeks old are authorised by the competent authority in accordance with Article 6(2) of Regulation (EC) No 911/2004, indicate for each animal of the consignment the temporary passport number. For each animal accompanied by a passport issued in accordance with Article 6(1)(a) of Regulation (EC) No 1760/2000, entering the passport number is optional. 
+Part II: 
+(1) Delete if not applicable. 
+(2) Shall be signed by the official veterinarian at the assembly centre after documentary check and identity checks on animals arriving with an official document or Sections A and B completed certificate, otherwise this point shall be deleted. 
+(3) Should be indicated, if the distance of transport exceeds 65 km. 
+(4) Delete, if the certificate is used for movement of animals within Member State of origin and only Sections A and B are completed and signed. 
+(5) In the case where a consignment is grouped in an assembly centre and comprises animals that were loaded on different dates, the date at which the journey commenced for the whole consignment is considered to be the earliest date when any part of the consignment left the holding of origin. 
+(6) This statement does not exempt transporters from their obligations in accordance with Union rules in force in particular regarding the fitness of animals to be transported. 
+·                    The colour of the stamp and the signature must be different from that of the other particulars in the certificate. 
+·                    The required details of this certificate have to be entered into TRACES on the day of issuing the certificate and at least within 24 hours thereof.</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Container inspection (Control by official veterinarian)">8</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-03-09T12:27:16.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT_NATIONAL</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>FITNESS_FOR_TRANSPORT</ns4:Content>
+			 <ns4:Content languageID="en">Fitness for transport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>INVALID_PROOF_OF_TRANSPORTER_REGISTRATION</ns4:Content>
+			 <ns4:Content languageID="en">Invalid proof of transporter's registration</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS</ns4:ID>
+			 <ns4:Content>22</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ACCURATE</ns4:Content>
+			 <ns4:Content languageID="en">units (Accurate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS</ns4:ID>
+			 <ns4:Content>23</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ESTIMATE</ns4:Content>
+			 <ns4:Content languageID="en">% (Estimate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BIRTH_OR_ABORTIONS</ns4:ID>
+			 <ns4:Content>2</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CORRECTIVE_ACTION</ns4:ID>
+			 <ns4:Content>UNLOADING</ns4:Content>
+			 <ns4:Content languageID="en">Unloading</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FOLLOW_UP_QUARANTINE_OR_ISOLATION</ns4:ID>
+			 <ns4:Content>HUMANE_KILLING_EUTHANASIA</ns4:Content>
+			 <ns4:Content languageID="en">Humane killing/Euthanasia</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PLACE_OF_OFFICIAL_CONTROL</ns4:ID>
+			 <ns4:Content>APPROVED_ESTABLISHMENT</ns4:Content>
+			 <ns4:Content languageID="en">Approved establishment</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">LABORATORY_TEST_REFERENCES</ns4:ID>
+			 <ns4:Content>LAP-000000915-INTRA.EU.NL.2021.0000001</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Container inspection (Control by official veterinarian)">8</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-03-09T12:26:00.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT_NATIONAL</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>FITNESS_FOR_TRANSPORT</ns4:Content>
+			 <ns4:Content languageID="en">Fitness for transport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>INVALID_PROOF_OF_TRANSPORTER_REGISTRATION</ns4:Content>
+			 <ns4:Content languageID="en">Invalid proof of transporter's registration</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS</ns4:ID>
+			 <ns4:Content>22</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ACCURATE</ns4:Content>
+			 <ns4:Content languageID="en">units (Accurate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS</ns4:ID>
+			 <ns4:Content>23</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ESTIMATE</ns4:Content>
+			 <ns4:Content languageID="en">% (Estimate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BIRTH_OR_ABORTIONS</ns4:ID>
+			 <ns4:Content>2</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CORRECTIVE_ACTION</ns4:ID>
+			 <ns4:Content>UNLOADING</ns4:Content>
+			 <ns4:Content languageID="en">Unloading</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FOLLOW_UP_QUARANTINE_OR_ISOLATION</ns4:ID>
+			 <ns4:Content>HUMANE_KILLING_EUTHANASIA</ns4:Content>
+			 <ns4:Content languageID="en">Humane killing/Euthanasia</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PLACE_OF_OFFICIAL_CONTROL</ns4:ID>
+			 <ns4:Content>APPROVED_ESTABLISHMENT</ns4:Content>
+			 <ns4:Content languageID="en">Approved establishment</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">LABORATORY_TEST_REFERENCES</ns4:ID>
+			 <ns4:Content>LAP-000000914-INTRA.EU.NL.2021.0000001</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Container inspection (Control by official veterinarian)">8</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-03-08T22:41:05.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT_NATIONAL</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>NOT_SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Not satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>ADDITIONAL_PROVISIONS_FOR_LONG_JOURNEYS</ns4:Content>
+			 <ns4:Content languageID="en">Additional provisions for long journeys</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>NON_APPROVED_ESTABLISHMENT</ns4:Content>
+			 <ns4:Content languageID="en">Non-approved establishment</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS</ns4:ID>
+			 <ns4:Content>30</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ESTIMATE</ns4:Content>
+			 <ns4:Content languageID="en">% (Estimate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS</ns4:ID>
+			 <ns4:Content>2</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">UNFIT_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ACCURATE</ns4:Content>
+			 <ns4:Content languageID="en">units (Accurate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BIRTH_OR_ABORTIONS</ns4:ID>
+			 <ns4:Content>2</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CORRECTIVE_ACTION</ns4:ID>
+			 <ns4:Content>UNLOADING</ns4:Content>
+			 <ns4:Content languageID="en">Unloading</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FOLLOW_UP_QUARANTINE_OR_ISOLATION</ns4:ID>
+			 <ns4:Content>HUMANE_KILLING_EUTHANASIA</ns4:Content>
+			 <ns4:Content languageID="en">Humane killing/Euthanasia</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PLACE_OF_OFFICIAL_CONTROL</ns4:ID>
+			 <ns4:Content>AIRPORT</ns4:Content>
+			 <ns4:Content languageID="en">Airport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Container inspection (Control by official veterinarian)">8</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-03-08T18:59:35.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT_NATIONAL</ns4:ID>
+			 <ns4:Content>NOT_SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Not satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>NOT_SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Not satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>FITNESS_FOR_TRANSPORT</ns4:Content>
+			 <ns4:Content languageID="en">Fitness for transport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>MEANS_OF_TRANSPORT</ns4:Content>
+			 <ns4:Content languageID="en">Means of transport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>INVALID_PROOF_OF_TRANSPORTER_REGISTRATION</ns4:Content>
+			 <ns4:Content languageID="en">Invalid proof of transporter's registration</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">HEALTH_NON_COMPLIANCE</ns4:ID>
+			 <ns4:Content>MISMATCH_BETWEEN_IDENTITY_ACCOMPANYING_DOCUMENTS</ns4:Content>
+			 <ns4:Content languageID="en">Mis-match between identity and accompanying documents</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS</ns4:ID>
+			 <ns4:Content>25</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEAD_ANIMALS_COUNT_TYPE</ns4:ID>
+			 <ns4:Content>ACCURATE</ns4:Content>
+			 <ns4:Content languageID="en">units (Accurate)</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BIRTH_OR_ABORTIONS</ns4:ID>
+			 <ns4:Content>11</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CORRECTIVE_ACTION</ns4:ID>
+			 <ns4:Content>TRANSFER_TO_ANOTHER_MEANS_OF_TRANSPORT</ns4:Content>
+			 <ns4:Content languageID="en">Transfer to another means of transport</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CORRECTIVE_ACTION</ns4:ID>
+			 <ns4:Content>UNLOADING</ns4:Content>
+			 <ns4:Content languageID="en">Unloading</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FOLLOW_UP_QUARANTINE_OR_ISOLATION</ns4:ID>
+			 <ns4:Content>HUMANE_KILLING_EUTHANASIA</ns4:Content>
+			 <ns4:Content languageID="en">Humane killing/Euthanasia</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PLACE_OF_OFFICIAL_CONTROL</ns4:ID>
+			 <ns4:Content>APPROVED_ESTABLISHMENT</ns4:Content>
+			 <ns4:Content languageID="en">Approved establishment</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	   <ns4:SignatorySPSAuthentication>
+		  <ns4:TypeCode name="Container inspection (Control by official veterinarian)">8</ns4:TypeCode>
+		  <ns4:ActualDateTime>
+			 <ns5:DateTime>2021-02-18T16:14:11.000+01:00</ns5:DateTime>
+		  </ns4:ActualDateTime>
+		  <ns4:ProviderSPSParty>
+			 <ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+			 <ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+			 <ns4:RoleCode name="Authorized official">AM</ns4:RoleCode>
+			 <ns4:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns4:TypeCode>
+			 <ns4:SpecifiedSPSAddress>
+				<ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				<ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				<ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				<ns4:CountryID>NL</ns4:CountryID>
+				<ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				<ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+			 </ns4:SpecifiedSPSAddress>
+			 <ns4:SpecifiedSPSPerson>
+				<ns4:Name>Eduardo Diego</ns4:Name>
+			 </ns4:SpecifiedSPSPerson>
+		  </ns4:ProviderSPSParty>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT_NATIONAL</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK_RESULT</ns4:ID>
+			 <ns4:Content>SATISFACTORY</ns4:Content>
+			 <ns4:Content languageID="en">Satisfactory</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ns4:ID>
+			 <ns4:Content>YES</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PLACE_OF_OFFICIAL_CONTROL</ns4:ID>
+			 <ns4:Content>ENROUTE</ns4:Content>
+			 <ns4:Content languageID="en">Enroute</ns4:Content>
+		  </ns4:IncludedSPSClause>
+		  <ns4:IncludedSPSClause>
+			 <ns4:ID schemeID="eu_intra_control_clause" schemeName="EU Intra controls's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ns4:ID>
+			 <ns4:Content>Aart.Monst@WorldUSsR72.com</ns4:Content>
+		  </ns4:IncludedSPSClause>
+	   </ns4:SignatorySPSAuthentication>
+	</ns6:SPSExchangedDocument>
+	<ns6:SPSConsignment>
+	   <ns4:AvailabilityDueDateTime>
+		  <ns5:DateTime>2021-02-20T16:07:00.000+01:00</ns5:DateTime>
+	   </ns4:AvailabilityDueDateTime>
+	   <ns4:ExportExitDateTime>
+		  <ns5:DateTime>2021-02-18T16:07:00.000+01:00</ns5:DateTime>
+	   </ns4:ExportExitDateTime>
+	   <ns4:ConsignorSPSParty>
+		  <ns4:ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">1234567</ns4:ID>
+		  <ns4:Name>B&amp;S GTC Customs B.V.</ns4:Name>
+		  <ns4:RoleCode name="Consignor">CZ</ns4:RoleCode>
+		  <ns4:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</ns4:TypeCode>
+		  <ns4:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Animal importer">IMP</ns4:TypeCode>
+		  <ns4:SpecifiedSPSAddress>
+			 <ns4:PostcodeCode>3316</ns4:PostcodeCode>
+			 <ns4:LineOne>Rijksstraatweg 7
+Test Address 4
+10920</ns4:LineOne>
+			 <ns4:CityName languageID="en">Dordrecht</ns4:CityName>
+			 <ns4:CountryID>NL</ns4:CountryID>
+			 <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+			 <ns4:CountrySubDivisionName languageID="en">South Holland</ns4:CountrySubDivisionName>
+		  </ns4:SpecifiedSPSAddress>
+	   </ns4:ConsignorSPSParty>
+	   <ns4:ConsigneeSPSParty>
+		  <ns4:ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BE-IMP-123</ns4:ID>
+		  <ns4:Name>Test EU lms</ns4:Name>
+		  <ns4:RoleCode name="Consignee">CN</ns4:RoleCode>
+		  <ns4:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</ns4:TypeCode>
+		  <ns4:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Animal importer">IMP</ns4:TypeCode>
+		  <ns4:SpecifiedSPSAddress>
+			 <ns4:PostcodeCode>1000</ns4:PostcodeCode>
+			 <ns4:LineOne>addresse</ns4:LineOne>
+			 <ns4:CityName languageID="en">Ville de Bruxelles - Stad Brussel</ns4:CityName>
+			 <ns4:CountryID>BE</ns4:CountryID>
+			 <ns4:CountryName languageID="en">Belgium</ns4:CountryName>
+			 <ns4:CountrySubDivisionName languageID="en">Brussels-Capital</ns4:CountrySubDivisionName>
+		  </ns4:SpecifiedSPSAddress>
+	   </ns4:ConsigneeSPSParty>
+	   <ns4:ExportSPSCountry>
+		  <ns4:ID/>
+		  <ns4:Name/>
+		  <ns4:SubordinateSPSCountrySubDivision>
+			 <ns4:Name/>
+			 <ns4:HierarchicalLevelCode name="None">0</ns4:HierarchicalLevelCode>
+			 <ns4:FunctionTypeCode name="Place of authentication of document">44</ns4:FunctionTypeCode>
+			 <ns4:ActivityAuthorizedSPSParty>
+				<ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+				<ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+				<ns4:RoleCode name="Central bank or regulatory authority (Central competent authority)">RA</ns4:RoleCode>
+				<ns4:SpecifiedSPSAddress>
+				   <ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				   <ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				   <ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				   <ns4:CountryID>NL</ns4:CountryID>
+				   <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				   <ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+				</ns4:SpecifiedSPSAddress>
+			 </ns4:ActivityAuthorizedSPSParty>
+			 <ns4:ActivityAuthorizedSPSParty>
+				<ns4:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NL0002</ns4:ID>
+				<ns4:Name>Netherlands Food and Consumer Product Safety Authority</ns4:Name>
+				<ns4:RoleCode name="Local government sponsor (Local competent authority)">VG</ns4:RoleCode>
+				<ns4:SpecifiedSPSAddress>
+				   <ns4:PostcodeCode>3511</ns4:PostcodeCode>
+				   <ns4:LineOne>Catharijnesingel 59</ns4:LineOne>
+				   <ns4:CityName languageID="en">Utrecht</ns4:CityName>
+				   <ns4:CountryID>NL</ns4:CountryID>
+				   <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				   <ns4:CountrySubDivisionName languageID="en">Utrecht</ns4:CountrySubDivisionName>
+				</ns4:SpecifiedSPSAddress>
+			 </ns4:ActivityAuthorizedSPSParty>
+		  </ns4:SubordinateSPSCountrySubDivision>
+	   </ns4:ExportSPSCountry>
+	   <ns4:ImportSPSCountry>
+		  <ns4:ID>BE</ns4:ID>
+		  <ns4:Name languageID="en">Belgium</ns4:Name>
+	   </ns4:ImportSPSCountry>
+	   <ns4:ExaminationSPSEvent>
+		  <ns4:OccurrenceSPSLocation>
+			 <ns4:Name/>
+		  </ns4:OccurrenceSPSLocation>
+	   </ns4:ExaminationSPSEvent>
+	   <ns4:DespatchSPSParty>
+		  <ns4:ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">1234567</ns4:ID>
+		  <ns4:Name>B&amp;S GTC Customs B.V.</ns4:Name>
+		  <ns4:RoleCode name="Despatch party (Place of dispatch)">PW</ns4:RoleCode>
+		  <ns4:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</ns4:TypeCode>
+		  <ns4:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Animal importer">IMP</ns4:TypeCode>
+		  <ns4:SpecifiedSPSAddress>
+			 <ns4:PostcodeCode>3316</ns4:PostcodeCode>
+			 <ns4:LineOne>Rijksstraatweg 7
+Test Address 4
+10920</ns4:LineOne>
+			 <ns4:CityName languageID="en">Dordrecht</ns4:CityName>
+			 <ns4:CountryID>NL</ns4:CountryID>
+			 <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+			 <ns4:CountrySubDivisionName languageID="en">South Holland</ns4:CountrySubDivisionName>
+		  </ns4:SpecifiedSPSAddress>
+	   </ns4:DespatchSPSParty>
+	   <ns4:CustomsTransitAgentSPSParty>
+		  <ns4:ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">1234567</ns4:ID>
+		  <ns4:Name>B&amp;S GTC Customs B.V.</ns4:Name>
+		  <ns4:RoleCode name="Customs broker (Operator conducting assembly operations independently of an establishment)">CB</ns4:RoleCode>
+		  <ns4:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</ns4:TypeCode>
+		  <ns4:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Animal importer">IMP</ns4:TypeCode>
+		  <ns4:SpecifiedSPSAddress>
+			 <ns4:PostcodeCode>3316</ns4:PostcodeCode>
+			 <ns4:LineOne>Rijksstraatweg 7
+Test Address 4
+10920</ns4:LineOne>
+			 <ns4:CityName languageID="en">Dordrecht</ns4:CityName>
+			 <ns4:CountryID>NL</ns4:CountryID>
+			 <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+			 <ns4:CountrySubDivisionName languageID="en">South Holland</ns4:CountrySubDivisionName>
+		  </ns4:SpecifiedSPSAddress>
+	   </ns4:CustomsTransitAgentSPSParty>
+	   <ns4:MainCarriageSPSTransportMovement>
+		  <ns4:ID schemeID="road_vehicle_registration" schemeName="Road vehicle registration" schemeAgencyID="UA" schemeAgencyName="Ukraine">123456</ns4:ID>
+		  <ns4:ModeCode name="Road transport">3</ns4:ModeCode>
+	   </ns4:MainCarriageSPSTransportMovement>
+	   <ns4:UtilizedSPSTransportEquipment>
+		  <ns4:ID/>
+		  <ns4:AffixedSPSSeal>
+			 <ns4:ID schemeID="seal_number" schemeName="Seal number">MSKU907032</ns4:ID>
+		  </ns4:AffixedSPSSeal>
+	   </ns4:UtilizedSPSTransportEquipment>
+	   <ns4:IncludedSPSConsignmentItem>
+		  <ns4:NatureIdentificationSPSCargo>
+			 <ns4:TypeCode name="General cargo (Commodities)">12</ns4:TypeCode>
+		  </ns4:NatureIdentificationSPSCargo>
+		  <ns4:IncludedSPSTradeLineItem>
+			 <ns4:SequenceNumeric>0</ns4:SequenceNumeric>
+			 <ns4:Description>Consignment totals and summary</ns4:Description>
+			 <ns4:NetWeightMeasure unitCode="KGM">33.0</ns4:NetWeightMeasure>
+			 <ns4:GrossWeightMeasure unitCode="KGM">222.0</ns4:GrossWeightMeasure>
+			 <ns4:NetVolumeMeasure unitCode="H87">33</ns4:NetVolumeMeasure>
+			 <ns4:GrossVolumeMeasure unitCode="MTK">22.0</ns4:GrossVolumeMeasure>
+			 <ns4:PhysicalSPSPackage>
+				<ns4:LevelCode name="No packaging hierarchy">4</ns4:LevelCode>
+				<ns4:TypeCode name="Bag">BG</ns4:TypeCode>
+				<ns4:ItemQuantity>22.0</ns4:ItemQuantity>
+			 </ns4:PhysicalSPSPackage>
+		  </ns4:IncludedSPSTradeLineItem>
+		  <ns4:IncludedSPSTradeLineItem>
+			 <ns4:SequenceNumeric>1</ns4:SequenceNumeric>
+			 <ns4:Description/>
+			 <ns4:NetWeightMeasure unitCode="KGM">33.0</ns4:NetWeightMeasure>
+			 <ns4:GrossWeightMeasure unitCode="KGM">100.0</ns4:GrossWeightMeasure>
+			 <ns4:NetVolumeMeasure unitCode="H87">33</ns4:NetVolumeMeasure>
+			 <ns4:ApplicableSPSClassification>
+				<ns4:SystemID>CN</ns4:SystemID>
+				<ns4:SystemName>CN Code (Combined Nomenclature)</ns4:SystemName>
+				<ns4:ClassCode>0102</ns4:ClassCode>
+				<ns4:ClassName languageID="en">LIVE ANIMALS</ns4:ClassName>
+				<ns4:ClassName languageID="en">Live bovine animals</ns4:ClassName>
+			 </ns4:ApplicableSPSClassification>
+			 <ns4:PhysicalSPSPackage>
+				<ns4:LevelCode name="No packaging hierarchy">4</ns4:LevelCode>
+				<ns4:TypeCode name="Bag">BG</ns4:TypeCode>
+				<ns4:ItemQuantity>22.0</ns4:ItemQuantity>
+			 </ns4:PhysicalSPSPackage>
+		  </ns4:IncludedSPSTradeLineItem>
+	   </ns4:IncludedSPSConsignmentItem>
+	</ns6:SPSConsignment>
+ </ns3:SPSCertificate>
+ <ns3:SPSConsignmentItemLaboratoryTest>
+	<ns7:NatureIdentificationSPSCargo>
+	   <ns4:TypeCode name="General cargo (Commodities)">12</ns4:TypeCode>
+	</ns7:NatureIdentificationSPSCargo>
+	<ns7:ProductSPSLaboratoryTest>
+	   <ns7:ProductSPSClassification>
+		  <ns4:SystemID>CN</ns4:SystemID>
+		  <ns4:SystemName>CN Code (Combined Nomenclature)</ns4:SystemName>
+		  <ns4:ClassName languageID="en">LIVE ANIMALS</ns4:ClassName>
+		  <ns4:ClassName languageID="en">Live bovine animals</ns4:ClassName>
+	   </ns7:ProductSPSClassification>
+	   <ns7:SPSLaboratoryTest>
+		  <ns7:Reference>LAP-000000915-INTRA.EU.NL.2021.0000001</ns7:Reference>
+		  <ns7:TestDescriptor>
+			 <ns8:ID schemeID="laboratory_test_internal_id" schemeName="Laboratory test internal ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">11221</ns8:ID>
+			 <ns8:Description languageID="en">ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES</ns8:Description>
+			 <ns8:CategoryCode listID="laboratory_test_category" listName="Laboratory test category" name="Group B.2(b) Anticoccidials, including nitroimidazoles">RESIDUES_B2B</ns8:CategoryCode>
+		  </ns7:TestDescriptor>
+		  <ns7:TestMotivationCode listID="laboratory_test_motivation" listName="Laboratory test motivation" name="Random">RANDOM</ns7:TestMotivationCode>
+		  <ns7:InspectorConclusionCode listID="inspector_conclusion" listName="Inspector conclusion" name="Satisfactory">SATISFACTORY</ns7:InspectorConclusionCode>
+		  <ns7:Analysys>
+			 <ns7:AnalysisTypeCode listID="analysis_type" listName="Analysis type" name="Initial">INITIAL</ns7:AnalysisTypeCode>
+			 <ns7:SamplingDateTime>2021-03-09T00:00:00.000+01:00</ns7:SamplingDateTime>
+			 <ns7:SampleBatchNumber>1223</ns7:SampleBatchNumber>
+			 <ns7:NumberOfSamples>2</ns7:NumberOfSamples>
+			 <ns7:SampleTypeCode listID="sample_type" listName="Sample type" name="Larva">LARVA</ns7:SampleTypeCode>
+			 <ns7:SampleConservationCode listID="sample_conservation" listName="Sample conservation" name="Chilled">CHILLED</ns7:SampleConservationCode>
+			 <ns7:LaboratorySPSParty>
+				<ns4:ID schemeID="laboratory_code" schemeName="Laboratory code" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NLCODE123</ns4:ID>
+				<ns4:Name>Test Lab in NL</ns4:Name>
+				<ns4:RoleCode name="Test execution party (Laboratory)">DCW</ns4:RoleCode>
+				<ns4:SpecifiedSPSAddress>
+				   <ns4:PostcodeCode>1094</ns4:PostcodeCode>
+				   <ns4:LineOne>Address 1</ns4:LineOne>
+				   <ns4:CityName languageID="en">Amsterdam</ns4:CityName>
+				   <ns4:CountryID>NL</ns4:CountryID>
+				   <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				   <ns4:CountrySubDivisionName languageID="en">North Holland</ns4:CountrySubDivisionName>
+				</ns4:SpecifiedSPSAddress>
+			 </ns7:LaboratorySPSParty>
+			 <ns7:LaboratoryReceiptDateTime>2021-03-02T00:00:00.000+01:00</ns7:LaboratoryReceiptDateTime>
+			 <ns7:LaboratoryReportDateTime>2021-03-09T00:00:00.000+01:00</ns7:LaboratoryReportDateTime>
+			 <ns7:LaboratoryTestMethod>test met</ns7:LaboratoryTestMethod>
+			 <ns7:LaboratoryResults>ok</ns7:LaboratoryResults>
+			 <ns7:LaboratoryConclusionCode listID="laboratory_conclusion" listName="Laboratory conclusion" name="Satisfactory">SATISFACTORY</ns7:LaboratoryConclusionCode>
+		  </ns7:Analysys>
+	   </ns7:SPSLaboratoryTest>
+	</ns7:ProductSPSLaboratoryTest>
+	<ns7:ProductSPSLaboratoryTest>
+	   <ns7:ProductSPSClassification>
+		  <ns4:SystemID>CN</ns4:SystemID>
+		  <ns4:SystemName>CN Code (Combined Nomenclature)</ns4:SystemName>
+		  <ns4:ClassName languageID="en">LIVE ANIMALS</ns4:ClassName>
+		  <ns4:ClassName languageID="en">Live bovine animals</ns4:ClassName>
+	   </ns7:ProductSPSClassification>
+	   <ns7:SPSLaboratoryTest>
+		  <ns7:Reference>LAP-000000914-INTRA.EU.NL.2021.0000001</ns7:Reference>
+		  <ns7:TestDescriptor>
+			 <ns8:ID schemeID="laboratory_test_internal_id" schemeName="Laboratory test internal ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">11221</ns8:ID>
+			 <ns8:Description languageID="en">ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES</ns8:Description>
+			 <ns8:CategoryCode listID="laboratory_test_category" listName="Laboratory test category" name="Group B.2(b) Anticoccidials, including nitroimidazoles">RESIDUES_B2B</ns8:CategoryCode>
+		  </ns7:TestDescriptor>
+		  <ns7:TestMotivationCode listID="laboratory_test_motivation" listName="Laboratory test motivation" name="Random">RANDOM</ns7:TestMotivationCode>
+		  <ns7:InspectorConclusionCode listID="inspector_conclusion" listName="Inspector conclusion" name="Satisfactory">SATISFACTORY</ns7:InspectorConclusionCode>
+		  <ns7:Analysys>
+			 <ns7:AnalysisTypeCode listID="analysis_type" listName="Analysis type" name="Initial">INITIAL</ns7:AnalysisTypeCode>
+			 <ns7:SamplingDateTime>2021-03-09T00:00:00.000+01:00</ns7:SamplingDateTime>
+			 <ns7:SampleBatchNumber>1223</ns7:SampleBatchNumber>
+			 <ns7:NumberOfSamples>2</ns7:NumberOfSamples>
+			 <ns7:SampleTypeCode listID="sample_type" listName="Sample type" name="Larva">LARVA</ns7:SampleTypeCode>
+			 <ns7:SampleConservationCode listID="sample_conservation" listName="Sample conservation" name="Chilled">CHILLED</ns7:SampleConservationCode>
+			 <ns7:LaboratorySPSParty>
+				<ns4:ID schemeID="laboratory_code" schemeName="Laboratory code" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">NLCODE123</ns4:ID>
+				<ns4:Name>Test Lab in NL</ns4:Name>
+				<ns4:RoleCode name="Test execution party (Laboratory)">DCW</ns4:RoleCode>
+				<ns4:SpecifiedSPSAddress>
+				   <ns4:PostcodeCode>1094</ns4:PostcodeCode>
+				   <ns4:LineOne>Address 1</ns4:LineOne>
+				   <ns4:CityName languageID="en">Amsterdam</ns4:CityName>
+				   <ns4:CountryID>NL</ns4:CountryID>
+				   <ns4:CountryName languageID="en">Netherlands</ns4:CountryName>
+				   <ns4:CountrySubDivisionName languageID="en">North Holland</ns4:CountrySubDivisionName>
+				</ns4:SpecifiedSPSAddress>
+			 </ns7:LaboratorySPSParty>
+			 <ns7:LaboratoryReceiptDateTime>2021-03-02T00:00:00.000+01:00</ns7:LaboratoryReceiptDateTime>
+			 <ns7:LaboratoryReportDateTime>2021-03-09T00:00:00.000+01:00</ns7:LaboratoryReportDateTime>
+			 <ns7:LaboratoryTestMethod>test met</ns7:LaboratoryTestMethod>
+			 <ns7:LaboratoryResults>ok</ns7:LaboratoryResults>
+			 <ns7:LaboratoryConclusionCode listID="laboratory_conclusion" listName="Laboratory conclusion" name="Satisfactory">SATISFACTORY</ns7:LaboratoryConclusionCode>
+		  </ns7:Analysys>
+	   </ns7:SPSLaboratoryTest>
+	</ns7:ProductSPSLaboratoryTest>
+ </ns3:SPSConsignmentItemLaboratoryTest>
+</ns3:GetEuIntraCertificateResponse>

@@ -1,0 +1,40 @@
+{
+  "description": "Maps TRACES SOAP/XML response roots to JSON keys for traces-to-unvtd conversion.",
+  "messages": {
+    "certificate/SPSCertificate": {
+      "xmlRoot": "SPSCertificate",
+      "rootMap": {},
+      "arrayKeys": []
+    },
+    "EUIntraCertificate/v1/getEuIntraCertificate.response": {
+      "xmlRoot": "GetEuIntraCertificateResponse",
+      "rootMap": {
+        "SPSCertificate": "spsCertificate",
+        "SPSConsignmentItemLaboratoryTest": "spsConsignmentItemLaboratoryTest"
+      },
+      "arrayKeys": ["spsConsignmentItemLaboratoryTest"]
+    },
+    "ChedCertificate/v2/getChedCertificate.response": {
+      "xmlRoot": "GetChedCertificateResponse",
+      "rootMap": {
+        "SPSCertificate": "spsCertificate",
+        "ProductSPSLaboratoryTest": "productSPSLaboratoryTest"
+      },
+      "arrayKeys": ["productSPSLaboratoryTest"]
+    },
+    "ChedCertificate/submission/createAndSubmitChedForDecision.request": {
+      "xmlRoot": "CreateAndSubmitChedForDecisionRequest",
+      "rootMap": {
+        "SPSCertificate": "spsCertificate"
+      },
+      "arrayKeys": []
+    },
+    "DocomCertificate/v1/getDocomCertificate.response": {
+      "xmlRoot": "GetDocomCertificateResponse",
+      "rootMap": {
+        "SPSCertificate": "spsCertificate"
+      },
+      "arrayKeys": []
+    }
+  }
+}

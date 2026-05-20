@@ -1,0 +1,143 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v3="http://ec.europa.eu/sanco/tracesnt/base/v3" xmlns:v31="http://ec.europa.eu/tracesnt/body/v3" xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:v01="http://ec.europa.eu/tracesnt/certificate/ched/submission/v01" xmlns:urn="urn:un:unece:uncefact:data:standard:SPSCertificate:17" xmlns:urn1="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21" xmlns:urn2="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">
+   <soapenv:Header>
+      <v3:LanguageCode>en</v3:LanguageCode>
+      <v31:BodyIdentity>
+         <AuthorityActivityAccessIdentifier>XXX</AuthorityActivityAccessIdentifier>
+      </v31:BodyIdentity>
+      <v3:WebServiceClientId>YYY</v3:WebServiceClientId>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v01:CreateAndSubmitChedForDecisionRequest>
+         <urn:SPSCertificate>
+            <urn:SPSExchangedDocument>
+               <urn1:Name>CHED-A - Common Health Entry Document for Anilmals</urn1:Name>
+               <urn1:ID/>
+               <urn1:Description/>
+               <urn1:TypeCode>636</urn1:TypeCode>
+               <urn1:StatusCode>70</urn1:StatusCode>
+               <urn1:IssueDateTime>
+                  <urn2:DateTime>2019-03-31T09:56:00+02:00</urn2:DateTime>
+               </urn1:IssueDateTime>
+               <urn1:IncludedSPSNote>
+                  <urn1:ContentCode>A</urn1:ContentCode>
+                  <urn1:Content/>
+                  <urn1:SubjectCode>CHED_TYPE</urn1:SubjectCode>
+               </urn1:IncludedSPSNote>
+               <urn1:ReferenceSPSReferencedDocument>
+                  <urn1:IssueDateTime>2019-03-21T17:56:00.000+02:00</urn1:IssueDateTime>
+                  <urn1:TypeCode name="Related document">853</urn1:TypeCode>
+                  <urn1:RelationshipTypeCode>ZZZ</urn1:RelationshipTypeCode>
+                  <urn1:ID schemeAgencyID="KE">SPS-Certificate-007</urn1:ID>
+                  <urn1:Information>US</urn1:Information>
+               </urn1:ReferenceSPSReferencedDocument>
+               <urn1:SignatorySPSAuthentication>
+                  <urn1:TypeCode name="Inspection (Identification of Applicant)">4</urn1:TypeCode>
+                  <urn1:ActualDateTime>
+                     <urn2:DateTimeString/>
+                  </urn1:ActualDateTime>
+                  <urn1:ProviderSPSParty>
+                     <urn1:ID/>
+                     <urn1:Name>Bruno</urn1:Name>
+                  </urn1:ProviderSPSParty>                  
+                  <urn1:IncludedSPSClause>
+                     <urn1:ID>GOODS_CERTIFIED_AS</urn1:ID>
+                     <urn1:Content>APPROVED_BODIES</urn1:Content>
+                  </urn1:IncludedSPSClause>
+                  <urn1:IncludedSPSClause>
+                     <urn1:ID>PURPOSE</urn1:ID>
+                     <urn1:Content>INTERNAL_MARKET</urn1:Content>
+                  </urn1:IncludedSPSClause>
+               </urn1:SignatorySPSAuthentication>
+            </urn:SPSExchangedDocument>
+            <urn:SPSConsignment>
+               <urn1:AvailabilityDueDateTime>
+                  <urn2:DateTime>2019-03-31T17:56:00+02:00</urn2:DateTime>
+               </urn1:AvailabilityDueDateTime>
+               <urn1:ExportExitDateTime>
+                  <urn2:DateTime>2019-03-27T01:00:00+01:00</urn2:DateTime>
+               </urn1:ExportExitDateTime>
+               <urn1:ConsignorSPSParty>
+                  <urn1:ID schemeID="national_registry_number">US777888</urn1:ID>
+                  <urn1:Name/>
+                  <urn1:SpecifiedSPSAddress>
+                     <urn1:PostcodeCode/>
+                     <urn1:LineOne/>
+                     <urn1:CityName/>
+                     <urn1:CountryID>US</urn1:CountryID>
+                     <urn1:CountryName>United States</urn1:CountryName>
+                  </urn1:SpecifiedSPSAddress>
+               </urn1:ConsignorSPSParty>
+               <urn1:ConsigneeSPSParty>
+                  <urn1:ID schemeID="eori_number">ES222222</urn1:ID>
+                  <urn1:Name/>
+                  <urn1:SpecifiedSPSAddress>
+                     <urn1:PostcodeCode/>
+                     <urn1:LineOne/>
+                     <urn1:CityName/>
+                     <urn1:CountryID>ES</urn1:CountryID>
+                     <urn1:CountryName>Spain</urn1:CountryName>
+                  </urn1:SpecifiedSPSAddress>
+               </urn1:ConsigneeSPSParty>
+               <urn1:ExportSPSCountry>
+                  <urn1:ID>US</urn1:ID>
+                  <urn1:Name>United States</urn1:Name>
+               </urn1:ExportSPSCountry>
+               <urn1:ImportSPSCountry>
+                  <urn1:ID>ES</urn1:ID>
+                  <urn1:Name>Spain</urn1:Name>
+               </urn1:ImportSPSCountry>
+               <urn1:UnloadingBaseportSPSLocation>
+                  <urn1:ID schemeID="authority_activity_id">ESMAD4</urn1:ID>
+                  <urn1:Name>ES</urn1:Name>
+               </urn1:UnloadingBaseportSPSLocation>
+               <urn1:ExaminationSPSEvent>
+                  <urn1:OccurrenceSPSLocation>
+                     <urn1:ID schemeID="xsd_datetime">2019-04-01T15:00:00.000+02:00</urn1:ID>
+                     <urn1:Name></urn1:Name>
+                  </urn1:OccurrenceSPSLocation>
+               </urn1:ExaminationSPSEvent>
+               <urn1:DeliverySPSParty>
+                  <urn1:ID schemeID="eori_number">ES333444</urn1:ID>
+                  <urn1:Name/>
+                  <urn1:RoleCode listID="3035" listVersionID="D16B">CN</urn1:RoleCode>
+                  <urn1:SpecifiedSPSAddress>
+                     <urn1:CountryID>ES</urn1:CountryID>
+                     <urn1:CountryName>Spain</urn1:CountryName>
+                  </urn1:SpecifiedSPSAddress>
+               </urn1:DeliverySPSParty>
+               <urn1:CustomsTransitAgentSPSParty>
+                  <urn1:ID schemeID="eori_number">ES222111</urn1:ID>
+                  <urn1:Name/>
+                  <urn1:SpecifiedSPSAddress>
+                     <urn1:CountryID>ES</urn1:CountryID>
+                     <urn1:CountryName>Spain</urn1:CountryName>
+                  </urn1:SpecifiedSPSAddress>
+               </urn1:CustomsTransitAgentSPSParty>
+               <urn1:MainCarriageSPSTransportMovement>
+                  <urn1:ID schemeID="airplane_flight_number_before_bcp">LH1198</urn1:ID>
+                  <urn1:ModeCode name="Air transport">4</urn1:ModeCode>
+               </urn1:MainCarriageSPSTransportMovement>
+               <urn1:IncludedSPSConsignmentItem>
+                  <urn1:IncludedSPSTradeLineItem>
+                     <urn1:SequenceNumeric>1</urn1:SequenceNumeric>
+                     <urn1:Description/>
+                     <urn1:ScientificName>Rattus rattus</urn1:ScientificName>
+                     <urn1:NetVolumeMeasure unitCode="H87">18</urn1:NetVolumeMeasure>
+                     <urn1:ApplicableSPSClassification>
+                        <urn1:SystemID>CN</urn1:SystemID>
+                        <urn1:SystemName/>
+                        <urn1:ClassCode>01061900</urn1:ClassCode>
+                        <urn1:ClassName/>
+                     </urn1:ApplicableSPSClassification>
+                     <urn1:PhysicalSPSPackage>
+                        <urn1:LevelCode>4</urn1:LevelCode>
+                        <urn1:TypeCode>CT</urn1:TypeCode>
+                        <urn1:ItemQuantity>1</urn1:ItemQuantity>
+                     </urn1:PhysicalSPSPackage>
+                  </urn1:IncludedSPSTradeLineItem>
+               </urn1:IncludedSPSConsignmentItem>
+            </urn:SPSConsignment>
+         </urn:SPSCertificate>
+      </v01:CreateAndSubmitChedForDecisionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

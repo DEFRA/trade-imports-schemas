@@ -60,8 +60,35 @@ Validation scripts remain in `scripts/`:
 
 - `npm run validate-schemas`
 - `npm run validate-samples`
+- `npm test` — converter unit tests (INTRA/CHED XML fixtures skip if sibling `TRACESNT` repo is absent)
 
 Some validator wiring may still target legacy paths while migration completes; treat output accordingly and update script targets with each relocation/version bump.
+
+## TRACES → UNVTD conversion
+
+Convert TRACES CHED, INTRA, and DOCOM certificates (XML or TRACES-shaped JSON) to UNVTD profile payloads:
+
+```bash
+npm run convert:traces -- path/to/certificate.xml -o out.json --validate
+npm run convert:traces -- path/to/traces.json --from-json -o out.json --type docom
+npm run convert:traces -- path/to/certificate.xml -o samples/imports/eu/intra/json/converted.json
+```
+
+Written files include `$model`, `$schema`, `@context`, and `$type` in the same order as `unvtd-*.json` samples (`$model` is always `defra/certificate-internal/1`; `$type` is `ched`, `intra`, or `docom`). Use `--no-metadata` for payload-only JSON.
+
+Pipeline:
+
+1. **Parse** TRACES SOAP/XML (`scripts/lib/traces-xml.js`) or accept `--from-json`.
+2. **Normalize** codes, dates, notes, and clauses (`scripts/lib/traces-normalize.js`).
+3. **Map** to `exchangedDocument`, `specifiedConsignment[]`, and optional `laboratoryObservationResult[]` (`scripts/lib/unvtd-map.js`).
+4. **Profile** detection by `documentTypeCode` (`636` → CHED, `666`/`856` → INTRA, else DOCOM unless `--type` overrides).
+
+Field rules follow [TRACES to internal model mapping](https://github.com/defra/trade-imports-documentation) (EUDP / TIG analysis). Message roots are listed via `node scripts/traces-to-unvtd.js --list`.
+
+**Two different “type” flags:**
+
+- **`--type ched|intra|docom`** — UNVTD **profile** override. Usually omitted; inferred from `documentTypeCode` (`636` → CHED, `666`/`856` → INTRA).
+- **`--message <id>`** — TRACES **XML wrapper** (SOAP root). Only needed if auto-detection fails. Use `--list` for ids (e.g. `createAndSubmitChedForDecision.request` for CHED submission envelopes, `getChedCertificate.response` for retrieve).
 
 ## Versioning
 

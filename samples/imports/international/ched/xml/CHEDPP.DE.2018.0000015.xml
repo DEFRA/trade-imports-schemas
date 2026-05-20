@@ -1,0 +1,280 @@
+<ns6:SPSCertificate>
+	<ns6:SPSExchangedDocument>
+	   <ns8:Name languageID="en">CHED-PP - Common Health Entry Document for Plant Product</ns8:Name>
+	   <ns8:ID>CHEDPP.DE.2018.0000015</ns8:ID>
+	   <ns8:TypeCode name="Health certificate (CHED - Common Health Entry Document)">636</ns8:TypeCode>
+	   <ns8:StatusCode name="Issued (Validated)">70</ns8:StatusCode>
+	   <ns8:IssueDateTime>
+		  <ns9:DateTime>2018-07-11T12:59:37.000+02:00</ns9:DateTime>
+	   </ns8:IssueDateTime>
+	   <ns8:IssuerSPSParty>
+		  <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEFRA4</ns8:ID>
+		  <ns8:Name>Frankfurt am Main</ns8:Name>
+		  <ns8:RoleCode name="Officer (Identification of Applicant)">VJ</ns8:RoleCode>
+		  <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>60549</ns8:PostcodeCode>
+			 <ns8:LineOne>Perishable Center 
+Tor 26/454</ns8:LineOne>
+			 <ns8:CityName languageID="en">Frankfurt Am Main, Stadt</ns8:CityName>
+			 <ns8:CountryID>DE</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Germany</ns8:CountryName>
+		  </ns8:SpecifiedSPSAddress>
+		  <ns8:SpecifiedSPSPerson>
+			 <ns8:Name>BCP DE ONE</ns8:Name>
+		  </ns8:SpecifiedSPSPerson>
+	   </ns8:IssuerSPSParty>
+	   <ns8:IncludedSPSNote>
+		  <ns8:ContentCode listID="ched_type" listName="CHED type" name="CHED-PP - Common Health Entry Document for Plant Product">PP</ns8:ContentCode>
+		  <ns8:Content/>
+		  <ns8:SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Type of CHED">CHED_TYPE</ns8:SubjectCode>
+	   </ns8:IncludedSPSNote>
+	   <ns8:ReferenceSPSReferencedDocument>
+		  <ns8:TypeCode name="Health certificate (CHED - Common Health Entry Document)">636</ns8:TypeCode>
+		  <ns8:RelationshipTypeCode name="Document reference, internal (Document reference, internal)">CAW</ns8:RelationshipTypeCode>
+		  <ns8:ID>CHEDPP.DE.2018.0000015</ns8:ID>
+		  <ns8:AttachmentBinaryObject format="url" mimeCode="text/url" uri="https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/ched/CHEDPP.DE.2018.0000015"/>
+	   </ns8:ReferenceSPSReferencedDocument>
+	   <ns8:ReferenceSPSReferencedDocument>
+		  <ns8:IssueDateTime>2018-07-04T00:00:00.000+02:00</ns8:IssueDateTime>
+		  <ns8:TypeCode name="Phytosanitary certificate (Phytosanitary certificate)">851</ns8:TypeCode>
+		  <ns8:RelationshipTypeCode name="Mutually defined reference number (Supporting document)">ZZZ</ns8:RelationshipTypeCode>
+		  <ns8:ID schemeAgencyID="KE">PSC 123</ns8:ID>
+	   </ns8:ReferenceSPSReferencedDocument>
+	   <ns8:SignatorySPSAuthentication>
+		  <ns8:TypeCode name="Inspection (Identification of Applicant)">4</ns8:TypeCode>
+		  <ns8:ActualDateTime>
+			 <ns9:DateTime>2018-07-11T12:59:37.000+02:00</ns9:DateTime>
+		  </ns8:ActualDateTime>
+		  <ns8:ProviderSPSParty>
+			 <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEFRA4</ns8:ID>
+			 <ns8:Name>Frankfurt am Main</ns8:Name>
+			 <ns8:RoleCode name="Officer (Identification of Applicant)">VJ</ns8:RoleCode>
+			 <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+			 <ns8:SpecifiedSPSAddress>
+				<ns8:PostcodeCode>60549</ns8:PostcodeCode>
+				<ns8:LineOne>Perishable Center 
+Tor 26/454</ns8:LineOne>
+				<ns8:CityName languageID="en">Frankfurt Am Main, Stadt</ns8:CityName>
+				<ns8:CountryID>DE</ns8:CountryID>
+				<ns8:CountryName languageID="en">Germany</ns8:CountryName>
+			 </ns8:SpecifiedSPSAddress>
+			 <ns8:SpecifiedSPSPerson>
+				<ns8:Name>BCP DE ONE</ns8:Name>
+			 </ns8:SpecifiedSPSPerson>
+		  </ns8:ProviderSPSParty>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_consignment_clause" schemeName="CHED consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PURPOSE</ns8:ID>
+			 <ns8:Content>INTERNAL_MARKET</ns8:Content>
+			 <ns8:Content languageID="en">For free circulation</ns8:Content>
+		  </ns8:IncludedSPSClause>
+	   </ns8:SignatorySPSAuthentication>
+	   <ns8:SignatorySPSAuthentication>
+		  <ns8:TypeCode name="Clearance (Official inspector)">1</ns8:TypeCode>
+		  <ns8:ActualDateTime>
+			 <ns9:DateTime>2018-07-11T12:59:37.000+02:00</ns9:DateTime>
+		  </ns8:ActualDateTime>
+		  <ns8:ProviderSPSParty>
+			 <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEFRA4</ns8:ID>
+			 <ns8:Name>Frankfurt am Main</ns8:Name>
+			 <ns8:RoleCode name="Authorized official">AM</ns8:RoleCode>
+			 <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+			 <ns8:SpecifiedSPSAddress>
+				<ns8:PostcodeCode>60549</ns8:PostcodeCode>
+				<ns8:LineOne>Perishable Center 
+Tor 26/454</ns8:LineOne>
+				<ns8:CityName languageID="en">Frankfurt Am Main, Stadt</ns8:CityName>
+				<ns8:CountryID>DE</ns8:CountryID>
+				<ns8:CountryName languageID="en">Germany</ns8:CountryName>
+			 </ns8:SpecifiedSPSAddress>
+			 <ns8:SpecifiedSPSPerson>
+				<ns8:Name>BCP DE ONE</ns8:Name>
+			 </ns8:SpecifiedSPSPerson>
+		  </ns8:ProviderSPSParty>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DECISION_CONCLUSION</ns8:ID>
+			 <ns8:Content>ACCEPTABLE_FOR_INTERNAL_MARKET</ns8:Content>
+			 <ns8:Content languageID="en">Acceptable for free circulation</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns8:ID>
+			 <ns8:Content>SATISFACTORY</ns8:Content>
+			 <ns8:Content languageID="en">Satisfactory</ns8:Content>
+		  </ns8:IncludedSPSClause>
+	   </ns8:SignatorySPSAuthentication>
+	</ns6:SPSExchangedDocument>
+	<ns6:SPSConsignment>
+	   <ns8:ConsignorSPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>COOPERATIVEAF26 Ent</ns8:Name>
+		  <ns8:RoleCode name="Consignor (Exporter)">CZ</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>00202</ns8:PostcodeCode>
+			 <ns8:LineOne>Avenue Pierre Saul 13</ns8:LineOne>
+			 <ns8:CityName languageID="en">Nairobi</ns8:CityName>
+			 <ns8:CountryID>KE</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Kenya</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Nairobi</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:ConsignorSPSParty>
+	   <ns8:ConsigneeSPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>Keil Spedition</ns8:Name>
+		  <ns8:RoleCode name="Consignee (Importer)">CN</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>55545</ns8:PostcodeCode>
+			 <ns8:LineOne>Rüdesheimerstr. 60-68</ns8:LineOne>
+			 <ns8:CityName languageID="en">Bad Kreuznach</ns8:CityName>
+			 <ns8:CountryID>DE</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Germany</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Rhineland-Palatinate</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:ConsigneeSPSParty>
+	   <ns8:ExportSPSCountry>
+		  <ns8:ID>KE</ns8:ID>
+		  <ns8:Name languageID="en">Kenya</ns8:Name>
+	   </ns8:ExportSPSCountry>
+	   <ns8:ImportSPSCountry>
+		  <ns8:ID/>
+		  <ns8:Name/>
+	   </ns8:ImportSPSCountry>
+	   <ns8:UnloadingBaseportSPSLocation>
+		  <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DEFRA4</ns8:ID>
+		  <ns8:Name>DE</ns8:Name>
+		  <ns8:Name languageID="en">Frankfurt Am Main, Stadt</ns8:Name>
+	   </ns8:UnloadingBaseportSPSLocation>
+	   <ns8:ExaminationSPSEvent>
+		  <ns8:OccurrenceSPSLocation>
+			 <ns8:Name/>
+		  </ns8:OccurrenceSPSLocation>
+	   </ns8:ExaminationSPSEvent>
+	   <ns8:DeliverySPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>Keil Spedition</ns8:Name>
+		  <ns8:RoleCode name="Delivery party (Place of destination)">DP</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>55545</ns8:PostcodeCode>
+			 <ns8:LineOne>Rüdesheimerstr. 60-68</ns8:LineOne>
+			 <ns8:CityName languageID="en">Bad Kreuznach</ns8:CityName>
+			 <ns8:CountryID>DE</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Germany</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Rhineland-Palatinate</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:DeliverySPSParty>
+	   <ns8:CustomsTransitAgentSPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>Keil Spedition</ns8:Name>
+		  <ns8:RoleCode name="Customs broker (Responsible for consignment)">CB</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Responsible for the load">RESPONSIBLE_FOR_THE_LOAD</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Responsible For the Load (Freight Forwarder)">RFL</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>55545</ns8:PostcodeCode>
+			 <ns8:LineOne>Rüdesheimerstr. 60-68</ns8:LineOne>
+			 <ns8:CityName languageID="en">Bad Kreuznach</ns8:CityName>
+			 <ns8:CountryID>DE</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Germany</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Rhineland-Palatinate</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:CustomsTransitAgentSPSParty>
+	   <ns8:MainCarriageSPSTransportMovement>
+		  <ns8:ID schemeID="road_vehicle_registration_before_bcp" schemeName="Road vehicle registration (before BCP)" schemeAgencyID="DE" schemeAgencyName="Germany">lkw</ns8:ID>
+		  <ns8:ModeCode name="Road transport">3</ns8:ModeCode>
+	   </ns8:MainCarriageSPSTransportMovement>
+	   <ns8:UtilizedSPSTransportEquipment>
+		  <ns8:ID schemeID="container_number" schemeName="Container number">Container 1</ns8:ID>
+		  <ns8:AffixedSPSSeal>
+			 <ns8:ID schemeID="seal_number" schemeName="Seal number">Plombe 1</ns8:ID>
+		  </ns8:AffixedSPSSeal>
+	   </ns8:UtilizedSPSTransportEquipment>
+	   <ns8:IncludedSPSConsignmentItem>
+		  <ns8:IncludedSPSTradeLineItem>
+			 <ns8:SequenceNumeric>0</ns8:SequenceNumeric>
+			 <ns8:Description>Consignment totals and summary</ns8:Description>
+			 <ns8:NetWeightMeasure unitCode="KGM">111.0</ns8:NetWeightMeasure>
+			 <ns8:PhysicalSPSPackage>
+				<ns8:LevelCode name="No packaging hierarchy">4</ns8:LevelCode>
+				<ns8:TypeCode name="A receptacle, made of wood, on which goods are retained for ease of mechanical handling during transport and storage.">8B</ns8:TypeCode>
+				<ns8:ItemQuantity>5.0</ns8:ItemQuantity>
+			 </ns8:PhysicalSPSPackage>
+		  </ns8:IncludedSPSTradeLineItem>
+		  <ns8:IncludedSPSTradeLineItem>
+			 <ns8:SequenceNumeric>1</ns8:SequenceNumeric>
+			 <ns8:Description/>
+			 <ns8:ScientificName languageID="en">Rosa canina</ns8:ScientificName>
+			 <ns8:NetWeightMeasure unitCode="KGM">50.5</ns8:NetWeightMeasure>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>CN</ns8:SystemID>
+				<ns8:SystemName>CN Code (Combined Nomenclature)</ns8:SystemName>
+				<ns8:ClassCode>06031100</ns8:ClassCode>
+				<ns8:ClassName languageID="en">LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE</ns8:ClassName>
+				<ns8:ClassName languageID="en">Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared</ns8:ClassName>
+				<ns8:ClassName languageID="en">Fresh</ns8:ClassName>
+				<ns8:ClassName languageID="en">Roses</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>EPPT</ns8:SystemID>
+				<ns8:SystemName>EPPO Plant Protection Thesaurus</ns8:SystemName>
+				<ns8:ClassCode>ROSCN</ns8:ClassCode>
+				<ns8:ClassName languageID="en">Rosa canina</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>PRODUCT_TYPE</ns9:SystemID>
+				<ns8:SystemName>Product type</ns9:SystemName>
+				<ns8:ClassCode>OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE</ns9:ClassCode>
+				<ns8:ClassName languageID="en">Other living plants: cut flowers and branches with foliage</ns9:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:PhysicalSPSPackage>
+				<ns8:LevelCode name="No packaging hierarchy">4</ns8:LevelCode>
+				<ns8:TypeCode name="A receptacle, made of wood, on which goods are retained for ease of mechanical handling during transport and storage.">8B</ns8:TypeCode>
+				<ns8:ItemQuantity>2.0</ns8:ItemQuantity>
+			 </ns8:PhysicalSPSPackage>
+			 <ns8:OriginSPSCountry>
+				<ns8:ID>KE</ns8:ID>
+				<ns8:Name languageID="en">Kenya</ns8:Name>
+			 </ns8:OriginSPSCountry>
+		  </ns8:IncludedSPSTradeLineItem>
+		  <ns8:IncludedSPSTradeLineItem>
+			 <ns8:SequenceNumeric>2</ns8:SequenceNumeric>
+			 <ns8:Description/>
+			 <ns8:ScientificName languageID="en">Rosa arkansana</ns8:ScientificName>
+			 <ns8:NetWeightMeasure unitCode="KGM">60.5</ns8:NetWeightMeasure>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>CN</ns8:SystemID>
+				<ns8:SystemName>CN Code (Combined Nomenclature)</ns8:SystemName>
+				<ns8:ClassCode>06031100</ns8:ClassCode>
+				<ns8:ClassName languageID="en">LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE</ns8:ClassName>
+				<ns8:ClassName languageID="en">Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared</ns8:ClassName>
+				<ns8:ClassName languageID="en">Fresh</ns8:ClassName>
+				<ns8:ClassName languageID="en">Roses</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>EPPT</ns8:SystemID>
+				<ns8:SystemName>EPPO Plant Protection Thesaurus</ns8:SystemName>
+				<ns8:ClassCode>ROSAK</ns8:ClassCode>
+				<ns8:ClassName languageID="en">Rosa arkansana</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>PRODUCT_TYPE</ns9:SystemID>
+				<ns8:SystemName>Product type</ns9:SystemName>
+				<ns8:ClassCode>OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE</ns9:ClassCode>
+				<ns8:ClassName languageID="en">Other living plants: cut flowers and branches with foliage</ns9:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:PhysicalSPSPackage>
+				<ns8:LevelCode name="No packaging hierarchy">4</ns8:LevelCode>
+				<ns8:TypeCode name="Crate">CR</ns8:TypeCode>
+				<ns8:ItemQuantity>3.0</ns8:ItemQuantity>
+			 </ns8:PhysicalSPSPackage>
+			 <ns8:OriginSPSCountry>
+				<ns8:ID>KE</ns8:ID>
+				<ns8:Name languageID="en">Kenya</ns8:Name>
+			 </ns8:OriginSPSCountry>
+		  </ns8:IncludedSPSTradeLineItem>
+	   </ns8:IncludedSPSConsignmentItem>
+	</ns6:SPSConsignment>
+</ns6:SPSCertificate>

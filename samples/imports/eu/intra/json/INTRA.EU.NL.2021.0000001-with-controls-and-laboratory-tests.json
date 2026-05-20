@@ -1,0 +1,529 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "../../../../../schemas/profiles/imports/eu/defra-unvtd-profile-intra-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "intra",
+  "exchangedDocument": {
+    "name": "64/432 (2016/2008) F1 Bovine",
+    "identifier": "INTRA.EU.NL.2021.0000001",
+    "documentTypeCode": "856",
+    "documentStatusCode": "70",
+    "issueDateTime": "2021-02-18T16:09:51.000+01:00",
+    "includedNote": [
+      {
+        "type": "Note",
+        "noteSubjectCode": "LAST_UPDATE_DATETIME",
+        "content": "2021-03-09T12:27:16.000+01:00"
+      },
+      {
+        "type": "Note",
+        "noteSubjectCode": "ESTIMATED_JOURNEY_TIME",
+        "content": "1"
+      },
+      {
+        "type": "Note",
+        "noteSubjectCode": "JOURNEY_LOG",
+        "contentCode": "NO"
+      },
+      {
+        "type": "Note",
+        "noteSubjectCode": "TRANSPORT_CONDITIONS",
+        "contentCode": "AMBIENT"
+      }
+    ],
+    "referenceDocument": [
+      {
+        "identifier": "INTRA.EU.NL.2021.0000001",
+        "documentTypeCode": "856",
+        "relationshipTypeCode": "CAW",
+        "attachmentBinaryObject": {
+          "format": "url",
+          "mimeCode": "text/url",
+          "uri": "http://DESKTOP-19:7001/tracesnt/certificate/eu-intra/INTRA.EU.NL.2021.0000001"
+        }
+      },
+      {
+        "identifier": "222222",
+        "documentTypeCode": "730",
+        "relationshipTypeCode": "BM",
+        "information": [
+          "123456"
+        ]
+      }
+    ],
+    "firstSignatoryAuthentication": {
+      "governmentActionTypeCode": "4",
+      "actualDateTime": "2021-02-18T16:10:29.000+01:00",
+      "providerParty": {
+        "identifier": "IT123VET",
+        "name": "Agropoli Vet Office",
+        "partyRoleCode": "VJ",
+        "partyTypeCode": [
+          "VETERINARY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "84043",
+          "lineOne": "street",
+          "cityName": "Agropoli",
+          "countryName": "Italy",
+          "countrySubDivisionName": "Campania"
+        },
+        "definedContact": [
+          {
+            "personName": "Chuck Norris"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "CERTIFIED_AS_OR_FOR",
+          "content": "RELAYING"
+        },
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "content": "chucknorris@texasranger.com"
+        }
+      ]
+    },
+    "secondSignatoryAuthentication": {
+      "governmentActionTypeCode": "1",
+      "actualDateTime": "2021-02-18T16:13:39.000+01:00",
+      "providerParty": {
+        "identifier": "NL0002",
+        "name": "Netherlands Food and Consumer Product Safety Authority",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3511",
+          "lineOne": "Catharijnesingel 59",
+          "cityName": "Utrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "Utrecht"
+        },
+        "definedContact": [
+          {
+            "personName": "Eduardo Diego"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "content": "Aart.Monst@WorldUSsR72.com"
+        },
+        {
+          "identifier": "HEALTH_CLAUSES",
+          "content": "(1)either - [x] [I, the undersigned official veterinarian, hereby certify, that all applicable provisions of Directive 64/432/EEC are fulfilled and that in particular the animals described in Part I meet the following requirements:]  \n(1)(2)or - [ ] ~~[Based on the information provided either in an official document or a certificate in which Sections A and B were completed by the official veterinarian or the approved veterinarian responsible for the holding of origin, I, the undersigned official veterinarian, hereby certify, that all applicable provisions of Directive 64/432/EEC are fulfilled and that in particular the animals described in Part I meet the following requirements:]~~  \nII.1. Section A \nII.1.1. The animals come from holding/s of origin and area/s which, in conformity with Union or national legislation, is/are not subject to any prohibition or restriction for reasons of animal diseases affecting bovine animals. \n(1)either - [ ] ~~[II.1.2.~~  ~~The animals are bovine animals for breeding or production, and~~  \n~~II.1.2.1.~~  ~~have been resident, as far as can be ascertained, on the holding/s of origin during the last 30 days, or since birth, if they are less than 30 days of age, and no animal imported from a third country was introduced into that/those holding/s during this period, unless it was isolated from all other animals on the holding/s;~~  \n~~II.1.2.2.~~  ~~come from herd/s which is/are officially tuberculosis-free, and~~  \n~~(1)either~~  - [ ] ~~[II.1.2.2.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.2.2~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially tuberculosis-free in accordance with point 4 of Annex A(I) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.2.3.~~  ~~are animals less than 6 weeks of age;]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.2.4.~~  ~~are animals 6 weeks of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(a) of Directive 64/432/EEC for tuberculosis on~~ null~~(insert date);]~~  \n~~II.1.2.3.~~  ~~come from herd/s which is/are officially brucellosis-free, and~~  \n~~(1)either~~  - [ ] ~~[II.1.2.3.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.3.2.~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially brucellosis-free in accordance with point 7 of Annex A(II) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.3.3.~~  ~~are castrated animals and/or less than 12 months of age;]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.3.4.~~  ~~are animals 12 months of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(b) of Directive 64/432/EEC for brucellosis on~~ null~~(insert date);]~~  \n~~II.1.2.4.~~  ~~come from herd/s which is/are officially enzootic bovine leukosis-free, and~~  \n~~(1)either~~  - [ ] ~~[II.1.2.4.1.~~  ~~the holding/s is/are situated in a Member State or part of its territory with a surveillance network approved under Commission Implementing Decision~~ null~~/~~ null~~/EU (insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.4.2.~~  ~~the holding/s is/are situated in a Member State or part of its territory which is recognised as being officially enzootic bovine leukosis-free in accordance with point E of Annex D(I) to Directive 64/432/EEC by Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number);]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.4.3.~~  ~~are animals less than 12 months of age;]~~  \n~~(1)and/or~~  - [ ] ~~[II.1.2.4.4.~~  ~~are animals 12 months of age or more and had been tested with negative results during the 30 days prior to the departure from the holding of origin, in accordance with Article 6(2)(c) of Directive 64/432/EEC for enzootic bovine leukosis on~~ null~~(insert date).]~~ ~~]~~  \n(1)or - [x] [II.1.2.  The animals are animals for slaughter coming from officially tuberculosis-free and officially enzootic bovine leukosis-free herd/s, and  \n(1)either  - [x] [II.1.2.1.  come from officially brucellosis-free herd/s;]  \n(1)and/or  - [ ] ~~[II.1.2.2.~~  ~~are castrated.]~~ ]  \nII.2. Section B \nThe description of the consignment in this Section corresponds to the information entered in Points I.15., I.16.(3), I.17.(3), I.20. and I.31. \n(4)- [ ] ~~[II.3.~~  ~~Section C~~  \n~~II.3.1.~~  ~~The animals had been inspected in accordance with Article 5(2) of Directive 64/432/EEC on~~ null~~(insert date) during the 24 hours before scheduled departure and had not shown clinical signs of infectious or contagious disease.~~  \n~~II.3.2.~~  ~~The animals come from the holding/s and, where applicable, an approved assembly centre, and the area/s which, in conformity with Union or national legislation, is/are not subject to any prohibitions or restrictions for reasons of animal diseases affecting bovine animals.~~  \n~~(1)~~  - [ ] ~~[II.3.3.~~  ~~The animals meet the additional guarantees for infectious bovine rhinotracheitis in accordance with Article~~ null~~(insert article number) of Commission Decision~~ null~~/~~ null~~/~~ null~~(insert number).]~~  \n~~II.3.4.~~  ~~The animals did not remain more than six days in the approved assembly centre.~~  \n~~II.3.5.~~  ~~Arrangements are made to transport the animals in means of transport which are constructed in such a way that the animal faeces, litter or feed cannot leak or fall out of the vehicle, and which had been cleansed and disinfected immediately after the transport of animals, or of any product which could affect animal health, and where necessary before loading of the animals, using disinfectants officially authorised by the competent authority.~~  \n~~(5)(6)II.3.6.~~  ~~At the time of inspection, the animals covered by this health certificate were fit to be transported in accordance with the provisions of Council Regulation (EC) No 1/2005 on the intended journey due to start on~~ null~~(insert date).~~  \n~~II.3.7.~~  ~~This certificate~~  \n~~(1)either~~  - [ ] ~~[II.3.7.1.~~  ~~is valid for 10 days from the date of inspection on the holding of origin, or in the approved assembly centre in the Member State of origin;]~~  \n~~(1)or~~  - [ ] ~~[II.3.7.1.~~  ~~expires in accordance with Article 5(5) of Directive 64/432/EEC on~~ null~~(insert date).]~~ ~~]~~  \n\n(1) - [ ] ~~[II.3.8.~~  ~~The animals come directly from a semen collection centre complying with Directive 88/407/EEC;]~~  \n(1) - [ ] ~~[II.3.9.~~  ~~The animals are to be dispatched to Switzerland and they:~~  \n~~are identified by a permanent identification system enabling them to be traced back to the dam and herd of origin and making it possible to establish that they are not the progeny of BSE suspect or confirmed females born during the two years preceding the diagnosis;~~  \n~~do not come from herds where a suspected case of BSE is under investigation;~~  \n~~were born after 1 June 2001.]~~  \n\n(1) - [ ] ~~[II.4. ‘~~ null~~(Animals) in compliance with~~ null~~(Article 4(1)(a) or 4(1)(b) or 4(1)(c), indicate as appropriate) of Commission Implementing Decision (EU) 2016/2008 concerning animal health control measures relating to lumpy skin disease in certain Member States’.]~~  \n(1) - [ ] ~~[II.5. ‘~~ null~~(Animals) in compliance with Article 5(1) of Commission Implementing Decision (EU) 2016/2008 concerning animal health control measures relating to lumpy skin disease in certain Member States’.]~~  \n\n\nBlue Tongue(BT): exemption from the exit ban \n-BT-1:- [ ] ~~Animals in compliance with Article~~ - [ ] ~~7(1)~~ ~~or~~ - [ ] ~~7(2)(a)~~ ~~or~~ - [ ] ~~7(2)(b)~~ ~~or~~ - [ ] ~~7(2)(c)~~ ~~or~~ - [ ] ~~7(2a)(a)~~ ~~or~~ - [ ] ~~7(2a)(b)~~ ~~or~~ - [ ] ~~7(2a)(c)~~ ~~, (indicate as appropriate) of Regulation (EC) No 1266/2007.~~  \n-BT-2:- [ ] - [ ] ~~Animals~~ ~~,~~ - [ ] ~~semen~~ ~~,~~ - [ ] ~~ova~~ ~~and~~ - [ ] ~~embryos~~ ~~, (indicate as appropriate) in compliance with Article~~ - [ ] ~~8(1)(a)~~ ~~or~~ - [ ] ~~8(1)(b)~~ ~~or~~ - [ ] ~~8(4)~~ ~~or~~ - [ ] ~~8(5a)~~ ~~,(indicate as appropriate) of Regulation (EC) No1266/2007.~~  \n-BT-3:- [ ] ~~Insecticide/repellent treatment with~~ null~~(insert name of the product) on~~ null~~(insert date) in conformity with Article 9 of Regulation (EC) No 1266/2007.~~  \n-BTA1:- [ ] ~~Animal(s) were kept until dispatch in a bluetongue seasonally-free zone during the seasonally vector-free period that started on~~ null~~(insert date) since birth or for at least 60 days~~ - [ ] ~~and, if appropriate (indicate as appropriate), were then subjected to an agent identification test according to the OIE Terrestrial Manual on samples taken within seven days prior to dispatch, with negative results , in conformity with Regulation (EC) No 1266/2007 Annex III.A(1) to Regulation (EC) No 1266/2007.~~  \n-BTA2:- [ ] ~~Animal(s) in conformity with Annex III.A(2) to Regulation (EC) No 1266/2007~~  \n-BTA3:- [ ] ~~Animal(s) in conformity with Annex III.A(3) to Regulation (EC) No 1266/2007~~  \n-BTA4:- [ ] ~~Animal(s) in conformity with Annex III.A(4) to Regulation (EC) No 1266/2007~~  \n-BTA5:- [ ] ~~Animal(s) vaccinated against bluetongue serotype/s~~ null~~(insert serotype/s) with~~ null~~(insert name of the vaccine) with a~~ - [ ] ~~inactivated~~ ~~/~~ - [ ] ~~modified live~~ ~~vaccine (indicate, as appropriate) in conformity with Annex III.A(5) to Regulation (EC) No 1266/2007.~~  \n-BTA6:- [ ] ~~Animal(s) subjected to a serological test according to the OIE Terrestrial Manual to detect antibodies against the bluetongue virus serotype~~ null~~(indicate serotype) in conformity with Annex III.A(6) to Regulation (EC) No 1266/2007.~~  \n-BTA7:- [ ] ~~Animal(s) subjected to a specific serological test according to the OIE Terrestrial Manual to detect antibodies against all the bluetongue virus serotypes~~ null~~(indicate serotypes) present or likely to be present in conformity with Annex III.A(7) to Regulation (EC) No 1266/2007.~~  \n-BTA8:- [ ] - [ ] ~~\"Animal(s) is (are) not pregnant\"~~ ~~or~~ - [ ] ~~\"Animal(s) may be pregnant and complies (comply) with the condition(s)~~ null~~(set out in points~~ - [ ] ~~5~~ ~~,~~ - [ ] ~~6~~ ~~and~~ - [ ] ~~7~~ ~~before insemination or mating, or~~ - [ ] ~~set out in point 3~~ ~~; indicate as appropriate)\".~~  \n\n\nNotes \n·               Section A and B of the certificate shall be stamped and signed by: \no     either the official veterinarian of the holding of origin, if different from the official veterinarian signing Section C; or \no     the approved veterinarian of the holding of origin where the Member State of origin has introduced a surveillance network system approved in accordance with Article 14(5) of Directive 64/432/EEC; or \no     the official veterinarian responsible for the approved assembly centre at the date of departure of the animals. \n·               Section C shall be stamped and signed by the official veterinarian of: \no     either the holding of origin; or \no     the approved assembly centre situated in the Member State of origin; or \no     the approved assembly centre situated in one Member State of transit when completing the certificate for dispatch of animals to the Member State of destination. \nPart I: \n• Box reference I.6.: Indicate the serial number(s) of the health certificate(s) drawn up on the day of health inspection on the holding(s) of origin in the Member State(s) of origin and accompanying the animals forming the consignment for which this health certificate is issued in an assembly centre situated in the Member State of transit, as described in Article 5(5) of Directive 64/432/EEC. \n• Box reference I.7.: Fill in if applicable. \n• Box reference I.12.: Dealer’s premises shall only be marked as a Place of origin in the case of animals for slaughter. \n• Box reference I.13.: In the case of animals for slaughter either Assembly centre or Establishment shall be marked as a Place of destination as described in Article 7 of Directive 64/432/EEC. \n• Box reference I.23.: For containers or boxes, the container number and the seal number (if applicable) shall be included. \n• Box reference I.31.: Official identification: Indicate for each animal of the consignment the unique identification code, as described in Article 1(2) of Regulation (EC) No 911/2004, displayed on the visible means of identification applied in accordance with Regulation (EC) No 1760/2000. \nPassport number: If temporary passports for animals less than 4 weeks old are authorised by the competent authority in accordance with Article 6(2) of Regulation (EC) No 911/2004, indicate for each animal of the consignment the temporary passport number. For each animal accompanied by a passport issued in accordance with Article 6(1)(a) of Regulation (EC) No 1760/2000, entering the passport number is optional. \nPart II: \n(1) Delete if not applicable. \n(2) Shall be signed by the official veterinarian at the assembly centre after documentary check and identity checks on animals arriving with an official document or Sections A and B completed certificate, otherwise this point shall be deleted. \n(3) Should be indicated, if the distance of transport exceeds 65 km. \n(4) Delete, if the certificate is used for movement of animals within Member State of origin and only Sections A and B are completed and signed. \n(5) In the case where a consignment is grouped in an assembly centre and comprises animals that were loaded on different dates, the date at which the journey commenced for the whole consignment is considered to be the earliest date when any part of the consignment left the holding of origin. \n(6) This statement does not exempt transporters from their obligations in accordance with Union rules in force in particular regarding the fitness of animals to be transported. \n·                    The colour of the stamp and the signature must be different from that of the other particulars in the certificate. \n·                    The required details of this certificate have to be entered into TRACES on the day of issuing the certificate and at least within 24 hours thereof."
+        }
+      ]
+    },
+    "thirdSignatoryAuthentication": {
+      "governmentActionTypeCode": "8",
+      "actualDateTime": "2021-03-09T12:27:16.000+01:00",
+      "providerParty": {
+        "identifier": "NL0002",
+        "name": "Netherlands Food and Consumer Product Safety Authority",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3511",
+          "lineOne": "Catharijnesingel 59",
+          "cityName": "Utrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "Utrecht"
+        },
+        "definedContact": [
+          {
+            "personName": "Eduardo Diego"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "DOCUMENTARY_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK_RESULT_NATIONAL",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "IDENTITY_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "IDENTITY_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "PHYSICAL_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "WELFARE_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "WELFARE_NON_COMPLIANCE",
+          "content": "FITNESS_FOR_TRANSPORT"
+        },
+        {
+          "identifier": "HEALTH_NON_COMPLIANCE",
+          "content": "INVALID_PROOF_OF_TRANSPORTER_REGISTRATION"
+        },
+        {
+          "identifier": "DEAD_ANIMALS",
+          "content": "22"
+        },
+        {
+          "identifier": "DEAD_ANIMALS_COUNT_TYPE",
+          "content": "ACCURATE"
+        },
+        {
+          "identifier": "UNFIT_ANIMALS",
+          "content": "23"
+        },
+        {
+          "identifier": "UNFIT_ANIMALS_COUNT_TYPE",
+          "content": "ESTIMATE"
+        },
+        {
+          "identifier": "BIRTH_OR_ABORTIONS",
+          "content": "2"
+        },
+        {
+          "identifier": "CORRECTIVE_ACTION",
+          "content": "UNLOADING"
+        },
+        {
+          "identifier": "FOLLOW_UP_QUARANTINE_OR_ISOLATION",
+          "content": "HUMANE_KILLING_EUTHANASIA"
+        },
+        {
+          "identifier": "PLACE_OF_OFFICIAL_CONTROL",
+          "content": "APPROVED_ESTABLISHMENT"
+        },
+        {
+          "identifier": "LABORATORY_TEST_REFERENCES",
+          "content": "LAP-000000915-INTRA.EU.NL.2021.0000001"
+        },
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "content": "Aart.Monst@WorldUSsR72.com"
+        }
+      ]
+    },
+    "fourthSignatoryAuthentication": {
+      "governmentActionTypeCode": "8",
+      "actualDateTime": "2021-02-18T16:14:11.000+01:00",
+      "providerParty": {
+        "identifier": "NL0002",
+        "name": "Netherlands Food and Consumer Product Safety Authority",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3511",
+          "lineOne": "Catharijnesingel 59",
+          "cityName": "Utrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "Utrecht"
+        },
+        "definedContact": [
+          {
+            "personName": "Eduardo Diego"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "DOCUMENTARY_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK_RESULT_NATIONAL",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "IDENTITY_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "IDENTITY_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "PHYSICAL_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "PHYSICAL_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        },
+        {
+          "identifier": "WELFARE_CHECK",
+          "content": "YES"
+        },
+        {
+          "identifier": "PLACE_OF_OFFICIAL_CONTROL",
+          "content": "ENROUTE"
+        },
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "content": "Aart.Monst@WorldUSsR72.com"
+        }
+      ]
+    }
+  },
+  "specifiedConsignment": [
+    {
+      "availabilityDueDateTime": "2021-02-20T16:07:00.000+01:00",
+      "exportExitDateTime": "2021-02-18T16:07:00.000+01:00",
+      "consignorParty": {
+        "identifier": "1234567",
+        "name": "B&S GTC Customs B.V.",
+        "partyRoleCode": "CZ",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3316",
+          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+          "cityName": "Dordrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "South Holland"
+        }
+      },
+      "consigneeParty": {
+        "identifier": "BE-IMP-123",
+        "name": "Test EU lms",
+        "partyRoleCode": "CN",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ],
+        "postalAddress": {
+          "postcodeCode": "1000",
+          "lineOne": "addresse",
+          "cityName": "Ville de Bruxelles - Stad Brussel",
+          "countryName": "Belgium",
+          "countrySubDivisionName": "Brussels-Capital"
+        }
+      },
+      "exportCountry": {
+        "id": "",
+        "name": "",
+        "subordinateSPSCountrySubDivision": {
+          "name": "",
+          "hierarchicalLevelCode": 0,
+          "functionTypeCode": 44
+        }
+      },
+      "importCountry": {
+        "id": "BE",
+        "name": {
+          "languageid": "en",
+          "value": "Belgium"
+        }
+      },
+      "examinationSPSEvent": {
+        "occurrenceSPSLocation": {
+          "name": ""
+        }
+      },
+      "despatchParty": {
+        "identifier": "1234567",
+        "name": "B&S GTC Customs B.V.",
+        "partyRoleCode": "PW",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3316",
+          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+          "cityName": "Dordrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "South Holland"
+        }
+      },
+      "customsTransitAgentParty": {
+        "identifier": "1234567",
+        "name": "B&S GTC Customs B.V.",
+        "partyRoleCode": "CB",
+        "partyTypeCode": [
+          "IMPORTER",
+          "IMP"
+        ],
+        "postalAddress": {
+          "postcodeCode": "3316",
+          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+          "cityName": "Dordrecht",
+          "countryName": "Netherlands",
+          "countrySubDivisionName": "South Holland"
+        }
+      },
+      "mainCarriageLogisticsTransportMovement": {
+        "id": 123456,
+        "modeCode": 3
+      },
+      "utilizedLogisticsTransportEquipment": {
+        "id": "",
+        "affixedLogisticsSeal": {
+          "id": "MSKU907032"
+        }
+      },
+      "includedConsignmentItem": [
+        {
+          "natureIdCargo": [
+            {
+              "typeCode": "12"
+            }
+          ],
+          "includedTradeLineItem": [
+            {
+              "sequenceNumeric": 0,
+              "description": [
+                "Consignment totals and summary"
+              ]
+            },
+            {
+              "sequenceNumeric": 1,
+              "applicableProductClassification": [
+                {
+                  "systemName": "CN Code (Combined Nomenclature)",
+                  "classCode": 102,
+                  "className": [
+                    "LIVE ANIMALS",
+                    "Live bovine animals"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "laboratoryObservationResult": [
+    {
+      "natureIdCargo": {
+        "typeCode": "12"
+      },
+      "productLaboratoryTest": [
+        {
+          "applicableProductClassification": {
+            "systemName": "CN Code (Combined Nomenclature)",
+            "className": [
+              "LIVE ANIMALS",
+              "Live bovine animals"
+            ]
+          },
+          "laboratoryTest": [
+            {
+              "reference": "LAP-000000915-INTRA.EU.NL.2021.0000001",
+              "testDescriptor": {
+                "id": 11221,
+                "description": {
+                  "value": "ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES",
+                  "languageid": "en"
+                },
+                "categoryCode": "RESIDUES_B2B"
+              },
+              "testMotivationCode": "RANDOM",
+              "inspectorConclusionCode": "SATISFACTORY",
+              "analysis": {
+                "analysisTypeCode": "INITIAL",
+                "samplingDateTime": "2021-03-09T00:00:00.000+01:00",
+                "sampleBatchNumber": 1223,
+                "numberOfSamples": 2,
+                "sampleTypeCode": "LARVA",
+                "sampleConservationCode": "CHILLED",
+                "laboratory": {
+                  "identifier": "NLCODE123",
+                  "name": "Test Lab in NL",
+                  "partyRoleCode": "DCW",
+                  "postalAddress": {
+                    "postcodeCode": "1094",
+                    "lineOne": "Address 1",
+                    "cityName": "Amsterdam",
+                    "countryName": "Netherlands",
+                    "countrySubDivisionName": "North Holland"
+                  }
+                },
+                "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
+                "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",
+                "laboratoryTestMethod": "test met",
+                "laboratoryResults": "ok",
+                "laboratoryConclusionCode": "SATISFACTORY"
+              }
+            }
+          ]
+        },
+        {
+          "applicableProductClassification": {
+            "systemName": "CN Code (Combined Nomenclature)",
+            "className": [
+              "LIVE ANIMALS",
+              "Live bovine animals"
+            ]
+          },
+          "laboratoryTest": [
+            {
+              "reference": "LAP-000000914-INTRA.EU.NL.2021.0000001",
+              "testDescriptor": {
+                "id": 11221,
+                "description": {
+                  "value": "ANTICOCCIDIALS, INCLUDING NITROIMIDAZOLES",
+                  "languageid": "en"
+                },
+                "categoryCode": "RESIDUES_B2B"
+              },
+              "testMotivationCode": "RANDOM",
+              "inspectorConclusionCode": "SATISFACTORY",
+              "analysis": {
+                "analysisTypeCode": "INITIAL",
+                "samplingDateTime": "2021-03-09T00:00:00.000+01:00",
+                "sampleBatchNumber": 1223,
+                "numberOfSamples": 2,
+                "sampleTypeCode": "LARVA",
+                "sampleConservationCode": "CHILLED",
+                "laboratory": {
+                  "identifier": "NLCODE123",
+                  "name": "Test Lab in NL",
+                  "partyRoleCode": "DCW",
+                  "postalAddress": {
+                    "postcodeCode": "1094",
+                    "lineOne": "Address 1",
+                    "cityName": "Amsterdam",
+                    "countryName": "Netherlands",
+                    "countrySubDivisionName": "North Holland"
+                  }
+                },
+                "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
+                "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",
+                "laboratoryTestMethod": "test met",
+                "laboratoryResults": "ok",
+                "laboratoryConclusionCode": "SATISFACTORY"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

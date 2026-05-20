@@ -1,0 +1,270 @@
+<ns6:SPSCertificate>
+	<ns6:SPSExchangedDocument>
+	   <ns8:Name languageID="en">CHED-PP - Common Health Entry Document for Plant Product</ns8:Name>
+	   <ns8:ID>CHEDPP.FR.2018.0028758</ns8:ID>
+	   <ns8:TypeCode name="Health certificate (CHED - Common Health Entry Document)">636</ns8:TypeCode>
+	   <ns8:StatusCode name="Rejected (Rejected)">41</ns8:StatusCode>
+	   <ns8:IssueDateTime>
+		  <ns9:DateTime>2018-07-27T16:38:01.000+02:00</ns9:DateTime>
+	   </ns8:IssueDateTime>
+	   <ns8:IssuerSPSParty>
+		  <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FRCDG4</ns8:ID>
+		  <ns8:Name>Roissy Charles-De-Gaulle FRCDG4</ns8:Name>
+		  <ns8:RoleCode name="Officer (Identification of Applicant)">VJ</ns8:RoleCode>
+		  <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>95701</ns8:PostcodeCode>
+			 <ns8:LineOne>Zone de fret 1 - Rue du pélican
+BP 10111</ns8:LineOne>
+			 <ns8:CityName languageID="en">Roissy Ch De Gaulle Cedex</ns8:CityName>
+			 <ns8:CountryID>FR</ns8:CountryID>
+			 <ns8:CountryName languageID="en">France</ns8:CountryName>
+		  </ns8:SpecifiedSPSAddress>
+		  <ns8:SpecifiedSPSPerson>
+			 <ns8:Name>BCP FR ONE</ns8:Name>
+		  </ns8:SpecifiedSPSPerson>
+	   </ns8:IssuerSPSParty>
+	   <ns8:IncludedSPSNote>
+		  <ns8:ContentCode listID="ched_type" listName="CHED type" name="CHED-PP - Common Health Entry Document for Plant Product">PP</ns8:ContentCode>
+		  <ns8:Content/>
+		  <ns8:SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Type of CHED">CHED_TYPE</ns8:SubjectCode>
+	   </ns8:IncludedSPSNote>
+	   <ns8:IncludedSPSNote>
+		  <ns8:ContentCode listID="ched_not_acceptable_measure" listName="CHED Not acceptable measure" name="Re-dispatching">REDISPATCHING</ns8:ContentCode>
+		  <ns8:ContentCode listID="ched_not_acceptable_measure_extent" listName="CHED Not acceptable measure extent" name="Contaminated products">CONTAMINATED_PRODUCTS</ns8:ContentCode>
+		  <ns8:Content/>
+		  <ns8:SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Not acceptable measure">NOT_ACCEPTABLE_MEASURE</ns8:SubjectCode>
+	   </ns8:IncludedSPSNote>
+	   <ns8:IncludedSPSNote>
+		  <ns8:ContentCode listID="refusal_reason" listName="Refusal reason" name="Other reasons: presence of harmful organism">PRESENCE_OF_HARMFUL_ORGANISM</ns8:ContentCode>
+		  <ns8:Content/>
+		  <ns8:SubjectCode listID="certificate_note_subject_code" listName="Certificate Note SubjectCode list" name="Refusal reason">REFUSAL_REASON</ns8:SubjectCode>
+	   </ns8:IncludedSPSNote>
+	   <ns8:ReferenceSPSReferencedDocument>
+		  <ns8:TypeCode name="Related document">916</ns8:TypeCode>
+		  <ns8:RelationshipTypeCode name="Local reference number (Local reference)">AVZ</ns8:RelationshipTypeCode>
+		  <ns8:ID>steve</ns8:ID>
+	   </ns8:ReferenceSPSReferencedDocument>
+	   <ns8:ReferenceSPSReferencedDocument>
+		  <ns8:TypeCode name="Health certificate (CHED - Common Health Entry Document)">636</ns8:TypeCode>
+		  <ns8:RelationshipTypeCode name="Document reference, internal (Document reference, internal)">CAW</ns8:RelationshipTypeCode>
+		  <ns8:ID>CHEDPP.FR.2018.0028758</ns8:ID>
+		  <ns8:AttachmentBinaryObject format="url" mimeCode="text/url" uri="https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/ched/CHEDPP.FR.2018.0028758"/>
+	   </ns8:ReferenceSPSReferencedDocument>
+	   <ns8:ReferenceSPSReferencedDocument>
+		  <ns8:IssueDateTime>2018-07-26T00:00:00.000+02:00</ns8:IssueDateTime>
+		  <ns8:TypeCode name="Phytosanitary certificate (Phytosanitary certificate)">851</ns8:TypeCode>
+		  <ns8:RelationshipTypeCode name="Mutually defined reference number (Supporting document)">ZZZ</ns8:RelationshipTypeCode>
+		  <ns8:ID schemeAgencyID="AI">aa</ns8:ID>
+	   </ns8:ReferenceSPSReferencedDocument>
+	   <ns8:SignatorySPSAuthentication>
+		  <ns8:TypeCode name="Inspection (Identification of Applicant)">4</ns8:TypeCode>
+		  <ns8:ActualDateTime>
+			 <ns9:DateTime>2018-07-27T16:38:00.000+02:00</ns9:DateTime>
+		  </ns8:ActualDateTime>
+		  <ns8:ProviderSPSParty>
+			 <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FRCDG4</ns8:ID>
+			 <ns8:Name>Roissy Charles-De-Gaulle FRCDG4</ns8:Name>
+			 <ns8:RoleCode name="Officer (Identification of Applicant)">VJ</ns8:RoleCode>
+			 <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+			 <ns8:SpecifiedSPSAddress>
+				<ns8:PostcodeCode>95701</ns8:PostcodeCode>
+				<ns8:LineOne>Zone de fret 1 - Rue du pélican
+BP 10111</ns8:LineOne>
+				<ns8:CityName languageID="en">Roissy Ch De Gaulle Cedex</ns8:CityName>
+				<ns8:CountryID>FR</ns8:CountryID>
+				<ns8:CountryName languageID="en">France</ns8:CountryName>
+			 </ns8:SpecifiedSPSAddress>
+			 <ns8:SpecifiedSPSPerson>
+				<ns8:Name>BCP FR ONE</ns8:Name>
+			 </ns8:SpecifiedSPSPerson>
+		  </ns8:ProviderSPSParty>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_consignment_clause" schemeName="CHED consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PURPOSE</ns8:ID>
+			 <ns8:Content>INTERNAL_MARKET</ns8:Content>
+			 <ns8:Content languageID="en">For free circulation</ns8:Content>
+		  </ns8:IncludedSPSClause>
+	   </ns8:SignatorySPSAuthentication>
+	   <ns8:SignatorySPSAuthentication>
+		  <ns8:TypeCode name="Clearance (Official inspector)">1</ns8:TypeCode>
+		  <ns8:ActualDateTime>
+			 <ns9:DateTime>2018-07-27T16:38:00.000+02:00</ns9:DateTime>
+		  </ns8:ActualDateTime>
+		  <ns8:ProviderSPSParty>
+			 <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FRCDG4</ns8:ID>
+			 <ns8:Name>Roissy Charles-De-Gaulle FRCDG4</ns8:Name>
+			 <ns8:RoleCode name="Authorized official">AM</ns8:RoleCode>
+			 <ns8:TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</ns8:TypeCode>
+			 <ns8:SpecifiedSPSAddress>
+				<ns8:PostcodeCode>95701</ns8:PostcodeCode>
+				<ns8:LineOne>Zone de fret 1 - Rue du pélican
+BP 10111</ns8:LineOne>
+				<ns8:CityName languageID="en">Roissy Ch De Gaulle Cedex</ns8:CityName>
+				<ns8:CountryID>FR</ns8:CountryID>
+				<ns8:CountryName languageID="en">France</ns8:CountryName>
+			 </ns8:SpecifiedSPSAddress>
+			 <ns8:SpecifiedSPSPerson>
+				<ns8:Name>BCP FR ONE</ns8:Name>
+			 </ns8:SpecifiedSPSPerson>
+		  </ns8:ProviderSPSParty>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DECISION_CONCLUSION</ns8:ID>
+			 <ns8:Content>NOT_ACCEPTABLE</ns8:Content>
+			 <ns8:Content languageID="en">Not Acceptable</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK_RESULT</ns8:ID>
+			 <ns8:Content>SATISFACTORY</ns8:Content>
+			 <ns8:Content languageID="en">Satisfactory</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ns8:ID>
+			 <ns8:Content>YES</ns8:Content>
+			 <ns8:Content languageID="en">True</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK_RESULT</ns8:ID>
+			 <ns8:Content>SATISFACTORY</ns8:Content>
+			 <ns8:Content languageID="en">Satisfactory</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ns8:ID>
+			 <ns8:Content>YES</ns8:Content>
+			 <ns8:Content languageID="en">True</ns8:Content>
+		  </ns8:IncludedSPSClause>
+		  <ns8:IncludedSPSClause>
+			 <ns8:ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK_RESULT</ns8:ID>
+			 <ns8:Content>NOT_SATISFACTORY</ns8:Content>
+			 <ns8:Content languageID="en">Not satisfactory</ns8:Content>
+		  </ns8:IncludedSPSClause>
+	   </ns8:SignatorySPSAuthentication>
+	</ns6:SPSExchangedDocument>
+	<ns6:SPSConsignment>
+	   <ns8:ConsignorSPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>COOPERATIVEHb29 Co</ns8:Name>
+		  <ns8:RoleCode name="Consignor (Exporter)">CZ</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:LineOne>Banat Street 63</ns8:LineOne>
+			 <ns8:CityName languageID="en">Abidjan</ns8:CityName>
+			 <ns8:CountryID>CI</ns8:CountryID>
+			 <ns8:CountryName languageID="en">Cote D'Ivoire</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Abidjan</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:ConsignorSPSParty>
+	   <ns8:ConsigneeSPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>COOPERATIVEAA67 WW</ns8:Name>
+		  <ns8:RoleCode name="Consignee (Importer)">CN</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>35340</ns8:PostcodeCode>
+			 <ns8:LineOne>via Savigliano 39</ns8:LineOne>
+			 <ns8:CityName languageID="en">La Bouexiere</ns8:CityName>
+			 <ns8:CountryID>FR</ns8:CountryID>
+			 <ns8:CountryName languageID="en">France</ns8:CountryName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:ConsigneeSPSParty>
+	   <ns8:ExportSPSCountry>
+		  <ns8:ID>CI</ns8:ID>
+		  <ns8:Name languageID="en">Cote D'Ivoire</ns8:Name>
+	   </ns8:ExportSPSCountry>
+	   <ns8:ImportSPSCountry>
+		  <ns8:ID/>
+		  <ns8:Name/>
+	   </ns8:ImportSPSCountry>
+	   <ns8:UnloadingBaseportSPSLocation>
+		  <ns8:ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FRCDG4</ns8:ID>
+		  <ns8:Name>FR</ns8:Name>
+		  <ns8:Name languageID="en">Roissy Ch De Gaulle Cedex</ns8:Name>
+	   </ns8:UnloadingBaseportSPSLocation>
+	   <ns8:ExaminationSPSEvent>
+		  <ns8:OccurrenceSPSLocation>
+			 <ns8:Name/>
+		  </ns8:OccurrenceSPSLocation>
+	   </ns8:ExaminationSPSEvent>
+	   <ns8:DeliverySPSParty>
+		  <ns8:ID/>
+		  <ns8:Name>COOPERATIVEAA67 WW</ns8:Name>
+		  <ns8:RoleCode name="Delivery party (Place of destination)">DP</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Plant establishment">PLANT_ESTABLISHMENT</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Plant Nurseries">PLANTS</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>35340</ns8:PostcodeCode>
+			 <ns8:LineOne>via Savigliano 39</ns8:LineOne>
+			 <ns8:CityName languageID="en">La Bouexiere</ns8:CityName>
+			 <ns8:CountryID>FR</ns8:CountryID>
+			 <ns8:CountryName languageID="en">France</ns8:CountryName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:DeliverySPSParty>
+	   <ns8:CustomsTransitAgentSPSParty>
+		  <ns8:ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">FR95999020L</ns8:ID>
+		  <ns8:Name>AIR FRANCE CARGO</ns8:Name>
+		  <ns8:RoleCode name="Customs broker (Responsible for consignment)">CB</ns8:RoleCode>
+		  <ns8:TypeCode listID="operator_activity_type" listName="Operator activity type" name="Responsible for the load">RESPONSIBLE_FOR_THE_LOAD</ns8:TypeCode>
+		  <ns8:TypeCode listID="classification_section_code" listName="Operator classification section code" name="Responsible For the Load (Freight Forwarder)">RFL</ns8:TypeCode>
+		  <ns8:SpecifiedSPSAddress>
+			 <ns8:PostcodeCode>95700</ns8:PostcodeCode>
+			 <ns8:LineOne>12 Rue des Tarterets - zone de fret 1</ns8:LineOne>
+			 <ns8:CityName languageID="en">Roissy-en-France</ns8:CityName>
+			 <ns8:CountryID>FR</ns8:CountryID>
+			 <ns8:CountryName languageID="en">France</ns8:CountryName>
+			 <ns8:CountrySubDivisionName languageID="en">Metropolitan France</ns8:CountrySubDivisionName>
+		  </ns8:SpecifiedSPSAddress>
+	   </ns8:CustomsTransitAgentSPSParty>
+	   <ns8:MainCarriageSPSTransportMovement>
+		  <ns8:ID schemeID="airplane_flight_number_before_bcp" schemeName="Flight number (before BCP)">AAA</ns8:ID>
+		  <ns8:ModeCode name="Air transport">4</ns8:ModeCode>
+	   </ns8:MainCarriageSPSTransportMovement>
+	   <ns8:IncludedSPSConsignmentItem>
+		  <ns8:IncludedSPSTradeLineItem>
+			 <ns8:SequenceNumeric>0</ns8:SequenceNumeric>
+			 <ns8:Description>Consignment totals and summary</ns8:Description>
+			 <ns8:NetWeightMeasure unitCode="KGM">4500.0</ns8:NetWeightMeasure>
+			 <ns8:PhysicalSPSPackage>
+				<ns8:LevelCode name="No packaging hierarchy">4</ns8:LevelCode>
+				<ns8:TypeCode name="Carton">CT</ns8:TypeCode>
+				<ns8:ItemQuantity>240.0</ns8:ItemQuantity>
+			 </ns8:PhysicalSPSPackage>
+		  </ns8:IncludedSPSTradeLineItem>
+		  <ns8:IncludedSPSTradeLineItem>
+			 <ns8:SequenceNumeric>1</ns8:SequenceNumeric>
+			 <ns8:Description/>
+			 <ns8:ScientificName languageID="en">Mangifera indica</ns8:ScientificName>
+			 <ns8:NetWeightMeasure unitCode="KGM">4500.0</ns8:NetWeightMeasure>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>CN</ns8:SystemID>
+				<ns8:SystemName>CN Code (Combined Nomenclature)</ns8:SystemName>
+				<ns8:ClassCode>08045000</ns8:ClassCode>
+				<ns8:ClassName languageID="en">EDIBLE FRUIT AND NUTS; PEEL OF CITRUS FRUIT OR MELONS</ns8:ClassName>
+				<ns8:ClassName languageID="en">Dates, figs, pineapples, avocados, guavas, mangoes and mangosteens, fresh or dried</ns8:ClassName>
+				<ns8:ClassName languageID="en">Guavas, mangoes and mangosteens</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>EPPT</ns8:SystemID>
+				<ns8:SystemName>EPPO Plant Protection Thesaurus</ns8:SystemName>
+				<ns8:ClassCode>MNGIN</ns8:ClassCode>
+				<ns8:ClassName languageID="en">Mangifera indica</ns8:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:ApplicableSPSClassification>
+				<ns8:SystemID>PRODUCT_TYPE</ns9:SystemID>
+				<ns8:SystemName>Product type</ns9:SystemName>
+				<ns8:ClassCode>OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES</ns9:ClassCode>
+				<ns8:ClassName languageID="en">Other living plants: fruit and vegetables</ns9:ClassName>
+			 </ns8:ApplicableSPSClassification>
+			 <ns8:PhysicalSPSPackage>
+				<ns8:LevelCode name="No packaging hierarchy">4</ns8:LevelCode>
+				<ns8:TypeCode name="Carton">CT</ns8:TypeCode>
+				<ns8:ItemQuantity>240.0</ns8:ItemQuantity>
+			 </ns8:PhysicalSPSPackage>
+			 <ns8:OriginSPSCountry>
+				<ns8:ID>CI</ns8:ID>
+				<ns8:Name languageID="en">Cote D'Ivoire</ns8:Name>
+			 </ns8:OriginSPSCountry>
+		  </ns8:IncludedSPSTradeLineItem>
+	   </ns8:IncludedSPSConsignmentItem>
+	</ns6:SPSConsignment>
+</ns6:SPSCertificate>

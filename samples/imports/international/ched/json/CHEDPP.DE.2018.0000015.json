@@ -1,0 +1,269 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "../../../../../schemas/profiles/imports/international/defra-unvtd-profile-ched-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "ched",
+  "exchangedDocument": {
+    "name": "CHED-PP - Common Health Entry Document for Plant Product",
+    "identifier": "CHEDPP.DE.2018.0000015",
+    "documentTypeCode": "636",
+    "documentStatusCode": "70",
+    "issueDateTime": "2018-07-11T12:59:37.000+02:00",
+    "includedNote": [
+      {
+        "type": "Note",
+        "noteSubjectCode": "CHED_TYPE",
+        "contentCode": "PP"
+      }
+    ],
+    "referenceDocument": [
+      {
+        "identifier": "CHEDPP.DE.2018.0000015",
+        "documentTypeCode": "636",
+        "relationshipTypeCode": "CAW",
+        "attachmentBinaryObject": {
+          "format": "url",
+          "mimeCode": "text/url",
+          "uri": "https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/ched/CHEDPP.DE.2018.0000015"
+        }
+      },
+      {
+        "identifier": "PSC 123",
+        "documentTypeCode": "851",
+        "relationshipTypeCode": "ZZZ"
+      }
+    ],
+    "firstSignatoryAuthentication": {
+      "governmentActionTypeCode": "4",
+      "actualDateTime": "2018-07-11T12:59:37.000+02:00",
+      "providerParty": {
+        "identifier": "DEFRA4",
+        "name": "Frankfurt am Main",
+        "partyRoleCode": "VJ",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "60549",
+          "lineOne": "Perishable Center \nTor 26/454",
+          "cityName": "Frankfurt Am Main, Stadt",
+          "countryName": "Germany"
+        },
+        "definedContact": [
+          {
+            "personName": "BCP DE ONE"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "PURPOSE",
+          "content": "INTERNAL_MARKET"
+        }
+      ]
+    },
+    "secondSignatoryAuthentication": {
+      "governmentActionTypeCode": "1",
+      "actualDateTime": "2018-07-11T12:59:37.000+02:00",
+      "providerParty": {
+        "identifier": "DEFRA4",
+        "name": "Frankfurt am Main",
+        "partyRoleCode": "AM",
+        "partyTypeCode": [
+          "AUTHORITY"
+        ],
+        "postalAddress": {
+          "postcodeCode": "60549",
+          "lineOne": "Perishable Center \nTor 26/454",
+          "cityName": "Frankfurt Am Main, Stadt",
+          "countryName": "Germany"
+        },
+        "definedContact": [
+          {
+            "personName": "BCP DE ONE"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "DECISION_CONCLUSION",
+          "content": "ACCEPTABLE_FOR_INTERNAL_MARKET"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK_RESULT",
+          "content": "SATISFACTORY"
+        }
+      ]
+    }
+  },
+  "specifiedConsignment": [
+    {
+      "consignorParty": {
+        "identifier": "",
+        "name": "COOPERATIVEAF26 Ent",
+        "partyRoleCode": "CZ",
+        "partyTypeCode": [
+          "PLANT_ESTABLISHMENT",
+          "PLANTS"
+        ],
+        "postalAddress": {
+          "postcodeCode": "202",
+          "lineOne": "Avenue Pierre Saul 13",
+          "cityName": "Nairobi",
+          "countryName": "Kenya",
+          "countrySubDivisionName": "Nairobi"
+        }
+      },
+      "consigneeParty": {
+        "identifier": "",
+        "name": "Keil Spedition",
+        "partyRoleCode": "CN",
+        "partyTypeCode": [
+          "PLANT_ESTABLISHMENT",
+          "PLANTS"
+        ],
+        "postalAddress": {
+          "postcodeCode": "55545",
+          "lineOne": "Rüdesheimerstr. 60-68",
+          "cityName": "Bad Kreuznach",
+          "countryName": "Germany",
+          "countrySubDivisionName": "Rhineland-Palatinate"
+        }
+      },
+      "exportCountry": {
+        "id": "KE",
+        "name": {
+          "languageid": "en",
+          "value": "Kenya"
+        }
+      },
+      "importCountry": {
+        "id": "",
+        "name": ""
+      },
+      "unloadingBaseportLocation": [
+        {
+          "identifier": "DEFRA4",
+          "name": "DE"
+        }
+      ],
+      "examinationSPSEvent": {
+        "occurrenceSPSLocation": {
+          "name": ""
+        }
+      },
+      "deliveryParty": {
+        "identifier": "",
+        "name": "Keil Spedition",
+        "partyRoleCode": "DP",
+        "partyTypeCode": [
+          "PLANT_ESTABLISHMENT",
+          "PLANTS"
+        ],
+        "postalAddress": {
+          "postcodeCode": "55545",
+          "lineOne": "Rüdesheimerstr. 60-68",
+          "cityName": "Bad Kreuznach",
+          "countryName": "Germany",
+          "countrySubDivisionName": "Rhineland-Palatinate"
+        }
+      },
+      "customsTransitAgentParty": {
+        "identifier": "",
+        "name": "Keil Spedition",
+        "partyRoleCode": "CB",
+        "partyTypeCode": [
+          "RESPONSIBLE_FOR_THE_LOAD",
+          "RFL"
+        ],
+        "postalAddress": {
+          "postcodeCode": "55545",
+          "lineOne": "Rüdesheimerstr. 60-68",
+          "cityName": "Bad Kreuznach",
+          "countryName": "Germany",
+          "countrySubDivisionName": "Rhineland-Palatinate"
+        }
+      },
+      "mainCarriageLogisticsTransportMovement": {
+        "id": "lkw",
+        "modeCode": 3
+      },
+      "utilizedLogisticsTransportEquipment": {
+        "id": "Container 1",
+        "affixedLogisticsSeal": {
+          "id": "Plombe 1"
+        }
+      },
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "sequenceNumeric": 0,
+              "description": [
+                "Consignment totals and summary"
+              ]
+            },
+            {
+              "sequenceNumeric": 1,
+              "applicableProductClassification": [
+                {
+                  "systemName": "CN Code (Combined Nomenclature)",
+                  "classCode": 6031100,
+                  "className": [
+                    "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
+                    "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
+                    "Fresh",
+                    "Roses"
+                  ]
+                },
+                {
+                  "systemName": "EPPO Plant Protection Thesaurus",
+                  "classCode": "ROSCN",
+                  "className": [
+                    "Rosa canina"
+                  ]
+                },
+                {
+                  "systemName": "Product type",
+                  "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                  "className": [
+                    "Other living plants: cut flowers and branches with foliage"
+                  ]
+                }
+              ]
+            },
+            {
+              "sequenceNumeric": 2,
+              "applicableProductClassification": [
+                {
+                  "systemName": "CN Code (Combined Nomenclature)",
+                  "classCode": 6031100,
+                  "className": [
+                    "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
+                    "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
+                    "Fresh",
+                    "Roses"
+                  ]
+                },
+                {
+                  "systemName": "EPPO Plant Protection Thesaurus",
+                  "classCode": "ROSAK",
+                  "className": [
+                    "Rosa arkansana"
+                  ]
+                },
+                {
+                  "systemName": "Product type",
+                  "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                  "className": [
+                    "Other living plants: cut flowers and branches with foliage"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
