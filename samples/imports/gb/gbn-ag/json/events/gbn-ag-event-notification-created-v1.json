@@ -1,0 +1,70 @@
+{
+  "_comment": "NotificationCreated event sample for GBN-AG. The DRAFT-state notification has minimal information: issuer (who is creating the notification), primary commodity (CN code), and origin country. No signatures, no transport details, no parties beyond the issuer - those are filled in during the importer's session and emitted on Submit. Validates against gbn-ag-event-notification-created-v1.schema.json, which uses the core CertificatePayload base rather than the SUBMITTED-grade gbn-ag-v1 narrowings.",
+  "$schema": "gbn-ag-event-notification-created-v1.schema.json",
+  "eventId": "a1b2c3d4-e5f6-7890-abcd-ef1234567000",
+  "aggregateType": "Notification",
+  "subType": "GBN-AG",
+  "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
+  "aggregateVersion": 1,
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationCreated",
+  "timestamp": "2026-05-15T09:30:00.000Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "gbn-ag",
+    "exchangedDocument": {
+      "identifier": "GBN-AG-26-0000001-8",
+      "documentStatusCode": "DRAFT",
+      "functionCode": "9",
+      "issueDateTime": "2026-05-15T09:30:00.000Z",
+      "issuer": {
+        "name": "Kai Inc.",
+        "postalAddress": {
+          "lineOne": "UNCANNY COMICS",
+          "lineTwo": "3 TARRING ROAD",
+          "cityName": "WORTHING",
+          "postcodeCode": "BN11 4SS",
+          "countryId": "GB"
+        },
+        "definedContact": [
+          {
+            "personName": "Kai Atkinson",
+            "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
+            "telephoneUniversalCommunication": "0123456788"
+          }
+        ]
+      }
+    },
+    "specifiedConsignment": [
+      {
+        "includedConsignmentItem": [
+          {
+            "includedTradeLineItem": [
+              {
+                "specifiedTradeProduct": [
+                  {
+                    "designatedProductClassification": [
+                      {
+                        "systemId": "CN",
+                        "classCode": "01020000"
+                      }
+                    ],
+                    "originTradeCountry": [
+                      {
+                        "identifier": "FR"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "correlationId": "cid-20260515-093000",
+    "schemaVersion": 1,
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-created-v1.schema.json"
+  }
+}

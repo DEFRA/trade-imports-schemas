@@ -1,0 +1,416 @@
+{
+  "_comment": "Multi-species worked example, sibling of gbn-ag-v1-example.json (livestock). Source derived from docs/multi-commodity-cheda.json (cats and ferrets from CH to GB). Trimmed to one cat and one ferret to keep the structure scannable. Demonstrates: (1) two trade lines on one consignment for two species sharing CN 01061900; (2) the `identifier` array on the `tradeProductInstance` $def — each animal carries microchip + passport + tattoo together; (3) the `permanentLocation` slot on the `tradeProductInstance` $def (on the cat); (4) the `charityAddress` slot on the `tradeProductInstance` $def (on the ferret); (5) two transport movements — pre-BCP road leg and after-BCP vessel leg — each with its own `arrivalEvent`; (6) no `finalDestinationLogisticsLocation` on the consignment because per refdata routing both species have cph_number=false (the slot is optional after the relaxation).",
+  "$model": "defra/certificate-internal/1",
+  "$schema": "gbn-ag-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "gbn-ag",
+  "exchangedDocument": {
+    "identifier": "GBN-AG-26-1481364-X",
+    "issuer": {
+      "name": "Kai Inc.",
+      "postalAddress": {
+        "lineOne": "UNCANNY COMICS",
+        "lineTwo": "3 TARRING ROAD",
+        "cityName": "WORTHING",
+        "postcodeCode": "BN11 4SS",
+        "countryId": "GB"
+      },
+      "definedContact": [
+        {
+          "personName": "Kai Atkinson",
+          "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
+          "telephoneUniversalCommunication": "0123456788"
+        }
+      ]
+    },
+    "firstSignatoryAuthentication": {
+      "includedClause": [
+        {
+          "identifier": "PURPOSE",
+          "content": "INTERNAL_MARKET",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        },
+        {
+          "identifier": "GOODS_CERTIFIED_AS",
+          "content": "PETS",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        }
+      ]
+    },
+    "referenceDocument": [
+      {
+        "typeCode": "853",
+        "identifier": "docref-vet",
+        "issueDateTime": "2026-05-05",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:4fe1b796-6353-44c7-9f09-06428dc95b45",
+            "filename": "01-04 Reason For Import.png",
+            "mimeCode": "image/png"
+          }
+        ]
+      }
+    ]
+  },
+  "specifiedConsignment": [
+    {
+      "consignorParty": {
+        "name": "Astra Rosales",
+        "postalAddress": {
+          "lineOne": "43 East Hague Extension",
+          "cityName": "Quas occaecat ut ear",
+          "postcodeCode": "30055",
+          "countryId": "CH"
+        },
+        "definedContact": [
+          {
+            "personName": "Astra Rosales",
+            "telephoneUniversalCommunication": "01783 772587",
+            "emailURIUniversalCommunication": "revoje@mailinator.net"
+          }
+        ]
+      },
+      "consigneeParty": {
+        "name": "Mike Tyson",
+        "postalAddress": {
+          "lineOne": "35 Exeter road",
+          "cityName": "London",
+          "postcodeCode": "NW2 3SR",
+          "countryId": "GB"
+        },
+        "definedContact": [
+          {
+            "personName": "Mike Tyson",
+            "telephoneUniversalCommunication": "07455344536",
+            "emailURIUniversalCommunication": "jon.tyson@yahoo.com"
+          }
+        ]
+      },
+      "despatchParty": {
+        "name": "Astra Rosales",
+        "postalAddress": {
+          "lineOne": "43 East Hague Extension",
+          "cityName": "Quas occaecat ut ear",
+          "postcodeCode": "30055",
+          "countryId": "CH"
+        }
+      },
+      "deliveryParty": {
+        "name": "Mike Tyson",
+        "postalAddress": {
+          "lineOne": "35 Exeter road",
+          "cityName": "London",
+          "postcodeCode": "NW2 3SR",
+          "countryId": "GB"
+        }
+      },
+      "importer": {
+        "name": "Importerporter",
+        "postalAddress": {
+          "lineOne": "186 Ditchling Road",
+          "cityName": "Brighton",
+          "postcodeCode": "BN17DD",
+          "countryId": "FR"
+        }
+      },
+      "applicableCrossBorderRegulatoryProcedure": [
+        {
+          "typeCode": "SPS_INSPECTION",
+          "urlId": "https://defra-codelists.gov.uk/regulatory_procedure_type",
+          "entryCustomsOfficeSpecifiedLogisticsLocation": {
+            "identifier": "GBAPHA1A",
+            "name": "APHA Bristol BCP",
+            "postalAddress": {
+              "lineOne": "APHA Bristol",
+              "cityName": "Bristol",
+              "postcodeCode": "BS1 1AA",
+              "countryId": "GB"
+            },
+            "urlId": "https://defra-codelists.gov.uk/bcp_reference"
+          }
+        }
+      ],
+      "unloadingBaseportLocation": {
+        "identifier": "GBBRS",
+        "name": "Bristol",
+        "postalAddress": {
+          "lineOne": "Port of Bristol",
+          "cityName": "Bristol",
+          "postcodeCode": "BS1 1AA",
+          "countryId": "GB"
+        },
+        "urlId": "https://service.unece.org/locode/"
+      },
+      "_mapping_note_transport": "Two transport movements: the pre-BCP leg (road, France to UK port) and the after-BCP leg (vessel and onward delivery). Each carries its own arrivalEvent — the pre-BCP arrival is the vehicle arriving at the BCP; the after-BCP arrival is the vessel/vehicle arriving at the delivery location. Disambiguation between legs is via identifier.schemeId (e.g. road_vehicle_registration_before_bcp / vessel_name_after_bcp).",
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "identifier": "FR-AB-123-CD",
+          "modeCode": 3,
+          "usedLogisticsTransportMeans": {
+            "name": "Refrigerated van"
+          },
+          "transportContractRelatedReferencedDocument": [
+            {
+              "typeCode": "730",
+              "identifier": "CMR-pre-bcp"
+            }
+          ],
+          "departureEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-27T08:00:00Z"
+            }
+          ],
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-27T22:00:00Z"
+            }
+          ],
+          "urlId": "https://defra-codelists.gov.uk/road_vehicle_registration_before_bcp"
+        },
+        {
+          "identifier": "SHIP-REF-123",
+          "modeCode": 1,
+          "usedLogisticsTransportMeans": {
+            "name": "SHIP-REF-123"
+          },
+          "transportContractRelatedReferencedDocument": [
+            {
+              "typeCode": "705",
+              "identifier": "CMR-123123"
+            }
+          ],
+          "departureEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-28T06:00:00Z"
+            }
+          ],
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-28T18:00:00Z"
+            }
+          ],
+          "urlId": "https://defra-codelists.gov.uk/vessel_name_after_bcp"
+        }
+      ],
+      "carrier": {
+        "name": "GERRING PARTNERS",
+        "identifier": "UK/EXETE/T1/00090683",
+        "urlId": "https://defra-codelists.gov.uk/private_transporter_approval_number",
+        "partyTypeCode": [
+          "COMMERCIAL_TRANSPORTER",
+          "TRANSPORTER"
+        ],
+        "postalAddress": {
+          "lineOne": "ARCHERS COTTAGE",
+          "lineTwo": "CORTON",
+          "cityName": "WARMINSTER",
+          "postcodeCode": "BA12 0SY",
+          "countryId": "GB"
+        }
+      },
+      "isOrHasUnweanedAnimals": false,
+      "includedConsignmentItem": [
+        {
+          "_mapping_note_lines": "Two trade lines, one per species. Both share CN 01061900. Per-species addresses (permanentLocation / charityAddress) sit on the trade product itself (specifiedTradeProduct[0]) — all animals on the line share that address. Per-animal data (identifier) sits inside individualTradeProductInstance[].",
+          "includedTradeLineItem": [
+            {
+              "_mapping_note_line": "Cats line — one cat. The line's specifiedTradeProduct carries the per-species permanentLocation (where the cats will permanently reside). The animal's individualTradeProductInstance entry carries its identifier array (microchip + passport + tattoo).",
+              "specifiedTradeProduct": [
+                {
+                  "designatedProductClassification": [
+                    {
+                      "systemId": "CN",
+                      "classCode": "01061900"
+                    }
+                  ],
+                  "description": "Other live mammals",
+                  "scientificName": [
+                    {
+                      "content": "Felis catus",
+                      "languageId": "la"
+                    }
+                  ],
+                  "commonName": [
+                    {
+                      "content": "Cat",
+                      "languageId": "en"
+                    }
+                  ],
+                  "originTradeCountry": [
+                    {
+                      "identifier": "FR",
+                      "subordinateTradeCountrySubDivision": [
+                        {
+                          "identifier": "FR-12436",
+                          "functionTypeCode": {
+                            "content": "106"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "permanentLocation": {
+                    "name": "Brighton home",
+                    "postalAddress": {
+                      "lineOne": "182 Ditchling Road",
+                      "cityName": "Brighton",
+                      "postcodeCode": "BN17JE",
+                      "countryId": "GB"
+                    }
+                  },
+                  "individualTradeProductInstance": [
+                    {
+                      "identifier": [
+                        {
+                          "typeCode": "MICROCHIP",
+                          "content": "mc-cat",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "PASSPORT",
+                          "content": "ppt-cat",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "TATTOO",
+                          "content": "tto-cat",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": {
+                    "content": 1,
+                    "unitCode": "H87"
+                  }
+                }
+              ],
+              "_mapping_note_path_a": "Path A — same identifiers on additionalInformationNote for joint review with TIG.",
+              "additionalInformationNote": [
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "mc-cat"
+                  ]
+                },
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "ppt-cat"
+                  ]
+                },
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "tto-cat"
+                  ]
+                }
+              ]
+            },
+            {
+              "_mapping_note_line": "Ferrets line — one ferret. The line's specifiedTradeProduct carries the per-species charityAddress (where the ferrets are donated). The animal's individualTradeProductInstance entry carries its identifier array.",
+              "specifiedTradeProduct": [
+                {
+                  "designatedProductClassification": [
+                    {
+                      "systemId": "CN",
+                      "classCode": "01061900"
+                    }
+                  ],
+                  "description": "Other live mammals",
+                  "scientificName": [
+                    {
+                      "content": "Mustela furo",
+                      "languageId": "la"
+                    }
+                  ],
+                  "commonName": [
+                    {
+                      "content": "Ferret",
+                      "languageId": "en"
+                    }
+                  ],
+                  "originTradeCountry": [
+                    {
+                      "identifier": "FR",
+                      "subordinateTradeCountrySubDivision": [
+                        {
+                          "identifier": "FR-12436",
+                          "functionTypeCode": {
+                            "content": "106"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "charityAddress": {
+                    "name": "The Ferret Trust UK",
+                    "postalAddress": {
+                      "lineOne": "Charity Lane",
+                      "cityName": "Bristol",
+                      "postcodeCode": "BS2 8AA",
+                      "countryId": "GB"
+                    }
+                  },
+                  "individualTradeProductInstance": [
+                    {
+                      "identifier": [
+                        {
+                          "typeCode": "MICROCHIP",
+                          "content": "mc-ferret",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "PASSPORT",
+                          "content": "ppt-ferret",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "TATTOO",
+                          "content": "tto-ferret",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": {
+                    "content": 1,
+                    "unitCode": "H87"
+                  }
+                }
+              ],
+              "additionalInformationNote": [
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "mc-ferret"
+                  ]
+                },
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "ppt-ferret"
+                  ]
+                },
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "tto-ferret"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

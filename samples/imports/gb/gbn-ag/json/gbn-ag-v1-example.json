@@ -1,0 +1,298 @@
+{
+  "_comment": "GBN-AG worked example — translation of an IPAFFS CHED-A notification into the GBN-AG schema, which derives from the canonical Defra UNVTD core via allOf. Naming follows the TIG team's convention (identifier, consignorParty, deliveryParty, postalAddress, definedContact, firstSignatoryAuthentication, includedClause, referenceDocument, unloadingBaseportLocation, provider). Primitive shape is hybrid: flat strings for party names / address lines / contact details, composite (UneceIdentifierType / UneceCodeType / UneceTextType) only where codelist metadata or language tags earn their keep. Per-animal identifiers are populated on BOTH placements for joint review with the TIG team: Path A on additionalInformationNote (operational TRACES placement) and Path B on individualTradeProductInstance (BSP-canonical placement). Authorial keys prefixed with _ are stripped before validation.",
+  "$model": "defra/certificate-internal/1",
+  "$schema": "gbn-ag-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "gbn-ag",
+  "exchangedDocument": {
+    "identifier": "GBN-AG-26-0000001-8",
+    "issuer": {
+      "name": "Kai Inc.",
+      "postalAddress": {
+        "lineOne": "UNCANNY COMICS",
+        "lineTwo": "3 TARRING ROAD",
+        "cityName": "WORTHING",
+        "postcodeCode": "BN11 4SS",
+        "countryId": "GB"
+      },
+      "definedamContact": [
+        {
+          "personName": "Kai Atkinson",
+          "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
+          "telephoneUniversalCommunication": "0123456788"
+        }
+      ]
+    },
+    "firstSignatoryAuthentication": {
+      "includedClause": [
+        {
+          "identifier": "PURPOSE",
+          "content": "INTERNAL_MARKET",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        },
+        {
+          "identifier": "GOODS_CERTIFIED_AS",
+          "content": "BREEDING_AND_PRODUCTION",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        }
+      ]
+    },
+    "referenceDocument": [
+      {
+        "typeCode": "853",
+        "identifier": "doc-ref",
+        "issueDateTime": "2026-04-01",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+            "filename": "1.6_Discernment_Summary.pdf",
+            "mimeCode": "application/pdf"
+          }
+        ]
+      },
+      {
+        "typeCode": "916",
+        "identifier": "journey-log",
+        "issueDateTime": "2026-05-09",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
+            "filename": "1.5_Description_Summary.pdf",
+            "mimeCode": "application/pdf"
+          }
+        ]
+      }
+    ]
+  },
+  "specifiedConsignment": [
+    {
+      "consignorParty": {
+        "name": "Astra Rosales",
+        "postalAddress": {
+          "lineOne": "43 East Hague Extension",
+          "lineTwo": "Delectus sit odio p",
+          "cityName": "Quas occaecat ut ear",
+          "postcodeCode": "30055",
+          "countryId": "CH"
+        }
+      },
+      "consigneeParty": {
+        "name": "Linus George Ltd",
+        "postalAddress": {
+          "lineOne": "558 Oak Street",
+          "lineTwo": "Ut aperiam in volupt",
+          "cityName": "Eligendi et beatae p",
+          "postcodeCode": "24271",
+          "countryId": "CH"
+        }
+      },
+      "despatchParty": {
+        "name": "Astra Rosales",
+        "postalAddress": {
+          "lineOne": "43 East Hague Extension",
+          "lineTwo": "Delectus sit odio p",
+          "cityName": "Quas occaecat ut ear",
+          "postcodeCode": "30055",
+          "countryId": "CH"
+        }
+      },
+      "deliveryParty": {
+        "name": "Linus George Ltd",
+        "postalAddress": {
+          "lineOne": "558 Oak Street",
+          "lineTwo": "Ut aperiam in volupt",
+          "cityName": "Eligendi et beatae p",
+          "postcodeCode": "24271",
+          "countryId": "CH"
+        }
+      },
+      "importer": {
+        "name": "Importerporter",
+        "postalAddress": {
+          "lineOne": "186 Ditchling Road",
+          "lineTwo": "BRIGHTON",
+          "cityName": "Brighton",
+          "postcodeCode": "BN17DD",
+          "countryId": "FR"
+        }
+      },
+      "finalDestinationLogisticsLocation": {
+        "identifier": "CPH19876",
+        "name": "Linus George Ltd",
+        "postalAddress": {
+          "lineOne": "558 Oak Street",
+          "lineTwo": "Ut aperiam in volupt",
+          "cityName": "Eligendi et beatae p",
+          "postcodeCode": "24271",
+          "countryId": "CH"
+        },
+        "urlId": "https://defra-codelists.gov.uk/cph_number"
+      },
+      "applicableCrossBorderRegulatoryProcedure": [
+        {
+          "typeCode": "SPS_INSPECTION",
+          "urlId": "https://defra-codelists.gov.uk/regulatory_procedure_type",
+          "entryCustomsOfficeSpecifiedLogisticsLocation": {
+            "identifier": "GBDVR1",
+            "name": "Dover BCP",
+            "postalAddress": {
+              "lineOne": "Border Control Post, Port of Dover",
+              "cityName": "Dover",
+              "postcodeCode": "CT17 9TF",
+              "countryId": "GB"
+            },
+            "urlId": "https://defra-codelists.gov.uk/bcp_reference"
+          }
+        }
+      ],
+      "unloadingBaseportLocation": {
+        "identifier": "GBDVR",
+        "name": "Dover",
+        "postalAddress": {
+          "lineOne": "Port of Dover",
+          "cityName": "Dover",
+          "postcodeCode": "CT17 9TF",
+          "countryId": "GB"
+        },
+        "urlId": "https://service.unece.org/locode/"
+      },
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "identifier": "SHIPPY",
+          "modeCode": 1,
+          "usedLogisticsTransportMeans": {
+            "name": "SHIPPY"
+          },
+          "transportContractRelatedReferencedDocument": [
+            {
+              "typeCode": "705",
+              "identifier": "doc-ref-BOL"
+            }
+          ],
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
+            }
+          ],
+          "urlId": "https://defra-codelists.gov.uk/vessel_name_after_bcp"
+        }
+      ],
+      "transitTradeCountry": [
+        {
+          "identifier": "BE"
+        }
+      ],
+      "carrier": {
+        "name": "ALISTAIR WILSON",
+        "identifier": "UK/INVER/T1/00091851",
+        "urlId": "https://defra-codelists.gov.uk/private_transporter_approval_number",
+        "partyTypeCode": [
+          "COMMERCIAL_TRANSPORTER",
+          "TRANSPORTER"
+        ],
+        "postalAddress": {
+          "lineOne": "AUCHENBLAE",
+          "lineTwo": "INVER SHIN",
+          "cityName": "SUTHERLAND",
+          "postcodeCode": "IV27 4ET",
+          "countryId": "GB"
+        }
+      },
+      "isOrHasUnweanedAnimals": true,
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "specifiedTradeProduct": [
+                {
+                  "designatedProductClassification": [
+                    {
+                      "systemId": "CN",
+                      "classCode": "01020000"
+                    }
+                  ],
+                  "description": "Live bovine animals",
+                  "scientificName": [
+                    {
+                      "content": "Bos taurus",
+                      "languageId": "la"
+                    }
+                  ],
+                  "commonName": [
+                    {
+                      "content": "Cattle",
+                      "languageId": "en"
+                    }
+                  ],
+                  "originTradeCountry": [
+                    {
+                      "identifier": "FR",
+                      "subordinateTradeCountrySubDivision": [
+                        {
+                          "identifier": "FR-12345",
+                          "functionTypeCode": {
+                            "content": "106"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "_mapping_note_charity": "Per-species charityAddress demonstration. For livestock this would be unusual operationally (CPH-tagged farm is the normal destination), but the slot is available at the gbnAgTradeProduct level and accepts a value here — included so the validator's check C confirms the slot is exercised somewhere in the worked examples.",
+                  "charityAddress": {
+                    "name": "Bovine Welfare Sanctuary UK",
+                    "postalAddress": {
+                      "lineOne": "Sanctuary Farm",
+                      "cityName": "Yeovil",
+                      "postcodeCode": "BA20 1AA",
+                      "countryId": "GB"
+                    }
+                  },
+                  "_comment": "Per-animal identifiers - BSP-canonical, purpose-built slot. Each animal is one tradeProductInstance with identifier.typeCode naming the kind of identifier (a value from the animal_identifier_types codelist) and identifier.content carrying the value itself.",
+                  "individualTradeProductInstance": [
+                    {
+                      "identifier": [
+                        {
+                          "typeCode": "EAR_TAG",
+                          "content": "et1",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "PASSPORT",
+                          "content": "passport1",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": {
+                    "content": 20,
+                    "unitCode": "H87"
+                  }
+                }
+              ],
+              "_mapping_note_path_a": "Per-animal identifiers — Path A placement (operational TRACES). Each identifier is one additionalInformationNote with subjectCode tagged listId='ched_note_subject_code' and content carrying the identifier value. Populated alongside Path B above so the joint review can compare both placements with the same data.",
+              "additionalInformationNote": [
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "et1"
+                  ]
+                },
+                {
+                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "content": [
+                    "passport1"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

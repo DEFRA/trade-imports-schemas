@@ -207,23 +207,31 @@ async function main() {
       const sampleRaw = await loadJson(samplePath)
       const sample = stripAuthorialKeys(sampleRaw)
 
-      let schemaRef = sample.$schema
+      const schemaRef = sample.$schema
       if (!schemaRef || typeof schemaRef !== 'string') {
-        if (relSample.endsWith('samples/gbn-ag-v1-example.json')) {
-          schemaRef = '../schemas/profiles/imports/gb/gbn-ag-v1.schema.json'
-        } else {
-          throw new Error('Missing $schema in sample')
-        }
+        throw new Error('Missing $schema in sample')
       }
 
+      // Two forms are accepted for sample.$schema:
+      // 1. Filesystem-relative path from the sample's directory (legacy form,
+      //    e.g. "../../../../../schemas/profiles/imports/eu/...schema.json").
+      // 2. A registered schema identity - typically a bare filename matching
+      //    the schema's $id (e.g. "gbn-ag-v1.schema.json"). This is the
+      //    preferred form: shorter, location-independent, matches the TIG
+      //    canonical core's bare-filename $id convention.
+      let schemaEntry = null
       const schemaAbs = resolve(dirname(samplePath), schemaRef)
-      if (!(await fileExists(schemaAbs))) {
-        throw new Error(`Sample $schema path not found: ${schemaRef}`)
+      if (await fileExists(schemaAbs)) {
+        schemaEntry = schemaByAbsPath.get(resolve(schemaAbs))
+      } else {
+        schemaEntry = schemaEntries.find(e =>
+          e.schema.$id === schemaRef ||
+          toPosix(relative(SCHEMAS_DIR, e.path)) === schemaRef ||
+          toPosix(relative(ROOT, e.path)) === schemaRef
+        )
       }
-
-      const schemaEntry = schemaByAbsPath.get(resolve(schemaAbs))
       if (!schemaEntry) {
-        throw new Error(`Schema not indexed for sample: ${schemaRef}`)
+        throw new Error(`Sample $schema not resolvable as filesystem path or registered schema identity: ${schemaRef}`)
       }
 
       const draft = schemaEntry.draft

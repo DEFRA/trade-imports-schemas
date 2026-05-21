@@ -11,6 +11,8 @@ The active design is **UNVTD + UN/CEFACT vocabulary-first**:
 - Payloads align to D23B vocabulary typing (`xsd:string`, `@vocab`, `@id`) where applicable.
 - We do not treat nested SPSCertificate inheritance as the primary modelling approach.
 
+More information about the Import Notification and Event Envelope schemas can be found in [profiles/imports/README.md](profiles/imports/README.md)
+
 ## Directory map
 
 ```text
@@ -58,6 +60,7 @@ Primary sample locations:
 
 - `samples/imports/international/ched/json/unvtd-ched.json`
 - `samples/imports/eu/intra/json/unvtd-intra.json`
+- `samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json`
 - `samples/imports/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
 
 ## Migration note
