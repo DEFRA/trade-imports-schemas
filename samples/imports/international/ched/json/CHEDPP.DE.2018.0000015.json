@@ -13,7 +13,15 @@
       {
         "type": "Note",
         "noteSubjectCode": "CHED_TYPE",
-        "contentCode": "PP"
+        "content": [],
+        "contentCode": [
+          {
+            "value": "PP",
+            "listId": "ched_type",
+            "listName": "CHED type",
+            "name": "CHED-PP - Common Health Entry Document for Plant Product"
+          }
+        ]
       }
     ],
     "referenceDocument": [

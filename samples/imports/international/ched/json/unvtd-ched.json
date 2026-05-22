@@ -9,17 +9,30 @@
     "includedNote": [
       {
         "type": "Note",
-        "contentCode": "PP",
+        "content": [],
+        "contentCode": [
+          {
+            "value": "PP"
+          }
+        ],
         "noteSubjectCode": "CHED_TYPE"
       },
       {
         "type": "Note",
-        "content": "1",
+        "content": [
+          "1"
+        ],
+        "contentCode": [],
         "noteSubjectCode": "ESTIMATED_JOURNEY_TIME"
       },
       {
         "type": "Note",
-        "contentCode": "NO",
+        "content": [],
+        "contentCode": [
+          {
+            "value": "NO"
+          }
+        ],
         "noteSubjectCode": "JOURNEY_LOG"
       }
     ],

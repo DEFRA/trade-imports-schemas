@@ -4,6 +4,35 @@
   "title": "Defra UNVTD canonical core",
   "description": "Canonical component schema for Defra internal models using UN/CEFACT/UNVTD building blocks. Property names and value kinds follow the UN/CEFACT D23B JSON-LD vocabulary (https://vocabulary.uncefact.org/unece-context-D23B.jsonld): xsd:string-typed terms are JSON strings; @vocab-typed terms are JSON strings; @id-typed terms are JSON objects or strings per JSON-LD. That file defines the RDF types ExchangedDocument and Consignment (PascalCase keys) and many association properties, but it does not currently declare the BSP assembly property keys exchangedDocument or specifiedConsignment (camelCase) used on the JSON root alongside UN JSON Schemas (e.g. UNECE-BSPMaster D23B). defra-unvtd-core-v1.context.jsonld adds only those two missing keys as Defra profile aliases (not unece terms), so we avoid minting unofficial vocabulary entries while preserving a stable JSON-LD expansion for TRACES-oriented payload shape. If UN later publishes exchangedDocument/specifiedConsignment in the official context, remove the Defra aliases and use the official mapping directly.",
   "$defs": {
+    "UneceCodeType": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "listId": {
+          "type": "string"
+        },
+        "listName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "listAgencyId": {
+          "type": "string"
+        },
+        "listAgencyName": {
+          "type": "string"
+        },
+        "listVersionId": {
+          "type": "string"
+        }
+      }
+    },
     "UneceMeasureType": {
       "type": "object",
       "anyOf": [
@@ -147,23 +176,45 @@
     },
     "IncludedNote": {
       "type": "object",
-      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): unece:content, unece:contentCode, and unece:noteSubjectCode are xsd:string in unece-context-D23B.jsonld — use a single string per property, not single-element arrays.",
+      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): supported properties are aligned to the Note vocabulary term set. unece:identifier, unece:name, unece:subject, unece:creationDateTime, unece:noteSubjectCode, unece:content, and unece:contentCode are xsd:string in unece-context-D23B.jsonld.",
       "properties": {
         "type": {
           "const": "Note",
           "description": "JSON-LD @type for unece:Note when using unece-context-D23B.jsonld (type aliases to @type)."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "unece:identifier — xsd:string in unece-context-D23B.jsonld."
+        },
+        "name": {
+          "type": "string",
+          "description": "unece:name — xsd:string in unece-context-D23B.jsonld."
+        },
+        "subject": {
+          "type": "string",
+          "description": "unece:subject — xsd:string in unece-context-D23B.jsonld."
+        },
+        "creationDateTime": {
+          "type": "string",
+          "description": "unece:creationDateTime — xsd:string in unece-context-D23B.jsonld."
         },
         "noteSubjectCode": {
           "type": "string",
           "description": "unece:noteSubjectCode — xsd:string in unece-context-D23B.jsonld."
         },
         "content": {
-          "type": "string",
-          "description": "unece:content — xsd:string in unece-context-D23B.jsonld."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "unece:content profile extension for deterministic typed contracts and lossless TRACES XML round-tripping: always an array of strings."
         },
         "contentCode": {
-          "type": "string",
-          "description": "unece:contentCode — xsd:string in unece-context-D23B.jsonld."
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UneceCodeType"
+          },
+          "description": "unece:contentCode profile extension for deterministic typed contracts and lossless TRACES XML round-tripping: always an array of UneceCodeType objects (value + optional list metadata such as listId/listName/name)."
         }
       }
     },

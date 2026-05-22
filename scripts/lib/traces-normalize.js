@@ -55,10 +55,10 @@ export function toCodeObject (obj) {
   const value = o.value ?? o.Value ?? o['#text']
   if (value === undefined) return undefined
   const out = { value }
-  if (o.listID != null || o.listId != null) out.listID = o.listID ?? o.listId
+  if (o.listID != null || o.listId != null || o.listid != null) out.listID = o.listID ?? o.listId ?? o.listid
   if (o.listName != null) out.listName = o.listName
   if (o.name != null) out.name = o.name
-  if (o.schemeID != null || o.schemeId != null) out.schemeID = o.schemeID ?? o.schemeId
+  if (o.schemeID != null || o.schemeId != null || o.schemeid != null) out.schemeID = o.schemeID ?? o.schemeId ?? o.schemeid
   if (o.schemeName != null) out.schemeName = o.schemeName
   return out
 }
