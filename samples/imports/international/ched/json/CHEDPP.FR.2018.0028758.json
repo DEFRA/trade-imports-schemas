@@ -13,17 +13,44 @@
       {
         "type": "Note",
         "noteSubjectCode": "CHED_TYPE",
-        "contentCode": "PP"
+        "contentCode": [
+          {
+            "value": "PP",
+            "listId": "ched_type",
+            "listName": "CHED type",
+            "name": "CHED-PP - Common Health Entry Document for Plant Product"
+          }
+        ]
       },
       {
         "type": "Note",
         "noteSubjectCode": "NOT_ACCEPTABLE_MEASURE",
-        "contentCode": "REDISPATCHING"
+        "contentCode": [
+          {
+            "value": "REDISPATCHING",
+            "listId": "ched_not_acceptable_measure",
+            "listName": "CHED Not acceptable measure",
+            "name": "Re-dispatching"
+          },
+          {
+            "value": "CONTAMINATED_PRODUCTS",
+            "listId": "ched_not_acceptable_measure_extent",
+            "listName": "CHED Not acceptable measure extent",
+            "name": "Contaminated products"
+          }
+        ]
       },
       {
         "type": "Note",
         "noteSubjectCode": "REFUSAL_REASON",
-        "contentCode": "PRESENCE_OF_HARMFUL_ORGANISM"
+        "contentCode": [
+          {
+            "value": "PRESENCE_OF_HARMFUL_ORGANISM",
+            "listId": "refusal_reason",
+            "listName": "Refusal reason",
+            "name": "Other reasons: presence of harmful organism"
+          }
+        ]
       }
     ],
     "referenceDocument": [

@@ -19,7 +19,11 @@
       },
       {
         "type": "Note",
-        "contentCode": "NO",
+        "contentCode": [
+          {
+            "value": "NO"
+          }
+        ],
         "noteSubjectCode": "JOURNEY_LOG"
       }
     ],

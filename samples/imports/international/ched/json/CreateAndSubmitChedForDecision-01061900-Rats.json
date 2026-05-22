@@ -13,7 +13,11 @@
       {
         "type": "Note",
         "noteSubjectCode": "CHED_TYPE",
-        "contentCode": "A"
+        "contentCode": [
+          {
+            "value": "A"
+          }
+        ]
       }
     ],
     "referenceDocument": [

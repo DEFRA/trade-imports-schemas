@@ -13,22 +13,37 @@
       {
         "type": "Note",
         "noteSubjectCode": "LAST_UPDATE_DATETIME",
-        "content": "2021-03-09T12:27:16.000+01:00"
+        "content": "2021-03-09T12:27:16.000+01:00",
+        "contentCode": []
       },
       {
         "type": "Note",
         "noteSubjectCode": "ESTIMATED_JOURNEY_TIME",
-        "content": "1"
+        "content": "1",
+        "contentCode": []
       },
       {
         "type": "Note",
         "noteSubjectCode": "JOURNEY_LOG",
-        "contentCode": "NO"
+        "contentCode": [
+          {
+            "value": "NO",
+            "listId": "boolean",
+            "listName": "Boolean (yes/no)"
+          }
+        ]
       },
       {
         "type": "Note",
         "noteSubjectCode": "TRANSPORT_CONDITIONS",
-        "contentCode": "AMBIENT"
+        "contentCode": [
+          {
+            "value": "AMBIENT",
+            "listId": "product_temperature",
+            "listName": "Product temperature",
+            "name": "Ambient"
+          }
+        ]
       }
     ],
     "referenceDocument": [

@@ -50,6 +50,30 @@ function asString (val) {
   return undefined
 }
 
+function mapCodeType (raw) {
+  if (raw == null) return undefined
+  if (typeof raw !== 'object') {
+    const value = asString(raw)
+    return value ? { value } : undefined
+  }
+  const value = asString(raw.value)
+  if (!value) return undefined
+  const out = { value }
+  const listId = asString(raw.listId ?? raw.listID ?? raw.listid)
+  if (listId) out.listId = listId
+  const listName = asString(raw.listName)
+  if (listName) out.listName = listName
+  const name = asString(raw.name)
+  if (name) out.name = name
+  const listAgencyId = asString(raw.listAgencyId ?? raw.listAgencyID ?? raw.listagencyid)
+  if (listAgencyId) out.listAgencyId = listAgencyId
+  const listAgencyName = asString(raw.listAgencyName)
+  if (listAgencyName) out.listAgencyName = listAgencyName
+  const listVersionId = asString(raw.listVersionId ?? raw.listVersionID ?? raw.listversionid)
+  if (listVersionId) out.listVersionId = listVersionId
+  return out
+}
+
 function mapNotes (notes) {
   if (!notes) return undefined
   const arr = Array.isArray(notes) ? notes : [notes]
@@ -67,14 +91,8 @@ function mapNotes (notes) {
       note.content = asString(n.content)
     }
     const cc = n.contentCodes ?? n.contentCode
-    if (cc != null) {
-      if (Array.isArray(cc)) {
-        const first = cc[0]
-        note.contentCode = asString(typeof first === 'object' ? first?.value : first)
-      } else {
-        note.contentCode = asString(typeof cc === 'object' ? cc.value : cc)
-      }
-    }
+    const ccArr = cc == null ? [] : (Array.isArray(cc) ? cc : [cc])
+    note.contentCode = ccArr.map(mapCodeType).filter(Boolean)
     out.push(note)
   }
   return out.length ? out : undefined

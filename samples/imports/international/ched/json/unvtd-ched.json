@@ -9,7 +9,11 @@
     "includedNote": [
       {
         "type": "Note",
-        "contentCode": "PP",
+        "contentCode": [
+          {
+            "value": "PP"
+          }
+        ],
         "noteSubjectCode": "CHED_TYPE"
       },
       {
@@ -19,7 +23,11 @@
       },
       {
         "type": "Note",
-        "contentCode": "NO",
+        "contentCode": [
+          {
+            "value": "NO"
+          }
+        ],
         "noteSubjectCode": "JOURNEY_LOG"
       }
     ],
