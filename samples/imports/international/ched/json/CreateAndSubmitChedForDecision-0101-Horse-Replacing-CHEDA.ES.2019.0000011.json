@@ -13,6 +13,7 @@
       {
         "type": "Note",
         "noteSubjectCode": "CHED_TYPE",
+        "content": [],
         "contentCode": [
           {
             "value": "A"

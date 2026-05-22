@@ -74,6 +74,17 @@ function mapCodeType (raw) {
   return out
 }
 
+function mapContentArray (raw) {
+  if (raw == null) return []
+  const arr = Array.isArray(raw) ? raw : [raw]
+  return arr
+    .map((v) => {
+      if (typeof v === 'object' && v !== null) return asString(v.value ?? v.content)
+      return asString(v)
+    })
+    .filter(Boolean)
+}
+
 function mapNotes (notes) {
   if (!notes) return undefined
   const arr = Array.isArray(notes) ? notes : [notes]
@@ -85,11 +96,10 @@ function mapNotes (notes) {
     if (!noteSubjectCode) continue
     const note = {
       type: 'Note',
-      noteSubjectCode
+      noteSubjectCode,
+      content: []
     }
-    if (n.content !== undefined && n.content !== '') {
-      note.content = asString(n.content)
-    }
+    note.content = mapContentArray(n.content)
     const cc = n.contentCodes ?? n.contentCode
     const ccArr = cc == null ? [] : (Array.isArray(cc) ? cc : [cc])
     note.contentCode = ccArr.map(mapCodeType).filter(Boolean)

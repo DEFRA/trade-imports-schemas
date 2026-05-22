@@ -13,18 +13,23 @@
       {
         "type": "Note",
         "noteSubjectCode": "LAST_UPDATE_DATETIME",
-        "content": "2021-03-09T12:27:16.000+01:00",
+        "content": [
+          "2021-03-09T12:27:16.000+01:00"
+        ],
         "contentCode": []
       },
       {
         "type": "Note",
         "noteSubjectCode": "ESTIMATED_JOURNEY_TIME",
-        "content": "1",
+        "content": [
+          "1"
+        ],
         "contentCode": []
       },
       {
         "type": "Note",
         "noteSubjectCode": "JOURNEY_LOG",
+        "content": [],
         "contentCode": [
           {
             "value": "NO",
@@ -36,6 +41,7 @@
       {
         "type": "Note",
         "noteSubjectCode": "TRANSPORT_CONDITIONS",
+        "content": [],
         "contentCode": [
           {
             "value": "AMBIENT",

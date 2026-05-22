@@ -203,8 +203,11 @@
           "description": "unece:noteSubjectCode — xsd:string in unece-context-D23B.jsonld."
         },
         "content": {
-          "type": "string",
-          "description": "unece:content — xsd:string in unece-context-D23B.jsonld."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "unece:content profile extension for deterministic typed contracts and lossless TRACES XML round-tripping: always an array of strings."
         },
         "contentCode": {
           "type": "array",

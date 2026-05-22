@@ -9,6 +9,7 @@
     "includedNote": [
       {
         "type": "Note",
+        "content": [],
         "contentCode": [
           {
             "value": "PP"
@@ -18,11 +19,15 @@
       },
       {
         "type": "Note",
-        "content": "1",
+        "content": [
+          "1"
+        ],
+        "contentCode": [],
         "noteSubjectCode": "ESTIMATED_JOURNEY_TIME"
       },
       {
         "type": "Note",
+        "content": [],
         "contentCode": [
           {
             "value": "NO"

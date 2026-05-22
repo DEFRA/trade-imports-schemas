@@ -13,6 +13,7 @@
       {
         "type": "Note",
         "noteSubjectCode": "CHED_TYPE",
+        "content": [],
         "contentCode": [
           {
             "value": "PP",
@@ -25,6 +26,7 @@
       {
         "type": "Note",
         "noteSubjectCode": "NOT_ACCEPTABLE_MEASURE",
+        "content": [],
         "contentCode": [
           {
             "value": "REDISPATCHING",
@@ -43,6 +45,7 @@
       {
         "type": "Note",
         "noteSubjectCode": "REFUSAL_REASON",
+        "content": [],
         "contentCode": [
           {
             "value": "PRESENCE_OF_HARMFUL_ORGANISM",
