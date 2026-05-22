@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schemas/reference-data/defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse-v1.schema.json",
+  "@context": "https://vocabulary.uncefact.org/unece-context-D23B.jsonld",
+  "source": "traces",
+  "treeId": "chedpp",
+  "nodePath": "R/N-11978",
+  "node": {
+    "modelId": "11978",
+    "selectable": true,
+    "nodeType": "label"
+  },
+  "attributes": [
+    {
+      "key": "minimumTemperature",
+      "value": {
+        "content": "2.0",
+        "unitCode": "CEL"
+      }
+    }
+  ],
+  "classificationSections": [
+    {
+      "classCode": "I",
+      "descriptions": [
+        "Live animals; animal products"
+      ]
+    }
+  ],
+  "retrievedAt": "2026-05-22T15:40:00Z"
+}

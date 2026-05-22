@@ -22,6 +22,8 @@ const GLOBAL_KEY_RENAMES = {
   deliverySPSParty: 'deliveryParty',
   exportSPSCountry: 'exportCountry',
   importSPSCountry: 'importCountry',
+  reExportSPSCountry: 'reExportCountry',
+  transitSPSCountry: 'transitCountry',
   providerSPSParty: 'providerParty',
   specifiedSPSAddress: 'postalAddress',
   includedSPSConsignmentItem: 'includedConsignmentItem',
@@ -377,6 +379,18 @@ function mapLogisticsLocation (loc) {
   return out
 }
 
+function mapTradeCountry (country) {
+  if (!country || typeof country !== 'object') return undefined
+  const out = {}
+  const id = country.id ?? country.identifier
+  if (id != null) out.id = asString(typeof id === 'object' ? id.value : id)
+  const name = country.name
+  if (name != null) {
+    out.name = extractContentValue(name) ?? asString(name)
+  }
+  return Object.keys(out).length ? out : undefined
+}
+
 function mapConsignment (consignment) {
   if (!consignment || typeof consignment !== 'object') {
     throw new Error('Missing spsConsignment on certificate')
@@ -479,6 +493,17 @@ function mapTree (val, ctx = {}) {
     if (newKey === 'unloadingBaseportLocation') {
       const items = Array.isArray(v) ? v : [v]
       out.unloadingBaseportLocation = items.map(mapLogisticsLocation)
+      continue
+    }
+
+    if (newKey === 'exportCountry' || newKey === 'importCountry') {
+      out[newKey] = mapTradeCountry(v)
+      continue
+    }
+
+    if (newKey === 'reExportCountry' || newKey === 'transitCountry') {
+      const items = Array.isArray(v) ? v : [v]
+      out[newKey] = items.map(mapTradeCountry).filter(Boolean)
       continue
     }
 
