@@ -16,7 +16,7 @@
         "postcodeCode": "BN11 4SS",
         "countryId": "GB"
       },
-      "definedamContact": [
+      "definedContact": [
         {
           "personName": "Kai Atkinson",
           "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
@@ -57,13 +57,13 @@
         ]
       },
       {
-        "typeCode": "916",
-        "identifier": "journey-log",
+        "typeCode": "705",
+        "identifier": "BOL-2026-884721",
         "issueDateTime": "2026-05-09",
         "attachmentBinaryObject": [
           {
             "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
-            "filename": "1.5_Description_Summary.pdf",
+            "filename": "bill-of-lading.pdf",
             "mimeCode": "application/pdf"
           }
         ]
@@ -253,16 +253,6 @@
                       ]
                     }
                   ],
-                  "_mapping_note_charity": "Per-species charityAddress demonstration. For livestock this would be unusual operationally (CPH-tagged farm is the normal destination), but the slot is available at the gbnAgTradeProduct level and accepts a value here — included so the validator's check C confirms the slot is exercised somewhere in the worked examples.",
-                  "charityAddress": {
-                    "name": "Bovine Welfare Sanctuary UK",
-                    "postalAddress": {
-                      "lineOne": "Sanctuary Farm",
-                      "cityName": "Yeovil",
-                      "postcodeCode": "BA20 1AA",
-                      "countryId": "GB"
-                    }
-                  },
                   "_comment": "Per-animal identifiers - BSP-canonical, purpose-built slot. Each animal is one tradeProductInstance with identifier.typeCode naming the kind of identifier (a value from the animal_identifier_types codelist) and identifier.content carrying the value itself.",
                   "individualTradeProductInstance": [
                     {

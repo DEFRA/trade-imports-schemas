@@ -69,13 +69,13 @@
           ]
         },
         {
-          "typeCode": "916",
-          "identifier": "journey-log",
+          "typeCode": "705",
+          "identifier": "BOL-2026-884721",
           "issueDateTime": "2026-05-09",
           "attachmentBinaryObject": [
             {
               "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
-              "filename": "1.5_Description_Summary.pdf",
+              "filename": "bill-of-lading.pdf",
               "mimeCode": "application/pdf"
             }
           ]
@@ -265,15 +265,6 @@
                         ]
                       }
                     ],
-                    "charityAddress": {
-                      "name": "Bovine Welfare Sanctuary UK",
-                      "postalAddress": {
-                        "lineOne": "Sanctuary Farm",
-                        "cityName": "Yeovil",
-                        "postcodeCode": "BA20 1AA",
-                        "countryId": "GB"
-                      }
-                    },
                     "individualTradeProductInstance": [
                       {
                         "identifier": [

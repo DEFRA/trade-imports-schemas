@@ -259,10 +259,6 @@
           "maxItems": 1,
           "items": { "$ref": "#/$defs/originTradeCountry" }
         },
-        "charityAddress": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsLocation",
-          "description": "Optional per-species charity recipient address. When present, applies to every animal on this trade line. New GBN-AG concept (not in IPAFFS today; gap-analysis row #30). Placement is tbc with the stakeholder — moved from per-animal up to per-species on the working assumption that all animals on a line share one charity address."
-        },
         "individualTradeProductInstance": {
           "type": "array",
           "items": { "$ref": "#/$defs/tradeProductInstance" },
