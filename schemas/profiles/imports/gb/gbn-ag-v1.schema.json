@@ -208,6 +208,15 @@
           "minItems": 1,
           "items": { "$ref": "#/$defs/gbnAgProductClassification" }
         },
+        "typeCode": {
+          "type": "string",
+          "description": "Optional trade-product type/form code (live animal / semen / embryo / ova). BSP/D23B canonical (unece:typeCode, xsd:string). Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this trade product's typeCode is drawn from."
+        },
         "scientificName": {
           "type": "array",
           "minItems": 1,
@@ -238,7 +247,7 @@
 
     "gbnAgProductClassification": {
       "type": "object",
-      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN') and classCode (the code value). No const enforcement on systemId — leaves room for secondary classifications (EPPO, IPAFFS species classes) if requirements emerge. CN codes are 8 digits in the operational case; the string-or-integer classCode accommodates both shapes without binding to a length pattern (CN-only enforcement would be premature optimisation).",
+      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN' or 'SPECIES_CLASS') and classCode (the code value). No const enforcement on systemId — a single trade product can carry multiple classifications under different coding systems (e.g. CN code for commodity plus a SPECIES_CLASS entry for taxonomic class). CN codes are 8 digits in the operational case; the string-or-integer classCode accommodates both shapes without binding to a length pattern.",
       "required": ["systemId", "classCode"],
       "properties": {
         "systemId": { "type": "string" },
@@ -247,6 +256,11 @@
             { "type": "string" },
             { "type": "integer" }
           ]
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this classification's classCode is drawn from."
         }
       }
     },

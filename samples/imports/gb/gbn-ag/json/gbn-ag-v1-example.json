@@ -6,6 +6,7 @@
   "$type": "gbn-ag",
   "exchangedDocument": {
     "identifier": "GBN-AG-26-0000001-8",
+    "traderAssignedId": "Imports456_GB",
     "issuer": {
       "name": "Kai Inc.",
       "postalAddress": {
@@ -199,6 +200,9 @@
         }
       },
       "isOrHasUnweanedAnimals": true,
+      "packageQuantity": {
+        "content": 1
+      },
       "includedConsignmentItem": [
         {
           "includedTradeLineItem": [
@@ -209,8 +213,15 @@
                     {
                       "systemId": "CN",
                       "classCode": "01020000"
+                    },
+                    {
+                      "systemId": "SPECIES_CLASS",
+                      "classCode": "MAMMALIA",
+                      "urlId": "https://defra-codelists.gov.uk/species_class"
                     }
                   ],
+                  "typeCode": "LIVE_ANIMAL",
+                  "urlId": "https://defra-codelists.gov.uk/species_type",
                   "description": "Live bovine animals",
                   "scientificName": [
                     {

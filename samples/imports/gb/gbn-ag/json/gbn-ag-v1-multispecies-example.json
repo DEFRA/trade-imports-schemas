@@ -6,6 +6,7 @@
   "$type": "gbn-ag",
   "exchangedDocument": {
     "identifier": "GBN-AG-26-1481364-X",
+    "traderAssignedId": "Pets789_GB",
     "issuer": {
       "name": "Kai Inc.",
       "postalAddress": {
@@ -221,8 +222,15 @@
                     {
                       "systemId": "CN",
                       "classCode": "01061900"
+                    },
+                    {
+                      "systemId": "SPECIES_CLASS",
+                      "classCode": "MAMMALIA",
+                      "urlId": "https://defra-codelists.gov.uk/species_class"
                     }
                   ],
+                  "typeCode": "LIVE_ANIMAL",
+                  "urlId": "https://defra-codelists.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {
@@ -319,8 +327,15 @@
                     {
                       "systemId": "CN",
                       "classCode": "01061900"
+                    },
+                    {
+                      "systemId": "SPECIES_CLASS",
+                      "classCode": "MAMMALIA",
+                      "urlId": "https://defra-codelists.gov.uk/species_class"
                     }
                   ],
+                  "typeCode": "LIVE_ANIMAL",
+                  "urlId": "https://defra-codelists.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {

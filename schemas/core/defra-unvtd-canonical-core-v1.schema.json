@@ -498,7 +498,7 @@
     },
     "TradeProduct": {
       "type": "object",
-      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / originTradeCountry / individualTradeProductInstance.",
+      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / originTradeCountry / individualTradeProductInstance.",
       "properties": {
         "description": {
           "oneOf": [
@@ -508,6 +508,15 @@
               "items": { "$ref": "#/$defs/UneceTextType" }
             }
           ]
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "BSP/D23B canonical slot (unece:typeCode, xsd:string) for the trade product's type/form code — e.g. live animal vs semen vs embryo vs ova. Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this trade product's typeCode is drawn from."
         },
         "designatedProductClassification": {
           "type": "array",
@@ -652,6 +661,10 @@
         "identifier": {
           "type": "string"
         },
+        "traderAssignedId": {
+          "type": "string",
+          "description": "Optional trader-entered reference. BSP/D23B canonical slot (unece:traderAssignedId, xsd:string) for an importer's own internal reference number against the consignment / pre-notification."
+        },
         "documentTypeCode": {
           "type": "string",
           "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level — profile schemas constrain by const/enum, and GBN-AG defers the value pending a UK pre-notification documentTypeCode decision."
@@ -780,6 +793,15 @@
           "type": "array",
           "items": { "$ref": "#/$defs/TradeCountry" },
           "description": "Transit countries between the consignment's origin and destination."
+        },
+        "packageQuantity": {
+          "type": "object",
+          "description": "Optional consignment-level package count. BSP/D23B canonical slot (unece:packageQuantity) for the number of packages in the consignment. content carries the count; unitCode is conventionally omitted for raw piece counts.",
+          "required": ["content"],
+          "properties": {
+            "content": { "type": "number", "exclusiveMinimum": 0 },
+            "unitCode": { "type": "string" }
+          }
         },
         "includedConsignmentItem": {
           "type": "array",
