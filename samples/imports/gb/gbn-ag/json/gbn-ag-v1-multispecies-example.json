@@ -122,7 +122,7 @@
       "applicableCrossBorderRegulatoryProcedure": [
         {
           "typeCode": "SPS_INSPECTION",
-          "urlId": "https://defra-codelists.gov.uk/regulatory_procedure_type",
+          "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
           "entryCustomsOfficeSpecifiedLogisticsLocation": {
             "identifier": "GBAPHA1A",
             "name": "APHA Bristol BCP",
@@ -132,7 +132,7 @@
               "postcodeCode": "BS1 1AA",
               "countryId": "GB"
             },
-            "urlId": "https://defra-codelists.gov.uk/bcp_reference"
+            "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
           }
         }
       ],
@@ -171,7 +171,7 @@
               "scheduledOccurrenceDateTime": "2026-05-27T22:00:00Z"
             }
           ],
-          "urlId": "https://defra-codelists.gov.uk/road_vehicle_registration_before_bcp"
+          "urlId": "https://codelists.tbc.defra.gov.uk/road_vehicle_registration_before_bcp"
         },
         {
           "identifier": "SHIP-REF-123",
@@ -195,13 +195,13 @@
               "scheduledOccurrenceDateTime": "2026-05-28T18:00:00Z"
             }
           ],
-          "urlId": "https://defra-codelists.gov.uk/vessel_name_after_bcp"
+          "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
         }
       ],
       "carrier": {
         "name": "GERRING PARTNERS",
         "identifier": "UK/EXETE/T1/00090683",
-        "urlId": "https://defra-codelists.gov.uk/private_transporter_approval_number",
+        "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
         "partyTypeCode": [
           "COMMERCIAL_TRANSPORTER",
           "TRANSPORTER"
@@ -231,11 +231,11 @@
                     {
                       "systemId": "SPECIES_CLASS",
                       "classCode": "MAMMALIA",
-                      "urlId": "https://defra-codelists.gov.uk/species_class"
+                      "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://defra-codelists.gov.uk/species_type",
+                  "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {
@@ -269,27 +269,27 @@
                         {
                           "typeCode": "MICROCHIP",
                           "content": "mc-cat",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "PASSPORT",
                           "content": "ppt-cat",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "TATTOO",
                           "content": "tto-cat",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "DESCRIPTION",
                           "content": "Tabby short-haired female, white chest patch",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "IDENTIFICATION_DETAILS",
                           "content": "Microchip implanted at left shoulder",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         }
                       ],
                       "permanentLocation": {
@@ -347,11 +347,11 @@
                     {
                       "systemId": "SPECIES_CLASS",
                       "classCode": "MAMMALIA",
-                      "urlId": "https://defra-codelists.gov.uk/species_class"
+                      "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://defra-codelists.gov.uk/species_type",
+                  "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {
@@ -384,17 +384,17 @@
                         {
                           "typeCode": "MICROCHIP",
                           "content": "mc-ferret",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "PASSPORT",
                           "content": "ppt-ferret",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         },
                         {
                           "typeCode": "TATTOO",
                           "content": "tto-ferret",
-                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                         }
                       ]
                     }

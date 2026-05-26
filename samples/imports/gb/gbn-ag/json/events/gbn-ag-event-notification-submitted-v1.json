@@ -144,12 +144,12 @@
             "postcodeCode": "24271",
             "countryId": "CH"
           },
-          "urlId": "https://defra-codelists.gov.uk/cph_number"
+          "urlId": "https://codelists.tbc.defra.gov.uk/cph_number"
         },
         "applicableCrossBorderRegulatoryProcedure": [
           {
             "typeCode": "SPS_INSPECTION",
-            "urlId": "https://defra-codelists.gov.uk/regulatory_procedure_type",
+            "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
             "entryCustomsOfficeSpecifiedLogisticsLocation": {
               "identifier": "GBDVR1",
               "name": "Dover BCP",
@@ -159,7 +159,7 @@
                 "postcodeCode": "CT17 9TF",
                 "countryId": "GB"
               },
-              "urlId": "https://defra-codelists.gov.uk/bcp_reference"
+              "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
             }
           }
         ],
@@ -192,7 +192,7 @@
                 "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
               }
             ],
-            "urlId": "https://defra-codelists.gov.uk/vessel_name_after_bcp"
+            "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
           }
         ],
         "transitTradeCountry": [
@@ -203,7 +203,7 @@
         "carrier": {
           "name": "ALISTAIR WILSON",
           "identifier": "UK/INVER/T1/00091851",
-          "urlId": "https://defra-codelists.gov.uk/private_transporter_approval_number",
+          "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
           "partyTypeCode": [
             "COMMERCIAL_TRANSPORTER",
             "TRANSPORTER"
@@ -234,11 +234,11 @@
                       {
                         "systemId": "SPECIES_CLASS",
                         "classCode": "MAMMALIA",
-                        "urlId": "https://defra-codelists.gov.uk/species_class"
+                        "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                       }
                     ],
                     "typeCode": "LIVE_ANIMAL",
-                    "urlId": "https://defra-codelists.gov.uk/species_type",
+                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                     "description": "Live bovine animals",
                     "scientificName": [
                       {
@@ -271,12 +271,12 @@
                           {
                             "typeCode": "EAR_TAG",
                             "content": "et1",
-                            "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                           },
                           {
                             "typeCode": "PASSPORT",
                             "content": "passport1",
-                            "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                           }
                         ]
                       }

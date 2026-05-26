@@ -155,7 +155,7 @@
       "required": ["identifier", "urlId", "postalAddress"],
       "properties": {
         "identifier": { "type": "string" },
-        "urlId": { "type": "string", "format": "uri", "const": "https://defra-codelists.gov.uk/cph_number" },
+        "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/cph_number" },
         "name": {
           "type": "string"
         },
@@ -181,7 +181,7 @@
           "required": ["identifier", "urlId"],
           "properties": {
             "identifier": { "type": "string" },
-            "urlId": { "type": "string", "format": "uri", "const": "https://defra-codelists.gov.uk/bcp_reference" },
+            "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/bcp_reference" },
             "name": {
               "type": "string"
             },
@@ -333,7 +333,7 @@
             "properties": {
               "content":  { "type": "string" },
               "typeCode": { "type": "string" },
-              "urlId":    { "type": "string", "format": "uri", "const": "https://defra-codelists.gov.uk/animal_identifier_types" }
+              "urlId":    { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
             }
           }
         },
