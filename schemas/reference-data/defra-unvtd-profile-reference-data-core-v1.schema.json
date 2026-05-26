@@ -112,7 +112,8 @@
       "type": "object",
       "required": [
         "classCode",
-        "description"
+        "description",
+        "scopes"
       ],
       "properties": {
         "classCode": {
@@ -127,8 +128,12 @@
         "description": {
           "type": "string"
         },
-        "scope": {
-          "type": "string"
+        "scopes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
