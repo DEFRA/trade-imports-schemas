@@ -357,11 +357,16 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / transit / re-export). identifier is the country code (ISO 3166-1 alpha-2 expected); optional name carries language-tagged country names.",
+      "description": "A country reference (origin / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names.",
       "properties": {
         "identifier": {
           "type": "string",
           "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use."
+        },
+        "id": {
+          "type": "string",
+          "description": "Legacy alias for identifier. Country code; ISO 3166-1 alpha-2 lexical token.",
+          "pattern": "^([A-Z]{2})?$"
         },
         "urlId": {
           "type": "string",
@@ -427,21 +432,6 @@
         "departureEvent": {
           "type": "array",
           "items": { "$ref": "#/$defs/TransportEvent" }
-        }
-      }
-    },
-    "TradeCountry": {
-      "type": "object",
-      "description": "SPSCountryType mapping for route countries. Operational TRACES mapping uses the country ID and Name fields.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Country identifier/code value (ISO 3166-1 alpha-2 style lexical token).",
-          "pattern": "^([A-Z]{2})?$"
-        },
-        "name": {
-          "type": "string",
-          "description": "Country name."
         }
       }
     },
