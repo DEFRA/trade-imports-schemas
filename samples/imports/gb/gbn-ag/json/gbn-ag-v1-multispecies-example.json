@@ -211,10 +211,10 @@
       "isOrHasUnweanedAnimals": false,
       "includedConsignmentItem": [
         {
-          "_mapping_note_lines": "Two trade lines, one per species. Both share CN 01061900. Per-species addresses (permanentLocation / charityAddress) sit on the trade product itself (specifiedTradeProduct[0]) — all animals on the line share that address. Per-animal data (identifier) sits inside individualTradeProductInstance[].",
+          "_mapping_note_lines": "Two trade lines, one per species. Both share CN 01061900. Per-animal data (identifier, permanentLocation) sits inside each individualTradeProductInstance[] entry — different animals on the same line can carry different permanent addresses. Per-species charityAddress still sits on the trade product itself (specifiedTradeProduct[0]) until the slot is removed.",
           "includedTradeLineItem": [
             {
-              "_mapping_note_line": "Cats line — one cat. The line's specifiedTradeProduct carries the per-species permanentLocation (where the cats will permanently reside). The animal's individualTradeProductInstance entry carries its identifier array (microchip + passport + tattoo).",
+              "_mapping_note_line": "Cats line — one cat. The animal's individualTradeProductInstance entry carries its identifier array (microchip + passport + tattoo) and its per-animal permanentLocation (where the cat will permanently reside).",
               "specifiedTradeProduct": [
                 {
                   "designatedProductClassification": [
@@ -249,15 +249,6 @@
                       ]
                     }
                   ],
-                  "permanentLocation": {
-                    "name": "Brighton home",
-                    "postalAddress": {
-                      "lineOne": "182 Ditchling Road",
-                      "cityName": "Brighton",
-                      "postcodeCode": "BN17JE",
-                      "countryId": "GB"
-                    }
-                  },
                   "individualTradeProductInstance": [
                     {
                       "identifier": [
@@ -276,7 +267,16 @@
                           "content": "tto-cat",
                           "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
                         }
-                      ]
+                      ],
+                      "permanentLocation": {
+                        "name": "Brighton home",
+                        "postalAddress": {
+                          "lineOne": "182 Ditchling Road",
+                          "cityName": "Brighton",
+                          "postcodeCode": "BN17JE",
+                          "countryId": "GB"
+                        }
+                      }
                     }
                   ]
                 }
