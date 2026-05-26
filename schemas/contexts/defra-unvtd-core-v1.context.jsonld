@@ -13,6 +13,26 @@
         "@id": "defraUnvtdProfile:specifiedConsignment",
         "@container": "@set",
         "@type": "@id"
+      },
+      "importer": {
+        "@id": "unece:importerParty",
+        "@type": "@id"
+      },
+      "carrier": {
+        "@id": "unece:carrierParty",
+        "@type": "@id"
+      },
+      "finalDestinationLogisticsLocation": {
+        "@id": "unece:finalDestinationLocation",
+        "@type": "@id"
+      },
+      "isOrHasUnweanedAnimals": {
+        "@id": "defraUnvtdProfile:isOrHasUnweanedAnimals",
+        "@type": "xsd:boolean"
+      },
+      "permanentLocation": {
+        "@id": "defraUnvtdProfile:permanentLocation",
+        "@type": "@id"
       }
     }
   ]
