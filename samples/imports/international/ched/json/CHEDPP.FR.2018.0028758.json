@@ -191,10 +191,7 @@
       },
       "exportCountry": {
         "id": "CI",
-        "name": {
-          "languageid": "en",
-          "value": "Cote D'Ivoire"
-        }
+        "name": "Cote D'Ivoire"
       },
       "importCountry": {
         "id": "",

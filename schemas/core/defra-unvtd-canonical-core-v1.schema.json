@@ -57,7 +57,45 @@
           "pattern": "^[+-]?(0|[1-9][0-9]*)(\\.\\d+)?$"
         },
         "unitCode": {
+          "type": "string",
+          "description": "Measurement unit code token."
+        },
+        "unitCodeListVersionId": {
           "type": "string"
+        }
+      }
+    },
+    "UneceWeightMeasureType": {
+      "type": "object",
+      "anyOf": [
+        {
+          "required": [
+            "content"
+          ]
+        },
+        {
+          "required": [
+            "value"
+          ]
+        }
+      ],
+      "properties": {
+        "content": {
+          "type": "string",
+          "pattern": "^[+-]?(0|[1-9][0-9]*)(\\.\\d+)?$"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[+-]?(0|[1-9][0-9]*)(\\.\\d+)?$"
+        },
+        "unitCode": {
+          "type": "string",
+          "description": "Weight unit code (subset of UN/CEFACT Rec 20/21 used by this profile).",
+          "enum": [
+            "KGM",
+            "GRM",
+            "TNE"
+          ]
         },
         "unitCodeListVersionId": {
           "type": "string"
@@ -272,6 +310,21 @@
         }
       }
     },
+    "TradeCountry": {
+      "type": "object",
+      "description": "SPSCountryType mapping for route countries. Operational TRACES mapping uses the country ID and Name fields.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Country identifier/code value (ISO 3166-1 alpha-2 style lexical token).",
+          "pattern": "^([A-Z]{2})?$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Country name."
+        }
+      }
+    },
     "CargoNature": {
       "type": "object",
       "properties": {
@@ -336,10 +389,10 @@
           }
         },
         "netWeight": {
-          "$ref": "#/$defs/UneceMeasureType"
+          "$ref": "#/$defs/UneceWeightMeasureType"
         },
         "grossWeight": {
-          "$ref": "#/$defs/UneceMeasureType"
+          "$ref": "#/$defs/UneceWeightMeasureType"
         },
         "applicableProductClassification": {
           "type": "array",
@@ -484,6 +537,28 @@
         },
         "customsTransitAgentParty": {
           "$ref": "#/$defs/TradeParty"
+        },
+        "exportCountry": {
+          "$ref": "#/$defs/TradeCountry",
+          "description": "Consignment route origin country (TRACES ExportSPSCountry)."
+        },
+        "importCountry": {
+          "$ref": "#/$defs/TradeCountry",
+          "description": "Consignment route destination/import country (TRACES ImportSPSCountry)."
+        },
+        "reExportCountry": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TradeCountry"
+          },
+          "description": "Re-export countries on the consignment route (TRACES ReExportSPSCountry[])."
+        },
+        "transitCountry": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TradeCountry"
+          },
+          "description": "Transit countries on the consignment route (TRACES TransitSPSCountry[])."
         },
         "unloadingBaseportLocation": {
           "type": "array",

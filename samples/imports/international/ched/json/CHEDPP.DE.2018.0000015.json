@@ -140,10 +140,7 @@
       },
       "exportCountry": {
         "id": "KE",
-        "name": {
-          "languageid": "en",
-          "value": "Kenya"
-        }
+        "name": "Kenya"
       },
       "importCountry": {
         "id": "",

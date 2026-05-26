@@ -347,19 +347,11 @@
       },
       "exportCountry": {
         "id": "",
-        "name": "",
-        "subordinateSPSCountrySubDivision": {
-          "name": "",
-          "hierarchicalLevelCode": 0,
-          "functionTypeCode": 44
-        }
+        "name": ""
       },
       "importCountry": {
         "id": "BE",
-        "name": {
-          "languageid": "en",
-          "value": "Belgium"
-        }
+        "name": "Belgium"
       },
       "examinationSPSEvent": {
         "occurrenceSPSLocation": {
