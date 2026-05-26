@@ -147,3 +147,21 @@ flowchart TD
     style created fill:#e8f5e9
     style submitted fill:#e8f5e9
 ```
+
+## Live-animals structural rules
+
+Three product-owner rules shape the GBN-AG schema beyond raw vocabulary alignment.
+
+### Multiple commodity lines per consignment
+
+One ITAHC (and one GBN-AG payload) can carry more than one commodity line. Cats and ferrets can travel under a single ITAHC; cows and cats cannot. Which commodities can share an ITAHC is a policy question, not a schema question - the schema permits multiple `includedTradeLineItem[]` entries (`minItems: 1`, no `maxItems` cap) and leaves the producer to enforce compatibility.
+
+### CPH at consignment level
+
+The County Parish Holding (CPH) number sits at consignment level (on `finalDestinationLogisticsLocation.identifier`), not per trade line. This follows from the previous rule: animals that require a CPH (livestock) cannot be on the same ITAHC as animals that do not (horses, cats, ferrets), so a consignment that requires a CPH only ever needs one.
+
+### Place of destination at consignment, Permanent Address per animal
+
+The Place of destination is the physical delivery point of the consignment (always mandatory; modelled as `deliveryParty`). The Permanent Address is where each individual animal will live long-term (per-animal; modelled as `tradeProductInstance.permanentLocation`, conditional on commodity).
+
+For livestock the two are usually the same: the consignment is delivered to the CPH-tagged farm, every animal stays there. For pets they are distinct: the consignment delivers to one business address (e.g. an importer's premises) and each animal then goes on to its own permanent home.
