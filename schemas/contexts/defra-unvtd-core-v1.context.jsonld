@@ -21,10 +21,6 @@
       "carrier": {
         "@id": "unece:carrierParty",
         "@type": "@id"
-      },
-      "finalDestinationLogisticsLocation": {
-        "@id": "unece:finalDestinationLocation",
-        "@type": "@id"
       }
     }
   ]

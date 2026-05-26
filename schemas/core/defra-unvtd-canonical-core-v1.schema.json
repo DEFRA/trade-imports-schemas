@@ -728,7 +728,7 @@
         },
         "deliveryParty": {
           "$ref": "#/$defs/TradeParty",
-          "description": "The immediate delivery party — the party to whom the consignment is delivered. Distinct from final destination (Defra pre-notification adds finalDestinationLogisticsLocation for the permanent post-movements destination at profile level)."
+          "description": "The immediate delivery party — the party to whom the consignment is delivered. Distinct from final destination (Defra pre-notification adds finalDestinationLocation for the permanent post-movements destination at profile level)."
         },
         "carrier": {
           "$ref": "#/$defs/TradeParty",

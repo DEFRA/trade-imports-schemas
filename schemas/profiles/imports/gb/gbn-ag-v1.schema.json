@@ -112,8 +112,8 @@
                 "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
                 "description": "GBN-AG-specific re-inclusion: the party legally importing the consignment into GB customs territory. IPAFFS source: notification.partOne.importer. Not modelled by operational TRACES (TIG observes 'may be same party as consignee in SPS'); we keep them distinct because the UK regulatory pathway requires both."
               },
-              "finalDestinationLogisticsLocation": {
-                "$ref": "#/$defs/finalDestinationLogisticsLocation",
+              "finalDestinationLocation": {
+                "$ref": "#/$defs/finalDestinationLocation",
                 "description": "GBN-AG-specific extension: the post-all-movements permanent destination, distinct from the immediate deliveryParty. The location identifier carries the County Parish Holding number with schemeId='cph_number'."
               },
               "applicableCrossBorderRegulatoryProcedure": {
@@ -149,7 +149,7 @@
   ],
 
   "$defs": {
-    "finalDestinationLogisticsLocation": {
+    "finalDestinationLocation": {
       "type": "object",
       "description": "The permanent final destination location for the consignment - UK regulatory livestock tracking. identifier is the County Parish Holding (CPH) number as a bare string. The sibling urlId is pinned to the Defra-curated CPH register.",
       "required": ["identifier", "urlId", "postalAddress"],

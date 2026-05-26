@@ -158,7 +158,7 @@ One ITAHC (and one GBN-AG payload) can carry more than one commodity line. Cats 
 
 ### CPH at consignment level
 
-The County Parish Holding (CPH) number sits at consignment level (on `finalDestinationLogisticsLocation.identifier`), not per trade line. This follows from the previous rule: animals that require a CPH (livestock) cannot be on the same ITAHC as animals that do not (horses, cats, ferrets), so a consignment that requires a CPH only ever needs one.
+The County Parish Holding (CPH) number sits at consignment level (on `finalDestinationLocation.identifier`), not per trade line. This follows from the previous rule: animals that require a CPH (livestock) cannot be on the same ITAHC as animals that do not (horses, cats, ferrets), so a consignment that requires a CPH only ever needs one.
 
 ### Place of destination at consignment, Permanent Address per animal
 

@@ -134,7 +134,7 @@
             "countryId": "FR"
           }
         },
-        "finalDestinationLogisticsLocation": {
+        "finalDestinationLocation": {
           "identifier": "CPH19876",
           "name": "Linus George Ltd",
           "postalAddress": {
