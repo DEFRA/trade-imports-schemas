@@ -113,7 +113,8 @@
       "required": [
         "classCode",
         "description",
-        "scopes"
+        "scopes",
+        "lms"
       ],
       "properties": {
         "classCode": {
@@ -127,6 +128,10 @@
         },
         "description": {
           "type": "string"
+        },
+        "active": {
+          "type": "boolean",
+          "default": true
         },
         "scopes": {
           "type": "array",
