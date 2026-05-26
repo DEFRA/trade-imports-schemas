@@ -44,6 +44,11 @@
             "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
           },
           {
+            "identifier": "INTERNAL_MARKET_PURPOSE",
+            "content": "BREEDING",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+          },
+          {
             "identifier": "GOODS_CERTIFIED_AS",
             "content": "BREEDING_AND_PRODUCTION",
             "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"

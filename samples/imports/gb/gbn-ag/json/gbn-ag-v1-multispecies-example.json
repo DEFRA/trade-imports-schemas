@@ -32,6 +32,11 @@
           "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
         },
         {
+          "identifier": "INTERNAL_MARKET_PURPOSE",
+          "content": "TRANSFER_OF_OWNERSHIP",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        },
+        {
           "identifier": "GOODS_CERTIFIED_AS",
           "content": "PETS",
           "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"

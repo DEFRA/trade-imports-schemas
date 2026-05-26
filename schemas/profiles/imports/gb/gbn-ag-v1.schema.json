@@ -46,6 +46,32 @@
                     }
                   ]
                 }
+              },
+              "if": {
+                "properties": {
+                  "includedClause": {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "identifier": { "const": "PURPOSE" },
+                        "content": { "const": "INTERNAL_MARKET" }
+                      },
+                      "required": ["identifier", "content"]
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "includedClause": {
+                    "contains": {
+                      "type": "object",
+                      "properties": { "identifier": { "const": "INTERNAL_MARKET_PURPOSE" } },
+                      "required": ["identifier"]
+                    },
+                    "description": "When the PURPOSE clause content is INTERNAL_MARKET, an additional INTERNAL_MARKET_PURPOSE clause must be present declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership). urlId points at the ched_consignment_clause codelist."
+                  }
+                }
               }
             },
             "referenceDocument": {
