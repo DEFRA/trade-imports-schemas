@@ -262,6 +262,7 @@
                       ]
                     }
                   ],
+                  "_mapping_note_freetext_identifier": "DESCRIPTION and IDENTIFICATION_DETAILS demonstrate v3 §15-§16: the free-text fallback identifier types in animal_identifier_types, used when a commodity has no defined identifier type. They reuse the existing identifier[] shape rather than a structurally distinct slot.",
                   "individualTradeProductInstance": [
                     {
                       "identifier": [
@@ -278,6 +279,16 @@
                         {
                           "typeCode": "TATTOO",
                           "content": "tto-cat",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "DESCRIPTION",
+                          "content": "Tabby short-haired female, white chest patch",
+                          "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
+                        },
+                        {
+                          "typeCode": "IDENTIFICATION_DETAILS",
+                          "content": "Microchip implanted at left shoulder",
                           "urlId": "https://defra-codelists.gov.uk/animal_identifier_types"
                         }
                       ],
