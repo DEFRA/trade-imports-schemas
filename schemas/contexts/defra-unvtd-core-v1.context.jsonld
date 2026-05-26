@@ -25,14 +25,6 @@
       "finalDestinationLogisticsLocation": {
         "@id": "unece:finalDestinationLocation",
         "@type": "@id"
-      },
-      "isOrHasUnweanedAnimals": {
-        "@id": "defraUnvtdProfile:isOrHasUnweanedAnimals",
-        "@type": "xsd:boolean"
-      },
-      "permanentLocation": {
-        "@id": "defraUnvtdProfile:permanentLocation",
-        "@type": "@id"
       }
     }
   ]

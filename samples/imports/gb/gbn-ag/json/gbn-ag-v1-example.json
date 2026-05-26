@@ -2,7 +2,7 @@
   "_comment": "GBN-AG worked example — translation of an IPAFFS CHED-A notification into the GBN-AG schema, which derives from the canonical Defra UNVTD core via allOf. Naming follows the TIG team's convention (identifier, consignorParty, deliveryParty, postalAddress, definedContact, firstSignatoryAuthentication, includedClause, referenceDocument, unloadingBaseportLocation, provider). Primitive shape is hybrid: flat strings for party names / address lines / contact details, composite (UneceIdentifierType / UneceCodeType / UneceTextType) only where codelist metadata or language tags earn their keep. Per-animal identifiers are populated on BOTH placements for joint review with the TIG team: Path A on additionalInformationNote (operational TRACES placement) and Path B on individualTradeProductInstance (BSP-canonical placement). Authorial keys prefixed with _ are stripped before validation.",
   "$model": "defra/certificate-internal/1",
   "$schema": "gbn-ag-v1.schema.json",
-  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
   "$type": "gbn-ag",
   "exchangedDocument": {
     "identifier": "GBN-AG-26-0000001-8",
