@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/imports/event-envelope-v1.schema.json",
   "title": "Trade Imports Event Envelope",
   "description": "Event envelope for Trade Imports CDP Microservice Architecture",
@@ -18,6 +18,10 @@
   ],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Sample-validator hook: relative path to the event schema. Present on sample artefacts; not part of the runtime event payload."
+    },
     "eventId": {
       "type": "string",
       "format": "uuid",

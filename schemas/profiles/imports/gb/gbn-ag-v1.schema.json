@@ -1,758 +1,362 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/imports/gbn-ag-v1.schema.json",
+  "$id": "gbn-ag-v1.schema.json",
   "title": "GBN-AG — GB Notification for Animals and Germinals (v1)",
-  "description": "Defra import event schema for live animals and germinals (GBN-AG). Each property corresponds to a required element from the gap analysis; not-required and TBC elements are omitted. The IPAFFS-to-SPS crosswalk is in crosswalk/recommendations.md (built from crosswalk/ipaffs-to-sps.json) and the slot-by-slot walkthrough of the worked example is in gbn-ag-walkthrough.md. Open design questions accumulate in open-questions.md. Decisions are recorded chronologically in design-log.md.\n\n**Naming.** $defs use bare names matching BSP composite names with the 'Type' suffix dropped (consignment mirrors BSP consignmentType, tradeParty mirrors tradePartyType, etc.). Property identity and provenance is carried by the UN/CEFACT JSON-LD context for BSP D23B (canonical source: https://vocabulary.uncefact.org/unece-context-D23B.jsonld; pulled on demand into build/vendor/uncefact/context-D23B.jsonld by `npm run vendor:uncefact:context`), not by lexical prefixes on $defs names. The prefix-removal decision is design-log.md DL-046; the partial supersession of that entry's narrowings claim is DL-047.\n\n**Primitives.** CCTS primitives (idType, codeType, textType, measureType, quantityType, binaryObjectType) are declared inline with their UN/CEFACT slot lists kept verbatim, no additional restrictions added (DL-047). The only deliberate divergence from BSP is that codelist-bearing properties are typed as open strings rather than enums against UN/CEFACT codelist files, to keep the schema independent of externally-curated reference data evolution. The full rationale and the joint-review position is in tig-side-by-side.md. indicatorType is referenced verbatim from BSP.",
-  "version": "0.9.0",
+  "description": "Defra import pre-notification schema for live animals and germinals. Derives from the canonical Defra UNVTD core (CertificatePayload)",
+  "version": "0.0.1",
 
-  "type": "object",
-  "$ref": "#/$defs/importNotificationAnimals",
-
-  "$defs": {
-
-    "importNotificationAnimals": {
-      "title": "Defra Import Notification — Animals and Germinals",
-      "description": "Root document for a GBN-AG notification. Built element by element against the gap analysis in docs/eudp/gbn-ag-data-elements.json — only Required elements are included. Not Required and TBC elements are deliberately omitted.",
+  "allOf": [
+    {
+      "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
+    },
+    {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["exchangedDocument", "specifiedConsignment"],
+      "required": ["$model", "$type", "exchangedDocument", "specifiedConsignment"],
       "properties": {
-        "exchangedDocument": { "$ref": "#/$defs/exchangedDocument" },
+        "$model": { "const": "defra/certificate-internal/1" },
+        "$type": { "const": "gbn-ag" },
+
+        "exchangedDocument": {
+          "type": "object",
+          "required": ["identifier", "issuer", "firstSignatoryAuthentication", "referenceDocument"],
+          "properties": {
+            "firstSignatoryAuthentication": {
+              "type": "object",
+              "required": ["includedClause"],
+              "properties": {
+                "includedClause": {
+                  "type": "array",
+                  "minItems": 2,
+                  "allOf": [
+                    {
+                      "contains": {
+                        "type": "object",
+                        "properties": { "identifier": { "const": "PURPOSE" } },
+                        "required": ["identifier"]
+                      },
+                      "description": "Must contain a clause declaring the Reason for Import (identifier='PURPOSE'; urlId points at the ched_consignment_clause codelist)."
+                    },
+                    {
+                      "contains": {
+                        "type": "object",
+                        "properties": { "identifier": { "const": "GOODS_CERTIFIED_AS" } },
+                        "required": ["identifier"]
+                      },
+                      "description": "Must contain a clause declaring the Animals Certified For category (identifier='GOODS_CERTIFIED_AS'; urlId points at the ched_consignment_clause codelist)."
+                    }
+                  ]
+                }
+              },
+              "if": {
+                "properties": {
+                  "includedClause": {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "identifier": { "const": "PURPOSE" },
+                        "content": { "const": "INTERNAL_MARKET" }
+                      },
+                      "required": ["identifier", "content"]
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "includedClause": {
+                    "contains": {
+                      "type": "object",
+                      "properties": { "identifier": { "const": "INTERNAL_MARKET_PURPOSE" } },
+                      "required": ["identifier"]
+                    },
+                    "description": "When the PURPOSE clause content is INTERNAL_MARKET, an additional INTERNAL_MARKET_PURPOSE clause must be present declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership). urlId points at the ched_consignment_clause codelist."
+                  }
+                }
+              }
+            },
+            "referenceDocument": {
+              "type": "array",
+              "minItems": 1,
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "typeCode": { "const": "853" }
+                },
+                "required": ["typeCode"]
+              },
+              "description": "Must carry at least one referenced document with typeCode='853' (UNTDID 1001 — Veterinary certificate). The accompanying-documents list (transport documents, ITAHC, etc.) shares this slot, distinguished by typeCode value."
+            }
+          }
+        },
+
         "specifiedConsignment": {
           "type": "array",
           "minItems": 1,
           "maxItems": 1,
-          "items": { "$ref": "#/$defs/consignment" },
-          "description": "The consignment described by this notification. Mirrors UN/CEFACT specifiedConsignment (UN01001937). SPS Cert and eCertMaster constrain this to maxItems:1 — one notification = one consignment — and we mirror that. The consignment is the wrapper that hosts the parties (consignor / consignee / importer / delivery / despatch / carrier), the transport movement(s), the regulatory procedure declaration (element 24, BCP), the destination locations (final destination, port of entry), the transit countries, and the line-items chain holding commodity data. See the `consignment` $def description below for the full slot list."
-        }
-      }
-    },
-
-    "exchangedDocument": {
-      "title": "Exchanged Document",
-      "description": "Document-level metadata for a GBN-AG notification. Mirrors UN/CEFACT exchangedDocumentType narrowed to GBN-AG relevant slots. Carries the document-level signatory authentication (firstSignatoryDocumentAuthentication) which holds the discriminator-coded clause declarations for Reasons for Import and Animals certified for?, and the referenced-document array (referenceReferencedDocument) which carries the latest health certificate and other accompanying documents.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "issuer", "firstSignatoryDocumentAuthentication", "referenceReferencedDocument"],
-      "properties": {
-
-        "id": {
-          "title": "GBN-AG notification reference number",
-          "description": "Element 1 in the gap analysis (CHED Ref). The regulatory reference number of the notification. System-generated at submission. Maps to UN/CEFACT exchangedDocument.id (UN01002488). Format proposed as `{PREFIX}-{YY}-{NNNNNNN}-{C}` (e.g. `AGN-26-0051285-5`) with a Luhn check digit on the trailing position for transcription robustness — caught at input rather than after a wrong-record fetch. The format is not enforced by this schema yet; it will tighten as the proposal is settled. Codelist metadata (schemeId / schemeName / schemeAgencyName naming the GBN-AG numbering scheme) is left optional on the idType primitive; it will be committed when the prefix and authority naming are finalised.",
-          "$ref": "#/$defs/idType"
-        },
-
-        "issuer": {
-          "title": "Responsible Person (organisation with named contact)",
-          "description": "Element 2 in the gap analysis (Responsible Person). The organisation responsible for the notification, with the named individual who submitted it as a defined trade contact. Maps to UN/CEFACT exchangedDocument.issuer (a tradePartyType). RPFL — Responsible Person For Load — is the registry of authorised import-responsible parties. Per IPAFFS / Customer Identity (Azure Entra AD) modelling, all responsible parties are identified as organisations; the individual who submitted the notification is captured as a defined trade contact on that organisation. The data is sourced from Customer Identity at submission time. See open-questions.md OQ-1 on whether to carry a Customer Identity correlation id alongside the resolved data.",
-          "$ref": "#/$defs/responsibleParty"
-        },
-
-        "firstSignatoryDocumentAuthentication": {
-          "title": "First Signatory Document Authentication",
-          "description": "The first or primary signature that authenticates this exchanged document. Mirrors UN/CEFACT exchangedDocument.firstSignatoryDocumentAuthentication (UN01003583). Carries the discriminator-coded clause declarations: Reasons for Import (clause id PURPOSE), Animals certified for? (clause id GOODS_CERTIFIED_AS). The clause pattern is BSP's general-purpose extension for discriminator-coded enum-as-clause statements (BSP `documentClauseType`); this is the right slot semantically for CHED-A enum values that declare regulatory intent at document level — see design-log.md DL-021 for the supersession of the original re-included applicableCrossBorderRegulatoryProcedure approach.",
-          "$ref": "#/$defs/documentAuthentication"
-        },
-
-        "referenceReferencedDocument": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/referencedDocument" },
-          "contains": {
+          "items": {
+            "type": "object",
+            "required": [
+              "consignorParty",
+              "consigneeParty",
+              "deliveryParty",
+              "importer",
+              "applicableCrossBorderRegulatoryProcedure",
+              "unloadingBaseportLocation",
+              "mainCarriageLogisticsTransportMovement",
+              "carrier",
+              "isOrHasUnweanedAnimals",
+              "includedConsignmentItem"
+            ],
             "properties": {
-              "typeCode": {
-                "properties": { "content": { "const": "853" } }
+              "importer": {
+                "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+                "description": "GBN-AG-specific re-inclusion: the party legally importing the consignment into GB customs territory. IPAFFS source: notification.partOne.importer. Not modelled by operational TRACES (TIG observes 'may be same party as consignee in SPS'); we keep them distinct because the UK regulatory pathway requires both."
+              },
+              "finalDestinationLocation": {
+                "$ref": "#/$defs/finalDestinationLocation",
+                "description": "GBN-AG-specific extension: the post-all-movements permanent destination, distinct from the immediate deliveryParty. The location identifier carries the County Parish Holding number with schemeId='cph_number'."
+              },
+              "applicableCrossBorderRegulatoryProcedure": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" }
+              },
+              "isOrHasUnweanedAnimals": {
+                "type": "boolean",
+                "description": "CHED-A welfare indicator — true if the consignment contains any unweaned (non-ablacted) animals. Defra extension; no BSP analogue, no TRACES analogue. Follows BSP's isOrHas naming convention for consignment-level boolean indicators."
+              },
+              "includedConsignmentItem": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["includedTradeLineItem"],
+                  "properties": {
+                    "includedTradeLineItem": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": { "$ref": "#/$defs/gbnAgTradeLineItem" }
+                    }
+                  }
+                }
               }
             }
-          },
-          "description": "References to other documents this notification points to. Mirrors UN/CEFACT exchangedDocument.referenceReferencedDocument (UN01002498) — preserved through eCertMaster and SPS Cert D23B with no subtractions. For GBN-AG, the array carries at least the latest veterinary health certificate (element 16) — schema enforces presence of an entry with typeCode.content='853' (UNTDID 1001 — Veterinary certificate) via JSON Schema 'contains'. Element 17 (Accompanying documents) shares this slot, contributing additional entries for ITAHC, transport documents, licences, etc., distinguished by their typeCode value. The codelist for typeCode is UNTDID 1001 (international, not Defra-owned); per the codelist re-inclusion policy in problem-statement.md, we do not re-include codelist metadata for international codelists."
+          }
         }
-
       }
-    },
+    }
+  ],
 
-    "responsibleParty": {
-      "title": "Responsible Party",
-      "description": "A trade party representing the responsible organisation, with the named individual who submitted the notification as a defined trade contact. Mirrors UN/CEFACT tradePartyType. Required: organisation name, the named contact (with person name and email). The address is required at the structural level; its sub-fields are flexibly required.",
+  "$defs": {
+    "finalDestinationLocation": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["name", "definedTradeContact"],
+      "description": "The permanent final destination location for the consignment - UK regulatory livestock tracking. identifier is the County Parish Holding (CPH) number as a bare string. The sibling urlId is pinned to the Defra-curated CPH register.",
+      "required": ["identifier", "urlId", "postalAddress"],
       "properties": {
+        "identifier": { "type": "string" },
+        "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/cph_number" },
         "name": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Organisation name. Maps to tradePartyType.name. At least one entry."
+          "type": "string"
         },
-        "specifiedTradeAddress": {
-          "$ref": "#/$defs/tradeAddress",
-          "description": "Organisation's registered address. Maps to tradePartyType.specifiedTradeAddress."
-        },
-        "definedTradeContact": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/definedTradeContact" },
-          "description": "The named individual who submitted the notification — at least the responsible person. Maps to tradePartyType.definedTradeContact[]."
-        }
-      }
-    },
-
-    "consignment": {
-      "title": "Consignment",
-      "description": "The consignment of animals/germinals being notified. Mirrors UN/CEFACT consignmentType (UN01002469) narrowed to GBN-AG relevant slots. Currently populated: includedConsignmentItem (the line-items chain), isOrHasUnweanedAnimals (the consignment-level unweaned-animals indicator, element 15), despatch (the place of dispatch / place of origin trade party, element 18), consignor (the consigning party, element 19), consignee (the receiving party, element 20), importer (the importing party, element 21 — re-included from the SPS subtraction), delivery (the place of destination trade party, element 22), finalDestinationLogisticsLocation (the permanent destination location, element 23 — re-included from the eCert subtraction; CPH lands here on id[]), applicableCrossBorderRegulatoryProcedure (the SPS regulatory procedure carrying the BCP / point-of-entry on entryCustomsOfficeSpecifiedLogisticsLocation, element 24 — re-included from the SPS subtraction; see DL-048), unloadingBaseportLogisticsLocation (the physical port of entry, element 26 — UN/LOCODE-tagged on id[]), mainCarriageLogisticsTransportMovement (the transport movement(s), element 27 mode + sub-elements transport id and document; the SPS profile collapses BSP's three-way carriage split into this single array, multiple entries permitted, distinguished by id.schemeID codelist values), and carrier (the transporter party, elements 44 and 45 — commercial-vs-private discriminator carried on typeCode). Reasons for Import and Animals certified for? are NOT carried here — they are document-level discriminator-coded clauses on `exchangedDocument.firstSignatoryDocumentAuthentication.includedDocumentClause[]` (see design-log.md DL-021).",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["includedConsignmentItem", "isOrHasUnweanedAnimals", "consignor", "consignee", "importer", "delivery", "finalDestinationLogisticsLocation", "applicableCrossBorderRegulatoryProcedure", "unloadingBaseportLogisticsLocation", "mainCarriageLogisticsTransportMovement", "carrier"],
-      "properties": {
-        "includedConsignmentItem": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/consignmentItem" },
-          "description": "Consignment item wrapper. Mirrors UN/CEFACT includedConsignmentItem (UN01005228). One item per consignment in IPAFFS / CHED-A reality (per-species commodity rows live one level deeper, on includedTradeLineItem)."
-        },
-        "isOrHasUnweanedAnimals": {
-          "$ref": "https://raw.githubusercontent.com/uncefact/spec-JSONschema/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/BasicComponents#/$defs/udt/$defs/indicatorType",
-          "description": "Element 15 in the gap analysis (Does the consignment contain unweaned animals?). Boolean indicator at the consignment level: true if the consignment contains any unweaned (non-ablacted) animals, false otherwise. Defra-side extension on the consignment — JSON BSP D23B does not provide an animal-welfare-specific indicator slot, and the strategy-2 re-include path is not available because no wider profile carries it. The CHED-A question is asked once per consignment (not per commodity row or per animal) and is consignment-scoped per IPAFFS source path (notification.partOne.commodities.includeNonAblactedAnimals — boolean at the commodities wrapper). Required in GBN-AG (gap-analysis Required + IPAFFS Mandatory). Slot naming follows BSP's isOrHas convention for boolean indicators (e.g. consignmentType.isOrHasContainerization, isOrHasShipStores, isOrHasTransshipmentPermission). Composed from BSP indicatorType primitive."
-        },
-        "despatch": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Element 18 in the gap analysis (Place of Origin). The party from whom this consignment will be or has been despatched — the place-of-origin / place-of-dispatch concept at consignment level. Mirrors UN/CEFACT consignment.despatch (UN01004219, BSP) preserved through eCertMaster (line 1274) and SPS Cert D23B (line 158) with subtractions on contact details that GBN-AG re-includes per the Defra-import re-inclusion rule. Independent verification: the European Commission's TRACES CHED Certificate Service XSD v2.31 declares this slot as 'DespatchSPSParty' (UN03000071) with cardinality 0..1 and 'In All Contexts' geopolitical scope — schema-permitted on CHED journeys. Optional at the common-base parent schema (mirroring the TRACES XSD's minOccurs=0); per-journey schemas may require it when the journey demands. See design-log.md DL-026 for the full reasoning, including the divergence from the TRACES Integration Gateway team's analysis (their claim 'INTRA + DOCOM (NOT CHED)' applies to operational data population, not to schema declaration)."
-        },
-        "consignor": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Element 19 in the gap analysis (Consignor or exporter). The party who consigns the goods. Mirrors UN/CEFACT consignment.consignor (UN01004212, BSP) — *'The consignor party for this supply chain consignment.'* eCertMaster (line 941) preserves the slot but strips all contact-detail children on `definedTradeContact[]`: authorizedPersonName, description, telephoneUniversalCommunication, faxUniversalCommunication, uriUniversalCommunication, emailURIUniversalCommunication, ediUniversalCommunication, postalTradeAddress (personName survives). SPS Cert D23B (line 129) further strips `role`. GBN-AG re-includes telephone, email, and roleCode per the Defra-import re-inclusion rule (gap analysis demands telephone and email; operational TRACES populates roleCode per UNTDID 3035). Required at the common-base parent — independently verified against the European Commission's TRACES CHED Certificate Service XSD v2.31 (line 1838: `minOccurs=\"1\"`, UN03000058, BusinessTerm 'Exporter', cardinality 1, 'In All Contexts'); same `minOccurs=\"1\"` declaration in EuIntraCertificateServiceV1.29.xsd and DocomCertificateRetrievalServiceV1.27.xsd. The TRACES Integration Gateway team's workbook (lines 415-429) confirms ConsignorSPSParty is populated by CHED + INTRA + DOCOM (all journeys) — no divergence between our analysis and theirs for this slot. Sub-field mappings from IPAFFS EconomicOperator: companyName → name[0].content; individualName → definedTradeContact[].personName.content; address.addressLine1/2/3 → specifiedTradeAddress.lineOne/Two/Three.content; address.city → specifiedTradeAddress.cityName.content; address.postalZipCode → specifiedTradeAddress.postcodeCode.content; address.countryISOCode → specifiedTradeAddress.countryId.content; address.email → definedTradeContact[].emailURIUniversalCommunication.content; address.telephone → definedTradeContact[].telephoneUniversalCommunication.content. IPAFFS UUID `id`, the `type` enum, and `status` are operational provenance / Defra-internal — not carried into the regulatory data. Distinct from `despatch` (the place of dispatch / origin party — element 18); BSP models them as separate slots."
-        },
-        "consignee": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Element 20 in the gap analysis (Consignee). The party who receives the goods. Mirrors UN/CEFACT consignment.consignee (UN01004213, BSP) — *'The consignee party for this supply chain consignment.'* eCertMaster (line 1052) preserves the slot but strips contact-detail children on `definedTradeContact[]`: description, telephoneUniversalCommunication, faxUniversalCommunication, uriUniversalCommunication, emailURIUniversalCommunication, ediUniversalCommunication, postalTradeAddress (personName and authorizedPersonName preserved at this layer — note difference from consignor where authorizedPersonName is stripped at eCertMaster). SPS Cert D23B (line 134) then strips `role` AND `definedTradeContact[].authorizedPersonName`. Net effective shape at the SPS layer matches consignor: telephone, email, address, person-with-authority all stripped; `personName` survives. GBN-AG re-includes telephone, email, and roleCode per the Defra-import re-inclusion rule. Required at the common-base parent — independently verified against the European Commission's TRACES CHED Certificate Service XSD v2.31 (line 1865: `minOccurs=\"1\"`, UN03000059, BusinessTerm 'Consignee', cardinality 1, 'In All Contexts'); same `minOccurs=\"1\"` declaration in EuIntraCertificateServiceV1.29.xsd and DocomCertificateRetrievalServiceV1.27.xsd. The TIG team's workbook (lines 400-414) confirms ConsigneeSPSParty is populated by CHED + INTRA + DOCOM — no divergence; their workbook records `ID` cardinality as `0..1 / 1..1` (varies by journey), worth flagging for per-journey schema work. Sub-field decomposition follows the EconomicOperator → tradePartyType pattern established by DL-027 for consignor: companyName → name[0].content; individualName → definedTradeContact[].personName.content; address.* → specifiedTradeAddress.* (lines, city, postcode, country); address.email → definedTradeContact[].emailURIUniversalCommunication.content; address.telephone → definedTradeContact[].telephoneUniversalCommunication.content. IPAFFS UUID `id`, `type` enum, and `status` not carried (operational provenance). Distinct from `importer` (element 21) — BSP keeps consignee (the party to whom goods are consigned per the trade contract) and importer (the party legally importing) as separate slots; they may be the same legal entity in some shipments but the model preserves the distinction."
-        },
-        "importer": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Element 21 in the gap analysis (Importer). The party who imports the consignment. Mirrors UN/CEFACT consignment.importer (UN01004217, BSP) — *'The party who imports this supply chain consignment.'* **Re-included from the SPS profile subtraction:** eCertMaster line 1272 strips the slot wholesale (`importer: false`); SPS Cert D23B inherits the strip. GBN-AG re-includes the slot per the Defra-import re-inclusion rule (problem-statement.md, 'Defra import model may re-include SPS-subtracted concepts when import-side need is documented'). The IPAFFS source field `notification.partOne.importer` exists as a distinct EconomicOperator separate from consignee (data dictionary line 45, mandatory, all four CHED journeys). Required at the common-base parent — gap analysis Mandatory; IPAFFS Mandatory. **Divergence from operational TRACES recorded** (see DL-029): no TRACES XSD declares an `Importer*Party` element on any service (CHED, EU Intra, DOCOM); zero matches across all three. The operational TRACES pattern folds importer into `consignee.typeCode` with values like 'IMPORTER' / 'IMP' (per TIG team `TRACES to internal model mapping.md` line 230 and `TRACES to IPAFFS CHED comparison.md` line 49: 'Importer (CHED-specific) — may be same party as consignee in SPS'). GBN-AG preserves the IPAFFS structural distinction because the import-side source has it as a separate field with a complete address and contact details that would be lost if folded into a typeCode value on consignee. Transformer note: when GBN-AG data flows back to TRACES, the importer party data must be folded into consignee.typeCode='IMPORTER'. Sub-field decomposition follows DL-027 (consignor): companyName → name[0].content; address.* → specifiedTradeAddress.*; email/telephone → definedTradeContact[].emailURIUniversalCommunication / .telephoneUniversalCommunication. IPAFFS UUID id, type enum, and status not carried (operational provenance)."
-        },
-        "delivery": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Element 22 in the gap analysis (Place of Destination). The party to whom the consignment will be, or has been, delivered — the place-of-destination concept at consignment level. Mirrors UN/CEFACT consignment.delivery (UN01004220, BSP) — *'The party to whom this supply chain consignment will be, or has been, delivered.'* eCertMaster (line 1384) preserves the slot but strips contact-detail children on `definedTradeContact[]` (description, telephoneUniversalCommunication, faxUniversalCommunication, uriUniversalCommunication, emailURIUniversalCommunication, ediUniversalCommunication, postalTradeAddress) — same asymmetry pattern as consignee: personName AND authorizedPersonName preserved at this layer, only stripped at SPS Cert D23B (line 170, alongside `role`). GBN-AG re-includes telephone, email, and roleCode per the Defra-import re-inclusion rule. **Required at the common-base parent — cardinality tightening from TRACES schema:** TRACES CHED Certificate Service XSD v2.31 line 2216 declares DeliverySPSParty with `minOccurs=\"0\"` (UN03000072, BusinessTerm 'Place of Destination'), same in EuIntraCertificateServiceV1.29.xsd and DocomCertificateRetrievalServiceV1.27.xsd. IPAFFS data dictionary marks placeOfDestination as Mandatory across all four CHED journeys; gap analysis says Required. GBN-AG follows the import-direction shape (IPAFFS source authoritative) and tightens to required at the common-base parent. The TIG team's workbook (lines 444-458) confirms DeliverySPSParty is populated by CHED + INTRA + DOCOM — no divergence with our analysis. Sub-field decomposition follows DL-027 (consignor) and DL-028 (consignee): companyName → name[0].content; address.* → specifiedTradeAddress.*; email/telephone → definedTradeContact[].*. Operational evidence: bos-taurus.json line 489 carries deliverySPSParty with id schemeID='eori_number' (same EORI as consignor/consignee/importer in this sample — same legal entity in four roles); roleCode listID=3035 listVersionID=D16B value=232 name='Delivery party (Place of destination)'. Pairs symmetrically with `despatch` (the from-party — element 18); BSP's despatch/delivery pair models the structural origin/destination axis. Distinct from `placeOfDestination` IPAFFS field name — GBN-AG follows BSP slot naming (`delivery`)."
-        },
-        "finalDestinationLogisticsLocation": {
-          "$ref": "#/$defs/logisticsLocation",
-          "description": "Element 23 in the gap analysis (Permanent Address). The final destination location for this consignment — the place where the goods (animals) will permanently reside post-import, distinct from the immediate delivery party (which may be a temporary holding facility, quarantine, or market). Mirrors UN/CEFACT consignment.finalDestinationLogisticsLocation (UN01004242, BSP) — *'The final destination location for this supply chain consignment.'* **Re-included from the SPS profile subtraction:** eCertContextCCL line 6552 strips the slot (`finalDestinationLogisticsLocation: false`); SPS Cert D23B inherits the strip. GBN-AG re-includes per the Defra-import re-inclusion rule — the requirement is GBN-AG-specific (UK regulatory livestock tracking — animal permanent residence registered against the UK county-parish-holding system). **Element 25 (CPH) lands on this slot's id[] entries** with codelist metadata `schemeId='cph_number'` (see DL-033). **Semantic match reasoning:** BSP provides the temporary-vs-permanent distinction at consignment level via the pair (delivery, finalDestinationLogisticsLocation). `delivery` is the immediate delivery party (already used for element 22). `finalDestinationLogisticsLocation` is the post-all-movements final resting place. The IPAFFS field `notification.partOne.commodities.complementParameterSet[].identifiers[].permanentAddress` (per-animal, EconomicOperator-shaped) and the deprecated top-level `notification.partOne.additionalPermanentAddresses[]` carry this concept; the gap analysis describes a single consignment-level permanent address — cardinality fits this slot. **Shape note:** BSP types the slot as logisticsLocationType (location-shaped); IPAFFS source is EconomicOperator (party-shaped). The transformer wraps the IPAFFS data into a logistics location: name + address fields land on the location's name and postalTradeAddress; telephone + email land on a servicing party at the location (servicingSpecifiedLocationParty[].definedTradeContact[]). **Verification:** zero matches for 'permanent' across the European Commission's TRACES XSDs (CHED, EU Intra, DOCOM), the operational TRACES samples (bos-taurus.json, INTRA.EU.GB.2025.0000001.xml), and the TRACES Integration Gateway team's analysis (all five docs). This concept is GBN-AG-specific — required for UK regulatory livestock tracking; not carried by the EU TRACES data flow. Required at the common-base parent (gap analysis Mandatory; UK regulatory requirement). See design-log.md DL-031 for the full reasoning."
-        },
-        "applicableCrossBorderRegulatoryProcedure": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" },
-          "description": "Element 24 in the gap analysis (Border Control Post / Point of entry). Cross-border regulatory procedures applicable to this consignment — for GBN-AG, the SPS inspection procedure at the UK Border Control Post (BCP). Mirrors UN/CEFACT consignment.applicableCrossBorderRegulatoryProcedure (UN01006189, BSP) — *'A cross-border regulatory procedure applicable to this supply chain consignment.'* Array; multiple regulatory procedures may apply to a single consignment, distinguished by typeCode. **Re-included from the SPS profile subtraction:** SPS Cert D23B strips this slot at the consignment level; we re-include from BSPContextCCL because the BCP / Point of Entry semantic is required (IPAFFS source `notification.partOne.pointOfEntry`, Mandatory in the data dictionary). Each entry carries `typeCode` (which regulatory procedure — for SPS imports, the value identifies the SPS inspection procedure) and `entryCustomsOfficeSpecifiedLogisticsLocation` (the regulatory office handling the procedure — the BCP). See design-log.md DL-048."
-        },
-        "unloadingBaseportLogisticsLocation": {
-          "$ref": "#/$defs/logisticsLocation",
-          "description": "Element 26 in the gap analysis (Transport to BCP — Port of entry). The baseport location at which the consignment is unloaded from the international transport leg — the physical port/airport of entry to GB (e.g. Dover, Felixstowe, Heathrow, Warrenpoint). Mirrors UN/CEFACT consignment.unloadingBaseportLogisticsLocation (UN01004239, BSP) — *'The baseport location at which this supply chain consignment is to be unloaded from a means of transport according to the transport contract.'* Preserved through eCertMaster (line 1620) and SPS Cert D23B (line 206) with minor child subtractions (typeCode, description). No re-inclusion required at slot level. **Required at the common-base parent — cardinality tightening from TRACES schema:** TRACES CHED Certificate Service XSD v2.31 line 2108 declares UnloadingBaseportSPSLocation with `minOccurs=\"0\"` (UN03000068, BusinessTerm 'Discharge Port', cardinality 0..1, OPTIONAL); same in EuIntraCertificateServiceV1.29.xsd and DocomCertificateRetrievalServiceV1.27.xsd. IPAFFS data dictionary line 78 marks portOfEntry as Mandatory across CHED-A/P/D (CHEDPP marks it `-`). GBN-AG follows the import-direction shape and tightens to required at common-base. The TIG team's workbook (lines 320+) records UnloadingBaseportSPSLocation.ID with cardinality 1..1 — operational tightening matches our schema decision. No divergence with our analysis. **Codelist metadata pattern (DL-033):** the location's id[] carries the port identifier with `schemeId='un_locode'`, `schemeName='UN/LOCODE'`, `schemeAgencyId='un'`, `schemeAgencyName='United Nations'` (per the bos-taurus operational sample at line 394: schemeID=\"un_locode\", value=\"GBWPT\" for Warrenpoint). The codelist metadata distinguishes UN/LOCODE port codes from other identifier schemes (e.g. CPH on the same shape's id[] for finalDestinationLogisticsLocation — different schemeId values, same shape). IPAFFS source: notification.partOne.portOfEntry (string, source 'user_selection'). Distinct from notification.partOne.pointOfEntry which maps to applicableCrossBorderRegulatoryProcedure[].entryCustomsOfficeSpecifiedLogisticsLocation (the BCP / Designated Point of Entry — regulatory inspection point, not physical port). See design-log.md DL-034."
-        },
-        "transitTradeCountry": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tradeCountry" },
-          "description": "Element 47 in the gap analysis (Countries the consignment travels through — route). The transit countries between the consignment's origin and destination. Mirrors UN/CEFACT consignment.transitTradeCountry (UN01004269, BSP) — *'A transit country for this supply chain consignment.'* Array. Preserved through eCertContextCCL (line 6108, 6667 — re-defined at consignment level; eCertMaster line 1827 strips in nested context, line 3509 preserves at consignment) and SPS Cert D23B (line 472, with subtractions on subordinate sub-divisions). **Optional at the common-base parent (cardinality 0..n).** TRACES CHED Certificate Service XSD v2.31 line 2054 declares TransitSPSCountry with `minOccurs=\"0\" maxOccurs=\"unbounded\"`. IPAFFS data dictionary line 71 marks `notification.partOne.route` as Optional, CHED-A only (X for CHEDA, - for others); the gap analysis says Required for NDC, but the IPAFFS source carries it only when transit applies (direct imports leave it empty). The schema permits empty / absent (no minItems constraint) — runtime/per-journey schema may tighten when transit is applicable. **TIG team alignment:** workbook lines 357+ records TransitSPSCountry populated by CHED + INTRA + DOCOM, including SubordinateSPSCountrySubDivision and ActivityAuthorizedSPSParty (richer per-country structure for animal-health authorities). We narrow to id + name at this layer; the deeper sub-division structure is per-CHED journey work. Operational evidence: INTRA.EU.GB.2025.0000001.xml line 183 TransitSPSCountry with ID='XI', Name='United Kingdom (Northern Ireland)' (transiting via NI). IPAFFS source: notification.partOne.route.transitingStates[] (array of ISO 3166-1 alpha-2 country code strings); each string lands as one entry on transitTradeCountry[].id.content. See design-log.md DL-041."
-        },
-        "carrier": {
-          "$ref": "#/$defs/tradeParty",
-          "description": "Elements 44 (Transporter Commercial) and 45 (Transporter Private) in the gap analysis. The carrier party for the consignment — the party providing transport. Mirrors UN/CEFACT consignment.carrier (UN01004214, BSP) — *'The carrier party for this supply chain consignment.'* Preserved through eCertMaster (line 1162) and SPS Cert D23B (line 146) with subtractions on `role` and `definedTradeContact[].authorizedPersonName` (same pattern as consignee and delivery — see DL-028 / DL-030). GBN-AG re-includes telephone, email, and roleCode per Defra-import re-inclusion rule. **Single slot serves both elements 44 and 45 — distinguished by typeCode.** The IPAFFS source `notification.partOne.transporter` (one EconomicOperator field) carries an internal type enum value: 'commercial transporter' / 'commercial transporter - user added' (element 44) or 'private transporter' (element 45). The schema slot is one `tradeParty`; the discriminator is `typeCode[].content='COMMERCIAL_TRANSPORTER'` vs `'PRIVATE_TRANSPORTER'` per the operational TRACES codelist (operator_activity_type, see bos-taurus.json line 451-457). **Required at the common-base parent — cardinality tightening from TRACES schema:** TRACES CHED Certificate Service XSD v2.31 line 2162 declares CarrierSPSParty with `minOccurs=\"0\"` (cardinality 0..1); IPAFFS marks transporter as Mandatory. GBN-AG follows IPAFFS-direction shape and tightens. **TIG team alignment:** workbook lines 385+ records CarrierSPSParty populated by CHED + INTRA + DOCOM (all journeys) — no divergence with our analysis. Operational evidence: bos-taurus.json line 432 carrierSPSParty.id schemeID='operator_internal_activity_id' value='353100'; name='J Murphy Eventing Sport Horses'; roleCode listID='3035' listVersionID='D16B' value=53 'Carrier (Transporter)'; typeCode array carries operator_activity_type=COMMERCIAL_TRANSPORTER (element 44 discriminator) and classification_section_code=TRANSPORTER. Sub-field decomposition follows DL-027 (consignor) — companyName → name; address.* → specifiedTradeAddress.*; email/telephone → definedTradeContact[].*. roleCode populated as Defra-side constant from UNTDID 3035 (operational value 53 in D16B; current UNTDID 1153 may use a different mnemonic). See design-log.md DL-040.",
-          "title": "Carrier"
-        },
-        "mainCarriageLogisticsTransportMovement": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/logisticsTransportMovement" },
-          "description": "Element 27 in the gap analysis (Transport to BCP — Means of transport, mode). Plus elements 28 (transport identification) and 29 (transport document reference) — sub-elements of the same parent IPAFFS field; sub-element schema slots will be added as those elements are committed. Mirrors UN/CEFACT consignment.mainCarriageLogisticsTransportMovement (UN01004261, BSP) — *'A main carriage logistics transport movement for this supply chain consignment.'* **Single-array design per SPS-canonical pattern:** the SPS profile explicitly strips the alternative carriage slots — eCertContextCCL line 6660-6663 strips preCarriageLogisticsTransportMovement, onCarriageLogisticsTransportMovement, borderCrossingLogisticsTransportMovement, atArrivalLogisticsTransportMovement on the consignment. Multiple entries on `mainCarriage[]`, distinguished by id.schemeID codelist values, IS the SPS-canonical pattern (not a TRACES workaround). The IPAFFS source has two distinct fields (notification.partOne.meansOfTransport for the international leg and notification.partOne.meansOfTransportFromEntryPoint for the post-BCP leg); both land on this single array, distinguished by the id.schemeID values (e.g. 'airplane_flight_number_before_bcp', 'road_vehicle_registration_after_bcp' per the bos-taurus operational sample line 603). **Required at the common-base parent — cardinality tightening from TRACES schema:** TRACES CHED Certificate Service XSD v2.31 line 2270 declares MainCarriageSPSTransportMovement with `minOccurs=\"0\" maxOccurs=\"unbounded\"` (UN03000074, BusinessTerm 'Transport', cardinality 0..n, OPTIONAL); same in EU Intra and DOCOM XSDs. IPAFFS marks meansOfTransport as Mandatory. GBN-AG follows IPAFFS-direction shape and tightens to required minItems:1 at common-base. The TIG team's workbook (lines 315-319) records MainCarriageSPSTransportMovement.ID with cardinality 0..n and explicitly lists ID, ID.schemeAgencyID, ID.schemeID, ModeCode, UsedSPSTransportMeans.Name as populated by CHED + INTRA + DOCOM — no divergence with our analysis. Element 27's modeCode lands per UN/EDIFACT Recommendation 19 (codes 1=Maritime, 2=Rail, 3=Road, 4=Air, 9=Mode unknown); the IPAFFS string-enum is mapped to numeric codes by a Defra-side reference table at transformation time (Path A pattern, same as element 17's documentType mapping). See design-log.md DL-035."
+        "postalAddress": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
         }
       }
     },
 
     "crossBorderRegulatoryProcedure": {
-      "title": "Cross-Border Regulatory Procedure",
-      "description": "A cross-border regulatory procedure applicable to a consignment. Mirrors UN/CEFACT crossBorderRegulatoryProcedureType (UN01006148) narrowed to the slots GBN-AG populates: `typeCode` (which procedure — e.g. SPS inspection) and `entryCustomsOfficeSpecifiedLogisticsLocation` (the regulatory office at which the procedure is performed — for SPS imports, the Border Control Post). BSP's `crossBorderRegulatoryProcedureType` carries 60+ properties covering customs tariff, payment, control results, multiple customs-office variants (entry/exit/import/export/transit) — none of which are exercised by GBN-AG; only the entry-customs-office variant is populated. The schema accepts the canonical slot list without re-declaring those properties, so a future entry can populate any of them without a schema change.",
       "type": "object",
+      "description": "A cross-border regulatory procedure applied to the consignment - for GBN-AG, the SPS inspection at the UK Border Control Post. typeCode names the procedure; entryCustomsOfficeSpecifiedLogisticsLocation names the BCP. The BCP identifier carries its urlId naming the Defra-curated UK BCP register.",
       "required": ["typeCode", "entryCustomsOfficeSpecifiedLogisticsLocation"],
       "properties": {
-        "typeCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "Cross-border regulatory procedure type code (UN01006148). The codelist value identifies which procedure this entry describes. For GBN-AG, the SPS inspection procedure. The value is an open string at the schema; the source system tags it with appropriate codelist metadata (`schemeId`, `schemeAgencyId`) per the MDM-independence principle on codelist-bearing properties."
+        "typeCode": { "type": "string" },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this procedure typeCode is drawn from (e.g. regulatory_procedure_type)."
         },
         "entryCustomsOfficeSpecifiedLogisticsLocation": {
-          "$ref": "#/$defs/logisticsLocation",
-          "description": "The regulatory office at which the consignment enters the customs territory for this procedure (UN01008972). UN/CEFACT description: *'The location of the specified customs office at which the goods subject to this cross-border regulatory procedure, enter the customs territory of entry.'* For GBN-AG SPS imports, this is the **Border Control Post (BCP)** — the regulatory inspection point at the UK border. Sourced from IPAFFS `notification.partOne.pointOfEntry`. The BCP identifier lands on the location's `id[]` with codelist metadata `schemeId='bcp_reference'` (or the appropriate IPAFFS BCP-codelist scheme) per the codelist-metadata-on-id pattern (DL-033). Distinct from `consignment.unloadingBaseportLogisticsLocation` (the physical port — IPAFFS `portOfEntry` — UN/LOCODE-tagged)."
-        }
-      }
-    },
-
-    "documentAuthentication": {
-      "title": "Document Authentication",
-      "description": "The signatory authentication on a GBN-AG notification. Mirrors UN/CEFACT documentAuthenticationType narrowed to GBN-AG relevant slots. Carries the discriminator-coded clause declarations via `includedDocumentClause[]`. Provider / locationProvider / signatory party slots are not populated by GBN-AG yet (the signatory chain may be authored later for sign-off workflow). The clause slot itself is subtracted from `firstSignatoryDocumentAuthentication` by eCertMaster (and inherited subtraction in SPS Cert D23B); we re-include it under strategy step 2 (problem-statement.md) because the import-side need is documented and the slot's semantic — discriminator-coded clauses on the signatory's authentication — is the right BSP shape for CHED-A's enum-as-clause declarations (PURPOSE, GOODS_CERTIFIED_AS, etc.).",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["includedDocumentClause"],
-      "properties": {
-        "includedDocumentClause": {
-          "type": "array",
-          "minItems": 2,
-          "items": { "$ref": "#/$defs/documentClause" },
-          "allOf": [
-            {
-              "contains": {
-                "properties": {
-                  "id": {
-                    "properties": {
-                      "content": { "const": "PURPOSE" }
-                    }
-                  }
-                }
-              },
-              "description": "Must contain a clause declaring Reasons for Import (id.content='PURPOSE')."
+          "type": "object",
+          "required": ["identifier", "urlId"],
+          "properties": {
+            "identifier": { "type": "string" },
+            "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/bcp_reference" },
+            "name": {
+              "type": "string"
             },
-            {
-              "contains": {
-                "properties": {
-                  "id": {
-                    "properties": {
-                      "content": { "const": "GOODS_CERTIFIED_AS" }
-                    }
-                  }
-                }
-              },
-              "description": "Must contain a clause declaring Animals certified for? (id.content='GOODS_CERTIFIED_AS')."
+            "postalAddress": {
+              "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
             }
-          ],
-          "description": "Discriminator-coded clauses attached to the signatory's authentication. Mirrors UN/CEFACT documentAuthentication.includedDocumentClause (UN01002645) re-included from BSPContextCCL (eCertMaster strips this slot from firstSignatoryDocumentAuthentication; we re-include per strategy step 2). For CHED-A, the schema requires at least two clauses: one declaring Reasons for Import (id.content='PURPOSE') and one declaring Animals certified for? (id.content='GOODS_CERTIFIED_AS'). Additional clauses (e.g. SIGNATORY_PERSON_EMAIL — the signer's email address) are accepted at the schema level — the array's other entries are unconstrained beyond the per-item structure."
+          }
         }
       }
     },
 
-    "referencedDocument": {
-      "title": "Referenced Document",
-      "description": "A reference to a document this notification points to (the veterinary health certificate, an accompanying document, a transport contract document, etc.). Mirrors UN/CEFACT referencedDocumentType narrowed to GBN-AG relevant slots: typeCode (the document type per UNTDID 1001), id (the document's reference number), issueDateTime (when it was issued), relationshipTypeCode (the role this referenced document plays per UNTDID 1153), and attachmentBinaryObject (an attachment pointer when the source provides one). BSP defines ~67 properties on referencedDocumentType for full document-reference modelling (revision history, status codes, line references, quantities issued, etc.); we narrow to the slots populated by CHED-A. **Required: typeCode + id only.** issueDateTime is optional at the $def level — element 16 (Latest Health Certificate) and element 17 (Accompanying documents) carry it from IPAFFS sources that include the issue date; element 29 (Transport document reference, on transportContractRelatedReferencedDocument) does not (IPAFFS `meansOfTransport.document` is just a 32-char reference string). The relaxed required posture accommodates both — per-use sites can tighten via allOf if a future requirement demands. For element 16 the entry has typeCode.content='853' (Veterinary certificate); for element 17 entries carry other UNTDID 1001 codes; for element 29 entries carry transport-document codes derived from the leg's modeCode at transformation time — common values are 705 (Bill of lading) and 710 (Sea waybill) for maritime, 740 (Air waybill) for air, 730 (Road consignment note / CMR) for road, 720 (Rail consignment note) for rail, and 760 (Multimodal/combined transport document) for multimodal.",
+    "gbnAgTradeLineItem": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["typeCode", "id"],
-      "properties": {
-        "typeCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "The document type code per UNTDID 1001 (Document Name Code). Operational examples: '853' = Veterinary certificate; '636' = Health certificate (CHED); '855' = Certificate of inspection; '714' = Consignment information; '740' = Air waybill; '760' = Sea waybill; '730' = Road consignment note. The codelist is internationally maintained; codelist metadata on the codeType primitive (listId, listName, listAgencyName) is accepted but not enforced at the schema — international codelists do not benefit from the Defra codelist re-inclusion policy. The IPAFFS-side document-type enum (airWaybill, itahc, etc.) is mapped to UNTDID 1001 codes by a Defra-side reference table at transformation time."
-        },
-        "id": {
-          "$ref": "#/$defs/idType",
-          "description": "The document's identifier — the reference number assigned by the issuing authority (e.g. 'NL-HC-2025-88431' for a Dutch veterinary health certificate). Open string at the schema; format varies by issuing authority and document type. Runtime validation is a source-system responsibility."
-        },
-        "issueDateTime": {
-          "type": "string",
-          "format": "date",
-          "description": "The date the document was issued. ISO 8601 date format (YYYY-MM-DD). Mirrors UN/CEFACT referencedDocument.issueDateTime (UN01011525) — 'The formatted date or date time for the issuance of this referenced document'. JSON Schema 'format: date' annotation documents the expected format."
-        },
-        "relationshipTypeCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "The role this referenced document plays in the referencing document, per UNTDID 1153 (Reference Code Qualifier). Optional. Operational use: distinguish a self-reference entry (e.g. UNTDID 1153 'AAJ' / 'Document reference, internal') from a supporting-document entry (e.g. UNTDID 1153 'ZZZ' / 'Mutually defined reference number'). Operational TRACES samples use older D16B numeric variants (628 for self-reference, 813 for supporting). Codelist value is open at the schema; no enum constraint is enforced. Per-journey schemas may restrict the accepted values."
-        },
-        "attachmentBinaryObject": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/binaryObjectType" },
-          "description": "Pointers to the document's binary content (filename, MIME type, URI). Optional. Mirrors UN/CEFACT referencedDocument.attachmentBinaryObject (UN01003996). Preserved through eCertMaster on referenceReferencedDocument (subtraction applies to the parent exchangedDocument's own attachmentBinaryObject, not to entries inside referenceReferencedDocument). IPAFFS attachment metadata (attachmentId, attachmentFilename, attachmentContentType) populates one entry: attachmentId → uri, attachmentFilename → filename, attachmentContentType → mimeCode. Inline binary content (the BSP 'content' slot) is not populated — the schema accepts it but transformation is by reference, not value."
-        }
-      }
-    },
-
-    "documentClause": {
-      "title": "Document Clause",
-      "description": "A discriminator-coded clause on the signatory's authentication. Mirrors UN/CEFACT documentClauseType. The id carries the discriminator (the well-known name of the clause within the CHED-A consignment-clause codelist) plus the codelist metadata identifying the Defra-owned scheme. The content[] array carries the codified value (typically a single entry, no languageId, SCREAMING_SNAKE — the canonical value) and optional language-tagged display entries (with languageId='en' etc., human-readable). The codelist-metadata re-inclusion on id is per problem-statement.md, 'Codelist metadata: re-include for Defra-owned values'.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "content"],
-      "properties": {
-        "id": {
-          "allOf": [
-            { "$ref": "#/$defs/idType" },
-            {
-              "properties": {
-                "content": { "pattern": "^[A-Z][A-Z0-9_]*$" },
-                "schemeId": { "const": "ched_consignment_clause" }
-              },
-              "required": ["schemeId"]
-            }
-          ],
-          "description": "The clause identifier. id.content is the discriminator (SCREAMING_SNAKE — well-known clause names like 'PURPOSE', 'GOODS_CERTIFIED_AS', 'SIGNATORY_PERSON_EMAIL'). id.schemeId is constrained to const 'ched_consignment_clause' — the Defra-owned CHED-A consignment clause codelist. Other codelist metadata slots on the idType primitive (schemeName, schemeAgencyId, schemeAgencyName, schemeVersionId) are accepted but not constrained at the schema level — populated by the source system per the codelist re-inclusion policy."
-        },
-        "content": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "The clause content. Convention: the first entry has no languageId and carries the codified value (e.g. 'INTERNAL_MARKET', 'SLAUGHTERHOUSE'); subsequent entries optionally carry localised display text with languageId. The schema enforces minItems:1 (at least the codified entry) but does not enforce the convention strictly — runtime validation against the operational pattern is a source-system responsibility."
-        }
-      }
-    },
-
-    "consignmentItem": {
-      "title": "Consignment Item",
-      "description": "A consignment item bundling one or more trade line items. Mirrors UN/CEFACT consignmentItemType (UN01002472) narrowed to GBN-AG relevant slots. Currently carries only the includedTradeLineItem array; consignment-level totals (net weight, gross weight, gross volume) will be added as elements 11+ are committed.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["includedTradeLineItem"],
-      "properties": {
-        "includedTradeLineItem": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/tradeLineItem" },
-          "description": "Per-commodity trade line items. Mirrors UN/CEFACT includedTradeLineItem (UN01002491). One entry per commodity row in the IPAFFS commodityComplement[] sense — N entries permitted (matching CHED-A multi-commodity reality)."
-        }
-      }
-    },
-
-    "tradeLineItem": {
-      "title": "Trade Line Item",
-      "description": "A single commodity line within the consignment. Mirrors UN/CEFACT tradeLineItemType (UN01002484) narrowed to GBN-AG relevant slots. Carries the trade product wrapper (which holds product attributes — names, classifications), the line-trade-delivery wrapper (which holds line-level delivery attributes — counts, weights, volumes), and the line description (element 7). Currently populated: specifiedTradeProduct (elements 6, 9 — product attributes), specifiedLineTradeDelivery (element 11 — line-level count via productUnitQuantity), generalInformationDescription (element 7 — line description). Sequence number, per-line origin geography, per-line weights and other line-trade-delivery slots will be added as further elements are committed. The line/product structural distinction is documented in problem-statement.md, 'Designing the import-side schema: principled, not canonical'.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery", "generalInformationDescription"],
+      "description": "GBN-AG trade line item. Carries the trade product (species, classification, origin, per-animal data) and the line delivery (quantity). The additionalInformationNote slot carries Path A per-animal identifiers — the example populates BOTH placements so the joint review can compare with real data. No maxItems caps on the arrays — split-consignment / multi-product-line scenarios are not in scope today but adding caps would be premature optimisation.",
+      "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
       "properties": {
         "specifiedTradeProduct": {
           "type": "array",
           "minItems": 1,
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/tradeProduct" },
-          "description": "The trade product on this line. Mirrors UN/CEFACT specifiedTradeProduct (UN01004431) on tradeLineItemType. BSP defines this as an array; for GBN-AG we constrain to exactly one product per line (one species/commodity per row, matching IPAFFS)."
+          "items": { "$ref": "#/$defs/gbnAgTradeProduct" }
         },
         "specifiedLineTradeDelivery": {
           "type": "array",
           "minItems": 1,
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/lineTradeDelivery" },
-          "description": "The line trade delivery — the delivery aspect of this line of trade. Mirrors UN/CEFACT specifiedLineTradeDelivery (UN01011863) on tradeLineItemType. BSP defines this as an array; for GBN-AG we constrain to exactly one delivery per line. Carries line-level quantities, weights, and volumes — i.e. the per-line attributes that describe what's being delivered on this line, not what the product is."
+          "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
         },
-        "generalInformationDescription": {
+        "additionalInformationNote": {
           "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Element 7 in the gap analysis (Commodity description). A textual description providing general information for this line. Mirrors UN/CEFACT tradeLineItem.generalInformationDescription (BSP slot, BSPContextCCL line 61939) — *'A textual description providing general information for this supply chain trade line item.'* **Re-included from the SPS profile subtraction (DL-039):** eCertMaster line 1900 strips the slot wholesale (`generalInformationDescription: false` on includedTradeLineItem.items). GBN-AG re-includes per the Defra-import re-inclusion rule because IPAFFS source `notification.partOne.commodities.commodityComplement[].commodityDescription` is the per-line description that gap-analysis Element 7 demands. **TIG team alignment:** TIG team's UN-CEFACT JSON alignment proposal line 304 types `.includedTradeLineItem[].description` as `textType` with `Applies to: All` — they include the line description on the line, with the parallel SPS-namespace BBIE name `Description` (UN03000148, ChedCertificateServiceV2.31.xsd line 4810: `minOccurs=\"1\" maxOccurs=\"unbounded\"`, cardinality 1..n, BusinessTerm 'Description'). We follow the BSP-canonical name `generalInformationDescription`; the TIG name `description` is the SPS-namespace BBIE — same operational outcome (a textual line description), different naming. Operational evidence: bos-taurus.json line 656 (`description: [{value: 'Consignment totals and summary'}]` on the totals line) and line 699 (`description: [{}]` empty on the commodity line). Schema requires minItems:1 (TRACES BBIE is 1..n) — gap analysis Mandatory + TRACES Required."
+          "items": {
+            "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
+          },
+          "description": "Path A per-animal identifiers (operational TRACES placement): each note carries subjectCode='INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content. Populated alongside Path B (individualTradeProductInstance[]) for the joint review."
         }
       }
     },
 
-    "lineTradeDelivery": {
-      "title": "Line Trade Delivery",
-      "description": "The delivery aspect of a trade line item. Mirrors UN/CEFACT lineTradeDeliveryType narrowed to GBN-AG relevant slots. Currently populated: productUnitQuantity (element 11 — count of product units delivered on this line). BSP's lineTradeDeliveryType carries ~95 properties for full commercial-trade modelling (requested vs agreed vs billed quantities, packaging, despatch / receipt / pick-up events, schedules, etc.); we narrow to the slots that have meaning in the SPS-import context. Per-line weight measures will be added on this type when the gap-analysis weight elements are committed.",
+    "gbnAgTradeProduct": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["productUnitQuantity"],
-      "properties": {
-        "productUnitQuantity": {
-          "allOf": [
-            { "$ref": "#/$defs/quantityType" },
-            {
-              "properties": {
-                "content": { "type": "integer", "minimum": 1 },
-                "unitCode": { "const": "H87" }
-              },
-              "required": ["unitCode"]
-            }
-          ],
-          "description": "Element 11 in the gap analysis (Number of animals). The number of product units (animals) delivered on this line of trade. Mirrors UN/CEFACT lineTradeDelivery.productUnitQuantity (UN01011765) — preserved through eCertMaster and SPS Cert at the line-trade-delivery level. Description per BSP: 'The number of product units, at line level, in this trade delivery.' For live animals, each animal is one product unit. Required in GBN-AG (gap analysis Required + IPAFFS Mandatory). Constraints: content must be a positive integer (no fractional animals); unitCode is a const 'H87' (UNECE Recommendation 20 — Piece). Placement reasoning: count is a property of the line of trade (how much of the line is being delivered), not of the product (what the line carries) — see problem-statement.md, 'Designing the import-side schema: principled, not canonical'. See design-log.md DL-020 (current) and DL-007 (superseded — original Defra-extension placement that incorrectly assumed BSP had no per-line quantity slot)."
-        }
-      }
-    },
-
-    "tradeProduct": {
-      "title": "Trade Product",
-      "description": "The product (the commodity) on this line. Mirrors UN/CEFACT tradeProductType (UN01004679) narrowed to GBN-AG relevant slots. Carries the CN classification (element 6), the species' scientific name (element 9: scientificName, populated from the Defra reference-data lookup keyed on the CN code), the product's country of origin with optional region (elements 3 and 4), and the per-individual product instances carrying animal identifiers (element 14 — passport id, microchip, ear tag, etc.). The commonName slot was dropped at the element 9 refinement (see design-log.md DL-008): real-world CHED-A practice (XML SPS Cert form, peer-team JSON) does not carry a dedicated common-name slot on the line item; consumers needing the everyday name can resolve it from the CN code via reference data. Other auxiliary commodity data — commodity description / className, EPPO codes, commodity type — remains parked pending requirements clarification (see open-questions.md OQ-2).",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["designatedProductClassification", "scientificName", "originTradeCountry", "individualTradeProductInstance"],
+      "description": "GBN-AG trade product: one species/commodity. CN classification, scientific and common names (resolved from the CN code via Defra reference data), country of origin with optional region, and per-animal identifiers Path B.",
+      "required": [
+        "designatedProductClassification",
+        "description",
+        "scientificName",
+        "commonName",
+        "originTradeCountry"
+      ],
       "properties": {
         "designatedProductClassification": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/productClassification" },
-          "description": "Product classifications designated for this product. Mirrors UN/CEFACT designatedProductClassification (UN01004696). For GBN-AG the canonical classification is the CN (Combined Nomenclature) code; further classifications (e.g. EPPO) could be carried as additional entries if requirements direct, but the minimal commitment is one CN classification."
+          "items": { "$ref": "#/$defs/gbnAgProductClassification" }
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "Optional trade-product type/form code (live animal / semen / embryo / ova). BSP/D23B canonical (unece:typeCode, xsd:string). Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this trade product's typeCode is drawn from."
         },
         "scientificName": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Element 9 in the gap analysis (Species selection — scientific name component). The Linnaean binomial (e.g. 'Bos taurus' for CN 01022110). Mirrors UN/CEFACT specifiedTradeProduct.scientificName (UN01006144). Populated from the Defra reference-data lookup keyed on the CN code; not user-entered. BSP carries this as a textType array; one entry is the operational expectation."
+          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" }
+        },
+        "commonName": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" }
         },
         "originTradeCountry": {
           "type": "array",
           "minItems": 1,
           "maxItems": 1,
-          "items": { "$ref": "#/$defs/tradeCountry" },
-          "description": "Element 3 in the gap analysis (Country of origin). The country where this trade product was raised. Mirrors UN/CEFACT tradeProductType.originTradeCountry (UN01004703) — preserved through eCertMaster and SPS Cert D23B at the trade-product level; subtracted only at the consignmentItem level which GBN-AG does not use for origin. BSP defines this as an array; for GBN-AG we constrain to exactly one country per product (one origin per commodity row, matching IPAFFS reality). Required at the schema level — gap-analysis Required + IPAFFS Mandatory. The country code is open at the schema; codelist validity (ISO 3166-1 alpha-2 expected) is enforced at runtime by Defra reference data. The optional regional sub-division (element 4) is carried inside the country entry via subordinateTradeCountrySubDivision[]. Placement reasoning: country of origin describes where the product was raised — a property of the product, not of the act of trade — see problem-statement.md, 'Designing the import-side schema: principled, not canonical'."
+          "items": { "$ref": "#/$defs/originTradeCountry" }
         },
         "individualTradeProductInstance": {
           "type": "array",
-          "minItems": 1,
           "items": { "$ref": "#/$defs/tradeProductInstance" },
-          "description": "Element 14 in the gap analysis (Animal identification details). Per-individual-animal identifiers — passport id, microchip, ear tag, tattoo, leg ring, etc. Each animal on the line is modelled as a discrete tradeProductInstance carrying its own identifier in `id` (with `schemeId` for the identification system and `content` for the value). Mirrors UN/CEFACT tradeProductType.individualTradeProductInstance (UN01004697) — preserved through eCertMaster and SPS Cert D23B with no subtractions. BSP-canonical at every level. Schema enforces minItems:1; the instance array's length should equal the line's productUnitQuantity (DL-020) for fully-identified consignments (cross-property consistency enforced at runtime by source systems, not at schema level since JSON Schema cannot express the arithmetic constraint). Placement reasoning: per-individual identifiers are per-instance product data — BSP's purpose-built slot for this is `individualTradeProductInstance[]` — see design-log.md DL-022. Operational EU/TRACES practice (bos-taurus CHED-A and JSON peer-team) uses the alternative additionalInformationNote pattern; we diverge per the BSP-semantic-fidelity principle established in problem-statement.md."
+          "description": "Path B per-animal identifiers (BSP-canonical, purpose-built slot): each instance carries an identifier array (microchip / passport / tattoo / ear tag / leg ring as appropriate per the refdata identifier set for the species)."
         }
       }
     },
 
-    "tradeProductInstance": {
-      "title": "Trade Product Instance",
-      "description": "An individual instance of the trade product — a single animal in the GBN-AG context. Mirrors UN/CEFACT tradeProductInstanceType narrowed to GBN-AG relevant slots. Currently carries only the identifier (id with schemeId for identification system and content for value); other instance-level slots that BSP exposes (commonName, scientificName at instance level, intendedUse, batchId, lotId, processing events, etc.) are not populated by GBN-AG. The id-with-schemeId pattern matches the codelist-metadata re-inclusion convention from problem-statement.md and parallels documentClause.id (DL-021): id.content carries the value, id.schemeId names the codelist or identification system the value comes from.",
+    "gbnAgProductClassification": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["id"],
+      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN' or 'SPECIES_CLASS') and classCode (the code value). No const enforcement on systemId — a single trade product can carry multiple classifications under different coding systems (e.g. CN code for commodity plus a SPECIES_CLASS entry for taxonomic class). CN codes are 8 digits in the operational case; the string-or-integer classCode accommodates both shapes without binding to a length pattern.",
+      "required": ["systemId", "classCode"],
       "properties": {
-        "id": {
-          "allOf": [
-            { "$ref": "#/$defs/idType" },
-            {
-              "properties": {
-                "schemeId": { "pattern": "^[A-Z][A-Z0-9_]*$" }
-              },
-              "required": ["schemeId"]
-            }
-          ],
-          "description": "The animal's identifier. id.schemeId names the identification system (e.g. 'MICROCHIP', 'PASSPORT', 'EAR_TAG', 'TATTOO', 'LEG_RING'); the codelist is Defra-owned (provisional name `animal_identification_system` pending OQ-3 expansion). Schema enforces SCREAMING_SNAKE pattern on schemeId; valid system values are enforced at runtime by Defra reference data. id.content carries the identifier value — open string at the schema level (different identification systems have different value formats — microchip is 15-digit numeric, passport is alphanumeric, ear tags vary by issuing authority). Per-system content-format validation is a runtime / source-system responsibility."
-        }
-      }
-    },
-
-    "tradeCountry": {
-      "title": "Trade Country",
-      "description": "A country reference. Mirrors UN/CEFACT tradeCountryType. Used for origin (element 3) on tradeProduct, with optional region (element 4) carried via subordinateTradeCountrySubDivision[].",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id"],
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/idType",
-          "description": "Country code. ISO 3166-1 alpha-2 expected (e.g. 'AT' for Austria, 'GB' for Great Britain); codelist validity enforced at runtime by Defra reference data, not at the schema level."
+        "systemId": { "type": "string" },
+        "classCode": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "integer" }
+          ]
         },
-        "name": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Optional country name (multi-language array per BSP)."
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this classification's classCode is drawn from."
+        }
+      }
+    },
+
+    "originTradeCountry": {
+      "type": "object",
+      "description": "Country of origin for the trade product, with optional region of origin (UNCL3227 functionTypeCode='106').",
+      "required": ["identifier"],
+      "properties": {
+        "identifier": {
+          "type": "string"
         },
         "subordinateTradeCountrySubDivision": {
           "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/tradeCountrySubDivision" },
-          "description": "Element 4 in the gap analysis (Region of origin code). Optional regional sub-divisions of the origin country. The slot is present in the schema but the value is optional at runtime: IPAFFS source is Optional, gap-analysis Required is interpreted as 'slot must be supported in the schema' (Reading B for element 4 — see gbn-ag-data-elements.json element 4 notes for the broader interpretation discussion). Placement reasoning: region of origin describes where in the origin country the product was raised — nested under the country it sub-divides, on the product (not on the line of trade) — see problem-statement.md, 'Designing the import-side schema: principled, not canonical'."
+          "items": { "$ref": "#/$defs/tradeCountrySubDivision" }
         }
       }
     },
 
     "tradeCountrySubDivision": {
-      "title": "Trade Country Sub-Division",
-      "description": "A sub-division of a trade country. Mirrors UN/CEFACT tradeCountrySubDivisionType narrowed for the region-of-origin use case (functionTypeCode const '106' per UNCL3227 — Region of Origin). Carries the region code and an optional name. The functionTypeCode constraint disambiguates this slot from other potential uses of subordinateTradeCountrySubDivision (transhipment, customs office locations, etc.) and matches the foundational mapping in docs/crosswalk/recommendations/prose/notification.partOne.commodities.md.",
       "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "functionTypeCode"],
+      "description": "A sub-division of the country of origin (a region). functionTypeCode is constrained to '106' (UNCL3227 Region of Origin).",
+      "required": ["identifier", "functionTypeCode"],
       "properties": {
-        "id": {
-          "$ref": "#/$defs/idType",
-          "description": "Region code. Country-prefixed alphanumeric expected (e.g. 'AT-1' for a region in Austria); codelist constraint enforced at runtime by Defra reference data."
-        },
-        "name": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Optional region name (multi-language array per BSP)."
+        "identifier": {
+          "type": "string"
         },
         "functionTypeCode": {
-          "allOf": [
-            { "$ref": "#/$defs/codeType" },
-            { "properties": { "content": { "const": "106" } } }
-          ],
-          "description": "UNCL3227 function type code. Const '106' for Region of Origin."
-        }
-      }
-    },
-
-    "productClassification": {
-      "title": "Product Classification — CN code",
-      "description": "Element 6 in the gap analysis (Commodity selection). A product classification entry, narrowed for the GBN-AG use of the Combined Nomenclature codelist. Maps to UN/CEFACT productClassificationType (UN01002608). Schema is intentionally minimal — only systemId and classCode are accepted (additionalProperties:false rejects everything else). Auxiliary commodity data — including the classification's human-readable label (className), EPPO codes, and other reference-data outputs — is parked pending requirements clarification (see open-questions.md OQ-2). The systemId is fixed to 'CN' at schema level (D2). The classCode value is constrained to 8-digit numeric (D3): a format-level invariant of CN codes, separable from the runtime codelist-validity check enforced by Defra reference data. The classCode.listVersionId slot is optional (D4): populated at submit-time to record the CN list version (e.g. '2026') for audit replay clarity. The const 'CN' is a journey-time hard-code; it is in fact SPS-wide (animals, plants, animal products all use CN) and is a candidate for future promotion to the BSP-canonical common schema — see problem-statement.md, Common-vs-journey layering.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["systemId", "classCode"],
-      "properties": {
-        "systemId": {
-          "allOf": [
-            { "$ref": "#/$defs/idType" },
-            { "properties": { "content": { "const": "CN" } } }
-          ],
-          "description": "Code system identifier. Fixed to 'CN' (Combined Nomenclature) for GBN-AG."
-        },
-        "classCode": {
-          "allOf": [
-            { "$ref": "#/$defs/codeType" },
-            { "properties": { "content": { "pattern": "^\\d{8}$" } } }
-          ],
-          "description": "The 8-digit CN code (e.g. '01022110' for live cattle, pure-bred breeding). Schema enforces 8-digit numeric format. Codelist validity (the code exists in the live CN list as of the relevant date) is enforced at runtime by Defra reference data, not here. The optional listVersionId on the codeType primitive carries the CN list version (e.g. '2026') when populated by the source system."
-        }
-      }
-    },
-
-    "logisticsTransportMovement": {
-      "title": "Logistics Transport Movement",
-      "description": "A transport movement (a leg of the consignment's journey). Mirrors UN/CEFACT logisticsTransportMovementType narrowed to GBN-AG relevant slots: id (transport identifier with codelist metadata for the leg discriminator — re-included from the BSP strip per DL-036), modeCode (the mode per UN/EDIFACT Recommendation 19), usedLogisticsTransportMeans (named means of transport; the BSP id and typeCode children are stripped at SPS Cert D23B line 460 — only name is preserved), referenceReferencedDocument (transport documents). The Sanitary and Phytosanitary (SPS) profile collapses BSP's three-way carriage split (preCarriage / mainCarriage / onCarriage) into a single `mainCarriageLogisticsTransportMovement[]` array — eCertContextCCL line 6660-6663 explicitly strips preCarriageLogisticsTransportMovement, onCarriageLogisticsTransportMovement, borderCrossingLogisticsTransportMovement, atArrivalLogisticsTransportMovement. Multiple entries on `mainCarriage[]`, distinguished by id.schemeID codelist values, is the SPS-canonical pattern (operational TRACES samples and TIG team analysis confirm). Used by `consignment.mainCarriageLogisticsTransportMovement[]` (element 27 mode + element 28 transport identification + sub-element transport document fields).",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/idType" },
-          "description": "Transport identifier(s) with codelist metadata. Each entry carries the transport identifier value at `content` (flight number, vessel name, vehicle registration — typically up to 50 characters per IPAFFS source maxLength) and codelist metadata at `schemeId` / `schemeName` / `schemeAgencyId` / `schemeAgencyName` to identify the scheme and the leg discriminator. **Codelist metadata re-included from BSP profile strip (DL-036).** BSP `logisticsTransportMovement.id` (UN01003841 in BSPContextCCL line 32828) explicitly strips schemeId, schemeName, schemeAgencyId, schemeAgencyName, schemeVersionId, schemeDataUri, schemeUri — permitting only `content`. eCertContextCCL line 2917 inherits the strip. GBN-AG re-includes the codelist metadata per the Defra-import re-inclusion rule (problem-statement.md, 'Defra import model may re-include SPS-subtracted concepts when import-side need is documented') because the import-side need is the leg-discriminator codelist pattern established by DL-035 (e.g. `schemeId='airplane_flight_number_before_bcp'`, `schemeId='road_vehicle_registration_after_bcp'`). The TIG team's `UN-CEFACT JSON alignment proposal.md` §5.2 documents the same re-enablement pattern (lines 343-397) for `noteType.contentCode`, `noteType.subjectCode`, and `documentClauseType.id`; their workbook (lines 315-317) explicitly records `MainCarriageSPSTransportMovement.ID.schemeAgencyID` and `.ID.schemeID` as populated by CHED + INTRA + DOCOM — they implicitly re-include the same metadata on this slot. Operational evidence: `bos-taurus.json` line 605-608 populates id with `schemeID='airplane_flight_number_before_bcp'`, `schemeName='Flight number (before BCP)'`, value='A2B LOGISTIC'. The schemeId codelist is Defra-owned; runtime validation against the codelist is a source-system responsibility."
-        },
-        "modeCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "The mode of transport for this movement, per UN/EDIFACT Recommendation 19 (Modes of Transport). Operational examples: '1' = Maritime transport; '2' = Rail transport; '3' = Road transport; '4' = Air transport; '9' = Mode unknown. The IPAFFS-side enum (Aeroplane, Road Vehicle, Railway Wagon, Ship, Other, plus combined modes) is mapped to Recommendation 19 codes by a Defra-side reference table at transformation time. Codelist metadata: schemeId='un_recommendation_19' (or similar) is accepted but not enforced at the schema — the codelist is internationally maintained and not re-included per the codelist re-inclusion policy."
-        },
-        "usedLogisticsTransportMeans": {
           "type": "object",
-          "additionalProperties": false,
+          "required": ["content"],
           "properties": {
-            "name": {
-              "type": "array",
-              "items": { "$ref": "#/$defs/textType" },
-              "description": "Name of the means of transport (e.g. vessel name, descriptive identifier). The BSP id and typeCode children of usedLogisticsTransportMeans are stripped by SPS Cert D23B line 460; the transport identifier proper lands on the parent transportMovement.id (not here)."
+            "content": { "const": "106" }
+          }
+        }
+      }
+    },
+
+    "tradeProductInstance": {
+      "type": "object",
+      "description": "An individual animal. identifier is an array of regulatory IDs (an animal can carry microchip + passport + tattoo + ear tag + leg ring together; the refdata identifier set for the species determines which apply). permanentLocation is the per-animal permanent address, where the animal will live long-term once import is complete; different animals on the same line can carry different permanent addresses. All properties are optional; the producer populates whichever apply.",
+      "properties": {
+        "identifier": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["typeCode", "content"],
+            "description": "A per-animal identifier. typeCode names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) and is a bare string drawn from the animal_identifier_types codelist. content is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip). The sibling urlId points to the codelist that typeCode is drawn from.",
+            "properties": {
+              "content":  { "type": "string" },
+              "typeCode": { "type": "string" },
+              "urlId":    { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
             }
-          },
-          "description": "Named means of transport carried for this movement. Mirrors UN/CEFACT logisticsTransportMovement.usedLogisticsTransportMeans (UN01003861) narrowed to the slots preserved through SPS Cert D23B."
+          }
         },
-        "transportContractRelatedReferencedDocument": {
-          "type": "array",
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/referencedDocument" },
-          "description": "The transport contract document for this transport movement (e.g. air waybill, bill of lading, road consignment note). Mirrors UN/CEFACT logisticsTransportMovement.transportContractRelatedReferencedDocument (UN01008986, BSPContextCCL line 33766) — *'A transport contract document related to this logistics transport movement.'* **Re-included from the SPS profile subtraction (DL-037):** eCertMaster line 3492 strips the slot wholesale (`transportContractRelatedReferencedDocument: false`); SPS Cert D23B inherits the strip. GBN-AG re-includes per the Defra-import re-inclusion rule because the IPAFFS source (`notification.partOne.meansOfTransport.document`, 32-char alphanumeric, Mandatory) carries this data per-leg and needs a per-leg landing. Reuses the `referencedDocument` shape established by DL-024 / DL-025 for element 16 (vet cert) / element 17 (accompanying documents). The document's typeCode encodes the document kind per UNTDID 1001 (740 = Air waybill, 760 = Sea waybill, 730 = Road consignment note, etc.); the document reference (32-char IPAFFS string) lands on id.content. Replaces the erroneous `referenceReferencedDocument` slot from the initial DL-035 commit — that slot does not exist on logisticsTransportMovementType at the BSP level (it lives on exchangedDocument); see DL-037 retraction."
-        },
-        "arrivalEvent": {
-          "type": "array",
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/transportEvent" },
-          "description": "The arrival event for this transport movement — when the consignment arrives at the unloading location for this leg (Border Control Post / Designated Point of Entry for the international leg, final destination for an onward leg). Mirrors UN/CEFACT logisticsTransportMovement.arrivalEvent (UN01003858, BSPContextCCL line 33332) — *'An arrival event for this logistics transport movement.'* Preserved through eCertContextCCL line 2963 — explicitly re-included on the consignment-level transport-movement type (eCertMaster line 3457 strips arrivalEvent in a nested context, but eCertContextCCL re-enables it at the consignment level we target). Carries scheduledOccurrenceDateTime (the IPAFFS arrivalDate + arrivalTime aggregated, the importer-declared scheduled arrival — element 30) and actualOccurrenceDateTime (the IPAFFS consignmentArrived boolean encoded as slot-presence — populated when arrival is observed). **Operational divergence with TRACES recorded:** the TRACES SPSTransportMovementType (UN03000172, ChedCertificateServiceV2.31.xsd line 5477) declares only ID, ModeCode, and UsedSPSTransportMeans — no ArrivalSPSEvent on the transport movement. TRACES operational data (bos-taurus.json) captures arrival/departure as document-level notes (`includedSPSNote[]` with subjectCode='DEPARTURE_FROM_BCP_DATETIME', etc.) rather than as transport-movement events. We follow BSP-canonical placement on the transport movement; transformer projecting to TRACES-shaped consumers must lift the data to document notes. See design-log.md DL-038."
-        },
-        "departureEvent": {
-          "type": "array",
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/transportEvent" },
-          "description": "The departure event for this transport movement — when the consignment departs the loading location (origin port for the international leg, BCP for an onward leg). Mirrors UN/CEFACT logisticsTransportMovement.departureEvent (UN01003857, paired with arrivalEvent). Same inheritance posture as arrivalEvent (preserved through eCertContextCCL re-enable). Carries scheduledOccurrenceDateTime (the IPAFFS departureDate + departureTime aggregated). Same TRACES operational divergence as arrivalEvent — TRACES captures via document notes. See design-log.md DL-038."
+        "permanentLocation": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsLocation",
+          "description": "Optional per-animal permanent address. The address where this individual animal will permanently reside after import (e.g. for pets imported to a business address and then shipped onwards to their owner's home). Shown for commodities where the producer's refdata indicates a permanent address applies."
         }
       }
     },
 
-    "transportEvent": {
-      "title": "Transport Event",
-      "description": "A scheduled or actual occurrence event on a transport movement (arrival, departure). Mirrors UN/CEFACT transportEventType narrowed to GBN-AG relevant slots: scheduledOccurrenceDateTime (the importer-declared scheduled time of the event — populated from IPAFFS arrivalDate+arrivalTime or departureDate+departureTime, aggregated) and actualOccurrenceDateTime (the observed actual time of the event — populated from IPAFFS consignmentArrived boolean using slot-presence encoding: present-with-timestamp = arrived, absent = not yet arrived). BSP defines ~30 properties on transportEventType for full event modelling (location, party, status, equipment, etc.); we narrow to the two date-time slots used by the GBN-AG arrival/departure semantic.",
+    "gbnAgLineTradeDelivery": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
+      "required": ["productUnitQuantity"],
       "properties": {
-        "scheduledOccurrenceDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The scheduled date-time of this event in ISO 8601 format. For arrival events: IPAFFS arrivalDate + arrivalTime aggregated. For departure events: IPAFFS departureDate + departureTime aggregated."
-        },
-        "actualOccurrenceDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The actual observed date-time of this event in ISO 8601 format. For arrival events: populated when the IPAFFS consignmentArrived boolean is true (slot-presence encoding — present = arrived; absent = not yet arrived). The populated value reflects the arrival observation time in the new system, not necessarily the physical arrival moment."
+        "productUnitQuantity": {
+          "type": "object",
+          "required": ["content", "unitCode"],
+          "properties": {
+            "content": { "type": "number", "exclusiveMinimum": 0 },
+            "unitCode": { "type": "string" }
+          }
         }
-      }
-    },
-
-    "logisticsLocation": {
-      "title": "Logistics Location",
-      "description": "A physical location (farm, port, holding facility, etc.) carried as a logistics-location-shaped slot. Mirrors UN/CEFACT logisticsLocationType (UN01003679) narrowed to GBN-AG relevant slots: id (location identifier with optional codelist metadata), name (location name — e.g. farm name), typeCode (location classification per CCC/UNCEFACT codelist), postalTradeAddress (full postal address), servicingSpecifiedLocationParty (named contact for the location, carrying telephone and email). The shape splits 'where' (address on the location) from 'who to contact about it' (contact details on the servicing party). Used by elements where BSP models the data as a place rather than as a trade party — currently `consignment.finalDestinationLogisticsLocation` (element 23 — Permanent Address).",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["postalTradeAddress"],
-      "properties": {
-        "id": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/idType" },
-          "description": "Location identifier(s) with optional codelist metadata. Operational use: county-parish-holding (CPH) numbers, UN/LOCODE port codes, GS1 Global Location Numbers."
-        },
-        "name": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Name of the location (e.g. farm name, holding name). Maps to logisticsLocationType.name."
-        },
-        "typeCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "Location-classification code (e.g. holding type — farm, abattoir, market). Codelist may be Defra-owned or international depending on usage."
-        },
-        "postalTradeAddress": {
-          "$ref": "#/$defs/tradeAddress",
-          "description": "The location's postal address — line(s), city, postcode, country."
-        },
-        "servicingSpecifiedLocationParty": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tradeParty" },
-          "description": "Named contact party for the location. Mirrors UN/CEFACT logisticsLocation.servicingSpecifiedLocationParty (UN01003688) — narrowed here to use tradeParty for the contact party shape (rather than locationPartyType) so contact details (telephone, email) land on the standard definedTradeContact path used elsewhere in the schema."
-        }
-      }
-    },
-
-    "tradeParty": {
-      "title": "Trade Party",
-      "description": "A party (person or organisation) playing a named role on the consignment or document. Mirrors UN/CEFACT tradePartyType narrowed to GBN-AG relevant slots: id (party identifier with optional codelist metadata), name (organisation name), roleCode (the party's role per UNTDID 3035), typeCode (operational classification — TRACES uses two codes for activity type and section), specifiedTradeAddress (postal address), definedTradeContact (named contact with telephone/email). Reusable across consignment-level party slots: despatch, consignor, consignee, importer, delivery, carrier, customsTransitAgent. The SPS Certificate D23B profile subtracts roleCode and authorizedPersonName from these slots; GBN-AG re-includes them per the Defra-import re-inclusion rule because operational TRACES data populates roleCode (per UNTDID 3035) and the gap analysis demands contact details with named persons. Required: name. All other slots optional at the parent schema; per-journey schemas may tighten.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["name"],
-      "properties": {
-        "id": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/idType" },
-          "description": "Party identifier(s) with optional codelist metadata naming the scheme. Operational TRACES samples populate this with operator-activity ids (schemeId='operator_activity_id', schemeAgencyId='ec_sante_traces') or national registry numbers."
-        },
-        "name": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/textType" },
-          "description": "Organisation name. Maps to tradePartyType.name. At least one entry."
-        },
-        "roleCode": {
-          "$ref": "#/$defs/codeType",
-          "description": "The party's role on the consignment per UNTDID 3035 (Party Role Code). Operational examples: 'PW' = Despatch party (Place of dispatch); 'DP' = Delivery party (Place of destination); 'CN' = Consignee; 'CZ' = Consignor; 'CM' = Customs (Border control post). Re-included from the SPS subtraction; codelist metadata accepted but not enforced (UNTDID 3035 is internationally maintained)."
-        },
-        "typeCode": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/codeType" },
-          "description": "Operational party-classification codes. TRACES populates two entries per party: one with listId='operator_activity_type' (e.g. ANIMAL_ESTABLISHMENT, ANIMAL_EXPORTER, COMMERCIAL_TRANSPORTER) and one with listId='classification_section_code' (e.g. EXP, OTH-OPER, TRANSPORTER, RFL). Both are Defra/EC-owned codelists; codelist metadata is re-included on the codeType primitive when populated."
-        },
-        "specifiedTradeAddress": {
-          "$ref": "#/$defs/tradeAddress",
-          "description": "The party's postal address. Maps to tradePartyType.specifiedTradeAddress."
-        },
-        "definedTradeContact": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/definedTradeContact" },
-          "description": "Named contact(s) for the party (person name, email, telephone). Maps to tradePartyType.definedTradeContact[]. Re-included from the SPS subtraction; the gap-analysis IMP description for Element 18 demands telephone and email."
-        }
-      }
-    },
-
-    "tradeAddress": {
-      "title": "Trade Address",
-      "description": "A postal address. Mirrors UN/CEFACT tradeAddressType. Country is required; line one and postcode are required when the address is present.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["lineOne", "cityName", "postcodeCode", "countryId"],
-      "properties": {
-        "lineOne": { "$ref": "#/$defs/textType", "description": "First line of address." },
-        "lineTwo": { "$ref": "#/$defs/textType", "description": "Second line of address (optional)." },
-        "lineThree": { "$ref": "#/$defs/textType", "description": "Third line of address (optional)." },
-        "cityName": { "$ref": "#/$defs/textType", "description": "City or town." },
-        "postcodeCode": { "$ref": "#/$defs/codeType", "description": "Postal or zip code." },
-        "countryId": { "$ref": "#/$defs/idType", "description": "ISO 3166-1 alpha-2 country code." },
-        "countryName": { "$ref": "#/$defs/textType", "description": "Country name (optional; country is identified by countryId)." }
-      }
-    },
-
-    "definedTradeContact": {
-      "title": "Defined Trade Contact",
-      "description": "A structured contact for a trade party. Mirrors UN/CEFACT definedTradeContactType. The IPAFFS Responsible Person carries first name and last name as separate fields; the canonical UN/CEFACT shape is a single personName text. The schema accepts personName as a single concatenated value; transformers from IPAFFS sources concatenate first + last with a space.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["personName", "emailURIUniversalCommunication"],
-      "properties": {
-        "personName": {
-          "$ref": "#/$defs/textType",
-          "description": "Full name of the individual (e.g. 'Jane Doe'). Concatenation of first name and last name from IPAFFS sources."
-        },
-        "emailURIUniversalCommunication": {
-          "$ref": "#/$defs/textType",
-          "description": "Email address."
-        },
-        "telephoneUniversalCommunication": {
-          "$ref": "#/$defs/textType",
-          "description": "Telephone number (optional)."
-        }
-      }
-    },
-
-    "idType": {
-      "title": "Identifier (CCTS Identifier.Type)",
-      "description": "An identifier value with optional metadata describing the identification scheme it belongs to (e.g. a CPH number carrying schemeId='cph_number'). Slot list matches UN/CEFACT BasicComponents idType verbatim. Codelist-bearing properties (schemeAgencyId) are typed as open strings rather than enums against UN/CEFACT codelist files; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid against the relevant codelist.",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "string" },
-        "schemeId": { "type": "string" },
-        "schemeName": { "type": "string" },
-        "schemeAgencyId": { "type": "string" },
-        "schemeAgencyName": { "type": "string" },
-        "schemeVersionId": { "type": "string" },
-        "schemeDataUri": { "type": "string" },
-        "schemeUri": { "type": "string" }
-      }
-    },
-
-    "codeType": {
-      "title": "Code (CCTS Code.Type)",
-      "description": "A code value with optional metadata describing the codelist it belongs to. Slot list matches UN/CEFACT BasicComponents codeType verbatim. Codelist-bearing properties (listAgencyId, languageId) are typed as open strings rather than enums against UN/CEFACT codelist files; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid against the relevant codelist.",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "string" },
-        "listId": { "type": "string" },
-        "listName": { "type": "string" },
-        "listAgencyId": { "type": "string" },
-        "listAgencyName": { "type": "string" },
-        "listVersionId": { "type": "string" },
-        "name": { "type": "string" },
-        "languageId": { "type": "string" },
-        "listUri": { "type": "string" },
-        "listSchemeUri": { "type": "string" }
-      }
-    },
-
-    "textType": {
-      "title": "Text (CCTS Text.Type)",
-      "description": "A text value with optional language identifier. Slot list matches UN/CEFACT BasicComponents textType verbatim. The languageId is typed as an open string rather than an enum against the ISO language codelist; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid ISO language codes.",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "string" },
-        "languageId": { "type": "string" },
-        "languageLocaleId": { "type": "string" }
-      }
-    },
-
-    "measureType": {
-      "title": "Measure (CCTS Measure.Type)",
-      "description": "A numeric measurement with a unit. Slot list matches UN/CEFACT BasicComponents measureType verbatim. The unitCode is typed as an open string rather than an enum against the UN/CEFACT measurement unit codelist; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid measurement unit codes (UN/CEFACT Recommendation 20).",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "number" },
-        "unitCode": { "type": "string" },
-        "unitCodeListVersionId": { "type": "string" }
-      }
-    },
-
-    "quantityType": {
-      "title": "Quantity (CCTS Quantity.Type)",
-      "description": "A numeric quantity with a unit. Slot list matches UN/CEFACT BasicComponents quantityType verbatim. The unitCode is typed as an open string rather than an enum against the UN/CEFACT measurement unit codelist; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid measurement unit codes (UN/CEFACT Recommendation 20). Distinct from measureType in that quantityType is used for piece counts and discrete-unit quantities (e.g. productUnitQuantity with unitCode='H87' for 'one'), where measureType is used for continuous measurements (weight, volume, length).",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "number" },
-        "unitCode": { "type": "string" },
-        "unitCodeListId": { "type": "string" },
-        "unitCodeListAgencyId": { "type": "string" },
-        "unitCodeListAgencyName": { "type": "string" }
-      }
-    },
-
-    "binaryObjectType": {
-      "title": "Binary Object (CCTS Binary Object.Type)",
-      "description": "A binary attachment, either inline (content is a base64-encoded byte stream) or by reference (uri points to where the attachment is stored). Slot list matches UN/CEFACT BasicComponents binaryObjectType verbatim. The mimeCode is typed as an open string rather than an enum against the IANA MIME media type codelist; this is a deliberate choice to keep the schema independent of externally-curated reference data evolution. The source system is responsible for ensuring values are valid IANA MIME types. In operational use, the GBN-AG flow uses the by-reference pattern (uri + filename + mimeCode); inline content is accepted by the schema but not produced by Defra systems.",
-      "type": "object",
-      "properties": {
-        "content": { "type": "string", "contentEncoding": "base64" },
-        "format": { "type": "string" },
-        "mimeCode": { "type": "string" },
-        "encodingCode": { "type": "string" },
-        "characterSetCode": { "type": "string" },
-        "uri": { "type": "string" },
-        "filename": { "type": "string" }
       }
     }
   }

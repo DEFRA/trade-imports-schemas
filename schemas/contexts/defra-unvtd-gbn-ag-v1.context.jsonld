@@ -1,0 +1,18 @@
+{
+  "@context": [
+    "./defra-unvtd-core-v1.context.jsonld",
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "defraUnvtdProfile": "https://defra.gov.uk/trade/unvtd/profile#",
+      "isOrHasUnweanedAnimals": {
+        "@id": "defraUnvtdProfile:isOrHasUnweanedAnimals",
+        "@type": "xsd:boolean"
+      },
+      "permanentLocation": {
+        "@id": "defraUnvtdProfile:permanentLocation",
+        "@type": "@id"
+      }
+    }
+  ]
+}

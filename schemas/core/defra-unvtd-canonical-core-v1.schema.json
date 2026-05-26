@@ -102,6 +102,15 @@
         }
       }
     },
+    "UneceTextType": {
+      "description": "A text value with optional language identifier (CCTS Text.Type slot list). Used where text content carries a language tag (e.g. scientific names in Latin, common names in English, descriptions in EU member-state languages).",
+      "type": "object",
+      "required": ["content"],
+      "properties": {
+        "content": { "type": "string" },
+        "languageId": { "type": "string" }
+      }
+    },
     "Authentication": {
       "type": "object",
       "properties": {
@@ -117,8 +126,9 @@
           "type": "string",
           "description": "unece:governmentActionTypeCode is @vocab in unece-context-D23B.jsonld; use a string code or vocabulary token."
         },
-        "providerParty": {
-          "$ref": "#/$defs/TradeParty"
+        "provider": {
+          "$ref": "#/$defs/TradeParty",
+          "description": "The party authenticating this signatory entry (the issuing veterinarian, the certifying authority, the inspecting body). Maps to UN/CEFACT documentAuthentication.provider. Renamed from providerParty per TIG §4.4 naming alignment."
         },
         "includedClause": {
           "type": "array",
@@ -130,14 +140,11 @@
     },
     "Clause": {
       "type": "object",
+      "description": "A clause attached to a signatory's authentication. Matches BSP D23B documentClauseType (UN01002646): identifier is the bare clause identifier (e.g. PURPOSE / GOODS_CERTIFIED_AS), content is the clause content (e.g. INTERNAL_MARKET / BREEDING_AND_PRODUCTION). The optional sibling urlId carries a URL to the codelist these values are drawn from (e.g. ched_consignment_clause, eu_intra_consignment_clause); the gateway translates urlId to/from TRACES schemeId / schemeAgencyId.",
       "properties": {
-        "identifier": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string",
-          "description": "unece:content is xsd:string in unece-context-D23B.jsonld."
-        }
+        "identifier": { "type": "string" },
+        "content":    { "type": "string" },
+        "urlId":      { "type": "string", "format": "uri", "description": "URL to the codelist this clause's identifier and content are drawn from. BSP D23B documentClauseType.urlId (UN01013211)." }
       }
     },
     "TradeAddress": {
@@ -172,7 +179,13 @@
       "type": "object",
       "properties": {
         "identifier": {
-          "type": "string"
+          "type": "string",
+          "description": "Party identifier (bare string). The sibling urlId names the codelist/register the value is drawn from (e.g. operator_internal_activity_id, veterinary_office_identifier, authority_activity_id, or Defra-side schemes such as private_transporter_approval_number)."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist/register the party identifier is drawn from. The gateway translates urlId to/from TRACES schemeId / schemeAgencyId."
         },
         "name": {
           "type": "string",
@@ -184,17 +197,10 @@
         },
         "partyTypeCode": {
           "oneOf": [
-            {
-              "type": "string",
-              "description": "unece:partyTypeCode is @vocab in unece-context-D23B.jsonld."
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ],
+          "description": "Party-type code(s). Bare string for a single code or array of bare strings when a party carries codes from more than one TRACES list (e.g. COMMERCIAL_TRANSPORTER under operator_activity_type plus TRANSPORTER under classification_section_code). Matches the BSP D23B canonical shape where the codeType has its codelist metadata disabled. The receiver / gateway resolves which TRACES list each value belongs to from context (party role, message subtype)."
         },
         "postalAddress": {
           "$ref": "#/$defs/TradeAddress"
@@ -206,6 +212,14 @@
             "properties": {
               "personName": {
                 "type": "string"
+              },
+              "emailURIUniversalCommunication": {
+                "type": "string",
+                "description": "Contact email. Additive to the legacy personName-only shape — TRACES SOAP does not carry contact email/phone, but Defra import pre-notifications source these from IPAFFS and need to carry them on consignor / consignee / delivery / carrier / issuer parties."
+              },
+              "telephoneUniversalCommunication": {
+                "type": "string",
+                "description": "Contact telephone. Same rationale as emailURIUniversalCommunication."
               }
             }
           }
@@ -214,7 +228,7 @@
     },
     "IncludedNote": {
       "type": "object",
-      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): supported properties are aligned to the Note vocabulary term set. unece:identifier, unece:name, unece:subject, unece:creationDateTime, unece:noteSubjectCode, unece:content, and unece:contentCode are xsd:string in unece-context-D23B.jsonld.",
+      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): supported properties are aligned to the Note vocabulary term set. unece:identifier, unece:name, unece:subject, unece:creationDateTime, unece:noteSubjectCode, unece:content, and unece:contentCode are xsd:string in unece-context-D23B.jsonld. content is an array of strings and contentCode is an array of UneceCodeType objects so a single note can carry multiple linked codes from different codelists (e.g. refusal_reason plus refusal_reason_extent on one refusal note).",
       "properties": {
         "type": {
           "const": "Note",
@@ -238,7 +252,11 @@
         },
         "noteSubjectCode": {
           "type": "string",
-          "description": "unece:noteSubjectCode — xsd:string in unece-context-D23B.jsonld."
+          "description": "Legacy subject-code slot - flat string only. Retained for the existing INTRA/CHED samples; new code should use subjectCode below."
+        },
+        "subjectCode": {
+          "type": "string",
+          "description": "Subject of the note (bare string; e.g. INDIVIDUAL_IDENTIFICATION_NUMBER). The sibling urlId names the codelist this code is drawn from."
         },
         "content": {
           "type": "array",
@@ -261,17 +279,30 @@
       "properties": {
         "typeCode": {
           "type": "string",
-          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+          "description": "Document type per UNTDID 1001 (e.g. 853 Veterinary certificate, 636 CHED, 916 Journey log, 705 Bill of lading)."
         },
         "relationshipTypeCode": {
           "type": "string",
-          "description": "unece:relationshipTypeCode is xsd:string in unece-context-D23B.jsonld."
+          "description": "Role this referenced document plays per UNTDID 1153."
         },
         "identifier": {
-          "type": "string"
+          "type": "string",
+          "description": "Reference number assigned by the issuing authority."
+        },
+        "issueDateTime": {
+          "type": "string",
+          "format": "date",
+          "description": "Issue date of the referenced document (ISO 8601 YYYY-MM-DD)."
         },
         "attachmentBinaryObject": {
-          "$ref": "#/$defs/AttachmentBinaryObject"
+          "oneOf": [
+            { "$ref": "#/$defs/AttachmentBinaryObject" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/AttachmentBinaryObject" }
+            }
+          ],
+          "description": "Attachment(s) for the referenced document. Single object (legacy INTRA/CHED shape) or array (when one referenced document carries multiple files)."
         },
         "information": {
           "type": "array",
@@ -292,6 +323,10 @@
         },
         "uri": {
           "type": "string"
+        },
+        "filename": {
+          "type": "string",
+          "description": "Original filename for the attachment, where the by-reference pattern carries metadata alongside the URI."
         }
       }
     },
@@ -299,7 +334,13 @@
       "type": "object",
       "properties": {
         "identifier": {
-          "type": "string"
+          "type": "string",
+          "description": "Location identifier as a bare string (e.g. CPH19876, GBDVR1, GBDVR). Matches the BSP D23B canonical shape where idType metadata is disabled. The sibling urlId names the register or codelist the identifier is drawn from (cph_number, bcp_reference, un_locode)."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL identifier for the codelist / register this location's identifier is drawn from."
         },
         "name": {
           "type": "string"
@@ -307,21 +348,90 @@
         "typeCode": {
           "type": "string",
           "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+        },
+        "postalAddress": {
+          "$ref": "#/$defs/TradeAddress",
+          "description": "Optional postal address for the location. Additive — needed for port-of-entry and inspection-point records that carry both a codelist-tagged identifier and a human-readable address."
         }
       }
     },
     "TradeCountry": {
       "type": "object",
-      "description": "SPSCountryType mapping for route countries. Operational TRACES mapping uses the country ID and Name fields.",
+      "description": "A country reference (origin / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names.",
       "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use."
+        },
         "id": {
           "type": "string",
-          "description": "Country identifier/code value (ISO 3166-1 alpha-2 style lexical token).",
+          "description": "Legacy alias for identifier. Country code; ISO 3166-1 alpha-2 lexical token.",
           "pattern": "^([A-Z]{2})?$"
         },
-        "name": {
+        "urlId": {
           "type": "string",
-          "description": "Country name."
+          "format": "uri",
+          "description": "URL to the codelist this country identifier is drawn from. Optional; ISO 3166-1 alpha-2 is the default and does not need to be stated."
+        },
+        "name": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/UneceTextType" }
+            }
+          ]
+        }
+      }
+    },
+    "TransportEvent": {
+      "type": "object",
+      "description": "A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT transportEventType narrowed to the two date-time slots GBN-AG uses today. scheduledOccurrenceDateTime is the importer-declared planned time; actualOccurrenceDateTime is populated when the event has been observed.",
+      "properties": {
+        "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" },
+        "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" }
+      }
+    },
+    "LogisticsTransportMovement": {
+      "type": "object",
+      "description": "A transport movement (a leg of the consignment's journey). identifier carries the transport identifier (vessel name, flight number, vehicle registration). modeCode is per UN/EDIFACT Recommendation 19 (1=Maritime, 2=Rail, 3=Road, 4=Air, 9=Unknown). arrivalEvent[] and departureEvent[] carry the importer-declared scheduled timing for the leg's start and end.",
+      "properties": {
+        "identifier": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "integer" }
+          ],
+          "description": "Transport identifier as a bare string (e.g. SHIPPY, FR-AB-123-CD) or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The sibling urlId names the register the identifier is drawn from (vessel_name_after_bcp, road_vehicle_registration_before_bcp, airplane_flight_number_before_bcp)."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL identifier for the codelist / register this movement's identifier is drawn from."
+        },
+        "modeCode": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "integer" }
+          ],
+          "description": "Mode-of-transport code per UN/EDIFACT Recommendation 19. Accepts integer (current INTRA/CHED shape) or string (hybrid shape where GBN-AG and TRACES-textual consumers prefer it as a code value)."
+        },
+        "usedLogisticsTransportMeans": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" }
+          }
+        },
+        "transportContractRelatedReferencedDocument": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ReferencedDocument" }
+        },
+        "arrivalEvent": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TransportEvent" }
+        },
+        "departureEvent": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TransportEvent" }
         }
       }
     },
@@ -376,6 +486,48 @@
         }
       }
     },
+    "TradeProduct": {
+      "type": "object",
+      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / originTradeCountry / individualTradeProductInstance.",
+      "properties": {
+        "description": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/UneceTextType" }
+            }
+          ]
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "BSP/D23B canonical slot (unece:typeCode, xsd:string) for the trade product's type/form code — e.g. live animal vs semen vs embryo vs ova. Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this trade product's typeCode is drawn from."
+        },
+        "designatedProductClassification": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ProductClassification" }
+        }
+      }
+    },
+    "LineTradeDelivery": {
+      "type": "object",
+      "description": "Delivery aspect of a trade line — what's being delivered on this line (quantities, weights at line level). Productively used for piece-count commodities (e.g. animals counted in head, with unitCode='H87').",
+      "properties": {
+        "productUnitQuantity": {
+          "type": "object",
+          "required": ["content"],
+          "properties": {
+            "content": { "type": "number" },
+            "unitCode": { "type": "string" }
+          }
+        }
+      }
+    },
     "TradeLineItem": {
       "type": "object",
       "properties": {
@@ -383,10 +535,18 @@
           "type": "integer"
         },
         "description": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "$ref": "#/$defs/UneceTextType" }
+                ]
+              }
+            }
+          ]
         },
         "netWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
@@ -405,6 +565,21 @@
           "items": {
             "$ref": "#/$defs/LogisticsPackage"
           }
+        },
+        "specifiedTradeProduct": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TradeProduct" },
+          "description": "The trade product on this line. BSP-canonical structural slot; profile schemas may narrow shape and cardinality."
+        },
+        "specifiedLineTradeDelivery": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/LineTradeDelivery" },
+          "description": "Delivery aspect of this line (line-level quantities)."
+        },
+        "additionalInformationNote": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/IncludedNote" },
+          "description": "Per-line annotation notes — the BSP slot operational TRACES uses to carry per-animal identifiers (subjectCode 'INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content). Path A of the per-animal-ID placement debate; Path B places the same data on tradeProduct.individualTradeProductInstance[] at the GBN-AG profile level."
         }
       }
     },
@@ -466,8 +641,7 @@
     "ExchangedDocument": {
       "type": "object",
       "required": [
-        "identifier",
-        "documentTypeCode"
+        "identifier"
       ],
       "properties": {
         "name": {
@@ -477,17 +651,34 @@
         "identifier": {
           "type": "string"
         },
+        "traderAssignedId": {
+          "type": "string",
+          "description": "Optional trader-entered reference. BSP/D23B canonical slot (unece:traderAssignedId, xsd:string) for an importer's own internal reference number against the consignment / pre-notification."
+        },
         "documentTypeCode": {
           "type": "string",
-          "description": "Document type: unece:typeCode is xsd:string in unece-context-D23B.jsonld (use lexical string for numeric codes)."
+          "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level — profile schemas constrain by const/enum, and GBN-AG defers the value pending a UK pre-notification documentTypeCode decision."
         },
         "documentStatusCode": {
           "type": "string",
           "description": "Status code as string per UN vocabulary typing for coded strings."
         },
+        "versionId": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Document revision number. V1 on first submission, increments on each subsequent re-submission. Distinct from the envelope's aggregateVersion (event sequence) and the schema's structural version."
+        },
+        "functionCode": {
+          "type": "string",
+          "description": "UNTDID 1225 message function: 9 (Original), 5 (Replace), 4 (Change), 1 (Cancellation), 3 (Deletion). Tells the consumer what the message does to its view of the document."
+        },
         "issueDateTime": {
           "type": "string",
           "format": "date-time"
+        },
+        "issuer": {
+          "$ref": "#/$defs/TradeParty",
+          "description": "The party responsible for issuing this document. For TRACES CHED and Defra import pre-notifications, this carries the responsible-person organisation with a named contact."
         },
         "includedNote": {
           "type": "array",
@@ -535,6 +726,14 @@
         "despatchParty": {
           "$ref": "#/$defs/TradeParty"
         },
+        "deliveryParty": {
+          "$ref": "#/$defs/TradeParty",
+          "description": "The immediate delivery party — the party to whom the consignment is delivered. Distinct from final destination (Defra pre-notification adds finalDestinationLocation for the permanent post-movements destination at profile level)."
+        },
+        "carrier": {
+          "$ref": "#/$defs/TradeParty",
+          "description": "The carrier party (the transporter). Operational TRACES populates both an activity-type discriminator (operator_activity_type) and a section-code discriminator (classification_section_code) on partyTypeCode."
+        },
         "customsTransitAgentParty": {
           "$ref": "#/$defs/TradeParty"
         },
@@ -561,9 +760,37 @@
           "description": "Transit countries on the consignment route (TRACES TransitSPSCountry[])."
         },
         "unloadingBaseportLocation": {
+          "oneOf": [
+            { "$ref": "#/$defs/LogisticsLocation" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/LogisticsLocation" }
+            }
+          ],
+          "description": "Port of entry / unloading baseport. Single location (BSP-canonical) or array (legacy CHED sample shape). For Defra import pre-notifications the identifier carries un_locode."
+        },
+        "mainCarriageLogisticsTransportMovement": {
+          "oneOf": [
+            { "$ref": "#/$defs/LogisticsTransportMovement" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/LogisticsTransportMovement" }
+            }
+          ],
+          "description": "Transport movement(s) for the main carriage leg(s). Accepts a single object (TRACES production data with one carriage leg) or an array (BSP-canonical / multi-leg, with entries distinguished by id.schemeId). The SPS profile collapses BSP's three-way pre/main/on carriage split into this slot."
+        },
+        "transitTradeCountry": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/LogisticsLocation"
+          "items": { "$ref": "#/$defs/TradeCountry" },
+          "description": "Transit countries between the consignment's origin and destination."
+        },
+        "packageQuantity": {
+          "type": "object",
+          "description": "Optional consignment-level package count. BSP/D23B canonical slot (unece:packageQuantity) for the number of packages in the consignment. content carries the count; unitCode is conventionally omitted for raw piece counts.",
+          "required": ["content"],
+          "properties": {
+            "content": { "type": "number", "exclusiveMinimum": 0 },
+            "unitCode": { "type": "string" }
           }
         },
         "includedConsignmentItem": {

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-submitted-v1.schema.json",
+  "title": "GBN-AG NotificationSubmitted event (v1)",
+  "description": "Event emitted when a GBN-AG notification is formally submitted for the first time. Maps to the DRAFT -> SUBMITTED transition. The data payload is the full GBN-AG notification snapshot with documentStatusCode=SUBMITTED, versionId=1, functionCode=9 (Original).",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationSubmitted" },
+        "data": {
+          "allOf": [
+            { "$ref": "gbn-ag-v1.schema.json" },
+            {
+              "type": "object",
+              "required": ["exchangedDocument"],
+              "properties": {
+                "exchangedDocument": {
+                  "type": "object",
+                  "required": ["documentStatusCode", "versionId", "functionCode"],
+                  "properties": {
+                    "documentStatusCode": { "const": "SUBMITTED" },
+                    "versionId":          { "const": 1 },
+                    "functionCode":       { "const": "9" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

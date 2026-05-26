@@ -24,3 +24,5 @@ coverage/
 # Build outputs
 dist/
 build/
+/workspace/branch-with-crosswalk/
+/workspace/
