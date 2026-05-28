@@ -49,83 +49,81 @@
       ]
     }
   },
-  "specifiedConsignment": [
-    {
-      "availabilityDueDateTime": "2019-03-31T17:56:00+02:00",
-      "exportExitDateTime": "2019-03-27T01:00:00+01:00",
-      "consignorParty": {
-        "identifier": "US777888",
-        "name": "",
-        "postalAddress": {
-          "postcodeCode": "",
-          "lineOne": "",
-          "cityName": "",
-          "countryName": "United States"
-        }
-      },
-      "consigneeParty": {
-        "identifier": "ES222222",
-        "name": "",
-        "postalAddress": {
-          "postcodeCode": "",
-          "lineOne": "",
-          "cityName": "",
-          "countryName": "Spain"
-        }
-      },
-      "exportCountry": {
-        "id": "US",
-        "name": "United States"
-      },
-      "importCountry": {
-        "id": "ES",
-        "name": "Spain"
-      },
-      "unloadingBaseportLocation": [
-        {
-          "identifier": "ESMAD4",
-          "name": "ES"
-        }
-      ],
-      "examinationSPSEvent": {
-        "occurrenceSPSLocation": {
-          "id": "2019-04-01T15:00:00.000+02:00",
-          "name": ""
-        }
-      },
-      "deliveryParty": {
-        "identifier": "ES333444",
-        "name": "",
-        "partyRoleCode": "CN",
-        "postalAddress": {
-          "countryName": "Spain"
-        }
-      },
-      "customsTransitAgentParty": {
-        "identifier": "ES222111",
-        "name": "",
-        "postalAddress": {
-          "countryName": "Spain"
-        }
-      },
-      "mainCarriageLogisticsTransportMovement": {
-        "id": "LH1198",
-        "modeCode": 4
-      },
-      "includedConsignmentItem": [
-        {
-          "includedTradeLineItem": [
-            {
-              "sequenceNumeric": 1,
-              "applicableProductClassification": [
-                {
-                  "classCode": 1061900
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "specifiedConsignment": {
+    "availabilityDueDateTime": "2019-03-31T17:56:00+02:00",
+    "exportExitDateTime": "2019-03-27T01:00:00+01:00",
+    "consignorParty": {
+      "identifier": "US777888",
+      "name": "",
+      "postalAddress": {
+        "postcodeCode": "",
+        "lineOne": "",
+        "cityName": "",
+        "countryName": "United States"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "ES222222",
+      "name": "",
+      "postalAddress": {
+        "postcodeCode": "",
+        "lineOne": "",
+        "cityName": "",
+        "countryName": "Spain"
+      }
+    },
+    "exportCountry": {
+      "id": "US",
+      "name": "United States"
+    },
+    "importCountry": {
+      "id": "ES",
+      "name": "Spain"
+    },
+    "unloadingBaseportLocation": [
+      {
+        "identifier": "ESMAD4",
+        "name": "ES"
+      }
+    ],
+    "examinationSPSEvent": {
+      "occurrenceSPSLocation": {
+        "id": "2019-04-01T15:00:00.000+02:00",
+        "name": ""
+      }
+    },
+    "deliveryParty": {
+      "identifier": "ES333444",
+      "name": "",
+      "partyRoleCode": "CN",
+      "postalAddress": {
+        "countryName": "Spain"
+      }
+    },
+    "customsTransitAgentParty": {
+      "identifier": "ES222111",
+      "name": "",
+      "postalAddress": {
+        "countryName": "Spain"
+      }
+    },
+    "mainCarriageLogisticsTransportMovement": {
+      "id": "LH1198",
+      "modeCode": 4
+    },
+    "includedConsignmentItem": [
+      {
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 1,
+            "applicableProductClassification": [
+              {
+                "classCode": 1061900
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

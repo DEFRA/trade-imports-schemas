@@ -82,8 +82,7 @@
         }
       ]
     },
-    "specifiedConsignment": [
-      {
+    "specifiedConsignment": {
         "consignorParty": {
           "name": "Astra Rosales",
           "postalAddress": {
@@ -310,7 +309,6 @@
           }
         ]
       }
-    ]
   },
   "metadata": {
     "correlationId": "cid-20260521-101500",

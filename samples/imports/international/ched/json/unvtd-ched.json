@@ -129,8 +129,7 @@
       }
     ]
   },
-  "specifiedConsignment": [
-    {
+  "specifiedConsignment": {
       "availabilityDueDateTime": "2021-02-20T16:07:00.000+01:00",
       "exportExitDateTime": "2021-02-18T16:07:00.000+01:00",
       "mainCarriageLogisticsTransportMovement": [
@@ -242,8 +241,7 @@
           "identifier": "DEFRA4"
         }
       ]
-    }
-  ],
+    },
   "laboratoryObservationResult": [
     {
       "natureIdCargo": {

@@ -820,11 +820,7 @@
           "$ref": "#/$defs/ExchangedDocument"
         },
         "specifiedConsignment": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/Consignment"
-          }
+          "$ref": "#/$defs/Consignment"
         },
         "laboratoryObservationResult": {
           "type": "array",

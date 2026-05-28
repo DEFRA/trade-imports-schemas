@@ -76,8 +76,7 @@ test('INTRA XML converts to UNVTD shape and validates', { skip: !existsSync(FIXT
   assert.equal(out.$model, 'defra/certificate-internal/1')
   assert.ok(out.exchangedDocument)
   assert.equal(out.exchangedDocument.documentTypeCode, '856')
-  assert.ok(Array.isArray(out.specifiedConsignment))
-  assert.ok(out.specifiedConsignment.length >= 1)
+  assert.ok(out.specifiedConsignment && typeof out.specifiedConsignment === 'object')
   assert.ok(out.exchangedDocument.firstSignatoryAuthentication)
   assert.ok(out.laboratoryObservationResult?.length >= 1)
 
@@ -113,7 +112,7 @@ test('DOCOM JSON fixture maps with docom profile override', async () => {
   unvtd = applyProfile(unvtd, 'docom')
   assert.equal(unvtd.$type, 'docom')
   assert.equal(unvtd.exchangedDocument.identifier, 'DOCOM.EU.DE.2020.0000001')
-  assert.ok(Array.isArray(unvtd.specifiedConsignment))
+  assert.ok(unvtd.specifiedConsignment && typeof unvtd.specifiedConsignment === 'object')
 
   const { valid, errors } = await validateUnvtdPayload(unvtd, 'docom')
   assert.equal(valid, true, JSON.stringify(errors, null, 2))

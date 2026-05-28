@@ -35,8 +35,7 @@
         ]
       }
     },
-    "specifiedConsignment": [
-      {
+    "specifiedConsignment": {
         "includedConsignmentItem": [
           {
             "includedTradeLineItem": [
@@ -68,7 +67,6 @@
           }
         ]
       }
-    ]
   },
   "metadata": {
     "correlationId": "cid-20260515-093000",

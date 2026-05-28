@@ -559,7 +559,7 @@ export function mapTracesToUnvtd (input, options = {}) {
 
   const { cert, labTests } = extracted
   const exchangedDocument = mapExchangedDocument(cert.spsExchangedDocument)
-  const specifiedConsignment = [mapConsignment(cert.spsConsignment)]
+  const specifiedConsignment = mapConsignment(cert.spsConsignment)
 
   const payload = {
     $model: 'defra/certificate-internal/1',

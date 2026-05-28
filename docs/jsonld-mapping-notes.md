@@ -11,7 +11,7 @@ This note explains why `schemas/contexts/defra-unvtd-core-v1.context.jsonld` exi
   - Optional ergonomic aliases (`consignor`, `consignee`) mapped to UNECE properties
   - Defra profile aliases for the two missing BSP root keys:
   - `exchangedDocument` -> `defraUnvtdProfile:exchangedDocument`
-  - `specifiedConsignment` -> `defraUnvtdProfile:specifiedConsignment` (`@container: @set`)
+  - `specifiedConsignment` -> `defraUnvtdProfile:specifiedConsignment`
 
 ## Why this extension exists
 

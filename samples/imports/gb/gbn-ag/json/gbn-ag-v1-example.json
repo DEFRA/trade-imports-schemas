@@ -70,8 +70,7 @@
       }
     ]
   },
-  "specifiedConsignment": [
-    {
+  "specifiedConsignment": {
       "consignorParty": {
         "name": "Astra Rosales",
         "postalAddress": {
@@ -300,5 +299,4 @@
         }
       ]
     }
-  ]
 }

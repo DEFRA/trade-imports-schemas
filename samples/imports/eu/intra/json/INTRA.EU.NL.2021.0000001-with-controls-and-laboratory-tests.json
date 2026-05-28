@@ -309,129 +309,127 @@
       ]
     }
   },
-  "specifiedConsignment": [
-    {
-      "availabilityDueDateTime": "2021-02-20T16:07:00.000+01:00",
-      "exportExitDateTime": "2021-02-18T16:07:00.000+01:00",
-      "consignorParty": {
-        "identifier": "1234567",
-        "name": "B&S GTC Customs B.V.",
-        "partyRoleCode": "CZ",
-        "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
-        ],
-        "postalAddress": {
-          "postcodeCode": "3316",
-          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
-          "cityName": "Dordrecht",
-          "countryName": "Netherlands",
-          "countrySubDivisionName": "South Holland"
-        }
-      },
-      "consigneeParty": {
-        "identifier": "BE-IMP-123",
-        "name": "Test EU lms",
-        "partyRoleCode": "CN",
-        "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
-        ],
-        "postalAddress": {
-          "postcodeCode": "1000",
-          "lineOne": "addresse",
-          "cityName": "Ville de Bruxelles - Stad Brussel",
-          "countryName": "Belgium",
-          "countrySubDivisionName": "Brussels-Capital"
-        }
-      },
-      "exportCountry": {
-        "id": "",
+  "specifiedConsignment": {
+    "availabilityDueDateTime": "2021-02-20T16:07:00.000+01:00",
+    "exportExitDateTime": "2021-02-18T16:07:00.000+01:00",
+    "consignorParty": {
+      "identifier": "1234567",
+      "name": "B&S GTC Customs B.V.",
+      "partyRoleCode": "CZ",
+      "partyTypeCode": [
+        "IMPORTER",
+        "IMP"
+      ],
+      "postalAddress": {
+        "postcodeCode": "3316",
+        "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+        "cityName": "Dordrecht",
+        "countryName": "Netherlands",
+        "countrySubDivisionName": "South Holland"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "BE-IMP-123",
+      "name": "Test EU lms",
+      "partyRoleCode": "CN",
+      "partyTypeCode": [
+        "IMPORTER",
+        "IMP"
+      ],
+      "postalAddress": {
+        "postcodeCode": "1000",
+        "lineOne": "addresse",
+        "cityName": "Ville de Bruxelles - Stad Brussel",
+        "countryName": "Belgium",
+        "countrySubDivisionName": "Brussels-Capital"
+      }
+    },
+    "exportCountry": {
+      "id": "",
+      "name": ""
+    },
+    "importCountry": {
+      "id": "BE",
+      "name": "Belgium"
+    },
+    "examinationSPSEvent": {
+      "occurrenceSPSLocation": {
         "name": ""
-      },
-      "importCountry": {
-        "id": "BE",
-        "name": "Belgium"
-      },
-      "examinationSPSEvent": {
-        "occurrenceSPSLocation": {
-          "name": ""
-        }
-      },
-      "despatchParty": {
-        "identifier": "1234567",
-        "name": "B&S GTC Customs B.V.",
-        "partyRoleCode": "PW",
-        "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
+      }
+    },
+    "despatchParty": {
+      "identifier": "1234567",
+      "name": "B&S GTC Customs B.V.",
+      "partyRoleCode": "PW",
+      "partyTypeCode": [
+        "IMPORTER",
+        "IMP"
+      ],
+      "postalAddress": {
+        "postcodeCode": "3316",
+        "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+        "cityName": "Dordrecht",
+        "countryName": "Netherlands",
+        "countrySubDivisionName": "South Holland"
+      }
+    },
+    "customsTransitAgentParty": {
+      "identifier": "1234567",
+      "name": "B&S GTC Customs B.V.",
+      "partyRoleCode": "CB",
+      "partyTypeCode": [
+        "IMPORTER",
+        "IMP"
+      ],
+      "postalAddress": {
+        "postcodeCode": "3316",
+        "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
+        "cityName": "Dordrecht",
+        "countryName": "Netherlands",
+        "countrySubDivisionName": "South Holland"
+      }
+    },
+    "mainCarriageLogisticsTransportMovement": {
+      "id": 123456,
+      "modeCode": 3
+    },
+    "utilizedLogisticsTransportEquipment": {
+      "id": "",
+      "affixedLogisticsSeal": {
+        "id": "MSKU907032"
+      }
+    },
+    "includedConsignmentItem": [
+      {
+        "natureIdCargo": [
+          {
+            "typeCode": "12"
+          }
         ],
-        "postalAddress": {
-          "postcodeCode": "3316",
-          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
-          "cityName": "Dordrecht",
-          "countryName": "Netherlands",
-          "countrySubDivisionName": "South Holland"
-        }
-      },
-      "customsTransitAgentParty": {
-        "identifier": "1234567",
-        "name": "B&S GTC Customs B.V.",
-        "partyRoleCode": "CB",
-        "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
-        ],
-        "postalAddress": {
-          "postcodeCode": "3316",
-          "lineOne": "Rijksstraatweg 7\nTest Address 4\n10920",
-          "cityName": "Dordrecht",
-          "countryName": "Netherlands",
-          "countrySubDivisionName": "South Holland"
-        }
-      },
-      "mainCarriageLogisticsTransportMovement": {
-        "id": 123456,
-        "modeCode": 3
-      },
-      "utilizedLogisticsTransportEquipment": {
-        "id": "",
-        "affixedLogisticsSeal": {
-          "id": "MSKU907032"
-        }
-      },
-      "includedConsignmentItem": [
-        {
-          "natureIdCargo": [
-            {
-              "typeCode": "12"
-            }
-          ],
-          "includedTradeLineItem": [
-            {
-              "sequenceNumeric": 0,
-              "description": [
-                "Consignment totals and summary"
-              ]
-            },
-            {
-              "sequenceNumeric": 1,
-              "applicableProductClassification": [
-                {
-                  "systemName": "CN Code (Combined Nomenclature)",
-                  "classCode": 102,
-                  "className": [
-                    "LIVE ANIMALS",
-                    "Live bovine animals"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ]
+          },
+          {
+            "sequenceNumeric": 1,
+            "applicableProductClassification": [
+              {
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": 102,
+                "className": [
+                  "LIVE ANIMALS",
+                  "Live bovine animals"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "laboratoryObservationResult": [
     {
       "natureIdCargo": {
