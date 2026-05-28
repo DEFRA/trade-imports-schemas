@@ -90,54 +90,49 @@
         },
 
         "specifiedConsignment": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": {
-            "type": "object",
-            "required": [
-              "consignorParty",
-              "consigneeParty",
-              "deliveryParty",
-              "importer",
-              "applicableCrossBorderRegulatoryProcedure",
-              "unloadingBaseportLocation",
-              "mainCarriageLogisticsTransportMovement",
-              "carrier",
-              "isOrHasUnweanedAnimals",
-              "includedConsignmentItem"
-            ],
-            "properties": {
-              "importer": {
-                "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
-                "description": "GBN-AG-specific re-inclusion: the party legally importing the consignment into GB customs territory. IPAFFS source: notification.partOne.importer. Not modelled by operational TRACES (TIG observes 'may be same party as consignee in SPS'); we keep them distinct because the UK regulatory pathway requires both."
-              },
-              "finalDestinationLocation": {
-                "$ref": "#/$defs/finalDestinationLocation",
-                "description": "GBN-AG-specific extension: the post-all-movements permanent destination, distinct from the immediate deliveryParty. The location identifier carries the County Parish Holding number with schemeId='cph_number'."
-              },
-              "applicableCrossBorderRegulatoryProcedure": {
-                "type": "array",
-                "minItems": 1,
-                "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" }
-              },
-              "isOrHasUnweanedAnimals": {
-                "type": "boolean",
-                "description": "CHED-A welfare indicator — true if the consignment contains any unweaned (non-ablacted) animals. Defra extension; no BSP analogue, no TRACES analogue. Follows BSP's isOrHas naming convention for consignment-level boolean indicators."
-              },
-              "includedConsignmentItem": {
-                "type": "array",
-                "minItems": 1,
-                "maxItems": 1,
-                "items": {
-                  "type": "object",
-                  "required": ["includedTradeLineItem"],
-                  "properties": {
-                    "includedTradeLineItem": {
-                      "type": "array",
-                      "minItems": 1,
-                      "items": { "$ref": "#/$defs/gbnAgTradeLineItem" }
-                    }
+          "type": "object",
+          "required": [
+            "consignorParty",
+            "consigneeParty",
+            "deliveryParty",
+            "importer",
+            "applicableCrossBorderRegulatoryProcedure",
+            "unloadingBaseportLocation",
+            "mainCarriageLogisticsTransportMovement",
+            "carrier",
+            "isOrHasUnweanedAnimals",
+            "includedConsignmentItem"
+          ],
+          "properties": {
+            "importer": {
+              "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+              "description": "GBN-AG-specific re-inclusion: the party legally importing the consignment into GB customs territory. IPAFFS source: notification.partOne.importer. Not modelled by operational TRACES (TIG observes 'may be same party as consignee in SPS'); we keep them distinct because the UK regulatory pathway requires both."
+            },
+            "finalDestinationLocation": {
+              "$ref": "#/$defs/finalDestinationLocation",
+              "description": "GBN-AG-specific extension: the post-all-movements permanent destination, distinct from the immediate deliveryParty. The location identifier carries the County Parish Holding number with schemeId='cph_number'."
+            },
+            "applicableCrossBorderRegulatoryProcedure": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" }
+            },
+            "isOrHasUnweanedAnimals": {
+              "type": "boolean",
+              "description": "CHED-A welfare indicator — true if the consignment contains any unweaned (non-ablacted) animals. Defra extension; no BSP analogue, no TRACES analogue. Follows BSP's isOrHas naming convention for consignment-level boolean indicators."
+            },
+            "includedConsignmentItem": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["includedTradeLineItem"],
+                "properties": {
+                  "includedTradeLineItem": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "$ref": "#/$defs/gbnAgTradeLineItem" }
                   }
                 }
               }

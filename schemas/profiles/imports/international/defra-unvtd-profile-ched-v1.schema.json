@@ -22,6 +22,9 @@
               "const": "636"
             }
           }
+        },
+        "specifiedConsignment": {
+          "type": "object"
         }
       },
       "required": [
