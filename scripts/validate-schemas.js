@@ -8,7 +8,7 @@ import Ajv from 'ajv'
 import Ajv2020 from 'ajv/dist/2020.js'
 import addFormats from 'ajv-formats'
 import { readFile, writeFile, mkdir, access, readdir } from 'fs/promises'
-import { join, dirname, relative } from 'path'
+import { join, dirname, relative, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -24,7 +24,7 @@ const BSP_BASICCOMPONENTS_LEGACY_URL =
 const VENDOR_DIR = join(ROOT, 'build/vendor/uncefact')
 const BSP_VENDOR_PATH = join(VENDOR_DIR, 'UNECE-BasicComponents.json')
 const CONTEXT_VENDOR_PATH = join(VENDOR_DIR, 'unece-context-D23B.jsonld')
-const LOCAL_CONTEXT_PATH = join(ROOT, 'schemas/contexts/defra-unvtd-core-v1.context.jsonld')
+const CONTEXTS_DIR = join(SCHEMAS_DIR, 'contexts')
 
 function toPosix(p) {
   return p.split('\\').join('/')
@@ -109,12 +109,35 @@ async function ensureRemoteJson(url, targetPath, label) {
   return loadJson(targetPath)
 }
 
-function localContextIncludesOfficial(localContext) {
-  const ctx = localContext?.['@context']
-  if (Array.isArray(ctx)) {
-    return ctx.some(item => item === UNECE_CONTEXT_URL)
+async function contextIncludesOfficial(contextValue, baseDir) {
+  if (!contextValue) return false
+
+  if (typeof contextValue === 'string') {
+    if (contextValue === UNECE_CONTEXT_URL) return true
+    if (contextValue.startsWith('http://') || contextValue.startsWith('https://')) {
+      return false
+    }
+    const resolved = resolve(baseDir, contextValue)
+    if (!(await fileExists(resolved))) return false
+    const localCtx = await loadJson(resolved)
+    return contextIncludesOfficial(localCtx['@context'], dirname(resolved))
   }
-  return ctx === UNECE_CONTEXT_URL
+
+  if (Array.isArray(contextValue)) {
+    for (const item of contextValue) {
+      if (await contextIncludesOfficial(item, baseDir)) return true
+    }
+    return false
+  }
+
+  if (typeof contextValue === 'object') {
+    if (contextValue['@context']) {
+      return contextIncludesOfficial(contextValue['@context'], baseDir)
+    }
+    return false
+  }
+
+  return false
 }
 
 async function main() {
@@ -170,19 +193,27 @@ async function main() {
     }
   }
 
-  // Validate local context wiring against official context URL.
-  if (await fileExists(LOCAL_CONTEXT_PATH)) {
-    process.stdout.write(`  ${toPosix(relative(ROOT, LOCAL_CONTEXT_PATH))} (context linkage) ... `)
-    try {
-      const localContext = await loadJson(LOCAL_CONTEXT_PATH)
-      if (!localContextIncludesOfficial(localContext)) {
-        throw new Error(`@context does not include ${UNECE_CONTEXT_URL}`)
+  // Validate each local context's chain reaches the official D23B URL,
+  // following nested @context references between local files.
+  if (await fileExists(CONTEXTS_DIR)) {
+    const contextPaths = (await walkFiles(
+      CONTEXTS_DIR,
+      p => p.endsWith('.context.jsonld')
+    )).sort()
+    for (const contextPath of contextPaths) {
+      process.stdout.write(`  ${toPosix(relative(ROOT, contextPath))} (context linkage) ... `)
+      try {
+        const localContext = await loadJson(contextPath)
+        const ok = await contextIncludesOfficial(localContext['@context'], dirname(contextPath))
+        if (!ok) {
+          throw new Error(`@context chain does not include ${UNECE_CONTEXT_URL}`)
+        }
+        console.log('ok')
+      } catch (err) {
+        console.log('FAIL')
+        console.error(`    ${err.message}`)
+        failures += 1
       }
-      console.log('ok')
-    } catch (err) {
-      console.log('FAIL')
-      console.error(`    ${err.message}`)
-      failures += 1
     }
   }
 

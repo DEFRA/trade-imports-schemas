@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-created-v1.schema.json",
+  "title": "GBN-AG NotificationCreated event (v1)",
+  "description": "Event emitted when a new GBN-AG notification is created (entry -> DRAFT). The data payload is intentionally minimal - just enough for downstream consumers to discover the notification (issuer, primary commodity, origin country). Validates against the canonical core CertificatePayload base, not against gbn-ag-v1.schema.json (which carries SUBMITTED-grade narrowings such as required signatures and reference documents that a draft does not yet have).",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationCreated" },
+        "data": {
+          "allOf": [
+            { "$ref": "core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload" },
+            {
+              "type": "object",
+              "required": ["$model", "$type", "exchangedDocument"],
+              "properties": {
+                "$model": { "const": "defra/certificate-internal/1" },
+                "$type":  { "const": "gbn-ag" },
+                "exchangedDocument": {
+                  "type": "object",
+                  "required": ["identifier", "issuer", "documentStatusCode", "functionCode"],
+                  "properties": {
+                    "documentStatusCode": { "const": "DRAFT" },
+                    "functionCode":       { "const": "9" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

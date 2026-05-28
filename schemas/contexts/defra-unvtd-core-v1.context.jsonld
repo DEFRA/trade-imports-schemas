@@ -13,6 +13,14 @@
         "@id": "defraUnvtdProfile:specifiedConsignment",
         "@container": "@set",
         "@type": "@id"
+      },
+      "importer": {
+        "@id": "unece:importerParty",
+        "@type": "@id"
+      },
+      "carrier": {
+        "@id": "unece:carrierParty",
+        "@type": "@id"
       }
     }
   ]
