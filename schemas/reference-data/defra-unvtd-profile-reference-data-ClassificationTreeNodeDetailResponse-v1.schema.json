@@ -73,10 +73,7 @@
               "type": "string"
             },
             "className": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "type": "string"
             }
           }
         },
