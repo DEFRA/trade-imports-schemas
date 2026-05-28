@@ -20,8 +20,34 @@
           "type": "object",
           "required": ["identifier", "issuer", "firstSignatoryAuthentication", "referenceDocument"],
           "properties": {
+            "identifier": {
+              "type": "string",
+              "description": "The final agreed format is `GBN-AG-26-7K8M2P`. `GBN` is Great Britain Notification, `AG` is Animals and Germinals, `26` is the two-digit year of allocation, and `7K8M2P` is a six-character Crockford base32 non-guessable body. The scheme is reusable for other GB import journeys (for example `GBN-P-26-XXXXXX` for Products of Animal Origin, `GBN-PP-26-XXXXXX` for Plants)."
+            },
+            "documentTypeCode": {
+              "type": "string",
+              "description": "UNTDID 1001 code. GBN-AG leaves this optional and unset today because a UK pre-notification code has not yet been decided. INTRA and CHED carry codes 666/856 and 636 respectively."
+            },
+            "documentStatusCode": {
+              "type": "string",
+              "description": "TRACES-boundary value, populated by the gateway on outbound TRACES messages and round-tripped on inbound. UNCL1373 per UN/CEFACT. Internal workflow state is on `notificationStatusCode`."
+            },
+            "notificationStatusCode": {
+              "type": "string",
+              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status`."
+            },
+            "name": {
+              "description": "An optional human-readable name for the document. GBN-AG identifies the pre-notification by its `identifier`."
+            },
+            "traderAssignedId": {
+              "description": "Optional reference the trader assigns to the pre-notification - their own internal reference number, carried through unchanged."
+            },
+            "includedNote": {
+              "description": "General notes attached to the document as a whole, distinct from the per-line notes on a trade line's `additionalInformationNote`."
+            },
             "firstSignatoryAuthentication": {
               "type": "object",
+              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present.",
               "required": ["includedClause"],
               "properties": {
                 "includedClause": {
@@ -84,7 +110,7 @@
                 },
                 "required": ["typeCode"]
               },
-              "description": "Must carry at least one referenced document with typeCode='853' (UNTDID 1001 — Veterinary certificate). The accompanying-documents list (transport documents, ITAHC, etc.) shares this slot, distinguished by typeCode value."
+              "description": "Carries the regulatory documents that accompany the consignment. At least one entry is the veterinary health certificate (`typeCode` `853` on UNTDID 1001); further entries cover the other accompanying documents (transport documents and the like), each distinguished by its `typeCode`. Attachments are referenced by `filename`, `mimeCode`, and `uri` rather than embedded inline."
             }
           }
         },
@@ -104,13 +130,31 @@
             "includedConsignmentItem"
           ],
           "properties": {
+            "consignorParty": {
+              "description": "The party sending the animals under the trade contract - the exporter in regulatory terms. Distinct from `despatchParty` (the physical place the animals came from); the two may be the same legal entity (a farm that both raises and consigns) but are modelled separately."
+            },
+            "consigneeParty": {
+              "description": "The party receiving the animals under the trade contract. Kept separate from `importer` (the legal importer of record) and `deliveryParty` (the destination party); on a given consignment these may or may not be the same legal entity. Carries `name`, `postalAddress`, and a `definedContact` (telephone, email) for inspection coordination."
+            },
+            "despatchParty": {
+              "description": "The place from which the animals were despatched, typically the origin farm or production site. Pairs with `deliveryParty` to form the origin-to-destination axis of the consignment. Optional for GBN-AG."
+            },
+            "deliveryParty": {
+              "description": "The party the animals will be delivered to at the immediate destination - the contractual delivery point, which may be temporary. The post-movement permanent home is carried separately: per-animal `permanentLocation`, or the consignment's `finalDestinationLocation` for livestock."
+            },
+            "carrier": {
+              "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a `private_transporter_approval_number` (issued under the UK welfare-in-transport regime) as the value of `identifier`."
+            },
+            "transitTradeCountry": {
+              "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
+            },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
-              "description": "GBN-AG-specific re-inclusion: the party legally importing the consignment into GB customs territory. IPAFFS source: notification.partOne.importer. Not modelled by operational TRACES (TIG observes 'may be same party as consignee in SPS'); we keep them distinct because the UK regulatory pathway requires both."
+              "description": "The party legally importing the consignment, held as a full party with its own address and contacts. Modelled as a slot distinct from `consigneeParty` because the importer of record and the contractual receiver are frequently different legal entities on UK live-animal imports."
             },
             "finalDestinationLocation": {
               "$ref": "#/$defs/finalDestinationLocation",
-              "description": "GBN-AG-specific extension: the post-all-movements permanent destination, distinct from the immediate deliveryParty. The location identifier carries the County Parish Holding number with schemeId='cph_number'."
+              "description": "For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://codelists.tbc.defra.gov.uk/cph_number`. Pets omit this slot entirely and use per-animal `permanentLocation` instead."
             },
             "applicableCrossBorderRegulatoryProcedure": {
               "type": "array",
@@ -119,7 +163,7 @@
             },
             "isOrHasUnweanedAnimals": {
               "type": "boolean",
-              "description": "CHED-A welfare indicator — true if the consignment contains any unweaned (non-ablacted) animals. Defra extension; no BSP analogue, no TRACES analogue. Follows BSP's isOrHas naming convention for consignment-level boolean indicators."
+              "description": "True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications."
             },
             "includedConsignmentItem": {
               "type": "array",
@@ -190,7 +234,7 @@
 
     "gbnAgTradeLineItem": {
       "type": "object",
-      "description": "GBN-AG trade line item. Carries the trade product (species, classification, origin, per-animal data) and the line delivery (quantity). The additionalInformationNote slot carries Path A per-animal identifiers — the example populates BOTH placements so the joint review can compare with real data. No maxItems caps on the arrays — split-consignment / multi-product-line scenarios are not in scope today but adding caps would be premature optimisation.",
+      "description": "GBN-AG trade line item. One per species or commodity on the certificate. Carries the trade product, the line delivery (per-line quantity), and any per-line notes (including per-animal identifier notes carried alongside the BSP-canonical placement on `individualTradeProductInstance[].identifier[]`).",
       "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
       "properties": {
         "specifiedTradeProduct": {
@@ -208,7 +252,7 @@
           "items": {
             "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
           },
-          "description": "Path A per-animal identifiers (operational TRACES placement): each note carries subjectCode='INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content. Populated alongside Path B (individualTradeProductInstance[]) for the joint review."
+          "description": "General-purpose annotations on the trade line. GBN-AG carries per-animal identifiers on `individualTradeProductInstance[].identifier[]`; for consumers that follow the TRACES convention, the same identifiers are also emitted here as notes with `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER`."
         }
       }
     },
@@ -224,6 +268,10 @@
         "originTradeCountry"
       ],
       "properties": {
+        "description": {
+          "type": "string",
+          "description": "The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification."
+        },
         "designatedProductClassification": {
           "type": "array",
           "minItems": 1,
@@ -231,7 +279,7 @@
         },
         "typeCode": {
           "type": "string",
-          "description": "Optional trade-product type/form code (live animal / semen / embryo / ova). BSP/D23B canonical (unece:typeCode, xsd:string). Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+          "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
         },
         "urlId": {
           "type": "string",
@@ -241,12 +289,14 @@
         "scientificName": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" }
+          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
+          "description": "The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
         },
         "commonName": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" }
+          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
+          "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
         },
         "originTradeCountry": {
           "type": "array",
@@ -264,7 +314,7 @@
 
     "gbnAgProductClassification": {
       "type": "object",
-      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN' or 'SPECIES_CLASS') and classCode (the code value). No const enforcement on systemId — a single trade product can carry multiple classifications under different coding systems (e.g. CN code for commodity plus a SPECIES_CLASS entry for taxonomic class). CN codes are 8 digits in the operational case; the string-or-integer classCode accommodates both shapes without binding to a length pattern.",
+      "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",
       "required": ["systemId", "classCode"],
       "properties": {
         "systemId": { "type": "string" },

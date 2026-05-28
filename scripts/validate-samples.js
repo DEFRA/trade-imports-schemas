@@ -8,9 +8,12 @@
 import Ajv from 'ajv'
 import Ajv2020 from 'ajv/dist/2020.js'
 import addFormats from 'ajv-formats'
-import { readFile, writeFile, mkdir, access, readdir } from 'fs/promises'
+import { readFile, readdir } from 'fs/promises'
 import { join, dirname, relative, resolve } from 'path'
 import { fileURLToPath } from 'url'
+
+import { ensureRemoteJson, fileExists } from './lib/vendor.js'
+import { contextIncludesOfficial } from './lib/context-chain.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -32,15 +35,6 @@ function toPosix(p) {
 
 async function loadJson(path) {
   return JSON.parse(await readFile(path, 'utf-8'))
-}
-
-async function fileExists(path) {
-  try {
-    await access(path)
-    return true
-  } catch {
-    return false
-  }
 }
 
 async function walkFiles(dir, predicate, acc = []) {
@@ -93,21 +87,6 @@ function registerSchemaAliases(ajv, schema, schemaAbsPath) {
   safeAddSchema(ajv, schema, schema.$id)
 }
 
-async function ensureRemoteJson(url, targetPath, label) {
-  if (!(await fileExists(targetPath))) {
-    process.stdout.write(`  Fetching ${label} ... `)
-    const response = await fetch(url)
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} fetching ${url}`)
-    }
-    const body = await response.text()
-    await mkdir(dirname(targetPath), { recursive: true })
-    await writeFile(targetPath, body)
-    console.log('cached')
-  }
-  return loadJson(targetPath)
-}
-
 /**
  * Remove keys starting with `_` recursively.
  */
@@ -122,37 +101,6 @@ function stripAuthorialKeys(value) {
     return out
   }
   return value
-}
-
-async function contextIncludesOfficial(contextValue, baseDir) {
-  if (!contextValue) return false
-
-  if (typeof contextValue === 'string') {
-    if (contextValue === UNECE_CONTEXT_URL) return true
-    if (contextValue.startsWith('http://') || contextValue.startsWith('https://')) {
-      return false
-    }
-    const resolved = resolve(baseDir, contextValue)
-    if (!(await fileExists(resolved))) return false
-    const localCtx = await loadJson(resolved)
-    return contextIncludesOfficial(localCtx['@context'], dirname(resolved))
-  }
-
-  if (Array.isArray(contextValue)) {
-    for (const item of contextValue) {
-      if (await contextIncludesOfficial(item, baseDir)) return true
-    }
-    return false
-  }
-
-  if (typeof contextValue === 'object') {
-    if (contextValue['@context']) {
-      return contextIncludesOfficial(contextValue['@context'], baseDir)
-    }
-    return false
-  }
-
-  return false
 }
 
 async function main() {
@@ -257,7 +205,7 @@ async function main() {
 
       // JSON-LD context check (only when @context is present).
       if (sample['@context']) {
-        const hasOfficial = await contextIncludesOfficial(sample['@context'], dirname(samplePath))
+        const hasOfficial = await contextIncludesOfficial(sample['@context'], dirname(samplePath), UNECE_CONTEXT_URL)
         if (!hasOfficial) {
           throw new Error(`@context does not include ${UNECE_CONTEXT_URL}`)
         }

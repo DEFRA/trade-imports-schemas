@@ -23,10 +23,10 @@
                 "$type":  { "const": "gbn-ag" },
                 "exchangedDocument": {
                   "type": "object",
-                  "required": ["identifier", "issuer", "documentStatusCode", "functionCode"],
+                  "required": ["identifier", "issuer", "notificationStatusCode", "functionCode"],
                   "properties": {
-                    "documentStatusCode": { "const": "DRAFT" },
-                    "functionCode":       { "const": "9" }
+                    "notificationStatusCode": { "const": "DRAFT" },
+                    "functionCode":           { "const": "9" }
                   }
                 }
               }

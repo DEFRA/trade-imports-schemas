@@ -663,6 +663,10 @@
           "type": "string",
           "description": "Status code as string per UN vocabulary typing for coded strings."
         },
+        "notificationStatusCode": {
+          "type": "string",
+          "description": "Defra-internal workflow status of this notification. Codelist binding declared in the Defra profile vocabulary."
+        },
         "versionId": {
           "type": "integer",
           "minimum": 1,
