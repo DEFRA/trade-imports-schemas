@@ -1,0 +1,318 @@
+{
+  "_comment": "NotificationAmendmentRequested event sample for GBN-AG. Data payload is the full snapshot at the moment SUBMITTED is re-opened for editing; workflow state moves to AMEND while versionId and functionCode are unchanged from the prior submission.",
+  "$schema": "gbn-ag-event-notification-amendment-requested-v1.schema.json",
+  "eventId": "a4b5c6d7-e8f9-0123-4567-89abcdef0123",
+  "aggregateType": "Notification",
+  "subType": "GBN-AG",
+  "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
+  "aggregateVersion": 3,
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationAmendmentRequested",
+  "timestamp": "2026-05-25T14:00:00.000Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "gbn-ag",
+    "exchangedDocument": {
+      "identifier": "GBN-AG-26-0000001-8",
+      "traderAssignedId": "Imports456_GB",
+      "documentTypeCode": "999",
+      "notificationStatusCode": "AMEND",
+      "versionId": 1,
+      "functionCode": "9",
+      "issueDateTime": "2026-05-21T10:15:00.000Z",
+      "issuer": {
+        "name": "Kai Inc.",
+        "postalAddress": {
+          "lineOne": "UNCANNY COMICS",
+          "lineTwo": "3 TARRING ROAD",
+          "cityName": "WORTHING",
+          "postcodeCode": "BN11 4SS",
+          "countryId": "GB"
+        },
+        "definedContact": [
+          {
+            "personName": "Kai Atkinson",
+            "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
+            "telephoneUniversalCommunication": "0123456788"
+          }
+        ]
+      },
+      "firstSignatoryAuthentication": {
+        "includedClause": [
+          {
+            "identifier": "PURPOSE",
+            "content": "INTERNAL_MARKET",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+          },
+          {
+            "identifier": "INTERNAL_MARKET_PURPOSE",
+            "content": "BREEDING",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+          },
+          {
+            "identifier": "GOODS_CERTIFIED_AS",
+            "content": "BREEDING_AND_PRODUCTION",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+          }
+        ]
+      },
+      "referenceDocument": [
+        {
+          "typeCode": "853",
+          "identifier": "doc-ref",
+          "issueDateTime": "2026-04-01",
+          "attachmentBinaryObject": [
+            {
+              "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+              "filename": "1.6_Discernment_Summary.pdf",
+              "mimeCode": "application/pdf"
+            }
+          ]
+        },
+        {
+          "typeCode": "705",
+          "identifier": "BOL-2026-884721",
+          "issueDateTime": "2026-05-09",
+          "attachmentBinaryObject": [
+            {
+              "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
+              "filename": "bill-of-lading.pdf",
+              "mimeCode": "application/pdf"
+            }
+          ]
+        }
+      ]
+    },
+    "specifiedConsignment": {
+        "consignorParty": {
+          "name": "Astra Rosales",
+          "postalAddress": {
+            "lineOne": "43 East Hague Extension",
+            "lineTwo": "Delectus sit odio p",
+            "cityName": "Quas occaecat ut ear",
+            "postcodeCode": "30055",
+            "countryId": "CH"
+          }
+        },
+        "consigneeParty": {
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
+          }
+        },
+        "despatchParty": {
+          "name": "Astra Rosales",
+          "postalAddress": {
+            "lineOne": "43 East Hague Extension",
+            "lineTwo": "Delectus sit odio p",
+            "cityName": "Quas occaecat ut ear",
+            "postcodeCode": "30055",
+            "countryId": "CH"
+          }
+        },
+        "deliveryParty": {
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
+          }
+        },
+        "importer": {
+          "name": "Importerporter",
+          "postalAddress": {
+            "lineOne": "186 Ditchling Road",
+            "lineTwo": "BRIGHTON",
+            "cityName": "Brighton",
+            "postcodeCode": "BN17DD",
+            "countryId": "FR"
+          }
+        },
+        "finalDestinationLocation": {
+          "identifier": "CPH19876",
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
+          },
+          "urlId": "https://codelists.tbc.defra.gov.uk/cph_number"
+        },
+        "applicableCrossBorderRegulatoryProcedure": [
+          {
+            "typeCode": "SPS_INSPECTION",
+            "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
+            "entryCustomsOfficeSpecifiedLogisticsLocation": {
+              "identifier": "GBDVR1",
+              "name": "Dover BCP",
+              "postalAddress": {
+                "lineOne": "Border Control Post, Port of Dover",
+                "cityName": "Dover",
+                "postcodeCode": "CT17 9TF",
+                "countryId": "GB"
+              },
+              "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
+            }
+          }
+        ],
+        "unloadingBaseportLocation": {
+          "identifier": "GBDVR",
+          "name": "Dover",
+          "postalAddress": {
+            "lineOne": "Port of Dover",
+            "cityName": "Dover",
+            "postcodeCode": "CT17 9TF",
+            "countryId": "GB"
+          },
+          "urlId": "https://service.unece.org/locode/"
+        },
+        "mainCarriageLogisticsTransportMovement": [
+          {
+            "identifier": "SHIPPY",
+            "modeCode": 1,
+            "usedLogisticsTransportMeans": {
+              "name": "SHIPPY"
+            },
+            "transportContractRelatedReferencedDocument": [
+              {
+                "typeCode": "705",
+                "identifier": "doc-ref-BOL"
+              }
+            ],
+            "arrivalEvent": [
+              {
+                "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
+              }
+            ],
+            "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
+          }
+        ],
+        "transitTradeCountry": [
+          {
+            "identifier": "BE"
+          }
+        ],
+        "carrier": {
+          "name": "ALISTAIR WILSON",
+          "identifier": "UK/INVER/T1/00091851",
+          "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
+          "partyTypeCode": [
+            "COMMERCIAL_TRANSPORTER",
+            "TRANSPORTER"
+          ],
+          "postalAddress": {
+            "lineOne": "AUCHENBLAE",
+            "lineTwo": "INVER SHIN",
+            "cityName": "SUTHERLAND",
+            "postcodeCode": "IV27 4ET",
+            "countryId": "GB"
+          }
+        },
+        "isOrHasUnweanedAnimals": true,
+        "packageQuantity": {
+          "content": 1
+        },
+        "includedConsignmentItem": [
+          {
+            "includedTradeLineItem": [
+              {
+                "specifiedTradeProduct": [
+                  {
+                    "designatedProductClassification": [
+                      {
+                        "systemId": "CN",
+                        "classCode": "01020000"
+                      },
+                      {
+                        "systemId": "SPECIES_CLASS",
+                        "classCode": "MAMMALIA",
+                        "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
+                      }
+                    ],
+                    "typeCode": "LIVE_ANIMAL",
+                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
+                    "description": "Live bovine animals",
+                    "scientificName": [
+                      {
+                        "content": "Bos taurus",
+                        "languageId": "la"
+                      }
+                    ],
+                    "commonName": [
+                      {
+                        "content": "Cattle",
+                        "languageId": "en"
+                      }
+                    ],
+                    "originTradeCountry": [
+                      {
+                        "identifier": "FR",
+                        "subordinateTradeCountrySubDivision": [
+                          {
+                            "identifier": "FR-12345",
+                            "functionTypeCode": {
+                              "content": "106"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "individualTradeProductInstance": [
+                      {
+                        "identifier": [
+                          {
+                            "typeCode": "EAR_TAG",
+                            "content": "et1",
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                          },
+                          {
+                            "typeCode": "PASSPORT",
+                            "content": "passport1",
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "specifiedLineTradeDelivery": [
+                  {
+                    "productUnitQuantity": {
+                      "content": 20,
+                      "unitCode": "H87"
+                    }
+                  }
+                ],
+                "additionalInformationNote": [
+                  {
+                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "content": [
+                      "et1"
+                    ]
+                  },
+                  {
+                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "content": [
+                      "passport1"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+  },
+  "metadata": {
+    "correlationId": "cid-20260525-140000",
+    "schemaVersion": "1.0.0",
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-amendment-requested-v1.schema.json"
+  }
+}
