@@ -157,132 +157,130 @@
       ]
     }
   },
-  "specifiedConsignment": [
-    {
-      "consignorParty": {
-        "identifier": "",
-        "name": "COOPERATIVEHb29 Co",
-        "partyRoleCode": "CZ",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "lineOne": "Banat Street 63",
-          "cityName": "Abidjan",
-          "countryName": "Cote D'Ivoire",
-          "countrySubDivisionName": "Abidjan"
-        }
-      },
-      "consigneeParty": {
-        "identifier": "",
-        "name": "COOPERATIVEAA67 WW",
-        "partyRoleCode": "CN",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "postcodeCode": "35340",
-          "lineOne": "via Savigliano 39",
-          "cityName": "La Bouexiere",
-          "countryName": "France"
-        }
-      },
-      "exportCountry": {
-        "id": "CI",
-        "name": "Cote D'Ivoire"
-      },
-      "importCountry": {
-        "id": "",
-        "name": ""
-      },
-      "unloadingBaseportLocation": [
-        {
-          "identifier": "FRCDG4",
-          "name": "FR"
-        }
+  "specifiedConsignment": {
+    "consignorParty": {
+      "identifier": "",
+      "name": "COOPERATIVEHb29 Co",
+      "partyRoleCode": "CZ",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
       ],
-      "examinationSPSEvent": {
-        "occurrenceSPSLocation": {
-          "name": ""
-        }
-      },
-      "deliveryParty": {
-        "identifier": "",
-        "name": "COOPERATIVEAA67 WW",
-        "partyRoleCode": "DP",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "postcodeCode": "35340",
-          "lineOne": "via Savigliano 39",
-          "cityName": "La Bouexiere",
-          "countryName": "France"
-        }
-      },
-      "customsTransitAgentParty": {
-        "identifier": "FR95999020L",
-        "name": "AIR FRANCE CARGO",
-        "partyRoleCode": "CB",
-        "partyTypeCode": [
-          "RESPONSIBLE_FOR_THE_LOAD",
-          "RFL"
-        ],
-        "postalAddress": {
-          "postcodeCode": "95700",
-          "lineOne": "12 Rue des Tarterets - zone de fret 1",
-          "cityName": "Roissy-en-France",
-          "countryName": "France",
-          "countrySubDivisionName": "Metropolitan France"
-        }
-      },
-      "mainCarriageLogisticsTransportMovement": {
-        "id": "AAA",
-        "modeCode": 4
-      },
-      "includedConsignmentItem": [
-        {
-          "includedTradeLineItem": [
-            {
-              "sequenceNumeric": 0,
-              "description": [
-                "Consignment totals and summary"
-              ]
-            },
-            {
-              "sequenceNumeric": 1,
-              "applicableProductClassification": [
-                {
-                  "systemName": "CN Code (Combined Nomenclature)",
-                  "classCode": 8045000,
-                  "className": [
-                    "EDIBLE FRUIT AND NUTS; PEEL OF CITRUS FRUIT OR MELONS",
-                    "Dates, figs, pineapples, avocados, guavas, mangoes and mangosteens, fresh or dried",
-                    "Guavas, mangoes and mangosteens"
-                  ]
-                },
-                {
-                  "systemName": "EPPO Plant Protection Thesaurus",
-                  "classCode": "MNGIN",
-                  "className": [
-                    "Mangifera indica"
-                  ]
-                },
-                {
-                  "systemName": "Product type",
-                  "classCode": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES",
-                  "className": [
-                    "Other living plants: fruit and vegetables"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+      "postalAddress": {
+        "lineOne": "Banat Street 63",
+        "cityName": "Abidjan",
+        "countryName": "Cote D'Ivoire",
+        "countrySubDivisionName": "Abidjan"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "",
+      "name": "COOPERATIVEAA67 WW",
+      "partyRoleCode": "CN",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
+      ],
+      "postalAddress": {
+        "postcodeCode": "35340",
+        "lineOne": "via Savigliano 39",
+        "cityName": "La Bouexiere",
+        "countryName": "France"
+      }
+    },
+    "exportCountry": {
+      "id": "CI",
+      "name": "Cote D'Ivoire"
+    },
+    "importCountry": {
+      "id": "",
+      "name": ""
+    },
+    "unloadingBaseportLocation": [
+      {
+        "identifier": "FRCDG4",
+        "name": "FR"
+      }
+    ],
+    "examinationSPSEvent": {
+      "occurrenceSPSLocation": {
+        "name": ""
+      }
+    },
+    "deliveryParty": {
+      "identifier": "",
+      "name": "COOPERATIVEAA67 WW",
+      "partyRoleCode": "DP",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
+      ],
+      "postalAddress": {
+        "postcodeCode": "35340",
+        "lineOne": "via Savigliano 39",
+        "cityName": "La Bouexiere",
+        "countryName": "France"
+      }
+    },
+    "customsTransitAgentParty": {
+      "identifier": "FR95999020L",
+      "name": "AIR FRANCE CARGO",
+      "partyRoleCode": "CB",
+      "partyTypeCode": [
+        "RESPONSIBLE_FOR_THE_LOAD",
+        "RFL"
+      ],
+      "postalAddress": {
+        "postcodeCode": "95700",
+        "lineOne": "12 Rue des Tarterets - zone de fret 1",
+        "cityName": "Roissy-en-France",
+        "countryName": "France",
+        "countrySubDivisionName": "Metropolitan France"
+      }
+    },
+    "mainCarriageLogisticsTransportMovement": {
+      "id": "AAA",
+      "modeCode": 4
+    },
+    "includedConsignmentItem": [
+      {
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ]
+          },
+          {
+            "sequenceNumeric": 1,
+            "applicableProductClassification": [
+              {
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": 8045000,
+                "className": [
+                  "EDIBLE FRUIT AND NUTS; PEEL OF CITRUS FRUIT OR MELONS",
+                  "Dates, figs, pineapples, avocados, guavas, mangoes and mangosteens, fresh or dried",
+                  "Guavas, mangoes and mangosteens"
+                ]
+              },
+              {
+                "systemName": "EPPO Plant Protection Thesaurus",
+                "classCode": "MNGIN",
+                "className": [
+                  "Mangifera indica"
+                ]
+              },
+              {
+                "systemName": "Product type",
+                "classCode": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES",
+                "className": [
+                  "Other living plants: fruit and vegetables"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

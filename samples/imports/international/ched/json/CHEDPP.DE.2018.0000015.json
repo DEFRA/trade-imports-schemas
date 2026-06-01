@@ -104,171 +104,169 @@
       ]
     }
   },
-  "specifiedConsignment": [
-    {
-      "consignorParty": {
-        "identifier": "",
-        "name": "COOPERATIVEAF26 Ent",
-        "partyRoleCode": "CZ",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "postcodeCode": "202",
-          "lineOne": "Avenue Pierre Saul 13",
-          "cityName": "Nairobi",
-          "countryName": "Kenya",
-          "countrySubDivisionName": "Nairobi"
-        }
-      },
-      "consigneeParty": {
-        "identifier": "",
-        "name": "Keil Spedition",
-        "partyRoleCode": "CN",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "postcodeCode": "55545",
-          "lineOne": "Rüdesheimerstr. 60-68",
-          "cityName": "Bad Kreuznach",
-          "countryName": "Germany",
-          "countrySubDivisionName": "Rhineland-Palatinate"
-        }
-      },
-      "exportCountry": {
-        "id": "KE",
-        "name": "Kenya"
-      },
-      "importCountry": {
-        "id": "",
-        "name": ""
-      },
-      "unloadingBaseportLocation": [
-        {
-          "identifier": "DEFRA4",
-          "name": "DE"
-        }
+  "specifiedConsignment": {
+    "consignorParty": {
+      "identifier": "",
+      "name": "COOPERATIVEAF26 Ent",
+      "partyRoleCode": "CZ",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
       ],
-      "examinationSPSEvent": {
-        "occurrenceSPSLocation": {
-          "name": ""
-        }
-      },
-      "deliveryParty": {
-        "identifier": "",
-        "name": "Keil Spedition",
-        "partyRoleCode": "DP",
-        "partyTypeCode": [
-          "PLANT_ESTABLISHMENT",
-          "PLANTS"
-        ],
-        "postalAddress": {
-          "postcodeCode": "55545",
-          "lineOne": "Rüdesheimerstr. 60-68",
-          "cityName": "Bad Kreuznach",
-          "countryName": "Germany",
-          "countrySubDivisionName": "Rhineland-Palatinate"
-        }
-      },
-      "customsTransitAgentParty": {
-        "identifier": "",
-        "name": "Keil Spedition",
-        "partyRoleCode": "CB",
-        "partyTypeCode": [
-          "RESPONSIBLE_FOR_THE_LOAD",
-          "RFL"
-        ],
-        "postalAddress": {
-          "postcodeCode": "55545",
-          "lineOne": "Rüdesheimerstr. 60-68",
-          "cityName": "Bad Kreuznach",
-          "countryName": "Germany",
-          "countrySubDivisionName": "Rhineland-Palatinate"
-        }
-      },
-      "mainCarriageLogisticsTransportMovement": {
-        "id": "lkw",
-        "modeCode": 3
-      },
-      "utilizedLogisticsTransportEquipment": {
-        "id": "Container 1",
-        "affixedLogisticsSeal": {
-          "id": "Plombe 1"
-        }
-      },
-      "includedConsignmentItem": [
-        {
-          "includedTradeLineItem": [
-            {
-              "sequenceNumeric": 0,
-              "description": [
-                "Consignment totals and summary"
-              ]
-            },
-            {
-              "sequenceNumeric": 1,
-              "applicableProductClassification": [
-                {
-                  "systemName": "CN Code (Combined Nomenclature)",
-                  "classCode": 6031100,
-                  "className": [
-                    "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
-                    "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
-                    "Fresh",
-                    "Roses"
-                  ]
-                },
-                {
-                  "systemName": "EPPO Plant Protection Thesaurus",
-                  "classCode": "ROSCN",
-                  "className": [
-                    "Rosa canina"
-                  ]
-                },
-                {
-                  "systemName": "Product type",
-                  "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
-                  "className": [
-                    "Other living plants: cut flowers and branches with foliage"
-                  ]
-                }
-              ]
-            },
-            {
-              "sequenceNumeric": 2,
-              "applicableProductClassification": [
-                {
-                  "systemName": "CN Code (Combined Nomenclature)",
-                  "classCode": 6031100,
-                  "className": [
-                    "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
-                    "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
-                    "Fresh",
-                    "Roses"
-                  ]
-                },
-                {
-                  "systemName": "EPPO Plant Protection Thesaurus",
-                  "classCode": "ROSAK",
-                  "className": [
-                    "Rosa arkansana"
-                  ]
-                },
-                {
-                  "systemName": "Product type",
-                  "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
-                  "className": [
-                    "Other living plants: cut flowers and branches with foliage"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+      "postalAddress": {
+        "postcodeCode": "202",
+        "lineOne": "Avenue Pierre Saul 13",
+        "cityName": "Nairobi",
+        "countryName": "Kenya",
+        "countrySubDivisionName": "Nairobi"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "",
+      "name": "Keil Spedition",
+      "partyRoleCode": "CN",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
+      ],
+      "postalAddress": {
+        "postcodeCode": "55545",
+        "lineOne": "Rüdesheimerstr. 60-68",
+        "cityName": "Bad Kreuznach",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Rhineland-Palatinate"
+      }
+    },
+    "exportCountry": {
+      "id": "KE",
+      "name": "Kenya"
+    },
+    "importCountry": {
+      "id": "",
+      "name": ""
+    },
+    "unloadingBaseportLocation": [
+      {
+        "identifier": "DEFRA4",
+        "name": "DE"
+      }
+    ],
+    "examinationSPSEvent": {
+      "occurrenceSPSLocation": {
+        "name": ""
+      }
+    },
+    "deliveryParty": {
+      "identifier": "",
+      "name": "Keil Spedition",
+      "partyRoleCode": "DP",
+      "partyTypeCode": [
+        "PLANT_ESTABLISHMENT",
+        "PLANTS"
+      ],
+      "postalAddress": {
+        "postcodeCode": "55545",
+        "lineOne": "Rüdesheimerstr. 60-68",
+        "cityName": "Bad Kreuznach",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Rhineland-Palatinate"
+      }
+    },
+    "customsTransitAgentParty": {
+      "identifier": "",
+      "name": "Keil Spedition",
+      "partyRoleCode": "CB",
+      "partyTypeCode": [
+        "RESPONSIBLE_FOR_THE_LOAD",
+        "RFL"
+      ],
+      "postalAddress": {
+        "postcodeCode": "55545",
+        "lineOne": "Rüdesheimerstr. 60-68",
+        "cityName": "Bad Kreuznach",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Rhineland-Palatinate"
+      }
+    },
+    "mainCarriageLogisticsTransportMovement": {
+      "id": "lkw",
+      "modeCode": 3
+    },
+    "utilizedLogisticsTransportEquipment": {
+      "id": "Container 1",
+      "affixedLogisticsSeal": {
+        "id": "Plombe 1"
+      }
+    },
+    "includedConsignmentItem": [
+      {
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ]
+          },
+          {
+            "sequenceNumeric": 1,
+            "applicableProductClassification": [
+              {
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": 6031100,
+                "className": [
+                  "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
+                  "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
+                  "Fresh",
+                  "Roses"
+                ]
+              },
+              {
+                "systemName": "EPPO Plant Protection Thesaurus",
+                "classCode": "ROSCN",
+                "className": [
+                  "Rosa canina"
+                ]
+              },
+              {
+                "systemName": "Product type",
+                "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                "className": [
+                  "Other living plants: cut flowers and branches with foliage"
+                ]
+              }
+            ]
+          },
+          {
+            "sequenceNumeric": 2,
+            "applicableProductClassification": [
+              {
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": 6031100,
+                "className": [
+                  "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
+                  "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
+                  "Fresh",
+                  "Roses"
+                ]
+              },
+              {
+                "systemName": "EPPO Plant Protection Thesaurus",
+                "classCode": "ROSAK",
+                "className": [
+                  "Rosa arkansana"
+                ]
+              },
+              {
+                "systemName": "Product type",
+                "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                "className": [
+                  "Other living plants: cut flowers and branches with foliage"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
