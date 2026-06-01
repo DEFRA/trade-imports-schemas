@@ -142,6 +142,99 @@
         }
       }
     },
+    "CertificateModelReference": {
+      "type": "object",
+      "required": [
+        "modelId"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "integer"
+        },
+        "shortTitle": {
+          "type": "string"
+        },
+        "longTitle": {
+          "type": "string"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "LegislationReference": {
+      "type": "object",
+      "required": [
+        "legislationId"
+      ],
+      "properties": {
+        "legislationId": {
+          "type": "integer"
+        },
+        "celexIdentifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certificateModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CertificateModelReference"
+          }
+        },
+        "originCountries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationCountries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originClassificationSections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClassificationSection"
+          }
+        },
+        "destinationClassificationSections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClassificationSection"
+          }
+        }
+      }
+    },
+    "LegislationAttribute": {
+      "type": "object",
+      "required": [
+        "key",
+        "legislation"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "legislation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LegislationReference"
+          }
+        }
+      }
+    },
     "Taxon": {
       "type": "object",
       "required": [
@@ -202,7 +295,6 @@
             "nomenclature",
             "label",
             "group",
-            "root",
             "other"
           ]
         },
