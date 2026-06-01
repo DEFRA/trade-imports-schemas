@@ -235,11 +235,8 @@
         "active": {
           "type": "boolean"
         },
-        "displayNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "displayName": {
+          "type": "string"
         }
       }
     }
