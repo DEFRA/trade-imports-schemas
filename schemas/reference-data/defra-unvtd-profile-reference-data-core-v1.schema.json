@@ -112,7 +112,9 @@
       "type": "object",
       "required": [
         "classCode",
-        "description"
+        "description",
+        "scopes",
+        "lms"
       ],
       "properties": {
         "classCode": {
@@ -127,8 +129,16 @@
         "description": {
           "type": "string"
         },
-        "scope": {
-          "type": "string"
+        "active": {
+          "type": "boolean",
+          "default": true
+        },
+        "scopes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -136,7 +146,7 @@
       "type": "object",
       "required": [
         "taxonId",
-        "names"
+        "name"
       ],
       "properties": {
         "taxonId": {
@@ -148,13 +158,12 @@
         "faoCode": {
           "type": "string"
         },
-        "names": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
-        }
+        "name": {
+          "type": "string"
+		    },
+        "languageId": {
+          "type": "string"
+		    }
       }
     },
     "ClassificationTreeSummary": {
@@ -226,11 +235,8 @@
         "active": {
           "type": "boolean"
         },
-        "displayNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "displayName": {
+          "type": "string"
         }
       }
     }
