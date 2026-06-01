@@ -70,9 +70,8 @@
           "description": "Correlation identifier propagated from the request boundary"
         },
         "schemaVersion": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Structural schema version for this event type"
+          "type": "string",
+          "description": "Structural schema version for this event type. Semver-style `MAJOR.MINOR.PATCH`, e.g. `1.0.0`."
         },
         "schemaUri": {
           "type": "string",

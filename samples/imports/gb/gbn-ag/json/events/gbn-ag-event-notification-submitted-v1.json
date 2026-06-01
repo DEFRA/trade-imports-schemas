@@ -312,7 +312,7 @@
   },
   "metadata": {
     "correlationId": "cid-20260521-101500",
-    "schemaVersion": 1,
+    "schemaVersion": "1.0.0",
     "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-submitted-v1.schema.json"
   }
 }
