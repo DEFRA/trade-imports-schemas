@@ -112,7 +112,7 @@
       "type": "object",
       "required": [
         "classCode",
-        "descriptions"
+        "description"
       ],
       "properties": {
         "classCode": {
@@ -124,12 +124,8 @@
         "lms": {
           "type": "boolean"
         },
-        "descriptions": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
+        "description": {
+          "type": "string"
         },
         "scope": {
           "type": "string"
