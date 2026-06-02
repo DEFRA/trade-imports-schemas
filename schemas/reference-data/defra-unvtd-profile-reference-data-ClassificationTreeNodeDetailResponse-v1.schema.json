@@ -33,9 +33,9 @@
             "cnCode": {
               "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/CnCodeQualified"
             },
-            "modelId": {
-              "type": "string",
-              "description": "Source model identifier for node-detail payloads that do not carry a CN code (for example lower-level ITACHS certificate models)."
+            "certificateModel": {
+              "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/CertificateModelReference",
+              "description": "Certificate model if applicable (for example lower-level ITACHS certificate models)."
             },
             "selectable": {
               "type": "boolean"

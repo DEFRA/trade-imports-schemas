@@ -228,10 +228,7 @@
           "type": "string"
         },
         "legislation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/LegislationReference"
-          }
+          "$ref": "#/$defs/LegislationReference"
         }
       }
     },
@@ -293,6 +290,7 @@
           "type": "string",
           "enum": [
             "nomenclature",
+            "certificate",
             "label",
             "group",
             "other"
