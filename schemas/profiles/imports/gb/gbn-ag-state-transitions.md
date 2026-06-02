@@ -17,7 +17,9 @@ Three concepts get conflated unless laid out explicitly. Each lives in a differe
 |---|---|---|
 | Event identity | This specific event occurrence (deduplication, audit, replay tooling). | `eventId` in the event envelope. |
 | Aggregate sequence | The Nth event emitted for this notification. Monotonic per aggregate. Used for ordering, idempotency, optimistic concurrency. | `aggregateVersion` in the event envelope. |
-| Document state | The notification's business state: workflow status (`DRAFT` / `SUBMITTED` / `AMEND` / `WITHDRAWN`), revision number (`V1`, `V2`, ...), and the message function (`Original` / `Replace` / `Cancellation`) that tells the consumer what to do with this snapshot. | `documentStatusCode`, `versionId`, `functionCode` on `ExchangedDocument` in the event's `data` payload. |
+| Document state | The notification's business state: workflow status (`DRAFT` / `SUBMITTED` / `AMEND` / `WITHDRAWN`), revision number (`V1`, `V2`, ...), and the message function (`Original` / `Replace` / `Cancellation`) that tells the consumer what to do with this snapshot. | `notificationStatusCode`, `versionId`, `functionCode` on `ExchangedDocument` in the event's `data` payload. |
+
+`documentStatusCode` (UNCL1373 per UN/CEFACT) is the TRACES-boundary status value. The gateway populates it on outbound TRACES messages and round-trips it on inbound. Not used for Defra-internal workflow state.
 
 Wall-clock `timestamp` is for audit only; don't use it for ordering. Use `aggregateVersion` for that.
 

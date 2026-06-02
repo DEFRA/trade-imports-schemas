@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "defraUnvtdProfile": "https://defra.gov.uk/trade/unvtd/profile#",
+    "unece": "https://vocabulary.uncefact.org/",
+    "uncefact": "https://vocabulary.uncefact.org/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "defraUnvtdProfile:exchangedDocument",
+      "@type": "rdf:Property",
+      "rdfs:label": "exchangedDocument",
+      "rdfs:comment": "The document container at the root of a Defra UNVTD certificate payload. Holds the document identifier, the issuer, signatory authentications, included clauses (reason for import, animals certified for, sub-purpose when applicable), and the accompanying reference documents.",
+      "schema:rangeIncludes": { "@id": "uncefact:ExchangedDocument" }
+    },
+    {
+      "@id": "defraUnvtdProfile:isOrHasUnweanedAnimals",
+      "@type": "rdf:Property",
+      "rdfs:label": "isOrHasUnweanedAnimals",
+      "rdfs:comment": "True when the consignment contains any unweaned (non-ablacted) animals. UK welfare indicator on live-animal import pre-notifications.",
+      "schema:domainIncludes": { "@id": "uncefact:Consignment" },
+      "schema:rangeIncludes": { "@id": "xsd:boolean" }
+    },
+    {
+      "@id": "defraUnvtdProfile:notificationStatusCode",
+      "@type": "rdf:Property",
+      "rdfs:label": "notificationStatusCode",
+      "rdfs:comment": "Defra-internal workflow status of this notification.",
+      "schema:domainIncludes": { "@id": "uncefact:ExchangedDocument" },
+      "schema:rangeIncludes": { "@id": "https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status" }
+    },
+    {
+      "@id": "defraUnvtdProfile:permanentLocation",
+      "@type": "rdf:Property",
+      "rdfs:label": "permanentLocation",
+      "rdfs:comment": "The permanent address where this individual animal will reside after import. Used for commodities where an animal moves on from the consignment's immediate delivery point to a final home (such as a pet going on to its owner's address). Per-animal placement so different animals on one trade line can carry different addresses.",
+      "schema:domainIncludes": { "@id": "uncefact:TradeProductInstance" },
+      "schema:rangeIncludes": { "@id": "uncefact:LogisticsLocation" }
+    },
+    {
+      "@id": "defraUnvtdProfile:specifiedConsignment",
+      "@type": "rdf:Property",
+      "rdfs:label": "specifiedConsignment",
+      "rdfs:comment": "The consignment carried by a Defra UNVTD certificate payload.",
+      "schema:rangeIncludes": { "@id": "uncefact:Consignment" }
+    }
+  ]
+}

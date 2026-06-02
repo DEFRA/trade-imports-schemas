@@ -14,7 +14,7 @@
     "exchangedDocument": {
       "identifier": "GBN-AG-26-0000001-8",
       "traderAssignedId": "Imports456_GB",
-      "documentStatusCode": "DRAFT",
+      "notificationStatusCode": "DRAFT",
       "functionCode": "9",
       "issueDateTime": "2026-05-15T09:30:00.000Z",
       "issuer": {
@@ -74,7 +74,7 @@
   },
   "metadata": {
     "correlationId": "cid-20260515-093000",
-    "schemaVersion": 1,
+    "schemaVersion": "1.0.0",
     "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-created-v1.schema.json"
   }
 }
