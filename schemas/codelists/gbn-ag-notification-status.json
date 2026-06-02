@@ -1,0 +1,27 @@
+{
+  "$id": "https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status",
+  "title": "GBN-AG notification status",
+  "description": "Workflow states for a GBN-AG pre-notification, used as the value space for notificationStatusCode on ExchangedDocument. This file is the working source of truth in the absence of a live Defra codelists service; when that service goes live at https://codelists.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "DRAFT",
+      "label": "Draft",
+      "description": "Notification has been created but not yet submitted. Editable by the importer."
+    },
+    {
+      "code": "SUBMITTED",
+      "label": "Submitted",
+      "description": "Notification has been formally submitted. First submission is revision V1; subsequent re-submissions increment versionId."
+    },
+    {
+      "code": "AMEND",
+      "label": "Amend",
+      "description": "Notification has been re-opened for editing after a prior submission. Returns to SUBMITTED on re-submission."
+    },
+    {
+      "code": "WITHDRAWN",
+      "label": "Withdrawn",
+      "description": "Notification has been withdrawn. Terminal state."
+    }
+  ]
+}

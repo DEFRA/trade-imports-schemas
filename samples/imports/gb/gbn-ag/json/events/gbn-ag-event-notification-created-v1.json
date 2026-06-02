@@ -14,7 +14,7 @@
     "exchangedDocument": {
       "identifier": "GBN-AG-26-0000001-8",
       "traderAssignedId": "Imports456_GB",
-      "documentStatusCode": "DRAFT",
+      "notificationStatusCode": "DRAFT",
       "functionCode": "9",
       "issueDateTime": "2026-05-15T09:30:00.000Z",
       "issuer": {

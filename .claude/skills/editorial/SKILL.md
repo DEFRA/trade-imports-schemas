@@ -19,8 +19,9 @@ Decide who is reading this cold:
 - Concepts they already hold.
 - Concepts that need first-use introduction.
 - What action they need to take (approve, replicate, decide).
+- Never assume the reader is a machine or has any visibility of the intermediate material used to generate an output
 
-This frame is the lens for every later decision.
+This frame is the lens for every later decision. Assume your audience is a cold reader.
 
 ## 2. Drill from surface to essence
 
@@ -31,6 +32,11 @@ For each section, paragraph, sentence, recursively ask:
 - **Is this the real reason, or a surface gloss?**
 
 When the question feels answered, ask once more. The first answer is usually the framing, the second is the substance, the third is the core.
+
+**Worked example B.** A statement is written "adds typeCode + urlId (D23B unece:typeCode)":
+
+- *Why is this a question?* What am I trying to say? Why would a reader care? Does my reader know about typeCodes, or D23B? 
+- *What should have been written*: Vet handling and inspection regimes differ for live animals vs semen vs embryos vs ova. The CN commodity code does not always discriminate form, the urlId is added to the typeCode so we can tell the difference. UN/CEFACT uses these properties within the TradeProduct to convey this information.
 
 **Worked example.** An open question started as "is `private_transporter_approval_number` a real Defra scheme?". Drilling:
 

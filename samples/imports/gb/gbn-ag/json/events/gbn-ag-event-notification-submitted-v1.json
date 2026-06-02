@@ -1,5 +1,5 @@
 {
-  "_comment": "NotificationSubmitted event sample for GBN-AG. Envelope follows ADR-EUDP-002. Data payload is the full notification snapshot - same content as samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json, plus the three new ExchangedDocument fields (documentStatusCode, versionId, functionCode) that mark this as the first formal submission (V1, Original).",
+  "_comment": "NotificationSubmitted event sample for GBN-AG. Envelope follows ADR-EUDP-002. Data payload is the full notification snapshot - same content as samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json, plus the three ExchangedDocument workflow-state fields (notificationStatusCode, versionId, functionCode) that mark this as the first formal submission (V1, Original).",
   "$schema": "gbn-ag-event-notification-submitted-v1.schema.json",
   "eventId": "f3a4b5c6-d7e8-9012-3456-789abcdef012",
   "aggregateType": "Notification",
@@ -15,7 +15,7 @@
       "identifier": "GBN-AG-26-0000001-8",
       "traderAssignedId": "Imports456_GB",
       "documentTypeCode": "999",
-      "documentStatusCode": "SUBMITTED",
+      "notificationStatusCode": "SUBMITTED",
       "versionId": 1,
       "functionCode": "9",
       "issueDateTime": "2026-05-21T10:15:00.000Z",

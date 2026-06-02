@@ -7,7 +7,8 @@
     "validate-schemas": "node scripts/validate-schemas.js",
     "validate-samples": "node scripts/validate-samples.js",
     "convert:traces": "node scripts/traces-to-unvtd.js",
-    "test": "node --test scripts/traces-to-unvtd.test.js"
+    "build-dictionary:gbn-ag": "node scripts/build-data-dictionary.js gbn-ag",
+    "test": "node --test scripts/traces-to-unvtd.test.js scripts/build-data-dictionary.test.js"
   },
   "keywords": [
     "json-schema",

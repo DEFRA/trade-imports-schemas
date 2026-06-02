@@ -13,6 +13,9 @@
         "@id": "defraUnvtdProfile:specifiedConsignment",
         "@type": "@id"
       },
+      "notificationStatusCode": {
+        "@id": "defraUnvtdProfile:notificationStatusCode"
+      },
       "importer": {
         "@id": "unece:importerParty",
         "@type": "@id"
