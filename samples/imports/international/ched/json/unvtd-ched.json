@@ -194,7 +194,9 @@
                 {
                   "systemId": "CN",
                   "systemName": "CN Code (Combined Nomenclature)",
-                  "classCode": 102,
+                  "classCode": {
+                    "value": "102"
+                  },
                   "className": [
                     "LIVE ANIMALS",
                     "Live bovine animals"

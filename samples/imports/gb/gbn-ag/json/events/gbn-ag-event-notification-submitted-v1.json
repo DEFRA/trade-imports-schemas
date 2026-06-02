@@ -226,13 +226,17 @@
                 "specifiedTradeProduct": [
                   {
                     "designatedProductClassification": [
-                      {
+                       {
                         "systemId": "CN",
-                        "classCode": "01020000"
+                        "classCode": {
+                          "value": "01020000"
+                        }
                       },
                       {
                         "systemId": "SPECIES_CLASS",
-                        "classCode": "MAMMALIA",
+                        "classCode": {
+                          "value": "MAMMALIA"
+                        },
                         "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                       }
                     ],

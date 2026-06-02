@@ -212,7 +212,7 @@
             "applicableProductClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": 6031100,
+                "classCode": { "value": "6031100" },
                 "className": [
                   "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
                   "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
@@ -222,14 +222,14 @@
               },
               {
                 "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": "ROSCN",
+                "classCode": { "value": "ROSCN" },
                 "className": [
                   "Rosa canina"
                 ]
               },
               {
                 "systemName": "Product type",
-                "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                "classCode": { "value": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE" },
                 "className": [
                   "Other living plants: cut flowers and branches with foliage"
                 ]
@@ -241,7 +241,9 @@
             "applicableProductClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": 6031100,
+                "classCode": {
+                  "value": "6031100"
+                },
                 "className": [
                   "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
                   "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
@@ -251,14 +253,19 @@
               },
               {
                 "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": "ROSAK",
+                "classCode": 
+                {
+                  "value": "ROSAK"
+                },
                 "className": [
                   "Rosa arkansana"
                 ]
               },
               {
                 "systemName": "Product type",
-                "classCode": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE",
+                "classCode": {
+                  "value": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE"
+                },
                 "className": [
                   "Other living plants: cut flowers and branches with foliage"
                 ]

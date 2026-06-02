@@ -256,7 +256,9 @@
             "applicableProductClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": 8045000,
+                "classCode": {
+                  "value": "8045000"
+                },
                 "className": [
                   "EDIBLE FRUIT AND NUTS; PEEL OF CITRUS FRUIT OR MELONS",
                   "Dates, figs, pineapples, avocados, guavas, mangoes and mangosteens, fresh or dried",
@@ -265,14 +267,18 @@
               },
               {
                 "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": "MNGIN",
+                "classCode": {
+                  "value": "MNGIN"
+                },
                 "className": [
                   "Mangifera indica"
                 ]
               },
               {
                 "systemName": "Product type",
-                "classCode": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES",
+                "classCode": {
+                  "value": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES"                
+                },
                 "className": [
                   "Other living plants: fruit and vegetables"
                 ]

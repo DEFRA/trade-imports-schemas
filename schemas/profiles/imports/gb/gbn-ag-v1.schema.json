@@ -264,15 +264,12 @@
 
     "gbnAgProductClassification": {
       "type": "object",
-      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN' or 'SPECIES_CLASS') and classCode (the code value). No const enforcement on systemId — a single trade product can carry multiple classifications under different coding systems (e.g. CN code for commodity plus a SPECIES_CLASS entry for taxonomic class). CN codes are 8 digits in the operational case; the string-or-integer classCode accommodates both shapes without binding to a length pattern.",
+      "description": "Product classification. Required slots are systemId (the codelist name, e.g. 'CN' or 'SPECIES_CLASS') and classCode (the code value, wrapped in a UneceCodeType object). No const enforcement on systemId — a single trade product can carry multiple classifications under different coding systems (e.g. CN code for commodity plus a SPECIES_CLASS entry for taxonomic class).",
       "required": ["systemId", "classCode"],
       "properties": {
         "systemId": { "type": "string" },
         "classCode": {
-          "oneOf": [
-            { "type": "string" },
-            { "type": "integer" }
-          ]
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceCodeType"
         },
         "urlId": {
           "type": "string",

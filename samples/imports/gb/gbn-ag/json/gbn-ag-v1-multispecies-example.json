@@ -225,11 +225,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": "01061900"
+                      "classCode": { "value": "01061900" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": "MAMMALIA",
+                      "classCode": { "value": "MAMMALIA" },
                       "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],
@@ -341,11 +341,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": "01061900"
+                      "classCode": { "value": "01061900" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": "MAMMALIA",
+                      "classCode": { "value": "MAMMALIA" },
                       "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],

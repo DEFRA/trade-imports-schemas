@@ -469,14 +469,7 @@
           "type": "string"
         },
         "classCode": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
+          "$ref": "#/$defs/UneceCodeType"
         },
         "className": {
           "type": "array",
