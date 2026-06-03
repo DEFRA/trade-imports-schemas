@@ -514,7 +514,7 @@
     },
     "TradeProduct": {
       "type": "object",
-      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / individualTradeProductInstance.",
+      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, classification, and an optional per-product `originCountry`.",
       "properties": {
         "description": {
           "oneOf": [
@@ -537,6 +537,10 @@
         "designatedProductClassification": {
           "type": "array",
           "items": { "$ref": "#/$defs/ProductClassification" }
+        },
+        "originCountry": {
+          "$ref": "#/$defs/TradeCountry",
+          "description": "Per-product country of origin. Optional at core level; populated by profiles whose journeys carry origin per trade line rather than per consignment (TRACES CHED-PP's `OriginSPSCountry` is the round-trip target). Region of origin sits on `subordinateTradeCountrySubDivision` inside the `TradeCountry` shape and is carried with the country wherever it appears."
         }
       }
     },
