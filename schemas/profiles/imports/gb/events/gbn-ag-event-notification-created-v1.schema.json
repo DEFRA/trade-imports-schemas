@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-event-notification-created-v1.schema.json",
   "title": "GBN-AG NotificationCreated event (v1)",
-  "description": "Event emitted when a new GBN-AG notification is created (entry -> DRAFT). The data payload carries the minimum to identify the notification and pin the goods: the notification `identifier`, the workflow status (`notificationStatusCode = DRAFT`, `functionCode = 9` Original), and at least one trade line with `designatedProductClassification` and `originTradeCountry`. Sub-shapes reference `gbn-ag-v1.schema.json`'s `$def`s so any change to the canonical types flows through. The full SUBMITTED-grade contract lives on the NotificationSubmitted event.",
+  "description": "Event emitted when a new GBN-AG notification is created (entry -> DRAFT). The data payload carries the minimum to identify the notification and pin the goods: the notification `identifier`, the workflow status (`notificationStatusCode = DRAFT`, `functionCode = 9` Original), the consignment-level `originCountry`, and at least one trade line with a `designatedProductClassification`. Sub-shapes reference `gbn-ag-v1.schema.json`'s `$def`s (and the core `TradeCountry`) so any change to the canonical types flows through. The full SUBMITTED-grade contract lives on the NotificationSubmitted event.",
 
   "allOf": [
     { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
@@ -29,8 +29,11 @@
             },
             "specifiedConsignment": {
               "type": "object",
-              "required": ["includedConsignmentItem"],
+              "required": ["originCountry", "includedConsignmentItem"],
               "properties": {
+                "originCountry": {
+                  "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry"
+                },
                 "includedConsignmentItem": {
                   "type": "array",
                   "minItems": 1,
@@ -50,17 +53,12 @@
                               "minItems": 1,
                               "items": {
                                 "type": "object",
-                                "required": ["designatedProductClassification", "originTradeCountry"],
+                                "required": ["designatedProductClassification"],
                                 "properties": {
                                   "designatedProductClassification": {
                                     "type": "array",
                                     "minItems": 1,
                                     "items": { "$ref": "gbn-ag-v1.schema.json#/$defs/gbnAgProductClassification" }
-                                  },
-                                  "originTradeCountry": {
-                                    "type": "array",
-                                    "minItems": 1,
-                                    "items": { "$ref": "gbn-ag-v1.schema.json#/$defs/originTradeCountry" }
                                   }
                                 }
                               }

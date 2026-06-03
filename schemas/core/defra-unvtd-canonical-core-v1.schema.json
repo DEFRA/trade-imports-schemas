@@ -357,7 +357,7 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names.",
+      "description": "A country reference (origin / export / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names. `subordinateTradeCountrySubDivision` carries one or more regions within the country (UNCL3227 functionTypeCode '106' for region of origin) - meaningful where regulation is regionalised within a country, for example disease zoning on live-animal imports.",
       "properties": {
         "identifier": {
           "type": "string",
@@ -381,6 +381,32 @@
               "items": { "$ref": "#/$defs/UneceTextType" }
             }
           ]
+        },
+        "subordinateTradeCountrySubDivision": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TradeCountrySubDivision" }
+        }
+      }
+    },
+    "TradeCountrySubDivision": {
+      "type": "object",
+      "description": "A sub-division of a country (a region). `identifier` carries the region code drawn from the codelist named by the optional sibling `urlId`. `functionTypeCode` is constrained to '106' (UNCL3227 Region of Origin).",
+      "required": ["identifier", "functionTypeCode"],
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this region identifier is drawn from."
+        },
+        "functionTypeCode": {
+          "type": "object",
+          "required": ["content"],
+          "properties": {
+            "content": { "const": "106" }
+          }
         }
       }
     },
@@ -488,7 +514,7 @@
     },
     "TradeProduct": {
       "type": "object",
-      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / originTradeCountry / individualTradeProductInstance.",
+      "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, and classification. Profile schemas (e.g. GBN-AG) extend with richer slots such as scientificName / commonName / individualTradeProductInstance.",
       "properties": {
         "description": {
           "oneOf": [
@@ -741,9 +767,13 @@
         "customsTransitAgentParty": {
           "$ref": "#/$defs/TradeParty"
         },
+        "originCountry": {
+          "$ref": "#/$defs/TradeCountry",
+          "description": "The country the consignment originated from - where the goods were produced. For consignments where the country of production differs from the country of export, this slot carries the country of production and `exportCountry` carries the country of export; for the common case where they coincide, only `originCountry` need be populated."
+        },
         "exportCountry": {
           "$ref": "#/$defs/TradeCountry",
-          "description": "Consignment route origin country (TRACES ExportSPSCountry)."
+          "description": "The country the consignment was exported from (TRACES `ExportSPSCountry`). For consignments where the country of production differs from the country of export, this slot carries the country of export and `originCountry` carries the country of production."
         },
         "importCountry": {
           "$ref": "#/$defs/TradeCountry",

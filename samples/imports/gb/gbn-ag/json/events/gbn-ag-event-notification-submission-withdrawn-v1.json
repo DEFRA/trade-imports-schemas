@@ -133,6 +133,17 @@
             "countryId": "FR"
           }
         },
+        "originCountry": {
+          "identifier": "FR",
+          "subordinateTradeCountrySubDivision": [
+            {
+              "identifier": "FR-12345",
+              "functionTypeCode": {
+                "content": "106"
+              }
+            }
+          ]
+        },
         "finalDestinationLocation": {
           "identifier": "CPH19876",
           "name": "Linus George Ltd",
@@ -249,19 +260,6 @@
                       {
                         "content": "Cattle",
                         "languageId": "en"
-                      }
-                    ],
-                    "originTradeCountry": [
-                      {
-                        "identifier": "FR",
-                        "subordinateTradeCountrySubDivision": [
-                          {
-                            "identifier": "FR-12345",
-                            "functionTypeCode": {
-                              "content": "106"
-                            }
-                          }
-                        ]
                       }
                     ],
                     "individualTradeProductInstance": [
