@@ -121,6 +121,17 @@
           "countryId": "FR"
         }
       },
+      "originCountry": {
+        "identifier": "FR",
+        "subordinateTradeCountrySubDivision": [
+          {
+            "identifier": "FR-12345",
+            "functionTypeCode": {
+              "content": "106"
+            }
+          }
+        ]
+      },
       "finalDestinationLocation": {
         "identifier": "CPH19876",
         "name": "Linus George Ltd",
@@ -237,19 +248,6 @@
                     {
                       "content": "Cattle",
                       "languageId": "en"
-                    }
-                  ],
-                  "originTradeCountry": [
-                    {
-                      "identifier": "FR",
-                      "subordinateTradeCountrySubDivision": [
-                        {
-                          "identifier": "FR-12345",
-                          "functionTypeCode": {
-                            "content": "106"
-                          }
-                        }
-                      ]
                     }
                   ],
                   "_comment": "Per-animal identifiers - BSP-canonical, purpose-built slot. Each animal is one tradeProductInstance with identifier.typeCode naming the kind of identifier (a value from the animal_identifier_types codelist) and identifier.content carrying the value itself.",

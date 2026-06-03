@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-submission-amended-v1.schema.json",
+  "title": "GBN-AG NotificationSubmissionAmended event (v1)",
+  "description": "Event emitted when an amended GBN-AG notification is re-submitted (AMEND -> SUBMITTED). The data payload is the revised full notification snapshot, with `notificationStatusCode = SUBMITTED`, `versionId` incremented (V2 on first re-submission, V3+ on subsequent), and `functionCode = 5` (Replace) signalling that this snapshot supersedes the previous submission.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationSubmissionAmended" },
+        "data": {
+          "allOf": [
+            { "$ref": "gbn-ag-v1.schema.json" },
+            {
+              "type": "object",
+              "required": ["exchangedDocument"],
+              "properties": {
+                "exchangedDocument": {
+                  "type": "object",
+                  "required": ["notificationStatusCode", "versionId", "functionCode"],
+                  "properties": {
+                    "notificationStatusCode": { "const": "SUBMITTED" },
+                    "versionId":              { "type": "integer", "minimum": 2 },
+                    "functionCode":           { "const": "5" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 {
-  "_comment": "NotificationSubmitted event sample for GBN-AG. Envelope follows ADR-EUDP-002. Data payload is the full notification snapshot - same content as samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json, plus the three ExchangedDocument workflow-state fields (notificationStatusCode, versionId, functionCode) that mark this as the first formal submission (V1, Original).",
-  "$schema": "gbn-ag-event-notification-submitted-v1.schema.json",
-  "eventId": "f3a4b5c6-d7e8-9012-3456-789abcdef012",
+  "_comment": "NotificationSubmissionAmended event sample for GBN-AG. Data payload is the revised full notification snapshot; notificationStatusCode returns to SUBMITTED, versionId is V2 (the first re-submission), functionCode is 5 (Replace).",
+  "$schema": "gbn-ag-event-notification-submission-amended-v1.schema.json",
+  "eventId": "b7c8d9e0-f1a2-3456-7890-bcdef0123456",
   "aggregateType": "Notification",
   "subType": "GBN-AG",
   "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
-  "aggregateVersion": 2,
-  "eventType": "uk.gov.defra.trade.imports.animals.NotificationSubmitted",
-  "timestamp": "2026-05-21T10:15:00.000Z",
+  "aggregateVersion": 4,
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationSubmissionAmended",
+  "timestamp": "2026-05-26T09:30:00.000Z",
   "data": {
     "$model": "defra/certificate-internal/1",
     "$type": "gbn-ag",
@@ -16,8 +16,8 @@
       "traderAssignedId": "Imports456_GB",
       "documentTypeCode": "999",
       "notificationStatusCode": "SUBMITTED",
-      "versionId": 1,
-      "functionCode": "9",
+      "versionId": 2,
+      "functionCode": "5",
       "issueDateTime": "2026-05-21T10:15:00.000Z",
       "issuer": {
         "name": "Kai Inc.",
@@ -309,8 +309,8 @@
       }
   },
   "metadata": {
-    "correlationId": "cid-20260521-101500",
+    "correlationId": "cid-20260526-093000",
     "schemaVersion": "1.0.0",
-    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-submitted-v1.schema.json"
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-submission-amended-v1.schema.json"
   }
 }
