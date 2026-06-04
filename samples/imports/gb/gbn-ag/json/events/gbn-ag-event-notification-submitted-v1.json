@@ -294,13 +294,13 @@
                 ],
                 "additionalInformationNote": [
                   {
-                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                     "content": [
                       "et1"
                     ]
                   },
                   {
-                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                     "content": [
                       "passport1"
                     ]

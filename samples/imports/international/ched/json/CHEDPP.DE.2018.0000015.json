@@ -17,8 +17,7 @@
         "contentCode": [
           {
             "value": "PP",
-            "listId": "ched_type",
-            "listName": "CHED type",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_type",
             "name": "CHED-PP - Common Health Entry Document for Plant Product"
           }
         ]

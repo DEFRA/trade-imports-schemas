@@ -313,19 +313,19 @@
               "_mapping_note_path_a": "Path A — same identifiers on additionalInformationNote for joint review with TIG.",
               "additionalInformationNote": [
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "mc-cat"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "ppt-cat"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "tto-cat"
                   ]
@@ -395,19 +395,19 @@
               ],
               "additionalInformationNote": [
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "mc-ferret"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "ppt-ferret"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "tto-ferret"
                   ]

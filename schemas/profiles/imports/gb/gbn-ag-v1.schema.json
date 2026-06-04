@@ -321,7 +321,7 @@
       "properties": {
         "systemId": { "type": "string" },
         "classCode": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceCodeType"
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CodedValue"
         },
         "urlId": {
           "type": "string",
