@@ -104,13 +104,16 @@
           }
         },
         "despatchParty": {
-          "name": "Astra Rosales",
+          "identifier": "FR-15-HLD-00427",
+          "urlId": "https://codelists.tbc.defra.gov.uk/operator_activity_id",
+          "name": "Ferme du Massif Central",
+          "partyRoleCode": "PW",
           "postalAddress": {
-            "lineOne": "43 East Hague Extension",
-            "lineTwo": "Delectus sit odio p",
-            "cityName": "Quas occaecat ut ear",
-            "postcodeCode": "30055",
-            "countryId": "CH"
+            "lineOne": "Route de la Vallée 12",
+            "cityName": "Saint-Flour",
+            "postcodeCode": "15100",
+            "countryId": "FR",
+            "countrySubDivisionName": "Cantal"
           }
         },
         "deliveryParty": {

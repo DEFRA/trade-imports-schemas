@@ -92,12 +92,16 @@
         ]
       },
       "despatchParty": {
-        "name": "Astra Rosales",
+        "identifier": "FR-69-HLD-00031",
+        "urlId": "https://codelists.tbc.defra.gov.uk/operator_activity_id",
+        "name": "Élevage des Monts d'Or",
+        "partyRoleCode": "PW",
         "postalAddress": {
-          "lineOne": "43 East Hague Extension",
-          "cityName": "Quas occaecat ut ear",
-          "postcodeCode": "30055",
-          "countryId": "CH"
+          "lineOne": "8 Chemin des Crêtes",
+          "cityName": "Lyon",
+          "postcodeCode": "69005",
+          "countryId": "FR",
+          "countrySubDivisionName": "Rhône"
         }
       },
       "deliveryParty": {
