@@ -21,9 +21,9 @@
   "classificationSections": [
     {
       "classCode": "I",
-      "descriptions": [
-        "Live animals; animal products"
-      ]
+      "description": "Live animals; animal products",
+      "scopes": ["ALL"],
+      "lms": false
     }
   ],
   "retrievedAt": "2026-05-22T15:40:00Z"

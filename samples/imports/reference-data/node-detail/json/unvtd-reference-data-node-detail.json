@@ -12,19 +12,16 @@
   "classificationSections": [
     {
       "classCode": "I",
-      "descriptions": [
-        "Live animals; animal products"
-      ],
-      "scope": "ALL"
+      "description": "Live animals; animal products",
+      "scopes": ["ALL"],
+      "lms": false
     }
   ],
   "taxons": [
     {
       "taxonId": 12345,
       "eppoCode": "BOVINAE",
-      "names": [
-        "Bos taurus"
-      ]
+      "name": "Bos taurus"
     }
   ],
   "attributes": [
