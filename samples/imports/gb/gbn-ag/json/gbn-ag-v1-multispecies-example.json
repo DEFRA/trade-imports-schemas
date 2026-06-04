@@ -118,6 +118,17 @@
           "countryId": "FR"
         }
       },
+      "originCountry": {
+        "identifier": "FR",
+        "subordinateTradeCountrySubDivision": [
+          {
+            "identifier": "FR-12436",
+            "functionTypeCode": {
+              "content": "106"
+            }
+          }
+        ]
+      },
       "applicableCrossBorderRegulatoryProcedure": [
         {
           "typeCode": "SPS_INSPECTION",
@@ -248,19 +259,6 @@
                       "languageId": "en"
                     }
                   ],
-                  "originTradeCountry": [
-                    {
-                      "identifier": "FR",
-                      "subordinateTradeCountrySubDivision": [
-                        {
-                          "identifier": "FR-12436",
-                          "functionTypeCode": {
-                            "content": "106"
-                          }
-                        }
-                      ]
-                    }
-                  ],
                   "_mapping_note_freetext_identifier": "DESCRIPTION and IDENTIFICATION_DETAILS demonstrate v3 §15-§16: the free-text fallback identifier types in animal_identifier_types, used when a commodity has no defined identifier type. They reuse the existing identifier[] shape rather than a structurally distinct slot.",
                   "individualTradeProductInstance": [
                     {
@@ -362,19 +360,6 @@
                     {
                       "content": "Ferret",
                       "languageId": "en"
-                    }
-                  ],
-                  "originTradeCountry": [
-                    {
-                      "identifier": "FR",
-                      "subordinateTradeCountrySubDivision": [
-                        {
-                          "identifier": "FR-12436",
-                          "functionTypeCode": {
-                            "content": "106"
-                          }
-                        }
-                      ]
                     }
                   ],
                   "individualTradeProductInstance": [

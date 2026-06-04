@@ -1,13 +1,13 @@
 {
-  "_comment": "NotificationSubmitted event sample for GBN-AG. Envelope follows ADR-EUDP-002. Data payload is the full notification snapshot - same content as samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json, plus the three ExchangedDocument workflow-state fields (notificationStatusCode, versionId, functionCode) that mark this as the first formal submission (V1, Original).",
-  "$schema": "gbn-ag-event-notification-submitted-v1.schema.json",
-  "eventId": "f3a4b5c6-d7e8-9012-3456-789abcdef012",
+  "_comment": "NotificationAmendmentRequested event sample for GBN-AG. Data payload is the full snapshot at the moment SUBMITTED is re-opened for editing; workflow state moves to AMEND while versionId and functionCode are unchanged from the prior submission.",
+  "$schema": "gbn-ag-event-notification-amendment-requested-v1.schema.json",
+  "eventId": "a4b5c6d7-e8f9-0123-4567-89abcdef0123",
   "aggregateType": "Notification",
   "subType": "GBN-AG",
   "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
-  "aggregateVersion": 2,
-  "eventType": "uk.gov.defra.trade.imports.animals.NotificationSubmitted",
-  "timestamp": "2026-05-21T10:15:00.000Z",
+  "aggregateVersion": 3,
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationAmendmentRequested",
+  "timestamp": "2026-05-25T14:00:00.000Z",
   "data": {
     "$model": "defra/certificate-internal/1",
     "$type": "gbn-ag",
@@ -15,7 +15,7 @@
       "identifier": "GBN-AG-26-0000001-8",
       "traderAssignedId": "Imports456_GB",
       "documentTypeCode": "999",
-      "notificationStatusCode": "SUBMITTED",
+      "notificationStatusCode": "AMEND",
       "versionId": 1,
       "functionCode": "9",
       "issueDateTime": "2026-05-21T10:15:00.000Z",
@@ -237,17 +237,13 @@
                 "specifiedTradeProduct": [
                   {
                     "designatedProductClassification": [
-                       {
+                      {
                         "systemId": "CN",
-                        "classCode": {
-                          "value": "01020000"
-                        }
+                        "classCode": "01020000"
                       },
                       {
                         "systemId": "SPECIES_CLASS",
-                        "classCode": {
-                          "value": "MAMMALIA"
-                        },
+                        "classCode": "MAMMALIA",
                         "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                       }
                     ],
@@ -313,8 +309,8 @@
       }
   },
   "metadata": {
-    "correlationId": "cid-20260521-101500",
+    "correlationId": "cid-20260525-140000",
     "schemaVersion": "1.0.0",
-    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-submitted-v1.schema.json"
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-amendment-requested-v1.schema.json"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "_comment": "NotificationCreated event sample for GBN-AG. The DRAFT-state notification has minimal information: issuer (who is creating the notification), primary commodity (CN code), and origin country. No signatures, no transport details, no parties beyond the issuer - those are filled in during the importer's session and emitted on Submit. Validates against gbn-ag-event-notification-created-v1.schema.json, which uses the core CertificatePayload base rather than the SUBMITTED-grade gbn-ag-v1 narrowings.",
+  "_comment": "NotificationCreated event sample for GBN-AG. The DRAFT-state notification has minimal information: issuer (who is creating the notification), the consignment-level origin country, and at least one trade line carrying a primary commodity (CN code). No signatures, no transport details, no parties beyond the issuer - those are filled in during the importer's session and emitted on Submit. Validates against gbn-ag-event-notification-created-v1.schema.json, whose minimal contract references `gbn-ag-v1.schema.json`'s `$def`s and the core `TradeCountry`.",
   "$schema": "gbn-ag-event-notification-created-v1.schema.json",
   "eventId": "a1b2c3d4-e5f6-7890-abcd-ef1234567000",
   "aggregateType": "Notification",
@@ -36,6 +36,9 @@
       }
     },
     "specifiedConsignment": {
+        "originCountry": {
+          "identifier": "FR"
+        },
         "includedConsignmentItem": [
           {
             "includedTradeLineItem": [
@@ -58,12 +61,7 @@
                       }
                     ],
                     "typeCode": "LIVE_ANIMAL",
-                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
-                    "originTradeCountry": [
-                      {
-                        "identifier": "FR"
-                      }
-                    ]
+                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type"
                   }
                 ]
               }

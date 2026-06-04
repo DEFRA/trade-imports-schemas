@@ -122,6 +122,7 @@
             "consigneeParty",
             "deliveryParty",
             "importer",
+            "originCountry",
             "applicableCrossBorderRegulatoryProcedure",
             "unloadingBaseportLocation",
             "mainCarriageLogisticsTransportMovement",
@@ -144,6 +145,13 @@
             },
             "carrier": {
               "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a `private_transporter_approval_number` (issued under the UK welfare-in-transport regime) as the value of `identifier`."
+            },
+            "originCountry": {
+              "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
+              "description": "The country the animals or germinals originated from - where they were produced (born, raised, harvested). Required on GBN-AG: a live-animal pre-notification carries a single country of origin for the whole consignment, not per species. For most consignments the country of origin and the country of export coincide; when they differ (animals produced in one country and exported via another), `exportCountry` carries the country of export and this slot carries the country of production. Region of origin lives on `subordinateTradeCountrySubDivision` here: regional disease zoning (FMD-free zones, BTV restriction zones) is a property of where the animal was produced, not where it was exported from."
+            },
+            "exportCountry": {
+              "description": "The country the consignment was exported from. Optional on GBN-AG: populate when it differs from `originCountry` (for example animals produced in one country and exported via another). For the common case where origin and export coincide, leave this empty and carry the value on `originCountry`."
             },
             "transitTradeCountry": {
               "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
@@ -169,6 +177,7 @@
               "type": "array",
               "minItems": 1,
               "maxItems": 1,
+              "description": "GBN-AG consignment item. Exactly one per consignment - a GBN-AG certificate covers a single consignment item, which carries the 'trade lines', one per species or commodity. In UN/CEFACT D23B a `ConsignmentItem` is an item within a consignment separately identified for transport and customs purposes; here it groups the species or commodities carried by the consignment.",
               "items": {
                 "type": "object",
                 "required": ["includedTradeLineItem"],
@@ -234,7 +243,7 @@
 
     "gbnAgTradeLineItem": {
       "type": "object",
-      "description": "GBN-AG trade line item. One per species or commodity on the certificate. Carries the trade product, the line delivery (per-line quantity), and any per-line notes (including per-animal identifier notes carried alongside the BSP-canonical placement on `individualTradeProductInstance[].identifier[]`).",
+      "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the species or commodity, the line quantity (head count for animals; weight for some germinals), and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
       "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
       "properties": {
         "specifiedTradeProduct": {
@@ -259,13 +268,12 @@
 
     "gbnAgTradeProduct": {
       "type": "object",
-      "description": "GBN-AG trade product: one species/commodity. CN classification, scientific and common names (resolved from the CN code via Defra reference data), country of origin with optional region, and per-animal identifiers Path B.",
+      "description": "GBN-AG trade product: one species or commodity. CN classification, scientific and common names (resolved from the CN code via Defra reference data), and per-animal identifiers Path B. Country of origin is not held here on GBN-AG - it sits at the consignment level on `specifiedConsignment.originCountry`, since an animal pre-notification carries a single country of origin for the whole consignment.",
       "required": [
         "designatedProductClassification",
         "description",
         "scientificName",
-        "commonName",
-        "originTradeCountry"
+        "commonName"
       ],
       "properties": {
         "description": {
@@ -298,12 +306,6 @@
           "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
           "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
         },
-        "originTradeCountry": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": { "$ref": "#/$defs/originTradeCountry" }
-        },
         "individualTradeProductInstance": {
           "type": "array",
           "items": { "$ref": "#/$defs/tradeProductInstance" },
@@ -325,39 +327,6 @@
           "type": "string",
           "format": "uri",
           "description": "URL to the codelist this classification's classCode is drawn from."
-        }
-      }
-    },
-
-    "originTradeCountry": {
-      "type": "object",
-      "description": "Country of origin for the trade product, with optional region of origin (UNCL3227 functionTypeCode='106').",
-      "required": ["identifier"],
-      "properties": {
-        "identifier": {
-          "type": "string"
-        },
-        "subordinateTradeCountrySubDivision": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tradeCountrySubDivision" }
-        }
-      }
-    },
-
-    "tradeCountrySubDivision": {
-      "type": "object",
-      "description": "A sub-division of the country of origin (a region). functionTypeCode is constrained to '106' (UNCL3227 Region of Origin).",
-      "required": ["identifier", "functionTypeCode"],
-      "properties": {
-        "identifier": {
-          "type": "string"
-        },
-        "functionTypeCode": {
-          "type": "object",
-          "required": ["content"],
-          "properties": {
-            "content": { "const": "106" }
-          }
         }
       }
     },

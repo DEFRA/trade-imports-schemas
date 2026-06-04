@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-amendment-requested-v1.schema.json",
+  "title": "GBN-AG NotificationAmendmentRequested event (v1)",
+  "description": "Event emitted when a previously submitted GBN-AG notification is re-opened for editing (SUBMITTED -> AMEND). The data payload is the full notification snapshot at the point of re-opening, with `notificationStatusCode = AMEND`. `versionId` and `functionCode` carry forward from the prior submission - the document body has not yet been revised, only its workflow state.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationAmendmentRequested" },
+        "data": {
+          "allOf": [
+            { "$ref": "gbn-ag-v1.schema.json" },
+            {
+              "type": "object",
+              "required": ["exchangedDocument"],
+              "properties": {
+                "exchangedDocument": {
+                  "type": "object",
+                  "required": ["notificationStatusCode", "versionId", "functionCode"],
+                  "properties": {
+                    "notificationStatusCode": { "const": "AMEND" },
+                    "versionId":              { "type": "integer", "minimum": 1 },
+                    "functionCode":           { "const": "9" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
