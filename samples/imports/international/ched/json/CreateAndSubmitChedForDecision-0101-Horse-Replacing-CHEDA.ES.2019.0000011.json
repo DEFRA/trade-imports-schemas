@@ -131,7 +131,9 @@
             "sequenceNumeric": 1,
             "applicableProductClassification": [
               {
-                "classCode": 101
+                "classCode": {
+                  "value": "101"
+                }
               }
             ]
           }

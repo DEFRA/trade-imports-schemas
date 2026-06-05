@@ -4,34 +4,22 @@
   "title": "Defra UNVTD canonical core",
   "description": "Canonical component schema for Defra internal models using UN/CEFACT/UNVTD building blocks. Property names and value kinds follow the UN/CEFACT D23B JSON-LD vocabulary (https://vocabulary.uncefact.org/unece-context-D23B.jsonld): xsd:string-typed terms are JSON strings; @vocab-typed terms are JSON strings; @id-typed terms are JSON objects or strings per JSON-LD. That file defines the RDF types ExchangedDocument and Consignment (PascalCase keys) and many association properties, but it does not currently declare the BSP assembly property keys exchangedDocument or specifiedConsignment (camelCase) used on the JSON root alongside UN JSON Schemas (e.g. UNECE-BSPMaster D23B). defra-unvtd-core-v1.context.jsonld adds only those two missing keys as Defra profile aliases (not unece terms), so we avoid minting unofficial vocabulary entries while preserving a stable JSON-LD expansion for TRACES-oriented payload shape. If UN later publishes exchangedDocument/specifiedConsignment in the official context, remove the Defra aliases and use the official mapping directly.",
   "$defs": {
-    "UneceCodeType": {
+    "CodedValue": {
       "type": "object",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "properties": {
-        "value": {
-          "type": "string"
-        },
-        "listId": {
-          "type": "string"
-        },
-        "listName": {
-          "type": "string"
+        "value": { "type": "string" },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "Codelist URI. EU TRACES: https://traces-codelists.ec.europa.eu/{listId}. Defra: https://codelists.tbc.defra.gov.uk/..."
         },
         "name": {
-          "type": "string"
-        },
-        "listAgencyId": {
-          "type": "string"
-        },
-        "listAgencyName": {
-          "type": "string"
-        },
-        "listVersionId": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable label for the coded value."
         }
-      }
+      },
+      "additionalProperties": false
     },
     "UneceMeasureType": {
       "type": "object",
@@ -228,7 +216,7 @@
     },
     "IncludedNote": {
       "type": "object",
-      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): supported properties are aligned to the Note vocabulary term set. unece:identifier, unece:name, unece:subject, unece:creationDateTime, unece:noteSubjectCode, unece:content, and unece:contentCode are xsd:string in unece-context-D23B.jsonld. content is an array of strings and contentCode is an array of UneceCodeType objects so a single note can carry multiple linked codes from different codelists (e.g. refusal_reason plus refusal_reason_extent on one refusal note).",
+      "description": "UNECE Note (https://vocabulary.uncefact.org/Note): supported properties are aligned to the Note vocabulary term set. unece:identifier, unece:name, unece:subject, unece:creationDateTime, unece:noteSubjectCode, unece:content, and unece:contentCode are xsd:string in unece-context-D23B.jsonld. content is an array of strings and contentCode is an array of CodedValue objects so a single note can carry multiple linked codes from different codelists (e.g. refusal_reason plus refusal_reason_extent on one refusal note).",
       "properties": {
         "type": {
           "const": "Note",
@@ -255,8 +243,8 @@
           "description": "Legacy subject-code slot - flat string only. Retained for the existing INTRA/CHED samples; new code should use subjectCode below."
         },
         "subjectCode": {
-          "type": "string",
-          "description": "Subject of the note (bare string; e.g. INDIVIDUAL_IDENTIFICATION_NUMBER). The sibling urlId names the codelist this code is drawn from."
+          "$ref": "#/$defs/CodedValue",
+          "description": "Subject of the note as a coded value. urlId on the CodedValue names the codelist the code is drawn from."
         },
         "content": {
           "type": "array",
@@ -268,9 +256,9 @@
         "contentCode": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/UneceCodeType"
+            "$ref": "#/$defs/CodedValue"
           },
-          "description": "unece:contentCode profile extension for deterministic typed contracts and lossless TRACES XML round-tripping: always an array of UneceCodeType objects (value + optional list metadata such as listId/listName/name)."
+          "description": "unece:contentCode profile extension for deterministic typed contracts and lossless TRACES XML round-tripping: always an array of CodedValue objects (value + optional urlId and name)."
         }
       }
     },
@@ -495,14 +483,7 @@
           "type": "string"
         },
         "classCode": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
+          "$ref": "#/$defs/CodedValue"
         },
         "className": {
           "type": "array",

@@ -17,8 +17,7 @@
         "contentCode": [
           {
             "value": "PP",
-            "listId": "ched_type",
-            "listName": "CHED type",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_type",
             "name": "CHED-PP - Common Health Entry Document for Plant Product"
           }
         ]
@@ -30,14 +29,12 @@
         "contentCode": [
           {
             "value": "REDISPATCHING",
-            "listId": "ched_not_acceptable_measure",
-            "listName": "CHED Not acceptable measure",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_not_acceptable_measure",
             "name": "Re-dispatching"
           },
           {
             "value": "CONTAMINATED_PRODUCTS",
-            "listId": "ched_not_acceptable_measure_extent",
-            "listName": "CHED Not acceptable measure extent",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_not_acceptable_measure_extent",
             "name": "Contaminated products"
           }
         ]
@@ -49,8 +46,7 @@
         "contentCode": [
           {
             "value": "PRESENCE_OF_HARMFUL_ORGANISM",
-            "listId": "refusal_reason",
-            "listName": "Refusal reason",
+            "urlId": "https://traces-codelists.ec.europa.eu/refusal_reason",
             "name": "Other reasons: presence of harmful organism"
           }
         ]
@@ -256,7 +252,9 @@
             "applicableProductClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": 8045000,
+                "classCode": {
+                  "value": "8045000"
+                },
                 "className": [
                   "EDIBLE FRUIT AND NUTS; PEEL OF CITRUS FRUIT OR MELONS",
                   "Dates, figs, pineapples, avocados, guavas, mangoes and mangosteens, fresh or dried",
@@ -265,14 +263,18 @@
               },
               {
                 "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": "MNGIN",
+                "classCode": {
+                  "value": "MNGIN"
+                },
                 "className": [
                   "Mangifera indica"
                 ]
               },
               {
                 "systemName": "Product type",
-                "classCode": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES",
+                "classCode": {
+                  "value": "OTHER_LIVING_PLANTS_FRUIT_AND_VEGETABLES"                
+                },
                 "className": [
                   "Other living plants: fruit and vegetables"
                 ]

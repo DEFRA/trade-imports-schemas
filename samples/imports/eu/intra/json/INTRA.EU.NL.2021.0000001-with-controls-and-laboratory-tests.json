@@ -33,8 +33,7 @@
         "contentCode": [
           {
             "value": "NO",
-            "listId": "boolean",
-            "listName": "Boolean (yes/no)"
+            "urlId": "https://traces-codelists.ec.europa.eu/boolean"
           }
         ]
       },
@@ -45,8 +44,7 @@
         "contentCode": [
           {
             "value": "AMBIENT",
-            "listId": "product_temperature",
-            "listName": "Product temperature",
+            "urlId": "https://traces-codelists.ec.europa.eu/product_temperature",
             "name": "Ambient"
           }
         ]
@@ -418,7 +416,7 @@
             "applicableProductClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": 102,
+                "classCode": { "value": "102" },
                 "className": [
                   "LIVE ANIMALS",
                   "Live bovine animals"

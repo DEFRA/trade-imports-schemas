@@ -240,11 +240,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": "01061900"
+                      "classCode": { "value": "01061900" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": "MAMMALIA",
+                      "classCode": { "value": "MAMMALIA" },
                       "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],
@@ -317,19 +317,19 @@
               "_mapping_note_path_a": "Path A — same identifiers on additionalInformationNote for joint review with TIG.",
               "additionalInformationNote": [
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "mc-cat"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "ppt-cat"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "tto-cat"
                   ]
@@ -343,11 +343,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": "01061900"
+                      "classCode": { "value": "01061900" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": "MAMMALIA",
+                      "classCode": { "value": "MAMMALIA" },
                       "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                     }
                   ],
@@ -399,19 +399,19 @@
               ],
               "additionalInformationNote": [
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "mc-ferret"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "ppt-ferret"
                   ]
                 },
                 {
-                  "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                   "content": [
                     "tto-ferret"
                   ]

@@ -242,11 +242,11 @@
                     "designatedProductClassification": [
                       {
                         "systemId": "CN",
-                        "classCode": "01020000"
+                        "classCode": { "value": "01020000" }
                       },
                       {
                         "systemId": "SPECIES_CLASS",
-                        "classCode": "MAMMALIA",
+                        "classCode": { "value": "MAMMALIA" },
                         "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
                       }
                     ],
@@ -293,13 +293,13 @@
                 ],
                 "additionalInformationNote": [
                   {
-                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                     "content": [
                       "et1"
                     ]
                   },
                   {
-                    "subjectCode": "INDIVIDUAL_IDENTIFICATION_NUMBER",
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
                     "content": [
                       "passport1"
                     ]
