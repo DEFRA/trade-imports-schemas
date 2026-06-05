@@ -132,13 +132,13 @@
           ],
           "properties": {
             "consignorParty": {
-              "description": "The party sending the animals under the trade contract - the exporter in regulatory terms. Distinct from `despatchParty` (the physical place the animals came from); the two may be the same legal entity (a farm that both raises and consigns) but are modelled separately."
+              "description": "The party sending the animals under the trade contract - the exporter in regulatory terms. Distinct from `despatchParty` (the facility the animals were physically despatched from); the two may be the same legal entity (a farm that both raises and consigns) but are modelled separately. The consignor doesn't have to operate from the despatch facility: a consignor in one country can send animals despatched from a facility (typically an assembly centre or processing plant where animals are gathered for despatch) in another country. See `despatchParty` for what kind of facility goes there."
             },
             "consigneeParty": {
               "description": "The party receiving the animals under the trade contract. Kept separate from `importer` (the legal importer of record) and `deliveryParty` (the destination party); on a given consignment these may or may not be the same legal entity. Carries `name`, `postalAddress`, and a `definedContact` (telephone, email) for inspection coordination."
             },
             "despatchParty": {
-              "description": "The facility the animals were despatched from. In the direct case this is the source farm; in the consolidation case it's the assembly centre or processing plant where the despatch happens. It's a logistics fact (where the despatch event happened), separate from `originCountry`, which is a residency fact (where the animals lived). The two slots are independent: a consignment can carry FR-resident animals despatched via a GB-based assembly centre, with `originCountry: FR` and a GB postal address here. In the direct-origin case they coincide on country. Modelled as a party rather than a location because the regulatory chain pivots on the operator's identity: `identifier` carries the operator's TRACES-issued `operator_activity_id` (with `urlId` naming the codelist), `partyRoleCode` is `\"PW\"` (\"Place of dispatch\") to assert the role on this slot, and `postalAddress` carries the facility's address. One per certificate. Mixed-residence consignments are always split into separate certificates per residence country, regardless of whether they share a despatch facility."
+              "description": "The facility the animals were despatched from. This may be the source farm where the animals were born and raised (the direct case), or a consolidation hub - typically an assembly centre or processing plant - where animals are gathered for despatch from elsewhere (the consolidation case). It's a logistics fact (where the despatch happens), separate from `originCountry`, which is a residency fact (where the animals lived). See `originCountry` for the residency rule that determines its value and for the always-split rule for mixed-residence consignments. The two slots are independent: a consignment can carry FR-resident animals despatched via a GB-based assembly centre, with `originCountry: FR` and a GB postal address here. When animals are despatched directly from the farm they were raised at, the two coincide on country. Modelled as a party rather than a location because the regulatory chain pivots on the operator's identity: `identifier` carries the operator's TRACES-issued `operator_activity_id` (with `urlId` naming the codelist), `partyRoleCode` is `\"PW\"` (\"Place of dispatch\") to assert the role on this slot, and `postalAddress` carries the facility's address. One per certificate."
             },
             "deliveryParty": {
               "description": "The party the animals will be delivered to at the immediate destination - the contractual delivery point, which may be temporary. The post-movement permanent home is carried separately: per-animal `permanentLocation`, or the consignment's `finalDestinationLocation` for livestock."
@@ -158,7 +158,7 @@
             },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
-              "description": "The party legally importing the consignment, held as a full party with its own address and contacts. Modelled as a slot distinct from `consigneeParty` because the importer of record and the contractual receiver are frequently different legal entities on UK live-animal imports."
+              "description": "The Great Britain-based party responsible for the consignment on the import side. Makes the regulatory declarations to UK competent authorities and is the party of record for the import. Distinct from `consigneeParty` (the contractual receiver under the trade contract) and `deliveryParty` (the immediate delivery point) - the importer of record, the contractual receiver, and the delivery party are frequently three different legal entities on UK live-animal imports. Held as a full party with its own address and contacts."
             },
             "finalDestinationLocation": {
               "$ref": "#/$defs/finalDestinationLocation",
@@ -172,6 +172,9 @@
             "isOrHasUnweanedAnimals": {
               "type": "boolean",
               "description": "True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications."
+            },
+            "packageQuantity": {
+              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
             },
             "includedConsignmentItem": {
               "type": "array",
@@ -268,7 +271,7 @@
 
     "gbnAgTradeProduct": {
       "type": "object",
-      "description": "GBN-AG trade product: one species or commodity. CN classification, scientific and common names (resolved from the CN code via Defra reference data), and per-animal identifiers Path B. Country of origin is not held here on GBN-AG - it sits at the consignment level on `specifiedConsignment.originCountry`, since an animal pre-notification carries a single country of origin for the whole consignment.",
+      "description": "GBN-AG trade product: one species or commodity on a trade line. Carries the commodity's classification (typically a Combined Nomenclature (CN) code, the customs identifier for the goods), its scientific and common names (looked up by Defra from the CN code, not trader-entered), and the per-animal records on `individualTradeProductInstance`. Country of origin is not held here - it sits at consignment level on `specifiedConsignment.originCountry`, because an animal pre-notification carries one country of origin for the whole consignment, not per species.",
       "required": [
         "designatedProductClassification",
         "description",
@@ -309,7 +312,7 @@
         "individualTradeProductInstance": {
           "type": "array",
           "items": { "$ref": "#/$defs/tradeProductInstance" },
-          "description": "Path B per-animal identifiers (BSP-canonical, purpose-built slot): each instance carries an identifier array (microchip / passport / tattoo / ear tag / leg ring as appropriate per the refdata identifier set for the species)."
+          "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
         }
       }
     },
@@ -333,14 +336,14 @@
 
     "tradeProductInstance": {
       "type": "object",
-      "description": "An individual animal. identifier is an array of regulatory IDs (an animal can carry microchip + passport + tattoo + ear tag + leg ring together; the refdata identifier set for the species determines which apply). permanentLocation is the per-animal permanent address, where the animal will live long-term once import is complete; different animals on the same line can carry different permanent addresses. All properties are optional; the producer populates whichever apply.",
+      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
       "properties": {
         "identifier": {
           "type": "array",
           "items": {
             "type": "object",
             "required": ["typeCode", "content"],
-            "description": "A per-animal identifier. typeCode names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) and is a bare string drawn from the animal_identifier_types codelist. content is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip). The sibling urlId points to the codelist that typeCode is drawn from.",
+            "description": "A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) as a bare string; `urlId` names the codelist the typeCode is drawn from. `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip).",
             "properties": {
               "content":  { "type": "string" },
               "typeCode": { "type": "string" },
