@@ -240,12 +240,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": { "value": "01061900" }
+                      "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": { "value": "MAMMALIA" },
-                      "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
+                      "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
@@ -317,19 +316,19 @@
               "_mapping_note_path_a": "Path A — same identifiers on additionalInformationNote for joint review with TIG.",
               "additionalInformationNote": [
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "mc-cat"
                   ]
                 },
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "ppt-cat"
                   ]
                 },
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "tto-cat"
                   ]
@@ -343,12 +342,11 @@
                   "designatedProductClassification": [
                     {
                       "systemId": "CN",
-                      "classCode": { "value": "01061900" }
+                      "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
                     },
                     {
                       "systemId": "SPECIES_CLASS",
-                      "classCode": { "value": "MAMMALIA" },
-                      "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
+                      "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
@@ -399,19 +397,19 @@
               ],
               "additionalInformationNote": [
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "mc-ferret"
                   ]
                 },
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "ppt-ferret"
                   ]
                 },
                 {
-                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                  "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                   "content": [
                     "tto-ferret"
                   ]

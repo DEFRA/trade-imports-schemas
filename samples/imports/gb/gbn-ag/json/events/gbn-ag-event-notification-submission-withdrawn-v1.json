@@ -242,12 +242,11 @@
                     "designatedProductClassification": [
                       {
                         "systemId": "CN",
-                        "classCode": { "value": "01020000" }
+                        "classCode": { "value": "01020000", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
                       },
                       {
                         "systemId": "SPECIES_CLASS",
-                        "classCode": { "value": "MAMMALIA" },
-                        "urlId": "https://codelists.tbc.defra.gov.uk/species_class"
+                        "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                       }
                     ],
                     "typeCode": "LIVE_ANIMAL",
@@ -293,13 +292,13 @@
                 ],
                 "additionalInformationNote": [
                   {
-                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                     "content": [
                       "et1"
                     ]
                   },
                   {
-                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER" },
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
                     "content": [
                       "passport1"
                     ]
