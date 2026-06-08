@@ -337,12 +337,16 @@
     "ClassificationTreeNode": {
       "type": "object",
       "required": [
+        "nodeId",
         "path",
         "label",
         "nodeType",
         "selectable"
       ],
       "properties": {
+        "nodeId": {
+          "type": "string"
+        },
         "path": {
           "type": "string"
         },
