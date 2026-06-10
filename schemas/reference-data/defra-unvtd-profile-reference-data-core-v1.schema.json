@@ -363,6 +363,9 @@
             "other"
           ]
         },
+        "certificate": {
+          "$ref": "#/$defs/CertificateModelReference"
+        },
         "selectable": {
           "type": "boolean"
         },
