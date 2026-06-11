@@ -1,5 +1,4 @@
 {
-  "_comment": "GBN-AG worked example — translation of an IPAFFS CHED-A notification into the GBN-AG schema, which derives from the canonical Defra UNVTD core via allOf. Naming follows the TIG team's convention (identifier, consignorParty, deliveryParty, postalAddress, definedContact, firstSignatoryAuthentication, includedClause, referenceDocument, unloadingBaseportLocation, provider). Primitive shape is hybrid: flat strings for party names / address lines / contact details, composite (CodedValue / UneceTextType) only where codelist metadata or language tags earn their keep. Per-animal identifiers are populated on BOTH placements for joint review with the TIG team: Path A on additionalInformationNote (operational TRACES placement) and Path B on individualTradeProductInstance (BSP-canonical placement). Authorial keys prefixed with _ are stripped before validation.",
   "$model": "defra/certificate-internal/1",
   "$schema": "gbn-ag-v1.schema.json",
   "@context": "../../../../../schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
@@ -252,7 +251,6 @@
                       "languageId": "en"
                     }
                   ],
-                  "_comment": "Per-animal identifiers - BSP-canonical, purpose-built slot. Each animal is one tradeProductInstance with identifier.typeCode naming the kind of identifier (a value from the animal_identifier_types codelist) and identifier.content carrying the value itself.",
                   "individualTradeProductInstance": [
                     {
                       "identifier": [
@@ -279,7 +277,6 @@
                   }
                 }
               ],
-              "_mapping_note_path_a": "Per-animal identifiers — Path A placement (operational TRACES). Each identifier is one additionalInformationNote with subjectCode.urlId pointing to the codelist (e.g. https://traces-codelists.ec.europa.eu/ched_note_subject_code) and content carrying the identifier value. Populated alongside Path B above so the joint review can compare both placements with the same data.",
               "additionalInformationNote": [
                 {
                   "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },

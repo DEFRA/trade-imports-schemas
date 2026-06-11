@@ -1,5 +1,4 @@
 {
-  "_comment": "NotificationWithdrawn event sample for GBN-AG. The notification was withdrawn while still a draft, before submission. Data payload is minimal: only the notification identifier and the workflow consts. A different aggregateId from the lifecycle-going-through-submission samples, since this notification never reached submission.",
   "$schema": "gbn-ag-event-notification-withdrawn-v1.schema.json",
   "eventId": "d4e5f6a7-b8c9-0123-4567-defabc012345",
   "aggregateType": "Notification",
