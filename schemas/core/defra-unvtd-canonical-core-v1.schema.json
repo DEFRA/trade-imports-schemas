@@ -582,7 +582,7 @@
         "additionalInformationNote": {
           "type": "array",
           "items": { "$ref": "#/$defs/IncludedNote" },
-          "description": "Per-line annotation notes — the BSP slot operational TRACES uses to carry per-animal identifiers (subjectCode 'INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content). Path A of the per-animal-ID placement debate; Path B places the same data on tradeProduct.individualTradeProductInstance[] at the GBN-AG profile level."
+          "description": "Per-line annotation notes. Carries per-animal identifiers as separate note entries with `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER` and the identifier value in `content` - one note per identifier."
         }
       }
     },
