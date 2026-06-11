@@ -1,5 +1,4 @@
 {
-  "_comment": "NotificationSubmissionWithdrawn event sample for GBN-AG. Data payload is the full submitted snapshot at the moment of withdrawal; notificationStatusCode moves to WITHDRAWN, functionCode is 1 (Cancellation); versionId is unchanged.",
   "$schema": "gbn-ag-event-notification-submission-withdrawn-v1.schema.json",
   "eventId": "c0d1e2f3-a4b5-6789-0123-cdef01234567",
   "aggregateType": "Notification",
