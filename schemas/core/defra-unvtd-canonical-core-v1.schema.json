@@ -546,18 +546,10 @@
           "type": "integer"
         },
         "description": {
-          "oneOf": [
-            { "type": "string" },
-            {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  { "type": "string" },
-                  { "$ref": "#/$defs/UneceTextType" }
-                ]
-              }
-            }
-          ]
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "netWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
