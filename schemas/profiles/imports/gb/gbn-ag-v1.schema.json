@@ -47,7 +47,7 @@
             },
             "firstSignatoryAuthentication": {
               "type": "object",
-              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present.",
+              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present. When the `PURPOSE` clause `content` is `INTERNAL_MARKET`, the payload must also include a clause with `identifier` `INTERNAL_MARKET_PURPOSE` declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership), drawn from the same codelist.",
               "required": ["includedClause"],
               "properties": {
                 "includedClause": {
@@ -71,32 +71,6 @@
                       "description": "Must contain a clause declaring the Animals Certified For category (identifier='GOODS_CERTIFIED_AS'; urlId points at the ched_consignment_clause codelist)."
                     }
                   ]
-                }
-              },
-              "if": {
-                "properties": {
-                  "includedClause": {
-                    "contains": {
-                      "type": "object",
-                      "properties": {
-                        "identifier": { "const": "PURPOSE" },
-                        "content": { "const": "INTERNAL_MARKET" }
-                      },
-                      "required": ["identifier", "content"]
-                    }
-                  }
-                }
-              },
-              "then": {
-                "properties": {
-                  "includedClause": {
-                    "contains": {
-                      "type": "object",
-                      "properties": { "identifier": { "const": "INTERNAL_MARKET_PURPOSE" } },
-                      "required": ["identifier"]
-                    },
-                    "description": "When the PURPOSE clause content is INTERNAL_MARKET, an additional INTERNAL_MARKET_PURPOSE clause must be present declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership). urlId points at the ched_consignment_clause codelist."
-                  }
                 }
               }
             },
@@ -245,93 +219,91 @@
     },
 
     "gbnAgTradeLineItem": {
-      "type": "object",
-      "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the species or commodity, the line quantity (head count for animals; weight for some germinals), and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
-      "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
-      "properties": {
-        "specifiedTradeProduct": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/gbnAgTradeProduct" }
-        },
-        "specifiedLineTradeDelivery": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
-        },
-        "additionalInformationNote": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
-          },
-          "description": "General-purpose annotations on the trade line. GBN-AG carries per-animal identifiers on `individualTradeProductInstance[].identifier[]`; for consumers that follow the TRACES convention, the same identifiers are also emitted here as notes with `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER`."
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeLineItem" },
+        {
+          "type": "object",
+          "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the species or commodity, the line quantity (head count for animals; weight for some germinals), and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
+          "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
+          "properties": {
+            "specifiedTradeProduct": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/gbnAgTradeProduct" }
+            },
+            "specifiedLineTradeDelivery": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
+            }
+          }
         }
-      }
+      ]
     },
 
     "gbnAgTradeProduct": {
-      "type": "object",
-      "description": "GBN-AG trade product: one species or commodity on a trade line. Carries the commodity's classification (typically a Combined Nomenclature (CN) code, the customs identifier for the goods), its scientific and common names (looked up by Defra from the CN code, not trader-entered), and the per-animal records on `individualTradeProductInstance`. Country of origin is not held here - it sits at consignment level on `specifiedConsignment.originCountry`, because an animal pre-notification carries one country of origin for the whole consignment, not per species.",
-      "required": [
-        "designatedProductClassification",
-        "description",
-        "scientificName",
-        "commonName"
-      ],
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification."
-        },
-        "designatedProductClassification": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/gbnAgProductClassification" }
-        },
-        "typeCode": {
-          "type": "string",
-          "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
-        },
-        "urlId": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the codelist this trade product's typeCode is drawn from."
-        },
-        "scientificName": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-          "description": "The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
-        },
-        "commonName": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-          "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
-        },
-        "individualTradeProductInstance": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tradeProductInstance" },
-          "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeProduct" },
+        {
+          "type": "object",
+          "description": "GBN-AG trade product: one species or commodity on a trade line. Carries the commodity's classification (typically a Combined Nomenclature (CN) code, the customs identifier for the goods), its scientific and common names (looked up by Defra from the CN code, not trader-entered), and the per-animal records on `individualTradeProductInstance`. Country of origin is not held here - it sits at consignment level on `specifiedConsignment.originCountry`, because an animal pre-notification carries one country of origin for the whole consignment, not per species.",
+          "required": [
+            "designatedProductClassification",
+            "description",
+            "scientificName",
+            "commonName"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification."
+            },
+            "designatedProductClassification": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/gbnAgProductClassification" }
+            },
+            "typeCode": {
+              "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
+            },
+            "scientificName": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
+              "description": "The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
+            },
+            "commonName": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
+              "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
+            },
+            "individualTradeProductInstance": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/tradeProductInstance" },
+              "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
+            }
+          }
         }
-      }
+      ]
     },
 
     "gbnAgProductClassification": {
-      "type": "object",
-      "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",
-      "required": ["systemId", "classCode"],
-      "properties": {
-        "systemId": { "type": "string" },
-        "classCode": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CodedValue"
-        },
-        "urlId": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the codelist this classification's classCode is drawn from."
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ProductClassification" },
+        {
+          "type": "object",
+          "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",
+          "required": ["systemId", "classCode"],
+          "properties": {
+            "urlId": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to the codelist this classification's classCode is drawn from."
+            }
+          }
         }
-      }
+      ]
     },
 
     "tradeProductInstance": {
@@ -359,19 +331,22 @@
     },
 
     "gbnAgLineTradeDelivery": {
-      "type": "object",
-      "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
-      "required": ["productUnitQuantity"],
-      "properties": {
-        "productUnitQuantity": {
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LineTradeDelivery" },
+        {
           "type": "object",
-          "required": ["content", "unitCode"],
+          "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
+          "required": ["productUnitQuantity"],
           "properties": {
-            "content": { "type": "number", "exclusiveMinimum": 0 },
-            "unitCode": { "type": "string" }
+            "productUnitQuantity": {
+              "required": ["content", "unitCode"],
+              "properties": {
+                "content": { "exclusiveMinimum": 0 }
+              }
+            }
           }
         }
-      }
+      ]
     }
   }
 }
