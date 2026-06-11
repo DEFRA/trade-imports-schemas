@@ -250,22 +250,6 @@
                       "content": "Cattle",
                       "languageId": "en"
                     }
-                  ],
-                  "individualTradeProductInstance": [
-                    {
-                      "identifier": [
-                        {
-                          "typeCode": "EAR_TAG",
-                          "content": "et1",
-                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
-                        },
-                        {
-                          "typeCode": "PASSPORT",
-                          "content": "passport1",
-                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
-                        }
-                      ]
-                    }
                   ]
                 }
               ],

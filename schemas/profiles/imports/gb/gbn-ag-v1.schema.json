@@ -235,6 +235,9 @@
               "type": "array",
               "minItems": 1,
               "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
+            },
+            "additionalInformationNote": {
+              "description": "GBN-AG carries per-animal identifiers (microchip, passport, ear tag, tattoo, leg ring) here as separate note entries: `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER` and the identifier value in `content` - one note per identifier."
             }
           }
         }
@@ -281,7 +284,7 @@
             "individualTradeProductInstance": {
               "type": "array",
               "items": { "$ref": "#/$defs/tradeProductInstance" },
-              "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
+              "description": "Per-animal records. Each entry represents one individual animal on the line, carrying the optional per-animal permanent address. Per-animal identifiers (microchip, passport, ear tag, etc.) sit on the trade line's `additionalInformationNote[]` rather than here."
             }
           }
         }
@@ -308,24 +311,11 @@
 
     "tradeProductInstance": {
       "type": "object",
-      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
+      "description": "An individual animal on this trade line. Carries the optional `permanentLocation` slot for the per-animal permanent residence address - used for pet commodities where different animals on the same line can carry different permanent addresses (for example pets imported to a business address and then shipped onwards to their owners' homes).",
       "properties": {
-        "identifier": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["typeCode", "content"],
-            "description": "A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) as a bare string; `urlId` names the codelist the typeCode is drawn from. `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip).",
-            "properties": {
-              "content":  { "type": "string" },
-              "typeCode": { "type": "string" },
-              "urlId":    { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
-            }
-          }
-        },
         "permanentLocation": {
           "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsLocation",
-          "description": "Optional per-animal permanent address. The address where this individual animal will permanently reside after import (e.g. for pets imported to a business address and then shipped onwards to their owner's home). Shown for commodities where the producer's refdata indicates a permanent address applies."
+          "description": "The address where this individual animal will permanently reside after import. Populated for commodities where the producer's reference data indicates a permanent address applies (pets); livestock typically carries the destination at consignment level via `finalDestinationLocation` instead."
         }
       }
     },

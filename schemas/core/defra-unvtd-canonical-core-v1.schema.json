@@ -345,7 +345,7 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / export / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names. `subordinateTradeCountrySubDivision` carries one or more regions within the country (UNCL3227 functionTypeCode '106' for region of origin) - meaningful where regulation is regionalised within a country, for example disease zoning on live-animal imports.",
+      "description": "A country reference (origin / export / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names. `subordinateTradeCountrySubDivision` carries one or more regions within the country (UNCL3227 functionTypeCode '106' for region of origin), used where regulation is regionalised within a country.",
       "properties": {
         "identifier": {
           "type": "string",
@@ -400,7 +400,7 @@
     },
     "TransportEvent": {
       "type": "object",
-      "description": "A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT transportEventType narrowed to the two date-time slots GBN-AG uses today. scheduledOccurrenceDateTime is the importer-declared planned time; actualOccurrenceDateTime is populated when the event has been observed.",
+      "description": "A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT `transportEventType`. `scheduledOccurrenceDateTime` is the declared planned time; `actualOccurrenceDateTime` is populated when the event has been observed.",
       "properties": {
         "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" },
         "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" }
@@ -508,7 +508,7 @@
         },
         "typeCode": {
           "type": "string",
-          "description": "BSP/D23B canonical slot (unece:typeCode, xsd:string) for the trade product's type/form code — e.g. live animal vs semen vs embryo vs ova. Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+          "description": "BSP/D23B canonical slot (`unece:typeCode`, `xsd:string`) for the trade product's type/form code. Drawn from the codelist named by the sibling `urlId`."
         },
         "urlId": {
           "type": "string",
@@ -526,8 +526,7 @@
       }
     },
     "LineTradeDelivery": {
-      "type": "object",
-      "description": "Delivery aspect of a trade line — what's being delivered on this line (quantities, weights at line level). Productively used for piece-count commodities (e.g. animals counted in head, with unitCode='H87').",
+      "type": "object",      "description": "Delivery aspect of a trade line — what's being delivered on this line (quantities, weights at line level).",
       "properties": {
         "productUnitQuantity": {
           "type": "object",
@@ -582,7 +581,7 @@
         "additionalInformationNote": {
           "type": "array",
           "items": { "$ref": "#/$defs/IncludedNote" },
-          "description": "Per-line annotation notes — the BSP slot operational TRACES uses to carry per-animal identifiers (subjectCode 'INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content). Path A of the per-animal-ID placement debate; Path B places the same data on tradeProduct.individualTradeProductInstance[] at the GBN-AG profile level."
+          "description": "Per-line annotation notes. Each entry carries a coded subject and one or more content values; consumers narrow the permitted subject codes in their profile."
         }
       }
     },
@@ -660,7 +659,7 @@
         },
         "documentTypeCode": {
           "type": "string",
-          "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level — profile schemas constrain by const/enum, and GBN-AG defers the value pending a UK pre-notification documentTypeCode decision."
+          "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level; profile schemas constrain by const/enum."
         },
         "documentStatusCode": {
           "type": "string",
