@@ -30,7 +30,7 @@
       "rdfs:label": "notificationStatusCode",
       "rdfs:comment": "Defra-internal workflow status of this notification.",
       "schema:domainIncludes": { "@id": "uncefact:ExchangedDocument" },
-      "schema:rangeIncludes": { "@id": "https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status" }
+      "schema:rangeIncludes": { "@id": "https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status" }
     },
     {
       "@id": "defraUnvtdProfile:permanentLocation",

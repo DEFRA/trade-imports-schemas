@@ -54,6 +54,14 @@ Typical certificate layering:
 3. Profile schema under `profiles/imports/...`  
    Type-specific constraints (for example CHED/INTRA/DOCOM document type constraints).
 
+## BSP-qualified names and the JSON-LD bridge
+
+The schemas use BSP-master-style names (`LogisticsTransportMovement`, `mainCarriageLogisticsTransportMovement`, `usedLogisticsTransportMeans`, `entryCustomsOfficeSpecifiedLogisticsLocation`) on the wire because TRACES SPS Certificate XML carries the same `Logistics_` BIE qualifier. Keeping the BSP shape avoids per-property name translation at the gateway.
+
+The canonical UN/CEFACT D23B vocabulary publishes the shorter forms at `https://vocabulary.uncefact.org/` (`TransportMovement`, `mainCarriageTransportMovement`, `usedTransportMeans`, `entryCustomsOfficeSpecifiedLocation`). To keep both layers usable, `contexts/defra-unvtd-core-v1.context.jsonld` carries an `@id` binding for each BSP-qualified term to its canonical IRI. A consumer walking the context dereferences cleanly against the published vocabulary; the JSON payload on the wire matches TRACES.
+
+When adding a new property or class to a core or profile schema, check the canonical D23B context (`build/vendor/uncefact/unece-context-D23B.jsonld`) for the equivalent IRI. If the BSP-qualified form is absent there, add a binding in the core context entry mapping it to the canonical short form. Some terms (e.g. `LogisticsLocation`, `occurrenceLogisticsLocation`, `LogisticsTransportMeans`) are canonical with the `Logistics` qualifier and need no bridge.
+
 ## Samples
 
 Primary sample locations:
