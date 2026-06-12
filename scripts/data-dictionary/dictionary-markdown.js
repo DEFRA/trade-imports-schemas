@@ -97,7 +97,7 @@ function pickRowDescription(propNode, contextResolver, vocabLookup, notes) {
   // description keeps the table tight.
   const codelist = pickCodelist(propNode);
   if (codelist) {
-    const codelistText = `Codelist: \`${codelist}\`.`;
+    const codelistText = `Reference data: \`${codelist}\`.`;
     composed = composed ? `${composed} ${codelistText}` : codelistText;
   }
 
