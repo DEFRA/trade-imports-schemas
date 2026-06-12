@@ -48,14 +48,10 @@
                       {
                         "systemId": "CN",
                         "classCode": { "value": "01012100", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                      },
-                      {
-                        "systemId": "SPECIES_CLASS",
-                        "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                       }
                     ],
                     "typeCode": "LIVE_ANIMAL",
-                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type"
+                    "urlId": "https://refdata.tbc.defra.gov.uk/species_type"
                   }
                 ]
               }
