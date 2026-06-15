@@ -1,7 +1,7 @@
 {
-  "$id": "https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status",
+  "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status",
   "title": "GBN-AG notification status",
-  "description": "Workflow states for a GBN-AG pre-notification, used as the value space for notificationStatusCode on ExchangedDocument. This file is the working source of truth in the absence of a live Defra codelists service; when that service goes live at https://codelists.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "description": "Workflow states for a GBN-AG pre-notification, used as the value space for notificationStatusCode on ExchangedDocument. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
   "values": [
     {
       "code": "DRAFT",

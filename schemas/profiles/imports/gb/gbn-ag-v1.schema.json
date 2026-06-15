@@ -34,7 +34,7 @@
             },
             "notificationStatusCode": {
               "type": "string",
-              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status`."
+              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status`."
             },
             "name": {
               "description": "An optional human-readable name for the document. GBN-AG identifies the pre-notification by its `identifier`."
@@ -97,7 +97,6 @@
             "deliveryParty",
             "importer",
             "originCountry",
-            "applicableCrossBorderRegulatoryProcedure",
             "unloadingBaseportLocation",
             "mainCarriageLogisticsTransportMovement",
             "carrier",
@@ -118,7 +117,7 @@
               "description": "The party the animals will be delivered to at the immediate destination - the contractual delivery point, which may be temporary. The post-movement permanent home is carried separately: per-animal `permanentLocation`, or the consignment's `finalDestinationLocation` for livestock."
             },
             "carrier": {
-              "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a `private_transporter_approval_number` (issued under the UK welfare-in-transport regime) as the value of `identifier`."
+              "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a UK transporter approval number (issued under the welfare-in-transport regime) as the value of `identifier`. `partyTypeCode` is `oneOf` a single string or an array of strings: a single string for the common case where the party carries one classification; an array when the party carries codes from more than one TRACES list (e.g. an `operator_activity_type` code plus a `classification_section_code`). Transporter status (active, suspended, expired) is not in the notification payload; consumers resolve it by looking the approval number up against the issuing scheme at consumption time."
             },
             "originCountry": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
@@ -128,7 +127,16 @@
               "description": "The country the consignment was exported from. Optional on GBN-AG: populate when it differs from `originCountry` (for example animals produced in one country and exported via another). For the common case where origin and export coincide, leave this empty and carry the value on `originCountry`."
             },
             "transitTradeCountry": {
-              "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
+              "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Up to 12 entries. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Required when Means of Transport is Railway or Road Vehicle; optional otherwise. Does not carry per-country arrival or departure dates. In the transit-through-GB case, GB itself appears here."
+            },
+            "importCountry": {
+              "description": "The country the consignment is imported into. For non-transit GBN-AG, `importCountry` is implicitly GB and may be left unpopulated. For transit cases (Reason for Import = Transit), `importCountry` carries the actual final destination country (not GB); GB then appears in `transitTradeCountry` as a country the consignment passes through."
+            },
+            "unloadingBaseportLocation": {
+              "description": "The UK port (or point) of entry the consignment arrives at, sourced from the MDM Countries API restricted to ports handling arrivals from EU and EFTA countries within scope of the GBN-AG journey under EU-Reset. `identifier` carries the port reference (typically a UN/LOCODE like `GBHUL`); `name` carries the human-readable port name. This slot is the structural anchor for identifying the UK arrival event: the `arrivalEvent` whose `occurrenceLogisticsLocation.identifier` matches this slot's `identifier` is the leg arriving at the UK port. Distinct from any inspection point under `applicableCrossBorderRegulatoryProcedure`, which is a separate regulatory concept."
+            },
+            "mainCarriageLogisticsTransportMovement": {
+              "description": "The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases."
             },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
@@ -136,19 +144,19 @@
             },
             "finalDestinationLocation": {
               "$ref": "#/$defs/finalDestinationLocation",
-              "description": "For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://codelists.tbc.defra.gov.uk/cph_number`. Pets omit this slot entirely and use per-animal `permanentLocation` instead."
+              "description": "For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://refdata.tbc.defra.gov.uk/cph_number`. One CPH per consignment - the schema does not carry a per-species CPH. Pets omit this slot entirely and use per-animal `permanentLocation` instead."
             },
             "applicableCrossBorderRegulatoryProcedure": {
               "type": "array",
-              "minItems": 1,
-              "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" }
+              "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" },
+              "description": "Reserved for journeys where regulatory inspection at a UK BCP applies. GBN-AG under EU-Reset does not populate this slot - the UK Port of Entry sits on `unloadingBaseportLocation`, which is a distinct concept. Other GB-import journeys may use this slot to carry SPS-inspection data."
             },
             "isOrHasUnweanedAnimals": {
               "type": "boolean",
               "description": "True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications."
             },
             "packageQuantity": {
-              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
+              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. At consignment level: the schema does not carry a per-species packaging count. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
             },
             "includedConsignmentItem": {
               "type": "array",
@@ -180,7 +188,7 @@
       "required": ["identifier", "urlId", "postalAddress"],
       "properties": {
         "identifier": { "type": "string" },
-        "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/cph_number" },
+        "urlId": { "type": "string", "format": "uri", "const": "https://refdata.tbc.defra.gov.uk/cph_number" },
         "name": {
           "type": "string"
         },
@@ -199,14 +207,14 @@
         "urlId": {
           "type": "string",
           "format": "uri",
-          "description": "URL to the codelist this procedure typeCode is drawn from (e.g. regulatory_procedure_type)."
+          "description": "URL to the scheme this procedure typeCode is drawn from (e.g. regulatory_procedure_type)."
         },
         "entryCustomsOfficeSpecifiedLogisticsLocation": {
           "type": "object",
           "required": ["identifier", "urlId"],
           "properties": {
             "identifier": { "type": "string" },
-            "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/bcp_reference" },
+            "urlId": { "type": "string", "format": "uri", "const": "https://refdata.tbc.defra.gov.uk/bcp_reference" },
             "name": {
               "type": "string"
             },
@@ -267,7 +275,7 @@
               "items": { "$ref": "#/$defs/gbnAgProductClassification" }
             },
             "typeCode": {
-              "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
+              "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type scheme named by the sibling `urlId`."
             },
             "scientificName": {
               "type": "array",
@@ -302,7 +310,7 @@
             "urlId": {
               "type": "string",
               "format": "uri",
-              "description": "URL to the codelist this classification's classCode is drawn from."
+              "description": "URL to the scheme this classification's classCode is drawn from."
             }
           }
         }

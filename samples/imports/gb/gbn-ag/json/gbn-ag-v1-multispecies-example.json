@@ -92,7 +92,7 @@
       },
       "despatchParty": {
         "identifier": "FR-69-HLD-00031",
-        "urlId": "https://codelists.tbc.defra.gov.uk/operator_activity_id",
+        "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
         "name": "Élevage des Monts d'Or",
         "partyRoleCode": "PW",
         "postalAddress": {
@@ -132,23 +132,6 @@
           }
         ]
       },
-      "applicableCrossBorderRegulatoryProcedure": [
-        {
-          "typeCode": "SPS_INSPECTION",
-          "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
-          "entryCustomsOfficeSpecifiedLogisticsLocation": {
-            "identifier": "GBAPHA1A",
-            "name": "APHA Bristol BCP",
-            "postalAddress": {
-              "lineOne": "APHA Bristol",
-              "cityName": "Bristol",
-              "postcodeCode": "BS1 1AA",
-              "countryId": "GB"
-            },
-            "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
-          }
-        }
-      ],
       "unloadingBaseportLocation": {
         "identifier": "GBBRS",
         "name": "Bristol",
@@ -162,15 +145,15 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "identifier": "FR-AB-123-CD",
+          "identifier": "CMR-FR-2026-0017",
           "modeCode": 3,
           "usedLogisticsTransportMeans": {
-            "name": "Refrigerated van"
+            "name": "FR-AB-123-CD"
           },
           "transportContractRelatedReferencedDocument": [
             {
               "typeCode": "730",
-              "identifier": "CMR-pre-bcp"
+              "identifier": "CMR-FR-2026-0017"
             }
           ],
           "departureEvent": [
@@ -183,18 +166,18 @@
               "scheduledOccurrenceDateTime": "2026-05-27T22:00:00Z"
             }
           ],
-          "urlId": "https://codelists.tbc.defra.gov.uk/road_vehicle_registration_before_bcp"
+          "urlId": "https://refdata.tbc.defra.gov.uk/road_vehicle_registration"
         },
         {
-          "identifier": "SHIP-REF-123",
+          "identifier": "VOY-26-EUR-04832",
           "modeCode": 1,
           "usedLogisticsTransportMeans": {
-            "name": "SHIP-REF-123"
+            "name": "MV ATLANTIC STAR"
           },
           "transportContractRelatedReferencedDocument": [
             {
               "typeCode": "705",
-              "identifier": "CMR-123123"
+              "identifier": "BOL-2026-AT-9123"
             }
           ],
           "departureEvent": [
@@ -204,16 +187,20 @@
           ],
           "arrivalEvent": [
             {
-              "scheduledOccurrenceDateTime": "2026-05-28T18:00:00Z"
+              "scheduledOccurrenceDateTime": "2026-05-28T18:00:00Z",
+              "occurrenceLogisticsLocation": {
+                "identifier": "GBBRS",
+                "urlId": "https://service.unece.org/locode/"
+              }
             }
           ],
-          "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
+          "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
         }
       ],
       "carrier": {
         "name": "GERRING PARTNERS",
         "identifier": "UK/EXETE/T1/00090683",
-        "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
+        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
         "partyTypeCode": [
           "COMMERCIAL_TRANSPORTER",
           "TRANSPORTER"
@@ -237,14 +224,10 @@
                     {
                       "systemId": "CN",
                       "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                    },
-                    {
-                      "systemId": "SPECIES_CLASS",
-                      "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
+                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {
@@ -309,14 +292,10 @@
                     {
                       "systemId": "CN",
                       "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                    },
-                    {
-                      "systemId": "SPECIES_CLASS",
-                      "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
+                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
                   "scientificName": [
                     {
