@@ -1,5 +1,4 @@
 {
-  "_comment": "GBN-AG worked example — translation of an IPAFFS CHED-A notification into the GBN-AG schema, which derives from the canonical Defra UNVTD core via allOf. Naming follows the TIG team's convention (identifier, consignorParty, deliveryParty, postalAddress, definedContact, firstSignatoryAuthentication, includedClause, referenceDocument, unloadingBaseportLocation, provider). Primitive shape is hybrid: flat strings for party names / address lines / contact details, composite (CodedValue / UneceTextType) only where codelist metadata or language tags earn their keep. Per-animal identifiers are populated on BOTH placements for joint review with the TIG team: Path A on additionalInformationNote (operational TRACES placement) and Path B on individualTradeProductInstance (BSP-canonical placement). Authorial keys prefixed with _ are stripped before validation.",
   "$model": "defra/certificate-internal/1",
   "$schema": "gbn-ag-v1.schema.json",
   "@context": "../../../../../schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
@@ -93,7 +92,7 @@
       },
       "despatchParty": {
         "identifier": "FR-15-HLD-00427",
-        "urlId": "https://codelists.tbc.defra.gov.uk/operator_activity_id",
+        "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
         "name": "Ferme du Massif Central",
         "partyRoleCode": "PW",
         "postalAddress": {
@@ -143,25 +142,8 @@
           "postcodeCode": "24271",
           "countryId": "CH"
         },
-        "urlId": "https://codelists.tbc.defra.gov.uk/cph_number"
+        "urlId": "https://refdata.tbc.defra.gov.uk/cph_number"
       },
-      "applicableCrossBorderRegulatoryProcedure": [
-        {
-          "typeCode": "SPS_INSPECTION",
-          "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
-          "entryCustomsOfficeSpecifiedLogisticsLocation": {
-            "identifier": "GBDVR1",
-            "name": "Dover BCP",
-            "postalAddress": {
-              "lineOne": "Border Control Post, Port of Dover",
-              "cityName": "Dover",
-              "postcodeCode": "CT17 9TF",
-              "countryId": "GB"
-            },
-            "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
-          }
-        }
-      ],
       "unloadingBaseportLocation": {
         "identifier": "GBDVR",
         "name": "Dover",
@@ -175,10 +157,10 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "identifier": "SHIPPY",
+          "identifier": "VOY-26-EUR-04832",
           "modeCode": 1,
           "usedLogisticsTransportMeans": {
-            "name": "SHIPPY"
+            "name": "MV SHIPPY"
           },
           "transportContractRelatedReferencedDocument": [
             {
@@ -188,10 +170,14 @@
           ],
           "arrivalEvent": [
             {
-              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
+              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",
+              "occurrenceLogisticsLocation": {
+                "identifier": "GBDVR",
+                "urlId": "https://service.unece.org/locode/"
+              }
             }
           ],
-          "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
+          "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
         }
       ],
       "transitTradeCountry": [
@@ -202,7 +188,7 @@
       "carrier": {
         "name": "ALISTAIR WILSON",
         "identifier": "UK/INVER/T1/00091851",
-        "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
+        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
         "partyTypeCode": [
           "COMMERCIAL_TRANSPORTER",
           "TRANSPORTER"
@@ -229,14 +215,10 @@
                     {
                       "systemId": "CN",
                       "classCode": { "value": "01020000", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                    },
-                    {
-                      "systemId": "SPECIES_CLASS",
-                      "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
                     }
                   ],
                   "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
+                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
                   "description": "Live bovine animals",
                   "scientificName": "Bos taurus",
                   "commonName": "Cattle",
@@ -267,7 +249,6 @@
                   }
                 }
               ],
-              "_mapping_note_path_a": "Per-animal identifiers — Path A placement (operational TRACES). Each identifier is one additionalInformationNote with subjectCode.urlId pointing to the codelist (e.g. https://traces-codelists.ec.europa.eu/ched_note_subject_code) and content carrying the identifier value. Populated alongside Path B above so the joint review can compare both placements with the same data.",
               "additionalInformationNote": [
                 {
                   "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },

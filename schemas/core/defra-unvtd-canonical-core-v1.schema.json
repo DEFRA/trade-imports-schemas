@@ -159,7 +159,7 @@
       "properties": {
         "identifier": {
           "type": "string",
-          "description": "Party identifier (bare string). The sibling urlId names the codelist/register the value is drawn from (e.g. operator_internal_activity_id, veterinary_office_identifier, authority_activity_id, or Defra-side schemes such as private_transporter_approval_number)."
+          "description": "Party identifier (bare string). The sibling urlId names the codelist/register the value is drawn from (e.g. operator_internal_activity_id, veterinary_office_identifier, authority_activity_id, or Defra-side schemes such as uk_transporter_authorisation)."
         },
         "urlId": {
           "type": "string",
@@ -372,10 +372,11 @@
     },
     "TransportEvent": {
       "type": "object",
-      "description": "A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT transportEventType narrowed to the two date-time slots GBN-AG uses today. scheduledOccurrenceDateTime is the importer-declared planned time; actualOccurrenceDateTime is populated when the event has been observed.",
+      "description": "A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT `transportEventType`. `scheduledOccurrenceDateTime` is the declared planned time; `actualOccurrenceDateTime` is populated when the event has been observed. `occurrenceLogisticsLocation` identifies the location at which the event occurs (the destination of the leg for `arrivalEvent`; the origin for `departureEvent`), allowing consumers to identify a specific leg deterministically by matching the location identifier rather than relying on positional heuristics.",
       "properties": {
         "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" },
-        "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" }
+        "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" },
+        "occurrenceLogisticsLocation": { "$ref": "#/$defs/LogisticsLocation" }
       }
     },
     "LogisticsTransportMovement": {
@@ -387,7 +388,7 @@
             { "type": "string" },
             { "type": "integer" }
           ],
-          "description": "Transport identifier as a bare string (e.g. SHIPPY, FR-AB-123-CD) or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The sibling urlId names the register the identifier is drawn from (vessel_name_after_bcp, road_vehicle_registration_before_bcp, airplane_flight_number_before_bcp)."
+          "description": "Transport identifier as a bare string or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The sibling urlId names the register the identifier is drawn from (e.g. vessel_name, road_vehicle_registration, airplane_flight_number)."
         },
         "urlId": {
           "type": "string",
@@ -403,6 +404,7 @@
         },
         "usedLogisticsTransportMeans": {
           "type": "object",
+          "description": "The conveyance used on this leg. `name` carries the means' identifying name (vessel name, vehicle registration, flight callsign). Distinct from `identifier` on the parent movement, which carries the movement's reference (journey number, waybill, booking). Both slots can be populated and may carry different values: identifier identifies the movement, usedLogisticsTransportMeans.name identifies the vehicle / vessel / aircraft.",
           "properties": {
             "name": { "type": "string" }
           }
@@ -474,7 +476,7 @@
         },
         "typeCode": {
           "type": "string",
-          "description": "BSP/D23B canonical slot (unece:typeCode, xsd:string) for the trade product's type/form code — e.g. live animal vs semen vs embryo vs ova. Drawn from a Defra-curated species-type codelist named by the sibling urlId."
+          "description": "BSP/D23B canonical slot (`unece:typeCode`, `xsd:string`) for the trade product's type/form code. Drawn from the codelist named by the sibling `urlId`."
         },
         "urlId": {
           "type": "string",
@@ -492,8 +494,7 @@
       }
     },
     "LineTradeDelivery": {
-      "type": "object",
-      "description": "Delivery aspect of a trade line — what's being delivered on this line (quantities, weights at line level). Productively used for piece-count commodities (e.g. animals counted in head, with unitCode='H87').",
+      "type": "object",      "description": "Delivery aspect of a trade line — what's being delivered on this line (quantities, weights at line level).",
       "properties": {
         "productUnitQuantity": {
           "type": "object",
@@ -510,6 +511,12 @@
       "properties": {
         "sequenceNumeric": {
           "type": "integer"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "netWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
@@ -542,7 +549,7 @@
         "additionalInformationNote": {
           "type": "array",
           "items": { "$ref": "#/$defs/IncludedNote" },
-          "description": "Per-line annotation notes — the BSP slot operational TRACES uses to carry per-animal identifiers (subjectCode 'INDIVIDUAL_IDENTIFICATION_NUMBER' with the identifier value in content). Path A of the per-animal-ID placement debate; Path B places the same data on tradeProduct.individualTradeProductInstance[] at the GBN-AG profile level."
+          "description": "Per-line annotation notes. Each entry carries a coded subject and one or more content values; consumers narrow the permitted subject codes in their profile."
         }
       }
     },
@@ -620,7 +627,7 @@
         },
         "documentTypeCode": {
           "type": "string",
-          "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level — profile schemas constrain by const/enum, and GBN-AG defers the value pending a UK pre-notification documentTypeCode decision."
+          "description": "Document type per UNTDID 1001 (e.g. 636 CHED, 666/856 INTRA). Optional at core level; profile schemas constrain by const/enum."
         },
         "documentStatusCode": {
           "type": "string",

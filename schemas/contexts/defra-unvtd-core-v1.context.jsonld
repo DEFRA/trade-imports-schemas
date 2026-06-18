@@ -23,6 +23,25 @@
       "carrier": {
         "@id": "unece:carrierParty",
         "@type": "@id"
+      },
+      "individualTradeProductInstance": {
+        "@id": "unece:individualProductInstance",
+        "@type": "@id"
+      },
+      "LogisticsTransportMovement": {
+        "@id": "unece:TransportMovement"
+      },
+      "mainCarriageLogisticsTransportMovement": {
+        "@id": "unece:mainCarriageTransportMovement",
+        "@type": "@id"
+      },
+      "usedLogisticsTransportMeans": {
+        "@id": "unece:usedTransportMeans",
+        "@type": "@id"
+      },
+      "entryCustomsOfficeSpecifiedLogisticsLocation": {
+        "@id": "unece:entryCustomsOfficeSpecifiedLocation",
+        "@type": "@id"
       }
     }
   ]

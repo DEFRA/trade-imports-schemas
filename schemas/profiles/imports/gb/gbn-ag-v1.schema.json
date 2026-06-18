@@ -34,7 +34,7 @@
             },
             "notificationStatusCode": {
               "type": "string",
-              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://codelists.tbc.defra.gov.uk/gbn-ag-notification-status`."
+              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status`."
             },
             "name": {
               "description": "An optional human-readable name for the document. GBN-AG identifies the pre-notification by its `identifier`."
@@ -47,7 +47,7 @@
             },
             "firstSignatoryAuthentication": {
               "type": "object",
-              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present.",
+              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present. When the `PURPOSE` clause `content` is `INTERNAL_MARKET`, the payload must also include a clause with `identifier` `INTERNAL_MARKET_PURPOSE` declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership), drawn from the same codelist.",
               "required": ["includedClause"],
               "properties": {
                 "includedClause": {
@@ -71,32 +71,6 @@
                       "description": "Must contain a clause declaring the Animals Certified For category (identifier='GOODS_CERTIFIED_AS'; urlId points at the ched_consignment_clause codelist)."
                     }
                   ]
-                }
-              },
-              "if": {
-                "properties": {
-                  "includedClause": {
-                    "contains": {
-                      "type": "object",
-                      "properties": {
-                        "identifier": { "const": "PURPOSE" },
-                        "content": { "const": "INTERNAL_MARKET" }
-                      },
-                      "required": ["identifier", "content"]
-                    }
-                  }
-                }
-              },
-              "then": {
-                "properties": {
-                  "includedClause": {
-                    "contains": {
-                      "type": "object",
-                      "properties": { "identifier": { "const": "INTERNAL_MARKET_PURPOSE" } },
-                      "required": ["identifier"]
-                    },
-                    "description": "When the PURPOSE clause content is INTERNAL_MARKET, an additional INTERNAL_MARKET_PURPOSE clause must be present declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership). urlId points at the ched_consignment_clause codelist."
-                  }
                 }
               }
             },
@@ -123,7 +97,6 @@
             "deliveryParty",
             "importer",
             "originCountry",
-            "applicableCrossBorderRegulatoryProcedure",
             "unloadingBaseportLocation",
             "mainCarriageLogisticsTransportMovement",
             "carrier",
@@ -144,7 +117,7 @@
               "description": "The party the animals will be delivered to at the immediate destination - the contractual delivery point, which may be temporary. The post-movement permanent home is carried separately: per-animal `permanentLocation`, or the consignment's `finalDestinationLocation` for livestock."
             },
             "carrier": {
-              "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a `private_transporter_approval_number` (issued under the UK welfare-in-transport regime) as the value of `identifier`."
+              "description": "The person or organisation responsible for moving the goods from the consignment's despatch point to the delivery point. Pre-notifications distinguish commercial from private transporters via the `operator_activity_type` code on `partyTypeCode`; private transporters carry a UK transporter approval number (issued under the welfare-in-transport regime) as the value of `identifier`. `partyTypeCode` is `oneOf` a single string or an array of strings: a single string for the common case where the party carries one classification; an array when the party carries codes from more than one TRACES list (e.g. an `operator_activity_type` code plus a `classification_section_code`). Transporter status (active, suspended, expired) is not in the notification payload; consumers resolve it by looking the approval number up against the issuing scheme at consumption time."
             },
             "originCountry": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
@@ -156,25 +129,34 @@
             "transitTradeCountry": {
               "description": "The countries the consignment passes through between origin and destination, one entry per country with `code.value` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
             },
+            "importCountry": {
+              "description": "The country the consignment is imported into. For non-transit GBN-AG, `importCountry` is implicitly GB and may be left unpopulated. For transit cases (Reason for Import = Transit), `importCountry` carries the actual final destination country (not GB); GB then appears in `transitTradeCountry` as a country the consignment passes through."
+            },
+            "unloadingBaseportLocation": {
+              "description": "The UK port (or point) of entry the consignment arrives at, sourced from the MDM Countries API restricted to ports handling arrivals from EU and EFTA countries within scope of the GBN-AG journey under EU-Reset. `identifier` carries the port reference (typically a UN/LOCODE like `GBHUL`); `name` carries the human-readable port name. This slot is the structural anchor for identifying the UK arrival event: the `arrivalEvent` whose `occurrenceLogisticsLocation.identifier` matches this slot's `identifier` is the leg arriving at the UK port. Distinct from any inspection point under `applicableCrossBorderRegulatoryProcedure`, which is a separate regulatory concept."
+            },
+            "mainCarriageLogisticsTransportMovement": {
+              "description": "The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases."
+            },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
               "description": "The Great Britain-based party responsible for the consignment on the import side. Makes the regulatory declarations to UK competent authorities and is the party of record for the import. Distinct from `consigneeParty` (the contractual receiver under the trade contract) and `deliveryParty` (the immediate delivery point) - the importer of record, the contractual receiver, and the delivery party are frequently three different legal entities on UK live-animal imports. Held as a full party with its own address and contacts."
             },
             "finalDestinationLocation": {
               "$ref": "#/$defs/finalDestinationLocation",
-              "description": "For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://codelists.tbc.defra.gov.uk/cph_number`. Pets omit this slot entirely and use per-animal `permanentLocation` instead."
+              "description": "For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://refdata.tbc.defra.gov.uk/cph_number`. One CPH per consignment - the schema does not carry a per-species CPH. Pets omit this slot entirely and use per-animal `permanentLocation` instead."
             },
             "applicableCrossBorderRegulatoryProcedure": {
               "type": "array",
-              "minItems": 1,
-              "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" }
+              "items": { "$ref": "#/$defs/crossBorderRegulatoryProcedure" },
+              "description": "Reserved for journeys where regulatory inspection at a UK BCP applies. GBN-AG under EU-Reset does not populate this slot - the UK Port of Entry sits on `unloadingBaseportLocation`, which is a distinct concept. Other GB-import journeys may use this slot to carry SPS-inspection data."
             },
             "isOrHasUnweanedAnimals": {
               "type": "boolean",
               "description": "True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications."
             },
             "packageQuantity": {
-              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
+              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. At consignment level: the schema does not carry a per-species packaging count. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
             },
             "includedConsignmentItem": {
               "type": "array",
@@ -206,7 +188,7 @@
       "required": ["identifier", "urlId", "postalAddress"],
       "properties": {
         "identifier": { "type": "string" },
-        "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/cph_number" },
+        "urlId": { "type": "string", "format": "uri", "const": "https://refdata.tbc.defra.gov.uk/cph_number" },
         "name": {
           "type": "string"
         },
@@ -225,14 +207,14 @@
         "urlId": {
           "type": "string",
           "format": "uri",
-          "description": "URL to the codelist this procedure typeCode is drawn from (e.g. regulatory_procedure_type)."
+          "description": "URL to the scheme this procedure typeCode is drawn from (e.g. regulatory_procedure_type)."
         },
         "entryCustomsOfficeSpecifiedLogisticsLocation": {
           "type": "object",
           "required": ["identifier", "urlId"],
           "properties": {
             "identifier": { "type": "string" },
-            "urlId": { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/bcp_reference" },
+            "urlId": { "type": "string", "format": "uri", "const": "https://refdata.tbc.defra.gov.uk/bcp_reference" },
             "name": {
               "type": "string"
             },
@@ -245,28 +227,29 @@
     },
 
     "gbnAgTradeLineItem": {
-      "type": "object",
-      "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the species or commodity, the line quantity (head count for animals; weight for some germinals), and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
-      "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
-      "properties": {
-        "specifiedTradeProduct": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/gbnAgTradeProduct" }
-        },
-        "specifiedLineTradeDelivery": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
-        },
-        "additionalInformationNote": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
-          },
-          "description": "General-purpose annotations on the trade line. GBN-AG carries per-animal identifiers on `individualTradeProductInstance[].identifier[]`; for consumers that follow the TRACES convention, the same identifiers are also emitted here as notes with `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER`."
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeLineItem" },
+        {
+          "type": "object",
+          "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the species or commodity, the line quantity (head count for animals; weight for some germinals), and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
+          "required": ["specifiedTradeProduct", "specifiedLineTradeDelivery"],
+          "properties": {
+            "specifiedTradeProduct": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/gbnAgTradeProduct" }
+            },
+            "specifiedLineTradeDelivery": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
+            },
+            "additionalInformationNote": {
+              "description": "GBN-AG carries per-animal identifiers (microchip, passport, ear tag, tattoo, leg ring) here as separate note entries: `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER` and the identifier value in `content` - one note per identifier."
+            }
+          }
         }
-      }
+      ]
     },
 
     "gbnAgTradeProduct": {
@@ -314,20 +297,21 @@
     },
 
     "gbnAgProductClassification": {
-      "type": "object",
-      "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",
-      "required": ["systemId", "classCode"],
-      "properties": {
-        "systemId": { "type": "string" },
-        "classCode": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CodedValue"
-        },
-        "urlId": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the codelist this classification's classCode is drawn from."
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ProductClassification" },
+        {
+          "type": "object",
+          "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",
+          "required": ["systemId", "classCode"],
+          "properties": {
+            "urlId": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to the scheme this classification's classCode is drawn from."
+            }
+          }
         }
-      }
+      ]
     },
 
     "tradeProductInstance": {
@@ -355,19 +339,22 @@
     },
 
     "gbnAgLineTradeDelivery": {
-      "type": "object",
-      "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
-      "required": ["productUnitQuantity"],
-      "properties": {
-        "productUnitQuantity": {
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LineTradeDelivery" },
+        {
           "type": "object",
-          "required": ["content", "unitCode"],
+          "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
+          "required": ["productUnitQuantity"],
           "properties": {
-            "content": { "type": "number", "exclusiveMinimum": 0 },
-            "unitCode": { "type": "string" }
+            "productUnitQuantity": {
+              "required": ["content", "unitCode"],
+              "properties": {
+                "content": { "exclusiveMinimum": 0 }
+              }
+            }
           }
         }
-      }
+      ]
     }
   }
 }

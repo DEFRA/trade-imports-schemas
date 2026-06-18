@@ -105,7 +105,7 @@
         },
         "despatchParty": {
           "identifier": "FR-15-HLD-00427",
-          "urlId": "https://codelists.tbc.defra.gov.uk/operator_activity_id",
+          "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
           "name": "Ferme du Massif Central",
           "partyRoleCode": "PW",
           "postalAddress": {
@@ -155,12 +155,12 @@
             "postcodeCode": "24271",
             "countryId": "CH"
           },
-          "urlId": "https://codelists.tbc.defra.gov.uk/cph_number"
+          "urlId": "https://refdata.tbc.defra.gov.uk/cph_number"
         },
         "applicableCrossBorderRegulatoryProcedure": [
           {
             "typeCode": "SPS_INSPECTION",
-            "urlId": "https://codelists.tbc.defra.gov.uk/regulatory_procedure_type",
+            "urlId": "https://refdata.tbc.defra.gov.uk/regulatory_procedure_type",
             "entryCustomsOfficeSpecifiedLogisticsLocation": {
               "identifier": "GBDVR1",
               "name": "Dover BCP",
@@ -170,7 +170,7 @@
                 "postcodeCode": "CT17 9TF",
                 "countryId": "GB"
               },
-              "urlId": "https://codelists.tbc.defra.gov.uk/bcp_reference"
+              "urlId": "https://refdata.tbc.defra.gov.uk/bcp_reference"
             }
           }
         ],
@@ -187,10 +187,10 @@
         },
         "mainCarriageLogisticsTransportMovement": [
           {
-            "identifier": "SHIPPY",
+            "identifier": "VOY-26-EUR-04832",
             "modeCode": 1,
             "usedLogisticsTransportMeans": {
-              "name": "SHIPPY"
+              "name": "MV SHIPPY"
             },
             "transportContractRelatedReferencedDocument": [
               {
@@ -200,10 +200,14 @@
             ],
             "arrivalEvent": [
               {
-                "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z"
+                "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",
+                "occurrenceLogisticsLocation": {
+                  "identifier": "GBDVR",
+                  "urlId": "https://service.unece.org/locode/"
+                }
               }
             ],
-            "urlId": "https://codelists.tbc.defra.gov.uk/vessel_name_after_bcp"
+            "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
           }
         ],
         "transitTradeCountry": [
@@ -214,7 +218,7 @@
         "carrier": {
           "name": "ALISTAIR WILSON",
           "identifier": "UK/INVER/T1/00091851",
-          "urlId": "https://codelists.tbc.defra.gov.uk/private_transporter_approval_number",
+          "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
           "partyTypeCode": [
             "COMMERCIAL_TRANSPORTER",
             "TRANSPORTER"
@@ -244,11 +248,11 @@
                       },
                       {
                         "systemId": "SPECIES_CLASS",
-                        "classCode": { "value": "MAMMALIA", "urlId": "https://codelists.tbc.defra.gov.uk/species_class" }
+                        "classCode": { "value": "MAMMALIA", "urlId": "https://refdata.tbc.defra.gov.uk/species_class" }
                       }
                     ],
                     "typeCode": "LIVE_ANIMAL",
-                    "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
+                    "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
                     "description": "Live bovine animals",
                     "scientificName": "Bos taurus",
                     "commonName": "Cattle",

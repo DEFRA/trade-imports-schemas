@@ -12,7 +12,8 @@
         "source",
         "treeId",
         "nodePath",
-        "node"
+        "node",
+        "nodeId"
       ],
       "properties": {
         "source": {
@@ -22,6 +23,9 @@
           "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/ClassificationTreeId"
         },
         "nodePath": {
+          "type": "string"
+        },
+        "nodeId": {
           "type": "string"
         },
         "node": {
