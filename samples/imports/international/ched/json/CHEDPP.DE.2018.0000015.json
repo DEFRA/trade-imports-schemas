@@ -201,7 +201,7 @@
           },
           {
             "sequenceNumeric": 1,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
                 "classCode": { "value": "6031100" },
@@ -230,7 +230,7 @@
           },
           {
             "sequenceNumeric": 2,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
                 "classCode": {

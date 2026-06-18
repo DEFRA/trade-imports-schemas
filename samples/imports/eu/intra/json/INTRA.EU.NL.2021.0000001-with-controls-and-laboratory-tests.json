@@ -406,7 +406,7 @@
           },
           {
             "sequenceNumeric": 1,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
                 "classCode": { "value": "102" },

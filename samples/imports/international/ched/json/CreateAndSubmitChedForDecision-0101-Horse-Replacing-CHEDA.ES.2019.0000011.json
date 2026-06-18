@@ -127,7 +127,7 @@
         "includedTradeLineItem": [
           {
             "sequenceNumeric": 1,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "classCode": {
                   "value": "101"

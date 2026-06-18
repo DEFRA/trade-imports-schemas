@@ -184,7 +184,7 @@
                 "value": "100",
                 "unitCode": "KGM"
               },
-              "applicableProductClassification": [
+              "applicableClassification": [
                 {
                   "systemId": "CN",
                   "systemName": "CN Code (Combined Nomenclature)",

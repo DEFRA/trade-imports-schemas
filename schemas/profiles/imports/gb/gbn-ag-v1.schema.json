@@ -298,7 +298,7 @@
 
     "gbnAgProductClassification": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ProductClassification" },
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ApplicableClassification" },
         {
           "type": "object",
           "description": "A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies.",

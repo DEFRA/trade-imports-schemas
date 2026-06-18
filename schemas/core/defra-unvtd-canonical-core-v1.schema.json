@@ -447,7 +447,7 @@
         }
       }
     },
-    "ProductClassification": {
+    "ApplicableClassification": {
       "type": "object",
       "properties": {
         "systemId": {
@@ -485,7 +485,7 @@
         },
         "designatedProductClassification": {
           "type": "array",
-          "items": { "$ref": "#/$defs/ProductClassification" }
+          "items": { "$ref": "#/$defs/ApplicableClassification" }
         },
         "originCountry": {
           "$ref": "#/$defs/TradeCountry",
@@ -524,10 +524,10 @@
         "grossWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
         },
-        "applicableProductClassification": {
+        "applicableClassification": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/ProductClassification"
+            "$ref": "#/$defs/ApplicableClassification"
           }
         },
         "physicalReferencedLogisticsPackage": {
@@ -590,12 +590,12 @@
         "applicableProductClassification": {
           "oneOf": [
             {
-              "$ref": "#/$defs/ProductClassification"
+              "$ref": "#/$defs/ApplicableClassification"
             },
             {
               "type": "array",
               "items": {
-                "$ref": "#/$defs/ProductClassification"
+                "$ref": "#/$defs/ApplicableClassification"
               }
             }
           ]
