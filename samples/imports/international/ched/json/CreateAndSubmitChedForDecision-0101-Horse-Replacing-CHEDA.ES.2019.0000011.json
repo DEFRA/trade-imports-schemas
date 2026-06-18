@@ -86,12 +86,10 @@
       }
     },
     "exportCountry": {
-      "id": "RS",
-      "name": "Serbia"
+      "code": { "value": "RS", "name": "Serbia" }
     },
     "importCountry": {
-      "id": "ES",
-      "name": "Spain"
+      "code": { "value": "ES", "name": "Spain" }
     },
     "unloadingBaseportLocation": [
       {

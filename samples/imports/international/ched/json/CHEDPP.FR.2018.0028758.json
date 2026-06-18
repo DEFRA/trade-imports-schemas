@@ -185,13 +185,9 @@
       }
     },
     "exportCountry": {
-      "id": "CI",
-      "name": "Cote D'Ivoire"
+      "code": { "value": "CI", "name": "Cote D'Ivoire" }
     },
-    "importCountry": {
-      "id": "",
-      "name": ""
-    },
+    "importCountry": {},
     "unloadingBaseportLocation": [
       {
         "identifier": "FRCDG4",
@@ -242,10 +238,7 @@
       {
         "includedTradeLineItem": [
           {
-            "sequenceNumeric": 0,
-            "description": [
-              "Consignment totals and summary"
-            ]
+            "sequenceNumeric": 0
           },
           {
             "sequenceNumeric": 1,

@@ -123,15 +123,13 @@
         }
       },
       "originCountry": {
-        "identifier": "FR",
-        "subordinateTradeCountrySubDivision": [
-          {
-            "identifier": "FR-12436",
-            "functionTypeCode": {
-              "content": "106"
-            }
+        "code": { "value": "FR" },
+        "subordinateTradeCountrySubDivision": {
+          "identifier": "FR-12436",
+          "functionTypeCode": {
+            "content": "106"
           }
-        ]
+        }
       },
       "applicableCrossBorderRegulatoryProcedure": [
         {
@@ -250,18 +248,8 @@
                   "typeCode": "LIVE_ANIMAL",
                   "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
-                  "scientificName": [
-                    {
-                      "content": "Felis catus",
-                      "languageId": "la"
-                    }
-                  ],
-                  "commonName": [
-                    {
-                      "content": "Cat",
-                      "languageId": "en"
-                    }
-                  ],
+                  "scientificName": "Felis catus",
+                  "commonName": "Cat",
                   "_mapping_note_freetext_identifier": "DESCRIPTION and IDENTIFICATION_DETAILS demonstrate v3 §15-§16: the free-text fallback identifier types in animal_identifier_types, used when a commodity has no defined identifier type. They reuse the existing identifier[] shape rather than a structurally distinct slot.",
                   "individualTradeProductInstance": [
                     {
@@ -352,18 +340,8 @@
                   "typeCode": "LIVE_ANIMAL",
                   "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                   "description": "Other live mammals",
-                  "scientificName": [
-                    {
-                      "content": "Mustela furo",
-                      "languageId": "la"
-                    }
-                  ],
-                  "commonName": [
-                    {
-                      "content": "Ferret",
-                      "languageId": "en"
-                    }
-                  ],
+                  "scientificName": "Mustela furo",
+                  "commonName": "Ferret",
                   "individualTradeProductInstance": [
                     {
                       "identifier": [

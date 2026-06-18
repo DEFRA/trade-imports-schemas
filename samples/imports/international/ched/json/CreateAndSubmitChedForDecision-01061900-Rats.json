@@ -73,12 +73,10 @@
       }
     },
     "exportCountry": {
-      "id": "US",
-      "name": "United States"
+      "code": { "value": "US", "name": "United States" }
     },
     "importCountry": {
-      "id": "ES",
-      "name": "Spain"
+      "code": { "value": "ES", "name": "Spain" }
     },
     "unloadingBaseportLocation": [
       {

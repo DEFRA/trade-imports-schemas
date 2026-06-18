@@ -137,15 +137,13 @@
           }
         },
         "originCountry": {
-          "identifier": "FR",
-          "subordinateTradeCountrySubDivision": [
-            {
-              "identifier": "FR-12345",
-              "functionTypeCode": {
-                "content": "106"
-              }
+          "code": { "value": "FR" },
+          "subordinateTradeCountrySubDivision": {
+            "identifier": "FR-12345",
+            "functionTypeCode": {
+              "content": "106"
             }
-          ]
+          }
         },
         "finalDestinationLocation": {
           "identifier": "CPH19876",
@@ -252,18 +250,8 @@
                     "typeCode": "LIVE_ANIMAL",
                     "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                     "description": "Live bovine animals",
-                    "scientificName": [
-                      {
-                        "content": "Bos taurus",
-                        "languageId": "la"
-                      }
-                    ],
-                    "commonName": [
-                      {
-                        "content": "Cattle",
-                        "languageId": "en"
-                      }
-                    ],
+                    "scientificName": "Bos taurus",
+                    "commonName": "Cattle",
                     "individualTradeProductInstance": [
                       {
                         "identifier": [

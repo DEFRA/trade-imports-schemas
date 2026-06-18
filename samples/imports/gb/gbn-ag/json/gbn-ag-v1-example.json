@@ -125,15 +125,13 @@
         }
       },
       "originCountry": {
-        "identifier": "FR",
-        "subordinateTradeCountrySubDivision": [
-          {
-            "identifier": "FR-12345",
-            "functionTypeCode": {
-              "content": "106"
-            }
+        "code": { "value": "FR" },
+        "subordinateTradeCountrySubDivision": {
+          "identifier": "FR-12345",
+          "functionTypeCode": {
+            "content": "106"
           }
-        ]
+        }
       },
       "finalDestinationLocation": {
         "identifier": "CPH19876",
@@ -198,7 +196,7 @@
       ],
       "transitTradeCountry": [
         {
-          "identifier": "BE"
+          "code": { "value": "BE" }
         }
       ],
       "carrier": {
@@ -240,18 +238,8 @@
                   "typeCode": "LIVE_ANIMAL",
                   "urlId": "https://codelists.tbc.defra.gov.uk/species_type",
                   "description": "Live bovine animals",
-                  "scientificName": [
-                    {
-                      "content": "Bos taurus",
-                      "languageId": "la"
-                    }
-                  ],
-                  "commonName": [
-                    {
-                      "content": "Cattle",
-                      "languageId": "en"
-                    }
-                  ],
+                  "scientificName": "Bos taurus",
+                  "commonName": "Cattle",
                   "_comment": "Per-animal identifiers - BSP-canonical, purpose-built slot. Each animal is one tradeProductInstance with identifier.typeCode naming the kind of identifier (a value from the animal_identifier_types codelist) and identifier.content carrying the value itself.",
                   "individualTradeProductInstance": [
                     {

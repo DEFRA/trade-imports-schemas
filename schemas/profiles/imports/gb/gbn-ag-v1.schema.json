@@ -154,7 +154,7 @@
               "description": "The country the consignment was exported from. Optional on GBN-AG: populate when it differs from `originCountry` (for example animals produced in one country and exported via another). For the common case where origin and export coincide, leave this empty and carry the value on `originCountry`."
             },
             "transitTradeCountry": {
-              "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
+              "description": "The countries the consignment passes through between origin and destination, one entry per country with `code.value` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
             },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
@@ -298,16 +298,12 @@
           "description": "URL to the codelist this trade product's typeCode is drawn from."
         },
         "scientificName": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-          "description": "The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
+          "type": "string",
+          "description": "The species name for the commodity in Latin, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
         },
         "commonName": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-          "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
+          "type": "string",
+          "description": "The everyday English name for the species, paired with `scientificName` to identify the commodity. Resolved from the CN code via reference data rather than trader-entered."
         },
         "individualTradeProductInstance": {
           "type": "array",

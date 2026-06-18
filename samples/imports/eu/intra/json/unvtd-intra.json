@@ -156,9 +156,6 @@
           "includedTradeLineItem": [
             {
               "sequenceNumeric": 0,
-              "description": [
-                "Consignment totals and summary"
-              ],
               "netWeight": {
                 "value": "33",
                 "unitCode": "KGM"
@@ -177,9 +174,6 @@
             },
             {
               "sequenceNumeric": 1,
-              "description": [
-                ""
-              ],
               "netWeight": {
                 "value": "33",
                 "unitCode": "KGM"
