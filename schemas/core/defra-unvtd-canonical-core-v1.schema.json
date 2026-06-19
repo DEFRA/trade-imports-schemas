@@ -518,6 +518,10 @@
             "type": "string"
           }
         },
+        "scientificName": {
+          "type": "string",
+          "description": "The species name for the commodity in Latin"
+        },
         "netWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
         },
