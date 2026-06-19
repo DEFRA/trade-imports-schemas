@@ -76,9 +76,9 @@
       "providerParty": {
         "identifier": "IT123VET",
         "name": "Agropoli Vet Office",
-        "partyRoleCode": "VJ",
+        "partyRoleCode": { "value": "VJ" },
         "partyTypeCode": [
-          "VETERINARY"
+          { "value": "VETERINARY" }
         ],
         "postalAddress": {
           "postcodeCode": "84043",
@@ -110,9 +110,9 @@
       "providerParty": {
         "identifier": "NL0002",
         "name": "Netherlands Food and Consumer Product Safety Authority",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "3511",
@@ -144,9 +144,9 @@
       "providerParty": {
         "identifier": "NL0002",
         "name": "Netherlands Food and Consumer Product Safety Authority",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "3511",
@@ -246,9 +246,9 @@
       "providerParty": {
         "identifier": "NL0002",
         "name": "Netherlands Food and Consumer Product Safety Authority",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "3511",
@@ -313,10 +313,10 @@
     "consignorParty": {
       "identifier": "1234567",
       "name": "B&S GTC Customs B.V.",
-      "partyRoleCode": "CZ",
+      "partyRoleCode": { "value": "CZ" },
       "partyTypeCode": [
-        "IMPORTER",
-        "IMP"
+        { "value": "IMPORTER" },
+        { "value": "IMP" }
       ],
       "postalAddress": {
         "postcodeCode": "3316",
@@ -329,10 +329,10 @@
     "consigneeParty": {
       "identifier": "BE-IMP-123",
       "name": "Test EU lms",
-      "partyRoleCode": "CN",
+      "partyRoleCode": { "value": "CN" },
       "partyTypeCode": [
-        "IMPORTER",
-        "IMP"
+        { "value": "IMPORTER" },
+        { "value": "IMP" }
       ],
       "postalAddress": {
         "postcodeCode": "1000",
@@ -354,10 +354,10 @@
     "despatchParty": {
       "identifier": "1234567",
       "name": "B&S GTC Customs B.V.",
-      "partyRoleCode": "PW",
+      "partyRoleCode": { "value": "PW" },
       "partyTypeCode": [
-        "IMPORTER",
-        "IMP"
+        { "value": "IMPORTER" },
+        { "value": "IMP" }
       ],
       "postalAddress": {
         "postcodeCode": "3316",
@@ -370,10 +370,10 @@
     "customsTransitAgentParty": {
       "identifier": "1234567",
       "name": "B&S GTC Customs B.V.",
-      "partyRoleCode": "CB",
+      "partyRoleCode": { "value": "CB" },
       "partyTypeCode": [
-        "IMPORTER",
-        "IMP"
+        { "value": "IMPORTER" },
+        { "value": "IMP" }
       ],
       "postalAddress": {
         "postcodeCode": "3316",
@@ -458,7 +458,7 @@
                 "laboratory": {
                   "identifier": "NLCODE123",
                   "name": "Test Lab in NL",
-                  "partyRoleCode": "DCW",
+                  "partyRoleCode": { "value": "DCW" },
                   "postalAddress": {
                     "postcodeCode": "1094",
                     "lineOne": "Address 1",
@@ -507,7 +507,7 @@
                 "laboratory": {
                   "identifier": "NLCODE123",
                   "name": "Test Lab in NL",
-                  "partyRoleCode": "DCW",
+                  "partyRoleCode": { "value": "DCW" },
                   "postalAddress": {
                     "postcodeCode": "1094",
                     "lineOne": "Address 1",

@@ -94,7 +94,7 @@
         "identifier": "FR-69-HLD-00031",
         "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
         "name": "Élevage des Monts d'Or",
-        "partyRoleCode": "PW",
+        "partyRoleCode": { "value": "PW" },
         "postalAddress": {
           "lineOne": "8 Chemin des Crêtes",
           "cityName": "Lyon",
@@ -200,8 +200,8 @@
         "identifier": "UK/EXETE/T1/00090683",
         "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
         "partyTypeCode": [
-          "COMMERCIAL_TRANSPORTER",
-          "TRANSPORTER"
+          { "value": "COMMERCIAL_TRANSPORTER" },
+          { "value": "TRANSPORTER" }
         ],
         "postalAddress": {
           "lineOne": "ARCHERS COTTAGE",
