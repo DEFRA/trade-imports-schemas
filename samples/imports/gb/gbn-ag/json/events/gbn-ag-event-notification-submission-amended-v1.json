@@ -57,6 +57,7 @@
       "referenceDocument": [
         {
           "typeCode": "853",
+          "relationshipTypeCode": "ZZZ",
           "identifier": "doc-ref",
           "issueDateTime": "2026-04-01",
           "attachmentBinaryObject": [
@@ -69,6 +70,7 @@
         },
         {
           "typeCode": "705",
+          "relationshipTypeCode": "ZZZ",
           "identifier": "BOL-2026-884721",
           "issueDateTime": "2026-05-09",
           "attachmentBinaryObject": [
