@@ -231,12 +231,10 @@
         "identifier": "1234567",
         "partyRoleCode": { "value": "CB" }
       },
-      "unloadingBaseportLocation": [
-        {
-          "name": "Dover BCP",
-          "identifier": "DEFRA4"
-        }
-      ]
+      "unloadingBaseportLocation": {
+        "name": "Dover BCP",
+        "identifier": "DEFRA4"
+      }
     },
   "laboratoryObservationResult": [
     {

@@ -740,14 +740,8 @@
           "description": "Transit countries on the consignment route (TRACES TransitSPSCountry[])."
         },
         "unloadingBaseportLocation": {
-          "oneOf": [
-            { "$ref": "#/$defs/LogisticsLocation" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/LogisticsLocation" }
-            }
-          ],
-          "description": "Port of entry / unloading baseport. Single location (BSP-canonical) or array (legacy CHED sample shape). For Defra import pre-notifications the identifier carries un_locode."
+          "$ref": "#/$defs/LogisticsLocation",
+          "description": "Port of entry / unloading baseport. For Defra import pre-notifications the identifier carries un_locode."
         },
         "mainCarriageLogisticsTransportMovement": {
           "oneOf": [

@@ -188,12 +188,10 @@
       "code": { "value": "CI", "name": "Cote D'Ivoire" }
     },
     "importCountry": {},
-    "unloadingBaseportLocation": [
-      {
-        "identifier": "FRCDG4",
-        "name": "FR"
-      }
-    ],
+    "unloadingBaseportLocation": {
+      "identifier": "FRCDG4",
+      "name": "FR"
+    },
     "examinationSPSEvent": {
       "occurrenceSPSLocation": {
         "name": ""

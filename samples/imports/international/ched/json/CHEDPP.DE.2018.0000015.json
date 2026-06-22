@@ -140,12 +140,10 @@
       "code": { "value": "KE", "name": "Kenya" }
     },
     "importCountry": {},
-    "unloadingBaseportLocation": [
-      {
-        "identifier": "DEFRA4",
-        "name": "DE"
-      }
-    ],
+    "unloadingBaseportLocation": {
+      "identifier": "DEFRA4",
+      "name": "DE"
+    },
     "examinationSPSEvent": {
       "occurrenceSPSLocation": {
         "name": ""
