@@ -89,7 +89,7 @@ One line per species or commodity on the certificate. A line carries the trade p
 | `description` | string \\| array | no | A textual description. |
 | `netWeight` | `UneceWeightMeasureType` | no | - |
 | `grossWeight` | `UneceWeightMeasureType` | no | - |
-| `applicableProductClassification` | array of `ProductClassification` | no | - |
+| `applicableClassification` | array of `ApplicableClassification` | no | - |
 | `physicalReferencedLogisticsPackage` | array of `LogisticsPackage` | no | - |
 | `specifiedTradeProduct` | array of `TradeProduct` | yes (at least 1) | The trade product on this line. BSP-canonical structural slot; profile schemas may narrow shape and cardinality. |
 | `specifiedLineTradeDelivery` | array of `LineTradeDelivery` | yes (at least 1) | Delivery aspect of this line (line-level quantities). |
@@ -104,7 +104,7 @@ One entry per species or commodity on the trade line. Carries the classification
 | `description` | string | yes | The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification. |
 | `typeCode` | string | no | The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type scheme named by the sibling `urlId`. |
 | `urlId` | string | no | URL to the scheme this trade product's typeCode is drawn from. |
-| `designatedProductClassification` | array of `ProductClassification` | yes (at least 1) | A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature; others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies. |
+| `designatedProductClassification` | array of `ApplicableClassification` | yes (at least 1) | A classification entry on a trade product. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature; others as registered). `classCode` is the value within that system. A trade product can carry multiple classification entries when more than one system applies. |
 | `originCountry` | `TradeCountry` | no | Per-product country of origin. Optional at core level; populated by profiles whose journeys carry origin per trade line rather than per consignment (TRACES CHED-PP's `OriginSPSCountry` is the round-trip target). Region of origin sits on `subordinateTradeCountrySubDivision` inside the `TradeCountry` shape and is carried with the country wherever it appears. |
 | `scientificName` | array of `UneceTextType` | yes (at least 1) | The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species. |
 | `commonName` | array of `UneceTextType` | yes (at least 1) | The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered. |

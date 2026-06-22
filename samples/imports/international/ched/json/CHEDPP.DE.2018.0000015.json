@@ -46,9 +46,9 @@
       "providerParty": {
         "identifier": "DEFRA4",
         "name": "Frankfurt am Main",
-        "partyRoleCode": "VJ",
+        "partyRoleCode": { "value": "VJ" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "60549",
@@ -75,9 +75,9 @@
       "providerParty": {
         "identifier": "DEFRA4",
         "name": "Frankfurt am Main",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "60549",
@@ -107,10 +107,10 @@
     "consignorParty": {
       "identifier": "",
       "name": "COOPERATIVEAF26 Ent",
-      "partyRoleCode": "CZ",
+      "partyRoleCode": { "value": "CZ" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "postcodeCode": "202",
@@ -123,10 +123,10 @@
     "consigneeParty": {
       "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": "CN",
+      "partyRoleCode": { "value": "CN" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
@@ -154,10 +154,10 @@
     "deliveryParty": {
       "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": "DP",
+      "partyRoleCode": { "value": "DP" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
@@ -170,10 +170,10 @@
     "customsTransitAgentParty": {
       "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": "CB",
+      "partyRoleCode": { "value": "CB" },
       "partyTypeCode": [
-        "RESPONSIBLE_FOR_THE_LOAD",
-        "RFL"
+        { "value": "RESPONSIBLE_FOR_THE_LOAD" },
+        { "value": "RFL" }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
@@ -201,7 +201,7 @@
           },
           {
             "sequenceNumeric": 1,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
                 "classCode": { "value": "6031100" },
@@ -230,7 +230,7 @@
           },
           {
             "sequenceNumeric": 2,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "systemName": "CN Code (Combined Nomenclature)",
                 "classCode": {

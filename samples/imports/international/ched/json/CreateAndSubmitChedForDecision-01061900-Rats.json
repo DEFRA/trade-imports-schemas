@@ -93,7 +93,7 @@
     "deliveryParty": {
       "identifier": "ES333444",
       "name": "",
-      "partyRoleCode": "CN",
+      "partyRoleCode": { "value": "CN" },
       "postalAddress": {
         "countryName": "Spain"
       }
@@ -114,7 +114,7 @@
         "includedTradeLineItem": [
           {
             "sequenceNumeric": 1,
-            "applicableProductClassification": [
+            "applicableClassification": [
               {
                 "classCode": {
                   "value": "1061900"

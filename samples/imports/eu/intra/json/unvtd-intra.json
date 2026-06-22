@@ -39,9 +39,9 @@
       "providerParty": {
         "name": "Agropoli Vet Office",
         "identifier": "IT123VET",
-        "partyRoleCode": "VJ",
+        "partyRoleCode": { "value": "VJ" },
         "partyTypeCode": [
-          "VETERINARY"
+          { "value": "VETERINARY" }
         ],
         "postalAddress": {
           "postcodeCode": "84043",
@@ -74,9 +74,9 @@
       "providerParty": {
         "name": "Netherlands Food and Consumer Product Safety Authority",
         "identifier": "NL0002",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ]
       },
       "governmentActionTypeCode": "1"
@@ -86,9 +86,9 @@
       "providerParty": {
         "name": "Netherlands Food and Consumer Product Safety Authority",
         "identifier": "NL0002",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ]
       },
       "includedClause": [
@@ -182,7 +182,7 @@
                 "value": "100",
                 "unitCode": "KGM"
               },
-              "applicableProductClassification": [
+              "applicableClassification": [
                 {
                   "systemId": "CN",
                   "systemName": "CN Code (Combined Nomenclature)",
@@ -207,30 +207,30 @@
       "consignorParty": {
         "name": "B&S GTC Customs B.V.",
         "identifier": "1234567",
-        "partyRoleCode": "CZ",
+        "partyRoleCode": { "value": "CZ" },
         "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
+          { "value": "IMPORTER" },
+          { "value": "IMP" }
         ]
       },
       "consigneeParty": {
         "name": "Test EU lms",
         "identifier": "BE-IMP-123",
-        "partyRoleCode": "CN",
+        "partyRoleCode": { "value": "CN" },
         "partyTypeCode": [
-          "IMPORTER",
-          "IMP"
+          { "value": "IMPORTER" },
+          { "value": "IMP" }
         ]
       },
       "despatchParty": {
         "name": "B&S GTC Customs B.V.",
         "identifier": "1234567",
-        "partyRoleCode": "PW"
+        "partyRoleCode": { "value": "PW" }
       },
       "customsTransitAgentParty": {
         "name": "B&S GTC Customs B.V.",
         "identifier": "1234567",
-        "partyRoleCode": "CB"
+        "partyRoleCode": { "value": "CB" }
       }
     },
   "laboratoryObservationResult": [
@@ -271,7 +271,7 @@
                 "laboratory": {
                   "name": "Test Lab in NL",
                   "identifier": "NLCODE123",
-                  "partyRoleCode": "DCW"
+                  "partyRoleCode": { "value": "DCW" }
                 },
                 "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
                 "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",
@@ -302,7 +302,7 @@
                 "laboratory": {
                   "name": "Test Lab in NL",
                   "identifier": "NLCODE123",
-                  "partyRoleCode": "DCW"
+                  "partyRoleCode": { "value": "DCW" }
                 },
                 "laboratoryReceiptDateTime": "2021-03-02T00:00:00.000+01:00",
                 "laboratoryReportDateTime": "2021-03-09T00:00:00.000+01:00",

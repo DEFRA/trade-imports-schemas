@@ -333,9 +333,9 @@ function mapTradeLineItem (item) {
   }
   if (item.netWeight) out.netWeight = mapMeasure(item.netWeight)
   if (item.grossWeight) out.grossWeight = mapMeasure(item.grossWeight)
-  const apc = item.applicableSPSClassification ?? item.applicableProductClassification
+  const apc = item.applicableSPSClassification ?? item.applicableProductClassification ?? item.applicableClassification
   if (apc) {
-    out.applicableProductClassification = Array.isArray(apc)
+    out.applicableClassification = Array.isArray(apc)
       ? apc.map(mapClassification)
       : [mapClassification(apc)]
   }

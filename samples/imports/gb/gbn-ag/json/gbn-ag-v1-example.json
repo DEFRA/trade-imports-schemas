@@ -96,7 +96,7 @@
         "identifier": "FR-15-HLD-00427",
         "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
         "name": "Ferme du Massif Central",
-        "partyRoleCode": "PW",
+        "partyRoleCode": { "value": "PW" },
         "postalAddress": {
           "lineOne": "Route de la Vallée 12",
           "cityName": "Saint-Flour",
@@ -192,8 +192,8 @@
         "identifier": "UK/INVER/T1/00091851",
         "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
         "partyTypeCode": [
-          "COMMERCIAL_TRANSPORTER",
-          "TRANSPORTER"
+          { "value": "COMMERCIAL_TRANSPORTER" },
+          { "value": "TRANSPORTER" }
         ],
         "postalAddress": {
           "lineOne": "AUCHENBLAE",

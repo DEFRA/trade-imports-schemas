@@ -171,15 +171,13 @@
           "description": "unece:name is xsd:string in unece-context-D23B.jsonld."
         },
         "partyRoleCode": {
-          "type": "string",
-          "description": "unece:partyRoleCode is @vocab in unece-context-D23B.jsonld."
+          "$ref": "#/$defs/CodedValue",
+          "description": "unece:partyRoleCode as a coded value. value carries the role code; the optional sibling urlId names the codelist it is drawn from."
         },
         "partyTypeCode": {
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ],
-          "description": "Party-type code(s). Bare string for a single code or array of bare strings when a party carries codes from more than one TRACES list (e.g. COMMERCIAL_TRANSPORTER under operator_activity_type plus TRANSPORTER under classification_section_code). Matches the BSP D23B canonical shape where the codeType has its codelist metadata disabled. The receiver / gateway resolves which TRACES list each value belongs to from context (party role, message subtype)."
+          "type": "array",
+          "items": { "$ref": "#/$defs/CodedValue" },
+          "description": "Party-type code(s) as coded values. A party can carry codes from more than one TRACES list (e.g. COMMERCIAL_TRANSPORTER under operator_activity_type plus TRANSPORTER under classification_section_code); each entry's urlId names the codelist its value is drawn from."
         },
         "postalAddress": {
           "$ref": "#/$defs/TradeAddress"
@@ -447,7 +445,7 @@
         }
       }
     },
-    "ProductClassification": {
+    "ApplicableClassification": {
       "type": "object",
       "properties": {
         "systemId": {
@@ -485,7 +483,7 @@
         },
         "designatedProductClassification": {
           "type": "array",
-          "items": { "$ref": "#/$defs/ProductClassification" }
+          "items": { "$ref": "#/$defs/ApplicableClassification" }
         },
         "originCountry": {
           "$ref": "#/$defs/TradeCountry",
@@ -528,10 +526,10 @@
         "grossWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"
         },
-        "applicableProductClassification": {
+        "applicableClassification": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/ProductClassification"
+            "$ref": "#/$defs/ApplicableClassification"
           }
         },
         "physicalReferencedLogisticsPackage": {
@@ -594,12 +592,12 @@
         "applicableProductClassification": {
           "oneOf": [
             {
-              "$ref": "#/$defs/ProductClassification"
+              "$ref": "#/$defs/ApplicableClassification"
             },
             {
               "type": "array",
               "items": {
-                "$ref": "#/$defs/ProductClassification"
+                "$ref": "#/$defs/ApplicableClassification"
               }
             }
           ]
