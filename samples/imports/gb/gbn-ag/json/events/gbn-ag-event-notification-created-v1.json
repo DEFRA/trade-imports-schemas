@@ -42,18 +42,14 @@
           {
             "includedTradeLineItem": [
               {
-                "specifiedTradeProduct": [
+                "applicableClassification": [
                   {
-                    "designatedProductClassification": [
-                      {
-                        "systemId": "CN",
-                        "classCode": { "value": "01012100", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                      }
-                    ],
-                    "typeCode": "LIVE_ANIMAL",
-                    "urlId": "https://refdata.tbc.defra.gov.uk/species_type"
+                    "systemId": "CN",
+                    "classCode": { "value": "01012100", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
                   }
-                ]
+                ],
+                "typeCode": "LIVE_ANIMAL",
+                "urlId": "https://refdata.tbc.defra.gov.uk/species_type"
               }
             ]
           }
