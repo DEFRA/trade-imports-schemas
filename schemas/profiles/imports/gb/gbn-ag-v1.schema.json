@@ -127,7 +127,7 @@
               "description": "The country the consignment was exported from. Optional on GBN-AG: populate when it differs from `originCountry` (for example animals produced in one country and exported via another). For the common case where origin and export coincide, leave this empty and carry the value on `originCountry`."
             },
             "transitTradeCountry": {
-              "description": "The countries the consignment passes through between origin and destination, one entry per country with `identifier` carrying the ISO 3166-1 alpha-2 code. Up to 12 entries. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Required when Means of Transport is Railway or Road Vehicle; optional otherwise. Does not carry per-country arrival or departure dates. In the transit-through-GB case, GB itself appears here."
+              "description": "The countries the consignment passes through between origin and destination, one entry per country with `code.value` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries."
             },
             "importCountry": {
               "description": "The country the consignment is imported into. For non-transit GBN-AG, `importCountry` is implicitly GB and may be left unpopulated. For transit cases (Reason for Import = Transit), `importCountry` carries the actual final destination country (not GB); GB then appears in `transitTradeCountry` as a country the consignment passes through."
@@ -253,50 +253,47 @@
     },
 
     "gbnAgTradeProduct": {
-      "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeProduct" },
-        {
-          "type": "object",
-          "description": "GBN-AG trade product: one species or commodity on a trade line. Carries the commodity's classification (typically a Combined Nomenclature (CN) code, the customs identifier for the goods), its scientific and common names (looked up by Defra from the CN code, not trader-entered), and the per-animal records on `individualTradeProductInstance`. Country of origin is not held here - it sits at consignment level on `specifiedConsignment.originCountry`, because an animal pre-notification carries one country of origin for the whole consignment, not per species.",
-          "required": [
-            "designatedProductClassification",
-            "description",
-            "scientificName",
-            "commonName"
-          ],
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification."
-            },
-            "designatedProductClassification": {
-              "type": "array",
-              "minItems": 1,
-              "items": { "$ref": "#/$defs/gbnAgProductClassification" }
-            },
-            "typeCode": {
-              "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type scheme named by the sibling `urlId`."
-            },
-            "scientificName": {
-              "type": "array",
-              "minItems": 1,
-              "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-              "description": "The species name for the commodity, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
-            },
-            "commonName": {
-              "type": "array",
-              "minItems": 1,
-              "items": { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/UneceTextType" },
-              "description": "The everyday name for the species, paired with `scientificName` to identify the commodity. Like the scientific name, it is resolved from the CN code via reference data rather than trader-entered."
-            },
-            "individualTradeProductInstance": {
-              "type": "array",
-              "items": { "$ref": "#/$defs/tradeProductInstance" },
-              "description": "Per-animal records. Each entry represents one individual animal on the line, carrying the optional per-animal permanent address. Per-animal identifiers (microchip, passport, ear tag, etc.) sit on the trade line's `additionalInformationNote[]` rather than here."
-            }
-          }
+      "type": "object",
+      "description": "GBN-AG trade product: one species or commodity on a trade line. Carries the commodity's classification (typically a Combined Nomenclature (CN) code, the customs identifier for the goods), its scientific and common names (looked up by Defra from the CN code, not trader-entered), and the per-animal records on `individualTradeProductInstance`. Country of origin is not held here - it sits at consignment level on `specifiedConsignment.originCountry`, because an animal pre-notification carries one country of origin for the whole consignment, not per species.",
+      "required": [
+        "designatedProductClassification",
+        "description",
+        "scientificName",
+        "commonName"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The free-text description of the commodity. Held at product scope because it describes the commodity itself, not the line that carries delivery quantity - which matters for mixed consignments (for example cats and dogs) where each species sits on its own product. Paired with `scientificName` and `commonName` for full species identification."
+        },
+        "designatedProductClassification": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/gbnAgProductClassification" }
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "The trade product's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
+        },
+        "urlId": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the codelist this trade product's typeCode is drawn from."
+        },
+        "scientificName": {
+          "type": "string",
+          "description": "The species name for the commodity in Latin, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "The everyday English name for the species, paired with `scientificName` to identify the commodity. Resolved from the CN code via reference data rather than trader-entered."
+        },
+        "individualTradeProductInstance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tradeProductInstance" },
+          "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
         }
-      ]
+      }
     },
 
     "gbnAgProductClassification": {
@@ -319,11 +316,24 @@
 
     "tradeProductInstance": {
       "type": "object",
-      "description": "An individual animal on this trade line. Carries the optional `permanentLocation` slot for the per-animal permanent residence address - used for pet commodities where different animals on the same line can carry different permanent addresses (for example pets imported to a business address and then shipped onwards to their owners' homes).",
+      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
       "properties": {
+        "identifier": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["typeCode", "content"],
+            "description": "A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) as a bare string; `urlId` names the codelist the typeCode is drawn from. `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip).",
+            "properties": {
+              "content":  { "type": "string" },
+              "typeCode": { "type": "string" },
+              "urlId":    { "type": "string", "format": "uri", "const": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
+            }
+          }
+        },
         "permanentLocation": {
           "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsLocation",
-          "description": "The address where this individual animal will permanently reside after import. Populated for commodities where the producer's reference data indicates a permanent address applies (pets); livestock typically carries the destination at consignment level via `finalDestinationLocation` instead."
+          "description": "Optional per-animal permanent address. The address where this individual animal will permanently reside after import (e.g. for pets imported to a business address and then shipped onwards to their owner's home). Shown for commodities where the producer's refdata indicates a permanent address applies."
         }
       }
     },

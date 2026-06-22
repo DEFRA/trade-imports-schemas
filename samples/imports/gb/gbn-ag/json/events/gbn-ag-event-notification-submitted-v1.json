@@ -1,4 +1,5 @@
 {
+  "_comment": "NotificationSubmitted event sample for GBN-AG. Envelope follows ADR-EUDP-002. Data payload is the full notification snapshot - same content as samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json, plus the three ExchangedDocument workflow-state fields (notificationStatusCode, versionId, functionCode) that mark this as the first formal submission (V1, Original).",
   "$schema": "gbn-ag-event-notification-submitted-v1.schema.json",
   "eventId": "f3a4b5c6-d7e8-9012-3456-789abcdef012",
   "aggregateType": "Notification",
@@ -84,208 +85,224 @@
       ]
     },
     "specifiedConsignment": {
-      "consignorParty": {
-        "name": "Astra Rosales",
-        "postalAddress": {
-          "lineOne": "43 East Hague Extension",
-          "lineTwo": "Delectus sit odio p",
-          "cityName": "Quas occaecat ut ear",
-          "postcodeCode": "30055",
-          "countryId": "CH"
-        }
-      },
-      "consigneeParty": {
-        "name": "Linus George Ltd",
-        "postalAddress": {
-          "lineOne": "558 Oak Street",
-          "lineTwo": "Ut aperiam in volupt",
-          "cityName": "Eligendi et beatae p",
-          "postcodeCode": "24271",
-          "countryId": "CH"
-        }
-      },
-      "despatchParty": {
-        "identifier": "FR-15-HLD-00427",
-        "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
-        "name": "Ferme du Massif Central",
-        "partyRoleCode": "PW",
-        "postalAddress": {
-          "lineOne": "Route de la Vallée 12",
-          "cityName": "Saint-Flour",
-          "postcodeCode": "15100",
-          "countryId": "FR",
-          "countrySubDivisionName": "Cantal"
-        }
-      },
-      "deliveryParty": {
-        "name": "Linus George Ltd",
-        "postalAddress": {
-          "lineOne": "558 Oak Street",
-          "lineTwo": "Ut aperiam in volupt",
-          "cityName": "Eligendi et beatae p",
-          "postcodeCode": "24271",
-          "countryId": "CH"
-        }
-      },
-      "importer": {
-        "name": "Importerporter",
-        "postalAddress": {
-          "lineOne": "186 Ditchling Road",
-          "lineTwo": "BRIGHTON",
-          "cityName": "Brighton",
-          "postcodeCode": "BN17DD",
-          "countryId": "FR"
-        }
-      },
-      "originCountry": {
-        "identifier": "FR",
-        "subordinateTradeCountrySubDivision": [
-          {
+        "consignorParty": {
+          "name": "Astra Rosales",
+          "postalAddress": {
+            "lineOne": "43 East Hague Extension",
+            "lineTwo": "Delectus sit odio p",
+            "cityName": "Quas occaecat ut ear",
+            "postcodeCode": "30055",
+            "countryId": "CH"
+          }
+        },
+        "consigneeParty": {
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
+          }
+        },
+        "despatchParty": {
+          "identifier": "FR-15-HLD-00427",
+          "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
+          "name": "Ferme du Massif Central",
+          "partyRoleCode": "PW",
+          "postalAddress": {
+            "lineOne": "Route de la Vallée 12",
+            "cityName": "Saint-Flour",
+            "postcodeCode": "15100",
+            "countryId": "FR",
+            "countrySubDivisionName": "Cantal"
+          }
+        },
+        "deliveryParty": {
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
+          }
+        },
+        "importer": {
+          "name": "Importerporter",
+          "postalAddress": {
+            "lineOne": "186 Ditchling Road",
+            "lineTwo": "BRIGHTON",
+            "cityName": "Brighton",
+            "postcodeCode": "BN17DD",
+            "countryId": "FR"
+          }
+        },
+        "originCountry": {
+          "code": { "value": "FR" },
+          "subordinateTradeCountrySubDivision": {
             "identifier": "FR-12345",
             "functionTypeCode": {
               "content": "106"
             }
           }
-        ]
-      },
-      "finalDestinationLocation": {
-        "identifier": "CPH19876",
-        "name": "Linus George Ltd",
-        "postalAddress": {
-          "lineOne": "558 Oak Street",
-          "lineTwo": "Ut aperiam in volupt",
-          "cityName": "Eligendi et beatae p",
-          "postcodeCode": "24271",
-          "countryId": "CH"
         },
-        "urlId": "https://refdata.tbc.defra.gov.uk/cph_number"
-      },
-      "unloadingBaseportLocation": {
-        "identifier": "GBDVR",
-        "name": "Dover",
-        "postalAddress": {
-          "lineOne": "Port of Dover",
-          "cityName": "Dover",
-          "postcodeCode": "CT17 9TF",
-          "countryId": "GB"
-        },
-        "urlId": "https://service.unece.org/locode/"
-      },
-      "mainCarriageLogisticsTransportMovement": [
-        {
-          "identifier": "VOY-26-EUR-04832",
-          "modeCode": 1,
-          "usedLogisticsTransportMeans": {
-            "name": "MV SHIPPY"
+        "finalDestinationLocation": {
+          "identifier": "CPH19876",
+          "name": "Linus George Ltd",
+          "postalAddress": {
+            "lineOne": "558 Oak Street",
+            "lineTwo": "Ut aperiam in volupt",
+            "cityName": "Eligendi et beatae p",
+            "postcodeCode": "24271",
+            "countryId": "CH"
           },
-          "transportContractRelatedReferencedDocument": [
-            {
-              "typeCode": "705",
-              "identifier": "doc-ref-BOL"
+          "urlId": "https://refdata.tbc.defra.gov.uk/cph_number"
+        },
+        "applicableCrossBorderRegulatoryProcedure": [
+          {
+            "typeCode": "SPS_INSPECTION",
+            "urlId": "https://refdata.tbc.defra.gov.uk/regulatory_procedure_type",
+            "entryCustomsOfficeSpecifiedLogisticsLocation": {
+              "identifier": "GBDVR1",
+              "name": "Dover BCP",
+              "postalAddress": {
+                "lineOne": "Border Control Post, Port of Dover",
+                "cityName": "Dover",
+                "postcodeCode": "CT17 9TF",
+                "countryId": "GB"
+              },
+              "urlId": "https://refdata.tbc.defra.gov.uk/bcp_reference"
             }
-          ],
-          "arrivalEvent": [
-            {
-              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",
-              "occurrenceLogisticsLocation": {
-                "identifier": "GBDVR",
-                "urlId": "https://service.unece.org/locode/"
-              }
-            }
-          ],
-          "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
-        }
-      ],
-      "transitTradeCountry": [
-        {
-          "identifier": "BE"
-        }
-      ],
-      "carrier": {
-        "name": "ALISTAIR WILSON",
-        "identifier": "UK/INVER/T1/00091851",
-        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
-        "partyTypeCode": [
-          "COMMERCIAL_TRANSPORTER",
-          "TRANSPORTER"
+          }
         ],
-        "postalAddress": {
-          "lineOne": "AUCHENBLAE",
-          "lineTwo": "INVER SHIN",
-          "cityName": "SUTHERLAND",
-          "postcodeCode": "IV27 4ET",
-          "countryId": "GB"
-        }
-      },
-      "isOrHasUnweanedAnimals": true,
-      "packageQuantity": {
-        "content": 1
-      },
-      "includedConsignmentItem": [
-        {
-          "includedTradeLineItem": [
-            {
-              "specifiedTradeProduct": [
-                {
-                  "designatedProductClassification": [
-                    {
-                      "systemId": "CN",
-                      "classCode": {
-                        "value": "01020000",
-                        "urlId": "https://traces-codelists.ec.europa.eu/cn"
+        "unloadingBaseportLocation": {
+          "identifier": "GBDVR",
+          "name": "Dover",
+          "postalAddress": {
+            "lineOne": "Port of Dover",
+            "cityName": "Dover",
+            "postcodeCode": "CT17 9TF",
+            "countryId": "GB"
+          },
+          "urlId": "https://service.unece.org/locode/"
+        },
+        "mainCarriageLogisticsTransportMovement": [
+          {
+            "identifier": "VOY-26-EUR-04832",
+            "modeCode": 1,
+            "usedLogisticsTransportMeans": {
+              "name": "MV SHIPPY"
+            },
+            "transportContractRelatedReferencedDocument": [
+              {
+                "typeCode": "705",
+                "identifier": "doc-ref-BOL"
+              }
+            ],
+            "arrivalEvent": [
+              {
+                "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",
+                "occurrenceLogisticsLocation": {
+                  "identifier": "GBDVR",
+                  "urlId": "https://service.unece.org/locode/"
+                }
+              }
+            ],
+            "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
+          }
+        ],
+        "transitTradeCountry": [
+          {
+            "identifier": "BE"
+          }
+        ],
+        "carrier": {
+          "name": "ALISTAIR WILSON",
+          "identifier": "UK/INVER/T1/00091851",
+          "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+          "partyTypeCode": [
+            "COMMERCIAL_TRANSPORTER",
+            "TRANSPORTER"
+          ],
+          "postalAddress": {
+            "lineOne": "AUCHENBLAE",
+            "lineTwo": "INVER SHIN",
+            "cityName": "SUTHERLAND",
+            "postcodeCode": "IV27 4ET",
+            "countryId": "GB"
+          }
+        },
+        "isOrHasUnweanedAnimals": true,
+        "packageQuantity": {
+          "content": 1
+        },
+        "includedConsignmentItem": [
+          {
+            "includedTradeLineItem": [
+              {
+                "specifiedTradeProduct": [
+                  {
+                    "designatedProductClassification": [
+                      {
+                        "systemId": "CN",
+                        "classCode": { "value": "01020000", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                      },
+                      {
+                        "systemId": "SPECIES_CLASS",
+                        "classCode": { "value": "MAMMALIA", "urlId": "https://refdata.tbc.defra.gov.uk/species_class" }
                       }
-                    }
-                  ],
-                  "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
-                  "description": "Live bovine animals",
-                  "scientificName": [
-                    {
-                      "content": "Bos taurus",
-                      "languageId": "la"
-                    }
-                  ],
-                  "commonName": [
-                    {
-                      "content": "Cattle",
-                      "languageId": "en"
-                    }
-                  ]
-                }
-              ],
-              "specifiedLineTradeDelivery": [
-                {
-                  "productUnitQuantity": {
-                    "content": 20,
-                    "unitCode": "H87"
+                    ],
+                    "typeCode": "LIVE_ANIMAL",
+                    "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+                    "description": "Live bovine animals",
+                    "scientificName": "Bos taurus",
+                    "commonName": "Cattle",
+                    "individualTradeProductInstance": [
+                      {
+                        "identifier": [
+                          {
+                            "typeCode": "EAR_TAG",
+                            "content": "et1",
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                          },
+                          {
+                            "typeCode": "PASSPORT",
+                            "content": "passport1",
+                            "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                          }
+                        ]
+                      }
+                    ]
                   }
-                }
-              ],
-              "additionalInformationNote": [
-                {
-                  "subjectCode": {
-                    "value": "INDIVIDUAL_IDENTIFICATION_NUMBER",
-                    "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+                ],
+                "specifiedLineTradeDelivery": [
+                  {
+                    "productUnitQuantity": {
+                      "content": 20,
+                      "unitCode": "H87"
+                    }
+                  }
+                ],
+                "additionalInformationNote": [
+                  {
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
+                    "content": [
+                      "et1"
+                    ]
                   },
-                  "content": [
-                    "et1"
-                  ]
-                },
-                {
-                  "subjectCode": {
-                    "value": "INDIVIDUAL_IDENTIFICATION_NUMBER",
-                    "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
-                  },
-                  "content": [
-                    "passport1"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                  {
+                    "subjectCode": { "value": "INDIVIDUAL_IDENTIFICATION_NUMBER", "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code" },
+                    "content": [
+                      "passport1"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
   },
   "metadata": {
     "correlationId": "cid-20260521-101500",

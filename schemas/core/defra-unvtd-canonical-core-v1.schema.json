@@ -90,15 +90,6 @@
         }
       }
     },
-    "UneceTextType": {
-      "description": "A text value with optional language identifier (CCTS Text.Type slot list). Used where text content carries a language tag (e.g. scientific names in Latin, common names in English, descriptions in EU member-state languages).",
-      "type": "object",
-      "required": ["content"],
-      "properties": {
-        "content": { "type": "string" },
-        "languageId": { "type": "string" }
-      }
-    },
     "Authentication": {
       "type": "object",
       "properties": {
@@ -345,34 +336,15 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / export / transit / re-export). The country code lives on `identifier` (newer canonical name) or on `id` (legacy alias retained for compatibility with existing CHED / INTRA samples). Both forms accept ISO 3166-1 alpha-2 (pattern enforced on `id`). Optional name carries language-tagged country names. `subordinateTradeCountrySubDivision` carries one or more regions within the country (UNCL3227 functionTypeCode '106' for region of origin), used where regulation is regionalised within a country.",
+      "description": "A country reference (origin / export / transit / re-export). The country code lives on `code.value` (ISO 3166-1 alpha-2 expected). `subordinateTradeCountrySubDivision` carries a single region within the country (UNCL3227 functionTypeCode '106' for region of origin) — meaningful where regulation is regionalised, for example disease zoning on live-animal imports.",
       "properties": {
-        "identifier": {
-          "type": "string",
-          "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use."
-        },
-        "id": {
-          "type": "string",
-          "description": "Legacy alias for identifier. Country code; ISO 3166-1 alpha-2 lexical token.",
-          "pattern": "^([A-Z]{2})?$"
-        },
-        "urlId": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the codelist this country identifier is drawn from. Optional; ISO 3166-1 alpha-2 is the default and does not need to be stated."
-        },
-        "name": {
-          "oneOf": [
-            { "type": "string" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/UneceTextType" }
-            }
-          ]
-        },
+        "code": {
+          "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use.",
+          "$ref": "#/$defs/CodedValue"
+        }
+        ,
         "subordinateTradeCountrySubDivision": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/TradeCountrySubDivision" }
+          "$ref": "#/$defs/TradeCountrySubDivision"
         }
       }
     },
@@ -499,14 +471,8 @@
       "type": "object",
       "description": "The product (commodity) carried on a trade line. Minimal at core level — carries description, type code, classification, and an optional per-product `originCountry`.",
       "properties": {
-        "description": {
-          "oneOf": [
-            { "type": "string" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/UneceTextType" }
-            }
-          ]
+        "scientificName": {
+          "type": "string"
         },
         "typeCode": {
           "type": "string",
@@ -551,6 +517,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "scientificName": {
+          "type": "string",
+          "description": "The species name for the commodity in Latin"
         },
         "netWeight": {
           "$ref": "#/$defs/UneceWeightMeasureType"

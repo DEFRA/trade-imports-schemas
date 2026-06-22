@@ -342,13 +342,9 @@
         "countrySubDivisionName": "Brussels-Capital"
       }
     },
-    "exportCountry": {
-      "id": "",
-      "name": ""
-    },
+    "exportCountry": {},
     "importCountry": {
-      "id": "BE",
-      "name": "Belgium"
+      "code": { "value": "BE", "name": "Belgium" }
     },
     "examinationSPSEvent": {
       "occurrenceSPSLocation": {
@@ -406,10 +402,7 @@
         ],
         "includedTradeLineItem": [
           {
-            "sequenceNumeric": 0,
-            "description": [
-              "Consignment totals and summary"
-            ]
+            "sequenceNumeric": 0
           },
           {
             "sequenceNumeric": 1,
