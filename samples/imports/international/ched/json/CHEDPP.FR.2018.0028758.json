@@ -80,9 +80,9 @@
       "providerParty": {
         "identifier": "FRCDG4",
         "name": "Roissy Charles-De-Gaulle FRCDG4",
-        "partyRoleCode": "VJ",
+        "partyRoleCode": { "value": "VJ" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "95701",
@@ -109,9 +109,9 @@
       "providerParty": {
         "identifier": "FRCDG4",
         "name": "Roissy Charles-De-Gaulle FRCDG4",
-        "partyRoleCode": "AM",
+        "partyRoleCode": { "value": "AM" },
         "partyTypeCode": [
-          "AUTHORITY"
+          { "value": "AUTHORITY" }
         ],
         "postalAddress": {
           "postcodeCode": "95701",
@@ -157,10 +157,10 @@
     "consignorParty": {
       "identifier": "",
       "name": "COOPERATIVEHb29 Co",
-      "partyRoleCode": "CZ",
+      "partyRoleCode": { "value": "CZ" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "lineOne": "Banat Street 63",
@@ -172,10 +172,10 @@
     "consigneeParty": {
       "identifier": "",
       "name": "COOPERATIVEAA67 WW",
-      "partyRoleCode": "CN",
+      "partyRoleCode": { "value": "CN" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "postcodeCode": "35340",
@@ -202,10 +202,10 @@
     "deliveryParty": {
       "identifier": "",
       "name": "COOPERATIVEAA67 WW",
-      "partyRoleCode": "DP",
+      "partyRoleCode": { "value": "DP" },
       "partyTypeCode": [
-        "PLANT_ESTABLISHMENT",
-        "PLANTS"
+        { "value": "PLANT_ESTABLISHMENT" },
+        { "value": "PLANTS" }
       ],
       "postalAddress": {
         "postcodeCode": "35340",
@@ -217,10 +217,10 @@
     "customsTransitAgentParty": {
       "identifier": "FR95999020L",
       "name": "AIR FRANCE CARGO",
-      "partyRoleCode": "CB",
+      "partyRoleCode": { "value": "CB" },
       "partyTypeCode": [
-        "RESPONSIBLE_FOR_THE_LOAD",
-        "RFL"
+        { "value": "RESPONSIBLE_FOR_THE_LOAD" },
+        { "value": "RFL" }
       ],
       "postalAddress": {
         "postcodeCode": "95700",

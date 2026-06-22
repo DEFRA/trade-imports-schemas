@@ -93,7 +93,7 @@
     "deliveryParty": {
       "identifier": "ES333444",
       "name": "",
-      "partyRoleCode": "CN",
+      "partyRoleCode": { "value": "CN" },
       "postalAddress": {
         "countryName": "Spain"
       }
