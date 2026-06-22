@@ -40,7 +40,7 @@ const GBN_AG = {
     "",
     "Descriptions come from the GBN-AG schema's own `description` fields (the live-animals domain), falling back to the UN/CEFACT D23B vocabulary (`uncefact.jsonld`) via the JSON-LD context chain where the schema is silent. The canonical UN/CEFACT meaning is always reachable as linked data from the property's IRI. Property names that resolve only to a Defra context - Defra extensions, profile-level slots - are listed in a separate section at the end with the context file that declares them.",
     "",
-    "Sections follow the payload's natural structure: Document, Consignment, Consignment item, Trade line item, Trade product, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name."
+    "Sections follow the payload's natural structure: Document, Consignment, Consignment item, Trade line item, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name."
   ].join("\n"),
 
   sections: [
@@ -73,18 +73,7 @@ const GBN_AG = {
         { kind: "prop", name: "includedConsignmentItem" }, { kind: "items" },
         { kind: "prop", name: "includedTradeLineItem" }, { kind: "items" }
       ],
-      intro: "One line per species or commodity on the certificate. A line carries the trade product (species), the line quantity, and the per-animal notes."
-    },
-    {
-      heading: "Trade product",
-      payloadPath: "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]",
-      descend: [
-        { kind: "prop", name: "specifiedConsignment" },
-        { kind: "prop", name: "includedConsignmentItem" }, { kind: "items" },
-        { kind: "prop", name: "includedTradeLineItem" }, { kind: "items" },
-        { kind: "prop", name: "specifiedTradeProduct" }, { kind: "items" }
-      ],
-      intro: "One entry per species or commodity on the trade line. Carries the classification, type, common and scientific names, country of origin, and the per-animal instances."
+      intro: "One line per species or commodity on the certificate. A line carries the species (classification, scientific and common names, type), the line quantity, the per-animal records, and any notes."
     },
     {
       heading: "Per-animal",
@@ -93,7 +82,6 @@ const GBN_AG = {
         { kind: "prop", name: "specifiedConsignment" },
         { kind: "prop", name: "includedConsignmentItem" }, { kind: "items" },
         { kind: "prop", name: "includedTradeLineItem" }, { kind: "items" },
-        { kind: "prop", name: "specifiedTradeProduct" }, { kind: "items" },
         { kind: "prop", name: "individualTradeProductInstance" }, { kind: "items" }
       ],
       intro: "One entry per individual animal on the trade line. Carries the animal's identifier(s) and, where the commodity calls for it, the per-animal permanent address."
