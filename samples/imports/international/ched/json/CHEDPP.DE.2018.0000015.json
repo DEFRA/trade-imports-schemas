@@ -181,10 +181,12 @@
         "countrySubDivisionName": "Rhineland-Palatinate"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": "lkw",
-      "modeCode": 3
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": "lkw",
+        "modeCode": 3
+      }
+    ],
     "utilizedLogisticsTransportEquipment": {
       "id": "Container 1",
       "affixedLogisticsSeal": {

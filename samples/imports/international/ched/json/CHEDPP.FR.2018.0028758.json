@@ -228,10 +228,12 @@
         "countrySubDivisionName": "Metropolitan France"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": "AAA",
-      "modeCode": 4
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": "AAA",
+        "modeCode": 4
+      }
+    ],
     "includedConsignmentItem": [
       {
         "includedTradeLineItem": [

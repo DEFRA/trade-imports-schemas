@@ -103,10 +103,12 @@
         "countryName": "Spain"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": "LH1198",
-      "modeCode": 4
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": "LH1198",
+        "modeCode": 4
+      }
+    ],
     "includedConsignmentItem": [
       {
         "includedTradeLineItem": [
