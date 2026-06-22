@@ -45,6 +45,7 @@
     "referenceDocument": [
       {
         "typeCode": "853",
+        "relationshipTypeCode": "ZZZ",
         "identifier": "docref-vet",
         "issueDateTime": "2026-05-05",
         "attachmentBinaryObject": [
@@ -161,7 +162,11 @@
           ],
           "arrivalEvent": [
             {
-              "scheduledOccurrenceDateTime": "2026-05-27T22:00:00Z"
+              "scheduledOccurrenceDateTime": "2026-05-27T22:00:00Z",
+              "occurrenceLogisticsLocation": {
+                "identifier": "FRROS",
+                "urlId": "https://service.unece.org/locode/"
+              }
             }
           ],
           "urlId": "https://refdata.tbc.defra.gov.uk/road_vehicle_registration"
