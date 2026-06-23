@@ -37,8 +37,16 @@
       "@type": "rdf:Property",
       "rdfs:label": "permanentLocation",
       "rdfs:comment": "The permanent address where this individual animal will reside after import. Used for commodities where an animal moves on from the consignment's immediate delivery point to a final home (such as a pet going on to its owner's address). Per-animal placement so different animals on one trade line can carry different addresses.",
-      "schema:domainIncludes": { "@id": "uncefact:TradeProductInstance" },
+      "schema:domainIncludes": { "@id": "uncefact:ProductInstance" },
       "schema:rangeIncludes": { "@id": "uncefact:LogisticsLocation" }
+    },
+    {
+      "@id": "uncefact:individualProductInstance",
+      "@type": "rdf:Property",
+      "rdfs:label": "individualTradeProductInstance",
+      "rdfs:comment": "Per-animal records on a trade line: one entry per individual animal, each carrying its regulatory identifiers and, for pets, its permanent onward address. The Defra UNVTD profiles attach this association to the trade line item rather than to a trade product, because they carry no trade-product level - classification and species sit on the line. Declaring the trade line as a domain keeps the linked-data meaning consistent with that placement; schema:domainIncludes is additive, so the UN/CEFACT default domain (uncefact:Product) is unchanged and still applies wherever a trade-product level is present.",
+      "schema:domainIncludes": { "@id": "uncefact:TradeLineItem" },
+      "schema:rangeIncludes": { "@id": "uncefact:ProductInstance" }
     },
     {
       "@id": "defraUnvtdProfile:specifiedConsignment",
