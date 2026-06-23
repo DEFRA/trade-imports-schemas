@@ -221,33 +221,28 @@
         {
           "includedTradeLineItem": [
             {
-              "specifiedTradeProduct": [
+              "applicableClassification": [
                 {
-                  "designatedProductClassification": [
-                    {
-                      "systemId": "CN",
-                      "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                  "systemId": "CN",
+                  "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                }
+              ],
+              "typeCode": "LIVE_ANIMAL",
+              "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+              "description": ["Other live mammals"],
+              "scientificName": "Felis catus",
+              "commonName": "Cat",
+              "individualTradeProductInstance": [
+                {
+                  "permanentLocation": {
+                    "name": "Brighton home",
+                    "postalAddress": {
+                      "lineOne": "182 Ditchling Road",
+                      "cityName": "Brighton",
+                      "postcodeCode": "BN17JE",
+                      "countryId": "GB"
                     }
-                  ],
-                  "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
-                  "description": "Other live mammals",
-                  "scientificName": "Felis catus",
-                  "commonName": "Cat",
-                  "_mapping_note_freetext_identifier": "DESCRIPTION and IDENTIFICATION_DETAILS demonstrate v3 §15-§16: the free-text fallback identifier types in animal_identifier_types, used when a commodity has no defined identifier type. They reuse the existing identifier[] shape rather than a structurally distinct slot.",
-                  "individualTradeProductInstance": [
-                    {
-                      "permanentLocation": {
-                        "name": "Brighton home",
-                        "postalAddress": {
-                          "lineOne": "182 Ditchling Road",
-                          "cityName": "Brighton",
-                          "postcodeCode": "BN17JE",
-                          "countryId": "GB"
-                        }
-                      }
-                    }
-                  ]
+                  }
                 }
               ],
               "specifiedLineTradeDelivery": [
@@ -280,38 +275,34 @@
               ]
             },
             {
-              "specifiedTradeProduct": [
+              "applicableClassification": [
                 {
-                  "designatedProductClassification": [
+                  "systemId": "CN",
+                  "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                }
+              ],
+              "typeCode": "LIVE_ANIMAL",
+              "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+              "description": ["Other live mammals"],
+              "scientificName": "Mustela furo",
+              "commonName": "Ferret",
+              "individualTradeProductInstance": [
+                {
+                  "identifier": [
                     {
-                      "systemId": "CN",
-                      "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
-                    }
-                  ],
-                  "typeCode": "LIVE_ANIMAL",
-                  "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
-                  "description": "Other live mammals",
-                  "scientificName": "Mustela furo",
-                  "commonName": "Ferret",
-                  "individualTradeProductInstance": [
+                      "typeCode": "MICROCHIP",
+                      "content": "mc-ferret",
+                      "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                    },
                     {
-                      "identifier": [
-                        {
-                          "typeCode": "MICROCHIP",
-                          "content": "mc-ferret",
-                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
-                        },
-                        {
-                          "typeCode": "PASSPORT",
-                          "content": "ppt-ferret",
-                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
-                        },
-                        {
-                          "typeCode": "TATTOO",
-                          "content": "tto-ferret",
-                          "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
-                        }
-                      ]
+                      "typeCode": "PASSPORT",
+                      "content": "ppt-ferret",
+                      "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                    },
+                    {
+                      "typeCode": "TATTOO",
+                      "content": "tto-ferret",
+                      "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
                     }
                   ]
                 }

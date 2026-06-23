@@ -28,12 +28,23 @@ test('generator writes the dictionary to the expected path', () => {
   assert.ok(existsSync(OUTPUT), `output not found at ${OUTPUT}`)
   const body = readFileSync(OUTPUT, 'utf-8')
   assert.ok(body.startsWith('# GBN-AG data dictionary'), 'title heading missing')
+  assert.ok(
+    !body.includes('_Not present at this path in the schema._'),
+    'dictionary has a "_Not present_" placeholder - a section descend path is stale'
+  )
+  // Positive proof the deepest descend (Per-animal) reached bottom: an empty-but-
+  // present node emits a heading with no rows and no placeholder, which the guard
+  // above would not catch. Pin the per-animal permanentLocation row specifically.
+  assert.ok(
+    body.includes('| `permanentLocation` | `LogisticsLocation`'),
+    'Per-animal table is missing its permanentLocation row - the descend did not resolve to the instance'
+  )
 })
 
 test('profile schema descriptions are preferred over the generic vocab', () => {
   const body = readFileSync(OUTPUT, 'utf-8')
   const domain = [
-    ['importer', 'The party legally importing the consignment'],
+    ['importer', 'responsible for the consignment on the import side'],
     ['consigneeParty', 'The party receiving the animals under the trade contract'],
     ['carrier', 'responsible for moving the goods from the consignment'],
     ['scientificName', 'resolved from Defra reference data keyed on the CN code'],
