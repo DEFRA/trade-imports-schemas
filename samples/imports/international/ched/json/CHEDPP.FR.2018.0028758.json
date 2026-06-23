@@ -188,12 +188,10 @@
       "code": { "value": "CI", "name": "Cote D'Ivoire" }
     },
     "importCountry": {},
-    "unloadingBaseportLocation": [
-      {
-        "identifier": "FRCDG4",
-        "name": "FR"
-      }
-    ],
+    "unloadingBaseportLocation": {
+      "identifier": "FRCDG4",
+      "name": "FR"
+    },
     "examinationSPSEvent": {
       "occurrenceSPSLocation": {
         "name": ""
@@ -230,10 +228,12 @@
         "countrySubDivisionName": "Metropolitan France"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": "AAA",
-      "modeCode": 4
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": "AAA",
+        "modeCode": 4
+      }
+    ],
     "includedConsignmentItem": [
       {
         "includedTradeLineItem": [

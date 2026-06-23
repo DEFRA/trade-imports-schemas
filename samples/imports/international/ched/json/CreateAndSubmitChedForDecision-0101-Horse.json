@@ -78,12 +78,10 @@
     "importCountry": {
       "code": { "value": "ES", "name": "Spain" }
     },
-    "unloadingBaseportLocation": [
-      {
-        "identifier": "ESMAD4",
-        "name": "ES"
-      }
-    ],
+    "unloadingBaseportLocation": {
+      "identifier": "ESMAD4",
+      "name": "ES"
+    },
     "examinationSPSEvent": {
       "occurrenceSPSLocation": {
         "id": "2019-04-11T15:00:00.000+02:00",
@@ -105,10 +103,12 @@
         "countryName": "Spain"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": "LH1198",
-      "modeCode": 4
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": "LH1198",
+        "modeCode": 4
+      }
+    ],
     "includedConsignmentItem": [
       {
         "includedTradeLineItem": [

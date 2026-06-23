@@ -740,24 +740,13 @@
           "description": "Transit countries on the consignment route (TRACES TransitSPSCountry[])."
         },
         "unloadingBaseportLocation": {
-          "oneOf": [
-            { "$ref": "#/$defs/LogisticsLocation" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/LogisticsLocation" }
-            }
-          ],
-          "description": "Port of entry / unloading baseport. Single location (BSP-canonical) or array (legacy CHED sample shape). For Defra import pre-notifications the identifier carries un_locode."
+          "$ref": "#/$defs/LogisticsLocation",
+          "description": "Port of entry / unloading baseport. For Defra import pre-notifications the identifier carries un_locode."
         },
         "mainCarriageLogisticsTransportMovement": {
-          "oneOf": [
-            { "$ref": "#/$defs/LogisticsTransportMovement" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/LogisticsTransportMovement" }
-            }
-          ],
-          "description": "Transport movement(s) for the main carriage leg(s). Accepts a single object (TRACES production data with one carriage leg) or an array (BSP-canonical / multi-leg, with entries distinguished by id.schemeId). The SPS profile collapses BSP's three-way pre/main/on carriage split into this slot."
+          "type": "array",
+          "items": { "$ref": "#/$defs/LogisticsTransportMovement" },
+          "description": "Transport movement(s) for the main carriage leg(s). An array of one entry per carriage leg, with entries distinguished by id.schemeId. The SPS profile collapses BSP's three-way pre/main/on carriage split into this slot."
         },
         "transitTradeCountry": {
           "type": "array",

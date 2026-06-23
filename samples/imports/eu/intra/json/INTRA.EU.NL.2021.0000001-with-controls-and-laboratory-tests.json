@@ -383,10 +383,12 @@
         "countrySubDivisionName": "South Holland"
       }
     },
-    "mainCarriageLogisticsTransportMovement": {
-      "id": 123456,
-      "modeCode": 3
-    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "id": 123456,
+        "modeCode": 3
+      }
+    ],
     "utilizedLogisticsTransportEquipment": {
       "id": "",
       "affixedLogisticsSeal": {
