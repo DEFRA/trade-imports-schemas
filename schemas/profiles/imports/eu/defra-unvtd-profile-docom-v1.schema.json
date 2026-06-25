@@ -16,7 +16,7 @@
           "const": "docom"
         },
         "specifiedConsignment": {
-          "type": "object"
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
         }
       },
       "required": [

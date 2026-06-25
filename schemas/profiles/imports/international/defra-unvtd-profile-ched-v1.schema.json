@@ -16,15 +16,20 @@
           "const": "ched"
         },
         "exchangedDocument": {
-          "type": "object",
-          "properties": {
-            "documentTypeCode": {
-              "const": "636"
+          "allOf": [
+            { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ExchangedDocument" },
+            {
+              "type": "object",
+              "properties": {
+                "documentTypeCode": {
+                  "const": "636"
+                }
+              }
             }
-          }
+          ]
         },
         "specifiedConsignment": {
-          "type": "object"
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
         }
       },
       "required": [
