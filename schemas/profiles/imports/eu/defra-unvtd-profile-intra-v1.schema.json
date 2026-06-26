@@ -16,18 +16,23 @@
           "const": "intra"
         },
         "exchangedDocument": {
-          "type": "object",
-          "properties": {
-            "documentTypeCode": {
-              "enum": [
-                "666",
-                "856"
-              ]
+          "allOf": [
+            { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ExchangedDocument" },
+            {
+              "type": "object",
+              "properties": {
+                "documentTypeCode": {
+                  "enum": [
+                    "666",
+                    "856"
+                  ]
+                }
+              }
             }
-          }
+          ]
         },
         "specifiedConsignment": {
-          "type": "object"
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
         }
       },
       "required": [
