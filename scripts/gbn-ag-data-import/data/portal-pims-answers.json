@@ -1,0 +1,1821 @@
+{
+  "source": {
+    "table_file": "portal-pims-table.json",
+    "secondary_source": {
+      "file": "live-animals-table.json",
+      "page_title": "Live Animals Data Fields - V4",
+      "page_id": "6497338582"
+    },
+    "page_id": "6525093960",
+    "page_title": "Portal to PIMS data mapping"
+  },
+  "_status_legend": {
+    "confirmed": "PIMS assumption or mapping confirmed as-is",
+    "corrected": "PIMS assumption was off; correct mapping documented in agreed_answer",
+    "answered": "Blue question answered",
+    "deferred": "Needs further input (BA, TIG, schema author) before a final answer",
+    "disputed": "Disagreement we couldn't resolve in this pass; raised for follow-up"
+  },
+  "operating_assumption": "PIMS consumes the canonical GBN-AG events directly. Events are versioned; schema evolution between versions is handled by transition support, not by a separate consumer view. Schema descriptions carry the consumer rules (slot semantics, derivation rules, conditionality) so the schema is the single source of truth.",
+  "scope_decisions": [
+    {
+      "id": "scope-arrival-time",
+      "topic": "Arrival time at port",
+      "decision": "Descoped by PO. The schema field is date-time; PIMS uses the date component only. No commitment to the time component being operationally meaningful.",
+      "raised_in_rows": [
+        "arrival-date-at-port"
+      ]
+    },
+    {
+      "id": "scope-journey-log",
+      "topic": "Journey Log",
+      "decision": "Descoped by PO (V4 Out of Scope Data Elements row 2). No schema slot for journey logs.",
+      "raised_in_rows": []
+    },
+    {
+      "id": "scope-transport-after-bcp",
+      "topic": "Transport after BCP / post-port legs",
+      "decision": "Descoped by PO (V4 Out of Scope Data Elements row 3). Onward legs from the UK port (road to BCP, BCP to delivery) are not modelled in mainCarriageLogisticsTransportMovement. This aligns with the parallel decision that BCPs are not in scope for GBN-AG under EU-Reset.",
+      "raised_in_rows": [
+        "arrival-date-at-port"
+      ]
+    },
+    {
+      "id": "scope-wing-ring",
+      "topic": "Animal Identifier - Wing Ring",
+      "decision": "Descoped by PO (V4 Out of Scope Data Elements row 4). Wing Ring is not in the animal_identifier_types codelist values used by GBN-AG (no avian identifier in scope).",
+      "raised_in_rows": []
+    },
+    {
+      "id": "scope-transit-handling",
+      "topic": "Transit case (Reason for Import = Transit)",
+      "decision": "TRACES-aligned. No exit-port slot on the entry notification. The Reason for Import = Transit clause (firstSignatoryAuthentication.includedClause where identifier = PURPOSE, content = Transit) signals the transit case. Downstream notifications cover any exit-specific certificate, consistent with how TRACES handles TEMPORARY_ADMISSION and INTRA samples. For transit, importCountry carries the actual final destination country (not GB), and GB appears in transitTradeCountry. For non-transit, importCountry is implicitly GB.",
+      "raised_in_rows": [
+        "arrival-date-at-port"
+      ]
+    },
+    {
+      "id": "scope-deterministic-port-arrival",
+      "topic": "Identifying the UK port arrival event without positional assumptions",
+      "decision": "Multi-leg journeys allowed. Consumer rule: read specifiedConsignment.mainCarriageLogisticsTransportMovement[].arrivalEvent[], find the event whose occurrenceLogisticsLocation.identifier matches specifiedConsignment.unloadingBaseportLocation.identifier, take that event's scheduledOccurrenceDateTime. The core schema carries occurrenceLogisticsLocation on TransportEvent (optional, range LogisticsLocation, D23B-canonical).",
+      "raised_in_rows": [
+        "arrival-date-at-port"
+      ]
+    }
+  ],
+  "schema_updates_pending": [],
+  "answers": [
+    {
+      "row_id": "reference-number",
+      "v4": {
+        "field_name": "Reference Number",
+        "v4_row_ref": "Live Animal Data Elements row 1",
+        "type": "string",
+        "mandatory": "N/A",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "GBN-AG-26-7K8M2P",
+        "conditions_values": "Format: GBN-AG-{year}-{body}. GBN = Great Britain Notification. AG = Animals and Germinals. Year = two-digit year of allocation. Body = six-character Crockford base32 non-guessable identifier."
+      },
+      "schema_path": "exchangedDocument.identifier",
+      "description": "The unique reference for the notification, in the format `GBN-AG-{year}-{body}`. GBN is Great Britain Notification, AG is Animals and Germinals, year is two digits, body is a six-character Crockford base32 non-guessable identifier. Example: `GBN-AG-26-7K8M2P`.",
+      "consumer_rule": {
+        "summary": "Read the string at exchangedDocument.identifier.",
+        "steps": [
+          "Read exchangedDocument.identifier."
+        ]
+      },
+      "notes": [
+        "V4 mandatory is N/A because the value is allocated by the system, not entered by the trader.",
+        "The schema description also covers scheme reusability for future GB import journeys (GBN-P-..., GBN-PP-...); dropped from the table description because PIMS only needs the current-journey format."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed. PIMS, V4, and the schema all align: this is the unique notification reference at exchangedDocument.identifier, in the GBN-AG-{year}-{body} format.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 17,
+          "field": "Reference Number",
+          "assumed_schema_path": "exchangedDocument > identifier",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "responsible-person-for-load",
+      "v4": {
+        "field_name": "Responsible Person for Load",
+        "v4_row_ref": "Live Animal Data Elements row 2",
+        "type": "",
+        "mandatory": "N/A",
+        "source": "gov.identity",
+        "applies_at": "Notification level",
+        "example": "James Harper +44 161 555 0198 j.h@harperlivestock.co.uk Harper Livestock Ltd 34 Grey Park Crewe CW1 2AL United Kingdom +44 161 555 0199",
+        "conditions_values": "Consumed on authentication. Bundle of values populated from the signed-in user's gov.uk identity: Responsible person (name), Telephone, Email, Organisation Name, Organisation Address, Organisation Telephone."
+      },
+      "schema_path": "exchangedDocument.issuer",
+      "description": "The Great Britain-based party submitting the pre-notification, populated from the gov.uk identity of the signed-in user. Modelled as a `TradeParty` at `exchangedDocument.issuer`. Organisation name and address live at `name` and `postalAddress`; the named person and their phone and email live as a `definedContact[]` entry. The schema only carries a single contact line per entry. If a second number is needed (personal and organisational) another `definedContact[]` entry can be added in future.",
+      "consumer_rule": {
+        "summary": "Read the issuer TradeParty for org name, address, and the named contact.",
+        "steps": [
+          "Read exchangedDocument.issuer.name for the organisation name.",
+          "Read exchangedDocument.issuer.postalAddress for the organisation address (lineOne, lineTwo, cityName, postcodeCode, countryId).",
+          "Read exchangedDocument.issuer.definedContact[0] for the named person: personName, telephoneUniversalCommunication, emailURIUniversalCommunication."
+        ]
+      },
+      "notes": [
+        "Source gov.identity means the portal populates this slot from the submitter's gov.uk identity record rather than from user-typed input.",
+        "PIMS row 14 had this mapping as a yellow assumption; confirmed as correct.",
+        "PIMS not-required row 10 drops Person Responsible City, Company Id, Contact Id, Fax, Id, Postcode, Type. The schema's postalAddress already contains city and postcode within the address block, so the pruning holds."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed. exchangedDocument.issuer carries the Great Britain-based party submitting the pre-notification. Single definedContact[] entry per the worked example; no separate org-level telephone slot. If real data ever surfaces two distinct numbers, a second definedContact[] entry (without personName) is non-breaking.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 14,
+          "field": "Person Responsible Address / Country / Company Name / Email / Name / Phone",
+          "assumed_schema_path": "exchangedDocument > issuer",
+          "assumption": "Issuer is Person Responsible - to confirm.",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 10,
+          "field": "Person Responsible City / Company Id / Contact Id / Fax / Id / Postcode / Type",
+          "assumed_schema_path": "",
+          "assumption": "The address information for Person Responsible is stored in a single address field, so the additional address fields are not required. Also assuming the other Id and Type fields are no longer required.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Address normalised to a single postalAddress block (city / postcode live inside it); no separate Id / Type / Fax slots."
+        }
+      ]
+    },
+    {
+      "row_id": "country-of-origin",
+      "v4": {
+        "field_name": "Country of origin",
+        "v4_row_ref": "Live Animal Data Elements row 3",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "MDM",
+        "applies_at": "Notification level",
+        "example": "France",
+        "conditions_values": "Restricted to countries in the named MDM list for EU, EEA and EFTA countries"
+      },
+      "schema_path": "specifiedConsignment.originCountry.identifier",
+      "description": "The country where the animals lived before being exported. Sourced from the MDM Countries API (EU, EEA, and EFTA countries within scope of GBN-AG under EU-Reset). Read the ISO 3166-1 alpha-2 code at `originCountry.identifier`.",
+      "consumer_rule": {
+        "summary": "Read the ISO alpha-2 country code.",
+        "steps": [
+          "Read specifiedConsignment.originCountry.identifier - the ISO 3166-1 alpha-2 code (e.g. FR for France)."
+        ]
+      },
+      "notes": [
+        "Origin is a residency-and-health fact, not a logistics one. The country may differ from the export country in edge cases (animals exported via a country other than where they resided)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping correct; schema description already describes the residency-and-health framing.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 6,
+          "field": "Country of Origin",
+          "assumed_schema_path": "specifiedConsignment > originCountry",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "region-of-origin-code-requirement",
+      "v4": {
+        "field_name": "Region of origin code requirement",
+        "v4_row_ref": "Live Animal Data Elements row 4",
+        "type": "enum (single-select)",
+        "mandatory": "Optional",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "No",
+        "conditions_values": "Yes or No. Defaults to No. If Yes is selected, Region of origin code is shown and becomes mandatory."
+      },
+      "schema_path": "",
+      "description": "UI Journey related workflow flag, not part of the model. Controls whether the origin code needs to be captured. Default to no; when it is collected it's held at `specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[]`.",
+      "consumer_rule": {
+        "summary": "No schema slot; read the data slot when present.",
+        "steps": [
+          "Skip this row for direct mapping; the flag is a notifier-side form control with no schema representation.",
+          "Read the captured region (when supplied) at specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[0].identifier - see region-of-origin-code."
+        ]
+      },
+      "notes": [
+        "No PIMS row for this; PIMS reads the data slot directly.",
+        "Pairs with region-of-origin-code (Region of origin code)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "UI workflow flag, not modelled. Default no; when collected, the value sits at specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[].",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": []
+    },
+    {
+      "row_id": "region-of-origin-code",
+      "v4": {
+        "field_name": "Region of origin code",
+        "v4_row_ref": "Live Animal Data Elements row 5",
+        "type": "string - max 5",
+        "mandatory": "Mandatory (conditional)",
+        "source": "MDM",
+        "applies_at": "Notification level",
+        "example": "FR-75",
+        "conditions_values": "Conditional: required when region code requirement = Yes. Displayed and stored with ISO country prefix."
+      },
+      "schema_path": "specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[0].identifier",
+      "description": "The region within the country of origin (e.g. `FR-75` for a French department). Sourced from MDM. Read the first entry of `subordinateTradeCountrySubDivision[]`. GBN-AG only carries region-of-origin subdivisions (UNCL3227 `functionTypeCode = 106`), so the array has at most one entry; the first value assumption is structurally correct.",
+      "consumer_rule": {
+        "summary": "Read the first subdivision entry under originCountry.",
+        "steps": [
+          "Read specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[0].identifier."
+        ]
+      },
+      "notes": [
+        "The array is optional and may be empty (when Region of origin code requirement 'Region of origin code requirement' is No).",
+        "GBN-AG narrows subdivisions to region-of-origin only, so positional access [0] is safe."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed PIMS's first-value assumption with the structural reason: GBN-AG only carries one kind of subdivision (region of origin, functionTypeCode='106').",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 18,
+          "field": "Region of Origin",
+          "assumed_schema_path": "specifiedConsignment > originCountry > subordinateTradeCountrySubDivision > identifier",
+          "assumption": "Subordinate Trade Country Sub Division is an array, so we are assuming the correct region will be the first value - to confirm.",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "internal-reference-number",
+      "v4": {
+        "field_name": "Internal reference number",
+        "v4_row_ref": "Live Animal Data Elements row 6",
+        "type": "string - max 58",
+        "mandatory": "Optional",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Imports456_GB",
+        "conditions_values": "Optional trader-entered reference for the consignment."
+      },
+      "schema_path": "exchangedDocument.traderAssignedId",
+      "description": "An optional reference the trader assigns to the pre-notification - their own internal reference number, carried through unchanged. Whether PIMS stores it is a PIMS-side decision; the slot is available.",
+      "consumer_rule": {
+        "summary": "Read the optional trader-supplied string.",
+        "steps": [
+          "Read exchangedDocument.traderAssignedId. Absent when the trader did not supply a value."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed. PIMS now confirms they want to capture this; the slot exists at exchangedDocument.traderAssignedId.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 28,
+          "field": "Internal Reference Number",
+          "assumed_schema_path": "",
+          "assumption": "Would be useful, so add it.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Confirmed slot at exchangedDocument.traderAssignedId."
+        }
+      ]
+    },
+    {
+      "row_id": "commodity-selection",
+      "v4": {
+        "field_name": "Commodity selection",
+        "v4_row_ref": "Live Animal Data Elements row 7",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "MDM",
+        "applies_at": "All live animal commodities",
+        "example": "Cattle, 0102, Bos taurus",
+        "conditions_values": "Values come from the named MDM commodity list. Search supports common name, species (scientific name) and commodity code."
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]",
+      "description": "The CN commodity code for the trade product, drawn from the MDM commodity list. Stored on each `specifiedTradeProduct[].designatedProductClassification[]` entry where `systemId = \"CN\"`; the value sits at `classCode.value` and the codelist URL at `classCode.urlId`. The MDM commodity list row also carries human common name and scientific name, stored at `commonName[].content` and `scientificName[].content`. The same CN code may repeat across trade lines when the consignment carries multiple species.",
+      "consumer_rule": {
+        "summary": "Read the CN code, common name, and scientific name from each trade product.",
+        "steps": [
+          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]:",
+          "  Read specifiedTradeProduct[].designatedProductClassification[] - find the entry with systemId='CN'; classCode.value is the CN code.",
+          "  Read specifiedTradeProduct[].commonName[].content (languageId='en') for the human name.",
+          "  Read specifiedTradeProduct[].scientificName[].content (languageId='la') for the scientific name."
+        ]
+      },
+      "notes": [
+        "Commodity, Type, and Species selection cascade in the notifier UI; in the schema they resolve to data on the trade product per species line.",
+        "PIMS's Commodity Species child table mirrors the per-species shape."
+      ],
+      "actions": [
+        "Consider narrowing the schema description of designatedProductClassification[] for the GBN-AG profile so that only CN is in use, dropping the SPECIES_CLASS legacy."
+      ],
+      "code_examples": [],
+      "agreed_answer": "Confirmed. The CN code, common name, and scientific name live on each specifiedTradeProduct on the trade line. PIMS's Commodity Species child table maps cleanly.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Commodity Species",
+          "row": 1,
+          "field": "Commodity Id / Commodity Description",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > designatedProductClassification > classCode",
+          "assumption": "PIMS child table; one row per species.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Commodity Species",
+          "row": 5,
+          "field": "Species Family Name",
+          "assumed_schema_path": "",
+          "assumption": "These fields may also be required - TBC",
+          "status": "",
+          "verdict": "modified",
+          "note": "Species Family Name is not in the V4 data model and not in the schema. Out of scope until V4 reintroduces it."
+        },
+        {
+          "section": "Commodity Species",
+          "row": 6,
+          "field": "Species Class Name",
+          "assumed_schema_path": "",
+          "assumption": "",
+          "status": "",
+          "verdict": "modified",
+          "note": "Species Class was removed from V4 in the recent re-export; the schema's SPECIES_CLASS classification is being removed (see queued actions on this row). Stays out until V4 reintroduces it."
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 3,
+          "field": "Commodity Code / Complement / Description / ID Types / Intended For / Species Class / etc.",
+          "assumed_schema_path": "",
+          "assumption": "All commodity/species information will now be captured in a child table, with one row per species. to confirm if this assumption is correct.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Legacy flat commodity fields superseded by per-species shape (commodity-selection, type-selection, species-selection)."
+        },
+        {
+          "section": "Commodity Species",
+          "row": 2,
+          "field": "Commodity Description",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > description",
+          "assumption": "",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "Commodity Description lives at specifiedTradeProduct[].description."
+        }
+      ]
+    },
+    {
+      "row_id": "type-selection",
+      "v4": {
+        "field_name": "Type selection",
+        "v4_row_ref": "Live Animal Data Elements row 8",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "MDM",
+        "applies_at": "All live animal commodities",
+        "example": "Game",
+        "conditions_values": "Where applicable for given commodity, user is able to filter species by type."
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].typeCode",
+      "description": "The product type for the trade product, used as a filter in the notifier UI when picking species. Stored at `specifiedTradeProduct[].typeCode` with `urlId` naming the Defra `species_type` codelist.",
+      "consumer_rule": {
+        "summary": "Read the typeCode from each trade product.",
+        "steps": [
+          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]: read typeCode and (optionally) urlId."
+        ]
+      },
+      "notes": [
+        "PIMS does not carry a Type row in their draft mapping; the slot exists for consumers that need it."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed. typeCode lives at specifiedTradeProduct[].typeCode with urlId pointing at species_type.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Commodity Species",
+          "row": 7,
+          "field": "Species Type Name",
+          "assumed_schema_path": "",
+          "assumption": "Expect to see this - domestic vs game.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "Maps to specifiedTradeProduct[].typeCode (Defra species_type scheme); V4 row 8 Type selection populates this."
+        }
+      ]
+    },
+    {
+      "row_id": "species-selection",
+      "v4": {
+        "field_name": "Species selection",
+        "v4_row_ref": "Live Animal Data Elements row 9",
+        "type": "enum (multi-select)",
+        "mandatory": "Mandatory",
+        "source": "MDM",
+        "applies_at": "All live animal commodities",
+        "example": "Bison bison (Bison) Bos spp. (Cattle species) Bos taurus (Cattle) Bubalus bubalis (Water buffalo)",
+        "conditions_values": "User may select one or more species up to the agreed maximum."
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]",
+      "description": "The species carried on the consignment. Multi-select: each selected species becomes a separate `includedTradeLineItem[]` entry. Within each line, the scientific name lives at `specifiedTradeProduct[].scientificName[].content` (`languageId: \"la\"`) and the common name at `commonName[].content` (`languageId: \"en\"`). To enumerate the species on a notification, iterate `includedTradeLineItem[]` across every `includedConsignmentItem[]`.",
+      "consumer_rule": {
+        "summary": "One trade-line item per species. Iterate all lines across all consignment items.",
+        "steps": [
+          "For each specifiedConsignment.includedConsignmentItem[]:",
+          "  For each includedTradeLineItem[]:",
+          "    The single specifiedTradeProduct[] entry on the line carries one species.",
+          "    Read scientificName[].content (la) and commonName[].content (en)."
+        ]
+      },
+      "notes": [
+        "The cascade with Commodity selection and Type selection is UI flow; the schema only holds the resolved per-species data."
+      ],
+      "actions": [
+        "Confirm that scientificName and commonName landing on the Commodity Species child table is acceptable."
+      ],
+      "code_examples": [
+        {
+          "label": "Multi-species shape: one trade-line item per species, sharing CN code and typeCode",
+          "code": "\"includedConsignmentItem\": [\n  {\n    \"includedTradeLineItem\": [\n      {\n        \"specifiedTradeProduct\": [\n          {\n            \"typeCode\": \"LIVE_ANIMAL\",\n            \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n            \"designatedProductClassification\": [\n              { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n            ],\n            \"scientificName\": [ { \"content\": \"Felis catus\", \"languageId\": \"la\" } ],\n            \"commonName\":    [ { \"content\": \"Cat\",         \"languageId\": \"en\" } ]\n          }\n        ]\n      },\n      {\n        \"specifiedTradeProduct\": [\n          {\n            \"typeCode\": \"LIVE_ANIMAL\",\n            \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n            \"designatedProductClassification\": [\n              { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n            ],\n            \"scientificName\": [ { \"content\": \"Mustela furo\", \"languageId\": \"la\" } ],\n            \"commonName\":    [ { \"content\": \"Ferret\",       \"languageId\": \"en\" } ]\n          }\n        ]\n      }\n    ]\n  }\n]"
+        }
+      ],
+      "agreed_answer": "Confirmed. One includedTradeLineItem per species. scientificName and commonName per line. PIMS's open question on landing in their model is logged as an action.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Commodity Species",
+          "row": 3,
+          "field": "Species Name",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > scientificName > content",
+          "assumption": "PIMS open question on where to land scientific and common name in their model.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Scientific (Latin) species name lives at specifiedTradeProduct[].scientificName[].content (languageId='la')."
+        },
+        {
+          "section": "Commodity Species",
+          "row": 4,
+          "field": "Species Common Name",
+          "assumed_schema_path": "",
+          "assumption": "",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "Common name lives at specifiedTradeProduct[].commonName[].content (languageId='en')."
+        }
+      ]
+    },
+    {
+      "row_id": "animal-identifiers",
+      "v4": {
+        "field_name": "Animal Identifier (Microchip, Leg Ring, Passport, Tattoo, Ear Tag, Identification details, Description)",
+        "v4_row_ref": "Live Animal Data Elements rows 10-16",
+        "type": "string - max 58 (each)",
+        "mandatory": "Optional",
+        "source": "",
+        "applies_at": "Per individual animal; identifier types vary by commodity",
+        "example": "MICROCHIP 981000123456789, EAR_TAG UK123456789012, PASSPORT UK123456789, TATTOO AB1234, LEG_RING GBR-2026-001, IDENTIFICATION_DETAILS \"Hive mark HM-2026-004\", DESCRIPTION \"Worker bees in sealed transport hive\"",
+        "conditions_values": "V4 shows each identifier field only when the selected commodity requires that identifier type. Identification details and Description are free-text fallbacks shown for commodities with no specific identifier type."
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].individualTradeProductInstance[].identifier[]",
+      "description": "Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade product; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist.",
+      "consumer_rule": {
+        "summary": "Walk individualTradeProductInstance[] for animals and identifier[] for per-animal identifiers.",
+        "steps": [
+          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]:",
+          "  For each individualTradeProductInstance[] (one per animal):",
+          "    For each identifier[] entry: read typeCode (kind), content (value), urlId (codelist)."
+        ]
+      },
+      "notes": [
+        "Per-animal-per-identifier structure: one row per animal in the parent table, child rows per identifier on that animal.",
+        "An animal can carry multiple identifier types simultaneously (e.g. cattle commonly carry both EAR_TAG and PASSPORT).",
+        "Which identifier types apply varies by species; the V4 form drives this from commodity-side refdata."
+      ],
+      "actions": [
+        "Add IDENTIFICATION_DETAILS and DESCRIPTION typeCodes to the animal_identifier_types codelist on the Defra side.",
+        "Confirm that the per-animal-per-identifier model is acceptable."
+      ],
+      "code_examples": [
+        {
+          "label": "One animal carrying ear-tag and passport",
+          "code": "\"individualTradeProductInstance\": [\n  {\n    \"identifier\": [\n      { \"typeCode\": \"EAR_TAG\",  \"content\": \"UK123456789012\", \"urlId\": \"https://refdata.tbc.defra.gov.uk/animal_identifier_types\" },\n      { \"typeCode\": \"PASSPORT\", \"content\": \"UK123456789\",    \"urlId\": \"https://refdata.tbc.defra.gov.uk/animal_identifier_types\" }\n    ]\n  }\n]"
+        }
+      ],
+      "agreed_answer": "Confirmed per-animal-per-identifier structure: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal. Free-text fallbacks (Identification details, Description) land as new typeCodes on the same slot.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Commodity Species",
+          "row": 6,
+          "field": "",
+          "assumed_schema_path": "",
+          "assumption": "This is individual animal level data, should this be stored in a separate table? Is this level of detail required for case workers? Table may need to be added to capture this, or Commodity ID Types field may need to be kept.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Per-animal-per-identifier model: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal."
+        },
+        {
+          "section": "Commodity Species",
+          "row": 9,
+          "field": "",
+          "assumed_schema_path": "",
+          "assumption": "Store this at an individual animal level - new table that is child of the species table. Conditional question - will see different identifiers depending on the commodity (e.g. bovines have an ear tag, dogs ...)",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Confirms per-animal-per-identifier child table model; same as the parent Animal Identifier row."
+        }
+      ]
+    },
+    {
+      "row_id": "number-of-packages",
+      "v4": {
+        "field_name": "Number of packages",
+        "v4_row_ref": "Live Animal Data Elements row 17",
+        "type": "numeric - max 10",
+        "mandatory": "Optional",
+        "source": "",
+        "applies_at": "Conditional per commodity (54 commodities listed)",
+        "example": "1, 25, 5000",
+        "conditions_values": "Shown where package count applies to the selected commodity."
+      },
+      "schema_path": "specifiedConsignment.packageQuantity.content",
+      "description": "Optional count of boxes, cages, or stalls in which the animals are transported. Lives at consignment level (not per species), even though V4 displays it conditionally per commodity. Read the numeric value at `packageQuantity.content`.",
+      "consumer_rule": {
+        "summary": "Read the consignment-level package count.",
+        "steps": [
+          "Read specifiedConsignment.packageQuantity.content. Absent for bulk loose-loaded consignments."
+        ]
+      },
+      "notes": [
+        "Consignment level, not per species. PIMS's question is answered: one number per consignment."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Answered PIMS's question: consignment level. The slot is at specifiedConsignment.packageQuantity; optional for bulk loose-loaded consignments.",
+      "agreed_status": "answered",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 22,
+          "field": "Number of Packages",
+          "assumed_schema_path": "specifiedConsignment > packageQuantity",
+          "assumption": "Should be at species level and will need to be in commodity-species child table.",
+          "status": "Question",
+          "verdict": "modified",
+          "note": "PIMS proposes species-level capture; V4 defines packageQuantity at consignment level. Schema stays at specifiedConsignment.packageQuantity per V4."
+        }
+      ]
+    },
+    {
+      "row_id": "number-of-animals",
+      "v4": {
+        "field_name": "Number of animals (quantity)",
+        "v4_row_ref": "Live Animal Data Elements row 18",
+        "type": "numeric - whole number",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "All live animal commodities",
+        "example": "1, 25, 5000",
+        "conditions_values": ""
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedLineTradeDelivery[].productUnitQuantity.content",
+      "description": "How many animals the consignment carries, broken down by species. Each species line on the notification carries its own count, so a notification with three species carries three counts. The count itself lives at `productUnitQuantity.content` on the trade line. The sibling `unitCode` tells you how to read it: `H87` means a head count (the usual case for live animals); `KGM` means a kilogram weight (used by some commodities like embryos or ova, which are measured by weight rather than head).",
+      "consumer_rule": {
+        "summary": "Read the per-line quantity on each trade line.",
+        "steps": [
+          "Iterate every includedTradeLineItem[] across every includedConsignmentItem[].",
+          "Read specifiedLineTradeDelivery[].productUnitQuantity.content (the number) and .unitCode (H87 = piece count, KGM = kilograms)."
+        ]
+      },
+      "notes": [
+        "Most live animals use H87 (piece count via numberOfAnimals); embryos/ova use KGM (kilograms)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. Per-line quantity at productUnitQuantity.content; the unit varies by commodity (H87 piece count for most; KGM weight for embryos/ova).",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Commodity Species",
+          "row": 5,
+          "field": "Number of Animals",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedLineTradeDelivery > productUnitQuantity > content",
+          "assumption": "Field to be added to PIMS to capture this.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Commodity Species",
+          "row": 8,
+          "field": "",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedLineTradeDelivery > productUnitQuantity > content",
+          "assumption": "Field to be added to PIMS to capture this.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "Per-species count at productUnitQuantity.content per trade line; same slot as the parent Number of animals row."
+        }
+      ]
+    },
+    {
+      "row_id": "animals-certified-for",
+      "v4": {
+        "field_name": "Animals certified for",
+        "v4_row_ref": "Live Animal Data Elements row 19",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "",
+        "example": "Slaughter",
+        "conditions_values": "One of: Further keeping, Slaughter, Confined establishment, Germinal products, Registered equine animal, Travelling circus/animal act, Exhibition, Event or activity near borders, Release into the wild, Dispatch centre, Relaying area / purification centre, Ornamental aquaculture establishment, Technical use, Quarantine or similar establishment, Live aquatic animals for human consumption, Other"
+      },
+      "schema_path": "exchangedDocument.firstSignatoryAuthentication.includedClause[].content",
+      "description": "The category the animals are certified for (e.g. Slaughter, Further keeping, Breeding). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = GOODS_CERTIFIED_AS`. Read the `content` of that clause.",
+      "consumer_rule": {
+        "summary": "Read the content of the GOODS_CERTIFIED_AS clause.",
+        "steps": [
+          "Iterate exchangedDocument.firstSignatoryAuthentication.includedClause[].",
+          "Find the entry where identifier = GOODS_CERTIFIED_AS.",
+          "Read that entry's content."
+        ]
+      },
+      "notes": [
+        "GBN-AG requires this clause to be present (schema enforces it via 'contains' constraint)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct; schema enforces the GOODS_CERTIFIED_AS clause as required.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 3,
+          "field": "Certified For",
+          "assumed_schema_path": "exchangedDocument > firstSignatoryAuthentication > includedClause > content where includedClause.identifier.content = GOODS_CERTIFIED_AS",
+          "assumption": "Using lists on Live Animals Data Fields page as master.",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "contains-unweaned-animals",
+      "v4": {
+        "field_name": "Contains Unweaned Animals",
+        "v4_row_ref": "Live Animal Data Elements row 20",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Equines, cattle, pigs, sheep, goats",
+        "example": "No",
+        "conditions_values": "Yes or No. Defaults to No."
+      },
+      "schema_path": "specifiedConsignment.isOrHasUnweanedAnimals",
+      "description": "A UK welfare indicator on the consignment. True when the consignment contains any unweaned animals; false otherwise. Read as a boolean at `isOrHasUnweanedAnimals`.",
+      "consumer_rule": {
+        "summary": "Read the boolean flag.",
+        "steps": [
+          "Read specifiedConsignment.isOrHasUnweanedAnimals (true or false)."
+        ]
+      },
+      "notes": [],
+      "actions": [
+        "Remove isOrHasUnweanedAnimals from the schema and worked samples. PIMS notes the field is mainly for welfare and not relevant for the EU journey; PO confirmation pending before removal."
+      ],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 9,
+          "field": "Include Non-Ablacted Animals",
+          "assumed_schema_path": "specifiedConsignment > isOrHasUnweanedAnimals",
+          "assumption": "Mainly used for welfare. Not relevant for EU journey.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "PIMS comment refreshed: 'Mainly used for welfare. Not relevant for EU journey.' Removal queued as an action pending PO confirmation."
+        }
+      ]
+    },
+    {
+      "row_id": "reason-for-import",
+      "v4": {
+        "field_name": "Reason for import",
+        "v4_row_ref": "Live Animal Data Elements row 21",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Internal market",
+        "conditions_values": "One of: Internal market, Transhipment or onward travel, Transit, Re-entry, Temporary admission horses."
+      },
+      "schema_path": "exchangedDocument.firstSignatoryAuthentication.includedClause[].content",
+      "description": "The reason for importing the consignment (e.g. Internal market, Transit, Re-entry). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = PURPOSE`. Read the `content` of that clause.",
+      "consumer_rule": {
+        "summary": "Read the content of the PURPOSE clause.",
+        "steps": [
+          "Iterate exchangedDocument.firstSignatoryAuthentication.includedClause[].",
+          "Find the entry where identifier = PURPOSE.",
+          "Read that entry's content."
+        ]
+      },
+      "notes": [
+        "When content = INTERNAL_MARKET, a further INTERNAL_MARKET_PURPOSE clause is required carrying the fine-grained intent (see Purpose in internal market).",
+        "When content = Transit, see the Transit case scope decision decision for how importCountry and transitTradeCountry behave."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct; the PURPOSE clause carries the V4 enum value.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 16,
+          "field": "Purpose of Consignment",
+          "assumed_schema_path": "exchangedDocument > firstSignatoryAuthentication > includedClause > content where includedClause.identifier.content = PURPOSE",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 13,
+          "field": "Purpose of Movement",
+          "assumed_schema_path": "",
+          "assumption": "Was this field replaced by Purpose of Consignment? Or was it used only for CVEDP type notifications, which we no longer receive? In either case, it's assumed we don't need it for the GBN-AG journey.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Confirmed. Purpose of Movement is superseded by Reason for Import (PURPOSE clause on firstSignatoryAuthentication)."
+        }
+      ]
+    },
+    {
+      "row_id": "purpose-in-internal-market",
+      "v4": {
+        "field_name": "Purpose in internal market",
+        "v4_row_ref": "Live Animal Data Elements row 22",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory (conditional)",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Slaughter",
+        "conditions_values": "Conditional: required when Reason for import = Internal market. Options: Transfer of ownership (Sale/gift, Rescue), Breeding, Research, Racing/competition/show/training, Approved premises or body, Companion animal not for resale or rehoming, Production, Slaughter, Fattening, Restocking."
+      },
+      "schema_path": "exchangedDocument.firstSignatoryAuthentication.includedClause[].content",
+      "description": "The specific agricultural intent within the internal market (Slaughter, Breeding, Fattening, etc.). Conditional: only present when Reason for import = Internal market. Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = INTERNAL_MARKET_PURPOSE`. Read the `content` of that clause.",
+      "consumer_rule": {
+        "summary": "Read the content of the INTERNAL_MARKET_PURPOSE clause.",
+        "steps": [
+          "Check the PURPOSE clause (see Reason for import) - if its content = INTERNAL_MARKET, the INTERNAL_MARKET_PURPOSE clause is present.",
+          "Iterate exchangedDocument.firstSignatoryAuthentication.includedClause[] and find the entry where identifier = INTERNAL_MARKET_PURPOSE.",
+          "Read that entry's content."
+        ]
+      },
+      "notes": [
+        "The schema enforces this conditionality via an if/then constraint on firstSignatoryAuthentication."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Corrected PIMS's mapping. PIMS's path was a generic PURPOSE-clause reference; the fine-grained intent actually lives on the INTERNAL_MARKET_PURPOSE clause that the schema enforces when PURPOSE.content = INTERNAL_MARKET.",
+      "agreed_status": "corrected",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 10,
+          "field": "Internal Market Purpose",
+          "assumed_schema_path": "exchangedDocument > firstSignatoryAuthentication > includedClause > content where purpose content = INTERNAL_MARKET",
+          "assumption": "PIMS path is vague - it points at the PURPOSE clause but the fine-grained intent lives on a separate clause.",
+          "status": "",
+          "verdict": "modified",
+          "note": "PIMS pointed at the PURPOSE clause; the fine-grained intent lives on a separate INTERNAL_MARKET_PURPOSE clause."
+        }
+      ]
+    },
+    {
+      "row_id": "place-of-origin",
+      "v4": {
+        "field_name": "Place of Origin",
+        "v4_row_ref": "Live Animal Data Elements row 23",
+        "type": "Standard address block",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Alpine Livestock Exports GmbH, Gewerbestrasse 18, Munich 80331, Germany",
+        "conditions_values": "Standard address block. One address record."
+      },
+      "schema_path": "specifiedConsignment.despatchParty",
+      "description": "The facility from which the animals were despatched - typically the source farm where the animals were born and raised, or a consolidation hub in mixed-source cases. Modelled as a `TradeParty` carrying name, address, contact details, and operator-activity-id as `identifier`. Distinct from country of origin (the residency fact, at `originCountry`).",
+      "consumer_rule": {
+        "summary": "Read the despatch party - a TradeParty on the consignment.",
+        "steps": [
+          "Read specifiedConsignment.despatchParty.",
+          "Use name, postalAddress, and definedContact[] for the address-block fields."
+        ]
+      },
+      "notes": [
+        "Distinct from consignor (the legal sender under the trade contract); the despatch facility is the physical place the animals leave from."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Answered PIMS's question: yes, this is available at specifiedConsignment.despatchParty as a TradeParty.",
+      "agreed_status": "answered",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 29,
+          "field": "",
+          "assumed_schema_path": "",
+          "assumption": "Is this of use to PIMS? to confirm.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 11,
+          "field": "Place of Original Harvest - multiple fields",
+          "assumed_schema_path": "",
+          "assumption": "Should this become the 'Place of Origin'?",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Yes. Place of Original Harvest in the legacy PIMS model is what V4 calls Place of Origin; lands on specifiedConsignment.despatchParty."
+        }
+      ]
+    },
+    {
+      "row_id": "consignor",
+      "v4": {
+        "field_name": "Consignor",
+        "v4_row_ref": "Live Animal Data Elements row 24",
+        "type": "Standard address block",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Alpine Livestock Exports GmbH, Munich, Germany",
+        "conditions_values": "Standard address block."
+      },
+      "schema_path": "specifiedConsignment.consignorParty",
+      "description": "The party sending the animals under the trade contract - the exporter in regulatory terms. Modelled as a `TradeParty` with name, address, and contact details. Distinct from `despatchParty` (the physical despatch facility); the consignor doesn't have to operate from the despatch premises.",
+      "consumer_rule": {
+        "summary": "Read the consignor TradeParty on the consignment.",
+        "steps": [
+          "Read specifiedConsignment.consignorParty.",
+          "Use name, postalAddress, and definedContact[] for the address-block fields."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. The TradeParty shape covers all V4 address-block fields (name, address lines, city, postcode, country, contact details).",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 5,
+          "field": "Consignor (multiple address-block fields)",
+          "assumed_schema_path": "specifiedConsignment > consignorParty",
+          "assumption": "Are all expected consignor fields included?",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 5,
+          "field": "Consignor additional fields",
+          "assumed_schema_path": "",
+          "assumption": "As above",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Typed as TradeAddress."
+        }
+      ]
+    },
+    {
+      "row_id": "consignee",
+      "v4": {
+        "field_name": "Consignee",
+        "v4_row_ref": "Live Animal Data Elements row 25",
+        "type": "Standard address block",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "UK Agri Foods Trading Ltd, Reading, UK",
+        "conditions_values": "Standard address block."
+      },
+      "schema_path": "specifiedConsignment.consigneeParty",
+      "description": "The party receiving the animals under the trade contract. Modelled as a `TradeParty` with name, address, and `definedContact[]` (telephone, email) for inspection coordination. Distinct from `importer` (the legal importer of record) and `deliveryParty` (the immediate delivery point).",
+      "consumer_rule": {
+        "summary": "Read the consignee TradeParty on the consignment.",
+        "steps": [
+          "Read specifiedConsignment.consigneeParty.",
+          "Use name, postalAddress, and definedContact[] for the address-block fields."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. The TradeParty shape covers all V4 address-block fields.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 4,
+          "field": "Consignee (multiple address-block fields)",
+          "assumed_schema_path": "specifiedConsignment > consigneeParty",
+          "assumption": "Are all expected consignee fields included? to confirm.",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 4,
+          "field": "Consignee Address Line 3 / Approval Number / Country ISO Code / Id / Telephone variants / Other Identifier / Status / Type / UK Telephone",
+          "assumed_schema_path": "",
+          "assumption": "These additional consignee fields are not expected to be received as part of the GBN-AG journey. Might want ISO code for country for ROW.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Typed as TradeAddress. countryId carries ISO alpha-2 (covers the rest-of-world ask)."
+        }
+      ]
+    },
+    {
+      "row_id": "importer",
+      "v4": {
+        "field_name": "Importer",
+        "v4_row_ref": "Live Animal Data Elements row 26",
+        "type": "Standard address block",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "UK Agri Foods Trading Ltd, Reading, UK",
+        "conditions_values": "Standard address block."
+      },
+      "schema_path": "specifiedConsignment.importer",
+      "description": "The Great Britain-based party responsible for the consignment on the import side - makes the regulatory declarations to UK competent authorities and is the party of record for the import. Modelled as a `TradeParty`. Distinct from `consigneeParty` (the contractual receiver) and `deliveryParty` (the delivery point) - these are frequently three different legal entities on UK live-animal imports.",
+      "consumer_rule": {
+        "summary": "Read the importer TradeParty on the consignment.",
+        "steps": [
+          "Read specifiedConsignment.importer.",
+          "Use name, postalAddress, and definedContact[] for the address-block fields."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 8,
+          "field": "Importer (multiple address-block fields)",
+          "assumed_schema_path": "specifiedConsignment > importer",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 6,
+          "field": "Importer additional fields",
+          "assumed_schema_path": "",
+          "assumption": "As above",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Typed as TradeAddress."
+        }
+      ]
+    },
+    {
+      "row_id": "place-of-destination",
+      "v4": {
+        "field_name": "Place of destination",
+        "v4_row_ref": "Live Animal Data Elements row 27",
+        "type": "Standard address block",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Meadow Farm Distribution, Peterborough PE7 3BW, UK",
+        "conditions_values": "Standard address block."
+      },
+      "schema_path": "specifiedConsignment.deliveryParty",
+      "description": "The immediate delivery point for the consignment - the contractual delivery party where the animals are delivered. Modelled as a `TradeParty` at `specifiedConsignment.deliveryParty`. For livestock specifically, the CPH-tagged permanent farm address lives separately at `finalDestinationLocation` (County Parish Holding); for pets, per-animal `permanentLocation` (Permanent Address) is used instead.",
+      "consumer_rule": {
+        "summary": "Read the deliveryParty TradeParty - distinct from despatchParty.",
+        "steps": [
+          "Read specifiedConsignment.deliveryParty.",
+          "Use name, postalAddress, and definedContact[] for the address-block fields."
+        ]
+      },
+      "notes": [
+        "PIMS's draft path pointed at despatchParty (the despatch facility, Place of Origin) - that's the origin, not the destination. Correction: deliveryParty."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Corrected PIMS's mapping. PIMS had Place of destination on despatchParty (which is actually Place of Origin / Place of Origin). The correct slot for delivery is specifiedConsignment.deliveryParty.",
+      "agreed_status": "corrected",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 15,
+          "field": "Place of Destination (multiple address-block fields)",
+          "assumed_schema_path": "specifiedConsignment > despatchParty",
+          "assumption": "PIMS mapped to despatchParty - but despatchParty is the origin facility, not the destination.",
+          "status": "",
+          "verdict": "modified",
+          "note": "PIMS mapped to despatchParty (which is Place of Origin); correct slot is deliveryParty."
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 7,
+          "field": "Place of Destination additional fields",
+          "assumed_schema_path": "",
+          "assumption": "As above",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Typed as TradeAddress."
+        }
+      ]
+    },
+    {
+      "row_id": "permanent-address",
+      "v4": {
+        "field_name": "Permanent Address",
+        "v4_row_ref": "Live Animal Data Elements row 28",
+        "type": "Standard address block",
+        "mandatory": "Mandatory (conditional, per animal)",
+        "source": "",
+        "applies_at": "Cats, Dogs, Ferrets",
+        "example": "Meadow Farm Distribution, Peterborough PE7 3BW, UK",
+        "conditions_values": "Conditional: required per animal when commodity is Cats, Dogs, or Ferrets. A different address can be entered for each animal."
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].individualTradeProductInstance[].permanentLocation",
+      "description": "Per-animal permanent address - where the individual animal will live long-term after import. Carried on each `individualTradeProductInstance[].permanentLocation`. Different animals on the same trade line can carry different addresses (common for pets imported to a business address and shipped onwards to their owners). Required for Cats, Dogs, Ferrets.",
+      "consumer_rule": {
+        "summary": "Read the permanent location per animal.",
+        "steps": [
+          "Iterate every individualTradeProductInstance[] across every specifiedTradeProduct[], every includedTradeLineItem[], every includedConsignmentItem[].",
+          "Read each instance's permanentLocation (when present).",
+          "Each animal also has its identifier[] array, so PIMS can tie the permanent address to a specific animal by sharing the same individualTradeProductInstance entry."
+        ]
+      },
+      "notes": [
+        "PIMS's question about identifying the specific animal: yes, each individualTradeProductInstance carries both the identifier[] and the permanentLocation, so they are co-located by structure."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Answered PIMS's question: yes, per-animal storage is the right level. The schema co-locates each animal's identifiers and permanent location on the same individualTradeProductInstance entry.",
+      "agreed_status": "answered",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Permanent Address",
+          "row": 1,
+          "field": "Permanent Address (address-block fields)",
+          "assumed_schema_path": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > individualTradeProductInstance > permanentLocation",
+          "assumption": "Is this an acceptable level at which to store the data? The address can be different per animal on a notification, do we need to be able to identify the specific animal that the address relates to?",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "transporter",
+      "v4": {
+        "field_name": "Transporter (type, Commercial Transporter, Private Transporter)",
+        "v4_row_ref": "Live Animal Data Elements rows 29-31",
+        "type": "TradeParty + enum discriminator",
+        "mandatory": "Mandatory",
+        "source": "MDM (commercial)",
+        "applies_at": "Notification level",
+        "example": "Commercial: Ulster Livestock Transport Ltd, Unit 6 Bally Business Centre, Ballymena BT42 1FL, GB, +44 1733 560890, ops@ulsterlivestock.co.uk, approval UK/NEWCA/T1/00090953. Private: North Pennine Livestock Services, Harvest Yard, Carlisle CA6 4AA, GB.",
+        "conditions_values": "Single transporter per notification. User picks one of Commercial or Private; the choice drives which fields V4 shows next."
+      },
+      "schema_path": "specifiedConsignment.carrier",
+      "description": "The party responsible for moving the consignment from despatch to delivery. Modelled as a `TradeParty` at `specifiedConsignment.carrier`. The transporter type (Commercial or Private) is carried as a `partyTypeCode` value (`COMMERCIAL_TRANSPORTER` or `PRIVATE_TRANSPORTER`); `partyTypeCode` is `oneOf` a single string or an array of strings, used as an array when the party carries codes from more than one TRACES list. When an approval number applies, it lives at `identifier`, with `urlId` pinning the Defra-curated scheme that issues UK transporter approval numbers. Name, postal address, telephone, and email live at `name`, `postalAddress`, and `definedContact[]`. Transporter status (active, suspended, expired) is not in the notification payload; consumers resolve it by looking the approval number up against the issuing scheme at consumption time.",
+      "consumer_rule": {
+        "summary": "Read specifiedConsignment.carrier as a single TradeParty.",
+        "steps": [
+          "Read specifiedConsignment.carrier.partyTypeCode - if string, it is the transporter type; if array, the COMMERCIAL_TRANSPORTER or PRIVATE_TRANSPORTER value is the type, other entries name additional TRACES classifications.",
+          "Read carrier.name for the transporter name.",
+          "Read carrier.postalAddress for the address (lineOne, lineTwo, cityName, postcodeCode, countryId).",
+          "Read carrier.definedContact[] for telephone and email.",
+          "When carrier.identifier is present, it is the transporter approval number; carrier.urlId names the scheme."
+        ]
+      },
+      "notes": [
+        "Single transporter slot per notification.",
+        "Transporter status (active / suspended / expired) is refdata, not payload - resolve by lookup at consumption time."
+      ],
+      "actions": [
+        "Confirm whether Private transporters carry an approval number. V4 row 31 lists only the address block; the schema's identifier slot is available if one is required.",
+        "Confirm the final scheme URL on the Defra side. The worked samples use `https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation` as a parking-lot scheme identifier; both the host and the path segment are decisions pending the Defra reference-data service publication.",
+        "Extend the `refdata.tbc.defra.gov.uk` host rename to non-GBN-AG samples (INTRA, CHED-PP, reference-data) when those profiles touch Defra scheme URLs."
+      ],
+      "code_examples": [
+        {
+          "label": "Commercial transporter carrying an approval number",
+          "code": "\"carrier\": {\n  \"name\": \"Ulster Livestock Transport Ltd\",\n  \"identifier\": \"UK/NEWCA/T1/00090953\",\n  \"urlId\": \"https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation\",\n  \"partyTypeCode\": [\"COMMERCIAL_TRANSPORTER\", \"TRANSPORTER\"],\n  \"postalAddress\": {\n    \"lineOne\": \"Unit 6, Bally Business Centre\",\n    \"lineTwo\": \"Fenaghy Road\",\n    \"cityName\": \"Ballymena\",\n    \"postcodeCode\": \"BT42 1FL\",\n    \"countryId\": \"GB\"\n  },\n  \"definedContact\": [\n    { \"telephoneUniversalCommunication\": \"+44 1733 560890\", \"emailURIUniversalCommunication\": \"ops@ulsterlivestock.co.uk\" }\n  ]\n}"
+        }
+      ],
+      "agreed_answer": "Confirmed specifiedConsignment.carrier with a single TradeParty per notification. Type discriminator on partyTypeCode (string or array). Approval number on identifier with urlId pinning the Defra-curated issuing scheme. Status not in payload; resolved by lookup.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 20,
+          "field": "Transporter Address City / Country / Line 1 / Line 2 / Postcode / Company Name / Email / Individual Name / Telephone / Type / Status / Approval Number",
+          "assumed_schema_path": "specifiedConsignment > carrier",
+          "assumption": "Do transporters have any additional identifiers that should be captured here? to confirm if fields exist in the schema to cover transporter status and approval number. to confirm how to map Transporter Type, as the suspected object in the schema can be either a string or an array - is that right?",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Confirms specifiedConsignment.carrier. Type on partyTypeCode (string or array); approval number on identifier + urlId; status not in payload (refdata lookup)."
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 8,
+          "field": "Transporter Address Line 3 / Country ISO Code / Details Required / Id / International Telephone / Telephone ISO Code / Other Identifier / UK Telephone",
+          "assumed_schema_path": "",
+          "assumption": "These additional transporter fields are not expected to be received as part of the GBN-AG journey.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Typed as TradeAddress."
+        }
+      ]
+    },
+    {
+      "row_id": "county-parish-holding",
+      "v4": {
+        "field_name": "County Parish Holding (CPH)",
+        "v4_row_ref": "Live Animal Data Elements row 32",
+        "type": "string - max 11",
+        "mandatory": "Mandatory (conditional)",
+        "source": "TBC",
+        "applies_at": "Cattle, Pigs, Sheep, Goats, Poultry (19 commodities)",
+        "example": "123456789 or 123/456/789",
+        "conditions_values": "Conditional: required when CPH applies to the selected commodity."
+      },
+      "schema_path": "specifiedConsignment.finalDestinationLocation.identifier",
+      "description": "The County Parish Holding (CPH) number of the destination farm. Required for livestock commodities (cattle, pigs, sheep, goats, poultry); not used for pets. Read the string at `finalDestinationLocation.identifier`. The sibling `urlId` is pinned to the Defra-curated CPH register.",
+      "consumer_rule": {
+        "summary": "Read the CPH number on finalDestinationLocation.",
+        "steps": [
+          "Read specifiedConsignment.finalDestinationLocation.identifier."
+        ]
+      },
+      "notes": [
+        "Pets (cats, dogs, ferrets) omit finalDestinationLocation and use per-animal permanentLocation instead (Permanent Address)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 7,
+          "field": "CPH Number",
+          "assumed_schema_path": "specifiedConsignment > finalDestinationLocation > identifier",
+          "assumption": "Received for some commodities only. Should be at species level - eg some cows going to one CPH, some going to another CPH.",
+          "status": "",
+          "verdict": "modified",
+          "note": "PIMS proposes species-level CPH; V4 defines CPH per consignment. Schema stays at specifiedConsignment.finalDestinationLocation.identifier per V4."
+        }
+      ]
+    },
+    {
+      "row_id": "port-of-entry",
+      "v4": {
+        "field_name": "Port of Entry",
+        "v4_row_ref": "Live Animal Data Elements row 33",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "MDM",
+        "applies_at": "Notification level",
+        "example": "Port of Hull",
+        "conditions_values": "Values come from the named MDM live animal ports of entry list"
+      },
+      "schema_path": "specifiedConsignment.unloadingBaseportLocation",
+      "description": "The UK Port of Entry the consignment lands. Note our concept of the BCP is separate from the Port of Entry.",
+      "consumer_rule": {
+        "summary": "Single object on the consignment. Read the identifier (UN/LOCODE) and name as needed.",
+        "steps": [
+          "Read specifiedConsignment.unloadingBaseportLocation - a single object directly on the consignment.",
+          "Use identifier for the UN/LOCODE (e.g. GBHUL for the Port of Hull).",
+          "Use name for the human-readable port name."
+        ]
+      },
+      "notes": [
+        "Sourced from the MDM Countries API, restricted to ports handling arrivals from EU/EFTA countries within scope of the GBN-AG journey under the EU-Reset programme.",
+        "Distinct from the BCP slot (applicableCrossBorderRegulatoryProcedure[].entryCustomsOfficeSpecifiedLogisticsLocation), which is a separate regulatory concept and is not in scope for GBN-AG under EU-Reset. The historical conflation comes from BTOM/CHED, where the BCP and the port of entry often share a physical location.",
+        "PIMS adapts to the model. If BCP-specific data is later required for casework, that needs to be added to the journey and the data definition first; it is not a schema-mapping decision.",
+        "This slot is doubly load-bearing: it also anchors the row-35 consumer rule (arrivalEvent.occurrenceLogisticsLocation matching)."
+      ],
+      "agreed_answer": "Mapping corrected to specifiedConsignment.unloadingBaseportLocation. The mapping conflated two concepts that historically coincided under BTOM/CHED but are distinct under GBN-AG with EU regulatory alignment. The Port of Entry is the UK port the consignment physically arrives at, sourced from the MDM Countries API. The BCP-flavoured slot is a separate regulatory concept and is not in scope for GBN-AG under EU-Reset.",
+      "agreed_status": "corrected",
+      "actions": [],
+      "code_examples": [],
+      "schema_updates": [
+        "narrow-unloading-baseport-location-description"
+      ],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 2,
+          "field": "BCP or Port of Entry",
+          "assumed_schema_path": "specifiedConsignment > applicableCrossBorderRegulatoryProcedure > entryCustomsOfficeSpecifiedLogisticsLocation > name where typeCode = SPS_INSPECTION",
+          "assumption": "PIMS expected to read from the applicable cross border regulatory procedure array, filtered by typeCode = SPS_INSPECTION.",
+          "status": "Assumption",
+          "verdict": "modified",
+          "note": "PIMS pointed at the BCP slot (applicableCrossBorderRegulatoryProcedure); Port of Entry is a distinct slot, unloadingBaseportLocation."
+        }
+      ]
+    },
+    {
+      "row_id": "arrival-date-at-port",
+      "v4": {
+        "field_name": "Arrival date at Port",
+        "v4_row_ref": "Live Animal Data Elements row 34",
+        "type": "date",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "12/12/2026",
+        "conditions_values": "Must be a valid date in DD/MM/YYYY format"
+      },
+      "schema_path": "specifiedConsignment.mainCarriageLogisticsTransportMovement[].arrivalEvent[].scheduledOccurrenceDateTime",
+      "description": "The date the consignment arrives at the UK Port of Entry. Multi-leg journeys are allowed. PIMS read these events by finding the event whose `occurrenceLogisticsLocation` matches the `identifier` of the `unloadingBaseportLocation`. PIMS may store the date component only, time is descoped.",
+      "consumer_rule": {
+        "summary": "Find the arrival event whose location matches the UK port of entry; read that event's scheduled date-time.",
+        "steps": [
+          "Read specifiedConsignment.unloadingBaseportLocation.identifier - this is the UK port reference (typically a UN/LOCODE like GBHUL).",
+          "Iterate every arrivalEvent across every entry in specifiedConsignment.mainCarriageLogisticsTransportMovement[].",
+          "Find the arrivalEvent whose occurrenceLogisticsLocation.identifier equals the port reference from step 1.",
+          "Read that event's scheduledOccurrenceDateTime. Take the date component for PIMS storage; the time component is descoped."
+        ]
+      },
+      "notes": [
+        "Multi-leg journeys are allowed. The location-match rule works regardless of leg count - no producer-side ordering convention required.",
+        "The rule round-trips to TRACES because TransportEvent.occurrenceLogisticsLocation is D23B-canonical.",
+        "PIMS storing date only is a downstream decision; the schema field carries date-time. Time precision is descoped (see Arrival Time scope decision)."
+      ],
+      "actions": [],
+      "code_examples": [
+        {
+          "label": "Port reference on the consignment",
+          "code": "\"unloadingBaseportLocation\": {\n  \"identifier\": \"GBBRS\",\n  \"name\": \"Bristol\",\n  \"postalAddress\": {\n    \"lineOne\": \"Port of Bristol\",\n    \"cityName\": \"Bristol\",\n    \"postcodeCode\": \"BS1 1AA\",\n    \"countryId\": \"GB\"\n  },\n  \"urlId\": \"https://service.unece.org/locode/\"\n}"
+        },
+        {
+          "label": "Matching arrival event",
+          "code": "\"arrivalEvent\": [\n  {\n    \"scheduledOccurrenceDateTime\": \"2026-05-27T22:00:00Z\",\n    \"occurrenceLogisticsLocation\": {\n      \"identifier\": \"GBBRS\",      // which we can match to the unloadingBaseportLocation.identifier\n      \"name\": \"Port of Bristol\"\n    }\n  }\n]"
+        }
+      ],
+      "agreed_answer": "Schema path corrected to a deterministic location-match rule rather than a positional heuristic.",
+      "agreed_status": "corrected",
+      "schema_updates": [
+        "add-occurrence-logistics-location",
+        "update-main-carriage-description"
+      ],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 1,
+          "field": "Arrival Date",
+          "assumed_schema_path": "specifiedConsignment > mainCarriageLogisticsTransportMovement > arrivalEvent > scheduledOccurrenceDateTime",
+          "assumption": "First transport movement and first arrival datetime; PIMS stores date only.",
+          "status": "Confirmed (with the heuristic 'first leg, first arrival')",
+          "verdict": "modified",
+          "note": "PIMS used a positional heuristic (first leg, first arrival); correct rule matches arrivalEvent.occurrenceLogisticsLocation against unloadingBaseportLocation.identifier."
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 1,
+          "field": "Arrival Time",
+          "assumed_schema_path": "",
+          "assumption": "Not required for GBN-AG journey",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Arrival Time descoped per Arrival Time scope decision; PIMS reads date only from scheduledOccurrenceDateTime."
+        }
+      ]
+    },
+    {
+      "row_id": "means-of-transport",
+      "v4": {
+        "field_name": "Means of transport",
+        "v4_row_ref": "Live Animal Data Elements row 35",
+        "type": "enum (single-select)",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Road Vehicle",
+        "conditions_values": "One of: Airplane, Railway, Road Vehicle, Vessel."
+      },
+      "schema_path": "specifiedConsignment.mainCarriageLogisticsTransportMovement[].modeCode",
+      "description": "The mode of transport for the consignment's arrival at the UK Port of Entry. Carried as `modeCode` per UN/EDIFACT Recommendation 19: 1 = Maritime (Vessel), 2 = Rail (Railway), 3 = Road (Road Vehicle), 4 = Air (Airplane). Read on the same leg whose `arrivalEvent.occurrenceLogisticsLocation` matches the UK port (see Arrival date at Port).",
+      "consumer_rule": {
+        "summary": "Read the mode code on the UK-arrival leg.",
+        "steps": [
+          "Identify the leg whose arrivalEvent matches the UK port (per Arrival date at Port's rule).",
+          "Read that leg's modeCode and translate per UN/EDIFACT Rec 19 to the V4 enum value."
+        ]
+      },
+      "notes": [
+        "modeCode is a numeric code, not a human-readable name. PIMS would translate to V4's labels (Vessel/Railway/Road Vehicle/Airplane)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Corrected PIMS's path. PIMS pointed at usedLogisticsTransportMeans.name which is not in our schema. The mode lives on modeCode as a UN/EDIFACT Rec 19 numeric code.",
+      "agreed_status": "corrected",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 13,
+          "field": "Means of Transport To Entry Point Type",
+          "assumed_schema_path": "specifiedConsignment > mainCarriageLogisticsTransportMovement > usedLogisticsTransportMeans > name",
+          "assumption": "PIMS path uses a slot (usedLogisticsTransportMeans) that does not exist in our schema; the mode lives on modeCode.",
+          "status": "",
+          "verdict": "modified",
+          "note": "usedLogisticsTransportMeans.name is in the schema and carries the means' identifying name (vessel name, vehicle registration, flight callsign); the mode of transport lives on modeCode (UN/EDIFACT Rec 19 numeric)."
+        }
+      ]
+    },
+    {
+      "row_id": "transport-identification",
+      "v4": {
+        "field_name": "Transport identification",
+        "v4_row_ref": "Live Animal Data Elements row 36",
+        "type": "string - max 58",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "FR-892-LK",
+        "conditions_values": "Free-text transport identifier."
+      },
+      "schema_path": "specifiedConsignment.mainCarriageLogisticsTransportMovement[].identifier",
+      "description": "Free-text transport identifier - vessel name, vehicle registration, flight number, or train identity. Read on the same leg as the UK port arrival event (see Arrival date at Port).",
+      "consumer_rule": {
+        "summary": "Read the transport identifier on the UK-arrival leg.",
+        "steps": [
+          "Identify the leg whose arrivalEvent matches the UK port (per Arrival date at Port's rule).",
+          "Read that leg's identifier."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 12,
+          "field": "Means of Transport To Entry Point Id",
+          "assumed_schema_path": "specifiedConsignment > mainCarriageLogisticsTransportMovement > identifier",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "transport-document-reference",
+      "v4": {
+        "field_name": "Transport document reference",
+        "v4_row_ref": "Live Animal Data Elements row 37",
+        "type": "string - max 58",
+        "mandatory": "Mandatory",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "CMR-2026-884721",
+        "conditions_values": "Free-text transport document reference."
+      },
+      "schema_path": "specifiedConsignment.mainCarriageLogisticsTransportMovement[].transportContractRelatedReferencedDocument[]",
+      "description": "The transport document for the leg arriving at the UK port (typically the Bill of Lading for maritime, Road Consignment Note (CMR) for road, Air Waybill for air, Rail Consignment Note for rail). Carried on each `transportContractRelatedReferencedDocument[]` entry on the relevant leg of `mainCarriageLogisticsTransportMovement[]`; each entry has a `typeCode` (per UNTDID 1001) and an `identifier` (the reference number). Find the relevant leg by matching its `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`, using the same deterministic rule as Arrival date at Port. V4 captures only the reference; the `typeCode` is inferred from the means of transport.",
+      "consumer_rule": {
+        "summary": "Read transportContractRelatedReferencedDocument[] on the leg matching the UK port.",
+        "steps": [
+          "Read specifiedConsignment.mainCarriageLogisticsTransportMovement[].",
+          "Find the leg whose arrivalEvent[].occurrenceLogisticsLocation.identifier matches specifiedConsignment.unloadingBaseportLocation.identifier.",
+          "On that leg, read transportContractRelatedReferencedDocument[]; each entry: typeCode (UNTDID 1001) is the document kind, identifier is the reference number."
+        ]
+      },
+      "notes": [
+        "UNTDID 1001 codelist resolves typeCode values: 705 Bill of Lading, 730 Road Consignment Note (CMR), 740 Air Waybill, etc."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Schema path corrected to the deterministic location-match rule rather than the positional 'first leg' heuristic. Same rule as arrival-date-at-port.",
+      "agreed_status": "corrected",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 11,
+          "field": "Means of Transport To Entry Point Document",
+          "assumed_schema_path": "specifiedConsignment > mainCarriageLogisticsTransportMovement > transportContractRelatedReferencedDocument > identifier",
+          "assumption": "First main carriage logistics transport movement in array will hold the relevant information to confirm Document (from list of document TypeCodes).",
+          "status": "Confirmed",
+          "verdict": "modified",
+          "note": "PIMS used a positional heuristic (first leg, first arrival); correct rule matches the leg's arrivalEvent.occurrenceLogisticsLocation against unloadingBaseportLocation.identifier (same rule as Arrival date at Port)."
+        }
+      ]
+    },
+    {
+      "row_id": "accompanying-document-type",
+      "v4": {
+        "field_name": "Accompanying Document: Type",
+        "v4_row_ref": "Live Animal Data Elements row 38",
+        "type": "enum (single-select)",
+        "mandatory": "Optional",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "Veterinary health certificate",
+        "conditions_values": "One of: ITAHC, Veterinary health certificate, Air waybill, Import permit, Letter of authority, Commercial invoice, Sea waybill, Rail waybill, Customs declaration, Bill of lading, Catch certificate, Laboratory sampling results, Health certificate, Journey log, Other."
+      },
+      "schema_path": "exchangedDocument.referenceDocument[].typeCode",
+      "description": "The type of accompanying document. Sent as a code per UNTDID 1001 (e.g. `853` for veterinary health certificate, `636` for CHED). PIMS would need the UNTDID 1001 codelist to resolve codes to the V4 human-readable labels.",
+      "consumer_rule": {
+        "summary": "Read the typeCode on each referenceDocument entry; resolve via UNTDID 1001.",
+        "steps": [
+          "Iterate exchangedDocument.referenceDocument[].",
+          "Read each entry's typeCode (a UNTDID 1001 code string).",
+          "Translate to the human-readable V4 label using a UNTDID 1001 lookup."
+        ]
+      },
+      "notes": [
+        "The schema enforces that at least one entry has typeCode = 853 (veterinary health certificate)."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Answered PIMS's question: typeCode is sent as the UNTDID 1001 code (not the name). PIMS would need the UNTDID 1001 list to translate codes to V4 labels.",
+      "agreed_status": "answered",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Document Fields",
+          "row": 1,
+          "field": "Document Type",
+          "assumed_schema_path": "exchangedDocument > referenceDocument > typeCode",
+          "assumption": "Will the schema send a text value for the type or just an enum? If an enum, PIMS will require the list of numbers and what they correlate to.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": ""
+        },
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 12,
+          "field": "Veterinary Document",
+          "assumed_schema_path": "",
+          "assumption": "This field looks to have been used as an alternative to the related document entity. Now that document information is stored in a related table, we believe this field is not required to be populated.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Confirmed. Veterinary documents carry on exchangedDocument.referenceDocument[] with typeCode 853 (UNTDID 1001). Legacy flat 'Veterinary Document' field superseded by the related-documents table."
+        }
+      ]
+    },
+    {
+      "row_id": "accompanying-document-reference",
+      "v4": {
+        "field_name": "Accompanying Document: Reference",
+        "v4_row_ref": "Live Animal Data Elements row 39",
+        "type": "string - max 58",
+        "mandatory": "Mandatory (conditional)",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "GBHC1234567890",
+        "conditions_values": "Conditional: required when an accompanying document is added."
+      },
+      "schema_path": "exchangedDocument.referenceDocument[].identifier",
+      "description": "Free-text reference identifier for an accompanying document (e.g. `GBHC1234567890`). Read at `referenceDocument[].identifier` on each entry.",
+      "consumer_rule": {
+        "summary": "Read each accompanying document's identifier.",
+        "steps": [
+          "Iterate exchangedDocument.referenceDocument[].",
+          "Read each entry's identifier."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Document Fields",
+          "row": 2,
+          "field": "Document Reference",
+          "assumed_schema_path": "exchangedDocument > referenceDocument > identifier",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "accompanying-document-date-of-issue",
+      "v4": {
+        "field_name": "Accompanying Document: Date of Issue",
+        "v4_row_ref": "Live Animal Data Elements row 40",
+        "type": "date",
+        "mandatory": "Mandatory (conditional)",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "12/12/2025",
+        "conditions_values": "Conditional: required when an accompanying document is added. Date in DD/MM/YYYY format."
+      },
+      "schema_path": "exchangedDocument.referenceDocument[].issueDateTime",
+      "description": "The date an accompanying document was issued. Carried as `issueDateTime` (date-time); PIMS may take the date component only. Read on each `referenceDocument[]` entry.",
+      "consumer_rule": {
+        "summary": "Read each accompanying document's issue date.",
+        "steps": [
+          "Iterate exchangedDocument.referenceDocument[].",
+          "Read each entry's issueDateTime; take the date component for PIMS storage."
+        ]
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Document Fields",
+          "row": 3,
+          "field": "Document Issue Date",
+          "assumed_schema_path": "exchangedDocument > referenceDocument > issueDateTime",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "transited-countries",
+      "v4": {
+        "field_name": "Transition Countries",
+        "v4_row_ref": "Live Animal Data Elements row 41",
+        "type": "enum (multi-select) - max 12 selectable countries",
+        "mandatory": "Optional (conditional)",
+        "source": "",
+        "applies_at": "Notification level",
+        "example": "France, Belgium",
+        "conditions_values": "Conditional: required when Means of transport is Railway or Road Vehicle. Optional multi-select. Maximum 12 countries."
+      },
+      "schema_path": "specifiedConsignment.transitTradeCountry[]",
+      "description": "The countries the consignment passes through between origin and destination. Up to 12 entries, multi-select. Required when Means of Transport is Railway or Road Vehicle (Means of transport); optional otherwise. Carried as an array of `TradeCountry` references; each entry has an ISO 3166-1 alpha-2 `identifier`.",
+      "consumer_rule": {
+        "summary": "Iterate the transit countries array.",
+        "steps": [
+          "Iterate specifiedConsignment.transitTradeCountry[].",
+          "Read each entry's identifier (ISO 3166-1 alpha-2 code)."
+        ]
+      },
+      "notes": [
+        "Does not carry per-country arrival or departure dates - just the country list.",
+        "In the transit-through-GB case (Reason for Import = Transit), GB itself appears here."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Auto-confirmed. PIMS mapping is correct; schema description noted via tighten-transit-trade-country-description.",
+      "agreed_status": "confirmed",
+      "schema_updates": [
+        "tighten-transit-trade-country-description"
+      ],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 19,
+          "field": "Route Transiting States",
+          "assumed_schema_path": "specifiedConsignment > transitTradeCountry",
+          "assumption": "Clean mapping, no comments.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "row_id": "contact-address",
+      "v4": {
+        "field_name": "Contact Address",
+        "v4_row_ref": "Live Animal Data Elements row 42",
+        "type": "",
+        "mandatory": "-",
+        "source": "gov.identity",
+        "applies_at": "Notification level",
+        "example": "APHA Woodham Lane New Haw Surrey KT15 3NB United Kingdom",
+        "conditions_values": "Consumed from gov.identity. If more than one address exists, the user must select one before continuing. Where a contact address is created by user, Standard address block should be used."
+      },
+      "schema_path": "exchangedDocument.issuer.postalAddress",
+      "description": "The submitter's preferred contact postal address for the notification, sourced from the gov.uk identity of the signed-in user (the user picks one when their profile carries more than one; they may supply a standard address block). Lands on the same slot as the Responsible Person for Load's organisation address: `exchangedDocument.issuer.postalAddress`. The V4 selection step is workflow flow; the schema does not carry a separate contact-address slot distinct from the responsible-person slot.",
+      "consumer_rule": {
+        "summary": "Read exchangedDocument.issuer.postalAddress.",
+        "steps": [
+          "Read exchangedDocument.issuer.postalAddress (lineOne, lineTwo, cityName, postcodeCode, countryId)."
+        ]
+      },
+      "notes": [
+        "Both V4 row 2 (Responsible Person for Load) and V4 row 42 (Contact Address) source from gov.identity and land on the same slot: issuer.postalAddress.",
+        "The example shows APHA's Weybridge address as a placeholder for a UK postal address; not a literal 'send to APHA' instruction."
+      ],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed reading (1). PIMS clarifies this is the submitter's preferred contact address chosen from gov.identity; lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - mapped fields",
+          "row": 30,
+          "field": "",
+          "assumed_schema_path": "",
+          "assumption": "The person submitting or updating the application, including selecting preferred address to use. Possibly not needed directly in the schema.",
+          "status": "Question",
+          "verdict": "confirmed",
+          "note": "Confirms the submitter's preferred address lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load (V4 row 2)."
+        }
+      ]
+    },
+    {
+      "row_id": "charity-descope",
+      "v4": {
+        "field_name": "(none - PIMS-only descope)",
+        "v4_row_ref": "",
+        "type": "",
+        "mandatory": "",
+        "source": "",
+        "applies_at": "",
+        "example": "",
+        "conditions_values": ""
+      },
+      "schema_path": "",
+      "description": "No charity-party concept is captured in GBN-AG. The PIMS legacy charity-related fields are out of scope for this journey.",
+      "consumer_rule": {
+        "summary": "No schema slot. Nothing to read.",
+        "steps": []
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed descope. No charity concept in GBN-AG.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 2,
+          "field": "Charity Address / Approval Number / Company Name / Consignor Email / Id / Individual Name / Telephone / Type / Status / etc.",
+          "assumed_schema_path": "",
+          "assumption": "We don't believe Charity information is being captured in the GBN-AG notification. to confirm",
+          "status": "Assumption",
+          "verdict": "confirmed",
+          "note": "No charity-party concept in GBN-AG."
+        }
+      ]
+    },
+    {
+      "row_id": "post-port-transport-descope",
+      "v4": {
+        "field_name": "(none - PIMS-only descope)",
+        "v4_row_ref": "",
+        "type": "",
+        "mandatory": "",
+        "source": "",
+        "applies_at": "",
+        "example": "",
+        "conditions_values": ""
+      },
+      "schema_path": "",
+      "description": "Onward transport after the UK Port of Entry, exit border control post, and port of exit are not modelled in GBN-AG. PIMS-side fields covering 'Means of Transport From Entry Point', 'Departure Date / Time', 'Exit BCP', 'Port of Exit', and related date fields are out of scope per the descope at `Post-Port-of-Entry Transport scope decision`.",
+      "consumer_rule": {
+        "summary": "No schema slot. Nothing to read.",
+        "steps": []
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed descope per Post-Port-of-Entry Transport scope decision.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Importer Notification - PIMS fields believed not required",
+          "row": 9,
+          "field": "Means of Transport From Entry Point Document / Id / Type / Departure Date / Departure Time / Exit Border Control Post / Exit BCP Date / Port of Exit / Port of Exit Date",
+          "assumed_schema_path": "",
+          "assumption": "These are for capturing transport (including when the transport departs) after visiting the BCP, which has been descoped. Exit border control post and port of exit information falls under post-BCP action.",
+          "status": "ASSUMPTION",
+          "verdict": "confirmed",
+          "note": "Post-Port-of-Entry transport, exit BCP, and port of exit not modelled; descoped per Post-Port-of-Entry Transport scope decision."
+        }
+      ]
+    },
+    {
+      "row_id": "document-url-descope",
+      "v4": {
+        "field_name": "(none - PIMS-only descope)",
+        "v4_row_ref": "",
+        "type": "",
+        "mandatory": "",
+        "source": "",
+        "applies_at": "",
+        "example": "",
+        "conditions_values": ""
+      },
+      "schema_path": "",
+      "description": "The Document URL ask (a link to the document in the notification portal for caseworker navigation) is not part of the schema definition. The notification carries the document content (`attachmentBinaryObject`) and references on `exchangedDocument.referenceDocument[]`; URLs into a downstream portal are a consumer-side concern.",
+      "consumer_rule": {
+        "summary": "No schema slot. Nothing to read.",
+        "steps": []
+      },
+      "notes": [],
+      "actions": [],
+      "code_examples": [],
+      "agreed_answer": "Confirmed descope. Portal URLs are a consumer-side concern.",
+      "agreed_status": "confirmed",
+      "schema_updates": [],
+      "pims_refs": [
+        {
+          "section": "Document Fields",
+          "row": 5,
+          "field": "Document URL",
+          "assumed_schema_path": "",
+          "assumption": "This URL should link caseworkers to the document in the notification portal we need to discuss what this URL might look like and get it added into the schema if appropriate.",
+          "status": "",
+          "verdict": "confirmed",
+          "note": "Document URL stays a consumer-side concern; not added to the schema."
+        }
+      ]
+    }
+  ]
+}

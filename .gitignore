@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# Secrets / local environment
+.env
+.envrc
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
@@ -28,3 +32,6 @@ build/
 /workspace/
 /.claude/
 /features/
+
+# gbn-ag data-import: committed inputs live in data/; per-run artefacts are transient
+/scripts/gbn-ag-data-import/data/scratch/

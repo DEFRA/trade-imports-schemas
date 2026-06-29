@@ -1,0 +1,781 @@
+{
+  "source": {
+    "page_id": "6525093960",
+    "page_title": "Portal to PIMS data mapping",
+    "space": "EUDP",
+    "version": 7,
+    "version_when": "2026-06-08T16:14:30.294Z",
+    "url": "https://eaflood.atlassian.net/wiki/spaces/EUDP/pages/6525093960/Portal+to+PIMS+data+mapping"
+  },
+  "sections": [
+    {
+      "section": "Importer Notification - mapped fields",
+      "source_heading": "Importer Notification",
+      "intro": null,
+      "column_layout": "4-col (Live Animal Data Field + PIMS Field + Schema Name + Comments)",
+      "rows": [
+        {
+          "row": 1,
+          "live_animal_data_field": "Arrival date at Port",
+          "pims_field": "Arrival Date",
+          "schema_name": "specifiedConsignment > mainCarriageLogisticsTransportMovement > arrivalEvent > scheduledOccurrenceDateTime",
+          "comments": "Needs to be first transport movement and first arrival datetimeThis will store date only, not datetime. confirmed",
+          "statuses": [
+            {
+              "colour": "Green",
+              "label": "confirmed"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "live_animal_data_field": "Port of Entry",
+          "pims_field": "BCP or Port of Entry",
+          "schema_name": "BCPspecifiedConsignment > applicableCrossBorderRegulatoryProcedure > entryCustomsOfficeSpecifiedLogisticsLocation > namewhere typeCode = SPS_INSPECTIONPort of EntryspecifiedConsignment.unloadingBaseportLocation",
+          "comments": "the applicable cross border regulatory procedure object holds an array of entry customer office specified logistics locations. We want the SPS_INSPECTION procedure from the array we will only ever receive the Port of Entry, not the BCP. Are you happy that this is what we will capture in the “BCP or Port of Entry” field in PIMS?",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "assumption"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "live_animal_data_field": "Animals certified for",
+          "pims_field": "Certified For",
+          "schema_name": "exchangedDocument > firstSignatoryAuthentication > includedClause > contentwhere includedClause.identifier.content = GOODS_CERTIFIED_AS",
+          "comments": "Using lists on Live Animals Data Fields page as master",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "live_animal_data_field": "Consignee",
+          "pims_field": "Consignee Address CityConsignee Address CountryConsignee Address Line 1Consignee Address Line 2Consignee Address PostcodeConsignee Company NameConsignee EmailConsignee Individual NameConsignee Telephone",
+          "schema_name": "specifiedConsignment > consigneeParty",
+          "comments": "Are all expected consignee fields included?\nto confirm",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "live_animal_data_field": "Consignor",
+          "pims_field": "Consignor Address CityConsignor Address CountryConsignor Address Line 1Consignor Address Line 2Consignor Address PostcodeConsignor Company NameConsignor EmailConsignor Individual NameConsignor Telephone",
+          "schema_name": "specifiedConsignment > consignorParty",
+          "comments": "Are all expected consignor fields included?",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "live_animal_data_field": "Country of origin",
+          "pims_field": "Country of Origin",
+          "schema_name": "specifiedConsignment > originCountry",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 7,
+          "live_animal_data_field": "County Parish Holding (CPH)",
+          "pims_field": "CPH Number",
+          "schema_name": "specifiedConsignment > finalDestinationLocation > identifier",
+          "comments": "Received for some commodities onlyShould be at species level - eg some cows going to one CPH, some going to another CPH",
+          "statuses": []
+        },
+        {
+          "row": 8,
+          "live_animal_data_field": "Importer",
+          "pims_field": "Importer Address CityImporter Address CountryImporter Address Line 1Importer Address Line 2Importer Address PostcodeImporter Company NameImporter EmailImporter Individual NameImporter Telephone",
+          "schema_name": "specifiedConsignment > importer",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 9,
+          "live_animal_data_field": "Contains Unweaned Animals",
+          "pims_field": "Include Non-Ablacted Animals",
+          "schema_name": "specifiedConsignment > isOrHasUnweanedAnimals",
+          "comments": "Mainly used for welfare. Not relevant for EU journey",
+          "statuses": []
+        },
+        {
+          "row": 10,
+          "live_animal_data_field": "Purpose in internal market",
+          "pims_field": "Internal Market Purpose",
+          "schema_name": "exchangedDocument > firstSignatoryAuthentication > includedClause > contentwhere purpose content = INTERNAL_MARKET",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 11,
+          "live_animal_data_field": "Transport document reference",
+          "pims_field": "Means of Transport To Entry Point Document",
+          "schema_name": "specifiedConsignment > mainCarriageLogisticsTransportMovement > transportContractRelatedReferencedDocument > identifier",
+          "comments": "First main carriage logistics transport movement in array will hold the relevant information to confirm Document (from list of document TypeCodes)",
+          "statuses": [
+            {
+              "colour": "Green",
+              "label": "Confirmed"
+            }
+          ]
+        },
+        {
+          "row": 12,
+          "live_animal_data_field": "Transport identification",
+          "pims_field": "Means of Transport To Entry Point Id",
+          "schema_name": "specifiedConsignment > mainCarriageLogisticsTransportMovement > identifier",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 13,
+          "live_animal_data_field": "Means of transport",
+          "pims_field": "Means of Transport To Entry Point Type",
+          "schema_name": "specifiedConsignment > mainCarriageLogisticsTransportMovement > usedLogisticsTransportMeans > name",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 14,
+          "live_animal_data_field": "Responsible Person for Load",
+          "pims_field": "Person Responsible AddressPerson Responsible CountryPerson Responsible Company NamePerson Responsible EmailPerson Responsible NamePerson Responsible Phone",
+          "schema_name": "exchangedDocument > issuer",
+          "comments": "Issuer is Person Responsible - to confirm",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 15,
+          "live_animal_data_field": "Place of destination",
+          "pims_field": "Place of Destination Address CityPlace of Destination Address Line 1Place of Destination Address Line 2Place of Destination Address PostcodePlace of Destination Company NamePlace of Destination CountryPlace of Destination EmailPlace of Destination Individual NamePlace of Destination Telephone",
+          "schema_name": "specifiedConsignment > despatchParty",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 16,
+          "live_animal_data_field": "Reason for import",
+          "pims_field": "Purpose of Consignment",
+          "schema_name": "exchangedDocument > firstSignatoryAuthentication > includedClause > contentwhere includedClause.identifier.content = PURPOSE",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 17,
+          "live_animal_data_field": "Reference Number",
+          "pims_field": "Reference Number",
+          "schema_name": "exchangedDocument > identifier",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 18,
+          "live_animal_data_field": "Region of origin code",
+          "pims_field": "Region of Origin",
+          "schema_name": "specifiedConsignment > originCountry > subordinateTradeCountrySubDivision > identifier",
+          "comments": "subordinate Trade Country Sub Division is an array, so we are assuming the correct region will be the first value - to confirm",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 19,
+          "live_animal_data_field": "Transition Countries",
+          "pims_field": "Route Transiting States",
+          "schema_name": "specifiedConsignment > transitTradeCountry",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 20,
+          "live_animal_data_field": "Commercial Transporter \nPrivate Transporter",
+          "pims_field": "Transporter Address CityTransporter Address CountryTransporter Address Line 1Transporter Address Line 2Transporter Address PostcodeTransporter Company NameTransporter EmailTransporter Individual NameTransporter TelephoneTransporter TypeTransporter StatusTransporter Approval Number",
+          "schema_name": "specifiedConsignment > carrier",
+          "comments": "Do transporters have any additional identifiers that should be captured here? to confirm to confirm if fields exist in the schema to cover transporter status and approval number. to confirm how to map Transporter Type, as the suspected object in the schema can be either a string or an array - is that right?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 21,
+          "live_animal_data_field": "",
+          "pims_field": "Type",
+          "schema_name": "$type",
+          "comments": "can you explain what the purpose is of the $ sign in the schema?",
+          "statuses": []
+        },
+        {
+          "row": 22,
+          "live_animal_data_field": "Number of packages",
+          "pims_field": "Number of Packages",
+          "schema_name": "specifiedConsignment > packageQuantity",
+          "comments": "Should this be captured at consignment or species level? to confirm the expectation - should be at species level and will be option. Not needed at notification level",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 23,
+          "live_animal_data_field": "",
+          "pims_field": "Version Number",
+          "schema_name": "",
+          "comments": "Version meaning version of the specific notification (eg will go to v2 if the importer amends the notification). to confirm schema location of the field, not expected on the Live Animal Data Field list",
+          "statuses": []
+        },
+        {
+          "row": 24,
+          "live_animal_data_field": "",
+          "pims_field": "Cloned",
+          "schema_name": "",
+          "comments": "This is cloning the HC from TRACES. Not expected to be possible for day 1, might come later",
+          "statuses": []
+        },
+        {
+          "row": 25,
+          "live_animal_data_field": "",
+          "pims_field": "Submission DateSubmitted By Display NameSubmitted By Is Control UserSubmitted By User Id",
+          "schema_name": "",
+          "comments": "to confirm if the person making the changes can be added to the schema, or if it’s there already user Id and Is Control User fields not required",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 26,
+          "live_animal_data_field": "",
+          "pims_field": "Last UpdatedLast Updated By Display NameLast Updated By User Id",
+          "schema_name": "",
+          "comments": "to confirm if the person making the changes can be added to the schema, or if it’s there already user Id field not required",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 27,
+          "live_animal_data_field": "",
+          "pims_field": "MRN Number",
+          "schema_name": "",
+          "comments": "No longer needed, related to GVMS.",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 28,
+          "live_animal_data_field": "Internal Reference Number",
+          "pims_field": "",
+          "schema_name": "",
+          "comments": "Would be useful, so add it",
+          "statuses": []
+        },
+        {
+          "row": 29,
+          "live_animal_data_field": "Place of Origin",
+          "pims_field": "",
+          "schema_name": "",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 30,
+          "live_animal_data_field": "Contact Address",
+          "pims_field": "",
+          "schema_name": "",
+          "comments": "The person submitting or updating the application, including selecting preferred address to use. Possibly not needed directly so long as the submitted/updated user can sync to Defra Customer",
+          "statuses": []
+        },
+        {
+          "row": 31,
+          "live_animal_data_field": "",
+          "pims_field": "Commodities Number of Animals",
+          "schema_name": "",
+          "comments": "The number of animals will now be captured at the species level, meaning it will be stored in a child table and not directly against the importer notification. But should we still have an overall count at notification level as well? to confirm",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 32,
+          "live_animal_data_field": "",
+          "pims_field": "Commodities Total Gross Weight",
+          "schema_name": "",
+          "comments": "Is this required?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 33,
+          "live_animal_data_field": "",
+          "pims_field": "Commodities Total Net Weight",
+          "schema_name": "",
+          "comments": "Is this required?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 34,
+          "live_animal_data_field": "",
+          "pims_field": "Weight (KG)",
+          "schema_name": "",
+          "comments": "Is this required?Needed for germinalsWould want to capture at species level, possibly at top level as well.",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 35,
+          "live_animal_data_field": "",
+          "pims_field": "Consigned Country",
+          "schema_name": "",
+          "comments": "Is this required?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 36,
+          "live_animal_data_field": "",
+          "pims_field": "Is Place of Destination the Permanent Address?",
+          "schema_name": "",
+          "comments": "Could this be implied by the existence of permanent addresses? And is it actually required to be populated, or is the existence of permanent addresses sufficient?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 37,
+          "live_animal_data_field": "",
+          "pims_field": "Imp TypeImp Type Code",
+          "schema_name": "",
+          "comments": "Are these additional Imp Type fields relevant to the GBN-AG journey?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 38,
+          "live_animal_data_field": "",
+          "pims_field": "Responsible for Transport",
+          "schema_name": "",
+          "comments": "Is this needed?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 39,
+          "live_animal_data_field": "",
+          "pims_field": "Destination Country",
+          "schema_name": "",
+          "comments": "This is separate to Place of Destination country, so it’s not clear what purpose this field holds.",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 40,
+          "live_animal_data_field": "",
+          "pims_field": "Estimated Journey Time (minutes)",
+          "schema_name": "",
+          "comments": "Is this still required? Or does this come under “journey log”, which has been descoped by Monica on the Live Animal Data Fields page",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Importer Notification - PIMS fields believed not required",
+      "source_heading": "Importer Notification",
+      "intro": "The following fields have been identified as being present on the Importer Notification table, but we believe they are not required for the new live animals journey.",
+      "column_layout": "2-col (PIMS Field + Comments)",
+      "rows": [
+        {
+          "row": 1,
+          "live_animal_data_field": "",
+          "pims_field": "Arrival Time",
+          "schema_name": "",
+          "comments": "Not required for GBN-AG journey",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "live_animal_data_field": "",
+          "pims_field": "Charity Address CityCharity Address CountryCharity Address Country ISO CodeCharity Address Line 1Charity Address Line 2Charity Address Line 3Charity Address PostcodeCharity Approval NumberCharity Company NameCharity Consignor EmailCharity IdCharity Individual NameCharity International TelephoneCharity International Telephone ISO CodeCharity Other IdentifierCharity StatusCharity TelephoneCharity TypeCharity UK Telephone",
+          "schema_name": "",
+          "comments": "We don’t believe Charity information is being captured in the GBN-AG notification. to confirm",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "Assumption"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "live_animal_data_field": "",
+          "pims_field": "Commodity CodeCommodity Complement IdCommodity Complement NameCommodity Complements TextCommodity DescriptionCommodity ID TypesCommodity Intended ForCommodity Species ClassCommodity Species Class NameCommodities Species Common NameCommodity Species IdCommodity Species NameCommodity Species NominationCommodity Species TypeComplex Commodity Selected",
+          "schema_name": "",
+          "comments": "All commodity/species information will now be captured in a child table, with one row per species (see commodity table below) to confirm if this assumption is correct, and we don’t want to store any of these fields directly at the notification level",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "live_animal_data_field": "",
+          "pims_field": "Consignee Address Line 3Consignee Approval NumberConsignee Country ISO Code*Consignee IdConsignee International TelephoneConsignee International Telephone ISO CodeConsignee Other IdentifierConsignee StatusConsignee TypeConsignee UK Telephone",
+          "schema_name": "",
+          "comments": "These additional consignee fields are not expected to be received as part of the GBN-AG journey. to confirmMight want ISO code for country for ROW",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "live_animal_data_field": "",
+          "pims_field": "Consignor Address Country ISO CodeConsignor Address Line 3Consignor Approval NumberConsignor IdConsignor International TelephoneConsignor International Telephone ISO CodeConsignor Other IdentifierConsignor StatusConsignor TypeConsignor UK Telephone",
+          "schema_name": "",
+          "comments": "As above",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "live_animal_data_field": "",
+          "pims_field": "Importer Address Line 3Importer Approval NumberImporter Country ISO CodeImporter IdImporter International TelephoneImporter International Telephone ISO CodeImporter Other IdentifierImporter StatusImporter TypeImporter UK Telephone",
+          "schema_name": "",
+          "comments": "As above",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "live_animal_data_field": "",
+          "pims_field": "Place of Destination Address Line 3Place of Destination Approval NumberPlace of Destination Country ISO CodePlace of Destination IdPlace of Destination International TelephonePlace of Destination International Telephone ISO CodePlace of Destination Other IdentifierPlace of Destination StatusPlace of Destination TypePlace of Destination UK Telephone",
+          "schema_name": "",
+          "comments": "As above",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "live_animal_data_field": "",
+          "pims_field": "Transporter Address Line 3Transporter Country ISO CodeTransporter Details RequiredTransporter IdTransporter International TelephoneTransporter International Telephone ISO CodeTransporter Other IdentifierTransporter UK Telephone",
+          "schema_name": "",
+          "comments": "As above",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "live_animal_data_field": "",
+          "pims_field": "Means of Transport From Entry Point DocumentMeans of Transport From Entry Point IdMeans of Transport From Entry Point TypeDeparture DateDeparture TimeExit Border Control PostExit Border Control Post DatePort of ExitPort of Exit Date",
+          "schema_name": "",
+          "comments": "These are for capturing transport (including when the transport departs) after visiting the BCP, which has been descoped by Monica on the Live Animals Data Fields page Exit border control post and port of exit information falls under post-BCP action",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "live_animal_data_field": "",
+          "pims_field": "Person Responsible CityPerson Responsible Company IdPerson Responsible Contact IdPerson Responsible FaxPerson Responsible IdPerson Responsible PostcodePerson Responsible Type",
+          "schema_name": "",
+          "comments": "The address information for Person Responsible is stored in a single address field, so the additional address fields are not required. Also assuming the other Id and Type fields are no longer required.",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 11,
+          "live_animal_data_field": "",
+          "pims_field": "Place of Original Harvest - multiple fields",
+          "schema_name": "",
+          "comments": "Should this become the “Place of Origin”?",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "QUESTION"
+            }
+          ]
+        },
+        {
+          "row": 12,
+          "live_animal_data_field": "",
+          "pims_field": "Veterinary Document",
+          "schema_name": "",
+          "comments": "This field looks to have been used as an alternative to the related document entity. Now that document information is stored in a related table, we believe this field is not required to be populated",
+          "statuses": [
+            {
+              "colour": "Yellow",
+              "label": "ASSUMPTION"
+            }
+          ]
+        },
+        {
+          "row": 13,
+          "live_animal_data_field": "",
+          "pims_field": "Purpose of Movement",
+          "schema_name": "",
+          "comments": "Was this field replaced by Purpose of Consignment? Or was it used only for CVEDP type notifications, which we no longer receive? In either case, it’s assumed we don’t need it for the GBN-AG journey",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Commodity Species",
+      "source_heading": "Commodity Species",
+      "intro": "The commodity species table will store all relevant species-level information.",
+      "column_layout": "4-col (Live Animal Data Field + PIMS Field + Schema Name + Comments)",
+      "rows": [
+        {
+          "row": 1,
+          "live_animal_data_field": "",
+          "pims_field": "Commodity Id",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > designatedProductClassification > classCode",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 2,
+          "live_animal_data_field": "",
+          "pims_field": "Commodity Description",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > description",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 3,
+          "live_animal_data_field": "",
+          "pims_field": "Species Name",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > scientificName > content",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 4,
+          "live_animal_data_field": "",
+          "pims_field": "Species Common Name",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > commonName > content",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 5,
+          "live_animal_data_field": "",
+          "pims_field": "Species Family Name",
+          "schema_name": "",
+          "comments": "These fields may also be required - TBC",
+          "statuses": []
+        },
+        {
+          "row": 6,
+          "live_animal_data_field": "",
+          "pims_field": "Species Class Name",
+          "schema_name": "",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 7,
+          "live_animal_data_field": "",
+          "pims_field": "Species Type Name",
+          "schema_name": "",
+          "comments": "Expect to see this - domestic vs game",
+          "statuses": []
+        },
+        {
+          "row": 8,
+          "live_animal_data_field": "Number of Animals",
+          "pims_field": "",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedLineTradeDelivery > productUnitQuantity > content",
+          "comments": "Field to be added to PIMS to capture this",
+          "statuses": []
+        },
+        {
+          "row": 9,
+          "live_animal_data_field": "Animal Identifier - MicrochipLeg ringPassportTattooEar TagIdentification DetailsDescription",
+          "pims_field": "",
+          "schema_name": "",
+          "comments": "Store this at an individual animal level - new table that is child of the species tableConditional question - will see different identifiers depending on the commodityeg bovines have an ear tag, dogs have passports, etc. But the last two fields are for all animalsAll optional as some information not available till close to the time, but notifiers often don’t bother to fill them in . Might make it required at portal level to supply one identifier at least. Bees will be different - need to distinguish between honey and bumblebees, might end up captured at this level",
+          "statuses": []
+        }
+      ]
+    },
+    {
+      "section": "Document Fields",
+      "source_heading": "Document Fields",
+      "intro": "Metadata for documents uploaded to the notification will be stored in this table.",
+      "column_layout": "4-col (Live Animal Data Field + PIMS Field + Schema Name + Comments)",
+      "rows": [
+        {
+          "row": 1,
+          "live_animal_data_field": "Type",
+          "pims_field": "Document Type",
+          "schema_name": "exchangedDocument > referenceDocument > typeCode",
+          "comments": "Will the schema send a text value for the type or just an enum? If an enum, PIMS will require the list of numbers and what they correlate to to confirm",
+          "statuses": [
+            {
+              "colour": "Blue",
+              "label": "Question"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "live_animal_data_field": "Reference",
+          "pims_field": "Document Reference",
+          "schema_name": "exchangedDocument > referenceDocument > identifier",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 3,
+          "live_animal_data_field": "Date of Issue",
+          "pims_field": "Document Issue Date",
+          "schema_name": "exchangedDocument > referenceDocument > issueDateTime",
+          "comments": "",
+          "statuses": []
+        },
+        {
+          "row": 4,
+          "live_animal_data_field": "",
+          "pims_field": "Attachment Filename",
+          "schema_name": "exchangedDocument > referenceDocument > attachmentBinaryObject > filename",
+          "comments": "The name of the file that was uploaded",
+          "statuses": []
+        },
+        {
+          "row": 5,
+          "live_animal_data_field": "",
+          "pims_field": "Document URL",
+          "schema_name": "",
+          "comments": "This URL should link caseworkers to the document in the notification portal we need to discuss what this URL might look like and get it added into the schema if appropriate",
+          "statuses": []
+        }
+      ]
+    },
+    {
+      "section": "Permanent Address",
+      "source_heading": "Permanent Address",
+      "intro": "[STATUS:Blue:Question] Is this an acceptable level at which to store the data? The address can be different per animal on a notification, do we need to be able to identify the specific animal that the address relates to?",
+      "column_layout": "4-col (Live Animal Data Field + PIMS Field + Schema Name + Comments)",
+      "rows": [
+        {
+          "row": 1,
+          "live_animal_data_field": "Permanent Address",
+          "pims_field": "Individual NameCompany NameAddress Line OneAddress Line TwoAddress CityAddress PostcodeAddress CountryEmailTelephone",
+          "schema_name": "specifiedConsignment > includedConsignmentItem > includedTradeLineItem > specifiedTradeProduct > individualTradeProductInstance > permanentLocation",
+          "comments": "",
+          "statuses": []
+        }
+      ]
+    }
+  ]
+}
