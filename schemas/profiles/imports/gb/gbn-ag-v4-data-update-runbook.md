@@ -170,7 +170,10 @@ Everything else in the delta is noise for the schema and must be discarded:
   - commodity-list and codelist edits are reference data (codelist properties are
     open strings, so reference-data changes do not change the schema);
   - conditions, validation wording, and mandatory/optional flips are description
-    prose (profile schemas carry no conditional logic);
+    prose (profile schemas carry no conditional logic) - EXCEPT a conditions change
+    that asserts a different cardinality or level than a documented structural rule
+    (e.g. "a different X per animal" when the rule is one X per consignment). That is
+    not prose; carry it to the verdict step as a candidate;
   - approval/sign-off and source/provenance columns are governance, not contract.
 
 The "how it applies" dimension is not held in a single column. Read the level
@@ -178,15 +181,31 @@ indicator together with the conditions prose and use judgement: a keyword match
 over the conditions text over-flags (validation text that mentions "the
 consignment" is not, by itself, a per-animal vs per-consignment change).
 
+Treat every field the V4 specification carries as data the schema must model. Do
+not withhold or soften a verdict because a field "might be display-only", derived,
+or not stored - assume it is payload, model it, and raise any residual doubt at the
+human review gate, not in the verdict.
+
 For each surviving candidate, cross-check the actual schema, the core building
 blocks, and the JSON-LD context, and assign a verdict:
-  - NEW PROPERTY: no equivalent exists. Propose a name aligned to the UN/CEFACT
-    D23B vocabulary (drop the Type suffix), the level it sits at, and its JSON-LD
-    binding.
-  - NO-OP: already modelled. Say where.
-  - NEEDS A DECISION: placement or modelling is ambiguous, or it contradicts a
-    documented structural rule. Give 2-3 options with trade-offs and STOP for a
-    human decision before it enters the change list.
+  - NEW PROPERTY: no existing property carries this meaning. Commit to it. An
+    additive, profile-local, optional field with an obvious home is a NEW PROPERTY
+    even when the exact key spelling is still open - note the spelling as a minor
+    sub-question, do not downgrade the verdict for it. Propose a key aligned to the
+    UN/CEFACT D23B vocabulary (drop the Type suffix), the level it sits at, and its
+    JSON-LD binding. Do not route the field into a semantically wrong existing slot
+    (for example an issued-identifier array for a human-given name) to dodge adding
+    a property; a slot is only a home if its meaning matches.
+  - NO-OP: an existing property already carries this exact meaning. Say where.
+  - NEEDS A DECISION: reserve this for a change that contradicts a documented
+    structural rule, carries a breaking change or shared-core blast radius, or has
+    a genuinely ambiguous placement with materially different downstream
+    consequences. An unchanged level/applies-at value does not downgrade a semantic
+    contradiction with a documented rule - the conflict itself is the trigger, even
+    if no column moved. You MUST output such an item as a decision block with 2-3
+    options and trade-offs and STOP without choosing; do not resolve it by your own
+    judgement, and do not demote it to a "confirm later" aside. Do not use this
+    verdict as a hedge for a clean additive field.
 
 Output a change list: per item, the verdict, the exact schema location
 (distinguishing a $def name from a property name), the type, whether it is
@@ -222,6 +241,63 @@ Then:
 Stop on any validation failure and report it. Do not advance the baseline -
 promotion is a separate human action.
 ```
+
+## Evaluating the prompts
+
+The two prompts carry the judgement in this workflow, so before trusting a change to
+either, score it. This is how the Analyse prompt was tuned; repeat it for any future
+edit.
+
+**Harness.** Give the prompt, verbatim, to a fresh assistant that has only the delta
+and read access to the schema - no prior analysis - so it stands in for a colleague
+following the runbook. Score its output with a second, separate assistant against a
+written golden answer and the rubric below. Two different assistants keep the author
+from grading their own prompt.
+
+**Define the great outcome first.** Write the ideal response for a known delta,
+broken into the sections you expect: (1) the schema-relevant change list (verdict,
+exact location, type, additive flag); (2) no-op classifications, with where each is
+already modelled; (3) decisions required (options and an explicit stop); (4) noise
+discarded, with a reason per category; (5) a completeness reconciliation - every
+delta item mapped to a verdict or a noise category. List the anti-patterns too (a
+false positive, a missed new field, a guessed decision, an invented path).
+
+**Rubric** (score each 0 miss / 1 partial / 2 hit):
+
+| # | Dimension | Hit | Gating |
+|---|-----------|-----|--------|
+| 1 | New field found | names the genuine new field, on the right object, and commits | yes |
+| 2 | No false positives | proposes a schema change for no no-op or noise item | yes |
+| 3 | No-op accuracy | locates each no-op in the existing model | |
+| 4 | Noise discrimination | categorises reference data / prose / governance with reasons | |
+| 5 | Decision discipline | flags a documented-rule contradiction, gives options, stops | yes |
+| 6 | Placement & naming | right level, D23B-aligned key, $def vs property kept distinct | |
+| 7 | No hallucination | every cited path exists in the schema | yes |
+| 8 | Completeness | all delta items reconciled | |
+
+**Pass:** every gating dimension (1, 2, 5, 7) scores 2, and the total is at least
+12 / 16.
+
+**Iterate.** A gating miss points at a specific gap in the prompt, not the model.
+Fix the clause, re-run, re-score.
+
+**Worked example (the v133 -> v171 delta).** The great outcome is one new field (the
+per-animal name), three no-ops (attachment format -> existing `mimeCode`; contact
+address -> existing standard address block; unweaned-animals already at notification
+level), and one decision (per-animal CPH, which contradicts the one-CPH-per-consignment
+rule). Two rounds of scoring drove two prompt fixes:
+
+- The first run found the new field and placed it correctly, then hedged it into a
+  "needs a decision" with escape hatches (reuse an identifier array; "might be
+  display-only"). Fix: an additive, profile-local, optional field with an obvious home
+  is a NEW PROPERTY (the key spelling is a minor sub-question); treat every field the
+  spec carries as data to model; do not route a value into a semantically wrong slot.
+- The second run then swallowed the per-animal-CPH change into the prose bucket and
+  resolved it by its own judgement. Fix: a conditions change that contradicts a
+  documented structural rule is not prose - emit it as a decision with options and a
+  hard stop, and an unchanged level column does not downgrade the contradiction.
+
+The third run scored a clean pass on every gating dimension.
 
 ## Human decision points
 
