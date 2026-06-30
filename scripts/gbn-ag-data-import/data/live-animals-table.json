@@ -3,9 +3,9 @@
     "page_id": "6497338582",
     "page_title": "Live Animals Data Fields - V4",
     "space": "EUDP",
-    "version": 133,
-    "version_when": "2026-06-09T13:29:46.501Z",
-    "url": "https://eaflood.atlassian.net/wiki/spaces/EUDP/pages/6497338582/Live+Animals+Data+Fields+-+V4"
+    "version": 173,
+    "version_when": "2026-06-29T11:08:22.239Z",
+    "url": "https://eaflood.atlassian.net/wiki/spaces/EUDP/pages/6497338582"
   },
   "page_callouts": [
     {
@@ -26,7 +26,7 @@
         "example",
         "po_approved"
       ],
-      "row_count": 42,
+      "row_count": 45,
       "rows": [
         {
           "row": 1,
@@ -111,7 +111,7 @@
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "France"
@@ -132,7 +132,7 @@
             "text": "enum (single-select)"
           },
           "conditions_values": {
-            "text": "Yes or No\nDefaults to No\nIf Yes is selected, Region of origin code is shown and becomes mandatory"
+            "text": "Yes or No"
           },
           "applies_at": {
             "text": "Notification level"
@@ -141,7 +141,7 @@
             "text": ""
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "No"
@@ -162,7 +162,7 @@
             "text": "string - max 5"
           },
           "conditions_values": {
-            "text": "Conditional: required when region code requirement = Yes\nDisplayed and stored with ISO country prefix"
+            "text": "Required when region code requirement = Yes\nDisplayed and stored with ISO country prefix derived from Country of Origin"
           },
           "applies_at": {
             "text": "Notification level"
@@ -171,7 +171,7 @@
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "FR-75"
@@ -225,13 +225,13 @@
             "text": "Values come from the named MDM commodity list. Search supports common name, species (scientific name) and commodity code"
           },
           "applies_at": {
-            "text": "All live animal commodities"
+            "text": "Commodity Level"
           },
           "source": {
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Cattle, 0102, Bos taurus"
@@ -255,13 +255,13 @@
             "text": "Where applicable for given commodity, user is able to filter species by type"
           },
           "applies_at": {
-            "text": "All live animal commodities"
+            "text": "Commodity Level"
           },
           "source": {
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Game"
@@ -285,13 +285,13 @@
             "text": "User may select one or more species up to the agreed maximum"
           },
           "applies_at": {
-            "text": "All live animal commodities"
+            "text": "Commodity Level"
           },
           "source": {
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Bison bison (Bison)\nBos spp. (Cattle species)\nBos taurus (Cattle)\nBubalus bubalis (Water buffalo)"
@@ -315,6 +315,7 @@
             "text": "Shown when the selected commodity requires microchip identifier"
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Microchip identifier commodities (12)",
@@ -336,20 +337,20 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "981000123456789"
           },
           "po_approved": {
             "tasks": [
-              "incomplete"
+              "complete"
             ]
           },
-          "po_approved_status": "incomplete"
+          "po_approved_status": "complete"
         },
         {
           "row": 11,
@@ -363,6 +364,7 @@
             "text": "Shown when the selected commodity requires leg ring identifier"
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Leg ring identifier commodities (4)",
@@ -379,17 +381,17 @@
             "text": ""
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "GBR-2026-001"
           },
           "po_approved": {
             "tasks": [
-              "incomplete"
+              "complete"
             ]
           },
-          "po_approved_status": "incomplete"
+          "po_approved_status": "complete"
         },
         {
           "row": 12,
@@ -403,12 +405,16 @@
             "text": "Shown when the selected commodity requires Passport identifier"
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Passport identifier commodities (6)",
                 "items": [
-                  "0101 - Donkey",
+                  "0101 - Donkey and asses",
                   "0101 - Horse",
+                  "0101 - Ponies",
+                  "0101 - Zebras",
+                  "0101 - Mules, hinnies or other hybrids",
                   "0102 - Cattle",
                   "01061900 - Cats",
                   "01061900 - Dogs",
@@ -418,20 +424,20 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "UK123456789"
           },
           "po_approved": {
             "tasks": [
-              "incomplete"
+              "complete"
             ]
           },
-          "po_approved_status": "incomplete"
+          "po_approved_status": "complete"
         },
         {
           "row": 13,
@@ -445,21 +451,25 @@
             "text": "Shown when the selected commodity requires Tattoo identifier"
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Tattoo identifier commodities (2)",
                 "items": [
                   "01061900 - Cats",
-                  "01061900 - Dogs"
+                  "01061900 - Dogs",
+                  "01061900 - Ferrets",
+                  "0103 - Pigs",
+                  "0102 - Bovine"
                 ]
               }
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "AB1234"
@@ -483,6 +493,7 @@
             "text": "Shown when the selected commodity requires Ear Tag"
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Ear tag identifier commodities (4)",
@@ -496,10 +507,10 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "UK123456789012"
@@ -514,22 +525,58 @@
         {
           "row": 15,
           "field_name": {
+            "text": "Horse Name"
+          },
+          "type": {
+            "text": "string - max 58"
+          },
+          "conditions_values": {
+            "text": "Shown when the selected commodity requires horse name"
+          },
+          "applies_at": {
+            "text": "Commodity Level",
+            "expands": [
+              {
+                "title": "Horse Name",
+                "items": [
+                  "0101 - Horse"
+                ]
+              }
+            ]
+          },
+          "source": {
+            "text": "User"
+          },
+          "mandatory": {
+            "text": "Mandatory to submit"
+          },
+          "example": {
+            "text": ""
+          },
+          "po_approved": {
+            "text": ""
+          },
+          "po_approved_status": "incomplete"
+        },
+        {
+          "row": 16,
+          "field_name": {
             "text": "Animal Identifier – Identification details"
           },
           "type": {
             "text": "string - max 58"
           },
           "conditions_values": {
-            "text": "Shown when given commodity does not have a specific identifier type. Captures free-text identification details."
+            "text": "Shown when given commodity does not have a specific identifier type. Captures free-text identification details"
           },
           "applies_at": {
-            "text": "All other commodities not listed against a specific identifier field"
+            "text": "Commodity Level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Hive mark HM-2026-004"
@@ -542,7 +589,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 16,
+          "row": 17,
           "field_name": {
             "text": "Animal Identifier – Description"
           },
@@ -550,16 +597,16 @@
             "text": "string - max 58"
           },
           "conditions_values": {
-            "text": "Shown when given commodity does not have a specific identifier type. Captures a free-text animal description."
+            "text": "Shown when given commodity does not have a specific identifier type. Captures a free-text animal description"
           },
           "applies_at": {
-            "text": "All other commodities not listed against a specific identifier field"
+            "text": "Commodity Level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Optional"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Worker bees in sealed transport hive"
@@ -572,7 +619,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 17,
+          "row": 18,
           "field_name": {
             "text": "Number of packages"
           },
@@ -583,6 +630,7 @@
             "text": "Shown where package count applies to the selected commodity."
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "Number of packages commodities (54)",
@@ -646,7 +694,7 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
             "text": "Optional"
@@ -662,7 +710,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 18,
+          "row": 19,
           "field_name": {
             "text": "Number of animals (quantity)"
           },
@@ -673,13 +721,13 @@
             "text": ""
           },
           "applies_at": {
-            "text": "All live animal commodities"
+            "text": "Commodity Level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "1, 25, 5000"
@@ -692,7 +740,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 19,
+          "row": 20,
           "field_name": {
             "text": "Animals certified for"
           },
@@ -724,15 +772,16 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Slaughter"
           },
           "po_approved": {
+            "text": "Notes: APHA intend to make this conditional for some commodities. Pending confirmation",
             "tasks": [
               "incomplete"
             ]
@@ -740,7 +789,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 20,
+          "row": 21,
           "field_name": {
             "text": "Contains Unweaned Animals"
           },
@@ -751,6 +800,7 @@
             "text": "Yes or No\nDefaults to No"
           },
           "applies_at": {
+            "text": "Notification level",
             "expands": [
               {
                 "title": "Contains Unweaned Animals",
@@ -765,10 +815,10 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "No"
@@ -782,7 +832,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 21,
+          "row": 22,
           "field_name": {
             "text": "Reason for import"
           },
@@ -796,10 +846,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Internal market"
@@ -812,7 +862,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 22,
+          "row": 23,
           "field_name": {
             "text": "Purpose in internal market"
           },
@@ -839,10 +889,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Slaughter"
@@ -855,7 +905,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 23,
+          "row": 24,
           "field_name": {
             "text": "Place of Origin"
           },
@@ -873,10 +923,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Alpine Livestock Exports GmbH\nGewerbestrasse 18\nIndustriegebiet Süd\nMunich\n80331\nGermany\n+49 89 4521 7780\nexports@alpinelivestock.de"
@@ -889,7 +939,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 24,
+          "row": 25,
           "field_name": {
             "text": "Consignor"
           },
@@ -907,10 +957,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Alpine Livestock Exports GmbH\nGewerbestrasse 18\nIndustriegebiet Süd\nMunich\n80331\nGermany\n+49 89 4521 7780\nexports@alpinelivestock.de"
@@ -923,7 +973,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 25,
+          "row": 26,
           "field_name": {
             "text": "Consignee"
           },
@@ -941,10 +991,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "UK Agri Foods Trading Ltd\nSuite 5\nCrown Business Park\nReading\nRG1 4QD\nUnited Kingdom\n+44 1733 560890\nimports@ukagrifoods.co.uk"
@@ -957,7 +1007,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 26,
+          "row": 27,
           "field_name": {
             "text": "Importer"
           },
@@ -975,10 +1025,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "UK Agri Foods Trading Ltd\nSuite 5\nCrown Business Hall\nReading\nRG1 4QD\nUnited Kingdom\n+44 1733 560890\nimports@ukagrifoods.co.uk"
@@ -991,7 +1041,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 27,
+          "row": 28,
           "field_name": {
             "text": "Place of destination"
           },
@@ -1009,10 +1059,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Meadow Farm Distribution\nPlot 8, Rural Enterprise Park\nStation Lane\nPeterborough\nPE7 3BW\nUnited Kingdom\n+44 1733 560890\nintake@meadowfarm.co.uk"
@@ -1025,7 +1075,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 28,
+          "row": 29,
           "field_name": {
             "text": "Permanent Address"
           },
@@ -1053,10 +1103,10 @@
             ]
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Meadow Farm Distribution\nPlot 8, Rural Enterprise Park\nStation Lane\nPeterborough\nPE7 3BW\nUnited Kingdom\n+44 1733 560890\nintake@meadowfarm.co.uk"
@@ -1069,7 +1119,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 29,
+          "row": 30,
           "field_name": {
             "text": "Transporter type"
           },
@@ -1083,10 +1133,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "MDM\nUser"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Commercial transporter"
@@ -1099,7 +1149,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 30,
+          "row": 31,
           "field_name": {
             "text": "Commercial Transporter"
           },
@@ -1120,10 +1170,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": "MDM"
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Ulster Livestock Transport Ltd\nUnit 6, Bally Business Centre\nFenaghy Road\nBallymena\nBT42 1FL\nUnited Kingdom\n+44 1733 560890\nops@ulsterlivestock.co.uk\nUK/NEWCA/T1/00090953"
@@ -1136,7 +1186,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 31,
+          "row": 32,
           "field_name": {
             "text": "Private Transporter"
           },
@@ -1146,7 +1196,6 @@
           "conditions_values": {
             "bullets": [
               "Conditional: required when Transporter type = Private transporter.",
-              "s.",
               "Single entry for the consignment.",
               "See Standard Address Block for field-level validation."
             ]
@@ -1155,10 +1204,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "North Pennine Livestock Services\nHarvest Yard\nLow Moor Road\nCarlisle\nCA6 4AA\nUnited Kingdom\n+44 1228 555019\ntransport@livestock.co.uk"
@@ -1171,7 +1220,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 32,
+          "row": 33,
           "field_name": {
             "text": "County Parish Holding (CPH)"
           },
@@ -1182,10 +1231,11 @@
             "bullets": [
               "Conditional: required when CPH applies to the selected commodity.",
               "Single entry for the consignment.",
-              "Accepts up to 11 characters, for example 123456789 or 123/456/789."
+              "Accepts up to 11 characters, for example 123456789 or 123/456/789"
             ]
           },
           "applies_at": {
+            "text": "Commodity Level",
             "expands": [
               {
                 "title": "CPH required commodities (19)",
@@ -1214,10 +1264,10 @@
             ]
           },
           "source": {
-            "text": "TBC"
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "123456789\n123/456/789"
@@ -1230,7 +1280,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 33,
+          "row": 34,
           "field_name": {
             "text": "Port of Entry"
           },
@@ -1247,7 +1297,7 @@
             "text": "MDM"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "Port of Hull"
@@ -1260,7 +1310,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 34,
+          "row": 35,
           "field_name": {
             "text": "Arrival date at Port"
           },
@@ -1274,10 +1324,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "12/12/2026"
@@ -1290,7 +1340,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 35,
+          "row": 36,
           "field_name": {
             "text": "Means of transport"
           },
@@ -1304,10 +1354,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "Road Vehicle"
@@ -1320,7 +1370,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 36,
+          "row": 37,
           "field_name": {
             "text": "Transport identification"
           },
@@ -1334,10 +1384,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "FR-892-LK"
@@ -1350,7 +1400,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 37,
+          "row": 38,
           "field_name": {
             "text": "Transport document reference"
           },
@@ -1364,10 +1414,10 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
-            "text": "Mandatory"
+            "text": "Mandatory to submit"
           },
           "example": {
             "text": "CMR-2026-884721"
@@ -1380,7 +1430,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 38,
+          "row": 39,
           "field_name": {
             "text": "Accompanying Document: Type"
           },
@@ -1398,7 +1448,6 @@
               "Commercial invoice",
               "Sea waybill",
               "Rail waybill",
-              "Customs declaration",
               "Bill of lading",
               "Catch certificate",
               "Laboratory sampling results for aflatoxin (Reg 2019/1793)",
@@ -1411,7 +1460,7 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
             "text": "Optional"
@@ -1421,13 +1470,43 @@
           },
           "po_approved": {
             "tasks": [
+              "complete"
+            ]
+          },
+          "po_approved_status": "complete"
+        },
+        {
+          "row": 40,
+          "field_name": {
+            "text": "Accompanying Document: Attachment Type"
+          },
+          "type": {
+            "text": "enum (single-select)"
+          },
+          "conditions_values": {
+            "text": "One of: PDF, DOC, DOCX, JPG, JPEG, PNG, XLS or XLSX"
+          },
+          "applies_at": {
+            "text": "Notification level"
+          },
+          "source": {
+            "text": "User"
+          },
+          "mandatory": {
+            "text": "Mandatory"
+          },
+          "example": {
+            "text": "PDF"
+          },
+          "po_approved": {
+            "tasks": [
               "incomplete"
             ]
           },
           "po_approved_status": "incomplete"
         },
         {
-          "row": 39,
+          "row": 41,
           "field_name": {
             "text": "Accompanying Document: Reference"
           },
@@ -1443,7 +1522,7 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
             "text": "Mandatory"
@@ -1459,7 +1538,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 40,
+          "row": 42,
           "field_name": {
             "text": "Accompanying Document: Date of Issue"
           },
@@ -1476,7 +1555,7 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
             "text": "Mandatory"
@@ -1492,7 +1571,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 41,
+          "row": 43,
           "field_name": {
             "text": "Transited Countries"
           },
@@ -1508,7 +1587,7 @@
             "text": "Notification level"
           },
           "source": {
-            "text": ""
+            "text": "User"
           },
           "mandatory": {
             "text": "Optional"
@@ -1524,7 +1603,7 @@
           "po_approved_status": "incomplete"
         },
         {
-          "row": 42,
+          "row": 44,
           "field_name": {
             "text": "Contact Address"
           },
@@ -1542,6 +1621,36 @@
           },
           "mandatory": {
             "text": "-"
+          },
+          "example": {
+            "text": "APHA\nWoodham Lane\nNew Haw\nSurrey\nKT15 3NB\nUnited Kingdom"
+          },
+          "po_approved": {
+            "tasks": [
+              "incomplete"
+            ]
+          },
+          "po_approved_status": "incomplete"
+        },
+        {
+          "row": 45,
+          "field_name": {
+            "text": "Contact Address"
+          },
+          "type": {
+            "text": "Standard address block"
+          },
+          "conditions_values": {
+            "text": "Where a contact address is created by user, Standard address block should be used"
+          },
+          "applies_at": {
+            "text": "Notification level"
+          },
+          "source": {
+            "text": "User"
+          },
+          "mandatory": {
+            "text": "Mandatory to proceed"
           },
           "example": {
             "text": "APHA\nWoodham Lane\nNew Haw\nSurrey\nKT15 3NB\nUnited Kingdom"

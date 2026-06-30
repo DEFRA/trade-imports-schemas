@@ -1816,6 +1816,46 @@
           "note": "Document URL stays a consumer-side concern; not added to the schema."
         }
       ]
+    },
+    {
+      "row_id": "horse-name",
+      "v4": {
+        "field_name": "Horse Name",
+        "v4_row_ref": "Live Animal Data Elements row 15",
+        "type": "string - max 58",
+        "mandatory": "Mandatory to submit",
+        "source": "User",
+        "applies_at": "Commodity Level (0101 - Horse)",
+        "example": "Starlight",
+        "conditions_values": "Shown when the selected commodity requires horse name"
+      },
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].individualTradeProductInstance[].name",
+      "description": "The given name of the individual horse. Carried on the per-animal record (individualTradeProductInstance) as a plain string. Applies to equines (commodity 0101); omitted for all other species.",
+      "consumer_rule": {
+        "summary": "Read name from individualTradeProductInstance[] for equine trade lines.",
+        "steps": [
+          "For equine trade lines (classCode prefix 0101):",
+          "  For each individualTradeProductInstance[]:",
+          "    Read name (string, up to 58 characters)."
+        ]
+      },
+      "notes": [
+        "The V4 spec restricts this to 0101 - Horse; the schema does not encode the commodity restriction - it is an optional property on all tradeProductInstance entries.",
+        "maxLength: 58 reflects the V4 spec constraint."
+      ],
+      "actions": [],
+      "code_examples": [
+        {
+          "label": "Horse trade line with named animal",
+          "code": "\"individualTradeProductInstance\": [\n  {\n    \"name\": \"Starlight\",\n    \"identifier\": [\n      { \"typeCode\": \"PASSPORT\", \"content\": \"826003200123456\", \"urlId\": \"https://codelists.tbc.defra.gov.uk/animal_identifier_types\" },\n      { \"typeCode\": \"MICROCHIP\", \"content\": \"826003200123456\", \"urlId\": \"https://codelists.tbc.defra.gov.uk/animal_identifier_types\" }\n    ]\n  }\n]"
+        }
+      ],
+      "agreed_answer": "New field added in V4 spec (v173). Maps to individualTradeProductInstance[].name on equine trade lines. Schema updated: tradeProductInstance.$def gains a name property (string, maxLength 58, optional).",
+      "agreed_status": "answered",
+      "schema_updates": [
+        "Added name property to $defs/tradeProductInstance in gbn-ag-v1.schema.json"
+      ],
+      "pims_refs": []
     }
   ]
 }
