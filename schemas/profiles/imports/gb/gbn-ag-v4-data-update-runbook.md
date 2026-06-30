@@ -209,7 +209,10 @@ blocks, and the JSON-LD context, and assign a verdict:
 
 Output a change list: per item, the verdict, the exact schema location
 (distinguishing a $def name from a property name), the type, whether it is
-additive/optional, and any shared-core blast radius. Then wait for confirmation.
+additive/optional, and any shared-core blast radius. Account for every delta item,
+and explicitly address any warning the diff raised (for example a duplicate
+row-key, which usually means one field documented in two ways) rather than letting
+it vanish into the noise. Then wait for confirmation.
 ```
 
 ### Apply prompt
