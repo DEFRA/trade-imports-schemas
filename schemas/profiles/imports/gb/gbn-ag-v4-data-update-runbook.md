@@ -245,63 +245,6 @@ Stop on any validation failure and report it. Do not advance the baseline -
 promotion is a separate human action.
 ```
 
-## Evaluating the prompts
-
-The two prompts carry the judgement in this workflow, so before trusting a change to
-either, score it. This is how the Analyse prompt was tuned; repeat it for any future
-edit.
-
-**Harness.** Give the prompt, verbatim, to a fresh assistant that has only the delta
-and read access to the schema - no prior analysis - so it stands in for a colleague
-following the runbook. Score its output with a second, separate assistant against a
-written golden answer and the rubric below. Two different assistants keep the author
-from grading their own prompt.
-
-**Define the great outcome first.** Write the ideal response for a known delta,
-broken into the sections you expect: (1) the schema-relevant change list (verdict,
-exact location, type, additive flag); (2) no-op classifications, with where each is
-already modelled; (3) decisions required (options and an explicit stop); (4) noise
-discarded, with a reason per category; (5) a completeness reconciliation - every
-delta item mapped to a verdict or a noise category. List the anti-patterns too (a
-false positive, a missed new field, a guessed decision, an invented path).
-
-**Rubric** (score each 0 miss / 1 partial / 2 hit):
-
-| # | Dimension | Hit | Gating |
-|---|-----------|-----|--------|
-| 1 | New field found | names the genuine new field, on the right object, and commits | yes |
-| 2 | No false positives | proposes a schema change for no no-op or noise item | yes |
-| 3 | No-op accuracy | locates each no-op in the existing model | |
-| 4 | Noise discrimination | categorises reference data / prose / governance with reasons | |
-| 5 | Decision discipline | flags a documented-rule contradiction, gives options, stops | yes |
-| 6 | Placement & naming | right level, D23B-aligned key, $def vs property kept distinct | |
-| 7 | No hallucination | every cited path exists in the schema | yes |
-| 8 | Completeness | all delta items reconciled | |
-
-**Pass:** every gating dimension (1, 2, 5, 7) scores 2, and the total is at least
-12 / 16.
-
-**Iterate.** A gating miss points at a specific gap in the prompt, not the model.
-Fix the clause, re-run, re-score.
-
-**Worked example (the v133 -> v171 delta).** The great outcome is one new field (the
-per-animal name), three no-ops (attachment format -> existing `mimeCode`; contact
-address -> existing standard address block; unweaned-animals already at notification
-level), and one decision (per-animal CPH, which contradicts the one-CPH-per-consignment
-rule). Two rounds of scoring drove two prompt fixes:
-
-- The first run found the new field and placed it correctly, then hedged it into a
-  "needs a decision" with escape hatches (reuse an identifier array; "might be
-  display-only"). Fix: an additive, profile-local, optional field with an obvious home
-  is a NEW PROPERTY (the key spelling is a minor sub-question); treat every field the
-  spec carries as data to model; do not route a value into a semantically wrong slot.
-- The second run then swallowed the per-animal-CPH change into the prose bucket and
-  resolved it by its own judgement. Fix: a conditions change that contradicts a
-  documented structural rule is not prose - emit it as a decision with options and a
-  hard stop, and an unchanged level column does not downgrade the contradiction.
-
-The third run scored a clean pass on every gating dimension.
-
 ## Human decision points
 
 Three points are deliberately human, not automated:
