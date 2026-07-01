@@ -278,6 +278,44 @@
               "applicableClassification": [
                 {
                   "systemId": "CN",
+                  "classCode": { "value": "01012910", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                }
+              ],
+              "typeCode": "LIVE_ANIMAL",
+              "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+              "description": ["Live horses"],
+              "scientificName": "Equus caballus",
+              "commonName": "Horse",
+              "individualTradeProductInstance": [
+                {
+                  "name": "Starlight",
+                  "identifier": [
+                    {
+                      "typeCode": "PASSPORT",
+                      "content": "826003200123456",
+                      "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                    },
+                    {
+                      "typeCode": "MICROCHIP",
+                      "content": "826003200123456",
+                      "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types"
+                    }
+                  ]
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": {
+                    "content": 1,
+                    "unitCode": "H87"
+                  }
+                }
+              ]
+            },
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
                   "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
                 }
               ],
