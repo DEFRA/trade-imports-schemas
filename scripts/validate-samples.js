@@ -87,22 +87,6 @@ function registerSchemaAliases(ajv, schema, schemaAbsPath) {
   safeAddSchema(ajv, schema, schema.$id)
 }
 
-/**
- * Remove keys starting with `_` recursively.
- */
-function stripAuthorialKeys(value) {
-  if (Array.isArray(value)) return value.map(stripAuthorialKeys)
-  if (value && typeof value === 'object') {
-    const out = {}
-    for (const [k, v] of Object.entries(value)) {
-      if (k.startsWith('_')) continue
-      out[k] = stripAuthorialKeys(v)
-    }
-    return out
-  }
-  return value
-}
-
 async function main() {
   console.log('Validating samples')
   console.log('='.repeat(70))
@@ -152,8 +136,7 @@ async function main() {
     const relSample = toPosix(relative(ROOT, samplePath))
     process.stdout.write(`  ${relSample} ... `)
     try {
-      const sampleRaw = await loadJson(samplePath)
-      const sample = stripAuthorialKeys(sampleRaw)
+      const sample = await loadJson(samplePath)
 
       const schemaRef = sample.$schema
       if (!schemaRef || typeof schemaRef !== 'string') {

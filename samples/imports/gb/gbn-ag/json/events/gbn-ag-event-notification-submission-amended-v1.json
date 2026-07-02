@@ -1,5 +1,4 @@
 {
-  "_comment": "NotificationSubmissionAmended event sample for GBN-AG. Data payload is the revised full notification snapshot; notificationStatusCode returns to SUBMITTED, versionId is V2 (the first re-submission), functionCode is 5 (Replace).",
   "$schema": "gbn-ag-event-notification-submission-amended-v1.schema.json",
   "eventId": "b7c8d9e0-f1a2-3456-7890-bcdef0123456",
   "aggregateType": "Notification",

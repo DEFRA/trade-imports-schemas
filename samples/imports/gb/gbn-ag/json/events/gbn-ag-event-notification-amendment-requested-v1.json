@@ -1,5 +1,4 @@
 {
-  "_comment": "NotificationAmendmentRequested event sample for GBN-AG. Data payload is the full snapshot at the moment SUBMITTED is re-opened for editing; workflow state moves to AMEND while versionId and functionCode are unchanged from the prior submission.",
   "$schema": "gbn-ag-event-notification-amendment-requested-v1.schema.json",
   "eventId": "a4b5c6d7-e8f9-0123-4567-89abcdef0123",
   "aggregateType": "Notification",
