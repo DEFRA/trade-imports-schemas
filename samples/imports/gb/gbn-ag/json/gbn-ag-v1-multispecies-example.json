@@ -201,11 +201,10 @@
         }
       ],
       "carrier": {
-        "name": "GERRING PARTNERS",
-        "identifier": "UK/EXETE/T1/00090683",
-        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+        "name": "MARGARET OKONKWO",
+        "partyRoleCode": { "value": "CA" },
         "partyTypeCode": [
-          { "value": "COMMERCIAL_TRANSPORTER" },
+          { "value": "PRIVATE_TRANSPORTER" },
           { "value": "TRANSPORTER" }
         ],
         "postalAddress": {

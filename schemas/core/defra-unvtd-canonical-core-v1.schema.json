@@ -379,7 +379,7 @@
     },
     "LogisticsTransportMovement": {
       "type": "object",
-      "description": "A transport movement (a leg of the consignment's journey). identifier carries the transport identifier (vessel name, flight number, vehicle registration). modeCode is per UN/EDIFACT Recommendation 19 (1=Maritime, 2=Rail, 3=Road, 4=Air, 9=Unknown). arrivalEvent[] and departureEvent[] carry the importer-declared scheduled timing for the leg's start and end.",
+      "description": "A transport movement (a leg of the consignment's journey). identifier carries the transport identifier (vessel name, flight number, vehicle registration). modeCode carries the mode-of-transport code (see its own description). arrivalEvent[] and departureEvent[] carry the importer-declared scheduled timing for the leg's start and end.",
       "properties": {
         "identifier": {
           "oneOf": [
@@ -394,11 +394,8 @@
           "description": "URL identifier for the codelist / register this movement's identifier is drawn from."
         },
         "modeCode": {
-          "oneOf": [
-            { "type": "string" },
-            { "type": "integer" }
-          ],
-          "description": "Mode-of-transport code per UN/EDIFACT Recommendation 19. Accepts integer (current INTRA/CHED shape) or string (hybrid shape where GBN-AG and TRACES-textual consumers prefer it as a code value)."
+          "type": "integer",
+          "description": "Mode-of-transport code, held as an integer. From the UN/CEFACT TransportModeCodeList (UN/EDIFACT Recommendation 19): 1 Maritime, 2 Rail, 3 Road, 4 Air."
         },
         "usedLogisticsTransportMeans": {
           "type": "object",
