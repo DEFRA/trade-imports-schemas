@@ -1,5 +1,4 @@
 {
-  "_comment": "NotificationSubmissionAmended event sample for GBN-AG. Data payload is the revised full notification snapshot; notificationStatusCode returns to SUBMITTED, versionId is V2 (the first re-submission), functionCode is 5 (Replace).",
   "$schema": "gbn-ag-event-notification-submission-amended-v1.schema.json",
   "eventId": "b7c8d9e0-f1a2-3456-7890-bcdef0123456",
   "aggregateType": "Notification",
@@ -18,7 +17,7 @@
       "notificationStatusCode": "SUBMITTED",
       "versionId": 2,
       "functionCode": "5",
-      "issueDateTime": "2026-05-21T10:15:00.000Z",
+      "issueDateTime": "2026-05-26T09:30:00.000Z",
       "issuer": {
         "name": "Kai Inc.",
         "postalAddress": {
@@ -221,9 +220,10 @@
           "name": "ALISTAIR WILSON",
           "identifier": "UK/INVER/T1/00091851",
           "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+          "partyRoleCode": { "value": "CA" },
           "partyTypeCode": [
-            { "value": "COMMERCIAL_TRANSPORTER" },
-            { "value": "TRANSPORTER" }
+            { "value": "COMMERCIAL_TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type" },
+            { "value": "TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code" }
           ],
           "postalAddress": {
             "lineOne": "AUCHENBLAE",

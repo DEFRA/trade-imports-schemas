@@ -33,7 +33,6 @@ These run by hand (`node workspace/scripts/<name>.js`), not via npm. Internal pa
 - **Two JSON Schema drafts coexist.** Most schemas declare `2020-12`; `event-envelope-v1` declares `draft-07`. Both validators select per-file from the declared `$schema`. New schemas should default to 2020-12 unless there is a reason.
 - **External dependencies are vendored on first run.** `scripts/validate-*.js` fetches `UNECE-BasicComponents.json` and `unece-context-D23B.jsonld` into `build/vendor/uncefact/` and reuses them on subsequent runs. `build/` is gitignored, so a fresh clone (or CI) re-fetches. Network must be available the first time.
 - **Schemas are registered under multiple aliases.** Each schema is added to AJV under its absolute-from-root path, its path-from-`schemas/`, and its `$id`. This is what lets samples reference schemas by relative path while in-tree `$ref`s use whatever the schema author chose. Don't assume `$id` is the canonical key.
-- **Samples can use `_`-prefixed authorial keys.** `validate-samples.js` strips any key starting with `_` recursively before validating. Use this for in-file commentary that must not break validation.
 - **Sample `$schema` is a relative file path**, resolved from the sample's directory — not a URL. Every sample must declare it.
 - **`@context` check is structural.** When a sample carries `@context`, the validator walks it (including nested local context files) and fails if `https://vocabulary.uncefact.org/unece-context-D23B.jsonld` is not reachable somewhere in the chain.
 
