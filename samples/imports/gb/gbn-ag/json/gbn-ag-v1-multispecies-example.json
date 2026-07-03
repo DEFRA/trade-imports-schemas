@@ -204,8 +204,8 @@
         "name": "MARGARET OKONKWO",
         "partyRoleCode": { "value": "CA" },
         "partyTypeCode": [
-          { "value": "PRIVATE_TRANSPORTER" },
-          { "value": "TRANSPORTER" }
+          { "value": "PRIVATE_TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type" },
+          { "value": "TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code" }
         ],
         "postalAddress": {
           "lineOne": "ARCHERS COTTAGE",
