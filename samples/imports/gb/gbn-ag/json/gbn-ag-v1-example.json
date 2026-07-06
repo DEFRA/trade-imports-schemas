@@ -205,9 +205,6 @@
         }
       },
       "isOrHasUnweanedAnimals": true,
-      "packageQuantity": {
-        "content": 1
-      },
       "includedConsignmentItem": [
         {
           "includedTradeLineItem": [
@@ -223,6 +220,9 @@
               "description": ["Live bovine animals"],
               "scientificName": "Bos taurus",
               "commonName": "Cattle",
+              "physicalReferencedLogisticsPackage": [
+                { "levelCode": 4, "typeCode": "CG", "itemQuantity": 5 }
+              ],
               "individualTradeProductInstance": [
                 {
                   "identifier": [

@@ -231,6 +231,9 @@
               "description": ["Other live mammals"],
               "scientificName": "Felis catus",
               "commonName": "Cat",
+              "physicalReferencedLogisticsPackage": [
+                { "levelCode": 4, "typeCode": "CG", "itemQuantity": 4 }
+              ],
               "individualTradeProductInstance": [
                 {
                   "permanentLocation": {
@@ -285,6 +288,9 @@
               "description": ["Live horses"],
               "scientificName": "Equus caballus",
               "commonName": "Horse",
+              "physicalReferencedLogisticsPackage": [
+                { "levelCode": 4, "typeCode": "CR", "itemQuantity": 1 }
+              ],
               "individualTradeProductInstance": [
                 {
                   "name": "Starlight",
@@ -323,6 +329,9 @@
               "description": ["Other live mammals"],
               "scientificName": "Mustela furo",
               "commonName": "Ferret",
+              "physicalReferencedLogisticsPackage": [
+                { "levelCode": 4, "typeCode": "CG", "itemQuantity": 2 }
+              ],
               "individualTradeProductInstance": [
                 {
                   "identifier": [
