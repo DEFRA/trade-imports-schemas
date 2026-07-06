@@ -34,6 +34,10 @@ Multi-leg journeys allowed. Consumer rule: read specifiedConsignment.mainCarriag
 
 The notification's own issuance datetime is `exchangedDocument.issueDateTime` (date-time), re-stamped on each submission. Consumer rule: submitted-on is the `issueDateTime` on the `NotificationSubmitted` event; last-amended-on is the `issueDateTime` on the latest `NotificationSubmissionAmended` event. This is distinct from the accompanying-document issue date at `exchangedDocument.referenceDocument[].issueDateTime` (the Accompanying Document: Date of Issue row).
 
+### Line quantity: productUnitQuantity, not the eCert measure
+
+The per-line quantity is carried on `includedTradeLineItem[].specifiedLineTradeDelivery[].productUnitQuantity` (`content` plus `unitCode`): `H87` for a live-animal head count, `KGM` for weighed germinals (semen, embryos, ova). One slot carries both, and the declared quantity stays distinct from the physical `netWeight`. TRACES eCert has no line-quantity slot, so it overloads measure fields: the count on `NetVolumeMeasure(H87)`, a weighed amount on `NetWeightMeasure(KGM)`. GBN-AG keeps `productUnitQuantity` because one slot spans counts and weights and reads as a quantity rather than a volume. The eCert form stays recoverable if a round-trip to SPS XML is ever needed: `H87` maps to `NetVolumeMeasure`, `KGM` to `NetWeightMeasure`. The one open point is the `KGM` target field and how it relates to the line's own `netWeight`, not yet confirmed against a germinal eCert sample.
+
 ## Mapping
 
 | Data field | PIMS field | Schema path | Description |

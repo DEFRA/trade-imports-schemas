@@ -1,0 +1,200 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "gbn-ag-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
+  "$type": "gbn-ag",
+  "exchangedDocument": {
+    "identifier": "GBN-AG-26-0000003-1",
+    "traderAssignedId": "Imports789_GB",
+    "issuer": {
+      "name": "Kai Inc.",
+      "postalAddress": {
+        "lineOne": "UNCANNY COMICS",
+        "lineTwo": "3 TARRING ROAD",
+        "cityName": "WORTHING",
+        "postcodeCode": "BN11 4SS",
+        "countryId": "GB"
+      },
+      "definedContact": [
+        {
+          "personName": "Kai Atkinson",
+          "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
+          "telephoneUniversalCommunication": "0123456788"
+        }
+      ]
+    },
+    "firstSignatoryAuthentication": {
+      "includedClause": [
+        {
+          "identifier": "PURPOSE",
+          "content": "INTERNAL_MARKET",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        },
+        {
+          "identifier": "INTERNAL_MARKET_PURPOSE",
+          "content": "BREEDING",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        },
+        {
+          "identifier": "GOODS_CERTIFIED_AS",
+          "content": "BREEDING_AND_PRODUCTION",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause"
+        }
+      ]
+    },
+    "referenceDocument": [
+      {
+        "typeCode": "853",
+        "relationshipTypeCode": "ZZZ",
+        "identifier": "doc-ref",
+        "issueDateTime": "2026-04-01",
+        "attachmentBinaryObject": [
+          {
+            "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+            "filename": "germinal-health-certificate.pdf",
+            "mimeCode": "application/pdf"
+          }
+        ]
+      }
+    ]
+  },
+  "specifiedConsignment": {
+      "consignorParty": {
+        "name": "Astra Rosales",
+        "postalAddress": {
+          "lineOne": "43 East Hague Extension",
+          "lineTwo": "Delectus sit odio p",
+          "cityName": "Quas occaecat ut ear",
+          "postcodeCode": "30055",
+          "countryId": "CH"
+        }
+      },
+      "consigneeParty": {
+        "name": "Linus George Ltd",
+        "postalAddress": {
+          "lineOne": "558 Oak Street",
+          "lineTwo": "Ut aperiam in volupt",
+          "cityName": "Eligendi et beatae p",
+          "postcodeCode": "24271",
+          "countryId": "CH"
+        }
+      },
+      "despatchParty": {
+        "identifier": "FR-15-HLD-00427",
+        "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
+        "name": "Centre de Collecte Embryonnaire",
+        "partyRoleCode": { "value": "PW" },
+        "postalAddress": {
+          "lineOne": "Route de la Vallée 12",
+          "cityName": "Saint-Flour",
+          "postcodeCode": "15100",
+          "countryId": "FR",
+          "countrySubDivisionName": "Cantal"
+        }
+      },
+      "deliveryParty": {
+        "name": "Linus George Ltd",
+        "postalAddress": {
+          "lineOne": "558 Oak Street",
+          "lineTwo": "Ut aperiam in volupt",
+          "cityName": "Eligendi et beatae p",
+          "postcodeCode": "24271",
+          "countryId": "CH"
+        }
+      },
+      "importer": {
+        "name": "Importerporter",
+        "postalAddress": {
+          "lineOne": "186 Ditchling Road",
+          "lineTwo": "BRIGHTON",
+          "cityName": "Brighton",
+          "postcodeCode": "BN17DD",
+          "countryId": "FR"
+        }
+      },
+      "originCountry": {
+        "code": { "value": "FR" },
+        "subordinateTradeCountrySubDivision": {
+          "identifier": "FR-12345",
+          "functionTypeCode": {
+            "content": "106"
+          }
+        }
+      },
+      "unloadingBaseportLocation": {
+        "identifier": "GBDVR",
+        "name": "Dover",
+        "postalAddress": {
+          "lineOne": "Port of Dover",
+          "cityName": "Dover",
+          "postcodeCode": "CT17 9TF",
+          "countryId": "GB"
+        },
+        "urlId": "https://service.unece.org/locode/"
+      },
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "identifier": "VOY-26-EUR-04832",
+          "modeCode": 1,
+          "usedLogisticsTransportMeans": {
+            "name": "MV SHIPPY"
+          },
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",
+              "occurrenceLogisticsLocation": {
+                "identifier": "GBDVR",
+                "urlId": "https://service.unece.org/locode/"
+              }
+            }
+          ],
+          "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name"
+        }
+      ],
+      "carrier": {
+        "name": "ALISTAIR WILSON",
+        "identifier": "UK/INVER/T1/00091851",
+        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+        "partyRoleCode": { "value": "CA" },
+        "partyTypeCode": [
+          { "value": "COMMERCIAL_TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type" },
+          { "value": "TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code" }
+        ],
+        "postalAddress": {
+          "lineOne": "AUCHENBLAE",
+          "lineTwo": "INVER SHIN",
+          "cityName": "SUTHERLAND",
+          "postcodeCode": "IV27 4ET",
+          "countryId": "GB"
+        }
+      },
+      "isOrHasUnweanedAnimals": false,
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
+                  "classCode": { "value": "05119985", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                }
+              ],
+              "typeCode": "EMBRYO",
+              "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+              "description": ["Porcine embryos"],
+              "scientificName": "Sus scrofa domesticus",
+              "commonName": "Pig",
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": {
+                    "content": 2.5,
+                    "unitCode": "KGM"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+}

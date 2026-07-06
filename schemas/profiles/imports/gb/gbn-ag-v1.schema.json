@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-v1.schema.json",
-  "title": "GBN-AG — GB Notification for Animals and Germinals (v1)",
+  "title": "GBN-AG - GB Notification for Animals and Germinals (v1)",
   "description": "Defra import pre-notification schema for live animals and germinals. Derives from the canonical Defra UNVTD core (CertificatePayload)",
   "version": "0.0.1",
 
@@ -261,6 +261,7 @@
             "specifiedLineTradeDelivery": {
               "type": "array",
               "minItems": 1,
+              "description": "The per-line quantity, carried on `productUnitQuantity` as `content` plus a `unitCode`: `H87` for a live-animal head count, `KGM` for weighed germinals (semen, embryos, ova). One slot carries both, keeping the declared quantity distinct from the physical `netWeight`. GBN-AG holds the quantity here rather than in the TRACES eCert `NetVolumeMeasure` measure; the eCert form is recoverable, with `H87` mapping to `NetVolumeMeasure` and `KGM` to `NetWeightMeasure`.",
               "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
             },
             "individualTradeProductInstance": {
@@ -328,7 +329,7 @@
         { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LineTradeDelivery" },
         {
           "type": "object",
-          "description": "GBN-AG line delivery: the per-line quantity. The unit varies by commodity per Defra refdata routing — most live animals use H87 (piece count via numberOfAnimals); some commodities (e.g. Sus scrofa domesticus embryos/ova, commodity 203) use KGM (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
+          "description": "GBN-AG line delivery: the per-line quantity on `productUnitQuantity`. The unit varies by commodity per Defra refdata routing: live animals use `H87` (a head count), and weighed germinals such as embryos or ova use `KGM` (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
           "required": ["productUnitQuantity"],
           "properties": {
             "productUnitQuantity": {
