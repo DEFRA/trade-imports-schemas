@@ -61,6 +61,18 @@
       "raised_in_rows": [
         "arrival-date-at-port"
       ]
+    },
+    {
+      "id": "scope-submitted-on-datetime",
+      "topic": "Submitted-on and last-amended-on datetime",
+      "decision": "The notification's own issuance datetime is `exchangedDocument.issueDateTime` (date-time), re-stamped on each submission. Consumer rule: submitted-on is the `issueDateTime` on the `NotificationSubmitted` event; last-amended-on is the `issueDateTime` on the latest `NotificationSubmissionAmended` event. This is distinct from the accompanying-document issue date at `exchangedDocument.referenceDocument[].issueDateTime` (the Accompanying Document: Date of Issue row).",
+      "raised_in_rows": []
+    },
+    {
+      "id": "scope-line-quantity-productunitquantity",
+      "topic": "Line quantity: productUnitQuantity, not the eCert measure",
+      "decision": "The per-line quantity is carried on `includedTradeLineItem[].specifiedLineTradeDelivery[].productUnitQuantity` (`content` plus `unitCode`): `H87` for a live-animal head count, `KGM` for weighed germinals (semen, embryos, ova). One slot carries both, and the declared quantity stays distinct from the physical `netWeight`. TRACES eCert has no line-quantity slot, so it overloads measure fields: the count on `NetVolumeMeasure(H87)`, a weighed amount on `NetWeightMeasure(KGM)`. GBN-AG keeps `productUnitQuantity` because one slot spans counts and weights and reads as a quantity rather than a volume. The eCert form stays recoverable if a round-trip to SPS XML is ever needed: `H87` maps to `NetVolumeMeasure`, `KGM` to `NetWeightMeasure`. The one open point is the `KGM` target field and how it relates to the line's own `netWeight`, not yet confirmed against a germinal eCert sample.",
+      "raised_in_rows": []
     }
   ],
   "schema_updates_pending": [],
@@ -120,7 +132,7 @@
         "conditions_values": "Consumed on authentication. Bundle of values populated from the signed-in user's gov.uk identity: Responsible person (name), Telephone, Email, Organisation Name, Organisation Address, Organisation Telephone."
       },
       "schema_path": "exchangedDocument.issuer",
-      "description": "The Great Britain-based party submitting the pre-notification, populated from the gov.uk identity of the signed-in user. Modelled as a `TradeParty` at `exchangedDocument.issuer`. Organisation name and address live at `name` and `postalAddress`; the named person and their phone and email live as a `definedContact[]` entry. The schema only carries a single contact line per entry. If a second number is needed (personal and organisational) another `definedContact[]` entry can be added in future.",
+      "description": "The Great Britain-based responsible-person organisation of record for the load. Modelled as a `TradeParty` at `exchangedDocument.issuer`. Organisation name and address live at `name` and `postalAddress`; the named person and their phone and email live as a `definedContact[]` entry. This is the organisation of record, not the individual who submitted the notification; that acting user is an event-level identity and is not carried in the payload. The schema only carries a single contact line per entry. If a second number is needed (personal and organisational) another `definedContact[]` entry can be added in future.",
       "consumer_rule": {
         "summary": "Read the issuer TradeParty for org name, address, and the named contact.",
         "steps": [
@@ -631,7 +643,7 @@
         ]
       },
       "notes": [
-        "Most live animals use H87 (piece count via numberOfAnimals); embryos/ova use KGM (kilograms)."
+        "Most live animals use H87 (a head count); weighed germinals such as embryos or ova use KGM (kilograms)."
       ],
       "actions": [],
       "code_examples": [],
@@ -1152,7 +1164,7 @@
         "conditions_values": "Single transporter per notification. User picks one of Commercial or Private; the choice drives which fields V4 shows next."
       },
       "schema_path": "specifiedConsignment.carrier",
-      "description": "The party responsible for moving the consignment from despatch to delivery. Modelled as a `TradeParty` at `specifiedConsignment.carrier`. The transporter type (Commercial or Private) is carried as a `partyTypeCode` value (`COMMERCIAL_TRANSPORTER` or `PRIVATE_TRANSPORTER`); `partyTypeCode` is `oneOf` a single string or an array of strings, used as an array when the party carries codes from more than one TRACES list. When an approval number applies, it lives at `identifier`, with `urlId` pinning the Defra-curated scheme that issues UK transporter approval numbers. Name, postal address, telephone, and email live at `name`, `postalAddress`, and `definedContact[]`. Transporter status (active, suspended, expired) is not in the notification payload; consumers resolve it by looking the approval number up against the issuing scheme at consumption time.",
+      "description": "The party responsible for moving the consignment from despatch to delivery. Modelled as a `TradeParty` at `specifiedConsignment.carrier`. The transporter type (Commercial or Private) is carried as a `partyTypeCode` value (`COMMERCIAL_TRANSPORTER` or `PRIVATE_TRANSPORTER`), and the two are mutually exclusive: a transporter is one or the other, never both. `partyTypeCode` is an array of coded values (`CodedValue`): a single entry when the party carries one classification, multiple entries when it carries codes from more than one TRACES list. The array holds codes from different lists, not two transporter types. To read the transporter type, take the entry whose `urlId` is the `operator_activity_type` list. When an approval number applies, it lives at `identifier`, with `urlId` pinning the Defra-curated scheme that issues UK transporter approval numbers. Name, postal address, telephone, and email live at `name`, `postalAddress`, and `definedContact[]`. Transporter status (active, suspended, expired) is not in the notification payload; consumers resolve it by looking the approval number up against the issuing scheme at consumption time.",
       "consumer_rule": {
         "summary": "Read specifiedConsignment.carrier as a single TradeParty.",
         "steps": [
@@ -1190,7 +1202,7 @@
           "assumption": "Do transporters have any additional identifiers that should be captured here? to confirm if fields exist in the schema to cover transporter status and approval number. to confirm how to map Transporter Type, as the suspected object in the schema can be either a string or an array - is that right?",
           "status": "Question",
           "verdict": "confirmed",
-          "note": "Confirms specifiedConsignment.carrier. Type on partyTypeCode (string or array); approval number on identifier + urlId; status not in payload (refdata lookup)."
+          "note": "Confirms specifiedConsignment.carrier. Type on partyTypeCode (array of coded values, read by the `operator_activity_type` urlId); approval number on identifier + urlId; status not in payload (refdata lookup)."
         },
         {
           "section": "Importer Notification - PIMS fields believed not required",
@@ -1499,7 +1511,7 @@
         "conditions_values": "One of: ITAHC, Veterinary health certificate, Air waybill, Import permit, Letter of authority, Commercial invoice, Sea waybill, Rail waybill, Customs declaration, Bill of lading, Catch certificate, Laboratory sampling results, Health certificate, Journey log, Other."
       },
       "schema_path": "exchangedDocument.referenceDocument[].typeCode",
-      "description": "The type of accompanying document. Sent as a code per UNTDID 1001 (e.g. `853` for veterinary health certificate, `636` for CHED). PIMS would need the UNTDID 1001 codelist to resolve codes to the V4 human-readable labels.",
+      "description": "The type of accompanying document. Sent as a code per UNTDID 1001 (e.g. `853` for veterinary health certificate, `636` for health certificate). PIMS would need the UNTDID 1001 codelist to resolve codes to the V4 human-readable labels.",
       "consumer_rule": {
         "summary": "Read the typeCode on each referenceDocument entry; resolve via UNTDID 1001.",
         "steps": [
