@@ -234,9 +234,6 @@
           }
         },
         "isOrHasUnweanedAnimals": true,
-        "packageQuantity": {
-          "content": 1
-        },
         "includedConsignmentItem": [
           {
             "includedTradeLineItem": [

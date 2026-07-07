@@ -431,14 +431,16 @@
       "type": "object",
       "properties": {
         "levelCode": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Packaging hierarchy level per the UNECE PackagingLevelCode list. For example 4, no packaging hierarchy, for a single flat set of packages."
         },
         "typeCode": {
           "type": "string",
-          "description": "unece:typeCode is xsd:string in unece-context-D23B.jsonld."
+          "description": "Package type per the UNECE PackageTypeCode list (UN/EDIFACT Recommendation 21), for example a cage or crate. Held as an open string. unece:typeCode is xsd:string in unece-context-D23B.jsonld."
         },
         "itemQuantity": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The number of packages of this type, the package count."
         }
       }
     },
@@ -750,15 +752,6 @@
           "type": "array",
           "items": { "$ref": "#/$defs/TradeCountry" },
           "description": "Transit countries between the consignment's origin and destination."
-        },
-        "packageQuantity": {
-          "type": "object",
-          "description": "Optional consignment-level package count. BSP/D23B canonical slot (unece:packageQuantity) for the number of packages in the consignment. content carries the count; unitCode is conventionally omitted for raw piece counts.",
-          "required": ["content"],
-          "properties": {
-            "content": { "type": "number", "exclusiveMinimum": 0 },
-            "unitCode": { "type": "string" }
-          }
         },
         "includedConsignmentItem": {
           "type": "array",

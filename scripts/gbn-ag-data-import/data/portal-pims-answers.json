@@ -592,12 +592,12 @@
         "example": "1, 25, 5000",
         "conditions_values": "Shown where package count applies to the selected commodity."
       },
-      "schema_path": "specifiedConsignment.packageQuantity.content",
-      "description": "Optional count of boxes, cages, or stalls in which the animals are transported. Lives at consignment level (not per species), even though V4 displays it conditionally per commodity. Read the numeric value at `packageQuantity.content`.",
+      "schema_path": "specifiedConsignment.includedConsignmentItem.includedTradeLineItem.physicalReferencedLogisticsPackage.itemQuantity",
+      "description": "The number of packages the animals are transported in, per species. Each trade line carries its own package group at `physicalReferencedLogisticsPackage[]`: `itemQuantity` is the count and `typeCode` the package type (UNECE PackageTypeCode). Optional - loose-loaded consignments omit it. This follows how TRACES eCert carries packages, on the line rather than the consignment.",
       "consumer_rule": {
-        "summary": "Read the consignment-level package count.",
+        "summary": "Read the per-species package count on each trade line.",
         "steps": [
-          "Read specifiedConsignment.packageQuantity.content. Absent for bulk loose-loaded consignments."
+          "Read physicalReferencedLogisticsPackage[].itemQuantity on each trade line. Absent for bulk loose-loaded consignments."
         ]
       },
       "notes": [
@@ -616,8 +616,8 @@
           "assumed_schema_path": "specifiedConsignment > packageQuantity",
           "assumption": "Should be at species level and will need to be in commodity-species child table.",
           "status": "Question",
-          "verdict": "modified",
-          "note": "PIMS proposes species-level capture; V4 defines packageQuantity at consignment level. Schema stays at specifiedConsignment.packageQuantity per V4."
+          "verdict": "confirmed",
+          "note": "PIMS proposed species-level capture; confirmed. Package count is carried per trade line at physicalReferencedLogisticsPackage[].itemQuantity, matching how eCert nests packages on the line rather than the consignment."
         }
       ]
     },

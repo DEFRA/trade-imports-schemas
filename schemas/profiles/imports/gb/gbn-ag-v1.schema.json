@@ -155,9 +155,6 @@
               "type": "boolean",
               "description": "True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications."
             },
-            "packageQuantity": {
-              "description": "On GBN-AG, packageQuantity carries the count of boxes, cages, or stalls in which the animals are transported. At consignment level: the schema does not carry a per-species packaging count. Optional - bulk consignments where animals are loose-loaded (for example livestock in a single trailer compartment) omit it."
-            },
             "includedConsignmentItem": {
               "type": "array",
               "minItems": 1,
@@ -264,6 +261,11 @@
               "description": "The per-line quantity, carried on `productUnitQuantity` as `content` plus a `unitCode`: `H87` for a live-animal head count, `KGM` for weighed germinals (semen, embryos, ova). One slot carries both, keeping the declared quantity distinct from the physical `netWeight`. GBN-AG holds the quantity here rather than in the TRACES eCert `NetVolumeMeasure` measure; the eCert form is recoverable, with `H87` mapping to `NetVolumeMeasure` and `KGM` to `NetWeightMeasure`.",
               "items": { "$ref": "#/$defs/gbnAgLineTradeDelivery" }
             },
+            "physicalReferencedLogisticsPackage": {
+              "type": "array",
+              "description": "The packages the line's animals are transported in - one entry per package group, carried per species, so a mixed consignment has a package group on each line and the consignment carries no aggregate. `itemQuantity` is the package count, `typeCode` the package type (an open string per UNECE PackageTypeCode), and `levelCode` the packaging level. Optional: consignments where the animals are loose-loaded (for example livestock in a single trailer compartment) omit it.",
+              "items": { "$ref": "#/$defs/gbnAgLogisticsPackage" }
+            },
             "individualTradeProductInstance": {
               "type": "array",
               "items": { "$ref": "#/$defs/tradeProductInstance" },
@@ -337,6 +339,22 @@
               "properties": {
                 "content": { "exclusiveMinimum": 0 }
               }
+            }
+          }
+        }
+      ]
+    },
+
+    "gbnAgLogisticsPackage": {
+      "allOf": [
+        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsPackage" },
+        {
+          "type": "object",
+          "required": ["itemQuantity", "typeCode"],
+          "properties": {
+            "typeCode": {
+              "type": "string",
+              "description": "Package type, an open string drawn from the UNECE PackageTypeCode list (UN/EDIFACT Recommendation 21)."
             }
           }
         }
