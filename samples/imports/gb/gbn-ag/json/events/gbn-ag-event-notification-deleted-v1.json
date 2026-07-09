@@ -12,8 +12,7 @@
     "$type": "gbn-ag",
     "exchangedDocument": {
       "identifier": "GBN-AG-26-0000002-5",
-      "notificationStatusCode": "DELETED",
-      "functionCode": "1"
+      "notificationStatusCode": "DELETED"
     }
   },
   "metadata": {
