@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-amendment-cancelled-v1.schema.json",
+  "title": "GBN-AG NotificationAmendmentCancelled event (v1)",
+  "description": "Event emitted when an in-progress amendment to a GBN-AG notification is abandoned and the notification reverts to its last submitted snapshot (AMEND -> SUBMITTED). The data payload is that snapshot, with `notificationStatusCode = SUBMITTED`. `versionId` carries forward unchanged - no new revision is minted, since nothing was re-submitted.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationAmendmentCancelled" },
+        "data": {
+          "allOf": [
+            { "$ref": "gbn-ag-v1.schema.json" },
+            {
+              "type": "object",
+              "required": ["exchangedDocument"],
+              "properties": {
+                "exchangedDocument": {
+                  "type": "object",
+                  "required": ["notificationStatusCode", "versionId"],
+                  "properties": {
+                    "notificationStatusCode": { "const": "SUBMITTED" },
+                    "versionId":              { "type": "integer", "minimum": 1 }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
