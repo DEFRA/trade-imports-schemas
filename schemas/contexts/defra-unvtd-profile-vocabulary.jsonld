@@ -36,9 +36,9 @@
       "@id": "defraUnvtdProfile:permanentLocation",
       "@type": "rdf:Property",
       "rdfs:label": "permanentLocation",
-      "rdfs:comment": "The permanent address where this individual animal will reside after import. Used for commodities where an animal moves on from the consignment's immediate delivery point to a final home (such as a pet going on to its owner's address). Per-animal placement so different animals on one trade line can carry different addresses.",
+      "rdfs:comment": "The permanent address where this individual animal will reside after import, carried as a party with its name, postal address, and contact details (telephone and email). Used for commodities where an animal moves on from the consignment's immediate delivery point to a final home (such as a pet going on to its owner's address). Per-animal placement so different animals on one trade line can carry different addresses.",
       "schema:domainIncludes": { "@id": "uncefact:ProductInstance" },
-      "schema:rangeIncludes": { "@id": "uncefact:LogisticsLocation" }
+      "schema:rangeIncludes": { "@id": "uncefact:TradeParty" }
     },
     {
       "@id": "uncefact:individualProductInstance",

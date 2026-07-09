@@ -36,7 +36,7 @@ test('generator writes the dictionary to the expected path', () => {
   // present node emits a heading with no rows and no placeholder, which the guard
   // above would not catch. Pin the per-animal permanentLocation row specifically.
   assert.ok(
-    body.includes('| `permanentLocation` | `LogisticsLocation`'),
+    body.includes('| `permanentLocation` | `TradeParty`'),
     'Per-animal table is missing its permanentLocation row - the descend did not resolve to the instance'
   )
 })

@@ -107,7 +107,7 @@ One entry per individual animal on the trade line. Carries the animal's identifi
 |---|---|---|---|
 | `name` | string | no | The given name of this individual animal. Required for equines (horses, donkeys, asses); omitted for other species. |
 | `identifier` | array of object | no | A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) as a bare string; `urlId` names the codelist the typeCode is drawn from. `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip). Reference data: `https://codelists.tbc.defra.gov.uk/animal_identifier_types`. |
-| `permanentLocation` | `LogisticsLocation` | no | Optional per-animal permanent address. The address where this individual animal will permanently reside after import (e.g. for pets imported to a business address and then shipped onwards to their owner's home). Shown for commodities where the producer's refdata indicates a permanent address applies. |
+| `permanentLocation` | `TradeParty` | no | Per-animal permanent address: the name, postal address, and contact details (telephone and email) for where the individual animal will permanently reside after import. Different animals on the same trade line can carry different addresses, common when pets are imported to a business address and then shipped onwards to their owners' homes. Populated for the species to which a permanent residence applies. Optional in the schema; the per-species requirement and the mandatory telephone and email are enforced at source. |
 
 ## Defra-declared property names
 
