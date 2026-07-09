@@ -34,7 +34,7 @@
             },
             "notificationStatusCode": {
               "type": "string",
-              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `WITHDRAWN`, drawn from `https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status`."
+              "description": "Defra-internal workflow status of this notification. Under GBN-AG the values are `DRAFT`, `SUBMITTED`, `AMEND`, `DELETED`, drawn from `https://refdata.tbc.defra.gov.uk/gbn-ag-notification-status`."
             },
             "name": {
               "description": "An optional human-readable name for the document. GBN-AG identifies the pre-notification by its `identifier`."

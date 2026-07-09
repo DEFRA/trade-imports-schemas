@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "gbn-ag-event-notification-withdrawn-v1.schema.json",
-  "title": "GBN-AG NotificationWithdrawn event (v1)",
-  "description": "Event emitted when a draft GBN-AG notification is withdrawn before submission (DRAFT -> WITHDRAWN). The data payload carries only what is needed to identify the notification and signal the withdrawal: the notification `identifier`, `notificationStatusCode = WITHDRAWN`, and `functionCode = 1` (Cancellation). A draft has no submitted snapshot to carry forward.",
+  "$id": "gbn-ag-event-notification-deleted-v1.schema.json",
+  "title": "GBN-AG NotificationDeleted event (v1)",
+  "description": "Event emitted when a draft GBN-AG notification is deleted before submission (DRAFT -> DELETED). The data payload carries only what is needed to identify the notification and signal the deletion: the notification `identifier`, `notificationStatusCode = DELETED`, and `functionCode = 1` (Cancellation). A draft has no submitted snapshot to carry forward.",
 
   "allOf": [
     { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
@@ -11,7 +11,7 @@
       "properties": {
         "aggregateType": { "const": "Notification" },
         "subType":       { "const": "GBN-AG" },
-        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationWithdrawn" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationDeleted" },
         "data": {
           "type": "object",
           "required": ["$model", "$type", "exchangedDocument"],
@@ -23,7 +23,7 @@
               "required": ["identifier", "notificationStatusCode", "functionCode"],
               "properties": {
                 "identifier":             { "type": "string" },
-                "notificationStatusCode": { "const": "WITHDRAWN" },
+                "notificationStatusCode": { "const": "DELETED" },
                 "functionCode":           { "const": "1" }
               }
             }

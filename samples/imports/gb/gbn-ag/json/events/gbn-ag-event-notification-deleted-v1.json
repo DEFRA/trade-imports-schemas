@@ -1,24 +1,24 @@
 {
-  "$schema": "gbn-ag-event-notification-withdrawn-v1.schema.json",
+  "$schema": "gbn-ag-event-notification-deleted-v1.schema.json",
   "eventId": "d4e5f6a7-b8c9-0123-4567-defabc012345",
   "aggregateType": "Notification",
   "subType": "GBN-AG",
   "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000002",
   "aggregateVersion": 2,
-  "eventType": "uk.gov.defra.trade.imports.animals.NotificationWithdrawn",
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationDeleted",
   "timestamp": "2026-05-18T16:00:00.000Z",
   "data": {
     "$model": "defra/certificate-internal/1",
     "$type": "gbn-ag",
     "exchangedDocument": {
       "identifier": "GBN-AG-26-0000002-5",
-      "notificationStatusCode": "WITHDRAWN",
+      "notificationStatusCode": "DELETED",
       "functionCode": "1"
     }
   },
   "metadata": {
     "correlationId": "cid-20260518-160000",
     "schemaVersion": "1.0.0",
-    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-withdrawn-v1.schema.json"
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-deleted-v1.schema.json"
   }
 }
