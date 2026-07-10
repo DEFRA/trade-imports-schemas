@@ -11,6 +11,16 @@ This repository uses a **UNVTD + UN/CEFACT vocabulary-first** approach:
 - Models align to `https://vocabulary.uncefact.org/unece-context-D23B.jsonld` typing/semantics.
 - We **do not use the old SPSCertificate-nested schema pattern as the primary design approach**.
 
+## Describing the goods
+
+Goods on a certificate are declared per commodity, not per consignment: each species
+or commodity is its own trade line under
+`specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]`, and each line
+carries its own commodity code, quantity and unit, packaging, and per-animal records. A
+mixed load is several lines with no blended total. For the annotated walkthrough of what
+each slot holds - and where the model follows the TRACES shape versus where it diverges -
+see [`schemas/profiles/imports/README.md`](./schemas/profiles/imports/README.md#describing-the-goods).
+
 ## Documentation map
 
 Each README is co-located with the directory it describes — start at the root, drill down for detail.

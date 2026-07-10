@@ -165,3 +165,85 @@ The County Parish Holding (CPH) number sits at consignment level (on `finalDesti
 The Place of destination is the physical delivery point of the consignment (always mandatory; modelled as `deliveryParty`). The Permanent Address is where each individual animal will live long-term (per-animal; modelled as `tradeProductInstance.permanentLocation`, conditional on commodity).
 
 For livestock the two are usually the same: the consignment is delivered to the CPH-tagged farm, every animal stays there. For pets they are distinct: the consignment delivers to one business address (e.g. an importer's premises) and each animal then goes on to its own permanent home.
+
+## Describing the goods
+
+A GBN-AG certificate covers one consignment, and its goods are declared as trade
+lines - one line per species or commodity - under
+`specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]`. A mixed
+load (cattle plus sheep, or live animals plus germinals) is several lines. Each
+line carries its own codes, quantity, packaging, and animal records, with no
+blended consignment-level total.
+
+Each line holds:
+
+```
+  specifiedConsignment
+  └── includedConsignmentItem[]                    [1..1]  exactly one item per certificate
+      └── includedTradeLineItem[]                  [1..*]  ONE LINE PER SPECIES / COMMODITY
+          ├── applicableClassification[]           [1..*]  commodity code (CN), species class
+          ├── description[]                         string  free-text commodity description
+          ├── scientificName / commonName                  species identity (from refdata)
+          ├── typeCode + urlId                             form: LIVE_ANIMAL | SEMEN | EMBRYO | OVA
+          │
+          ├── specifiedLineTradeDelivery[]         [1..*]  the declared QUANTITY (one in practice)
+          │   └── productUnitQuantity
+          │       ├── content            number           the value: how many, or how much
+          │       └── unitCode           string           H87 = head count | KGM = kilograms
+          │
+          ├── physicalReferencedLogisticsPackage[] [0..*]  the PACKAGES (optional; per line)
+          │   ├── itemQuantity           integer          number of packages
+          │   ├── typeCode               string           UNECE package type (cage, crate, ...)
+          │   └── levelCode              integer          UNECE packaging-hierarchy level
+          │
+          ├── netWeight                                    physical weight (distinct from quantity)
+          ├── individualTradeProductInstance[]     [0..*]  per-animal records (IDs, permanent home)
+          └── additionalInformationNote[]          [0..*]  per-line notes
+```
+
+**Commodity codes.** Classification sits on the line at `applicableClassification[]`
+(def `gbnAgApplicableClassification`). Each entry pairs a `systemId` (the coding
+system) with a `classCode` (the value in it): `systemId: "CN"` carries the customs
+nomenclature code at `classCode.value`, with the codelist URL on `classCode.urlId`.
+A line may carry more than one entry when more than one system applies. `CN` is the
+operative system; `SPECIES_CLASS` (the taxonomic class) is legacy and being withdrawn.
+
+**Species identity.** `scientificName` and `commonName` name the species, resolved
+from Defra reference data keyed on the `CN` code rather than trader-entered.
+`description[]` is the free-text commodity description.
+
+**Form.** `typeCode`, with `urlId` naming its codelist, records the form -
+`LIVE_ANIMAL`, `SEMEN`, `EMBRYO`, or `OVA`. Form is held separately because the
+handling regime and the quantity unit differ by form even where the `CN` code does
+not discriminate it.
+
+**Quantity and unit.** The declared quantity is one slot,
+`specifiedLineTradeDelivery[].productUnitQuantity`: a number in `content` with a
+sibling `unitCode` that says how to read it - `H87` for a head count (live animals),
+`KGM` for a kilogram weight (commodities measured by mass, such as embryos, ova, or
+semen). The unit travels with the value because one slot spans both counted and
+weighed goods; which unit applies is fixed by the commodity through Defra reference
+data. The value is the declared quantity only, kept distinct from the line's physical
+`netWeight`. The array permits more than one entry (`minItems: 1`, no `maxItems`), but
+the model uses exactly one per line.
+
+> **Design decision - not the TRACES shape.** TRACES eCert has no line-quantity slot,
+> so it overloads measure fields: the count on `NetVolumeMeasure(H87)`, a weighed
+> amount on `NetWeightMeasure(KGM)`. GBN-AG keeps `productUnitQuantity` instead,
+> because one slot spans counts and weights and reads as a quantity rather than a
+> volume. The eCert form stays recoverable if a round-trip to SPS XML is needed:
+> `H87` maps to `NetVolumeMeasure`, `KGM` to `NetWeightMeasure`.
+
+**Packaging.** `physicalReferencedLogisticsPackage[]` carries the packages per line:
+`itemQuantity` (the count), `typeCode` (the package type, an open value from the UNECE
+PackageTypeCode list), and `levelCode` (the packaging-hierarchy level). Optional -
+loose-loaded goods, such as livestock in a single trailer compartment, omit it.
+
+> **Follows the TRACES shape.** eCert carries packages on the line rather than the
+> consignment; GBN-AG matches that, so a mixed consignment carries a package group on
+> each line and no consignment-level aggregate.
+
+**Per-animal records and notes.** `individualTradeProductInstance[]` holds one entry
+per individual animal - its regulatory identifiers and the `permanentLocation` for
+where it will live after import. It is optional and empty for germinals.
+`additionalInformationNote[]` carries per-line notes.
