@@ -299,7 +299,7 @@
 
     "tradeProductInstance": {
       "type": "object",
-      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
+      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address and contact details for where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
       "properties": {
         "name": {
           "type": "string",
@@ -320,8 +320,8 @@
           }
         },
         "permanentLocation": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsLocation",
-          "description": "Optional per-animal permanent address. The address where this individual animal will permanently reside after import (e.g. for pets imported to a business address and then shipped onwards to their owner's home). Shown for commodities where the producer's refdata indicates a permanent address applies."
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "description": "Per-animal permanent address: the name, postal address, and contact details (telephone and email) for where the individual animal will permanently reside after import. Different animals on the same trade line can carry different addresses, common when pets are imported to a business address and then shipped onwards to their owners' homes. Populated for the species to which a permanent residence applies. Optional in the schema; the per-species requirement and the mandatory telephone and email are enforced at source."
         }
       }
     },

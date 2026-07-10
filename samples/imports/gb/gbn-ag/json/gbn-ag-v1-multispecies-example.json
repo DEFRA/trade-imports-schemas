@@ -243,7 +243,10 @@
                       "cityName": "Brighton",
                       "postcodeCode": "BN17JE",
                       "countryId": "GB"
-                    }
+                    },
+                    "definedContact": [
+                      { "telephoneUniversalCommunication": "+44 1273 555017", "emailURIUniversalCommunication": "owner@example.co.uk" }
+                    ]
                   }
                 }
               ],

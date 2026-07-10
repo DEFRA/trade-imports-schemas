@@ -1112,7 +1112,7 @@
       "row_id": "permanent-address",
       "v4": {
         "field_name": "Permanent Address",
-        "v4_row_ref": "Live Animal Data Elements row 28",
+        "v4_row_ref": "Live Animal Data Elements row 29",
         "type": "Standard address block",
         "mandatory": "Mandatory (conditional, per animal)",
         "source": "",
@@ -1121,7 +1121,7 @@
         "conditions_values": "Conditional: required per animal when commodity is Cats, Dogs, or Ferrets. A different address can be entered for each animal."
       },
       "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].individualTradeProductInstance[].permanentLocation",
-      "description": "Per-animal permanent address - where the individual animal will live long-term after import. Carried on each `individualTradeProductInstance[].permanentLocation`. Different animals on the same trade line can carry different addresses (common for pets imported to a business address and shipped onwards to their owners). Required for Cats, Dogs, Ferrets.",
+      "description": "Per-animal permanent address - where the individual animal will live long-term after import. Carried on each `individualTradeProductInstance[].permanentLocation`, modelled as a `TradeParty`, so the address-block name, postal fields, and contact details (telephone and email on `definedContact`) all have a home. Different animals on the same trade line can carry different addresses (common for pets imported to a business address and shipped onwards to their owners). Required for Cats, Dogs, Ferrets.",
       "consumer_rule": {
         "summary": "Read the permanent location per animal.",
         "steps": [
