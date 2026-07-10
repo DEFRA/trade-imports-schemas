@@ -19,9 +19,9 @@
       "description": "Notification has been re-opened for editing after a prior submission. Returns to SUBMITTED on re-submission."
     },
     {
-      "code": "WITHDRAWN",
-      "label": "Withdrawn",
-      "description": "Notification has been withdrawn. Terminal state."
+      "code": "DELETED",
+      "label": "Deleted",
+      "description": "Notification has been deleted. Terminal state."
     }
   ]
 }

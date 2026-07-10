@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "gbn-ag-event-notification-submitted-v1.schema.json",
-  "title": "GBN-AG NotificationSubmitted event (v1)",
-  "description": "Event emitted when a GBN-AG notification is formally submitted for the first time. Maps to the DRAFT -> SUBMITTED transition. The data payload is the full GBN-AG notification snapshot with notificationStatusCode=SUBMITTED, versionId=1.",
+  "$id": "gbn-ag-event-notification-submission-deleted-v1.schema.json",
+  "title": "GBN-AG NotificationSubmissionDeleted event (v1)",
+  "description": "Event emitted when a submitted GBN-AG notification is deleted (SUBMITTED -> DELETED, or AMEND -> DELETED). The data payload is the full notification snapshot at the point of deletion, with `notificationStatusCode = DELETED`. `versionId` carries forward from the prior state.",
 
   "allOf": [
     { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
@@ -11,7 +11,7 @@
       "properties": {
         "aggregateType": { "const": "Notification" },
         "subType":       { "const": "GBN-AG" },
-        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationSubmitted" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationSubmissionDeleted" },
         "data": {
           "allOf": [
             { "$ref": "gbn-ag-v1.schema.json" },
@@ -23,8 +23,8 @@
                   "type": "object",
                   "required": ["notificationStatusCode", "versionId"],
                   "properties": {
-                    "notificationStatusCode": { "const": "SUBMITTED" },
-                    "versionId":              { "const": 1 }
+                    "notificationStatusCode": { "const": "DELETED" },
+                    "versionId":              { "type": "integer", "minimum": 1 }
                   }
                 }
               }

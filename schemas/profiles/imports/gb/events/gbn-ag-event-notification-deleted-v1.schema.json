@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-deleted-v1.schema.json",
+  "title": "GBN-AG NotificationDeleted event (v1)",
+  "description": "Event emitted when a draft GBN-AG notification is deleted before submission (DRAFT -> DELETED). The data payload carries only what is needed to identify the notification and signal the deletion: the notification `identifier` and `notificationStatusCode = DELETED`. A draft has no submitted snapshot to carry forward.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationDeleted" },
+        "data": {
+          "type": "object",
+          "required": ["$model", "$type", "exchangedDocument"],
+          "properties": {
+            "$model": { "const": "defra/certificate-internal/1" },
+            "$type":  { "const": "gbn-ag" },
+            "exchangedDocument": {
+              "type": "object",
+              "required": ["identifier", "notificationStatusCode"],
+              "properties": {
+                "identifier":             { "type": "string" },
+                "notificationStatusCode": { "const": "DELETED" }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
