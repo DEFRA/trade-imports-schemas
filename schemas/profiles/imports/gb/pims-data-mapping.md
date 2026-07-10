@@ -89,13 +89,13 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   specifiedConsignment
   └── includedConsignmentItem[]
       └── includedTradeLineItem[]
-          └── specifiedTradeProduct[]
+          └── applicableClassification[]
   ```
-- **Description:** The CN commodity code for the trade product, drawn from the MDM commodity list. Stored on each `specifiedTradeProduct[].designatedProductClassification[]` entry where `systemId = "CN"`; the value sits at `classCode.value` and the codelist URL at `classCode.urlId`. The MDM commodity list row also carries human common name and scientific name, stored at `commonName[].content` and `scientificName[].content`. The same CN code may repeat across trade lines when the consignment carries multiple species. **Confirmed PIMS Commodity Species row 1.** **Modified PIMS Commodity Species row 5.** Species Family Name is not in the V4 data model and not in the schema. Out of scope until V4 reintroduces it. **Modified PIMS Commodity Species row 6.** Species Class was removed from V4 in the recent re-export; the schema's SPECIES_CLASS classification is being removed (see queued actions on this row). Stays out until V4 reintroduces it. **Confirmed PIMS Importer Notification - PIMS fields believed not required row 3.** Legacy flat commodity fields superseded by per-species shape (commodity-selection, type-selection, species-selection). **Confirmed PIMS Commodity Species row 2.** Commodity Description lives at specifiedTradeProduct[].description.
+- **Description:** The CN commodity code for the commodity on the trade line, drawn from the MDM commodity list. Stored on each `applicableClassification[]` entry where `systemId = "CN"`; the value sits at `classCode.value` and the codelist URL at `classCode.urlId`. The MDM commodity list row also carries the common and scientific names, held on the line at `commonName` and `scientificName`. The same CN code may repeat across trade lines when the consignment carries multiple species. **Confirmed PIMS Commodity Species row 1.** **Modified PIMS Commodity Species row 5.** Species Family Name is not in the V4 data model and not in the schema. Out of scope until V4 reintroduces it. **Modified PIMS Commodity Species row 6.** Species Class was removed from V4 in the recent re-export; the schema's SPECIES_CLASS classification is being removed (see queued actions on this row). Stays out until V4 reintroduces it. **Confirmed PIMS Importer Notification - PIMS fields believed not required row 3.** Legacy flat commodity fields superseded by per-species shape (commodity-selection, type-selection, species-selection). **Confirmed PIMS Commodity Species row 2.** Commodity Description lives at description[] on the trade line.
 
 **Actions:**
 
-- Consider narrowing the schema description of designatedProductClassification[] for the GBN-AG profile so that only CN is in use, dropping the SPECIES_CLASS legacy.
+- Consider narrowing the schema description of applicableClassification[] for the GBN-AG profile so that only CN is in use, dropping the SPECIES_CLASS legacy.
 
 ## Type selection
 
@@ -106,16 +106,15 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   specifiedConsignment
   └── includedConsignmentItem[]
       └── includedTradeLineItem[]
-          └── specifiedTradeProduct[]
-              └── typeCode
+          └── typeCode
   ```
-- **Description:** The product type for the trade product, used as a filter in the notifier UI when picking species. Stored at `specifiedTradeProduct[].typeCode` with `urlId` naming the Defra `species_type` codelist. **Confirmed PIMS Commodity Species row 7.** Maps to specifiedTradeProduct[].typeCode (Defra species_type scheme); V4 row 8 Type selection populates this.
+- **Description:** The product type for the commodity on this line, used as a filter in the notifier UI when picking species. Stored at `typeCode` on the line with `urlId` naming the Defra `species_type` codelist. **Confirmed PIMS Commodity Species row 7.** Maps to typeCode on the trade line (Defra species_type scheme); V4 row 8 Type selection populates this.
 
 ## Species selection
 
 - **PIMS field:** Species Name / Species Common Name
 - **Schema path:** `specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]`
-- **Description:** The species carried on the consignment. Multi-select: each selected species becomes a separate `includedTradeLineItem[]` entry. Within each line, the scientific name lives at `specifiedTradeProduct[].scientificName[].content` (`languageId: "la"`) and the common name at `commonName[].content` (`languageId: "en"`). To enumerate the species on a notification, iterate `includedTradeLineItem[]` across every `includedConsignmentItem[]`. **Confirmed PIMS Commodity Species row 3.** Scientific (Latin) species name lives at specifiedTradeProduct[].scientificName[].content (languageId='la'). **Confirmed PIMS Commodity Species row 4.** Common name lives at specifiedTradeProduct[].commonName[].content (languageId='en').
+- **Description:** The species carried on the consignment. Multi-select: each selected species becomes a separate `includedTradeLineItem[]` entry. Within each line the scientific name lives at `scientificName` and the common name at `commonName`, each a plain string. To enumerate the species on a notification, iterate `includedTradeLineItem[]` across every `includedConsignmentItem[]`. **Confirmed PIMS Commodity Species row 3.** Scientific (Latin) species name lives at scientificName on the trade line. **Confirmed PIMS Commodity Species row 4.** Common name lives at commonName on the trade line.
 
 **Actions:**
 
@@ -129,11 +128,10 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   specifiedConsignment
   └── includedConsignmentItem[]
       └── includedTradeLineItem[]
-          └── specifiedTradeProduct[]
-              └── individualTradeProductInstance[]
-                  └── identifier[]
+          └── individualTradeProductInstance[]
+              └── identifier[]
   ```
-- **Description:** Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade product; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist. **Confirmed PIMS Commodity Species row 6.** Per-animal-per-identifier model: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal. **Confirmed PIMS Commodity Species row 9.** Confirms per-animal-per-identifier child table model; same as the parent Animal Identifier row.
+- **Description:** Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade line; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist. **Confirmed PIMS Commodity Species row 6.** Per-animal-per-identifier model: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal. **Confirmed PIMS Commodity Species row 9.** Confirms per-animal-per-identifier child table model; same as the parent Animal Identifier row.
 
 **Actions:**
 
@@ -257,9 +255,8 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   specifiedConsignment
   └── includedConsignmentItem[]
       └── includedTradeLineItem[]
-          └── specifiedTradeProduct[]
-              └── individualTradeProductInstance[]
-                  └── permanentLocation
+          └── individualTradeProductInstance[]
+              └── permanentLocation
   ```
 - **Description:** Per-animal permanent address - where the individual animal will live long-term after import. Carried on each `individualTradeProductInstance[].permanentLocation`, modelled as a `TradeParty`, so the address-block name, postal fields, and contact details (telephone and email on `definedContact`) all have a home. Different animals on the same trade line can carry different addresses (common for pets imported to a business address and shipped onwards to their owners). Required for Cats, Dogs, Ferrets. **Confirmed PIMS Permanent Address row 1.**
 
@@ -390,30 +387,22 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   {
     "includedTradeLineItem": [
       {
-        "specifiedTradeProduct": [
-          {
-            "typeCode": "LIVE_ANIMAL",
-            "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
-            "designatedProductClassification": [
-              { "systemId": "CN", "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" } }
-            ],
-            "scientificName": [ { "content": "Felis catus", "languageId": "la" } ],
-            "commonName":    [ { "content": "Cat",         "languageId": "en" } ]
-          }
-        ]
+        "typeCode": "LIVE_ANIMAL",
+        "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+        "applicableClassification": [
+          { "systemId": "CN", "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" } }
+        ],
+        "scientificName": "Felis catus",
+        "commonName": "Cat"
       },
       {
-        "specifiedTradeProduct": [
-          {
-            "typeCode": "LIVE_ANIMAL",
-            "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
-            "designatedProductClassification": [
-              { "systemId": "CN", "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" } }
-            ],
-            "scientificName": [ { "content": "Mustela furo", "languageId": "la" } ],
-            "commonName":    [ { "content": "Ferret",       "languageId": "en" } ]
-          }
-        ]
+        "typeCode": "LIVE_ANIMAL",
+        "urlId": "https://refdata.tbc.defra.gov.uk/species_type",
+        "applicableClassification": [
+          { "systemId": "CN", "classCode": { "value": "01061900", "urlId": "https://traces-codelists.ec.europa.eu/cn" } }
+        ],
+        "scientificName": "Mustela furo",
+        "commonName": "Ferret"
       }
     ]
   }
