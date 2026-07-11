@@ -17,7 +17,19 @@ Each README is co-located with the directory it describes — start at the root,
 
 - [`README.md`](./README.md) (this file) — modelling approach, repo layout, validation, versioning.
 - [`schemas/README.md`](./schemas/README.md) — directory map, core + context + profile layering, sample locations, migration notes on transitional `$id`/`$ref` values.
+
+### GBN-AG GB Notification (Animals and Germinals)
+
 - [`schemas/profiles/imports/README.md`](./schemas/profiles/imports/README.md) — problem statement for UK Import Notifications post-Brexit, IPAFFS → UN/CEFACT mapping patterns, journey-specific Defra extensions (CPH, BCP, transporter approvals), and TIG team divergences worth flagging.
+
+#### GBN-AG Goods Description
+Goods on a GBN-AG certificate are declared per commodity, not per consignment: each species
+or commodity is its own trade line under
+`specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]`, and each line
+carries its own commodity code, quantity and unit, packaging, and per-animal records. A
+mixed load is several lines with no blended total. For the annotated walkthrough of what
+each slot holds - and where the model follows the TRACES shape versus where it diverges -
+see [`schemas/profiles/imports/README.md`](./schemas/profiles/imports/README.md#describing-the-goods).
 
 ## Repository layout
 
