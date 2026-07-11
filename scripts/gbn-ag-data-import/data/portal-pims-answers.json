@@ -71,7 +71,7 @@
     {
       "id": "scope-line-quantity-productunitquantity",
       "topic": "Line quantity: productUnitQuantity, not the eCert measure",
-      "decision": "The per-line quantity is carried on `includedTradeLineItem[].specifiedLineTradeDelivery[].productUnitQuantity` (`content` plus `unitCode`): `H87` for a live-animal head count, `KGM` for weighed germinals (semen, embryos, ova). One slot carries both, and the declared quantity stays distinct from the physical `netWeight`. TRACES eCert has no line-quantity slot, so it overloads measure fields: the count on `NetVolumeMeasure(H87)`, a weighed amount on `NetWeightMeasure(KGM)`. GBN-AG keeps `productUnitQuantity` because one slot spans counts and weights and reads as a quantity rather than a volume. The eCert form stays recoverable if a round-trip to SPS XML is ever needed: `H87` maps to `NetVolumeMeasure`, `KGM` to `NetWeightMeasure`. The one open point is the `KGM` target field and how it relates to the line's own `netWeight`, not yet confirmed against a germinal eCert sample.",
+      "decision": "Each line's declared quantity sits in one slot, `productUnitQuantity`: a number in `content` and a `unitCode` that says how to read it - `H87` for a head count (live animals), `KGM` for a kilogram weight (embryos, ova, semen). It is the declared quantity only, kept distinct from the line's physical `netWeight`. This is a deliberate choice, not the TRACES shape: eCert has no line-quantity slot and overloads measures instead, the count on `NetVolumeMeasure(H87)` and a weighed amount on `NetWeightMeasure(KGM)`. One `productUnitQuantity` reads as a quantity rather than a volume and spans both cases; the eCert form stays recoverable, with `H87` mapping to `NetVolumeMeasure` and `KGM` to `NetWeightMeasure`. The `KGM` leg is corroborated by CHED-PP and INTRA eCert samples that carry weights on `NetWeightMeasure`, but is not confirmed against a germinal eCert sample.",
       "raised_in_rows": []
     }
   ],
@@ -340,26 +340,26 @@
         "example": "Cattle, 0102, Bos taurus",
         "conditions_values": "Values come from the named MDM commodity list. Search supports common name, species (scientific name) and commodity code."
       },
-      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]",
-      "description": "The CN commodity code for the trade product, drawn from the MDM commodity list. Stored on each `specifiedTradeProduct[].designatedProductClassification[]` entry where `systemId = \"CN\"`; the value sits at `classCode.value` and the codelist URL at `classCode.urlId`. The MDM commodity list row also carries human common name and scientific name, stored at `commonName[].content` and `scientificName[].content`. The same CN code may repeat across trade lines when the consignment carries multiple species.",
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].applicableClassification[]",
+      "description": "The CN commodity code for the commodity on the trade line, drawn from the MDM commodity list. Stored on each `applicableClassification[]` entry where `systemId = \"CN\"`; the value sits at `classCode.value` and the codelist URL at `classCode.urlId`. The MDM commodity list row also carries the common and scientific names, held on the line at `commonName` and `scientificName`. The same CN code may repeat across trade lines when the consignment carries multiple species.",
       "consumer_rule": {
-        "summary": "Read the CN code, common name, and scientific name from each trade product.",
+        "summary": "Read the CN code, common name, and scientific name from each trade line.",
         "steps": [
           "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]:",
-          "  Read specifiedTradeProduct[].designatedProductClassification[] - find the entry with systemId='CN'; classCode.value is the CN code.",
-          "  Read specifiedTradeProduct[].commonName[].content (languageId='en') for the human name.",
-          "  Read specifiedTradeProduct[].scientificName[].content (languageId='la') for the scientific name."
+          "  Read applicableClassification[] - find the entry with systemId='CN'; classCode.value is the CN code.",
+          "  Read commonName on the line for the human name.",
+          "  Read scientificName on the line for the scientific name."
         ]
       },
       "notes": [
-        "Commodity, Type, and Species selection cascade in the notifier UI; in the schema they resolve to data on the trade product per species line.",
+        "Commodity, Type, and Species selection cascade in the notifier UI; in the schema they resolve to per-species data on the trade line.",
         "PIMS's Commodity Species child table mirrors the per-species shape."
       ],
       "actions": [
-        "Consider narrowing the schema description of designatedProductClassification[] for the GBN-AG profile so that only CN is in use, dropping the SPECIES_CLASS legacy."
+        "Consider narrowing the schema description of applicableClassification[] for the GBN-AG profile so that only CN is in use, dropping the SPECIES_CLASS legacy."
       ],
       "code_examples": [],
-      "agreed_answer": "Confirmed. The CN code, common name, and scientific name live on each specifiedTradeProduct on the trade line. PIMS's Commodity Species child table maps cleanly.",
+      "agreed_answer": "Confirmed. The CN code, common name, and scientific name live on each trade line. PIMS's Commodity Species child table maps cleanly.",
       "agreed_status": "confirmed",
       "schema_updates": [],
       "pims_refs": [
@@ -411,7 +411,7 @@
           "assumption": "",
           "status": "",
           "verdict": "confirmed",
-          "note": "Commodity Description lives at specifiedTradeProduct[].description."
+          "note": "Commodity Description lives at description[] on the trade line."
         }
       ]
     },
@@ -427,12 +427,12 @@
         "example": "Game",
         "conditions_values": "Where applicable for given commodity, user is able to filter species by type."
       },
-      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].typeCode",
-      "description": "The product type for the trade product, used as a filter in the notifier UI when picking species. Stored at `specifiedTradeProduct[].typeCode` with `urlId` naming the Defra `species_type` codelist.",
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].typeCode",
+      "description": "The product type for the commodity on this line, used as a filter in the notifier UI when picking species. Stored at `typeCode` on the line with `urlId` naming the Defra `species_type` codelist.",
       "consumer_rule": {
-        "summary": "Read the typeCode from each trade product.",
+        "summary": "Read the typeCode from each trade line.",
         "steps": [
-          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]: read typeCode and (optionally) urlId."
+          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]: read typeCode and (optionally) urlId."
         ]
       },
       "notes": [
@@ -440,7 +440,7 @@
       ],
       "actions": [],
       "code_examples": [],
-      "agreed_answer": "Confirmed. typeCode lives at specifiedTradeProduct[].typeCode with urlId pointing at species_type.",
+      "agreed_answer": "Confirmed. typeCode lives on the trade line with urlId pointing at species_type.",
       "agreed_status": "confirmed",
       "schema_updates": [],
       "pims_refs": [
@@ -452,7 +452,7 @@
           "assumption": "Expect to see this - domestic vs game.",
           "status": "",
           "verdict": "confirmed",
-          "note": "Maps to specifiedTradeProduct[].typeCode (Defra species_type scheme); V4 row 8 Type selection populates this."
+          "note": "Maps to typeCode on the trade line (Defra species_type scheme); V4 row 8 Type selection populates this."
         }
       ]
     },
@@ -469,14 +469,14 @@
         "conditions_values": "User may select one or more species up to the agreed maximum."
       },
       "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]",
-      "description": "The species carried on the consignment. Multi-select: each selected species becomes a separate `includedTradeLineItem[]` entry. Within each line, the scientific name lives at `specifiedTradeProduct[].scientificName[].content` (`languageId: \"la\"`) and the common name at `commonName[].content` (`languageId: \"en\"`). To enumerate the species on a notification, iterate `includedTradeLineItem[]` across every `includedConsignmentItem[]`.",
+      "description": "The species carried on the consignment. Multi-select: each selected species becomes a separate `includedTradeLineItem[]` entry. Within each line the scientific name lives at `scientificName` and the common name at `commonName`, each a plain string. To enumerate the species on a notification, iterate `includedTradeLineItem[]` across every `includedConsignmentItem[]`.",
       "consumer_rule": {
         "summary": "One trade-line item per species. Iterate all lines across all consignment items.",
         "steps": [
           "For each specifiedConsignment.includedConsignmentItem[]:",
           "  For each includedTradeLineItem[]:",
-          "    The single specifiedTradeProduct[] entry on the line carries one species.",
-          "    Read scientificName[].content (la) and commonName[].content (en)."
+          "    The line carries one species.",
+          "    Read scientificName and commonName on the line."
         ]
       },
       "notes": [
@@ -488,7 +488,7 @@
       "code_examples": [
         {
           "label": "Multi-species shape: one trade-line item per species, sharing CN code and typeCode",
-          "code": "\"includedConsignmentItem\": [\n  {\n    \"includedTradeLineItem\": [\n      {\n        \"specifiedTradeProduct\": [\n          {\n            \"typeCode\": \"LIVE_ANIMAL\",\n            \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n            \"designatedProductClassification\": [\n              { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n            ],\n            \"scientificName\": [ { \"content\": \"Felis catus\", \"languageId\": \"la\" } ],\n            \"commonName\":    [ { \"content\": \"Cat\",         \"languageId\": \"en\" } ]\n          }\n        ]\n      },\n      {\n        \"specifiedTradeProduct\": [\n          {\n            \"typeCode\": \"LIVE_ANIMAL\",\n            \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n            \"designatedProductClassification\": [\n              { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n            ],\n            \"scientificName\": [ { \"content\": \"Mustela furo\", \"languageId\": \"la\" } ],\n            \"commonName\":    [ { \"content\": \"Ferret\",       \"languageId\": \"en\" } ]\n          }\n        ]\n      }\n    ]\n  }\n]"
+          "code": "\"includedConsignmentItem\": [\n  {\n    \"includedTradeLineItem\": [\n      {\n        \"typeCode\": \"LIVE_ANIMAL\",\n        \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n        \"applicableClassification\": [\n          { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n        ],\n        \"scientificName\": \"Felis catus\",\n        \"commonName\": \"Cat\"\n      },\n      {\n        \"typeCode\": \"LIVE_ANIMAL\",\n        \"urlId\": \"https://refdata.tbc.defra.gov.uk/species_type\",\n        \"applicableClassification\": [\n          { \"systemId\": \"CN\", \"classCode\": { \"value\": \"01061900\", \"urlId\": \"https://traces-codelists.ec.europa.eu/cn\" } }\n        ],\n        \"scientificName\": \"Mustela furo\",\n        \"commonName\": \"Ferret\"\n      }\n    ]\n  }\n]"
         }
       ],
       "agreed_answer": "Confirmed. One includedTradeLineItem per species. scientificName and commonName per line. PIMS's open question on landing in their model is logged as an action.",
@@ -503,7 +503,7 @@
           "assumption": "PIMS open question on where to land scientific and common name in their model.",
           "status": "Question",
           "verdict": "confirmed",
-          "note": "Scientific (Latin) species name lives at specifiedTradeProduct[].scientificName[].content (languageId='la')."
+          "note": "Scientific (Latin) species name lives at scientificName on the trade line."
         },
         {
           "section": "Commodity Species",
@@ -513,7 +513,7 @@
           "assumption": "",
           "status": "",
           "verdict": "confirmed",
-          "note": "Common name lives at specifiedTradeProduct[].commonName[].content (languageId='en')."
+          "note": "Common name lives at commonName on the trade line."
         }
       ]
     },
@@ -529,12 +529,12 @@
         "example": "MICROCHIP 981000123456789, EAR_TAG UK123456789012, PASSPORT UK123456789, TATTOO AB1234, LEG_RING GBR-2026-001, IDENTIFICATION_DETAILS \"Hive mark HM-2026-004\", DESCRIPTION \"Worker bees in sealed transport hive\"",
         "conditions_values": "V4 shows each identifier field only when the selected commodity requires that identifier type. Identification details and Description are free-text fallbacks shown for commodities with no specific identifier type."
       },
-      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].individualTradeProductInstance[].identifier[]",
-      "description": "Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade product; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist.",
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].individualTradeProductInstance[].identifier[]",
+      "description": "Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade line; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist.",
       "consumer_rule": {
         "summary": "Walk individualTradeProductInstance[] for animals and identifier[] for per-animal identifiers.",
         "steps": [
-          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[]:",
+          "For each specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[]:",
           "  For each individualTradeProductInstance[] (one per animal):",
           "    For each identifier[] entry: read typeCode (kind), content (value), urlId (codelist)."
         ]
@@ -1120,12 +1120,12 @@
         "example": "Meadow Farm Distribution, Peterborough PE7 3BW, UK",
         "conditions_values": "Conditional: required per animal when commodity is Cats, Dogs, or Ferrets. A different address can be entered for each animal."
       },
-      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].specifiedTradeProduct[].individualTradeProductInstance[].permanentLocation",
+      "schema_path": "specifiedConsignment.includedConsignmentItem[].includedTradeLineItem[].individualTradeProductInstance[].permanentLocation",
       "description": "Per-animal permanent address - where the individual animal will live long-term after import. Carried on each `individualTradeProductInstance[].permanentLocation`, modelled as a `TradeParty`, so the address-block name, postal fields, and contact details (telephone and email on `definedContact`) all have a home. Different animals on the same trade line can carry different addresses (common for pets imported to a business address and shipped onwards to their owners). Required for Cats, Dogs, Ferrets.",
       "consumer_rule": {
         "summary": "Read the permanent location per animal.",
         "steps": [
-          "Iterate every individualTradeProductInstance[] across every specifiedTradeProduct[], every includedTradeLineItem[], every includedConsignmentItem[].",
+          "Iterate every individualTradeProductInstance[] across every includedTradeLineItem[], every includedConsignmentItem[].",
           "Read each instance's permanentLocation (when present).",
           "Each animal also has its identifier[] array, so PIMS can tie the permanent address to a specific animal by sharing the same individualTradeProductInstance entry."
         ]

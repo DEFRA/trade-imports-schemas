@@ -6,21 +6,22 @@
  * Output: schemas/profiles/imports/gb/pims-data-mapping.md
  *
  * Layout:
- *   - A title.
- *   - One markdown table - one row per answered V4 field, with four columns:
- *       Data field | PIMS field | Schema path | Description
- *     Schema paths are rendered inside <code> tags with <br> after every "."
- *     so long paths stay legible inside table cells.
- *   - An "Examples" section below the table, with one subsection per row that
- *     has code_examples populated. Each example renders as a labelled JSON
- *     code block.
+ *   - A title and intro.
+ *   - The scope decisions.
+ *   - One `##` section per answered V4 field: a `PIMS field` bullet, a
+ *     `Schema path` bullet (inline `code` for shallow paths, a fenced ASCII
+ *     tree for paths deeper than two dots), a `Description` bullet, and any
+ *     follow-up actions. A fenced code block renders a real tree in GitHub and
+ *     cannot sit in a table cell, so the mapping is sections, not a table.
+ *   - An "Examples" section, with one subsection per row that has code_examples
+ *     populated. Each example renders as a labelled JSON code block.
  *
- * Source fields the table uses:
- *   - v4.field_name -> Data field column
- *   - pims.field    -> PIMS field column
- *   - schema_path   -> Schema path column (broken at every ".")
- *   - description   -> Description column (the authored, agreed table text)
- *                      Falls back to agreed_answer if description is absent.
+ * Source fields each field section uses:
+ *   - v4.field_name -> the `##` heading (falls back to row_id)
+ *   - pims.field    -> the PIMS field bullet
+ *   - schema_path   -> the Schema path bullet (inline, or a tree when deep)
+ *   - description   -> the Description bullet (falls back to agreed_answer),
+ *                      with the PIMS verdicts appended
  *
  * The richer per-row context (v4 metadata, agreed_answer narrative,
  * consumer_rule, notes, actions, scope decisions, pending schema updates)
@@ -57,24 +58,26 @@ function readV4Total() {
   }
 }
 
-// Markdown table cells can't carry raw pipes or vertical whitespace without
-// breaking the row. Escape pipes and collapse vertical whitespace; explicit
-// <br> tags are preserved for in-cell line breaks.
+// Collapse a value to a single line (runs of whitespace become one space) and
+// escape pipes defensively so a stray pipe never breaks downstream markdown.
 function cell(value) {
   if (value === undefined || value === null) return "";
   return String(value).replace(/\|/g, "\\|").replace(/\s+/g, " ").trim();
 }
 
-// Render a schema path with line breaks after every "." segment, wrapped in
-// <code> so the cell stays legibly formatted as code without using backticks
-// (which don't compose with <br>).
-function pathCell(path) {
-  if (!path) return "";
-  const segments = path.split(".");
-  const joined = segments
-    .map((seg, i) => (i < segments.length - 1 ? `${seg}.<br>` : seg))
-    .join("");
-  return `<code>${joined}</code>`;
+// Schema path as a bullet. Inline `code` for shallow paths (<= 2 dots); for a
+// deeper path, a fenced ASCII tree nested under the bullet - a fenced code block
+// renders a real tree in GitHub but cannot sit in a table cell. Each deeper
+// level sits under its parent with a "└── " connector.
+function pathBullet(path) {
+  if (!path) return "- **Schema path:** _none_";
+  const dots = (path.match(/\./g) || []).length;
+  if (dots <= 2) return "- **Schema path:** `" + path + "`";
+  const tree = path.split(".").map((seg, i) =>
+    i === 0 ? seg : `${" ".repeat((i - 1) * 4)}└── ${seg}`
+  );
+  // Indent the fence and its lines by two so the code block belongs to the bullet.
+  return ["- **Schema path:**", "", "  ```", ...tree.map(line => "  " + line), "  ```"].join("\n");
 }
 
 // Render each pims_refs[] entry's verdict as a short bold line.
@@ -93,44 +96,36 @@ function pimsVerdictsLine(refs) {
   return parts.join(" ");
 }
 
-// Render the actions[] array as a follow-up block with a bold label and
-// hyphen-prefixed lines (separated by <br> for in-cell line breaks).
-function actionsBlock(actions) {
-  if (!Array.isArray(actions) || actions.length === 0) return "";
-  const items = actions.map(a => `- ${a}`).join("<br>");
-  return `**Actions:**<br>${items}`;
-}
-
-// Compose the description cell: description body, then a blank line, then
-// the PIMS verdicts line, then (when present) a blank line and the actions
-// block. Blank lines inside a markdown table cell are rendered with
-// <br><br>.
-function descriptionCell(entry) {
-  const body = entry.description || entry.agreed_answer || "";
-  const verdicts = pimsVerdictsLine(entry.pims_refs);
-  const actions = actionsBlock(entry.actions);
-  const parts = [body];
-  if (verdicts) parts.push(verdicts);
-  if (actions) parts.push(actions);
-  return cell(parts.join("<br><br>"));
-}
-
-// PIMS field column: concatenate the field labels from pims_refs[] entries.
+// PIMS field bullet value: concatenate the field labels from pims_refs[] entries.
 function pimsFieldCell(entry) {
   if (!Array.isArray(entry.pims_refs) || entry.pims_refs.length === 0) return "";
   return cell(entry.pims_refs.map(r => r.field || "").filter(Boolean).join(" / "));
 }
 
-function buildTable(answers) {
-  const rows = (answers.answers || []).map(entry => {
-    const dataField = (entry.v4 && entry.v4.field_name) || "";
-    return `| ${cell(dataField)} | ${pimsFieldCell(entry)} | ${pathCell(entry.schema_path)} | ${descriptionCell(entry)} |`;
-  });
-  return [
-    "| Data field | PIMS field | Schema path | Description |",
-    "|---|---|---|---|",
-    ...rows
-  ];
+// One `##` section per answered field, replacing the old table row. The V4
+// field name is the heading; PIMS field, schema path, and description are
+// bullets; the description carries the PIMS verdicts; follow-up actions become
+// a bullet list under an **Actions:** label.
+function fieldSection(entry) {
+  const name = (entry.v4 && entry.v4.field_name) || entry.row_id || "(unnamed)";
+  const description = [entry.description || entry.agreed_answer || "", pimsVerdictsLine(entry.pims_refs)]
+    .filter(Boolean)
+    .join(" ");
+  const out = [`## ${name}`, ""];
+  const pims = pimsFieldCell(entry);
+  if (pims) out.push(`- **PIMS field:** ${pims}`);
+  out.push(pathBullet(entry.schema_path));
+  if (description) out.push(`- **Description:** ${description}`);
+  if (Array.isArray(entry.actions) && entry.actions.length > 0) {
+    out.push("", "**Actions:**", "");
+    for (const action of entry.actions) out.push(`- ${action}`);
+  }
+  out.push("");
+  return out;
+}
+
+function buildEntries(answers) {
+  return (answers.answers || []).flatMap(fieldSection);
 }
 
 function buildExamples(answers) {
@@ -187,9 +182,7 @@ function main() {
     "",
     ...INTRO,
     ...buildScopeDecisions(answers),
-    "## Mapping",
-    "",
-    ...buildTable(answers),
+    ...buildEntries(answers),
     ...buildExamples(answers),
     ""
   ];
