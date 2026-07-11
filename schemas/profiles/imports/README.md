@@ -22,11 +22,22 @@ EU Reset will deliver a new set of SPS controls for EU imports and replatform th
 
 # UN/CEFACT SPS Certificate
 
-The UN/CEFACT Sanitary and Phytosanitary (SPS) Certificate is an international standard for exchanging electronic health certificates for animals, plants, and products. It is based on the Buy-Ship-Pay (BSP) model and enables government authorities to exchange data securely.
+The UN/CEFACT Sanitary and Phytosanitary (SPS) Certificate is an international standard for exchanging electronic health certificates for animals, plants, and products. It is based on the Buy-Ship-Pay (BSP) model and enables government authorities to exchange data securely. 
 
-- https://github.com/uncefact/spec-JSONschema/blob/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/UNECE-SPSCertificate.json
-- https://service.unece.org/trade/uncefact/publication/SupplyChainMGMT/SCRDM/HTML/001.htm
-- https://github.com/uncefact
+## GBN-AG Design Philosophy and Alignment with UNCEFACT
+
+Defra interoperability with Traces is via the Defra Traces Integration Gateway (TIG). TIG offers a modern JSON HTTP API (and an anti-corruption layer) to internal services such those supporting GBN-AG. **IMPORTANT**: within the Canonical Core Schema many XML element names have been changed (shortened), and aligned with D23B. Core also changes the _structure_ of XML model but retains the correct semantics via JSON-LD. This can be confusing at first. To retain interoperability with Core and Traces the GBN-AF guiding design principal is to replicated the structures and patterns in this order of precedence:
+
+- Defra Canonial Core Model
+- [Traces NT XML (eCert Master) Model](https://unece.org/trade/uncefact/xml-schemas)
+- [Buy Ship Pay (BSP) D23B SPS Model](https://vocabulary.uncefact.org/home)
+
+Where new concepts are required, such as `permanentLocation` ot `cphNumber`, their semantics are defined in JSON LD and their structure is captured in the gbn-ag schema.
+
+### Links
+- [Supply Chain REFERENCE DATA MODEL (SCRDM)](https://service.unece.org/trade/uncefact/publication/SupplyChainMGMT/SCRDM/HTML/001.htm)
+- [https://github.com/uncefact](https://vocabulary.uncefact.org/home) ([schema](https://github.com/uncefact/spec-JSONschema/blob/main/JSONschema2020-12/meta-library/BuyShipPay/D23B/UNECE-SPSCertificate.json))
+- [EU Intra Rules](https://webgate.ec.europa.eu/imsoc-guide/tracesnt-help/Content/en/documents-certificates/eu-intra/part-i.html)
 
 # Data Structures
 
