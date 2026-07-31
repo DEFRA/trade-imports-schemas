@@ -13,6 +13,7 @@
     "aggregateVersion",
     "eventType",
     "timestamp",
+    "publishedAt",
     "data",
     "metadata"
   ],
@@ -52,6 +53,11 @@
       "type": "string",
       "format": "date-time",
       "description": "ISO 8601 UTC time the business event occurred (YYYY-MM-DDTHH:mm:ss.sssZ milliseconds precision)"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC time the event was published to the message broker (YYYY-MM-DDTHH:mm:ss.sssZ milliseconds precision). Always set on the wire; corresponds to OutboxEvent.publishedAt. Required here because additionalProperties: false would otherwise reject it."
     },
     "data": {
       "type": "object",
