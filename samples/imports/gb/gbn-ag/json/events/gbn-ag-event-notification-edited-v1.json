@@ -1,0 +1,43 @@
+{
+  "$schema": "gbn-ag-event-notification-edited-v1.schema.json",
+  "eventId": "b7c8d9e0-f1a2-3456-bcde-f01234567890",
+  "aggregateType": "Notification",
+  "subType": "GBN-AG",
+  "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
+  "aggregateVersion": 2,
+  "eventType": "uk.gov.defra.trade.imports.animals.NotificationEdited",
+  "timestamp": "2026-05-15T09:45:00.000Z",
+  "publishedAt": "2026-05-15T09:45:00.123Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "gbn-ag",
+    "exchangedDocument": {
+      "identifier": "GBN-AG-26-0000001-8",
+      "notificationStatusCode": "DRAFT"
+    },
+    "specifiedConsignment": {
+      "originCountry": {
+        "code": { "value": "FR" }
+      },
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
+                  "classCode": { "value": "01012100", "urlId": "https://traces-codelists.ec.europa.eu/cn" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "correlationId": "cid-20260515-094500",
+    "schemaVersion": "1.0.0",
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-edited-v1.schema.json"
+  }
+}

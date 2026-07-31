@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-event-notification-edited-v1.schema.json",
+  "title": "GBN-AG NotificationEdited event (v1)",
+  "description": "Event emitted when a GBN-AG notification is saved with no lifecycle transition. Fires on every page-by-page edit that does not change the notification status; a save that does change status emits the corresponding lifecycle event instead — a single save never emits both. The data payload is a partial snapshot: at minimum the notification identifier, the consignment-level originCountry, and at least one trade line carrying an applicableClassification. notificationStatusCode is intentionally left open — NotificationEdited fires across the full lifecycle. Sub-shapes reference gbn-ag-v1.schema.json's $defs and the core TradeCountry so canonical type changes flow through without editing this file.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationEdited" },
+        "data": {
+          "type": "object",
+          "required": ["$model", "$type", "exchangedDocument", "specifiedConsignment"],
+          "properties": {
+            "$model": { "const": "defra/certificate-internal/1" },
+            "$type":  { "const": "gbn-ag" },
+            "exchangedDocument": {
+              "type": "object",
+              "required": ["identifier"],
+              "properties": {
+                "identifier": { "type": "string" }
+              }
+            },
+            "specifiedConsignment": {
+              "type": "object",
+              "required": ["originCountry", "includedConsignmentItem"],
+              "properties": {
+                "originCountry": {
+                  "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry"
+                },
+                "includedConsignmentItem": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": ["includedTradeLineItem"],
+                    "properties": {
+                      "includedTradeLineItem": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": ["applicableClassification"],
+                          "properties": {
+                            "applicableClassification": {
+                              "type": "array",
+                              "minItems": 1,
+                              "items": { "$ref": "gbn-ag-v1.schema.json#/$defs/gbnAgApplicableClassification" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
