@@ -360,7 +360,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Document URL
 - **Schema path:** _none_
-- **Description:** The Document URL ask (a link to the document in the notification portal for caseworker navigation) is not part of the schema definition. The notification carries the document content (`attachmentBinaryObject`) and references on `exchangedDocument.referenceDocument[]`; URLs into a downstream portal are a consumer-side concern. **Confirmed PIMS Document Fields row 5.** Document URL stays a consumer-side concern; not added to the schema.
+- **Description:** The Document URL ask (a link to the document in the notification portal for caseworker navigation) is not part of the schema definition. The notification carries attachment references (`attachmentBinaryObject`) on `exchangedDocument.referenceDocument[]`; URLs into a downstream portal are a consumer-side concern. **Confirmed PIMS Document Fields row 5.** Document URL stays a consumer-side concern; not added to the schema.
 
 ## Horse Name
 

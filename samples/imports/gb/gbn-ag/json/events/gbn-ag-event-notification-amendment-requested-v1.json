@@ -59,26 +59,22 @@
           "relationshipTypeCode": "ZZZ",
           "identifier": "doc-ref",
           "issueDateTime": "2026-04-01",
-          "attachmentBinaryObject": [
-            {
-              "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
-              "filename": "1.6_Discernment_Summary.pdf",
-              "mimeCode": "application/pdf"
-            }
-          ]
+          "attachmentBinaryObject": {
+            "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+            "filename": "1.6_Discernment_Summary.pdf",
+            "mimeCode": "application/pdf"
+          }
         },
         {
           "typeCode": "705",
           "relationshipTypeCode": "ZZZ",
           "identifier": "BOL-2026-884721",
           "issueDateTime": "2026-05-09",
-          "attachmentBinaryObject": [
-            {
-              "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
-              "filename": "bill-of-lading.pdf",
-              "mimeCode": "application/pdf"
-            }
-          ]
+          "attachmentBinaryObject": {
+            "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
+            "filename": "bill-of-lading.pdf",
+            "mimeCode": "application/pdf"
+          }
         }
       ]
     },

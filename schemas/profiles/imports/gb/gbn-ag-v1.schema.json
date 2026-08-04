@@ -18,7 +18,7 @@
 
         "exchangedDocument": {
           "type": "object",
-          "required": ["identifier", "issuer", "firstSignatoryAuthentication", "referenceDocument"],
+          "required": ["identifier", "issuer", "firstSignatoryAuthentication"],
           "properties": {
             "identifier": {
               "type": "string",
@@ -75,16 +75,7 @@
               }
             },
             "referenceDocument": {
-              "type": "array",
-              "minItems": 1,
-              "contains": {
-                "type": "object",
-                "properties": {
-                  "typeCode": { "const": "853" }
-                },
-                "required": ["typeCode"]
-              },
-              "description": "Carries the regulatory documents that accompany the consignment. At least one entry is the veterinary health certificate (`typeCode` `853` on UNTDID 1001); further entries cover the other accompanying documents (transport documents and the like), each distinguished by its `typeCode`. Attachments are referenced by `filename`, `mimeCode`, and `uri` rather than embedded inline."
+              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline."
             }
           }
         },

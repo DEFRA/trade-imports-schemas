@@ -48,13 +48,11 @@
         "relationshipTypeCode": "ZZZ",
         "identifier": "docref-vet",
         "issueDateTime": "2026-05-05",
-        "attachmentBinaryObject": [
-          {
-            "uri": "uri:documentid:4fe1b796-6353-44c7-9f09-06428dc95b45",
-            "filename": "01-04 Reason For Import.png",
-            "mimeCode": "image/png"
-          }
-        ]
+        "attachmentBinaryObject": {
+          "uri": "uri:documentid:4fe1b796-6353-44c7-9f09-06428dc95b45",
+          "filename": "01-04 Reason For Import.png",
+          "mimeCode": "image/png"
+        }
       }
     ]
   },

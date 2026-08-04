@@ -48,13 +48,11 @@
         "relationshipTypeCode": "ZZZ",
         "identifier": "doc-ref",
         "issueDateTime": "2026-04-01",
-        "attachmentBinaryObject": [
-          {
-            "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
-            "filename": "germinal-health-certificate.pdf",
-            "mimeCode": "application/pdf"
-          }
-        ]
+        "attachmentBinaryObject": {
+          "uri": "uri:documentid:6dc34f11-8496-4a7b-a6a6-75b262634120",
+          "filename": "germinal-health-certificate.pdf",
+          "mimeCode": "application/pdf"
+        }
       }
     ]
   },

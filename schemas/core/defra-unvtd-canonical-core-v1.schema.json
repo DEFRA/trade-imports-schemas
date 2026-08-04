@@ -272,14 +272,8 @@
           "description": "Issue date of the referenced document (ISO 8601 YYYY-MM-DD)."
         },
         "attachmentBinaryObject": {
-          "oneOf": [
-            { "$ref": "#/$defs/AttachmentBinaryObject" },
-            {
-              "type": "array",
-              "items": { "$ref": "#/$defs/AttachmentBinaryObject" }
-            }
-          ],
-          "description": "Attachment(s) for the referenced document. Single object (legacy INTRA/CHED shape) or array (when one referenced document carries multiple files)."
+          "$ref": "#/$defs/AttachmentBinaryObject",
+          "description": "Attachment for the referenced document, carried by reference: a link to the stored file (`uri`) with `filename` and `mimeCode` alongside. File content is never embedded."
         },
         "information": {
           "type": "array",
