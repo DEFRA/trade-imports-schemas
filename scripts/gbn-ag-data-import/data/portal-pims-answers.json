@@ -1521,7 +1521,7 @@
         ]
       },
       "notes": [
-        "The schema enforces that at least one entry has typeCode = 853 (veterinary health certificate)."
+        "Document mandates are enforced by the producing service, not the schema. The veterinary health certificate entry carries typeCode 853."
       ],
       "actions": [],
       "code_examples": [],
@@ -1805,7 +1805,7 @@
         "conditions_values": ""
       },
       "schema_path": "",
-      "description": "The Document URL ask (a link to the document in the notification portal for caseworker navigation) is not part of the schema definition. The notification carries the document content (`attachmentBinaryObject`) and references on `exchangedDocument.referenceDocument[]`; URLs into a downstream portal are a consumer-side concern.",
+      "description": "The Document URL ask (a link to the document in the notification portal for caseworker navigation) is not part of the schema definition. The notification carries attachment references (`attachmentBinaryObject`) on `exchangedDocument.referenceDocument[]`; URLs into a downstream portal are a consumer-side concern.",
       "consumer_rule": {
         "summary": "No schema slot. Nothing to read.",
         "steps": []
