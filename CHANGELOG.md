@@ -23,15 +23,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   classification present, all other fields absent) to demonstrate the optional-by-default
   rule.
 
-### Fixed
-
-- `schemas/profiles/imports/messaging/event-envelope-v1.schema.json`: declared
-  `publishedAt` as a required `date-time` property. The backend
-  (`OutboxPublishService`) always serialises `publishedAt` onto the wire, but the
-  envelope had `"additionalProperties": false` without declaring the field, causing
-  every published event to silently fail validation. Required on the wire; the outbox
-  entity's `publishedAt` column remains nullable (load-bearing for the unpublished-row
-  partial index and the poller query).
-
-- All seven existing `gbn-ag-event-*` samples updated to include `publishedAt` so they
-  validate against the corrected envelope.

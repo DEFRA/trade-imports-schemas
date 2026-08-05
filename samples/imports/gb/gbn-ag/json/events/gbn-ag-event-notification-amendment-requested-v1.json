@@ -7,7 +7,6 @@
   "aggregateVersion": 3,
   "eventType": "uk.gov.defra.trade.imports.animals.NotificationAmendmentRequested",
   "timestamp": "2026-05-25T14:00:00.000Z",
-  "publishedAt": "2026-05-25T14:00:00.123Z",
   "data": {
     "$model": "defra/certificate-internal/1",
     "$type": "gbn-ag",
