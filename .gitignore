@@ -28,6 +28,9 @@ coverage/
 # Build outputs
 dist/
 build/
+
+# Git worktrees
+.worktrees/
 /workspace/branch-with-crosswalk/
 /workspace/
 /.claude/
