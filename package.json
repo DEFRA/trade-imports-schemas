@@ -6,10 +6,11 @@
   "scripts": {
     "validate-schemas": "node scripts/validate-schemas.js",
     "validate-samples": "node scripts/validate-samples.js",
+    "validate-coherence": "node scripts/check-coherence.js",
     "convert:traces": "node scripts/traces-to-unvtd.js",
     "build-dictionary:gbn-ag": "node scripts/build-data-dictionary.js gbn-ag",
     "build-pims-mapping:gbn-ag": "node scripts/gbn-ag-data-import/build-pims-data-mapping.js",
-    "test": "node --test scripts/traces-to-unvtd.test.js scripts/build-data-dictionary.test.js"
+    "test": "node --test scripts/traces-to-unvtd.test.js scripts/build-data-dictionary.test.js scripts/check-coherence.test.js"
   },
   "keywords": [
     "json-schema",
