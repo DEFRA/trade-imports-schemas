@@ -1,0 +1,142 @@
+<ac:structured-macro ac:name="info" ac:schema-version="1"><ac:rich-text-body><p>GERMINALS requirements are not yet defined</p></ac:rich-text-body></ac:structured-macro>
+<h2><strong>Live Animal Data Elements</strong></h2>
+<p><strong>Note:</strong> fixture main section.</p>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Type</p></th><th><p>Conditions / Values</p></th><th><p>Applies At</p></th><th><p>Source</p></th><th><p>Mandatory</p></th><th><p>Example</p></th><th><p>PO Approved</p></th>
+    </tr>
+    <tr>
+      <td><p>Reference Number</p></td>
+      <td><p>string</p></td>
+      <td><ac:structured-macro ac:name="expand" ac:schema-version="1"><ac:parameter ac:name="title">CPH required commodities (2)</ac:parameter><ac:rich-text-body><ul><li><p>0102 - Cattle</p></li><li><p>0103 - Pig</p></li></ul></ac:rich-text-body></ac:structured-macro><p>Allocated on creation</p></td>
+      <td><p>Notification level</p></td>
+      <td><p>System</p></td>
+      <td><p>N/A</p></td>
+      <td><p>GBN-AG-26-7K8M2P</p></td>
+      <td><ac:task-list><ac:task><ac:task-id>1</ac:task-id><ac:task-status>complete</ac:task-status><ac:task-body>PO</ac:task-body></ac:task></ac:task-list></td>
+    </tr>
+    <tr>
+      <td><p>Contact Address</p></td>
+      <td><p></p></td>
+      <td><p>Consumed from gov.identity</p></td>
+      <td><p>Notification level</p></td>
+      <td><p>gov.identity</p></td>
+      <td><p>-</p></td>
+      <td><p>n/a</p></td>
+      <td><ac:task-list><ac:task><ac:task-id>2</ac:task-id><ac:task-status>incomplete</ac:task-status><ac:task-body>PO</ac:task-body></ac:task></ac:task-list></td>
+    </tr>
+    <tr>
+      <td><p>Contact Address</p></td>
+      <td><p>Standard address block</p></td>
+      <td><p>Where created by user</p></td>
+      <td><p>Notification level</p></td>
+      <td><p>User</p></td>
+      <td><p>Mandatory to proceed</p></td>
+      <td><p>n/a</p></td>
+      <td><p></p></td>
+    </tr>
+  </tbody>
+</table>
+<h1><strong><span>Reason of Import</span></strong></h1>
+<p>This section defines the reason block.</p>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Type</p></th><th><p>Conditions / Values</p></th><th><p>Applies At</p></th><th><p>Source</p></th><th><p>Mandatory</p></th><th><p>Example</p></th><th><p>PO Approved</p></th>
+    </tr>
+    <tr>
+      <td colspan="8"><p><strong>Reason of Import | Field Block - Mandatory to Submit - At least one</strong></p></td>
+    </tr>
+    <tr>
+      <td><p>Reason for import</p></td>
+      <td><p>enum (single-select)</p></td>
+      <td><p>Selected from the reasons list</p></td>
+      <td><p>Notification level</p></td>
+      <td><p>User</p></td>
+      <td><p>Mandatory to proceed</p></td>
+      <td><p>Internal market</p></td>
+      <td><p></p></td>
+    </tr>
+  </tbody>
+</table>
+<h1><strong><span>Animal Identifiers</span></strong></h1>
+<p>This section defines Animal Identifiers.</p>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Type</p></th><th><p>Conditions / Values</p></th><th><p>Applies At</p></th><th><p>Source</p></th><th><p>Mandatory</p></th><th><p>Example</p></th><th><p>PO Approved</p></th>
+    </tr>
+    <tr>
+      <td colspan="8"><p><strong>Animal Identifiers | Field Block - Mandatory to Submit - At least one</strong></p></td>
+    </tr>
+    <tr>
+      <td><p>Animal Identifier &ndash; Description</p></td>
+      <td><p>string</p></td>
+      <td><p>Free text</p></td>
+      <td><p>Unit Level</p></td>
+      <td><p>User</p></td>
+      <td><p>Optional</p></td>
+      <td><p>Brown mare, white sock</p></td>
+      <td><p></p></td>
+    </tr>
+  </tbody>
+</table>
+<h1><strong><span>Documents</span></strong></h1>
+<p>This section defines optional accompanying documents.</p>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Type</p></th><th><p>Conditions / Values</p></th><th><p>Applies At</p></th><th><p>Source</p></th><th><p>Mandatory</p></th><th><p>Example</p></th><th><p>PO Approved</p></th>
+    </tr>
+    <tr>
+      <td colspan="8"><p><strong>Accompanying Document | Field Block - Optional - All-or-nothing</strong></p></td>
+    </tr>
+    <tr>
+      <td><p>Accompanying Document: Type</p></td>
+      <td><p>enum (single-select)</p></td>
+      <td><p>Selected from the document types list</p></td>
+      <td><p>Notification level</p></td>
+      <td><p>User</p></td>
+      <td><p>All-or-nothing</p></td>
+      <td><p>Commercial invoice</p></td>
+      <td><p></p></td>
+    </tr>
+  </tbody>
+</table>
+<h1><ac:structured-macro ac:name="anchor" ac:schema-version="1"><ac:parameter ac:name="">address_block</ac:parameter></ac:structured-macro><span>Address Block</span></h1>
+<p>Reusable address structure.</p>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Attributes</p></th><th><p>Validation</p></th><th><p>Example</p></th><th><p>Notes</p></th>
+    </tr>
+    <tr>
+      <td><p>Name or Organisation name</p></td>
+      <td><p>string</p></td>
+      <td><p>Max 255</p></td>
+      <td><p>M&uuml;ller Farms GmbH</p></td>
+      <td><p></p></td>
+    </tr>
+    <tr>
+      <td><p>**<br /><code>Transporter authorisation number</code></p></td>
+      <td><p>string</p></td>
+      <td><p>Max 50</p></td>
+      <td><p>GB-TA-0042</p></td>
+      <td><p>Only for transporter addresses</p></td>
+    </tr>
+  </tbody>
+</table>
+<h2><strong>Out of Scope Data Elements</strong><br /><br /></h2>
+<table>
+  <tbody>
+    <tr>
+      <th><p>Field Name</p></th><th><p>Notes</p></th><th><p>Date</p></th>
+    </tr>
+    <tr>
+      <td><p>Journey Log</p></td>
+      <td><p>Handled by the welfare service <ri:user ri:account-id="abc-123-def"/></p></td>
+      <td><p><time datetime="2026-05-01"/></p></td>
+    </tr>
+  </tbody>
+</table>

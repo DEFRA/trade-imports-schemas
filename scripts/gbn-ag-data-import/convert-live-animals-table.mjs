@@ -9,9 +9,13 @@
 // deterministic ordering, and loud failure on unrecognised structure. Stories
 // 03 (auxiliary sections) and 04 (diff/promote) follow the shape it sets.
 //
-// Output carries all three page sections in page order: the main 8-column
-// "Live Animal Data Elements", plus the auxiliary "Common Attributes" (4 cols)
-// and "Out of Scope Data Elements" (3 cols, which add dates[]/user_mentions[]).
+// Output carries all six page sections in page order: four 8-column field
+// sections ("Live Animal Data Elements", plus "Reason of Import", "Animal
+// Identifiers" and "Documents", which each open with a merged-cell "Field
+// Block" banner captured as a section-level `block` cell), the 5-column
+// "Address Block", and "Out of Scope Data Elements" (3 cols, which add
+// dates[]/user_mentions[]). The SECTIONS const below is the structure
+// contract: a page restructure means updating it deliberately.
 //
 // Usage:
 //   convert-live-animals-table.mjs <xhtml-path> <meta-path> [-o <out-path>]
@@ -20,7 +24,7 @@
 //   <meta-path>   Story-01 sidecar JSON; copied verbatim into `source`.
 //   -o <out-path> Output file. Defaults to workspace/live-animals-table.next.json.
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { stderr, argv, cwd, exit } from 'node:process'
@@ -30,17 +34,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = resolve(__dirname, 'data')
 const SCRATCH = resolve(DATA_DIR, 'scratch')
 
-// The three page sections in page order, each with its expected column keys
-// (slugified header text). poStatus marks the main section, which carries the
-// extra row-level po_approved_status derived from its po_approved tasks.
+// The six page sections in page order, each with its expected column keys
+// (slugified header text). poStatus marks the 8-column field sections, which
+// carry the extra row-level po_approved_status derived from po_approved tasks.
+// block marks sections whose first body row is a merged-cell "Field Block"
+// banner (one <td colspan="8">), captured as a section-level `block` cell.
+const COLS_MAIN = ['field_name', 'type', 'conditions_values', 'applies_at',
+  'source', 'mandatory', 'example', 'po_approved']
 const SECTIONS = [
-  {
-    name: 'Live Animal Data Elements',
-    columns: ['field_name', 'type', 'conditions_values', 'applies_at',
-      'source', 'mandatory', 'example', 'po_approved'],
-    poStatus: true
-  },
-  { name: 'Common Attributes', columns: ['field_name', 'attributes', 'validation', 'example'] },
+  { name: 'Live Animal Data Elements', columns: COLS_MAIN, poStatus: true },
+  { name: 'Reason of Import', columns: COLS_MAIN, poStatus: true, block: true },
+  { name: 'Animal Identifiers', columns: COLS_MAIN, poStatus: true, block: true },
+  { name: 'Documents', columns: COLS_MAIN, poStatus: true, block: true },
+  { name: 'Address Block', columns: ['field_name', 'attributes', 'validation', 'example', 'notes'] },
   { name: 'Out of Scope Data Elements', columns: ['field_name', 'notes', 'date'] }
 ]
 const SECTION_BY_NAME = new Map(SECTIONS.map(s => [s.name, s]))
@@ -172,7 +178,9 @@ function headingBefore (xhtml, tableStart) {
   // table, not this one. Returning null makes the caller loud-fail (D9).
   const gap = xhtml.slice(last.index + last[0].length, tableStart)
   if (/<table\b/.test(gap)) return null
-  return stripToText(last[1])
+  // Anchor macros inside a heading carry their id as parameter text, which
+  // would fuse into the heading label ("address_blockAddress Block").
+  return stripToText(last[1].replace(RE_ANCHOR, ' '))
 }
 
 function parseSection (tableHtml, spec) {
@@ -187,7 +195,25 @@ function parseSection (tableHtml, spec) {
         `do not match expected ${JSON.stringify(spec.columns)}`)
   }
 
-  const bodyRows = trs.filter(r => !/<th\b/.test(r))
+  let bodyRows = trs.filter(r => !/<th\b/.test(r))
+
+  // Field Block banner: detection is structural (a single full-width merged
+  // cell), not textual, so a reworded banner flows through as content while a
+  // malformed data row still loud-fails via the td-count check below.
+  let blockCell = null
+  if (spec.block) {
+    const first = bodyRows[0] ?? ''
+    const tdCount = (first.match(/<td\b/g) || []).length
+    const colspan = first.match(/<td\b[^>]*\bcolspan="(\d+)"/)
+    if (tdCount !== 1 || !colspan || Number(colspan[1]) !== spec.columns.length) {
+      die(`Section "${spec.name}": expected a Field Block descriptor row ` +
+          `(one <td colspan="${spec.columns.length}">) as the first body row`)
+    }
+    const td = readTd(first, 0)
+    if (!td) die(`Section "${spec.name}": Field Block descriptor row unreadable`)
+    blockCell = parseCell(td.content, 'block')
+    bodyRows = bodyRows.slice(1)
+  }
   const rows = bodyRows.map((rowHtml, i) => {
     const tdCount = (rowHtml.match(/<td\b/g) || []).length
     if (tdCount !== spec.columns.length) {
@@ -210,7 +236,13 @@ function parseSection (tableHtml, spec) {
     return row
   })
 
-  return { section: spec.name, columns, row_count: rows.length, rows }
+  return {
+    section: spec.name,
+    ...(blockCell && { block: blockCell }),
+    columns,
+    row_count: rows.length,
+    rows
+  }
 }
 
 function extractCallouts (xhtml) {
@@ -275,6 +307,7 @@ function main () {
     page_callouts: extractCallouts(xhtml),
     sections
   }
+  mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(out, null, 2) + '\n', 'utf8')
   stderr.write(`Wrote ${opts.out} (${sections.map(s => `${s.section}: ${s.row_count}`).join(', ')})\n`)
 }

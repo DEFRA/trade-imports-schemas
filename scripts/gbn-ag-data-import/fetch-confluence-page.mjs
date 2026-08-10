@@ -7,7 +7,8 @@
 //   CONFLUENCE_USERNAME   Atlassian account email
 //   CONFLUENCE_API_TOKEN  Atlassian API token
 
-import { writeFile } from 'node:fs/promises'
+import { writeFile, mkdir } from 'node:fs/promises'
+import { dirname } from 'node:path'
 import { stderr, stdout, env, argv, exit } from 'node:process'
 
 const USAGE = `Usage: fetch-confluence-page.mjs <id-or-url> [-o <path>] [-m <path>] [-t]
@@ -106,6 +107,7 @@ async function main () {
   if (opts.titleStderr) stderr.write(`title: ${json.title}\n`)
 
   if (opts.output) {
+    await mkdir(dirname(opts.output), { recursive: true })
     await writeFile(opts.output, xhtml, 'utf8')
   } else {
     stdout.write(xhtml)
@@ -126,6 +128,7 @@ async function main () {
       version_when: versionWhen,
       url: `${base}/wiki/spaces/${space}/pages/${pageId}`
     }
+    await mkdir(dirname(opts.meta), { recursive: true })
     await writeFile(opts.meta, JSON.stringify(meta, null, 2), 'utf8')
   }
 }

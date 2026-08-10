@@ -19,7 +19,7 @@
 //                   the only path that writes the baseline. Bootstrap a brand-new
 //                   page with: convert, then --promote (the diff is all-added).
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { stderr, argv, cwd, exit } from 'node:process'
@@ -98,7 +98,7 @@ function diffSection (name, baseRows, nextRows) {
   return section
 }
 
-function buildDelta (baseline, next) {
+export function buildDelta (baseline, next) {
   const baseSections = baseline?.sections ?? []
   const nextSections = next.sections ?? []
   const order = nextSections.map(s => s.section)
@@ -107,9 +107,17 @@ function buildDelta (baseline, next) {
   const sections = order.map(name => {
     const bs = baseSections.find(s => s.section === name)
     const ns = nextSections.find(s => s.section === name)
-    if (ns && !bs) return { section: name, section_added: true, added: ns.rows.map(label), removed: [], changed: [] }
-    if (bs && !ns) return { section: name, section_removed: true, added: [], removed: bs.rows.map(label), changed: [] }
-    return diffSection(name, bs.rows, ns.rows)
+    let entry
+    if (ns && !bs) entry = { section: name, section_added: true, added: ns.rows.map(label), removed: [], changed: [] }
+    else if (bs && !ns) entry = { section: name, section_removed: true, added: [], removed: bs.rows.map(label), changed: [] }
+    else entry = diffSection(name, bs.rows, ns.rows)
+    // A section's Field Block banner carries group cardinality semantics
+    // ("At least one", "All-or-nothing"), so its appearance, disappearance or
+    // rewording is content, not noise.
+    const bBlock = bs?.block ?? null
+    const nBlock = ns?.block ?? null
+    if (!eq(bBlock, nBlock)) entry.block_changed = { before: bBlock, after: nBlock }
+    return entry
   })
 
   const bc = baseline?.page_callouts ?? []
@@ -149,7 +157,7 @@ function fmt (v) {
   return s.length > 160 ? s.slice(0, 157) + '... (see delta.json)' : s
 }
 
-function renderMarkdown (delta) {
+export function renderMarkdown (delta) {
   const L = ['# Live Animals delta', '']
   const whenFrom = delta.from_version_when ?? '?'
   const whenTo = delta.to_version_when ?? '?'
@@ -164,10 +172,11 @@ function renderMarkdown (delta) {
     L.push(`## ${s.section}`)
     if (s.section_added) L.push('_New section._')
     if (s.section_removed) L.push('_Section removed._')
-    if (!s.added.length && !s.removed.length && !s.changed.length) {
+    if (!s.added.length && !s.removed.length && !s.changed.length && !s.block_changed) {
       L.push('No changes.', '')
       continue
     }
+    if (s.block_changed) L.push(`Block: ${fmt(s.block_changed.before)} -> ${fmt(s.block_changed.after)}`)
     if (s.added.length) { L.push(`Added (${s.added.length}):`); s.added.forEach(f => L.push(`- ${f}`)) }
     if (s.removed.length) { L.push(`Removed (${s.removed.length}):`); s.removed.forEach(f => L.push(`- ${f}`)) }
     if (s.changed.length) {
@@ -214,6 +223,7 @@ function main () {
 
   const delta = buildDelta(baseline, next)
   const mdPath = opts.out.replace(/\.json$/, '') + '.md'
+  mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(delta, null, 2) + '\n', 'utf8')
   writeFileSync(mdPath, renderMarkdown(delta) + '\n', 'utf8')
 

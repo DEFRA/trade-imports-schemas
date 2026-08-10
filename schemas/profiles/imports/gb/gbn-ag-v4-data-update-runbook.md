@@ -18,15 +18,18 @@ schema is still aligned with the current version.
 ## Prerequisites
 
 - Node 18+.
-- Confluence credentials in the environment for the fetch step only:
-  `CONFLUENCE_URL`, `CONFLUENCE_USERNAME`, `CONFLUENCE_API_TOKEN`. The examples
-  below load them from a local, untracked `.env` via `node --env-file=.env`.
+- Confluence credentials exported in the environment for the fetch step only:
+  `CONFLUENCE_URL`, `CONFLUENCE_USERNAME`, `CONFLUENCE_API_TOKEN`. Any source
+  works - a direnv-managed workspace `.env`, `set -a; . ./.env; set +a` on a
+  local untracked file, or plain exports. (`node --env-file=.env` also works,
+  but only on Node 20.6+ and only if that file actually exists.)
 - The committed baseline at `scripts/gbn-ag-data-import/data/live-animals-table.json`
   (the last-aligned state). It is already present; the diff reads it automatically.
 
 All run artefacts are written under `scripts/gbn-ag-data-import/data/scratch/`,
-which is gitignored. The committed inputs in `scripts/gbn-ag-data-import/data/`
-(the baseline and the PIMS files) are the only data that ships.
+which is gitignored; the scripts create it on demand, so a fresh clone needs no
+mkdir. The committed inputs in `scripts/gbn-ag-data-import/data/` (the baseline
+and the PIMS files) are the only data that ships.
 
 ## The pipeline
 
@@ -55,7 +58,7 @@ which is gitignored. The committed inputs in `scripts/gbn-ag-data-import/data/`
 ### 1. Fetch the page (script)
 
 ```bash
-node --env-file=.env scripts/gbn-ag-data-import/fetch-confluence-page.mjs 6497338582 \
+node scripts/gbn-ag-data-import/fetch-confluence-page.mjs 6497338582 \
   -o scripts/gbn-ag-data-import/data/scratch/live-animals-v4.xhtml \
   -m scripts/gbn-ag-data-import/data/scratch/live-animals-v4.meta.json
 ```
@@ -71,10 +74,18 @@ node scripts/gbn-ag-data-import/convert-live-animals-table.mjs \
   scripts/gbn-ag-data-import/data/scratch/live-animals-v4.meta.json
 ```
 
-Produces `data/scratch/live-animals-table.next.json` - all three page sections in
-a stable, diff-able shape. The converter aborts with a non-zero exit and writes no
-output if the page structure is not what it expects, so an unannounced change to
-the page format is a loud failure rather than a silent misparse.
+Produces `data/scratch/live-animals-table.next.json` - all six page sections in
+a stable, diff-able shape: four 8-column field sections (Live Animal Data
+Elements, plus Reason of Import, Animal Identifiers and Documents, which each
+open with a "Field Block" banner row captured as a section-level `block` cell),
+the 5-column Address Block, and Out of Scope Data Elements. The section names
+and expected columns are defined once, in the `SECTIONS` const at the top of
+`convert-live-animals-table.mjs` - that const is the structure contract, and a
+page restructure means updating it deliberately (see `migrate-baseline-sections.mjs`
+for how the v173→v188 restructure was absorbed without diff noise). The
+converter aborts with a non-zero exit and writes no output if the page
+structure is not what it expects, so an unannounced change to the page format
+is a loud failure rather than a silent misparse.
 
 ### 3. Diff against the baseline (script)
 
@@ -84,8 +95,11 @@ node scripts/gbn-ag-data-import/diff-live-animals-table.mjs
 
 Compares the committed baseline against the freshly converted table and writes
 `data/scratch/live-animals-delta.json` and `.md` - rows added, removed, or changed
-per section, plus warnings (for example two rows that share a field label). It
-never writes the baseline.
+per section, plus warnings (for example two rows that share a field label). When
+a section's Field Block banner appears, disappears or is reworded, the delta
+reports it as `block_changed` (a `Block:` line in the markdown) - banners carry
+group cardinality semantics ("At least one", "All-or-nothing"), so they are
+content, not noise. It never writes the baseline.
 
 ### 4. Analyse the delta (AI + human)
 
@@ -174,12 +188,23 @@ Everything else in the delta is noise for the schema and must be discarded:
     that asserts a different cardinality or level than a documented structural rule
     (e.g. "a different X per animal" when the rule is one X per consignment). That is
     not prose; carry it to the verdict step as a candidate;
+  - the Address Block "notes" column is annotation prose - same rule as
+    conditions: noise unless it asserts a different cardinality or level;
   - approval/sign-off and source/provenance columns are governance, not contract.
+
+A `block_changed` entry (a "Field Block - ... - At least one / All-or-nothing"
+banner appearing, disappearing, or rewording) is a cardinality assertion over a
+group of fields. Carry it to the verdict step as a structural candidate; never
+discard it as prose.
 
 The "how it applies" dimension is not held in a single column. Read the level
 indicator together with the conditions prose and use judgement: a keyword match
 over the conditions text over-flags (validation text that mentions "the
-consignment" is not, by itself, a per-animal vs per-consignment change).
+consignment" is not, by itself, a per-animal vs per-consignment change). Level
+vocabulary: the page says "Unit Level" for fields carried per individual animal
+(it previously said "Commodity Level" for some of these) - read Unit Level as
+the individual-animal level, and treat a Commodity -> Unit flip as a real level
+candidate to judge, not a synonym swap.
 
 Treat every field the V4 specification carries as data the schema must model. Do
 not withhold or soften a verdict because a field "might be display-only", derived,
@@ -260,8 +285,10 @@ Three points are deliberately human, not automated:
 | `convert-live-animals-table.mjs` | XHTML -> table JSON; loud-fails on unknown structure | script |
 | `lib/confluence-xhtml.mjs` | XHTML text helpers used by the converter | library |
 | `diff-live-animals-table.mjs` | baseline vs next -> delta; `--promote` advances the baseline | script |
+| `migrate-baseline-sections.mjs` | one-off v173 reshape into the six-section layout; kept for audit; refuses any other baseline shape | script (inert) |
 | `build-pims-data-mapping.js` | answers + table -> `pims-data-mapping.md` | script |
 | `pims-coverage-report.js` | report PIMS-draft coverage (diagnostic) | script |
+| `*.test.mjs` + `test-fixtures/` | converter/diff/migration regression tests, run by `npm test` | tests |
 
 The data dictionary is generated by `scripts/build-data-dictionary.js`
 (`npm run build-dictionary:gbn-ag`) and is shared with the other profiles.
