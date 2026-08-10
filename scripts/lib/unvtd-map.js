@@ -52,6 +52,12 @@ function asString (val) {
   return undefined
 }
 
+function asCodedValue (raw) {
+  if (raw == null) return undefined
+  const value = asString(typeof raw === 'object' ? raw.value : raw)
+  return value ? { value } : undefined
+}
+
 function mapCodeType (raw) {
   if (raw == null) return undefined
   if (typeof raw !== 'object') {
@@ -129,15 +135,8 @@ function mapClauses (clauses) {
 
 function mapPartyTypeCode (typeCode) {
   if (typeCode == null) return undefined
-  let values
-  if (Array.isArray(typeCode)) {
-    values = typeCode.map((t) => asString(typeof t === 'object' ? t?.value : t)).filter(Boolean)
-  } else if (typeof typeCode === 'object' && typeCode.value !== undefined) {
-    values = [asString(typeCode.value)]
-  } else {
-    const s = asString(typeCode)
-    values = s ? [s] : []
-  }
+  const arr = Array.isArray(typeCode) ? typeCode : [typeCode]
+  const values = arr.map(asCodedValue).filter(Boolean)
   return values.length ? values : undefined
 }
 
@@ -148,7 +147,8 @@ function mapParty (party) {
   if (id != null) out.identifier = asString(typeof id === 'object' ? id.value : id)
   if (party.name != null) out.name = extractContentValue(party.name) ?? asString(party.name)
   const role = party.roleCode ?? party.partyRoleCode
-  if (role != null) out.partyRoleCode = asString(typeof role === 'object' ? role.value : role)
+  const roleCode = asCodedValue(role)
+  if (roleCode) out.partyRoleCode = roleCode
   const ptc = mapPartyTypeCode(party.typeCode ?? party.partyTypeCode)
   if (ptc) out.partyTypeCode = ptc
 
@@ -305,11 +305,8 @@ function mapClassification (c) {
   const sys = c.systemID ?? c.systemId
   if (sys != null) out.systemId = asString(typeof sys === 'object' ? sys.value : sys)
   if (c.systemName) out.systemName = extractContentValue(c.systemName) ?? asString(c.systemName)
-  const cc = c.classCode
-  if (cc != null) {
-    const v = typeof cc === 'object' ? cc.value : cc
-    out.classCode = typeof v === 'number' ? v : (Number.isNaN(Number(v)) ? asString(v) : Number(v))
-  }
+  const cc = asCodedValue(c.classCode)
+  if (cc) out.classCode = cc
   if (c.className) {
     const cn = c.className
     if (Array.isArray(cn)) {
@@ -377,6 +374,19 @@ function mapLogisticsLocation (loc) {
   const tc = loc.typeCode
   if (tc != null) out.typeCode = asString(typeof tc === 'object' ? tc.value : tc)
   return out
+}
+
+function mapTransportMovement (movement) {
+  if (!movement || typeof movement !== 'object') return undefined
+  const out = {}
+  const id = movement.id ?? movement.identifier
+  if (id != null) out.identifier = asString(typeof id === 'object' ? id.value : id)
+  const mode = movement.modeCode
+  if (mode != null) {
+    const v = Number(typeof mode === 'object' ? mode.value : mode)
+    if (!Number.isNaN(v)) out.modeCode = v
+  }
+  return Object.keys(out).length ? out : undefined
 }
 
 function mapTradeCountry (country) {
@@ -492,7 +502,13 @@ function mapTree (val, ctx = {}) {
 
     if (newKey === 'unloadingBaseportLocation') {
       const items = Array.isArray(v) ? v : [v]
-      out.unloadingBaseportLocation = items.map(mapLogisticsLocation)
+      out.unloadingBaseportLocation = mapLogisticsLocation(items[0])
+      continue
+    }
+
+    if (newKey === 'mainCarriageLogisticsTransportMovement') {
+      const items = Array.isArray(v) ? v : [v]
+      out.mainCarriageLogisticsTransportMovement = items.map(mapTransportMovement).filter(Boolean)
       continue
     }
 
