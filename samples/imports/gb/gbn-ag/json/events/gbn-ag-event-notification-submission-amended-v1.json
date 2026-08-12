@@ -296,5 +296,36 @@
     "correlationId": "cid-20260526-093000",
     "schemaVersion": "1.0.0",
     "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-submission-amended-v1.schema.json"
-  }
+  },
+  "actor": {
+    "id": "user-123",
+    "source": "defra-id",
+    "userType": "INTERNAL",
+    "displayName": "Test User",
+    "organisationId": "org-456"
+  },
+  "statusChanges": [
+    {
+      "status": "SUBMITTED",
+      "dateChanged": "2026-05-21T10:15:00.000Z",
+      "actor": {
+        "id": "user-123",
+        "source": "defra-id",
+        "userType": "INTERNAL",
+        "displayName": "Test User",
+        "organisationId": "org-456"
+      }
+    },
+    {
+      "status": "AMEND",
+      "dateChanged": "2026-05-26T09:30:00.000Z",
+      "actor": {
+        "id": "user-123",
+        "source": "defra-id",
+        "userType": "INTERNAL",
+        "displayName": "Test User",
+        "organisationId": "org-456"
+      }
+    }
+  ]
 }

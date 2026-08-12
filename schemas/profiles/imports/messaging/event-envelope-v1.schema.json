@@ -79,6 +79,37 @@
           "description": "Reference to the governing event schema definition (e.g., event-submitted-v1.schema.json for live animals submitted, plants-event-submitted-v1.schema.json for plants)"
         }
       }
+    },
+    "actor": {
+      "$ref": "#/$defs/actor",
+      "description": "The user or service that triggered this event. Sourced from the acting user's identity at the time the event was written to the outbox."
+    },
+    "statusChanges": {
+      "type": "array",
+      "description": "Ordered history of status transitions for this aggregate up to and including the current event. Each entry records the status, the instant it changed, and the actor responsible.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "status":      { "type": "string" },
+          "dateChanged": { "type": "string", "format": "date-time" },
+          "actor":       { "$ref": "#/$defs/actor" }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "actor": {
+      "type": "object",
+      "description": "The user or service that triggered an event.",
+      "properties": {
+        "id":                       { "type": "string" },
+        "source":                   { "type": "string" },
+        "userType":                 { "type": "string" },
+        "displayName":              { "type": "string" },
+        "organisationId":           { "type": "string" },
+        "onBehalfOfOrganisationId": { "type": "string" }
+      }
     }
   }
 }
