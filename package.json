@@ -9,7 +9,6 @@
     "validate-coherence": "node scripts/check-coherence.js",
     "convert:traces": "node scripts/traces-to-unvtd.js",
     "build-dictionary:gbn-ag": "node scripts/build-data-dictionary.js gbn-ag",
-    "build-pims-mapping:gbn-ag": "node scripts/gbn-ag-data-import/build-pims-data-mapping.js",
     "test": "node --test scripts/traces-to-unvtd.test.js scripts/build-data-dictionary.test.js scripts/check-coherence.test.js scripts/gbn-ag-data-import/convert-live-animals-table.test.mjs scripts/gbn-ag-data-import/diff-live-animals-table.test.mjs scripts/gbn-ag-data-import/migrate-baseline-sections.test.mjs"
   },
   "keywords": [

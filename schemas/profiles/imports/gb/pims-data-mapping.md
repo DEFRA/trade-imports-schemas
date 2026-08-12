@@ -2,6 +2,8 @@
 
 This guide maps the Defra V4 Live Animals Data Fields specification against the GBN-AG schema. For each V4 field it gives the schema path, an implementation description, the engagement with the PIMS team's draft mapping (`Confirmed` where the draft was right; `Modified` where it was off; `Deferred` where an open question remains), and any follow-up actions captured during the review.
 
+This document is maintained directly: it records the concluded PIMS reconciliation and is updated in place when a mapping changes. (An earlier generator and its answers file were retired once the reconciliation concluded.)
+
 Read the description first to understand what the slot carries, then the schema path to know where to read it from, then the bold PIMS engagement line for the verdict against the consumer draft.
 
 ## Scope decisions
@@ -301,13 +303,13 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Means of Transport To Entry Point Type
 - **Schema path:** `specifiedConsignment.mainCarriageLogisticsTransportMovement[].modeCode`
-- **Description:** The mode of transport for the consignment's arrival at the UK Port of Entry. Carried as `modeCode` per UN/EDIFACT Recommendation 19: 1 = Maritime (Vessel), 2 = Rail (Railway), 3 = Road (Road Vehicle), 4 = Air (Airplane). Read on the same leg whose `arrivalEvent.occurrenceLogisticsLocation` matches the UK port (see Arrival date at Port). **Modified PIMS row 13.** usedLogisticsTransportMeans.name is in the schema and carries the means' identifying name (vessel name, vehicle registration, flight callsign); the mode of transport lives on modeCode (UN/EDIFACT Rec 19 numeric).
+- **Description:** The mode of transport for the consignment's arrival at the UK Port of Entry. Carried as `modeCode` per UN/EDIFACT Recommendation 19: 1 = Maritime (Vessel), 2 = Rail (Railway), 3 = Road (Road Vehicle), 4 = Air (Airplane). Read on the same leg whose `arrivalEvent.occurrenceLogisticsLocation` matches the UK port (see Arrival date at Port). **Modified PIMS row 13.** The mode lives on `modeCode`; the transport identification lives on the same leg's `identifier` (see Transport identification) - there is no separate conveyance-name slot.
 
 ## Transport identification
 
 - **PIMS field:** Means of Transport To Entry Point Id
 - **Schema path:** `specifiedConsignment.mainCarriageLogisticsTransportMovement[].identifier`
-- **Description:** Free-text transport identifier - vessel name, vehicle registration, flight number, or train identity. Read on the same leg as the UK port arrival event (see Arrival date at Port). **Confirmed PIMS row 12.**
+- **Description:** The declared transport identification - vessel name, vehicle registration, flight number, or train identity. The sibling `urlId` names the register the value is drawn from (`road_vehicle_registration`, `vessel_name`, `airplane_flight_number`), mirroring the schemeID TRACES carries on the movement's ID. This is the single home for the means-of-transport identification. Read on the same leg as the UK port arrival event (see Arrival date at Port). **Confirmed PIMS row 12.**
 
 ## Transport document reference
 
