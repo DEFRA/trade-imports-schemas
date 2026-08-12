@@ -5,7 +5,7 @@
   "subType": "GBN-AG",
   "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
   "aggregateVersion": 4,
-  "eventType": "uk.gov.defra.trade.imports.animals.NotificationSubmissionAmended",
+  "eventType": "uk.gov.defra.imports.notification.NotificationSubmissionAmended",
   "timestamp": "2026-05-26T09:30:00.000Z",
   "data": {
     "$model": "defra/certificate-internal/1",

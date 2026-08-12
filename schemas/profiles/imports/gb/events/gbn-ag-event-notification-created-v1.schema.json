@@ -11,7 +11,7 @@
       "properties": {
         "aggregateType": { "const": "Notification" },
         "subType":       { "const": "GBN-AG" },
-        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationCreated" },
+        "eventType":     { "const": "uk.gov.defra.imports.notification.NotificationCreated" },
         "data": {
           "type": "object",
           "required": ["$model", "$type", "exchangedDocument", "specifiedConsignment"],
