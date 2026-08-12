@@ -75,7 +75,7 @@
               }
             },
             "referenceDocument": {
-              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline."
+              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Accompanying documents are all-or-nothing: they are optional as a group, but when one is provided its type, reference and date of issue accompany it. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline."
             }
           }
         },
