@@ -32,6 +32,8 @@ schemas/
         defra-unvtd-profile-docom-v1.schema.json
       gb/
         gbn-ag-v1.schema.json
+        pims/
+          gbn-ag-pims-v0.1.0.schema.json
       messaging/
         event-envelope-v1.schema.json
 
