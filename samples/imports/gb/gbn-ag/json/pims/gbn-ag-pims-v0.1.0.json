@@ -1,0 +1,155 @@
+{
+  "$schema": "gbn-ag-pims-v0.1.0.schema.json",
+  "eventId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "aggregateType": "Notification",
+  "subType": "GBN-AG",
+  "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
+  "aggregateVersion": 1,
+  "eventType": "uk.gov.defra.imports.notification.NotificationSubmitted",
+  "timestamp": "2026-08-12T10:15:00.000Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "gbn-ag",
+    "exchangedDocument": {
+      "identifier": "GBN-AG-26-0000001",
+      "traderAssignedId": "Imports456_GB",
+      "notificationStatusCode": "SUBMITTED",
+      "versionId": 1,
+      "issueDateTime": "2026-08-12T10:15:00Z",
+      "firstSignatoryAuthentication": {
+        "includedClause": [
+          { "identifier": "PURPOSE",               "content": "INTERNAL_MARKET", "urlId": null },
+          { "identifier": "INTERNAL_MARKET_PURPOSE","content": null,              "urlId": null },
+          { "identifier": "GOODS_CERTIFIED_AS",    "content": "BREEDING",        "urlId": null }
+        ]
+      }
+    },
+    "specifiedConsignment": {
+      "consignorParty": {
+        "name": "Ferme Dupont",
+        "postalAddress": {
+          "lineOne": "12 Rue de la Vallée",
+          "cityName": "Lyon",
+          "countryId": "FR"
+        }
+      },
+      "consigneeParty": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB"
+        }
+      },
+      "despatchParty": {
+        "name": "Ferme du Massif Central",
+        "postalAddress": {
+          "lineOne": "Route de la Vallée 12",
+          "cityName": "Saint-Flour",
+          "countryId": "FR"
+        }
+      },
+      "deliveryParty": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB"
+        }
+      },
+      "importer": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB"
+        }
+      },
+      "carrier": {
+        "name": "Ulster Livestock Transport Ltd",
+        "identifier": "UK/NEWCA/T1/00090953",
+        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+        "partyTypeCode": [
+          { "value": "COMMERCIAL_TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type" }
+        ],
+        "postalAddress": {
+          "lineOne": "Unit 6, Bally Business Centre",
+          "cityName": "Ballymena",
+          "countryId": "GB"
+        }
+      },
+      "originCountry": {
+        "code": { "value": "FR" }
+      },
+      "unloadingBaseportLocation": {
+        "identifier": "GBDVR"
+      },
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "modeCode": 1,
+          "usedLogisticsTransportMeans": { "name": "MV CATTLE CARRIER" },
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-08-15T00:00:00Z"
+            }
+          ]
+        }
+      ],
+      "isOrHasUnweanedAnimals": false,
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
+                  "classCode": { "value": "01020000" }
+                }
+              ],
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": { "content": 10 }
+                }
+              ],
+              "physicalReferencedLogisticsPackage": [
+                { "itemQuantity": 2 }
+              ],
+              "individualTradeProductInstance": [
+                {
+                  "identifier": [
+                    { "typeCode": "EAR_TAG", "content": "UK123456789012" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "correlationId": "cid-20260812-101500",
+    "schemaVersion": "0.1.0",
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/pims/gbn-ag-pims-v0.1.0.schema.json"
+  },
+  "actor": {
+    "id": "user-123",
+    "source": "defra-id",
+    "userType": "INTERNAL",
+    "displayName": "Test User",
+    "organisationId": "org-456"
+  },
+  "statusChanges": [
+    {
+      "status": "SUBMITTED",
+      "dateChanged": "2026-08-12T10:15:00.000Z",
+      "actor": {
+        "id": "user-123",
+        "source": "defra-id",
+        "userType": "INTERNAL",
+        "displayName": "Test User",
+        "organisationId": "org-456"
+      }
+    }
+  ]
+}
