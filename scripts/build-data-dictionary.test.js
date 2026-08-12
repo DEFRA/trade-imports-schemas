@@ -39,6 +39,13 @@ test('generator writes the dictionary to the expected path', () => {
     body.includes('| `permanentLocation` | `TradeParty`'),
     'Per-animal table is missing its permanentLocation row - the descend did not resolve to the instance'
   )
+  // Transport movement section: the leg identifier row must carry the canonical
+  // single-home description from the core schema.
+  assert.ok(body.includes('## Transport movement'), 'Transport movement section heading missing')
+  assert.ok(
+    body.includes('single home for the means-of-transport identification'),
+    'Transport movement identifier row is missing the canonical single-home description'
+  )
 })
 
 test('profile schema descriptions are preferred over the generic vocab', () => {
