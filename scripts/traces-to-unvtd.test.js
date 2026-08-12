@@ -106,6 +106,37 @@ test('CHED retrieve XML converts to UNVTD shape and validates', { skip: !existsS
   assert.equal(valid, true, JSON.stringify(errors, null, 2))
 })
 
+test('LAST_UPDATE_DATETIME note is copied to revisionDateTime and retained', async () => {
+  const fixture = {
+    spsCertificate: {
+      spsExchangedDocument: {
+        id: 'INTRA.EU.NL.2021.0000001',
+        typeCode: '856',
+        statusCode: '70',
+        issueDateTime: '2021-02-18T16:09:51.000+01:00',
+        includedSPSNote: [
+          {
+            content: '2026-07-22T12:38:45.000+02:00',
+            subjectCode: { value: 'LAST_UPDATE_DATETIME' }
+          }
+        ]
+      },
+      spsConsignment: {
+        consignorSPSParty: { id: '1', name: 'Consignor', roleCode: 'CZ' },
+        consigneeSPSParty: { id: '2', name: 'Consignee', roleCode: 'CN' }
+      }
+    }
+  }
+  const normalized = normalizeTracesPayload(fixture)
+  const unvtd = applyProfile(mapTracesToUnvtd(normalized), 'intra')
+  assert.equal(unvtd.exchangedDocument.revisionDateTime, '2026-07-22T12:38:45.000+02:00')
+  assert.ok(
+    unvtd.exchangedDocument.includedNote.some((n) => n.noteSubjectCode === 'LAST_UPDATE_DATETIME')
+  )
+  const { valid, errors } = await validateUnvtdPayload(unvtd, 'intra')
+  assert.equal(valid, true, JSON.stringify(errors, null, 2))
+})
+
 test('DOCOM JSON fixture maps with docom profile override', async () => {
   const normalized = normalizeTracesPayload(docomJsonFixture)
   let unvtd = mapTracesToUnvtd(normalized)

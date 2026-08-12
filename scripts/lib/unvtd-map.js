@@ -279,7 +279,12 @@ function mapExchangedDocument (spsDoc) {
 
   const notes = spsDoc.includedSPSNotes ?? spsDoc.includedSPSNote ?? spsDoc.includedNote
   const mappedNotes = mapNotes(notes)
-  if (mappedNotes) doc.includedNote = mappedNotes
+  if (mappedNotes) {
+    doc.includedNote = mappedNotes
+    const lastUpdate = mappedNotes.find((n) => n.noteSubjectCode === 'LAST_UPDATE_DATETIME')
+    const revisionDateTime = lastUpdate?.content?.[0]
+    if (revisionDateTime) doc.revisionDateTime = revisionDateTime
+  }
 
   const refs = spsDoc.referenceSPSReferencedDocument ?? spsDoc.referenceDocument
   const mappedRefs = mapReferencedDocuments(refs)

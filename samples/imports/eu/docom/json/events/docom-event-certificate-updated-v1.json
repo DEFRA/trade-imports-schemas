@@ -1,0 +1,33 @@
+{
+  "$schema": "docom-event-certificate-updated-v1.schema.json",
+  "eventId": "d4e5f6a7-b8c9-0123-def0-234567890123",
+  "aggregateType": "Certificate",
+  "subType": "DOCOM",
+  "aggregateId": "Imports.Certificate.DOCOM.DOCOM.EU.NL.2021.0000001",
+  "aggregateVersion": 1,
+  "eventType": "uk.gov.defra.trade.imports.traces.CertificateUpdated",
+  "timestamp": "2026-08-11T08:10:00.000Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "docom",
+    "exchangedDocument": {
+      "identifier": "DOCOM.EU.NL.2021.0000001",
+      "name": "Commercial document (illustrative sketch sample)",
+      "documentStatusCode": "70",
+      "issueDateTime": "2021-02-18T16:09:51.000Z"
+    },
+    "specifiedConsignment": {
+      "consignorParty": {
+        "name": "Example Consignor BV"
+      },
+      "consigneeParty": {
+        "name": "Example Consignee Ltd"
+      }
+    }
+  },
+  "metadata": {
+    "correlationId": "cid-20260811-081000",
+    "schemaVersion": "1.0.0",
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/eu/events/docom-event-certificate-updated-v1.schema.json"
+  }
+}

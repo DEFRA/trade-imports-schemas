@@ -27,11 +27,19 @@ schemas/
     imports/
       international/
         defra-unvtd-profile-ched-v1.schema.json
+        events/
+          ched-event-certificate-updated-v1.schema.json   # sketch
       eu/
         defra-unvtd-profile-intra-v1.schema.json
         defra-unvtd-profile-docom-v1.schema.json
+        events/
+          intra-event-certificate-updated-v1.schema.json  # sketch
+          docom-event-certificate-updated-v1.schema.json  # sketch
       gb/
         gbn-ag-v1.schema.json
+        events/                                          # GBN-AG Notification* catalogue
+      events/
+        README.md                                        # Certificate vs Notification guidance
       messaging/
         event-envelope-v1.schema.json
 
