@@ -4,7 +4,7 @@ Maps every property in the GBN-AG live-animals pre-notification payload to a pla
 
 Descriptions come from the GBN-AG schema's own `description` fields (the live-animals domain), falling back to the UN/CEFACT D23B vocabulary (`uncefact.jsonld`) via the JSON-LD context chain where the schema is silent. The canonical UN/CEFACT meaning is always reachable as linked data from the property's IRI. Property names that resolve only to a Defra context - Defra extensions, profile-level slots - are listed in a separate section at the end with the context file that declares them.
 
-Sections follow the payload's natural structure: Document, Consignment, Consignment item, Trade line item, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name.
+Sections follow the payload's natural structure: Document, Consignment, Transport movement, Consignment item, Trade line item, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name.
 
 ## Top-level payload structure
 
@@ -68,6 +68,19 @@ One consignment per payload. Carries the parties (consignor, consignee, delivery
 | `finalDestinationLocation` | `finalDestinationLocation` | no | For livestock the `identifier` inside this slot carries the CPH (County Parish Holding) number of the destination farm, with the sibling `urlId` pinned to `https://refdata.tbc.defra.gov.uk/cph_number`. One CPH per consignment - the schema does not carry a per-species CPH. Pets omit this slot entirely and use per-animal `permanentLocation` instead. Reference data: `https://refdata.tbc.defra.gov.uk/cph_number`. |
 | `applicableCrossBorderRegulatoryProcedure` | array of `crossBorderRegulatoryProcedure` | no | Reserved for journeys where regulatory inspection at a UK BCP applies. GBN-AG under EU-Reset does not populate this slot - the UK Port of Entry sits on `unloadingBaseportLocation`, which is a distinct concept. Other GB-import journeys may use this slot to carry SPS-inspection data. |
 | `isOrHasUnweanedAnimals` | boolean | yes | True when the consignment contains any unweaned (non-ablacted) animals. A UK welfare indicator on live-animal import pre-notifications. |
+
+## Transport movement (`specifiedConsignment.mainCarriageLogisticsTransportMovement[]`)
+
+One entry per main-carriage leg. The leg's `identifier` with its `urlId` register is the single home for the declared transport identification; consumers find the UK-arrival leg by matching `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`, never positionally.
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `identifier` | string \\| integer | no | The declared transport identification for this movement, as a bare string or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The value's register is named by the sibling urlId and varies by mode - road_vehicle_registration for road, vessel_name for maritime, airplane_flight_number for air - mirroring the schemeID that TRACES carries on the movement's ID. This is the single home for the means-of-transport identification; there is no separate conveyance-name slot. |
+| `urlId` | string | no | URL identifier for the codelist / register this movement's identifier is drawn from. |
+| `modeCode` | integer | no | Mode-of-transport code, held as an integer. From the UN/CEFACT TransportModeCodeList (UN/EDIFACT Recommendation 19): 1 Maritime, 2 Rail, 3 Road, 4 Air. |
+| `transportContractRelatedReferencedDocument` | array of `ReferencedDocument` | no | - |
+| `arrivalEvent` | array of `TransportEvent` | no | A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT `transportEventType`. `scheduledOccurrenceDateTime` is the declared planned time; `actualOccurrenceDateTime` is populated when the event has been observed. `occurrenceLogisticsLocation` identifies the location at which the event occurs (the destination of the leg for `arrivalEvent`; the origin for `departureEvent`), allowing consumers to identify a specific leg deterministically by matching the location identifier rather than relying on positional heuristics. |
+| `departureEvent` | array of `TransportEvent` | no | A scheduled or actual occurrence on a transport movement (arrival at, departure from a location). Mirrors UN/CEFACT `transportEventType`. `scheduledOccurrenceDateTime` is the declared planned time; `actualOccurrenceDateTime` is populated when the event has been observed. `occurrenceLogisticsLocation` identifies the location at which the event occurs (the destination of the leg for `arrivalEvent`; the origin for `departureEvent`), allowing consumers to identify a specific leg deterministically by matching the location identifier rather than relying on positional heuristics. |
 
 ## Consignment item (`specifiedConsignment.includedConsignmentItem[]`)
 
