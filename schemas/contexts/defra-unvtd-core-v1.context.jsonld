@@ -35,10 +35,6 @@
         "@id": "unece:mainCarriageTransportMovement",
         "@type": "@id"
       },
-      "usedLogisticsTransportMeans": {
-        "@id": "unece:usedTransportMeans",
-        "@type": "@id"
-      },
       "entryCustomsOfficeSpecifiedLogisticsLocation": {
         "@id": "unece:entryCustomsOfficeSpecifiedLocation",
         "@type": "@id"
