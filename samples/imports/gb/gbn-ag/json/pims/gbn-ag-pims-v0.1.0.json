@@ -18,9 +18,9 @@
       "issueDateTime": "2026-08-12T10:15:00Z",
       "firstSignatoryAuthentication": {
         "includedClause": [
-          { "identifier": "PURPOSE",               "content": "INTERNAL_MARKET", "urlId": null },
-          { "identifier": "INTERNAL_MARKET_PURPOSE","content": null,              "urlId": null },
-          { "identifier": "GOODS_CERTIFIED_AS",    "content": "BREEDING",        "urlId": null }
+          { "identifier": "PURPOSE",                "content": "INTERNAL_MARKET", "urlId": null },
+          { "identifier": "INTERNAL_MARKET_PURPOSE", "content": null,              "urlId": null },
+          { "identifier": "GOODS_CERTIFIED_AS",     "content": "BREEDING",        "urlId": null }
         ]
       }
     },
@@ -100,12 +100,10 @@
         {
           "includedTradeLineItem": [
             {
-              "applicableClassification": [
-                {
-                  "systemId": "CN",
-                  "classCode": { "value": "01020000" }
-                }
-              ],
+              "applicableClassification": {
+                "systemId": "CN",
+                "classCode": { "value": "01020000" }
+              },
               "specifiedLineTradeDelivery": [
                 {
                   "productUnitQuantity": { "content": 10 }
