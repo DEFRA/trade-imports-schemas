@@ -46,7 +46,7 @@
     },
     "eventType": {
       "type": "string",
-      "description": "Fully-qualified event type name (e.g., uk.gov.defra.imports.notification.NotificationCreated)"
+      "description": "Fully-qualified event type name (e.g., uk.gov.defra.imports.notification.NotificationCreated). Deliberately not domain-qualified: the same eventType recurs across journeys (an animals and a plants NotificationCreated carry the same value), so consumers discriminate on the (eventType, subType) pair, never on eventType alone."
     },
     "timestamp": {
       "type": "string",
