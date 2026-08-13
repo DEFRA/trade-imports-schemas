@@ -40,6 +40,8 @@ schemas/
         events/                                          # GBN-AG Notification* catalogue
       events/
         README.md                                        # Certificate vs Notification guidance
+      pims/
+        gbn-ag-pims-v0.1.0.schema.json
       messaging/
         event-envelope-v1.schema.json
 
