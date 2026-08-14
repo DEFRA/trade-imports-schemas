@@ -31,6 +31,9 @@
       "LogisticsTransportMovement": {
         "@id": "unece:TransportMovement"
       },
+      "LogisticsSeal": {
+        "@id": "unece:Seal"
+      },
       "mainCarriageLogisticsTransportMovement": {
         "@id": "unece:mainCarriageTransportMovement",
         "@type": "@id"
@@ -38,6 +41,17 @@
       "usedLogisticsTransportMeans": {
         "@id": "unece:usedTransportMeans",
         "@type": "@id"
+      },
+      "utilizedLogisticsTransportEquipment": {
+        "@id": "unece:utilizedTransportEquipment",
+        "@type": "@id"
+      },
+      "affixedLogisticsSeal": {
+        "@id": "unece:affixedSeal",
+        "@type": "@id"
+      },
+      "netVolume": {
+        "@id": "unece:netVolumeMeasure"
       },
       "entryCustomsOfficeSpecifiedLogisticsLocation": {
         "@id": "unece:entryCustomsOfficeSpecifiedLocation",

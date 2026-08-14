@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "docom-event-followup-updated-v1.schema.json",
+  "title": "DOCOM CertificateFollowUpUpdated event (v1)",
+  "description": "Event emitted when the Part III follow-up records on a TRACES DOCOM certificate are observed or republished. Certificate aggregate; subType is DOCOM. data is the full set of follow-up records for one certificate, keyed to it by data.certificateIdentifier. Separate from CertificateUpdated because TRACES appends follow-up records without reissuing the certificate.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Certificate" },
+        "subType": { "const": "DOCOM" },
+        "eventType": {
+          "const": "uk.gov.defra.trade.imports.traces.CertificateFollowUpUpdated"
+        },
+        "data": {
+          "$ref": "defra-unvtd-profile-docom-followup-v1.schema.json"
+        }
+      }
+    }
+  ]
+}

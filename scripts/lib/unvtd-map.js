@@ -20,20 +20,30 @@ const GLOBAL_KEY_RENAMES = {
   despatchSPSParty: 'despatchParty',
   customsTransitAgentSPSParty: 'customsTransitAgentParty',
   deliverySPSParty: 'deliveryParty',
+  carrierSPSParty: 'carrier',
+  operatorSPSParty: 'operatorParty',
   exportSPSCountry: 'exportCountry',
   importSPSCountry: 'importCountry',
+  originSPSCountry: 'originCountry',
   reExportSPSCountry: 'reExportCountry',
   transitSPSCountry: 'transitCountry',
   providerSPSParty: 'providerParty',
   specifiedSPSAddress: 'postalAddress',
   includedSPSConsignmentItem: 'includedConsignmentItem',
   includedSPSTradeLineItem: 'includedTradeLineItem',
+  loadingBaseportSPSLocation: 'loadingBaseportLocation',
   unloadingBaseportSPSLocation: 'unloadingBaseportLocation',
+  examinationSPSEvent: 'examinationEvent',
+  occurrenceSPSLocation: 'occurrenceLogisticsLocation',
   mainCarriageSPSTransportMovement: 'mainCarriageLogisticsTransportMovement',
+  usedSPSTransportMeans: 'usedLogisticsTransportMeans',
   utilizedSPSTransportEquipment: 'utilizedLogisticsTransportEquipment',
   affixedSPSSeal: 'affixedLogisticsSeal',
+  appliedSPSProcess: 'appliedProcess',
+  additionalInformationSPSNote: 'additionalInformationNote',
   applicableSPSClassification: 'applicableProductClassification',
   physicalReferencedSPSPackage: 'physicalReferencedLogisticsPackage',
+  physicalSPSPackage: 'physicalReferencedLogisticsPackage',
   natureIdentificationSPSCargo: 'natureIdCargo',
   referenceSPSReferencedDocument: 'referenceDocument',
   referencedSPSAttachmentBinaryObject: 'attachmentBinaryObject',
@@ -52,10 +62,49 @@ function asString (val) {
   return undefined
 }
 
-function asCodedValue (raw) {
-  if (raw == null) return undefined
-  const value = asString(typeof raw === 'object' ? raw.value : raw)
-  return value ? { value } : undefined
+const TRACES_CODELIST_BASE = 'https://traces-codelists.ec.europa.eu/'
+
+/**
+ * Codelist URL for a TRACES listId or identifier schemeId. Numeric list ids
+ * (1001, 3035, 7085, 9417) are UNTDID/UNCL lists rather than TRACES
+ * codelists, so they get no URL.
+ */
+function codelistUrl (listId) {
+  if (!listId || /^\d+$/.test(listId)) return undefined
+  return TRACES_CODELIST_BASE + listId
+}
+
+const CODE_VALUE_KEYS = new Set(['value', 'listID', 'listName', 'name', 'schemeID', 'schemeName'])
+
+/** True for a normalized code / identifier object: a value plus its scheme. */
+function isCodeOrIdentifierValue (val) {
+  if (!val || typeof val !== 'object' || Array.isArray(val)) return false
+  if (val.value === undefined) return false
+  return Object.keys(val).every((k) => CODE_VALUE_KEYS.has(k))
+}
+
+/** The list a coded value is drawn from (TRACES listID). */
+function listUrlId (raw) {
+  if (!raw || typeof raw !== 'object') return undefined
+  return codelistUrl(asString(raw.listId ?? raw.listID ?? raw.listid))
+}
+
+/** The register an identifier is drawn from (TRACES schemeID). */
+function schemeUrlId (raw) {
+  if (!raw || typeof raw !== 'object') return undefined
+  return codelistUrl(asString(raw.schemeId ?? raw.schemeID ?? raw.schemeid))
+}
+
+/**
+ * Split a TRACES identifier into the canonical `identifier` / `urlId` pair.
+ * Returns an empty object when there is no identifier to carry.
+ */
+function mapIdentifier (raw) {
+  if (raw == null) return {}
+  const identifier = asString(typeof raw === 'object' ? raw.value : raw)
+  if (!identifier) return {}
+  const urlId = schemeUrlId(raw)
+  return urlId ? { identifier, urlId } : { identifier }
 }
 
 function mapCodeType (raw) {
@@ -67,18 +116,10 @@ function mapCodeType (raw) {
   const value = asString(raw.value)
   if (!value) return undefined
   const out = { value }
-  const listId = asString(raw.listId ?? raw.listID ?? raw.listid)
-  if (listId) out.listId = listId
-  const listName = asString(raw.listName)
-  if (listName) out.listName = listName
+  const urlId = listUrlId(raw) ?? schemeUrlId(raw)
+  if (urlId) out.urlId = urlId
   const name = asString(raw.name)
   if (name) out.name = name
-  const listAgencyId = asString(raw.listAgencyId ?? raw.listAgencyID ?? raw.listagencyid)
-  if (listAgencyId) out.listAgencyId = listAgencyId
-  const listAgencyName = asString(raw.listAgencyName)
-  if (listAgencyName) out.listAgencyName = listAgencyName
-  const listVersionId = asString(raw.listVersionId ?? raw.listVersionID ?? raw.listversionid)
-  if (listVersionId) out.listVersionId = listVersionId
   return out
 }
 
@@ -125,6 +166,8 @@ function mapClauses (clauses) {
     const identifier = asString(c.value ?? c.identifier ?? extractCodeValue(c.id))
     if (!identifier) continue
     const clause = { identifier }
+    const urlId = schemeUrlId(c) ?? listUrlId(c)
+    if (urlId) clause.urlId = urlId
     if (c.content !== undefined) {
       clause.content = asString(c.content)
     }
@@ -136,18 +179,16 @@ function mapClauses (clauses) {
 function mapPartyTypeCode (typeCode) {
   if (typeCode == null) return undefined
   const arr = Array.isArray(typeCode) ? typeCode : [typeCode]
-  const values = arr.map(asCodedValue).filter(Boolean)
+  const values = arr.map(mapCodeType).filter(Boolean)
   return values.length ? values : undefined
 }
 
 function mapParty (party) {
   if (!party || typeof party !== 'object') return undefined
-  const out = {}
-  const id = party.id ?? party.identifier
-  if (id != null) out.identifier = asString(typeof id === 'object' ? id.value : id)
+  const out = { ...mapIdentifier(party.id ?? party.identifier) }
   if (party.name != null) out.name = extractContentValue(party.name) ?? asString(party.name)
   const role = party.roleCode ?? party.partyRoleCode
-  const roleCode = asCodedValue(role)
+  const roleCode = mapCodeType(role)
   if (roleCode) out.partyRoleCode = roleCode
   const ptc = mapPartyTypeCode(party.typeCode ?? party.partyTypeCode)
   if (ptc) out.partyTypeCode = ptc
@@ -310,7 +351,7 @@ function mapClassification (c) {
   const sys = c.systemID ?? c.systemId
   if (sys != null) out.systemId = asString(typeof sys === 'object' ? sys.value : sys)
   if (c.systemName) out.systemName = extractContentValue(c.systemName) ?? asString(c.systemName)
-  const cc = asCodedValue(c.classCode)
+  const cc = mapCodeType(c.classCode)
   if (cc) out.classCode = cc
   if (c.className) {
     const cn = c.className
@@ -333,19 +374,47 @@ function mapTradeLineItem (item) {
       ? d.map((x) => extractContentValue(x) ?? asString(x))
       : [extractContentValue(d) ?? asString(d)]
   }
-  if (item.netWeight) out.netWeight = mapMeasure(item.netWeight)
-  if (item.grossWeight) out.grossWeight = mapMeasure(item.grossWeight)
+  const scientificName = asString(extractContentValue(item.scientificName))
+  if (scientificName) out.scientificName = scientificName
+  const netWeight = item.netWeight ?? item.netWeightMeasure
+  if (netWeight) out.netWeight = mapMeasure(netWeight)
+  const grossWeight = item.grossWeight ?? item.grossWeightMeasure
+  if (grossWeight) out.grossWeight = mapMeasure(grossWeight)
+  const netVolume = item.netVolume ?? item.netVolumeMeasure
+  if (netVolume) out.netVolume = mapMeasure(netVolume)
+  const origin = mapTradeCountry(item.originSPSCountry ?? item.originCountry)
+  if (origin) out.originCountry = origin
   const apc = item.applicableSPSClassification ?? item.applicableProductClassification ?? item.applicableClassification
   if (apc) {
     out.applicableClassification = Array.isArray(apc)
       ? apc.map(mapClassification)
       : [mapClassification(apc)]
   }
-  const pkg = item.physicalReferencedSPSPackage ?? item.physicalReferencedLogisticsPackage
+  const pkg = item.physicalReferencedSPSPackage ?? item.physicalSPSPackage ?? item.physicalReferencedLogisticsPackage
   if (pkg) {
     out.physicalReferencedLogisticsPackage = (Array.isArray(pkg) ? pkg : [pkg]).map(mapTree)
   }
+  const processes = item.appliedSPSProcess ?? item.appliedProcess
+  if (processes) {
+    const mapped = (Array.isArray(processes) ? processes : [processes]).map(mapAppliedProcess).filter(Boolean)
+    if (mapped.length) out.appliedProcess = mapped
+  }
+  const lineNotes = mapNotes(item.additionalInformationSPSNotes ?? item.additionalInformationSPSNote ?? item.additionalInformationNote)
+  if (lineNotes) out.additionalInformationNote = lineNotes
   return out
+}
+
+function mapAppliedProcess (process) {
+  if (!process || typeof process !== 'object') return undefined
+  const out = {}
+  const tc = process.typeCode
+  if (tc != null) {
+    const typeCode = asString(typeof tc === 'object' ? tc.value : tc)
+    if (typeCode) out.typeCode = typeCode
+  }
+  const operator = mapParty(process.operatorSPSParty ?? process.operatorParty)
+  if (operator) out.operatorParty = operator
+  return Object.keys(out).length ? out : undefined
 }
 
 function mapConsignmentItem (item) {
@@ -365,16 +434,53 @@ function mapConsignmentItem (item) {
   return out
 }
 
-function mapLogisticsLocation (loc) {
-  if (!loc || typeof loc !== 'object') return loc
+/** Values of a location's Name elements, in the order TRACES sent them. */
+function locationNames (name) {
+  if (name == null) return []
+  return (Array.isArray(name) ? name : [name])
+    .map((n) => asString(typeof n === 'object' ? extractContentValue(n) ?? n.value : n))
+    .filter((v) => v != null && v !== '')
+}
+
+/**
+ * TRACES packs an address into repeated Name elements on baseport locations.
+ * The slots are positional and the layout differs per element, so each call
+ * site declares its own. Trailing slots may be absent.
+ *
+ * Place of loading (DOCOM I.14, INTRA I.13) describes an operator.
+ */
+const LOADING_BASEPORT_NAME_SLOTS = ['countryId', 'name', 'cityName', 'postcodeCode', 'lineOne']
+
+/**
+ * Point of entry / control authority (CHED I.4, I.5, II.20). Slots 2 and 5
+ * repeat the authority's activity id and UN/LOCODE, one of which the
+ * location's own ID already carries, so neither is mapped again.
+ */
+const UNLOADING_BASEPORT_NAME_SLOTS = ['countryId', 'cityName', null, 'name', 'lineOne', null]
+
+function mapPackedLocationNames (names, slots) {
   const out = {}
-  const id = loc.id ?? loc.identifier
-  if (id != null) out.identifier = asString(typeof id === 'object' ? id.value : id)
-  const name = loc.name
-  if (name != null) {
-    out.name = extractContentValue(name) ?? (Array.isArray(name)
-      ? name.map((n) => (typeof n === 'object' ? asString(n.value) : asString(n))).filter(Boolean).join(', ')
-      : asString(name))
+  const address = {}
+  names.forEach((value, index) => {
+    const slot = slots[index]
+    if (!slot) return
+    if (slot === 'name') out.name = value
+    else address[slot] = value
+  })
+  if (Object.keys(address).length) out.postalAddress = address
+  return out
+}
+
+function mapLogisticsLocation (loc, options = {}) {
+  if (!loc || typeof loc !== 'object') return loc
+  const out = { ...mapIdentifier(loc.id ?? loc.identifier) }
+  const names = locationNames(loc.name)
+  if (options.nameSlots) {
+    Object.assign(out, mapPackedLocationNames(names, options.nameSlots))
+  } else if (names.length) {
+    // Locations with no documented packing keep their names joined rather
+    // than dropped.
+    out.name = names.length === 1 ? names[0] : names.join(', ')
   }
   const tc = loc.typeCode
   if (tc != null) out.typeCode = asString(typeof tc === 'object' ? tc.value : tc)
@@ -383,26 +489,83 @@ function mapLogisticsLocation (loc) {
 
 function mapTransportMovement (movement) {
   if (!movement || typeof movement !== 'object') return undefined
-  const out = {}
-  const id = movement.id ?? movement.identifier
-  if (id != null) out.identifier = asString(typeof id === 'object' ? id.value : id)
+  const out = { ...mapIdentifier(movement.id ?? movement.identifier) }
   const mode = movement.modeCode
   if (mode != null) {
     const v = Number(typeof mode === 'object' ? mode.value : mode)
     if (!Number.isNaN(v)) out.modeCode = v
   }
+  const means = movement.usedSPSTransportMeans ?? movement.usedLogisticsTransportMeans
+  if (means && typeof means === 'object') {
+    const meansName = asString(extractContentValue(means.name) ?? means.name)
+    if (meansName) out.usedLogisticsTransportMeans = { name: meansName }
+  }
   return Object.keys(out).length ? out : undefined
+}
+
+function mapSeal (seal) {
+  if (!seal || typeof seal !== 'object') return undefined
+  const out = mapIdentifier(seal.id ?? seal.identifier)
+  return out.identifier ? out : undefined
+}
+
+function mapTransportEquipment (equipment) {
+  if (!equipment || typeof equipment !== 'object') return undefined
+  const out = { ...mapIdentifier(equipment.id ?? equipment.identifier) }
+  const seals = equipment.affixedSPSSeal ?? equipment.affixedLogisticsSeal
+  if (seals) {
+    const mapped = (Array.isArray(seals) ? seals : [seals]).map(mapSeal).filter(Boolean)
+    if (mapped.length) out.affixedLogisticsSeal = mapped
+  }
+  return Object.keys(out).length ? out : undefined
+}
+
+function mapExaminationEvent (event) {
+  if (!event || typeof event !== 'object') return undefined
+  const out = {}
+  if (event.scheduledOccurrenceDateTime) out.scheduledOccurrenceDateTime = asString(event.scheduledOccurrenceDateTime)
+  if (event.actualOccurrenceDateTime) out.actualOccurrenceDateTime = asString(event.actualOccurrenceDateTime)
+  const loc = event.occurrenceSPSLocation ?? event.occurrenceLogisticsLocation
+  const mappedLoc = mapLogisticsLocation(loc)
+  if (mappedLoc && Object.keys(mappedLoc).length) out.occurrenceLogisticsLocation = mappedLoc
+  return Object.keys(out).length ? out : undefined
+}
+
+/**
+ * A country sub-division: either a region, or the wrapper TRACES uses to hang
+ * competent authorities and customs offices off a country (functionTypeCode
+ * 44 / 42 / 41), in which case it has no identifier of its own.
+ */
+function mapCountrySubDivision (subDivision) {
+  if (!subDivision || typeof subDivision !== 'object') return undefined
+  const ftc = subDivision.functionTypeCode
+  const content = asString(typeof ftc === 'object' ? ftc?.value : ftc)
+  if (!content) return undefined
+  const out = { ...mapIdentifier(subDivision.id ?? subDivision.identifier) }
+  out.functionTypeCode = { content }
+  const parties = subDivision.activityAuthorizedSPSParty ?? subDivision.activityAuthorizedParty
+  if (parties) {
+    const mapped = (Array.isArray(parties) ? parties : [parties]).map(mapParty).filter(Boolean)
+    if (mapped.length) out.activityAuthorizedParty = mapped
+  }
+  return out
 }
 
 function mapTradeCountry (country) {
   if (!country || typeof country !== 'object') return undefined
   const out = {}
-  const id = country.id ?? country.identifier
-  if (id != null) out.id = asString(typeof id === 'object' ? id.value : id)
-  const name = country.name
-  if (name != null) {
-    out.name = extractContentValue(name) ?? asString(name)
+  const code = mapCodeType(country.id ?? country.identifier)
+  if (code) {
+    const name = asString(extractContentValue(country.name))
+    if (name) code.name = name
+    out.code = code
   }
+  // TRACES sends the export country with an empty code when it carries only
+  // the competent authorities (DOCOM I.3 / I.4), so the sub-division is mapped
+  // whether or not there is a country code to go with it.
+  const sub = country.subordinateSPSCountrySubDivision ?? country.subordinateTradeCountrySubDivision
+  const subDivision = mapCountrySubDivision(Array.isArray(sub) ? sub[0] : sub)
+  if (subDivision) out.subordinateTradeCountrySubDivision = subDivision
   return Object.keys(out).length ? out : undefined
 }
 
@@ -461,6 +624,14 @@ function mapTree (val, ctx = {}) {
   for (const [k, v] of Object.entries(val)) {
     let newKey = renameKey(k)
 
+    // Codes and identifiers reaching the generic walk have no urlId slot of
+    // their own, so they collapse to their bare value. Slots that do carry
+    // codelist metadata are handled by the mappers above.
+    if (isCodeOrIdentifierValue(v)) {
+      out[newKey] = v.value
+      continue
+    }
+
     if (k === 'id' && !ctx.keepId) {
       if (ctx.party || k.endsWith('Party') || GLOBAL_KEY_RENAMES[k]) {
         newKey = 'identifier'
@@ -505,9 +676,13 @@ function mapTree (val, ctx = {}) {
 
     const childCtx = { ...ctx }
 
-    if (newKey === 'unloadingBaseportLocation') {
+    if (newKey === 'unloadingBaseportLocation' || newKey === 'loadingBaseportLocation') {
       const items = Array.isArray(v) ? v : [v]
-      out.unloadingBaseportLocation = mapLogisticsLocation(items[0])
+      const nameSlots = newKey === 'loadingBaseportLocation'
+        ? LOADING_BASEPORT_NAME_SLOTS
+        : UNLOADING_BASEPORT_NAME_SLOTS
+      const location = mapLogisticsLocation(items[0], { nameSlots })
+      if (location && Object.keys(location).length) out[newKey] = location
       continue
     }
 
@@ -517,8 +692,21 @@ function mapTree (val, ctx = {}) {
       continue
     }
 
-    if (newKey === 'exportCountry' || newKey === 'importCountry') {
-      out[newKey] = mapTradeCountry(v)
+    if (newKey === 'utilizedLogisticsTransportEquipment') {
+      const items = (Array.isArray(v) ? v : [v]).map(mapTransportEquipment).filter(Boolean)
+      if (items.length) out.utilizedLogisticsTransportEquipment = items
+      continue
+    }
+
+    if (newKey === 'examinationEvent') {
+      const items = (Array.isArray(v) ? v : [v]).map(mapExaminationEvent).filter(Boolean)
+      if (items.length) out.examinationEvent = items
+      continue
+    }
+
+    if (newKey === 'exportCountry' || newKey === 'importCountry' || newKey === 'originCountry') {
+      const country = mapTradeCountry(v)
+      if (country) out[newKey] = country
       continue
     }
 
@@ -537,6 +725,95 @@ function mapTree (val, ctx = {}) {
     out[newKey] = mapTree(v, childCtx)
   }
   return out
+}
+
+function asBoolean (val) {
+  if (typeof val === 'boolean') return val
+  if (val === 'true') return true
+  if (val === 'false') return false
+  return undefined
+}
+
+function mapMeansOfTransport (means) {
+  if (!means || typeof means !== 'object') return undefined
+  const out = {}
+  const movement = mapTransportMovement(means.spsTransportMovement ?? means.specifiedLogisticsTransportMovement)
+  if (movement) out.specifiedLogisticsTransportMovement = movement
+  // TRACES spells the element InternationalTrasportDocument.
+  const document = asString(means.internationalTrasportDocument ?? means.internationalTransportDocument)
+  if (document) out.internationalTransportDocument = document
+  return Object.keys(out).length ? out : undefined
+}
+
+function mapRedispatchDetails (details) {
+  if (!details || typeof details !== 'object') return undefined
+  const out = {}
+  if (details.redispatchDateTime) out.redispatchDateTime = asString(details.redispatchDateTime)
+  const exitAuthority = mapParty(details.exitAuthoritySPSParty ?? details.exitAuthorityParty)
+  if (exitAuthority) out.exitAuthorityParty = exitAuthority
+  const destination = mapTradeCountry(details.countryOfDestination ?? details.destinationCountry)
+  if (destination) out.destinationCountry = destination
+  const means = details.meansOfTransport
+  if (means) {
+    const legs = (Array.isArray(means) ? means : [means]).map(mapMeansOfTransport).filter(Boolean)
+    if (legs.length) out.meansOfTransport = legs
+  }
+  const placeOfDestination = mapParty(details.placeOfDestinationSPSParty ?? details.placeOfDestinationParty)
+  if (placeOfDestination) out.placeOfDestinationParty = placeOfDestination
+  return Object.keys(out).length ? out : undefined
+}
+
+function mapControlDetails (details) {
+  if (!details || typeof details !== 'object') return undefined
+  const out = {}
+  const arrived = asBoolean(details.arrivalOfTheConsignment ?? details.consignmentArrivedIndicator)
+  if (arrived !== undefined) out.consignmentArrivedIndicator = arrived
+  const compliant = asBoolean(details.complianceOfTheConsignment ?? details.consignmentCompliantIndicator)
+  if (compliant !== undefined) out.consignmentCompliantIndicator = compliant
+  const notes = mapNotes(details.includedSPSNotes ?? details.includedSPSNote ?? details.includedNote)
+  if (notes) out.includedNote = notes
+  return Object.keys(out).length ? out : undefined
+}
+
+function mapFollowUpRecord (record) {
+  if (!record || typeof record !== 'object') return undefined
+  const out = {}
+  if (record.createdOn) out.creationDateTime = asString(record.createdOn)
+  if (record.updatedOn) out.revisionDateTime = asString(record.updatedOn)
+  const redispatch = mapRedispatchDetails(record.redispatchDetails)
+  if (redispatch) out.redispatchDetails = redispatch
+  const control = mapControlDetails(record.controlDetails)
+  if (control) out.controlDetails = control
+  const auth = record.certifyingOfficerSPSAuthentication ?? record.certifyingOfficerAuthentication
+  if (auth) {
+    const mapped = mapSignatory(auth)
+    if (mapped && Object.keys(mapped).length) out.certifyingOfficerAuthentication = mapped
+  }
+  return Object.keys(out).length ? out : undefined
+}
+
+/**
+ * Convert normalized TRACES DOCOM follow-up records to the DOCOM follow-up profile.
+ * Returns undefined when the payload carries no follow-up records.
+ */
+export function mapDocomFollowUps (input) {
+  const raw = input?.docomFollowUp
+  if (!raw) return undefined
+  const records = (Array.isArray(raw) ? raw : [raw]).map(mapFollowUpRecord).filter(Boolean)
+  if (!records.length) return undefined
+
+  const id = input?.spsCertificate?.spsExchangedDocument?.id
+  const certificateIdentifier = asString(typeof id === 'object' ? id?.value : id)
+  if (!certificateIdentifier) {
+    throw new Error('Cannot map DOCOM follow-ups: certificate identifier not found')
+  }
+
+  return {
+    $model: 'defra/certificate-internal/1',
+    $type: 'docom-followup',
+    certificateIdentifier,
+    followUp: records
+  }
 }
 
 /**

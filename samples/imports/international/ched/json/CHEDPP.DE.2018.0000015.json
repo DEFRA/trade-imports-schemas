@@ -45,15 +45,23 @@
       "actualDateTime": "2018-07-11T12:59:37.000+02:00",
       "providerParty": {
         "identifier": "DEFRA4",
+        "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
         "name": "Frankfurt am Main",
-        "partyRoleCode": { "value": "VJ" },
+        "partyRoleCode": {
+          "value": "VJ"
+        },
         "partyTypeCode": [
-          { "value": "AUTHORITY" }
+          {
+            "value": "AUTHORITY",
+            "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+            "name": "Authority"
+          }
         ],
         "postalAddress": {
           "postcodeCode": "60549",
           "lineOne": "Perishable Center \nTor 26/454",
           "cityName": "Frankfurt Am Main, Stadt",
+          "countryId": "DE",
           "countryName": "Germany"
         },
         "definedContact": [
@@ -65,6 +73,7 @@
       "includedClause": [
         {
           "identifier": "PURPOSE",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_consignment_clause",
           "content": "INTERNAL_MARKET"
         }
       ]
@@ -74,15 +83,23 @@
       "actualDateTime": "2018-07-11T12:59:37.000+02:00",
       "providerParty": {
         "identifier": "DEFRA4",
+        "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
         "name": "Frankfurt am Main",
-        "partyRoleCode": { "value": "AM" },
+        "partyRoleCode": {
+          "value": "AM"
+        },
         "partyTypeCode": [
-          { "value": "AUTHORITY" }
+          {
+            "value": "AUTHORITY",
+            "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+            "name": "Authority"
+          }
         ],
         "postalAddress": {
           "postcodeCode": "60549",
           "lineOne": "Perishable Center \nTor 26/454",
           "cityName": "Frankfurt Am Main, Stadt",
+          "countryId": "DE",
           "countryName": "Germany"
         },
         "definedContact": [
@@ -94,10 +111,12 @@
       "includedClause": [
         {
           "identifier": "DECISION_CONCLUSION",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_decision_clause",
           "content": "ACCEPTABLE_FOR_INTERNAL_MARKET"
         },
         {
           "identifier": "DOCUMENTARY_CHECK_RESULT",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_decision_clause",
           "content": "SATISFACTORY"
         }
       ]
@@ -105,106 +124,182 @@
   },
   "specifiedConsignment": {
     "consignorParty": {
-      "identifier": "",
       "name": "COOPERATIVEAF26 Ent",
-      "partyRoleCode": { "value": "CZ" },
+      "partyRoleCode": {
+        "value": "CZ"
+      },
       "partyTypeCode": [
-        { "value": "PLANT_ESTABLISHMENT" },
-        { "value": "PLANTS" }
+        {
+          "value": "PLANT_ESTABLISHMENT",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Plant establishment"
+        },
+        {
+          "value": "PLANTS",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Plant Nurseries"
+        }
       ],
       "postalAddress": {
-        "postcodeCode": "202",
+        "postcodeCode": "00202",
         "lineOne": "Avenue Pierre Saul 13",
         "cityName": "Nairobi",
+        "countryId": "KE",
         "countryName": "Kenya",
         "countrySubDivisionName": "Nairobi"
       }
     },
     "consigneeParty": {
-      "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": { "value": "CN" },
+      "partyRoleCode": {
+        "value": "CN"
+      },
       "partyTypeCode": [
-        { "value": "PLANT_ESTABLISHMENT" },
-        { "value": "PLANTS" }
+        {
+          "value": "PLANT_ESTABLISHMENT",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Plant establishment"
+        },
+        {
+          "value": "PLANTS",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Plant Nurseries"
+        }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
         "lineOne": "Rüdesheimerstr. 60-68",
         "cityName": "Bad Kreuznach",
+        "countryId": "DE",
         "countryName": "Germany",
         "countrySubDivisionName": "Rhineland-Palatinate"
       }
     },
     "exportCountry": {
-      "code": { "value": "KE", "name": "Kenya" }
+      "code": {
+        "value": "KE",
+        "name": "Kenya"
+      }
     },
-    "importCountry": {},
     "unloadingBaseportLocation": {
       "identifier": "DEFRA4",
-      "name": "DE"
-    },
-    "examinationSPSEvent": {
-      "occurrenceSPSLocation": {
-        "name": ""
+      "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+      "postalAddress": {
+        "countryId": "DE",
+        "cityName": "Frankfurt Am Main, Stadt"
       }
     },
     "deliveryParty": {
-      "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": { "value": "DP" },
+      "partyRoleCode": {
+        "value": "DP"
+      },
       "partyTypeCode": [
-        { "value": "PLANT_ESTABLISHMENT" },
-        { "value": "PLANTS" }
+        {
+          "value": "PLANT_ESTABLISHMENT",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Plant establishment"
+        },
+        {
+          "value": "PLANTS",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Plant Nurseries"
+        }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
         "lineOne": "Rüdesheimerstr. 60-68",
         "cityName": "Bad Kreuznach",
+        "countryId": "DE",
         "countryName": "Germany",
         "countrySubDivisionName": "Rhineland-Palatinate"
       }
     },
     "customsTransitAgentParty": {
-      "identifier": "",
       "name": "Keil Spedition",
-      "partyRoleCode": { "value": "CB" },
+      "partyRoleCode": {
+        "value": "CB"
+      },
       "partyTypeCode": [
-        { "value": "RESPONSIBLE_FOR_THE_LOAD" },
-        { "value": "RFL" }
+        {
+          "value": "RESPONSIBLE_FOR_THE_LOAD",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Responsible for the load"
+        },
+        {
+          "value": "RFL",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Responsible For the Load (Freight Forwarder)"
+        }
       ],
       "postalAddress": {
         "postcodeCode": "55545",
         "lineOne": "Rüdesheimerstr. 60-68",
         "cityName": "Bad Kreuznach",
+        "countryId": "DE",
         "countryName": "Germany",
         "countrySubDivisionName": "Rhineland-Palatinate"
       }
     },
     "mainCarriageLogisticsTransportMovement": [
       {
-        "id": "lkw",
+        "identifier": "lkw",
+        "urlId": "https://traces-codelists.ec.europa.eu/road_vehicle_registration_before_bcp",
         "modeCode": 3
       }
     ],
-    "utilizedLogisticsTransportEquipment": {
-      "id": "Container 1",
-      "affixedLogisticsSeal": {
-        "id": "Plombe 1"
+    "utilizedLogisticsTransportEquipment": [
+      {
+        "identifier": "Container 1",
+        "urlId": "https://traces-codelists.ec.europa.eu/container_number",
+        "affixedLogisticsSeal": [
+          {
+            "identifier": "Plombe 1",
+            "urlId": "https://traces-codelists.ec.europa.eu/seal_number"
+          }
+        ]
       }
-    },
+    ],
     "includedConsignmentItem": [
       {
         "includedTradeLineItem": [
           {
-            "sequenceNumeric": 0
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ],
+            "netWeight": {
+              "value": "111",
+              "unitCode": "KGM"
+            },
+            "physicalReferencedLogisticsPackage": [
+              {
+                "levelCode": 4,
+                "typeCode": "8B",
+                "itemQuantity": 5
+              }
+            ]
           },
           {
             "sequenceNumeric": 1,
+            "scientificName": "Rosa canina",
+            "netWeight": {
+              "value": "50.5",
+              "unitCode": "KGM"
+            },
+            "originCountry": {
+              "code": {
+                "value": "KE",
+                "name": "Kenya"
+              }
+            },
             "applicableClassification": [
               {
+                "systemId": "CN",
                 "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": { "value": "6031100" },
+                "classCode": {
+                  "value": "06031100"
+                },
                 "className": [
                   "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
                   "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
@@ -213,47 +308,17 @@
                 ]
               },
               {
+                "systemId": "EPPT",
                 "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": { "value": "ROSCN" },
+                "classCode": {
+                  "value": "ROSCN"
+                },
                 "className": [
                   "Rosa canina"
                 ]
               },
               {
-                "systemName": "Product type",
-                "classCode": { "value": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE" },
-                "className": [
-                  "Other living plants: cut flowers and branches with foliage"
-                ]
-              }
-            ]
-          },
-          {
-            "sequenceNumeric": 2,
-            "applicableClassification": [
-              {
-                "systemName": "CN Code (Combined Nomenclature)",
-                "classCode": {
-                  "value": "6031100"
-                },
-                "className": [
-                  "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
-                  "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
-                  "Fresh",
-                  "Roses"
-                ]
-              },
-              {
-                "systemName": "EPPO Plant Protection Thesaurus",
-                "classCode": 
-                {
-                  "value": "ROSAK"
-                },
-                "className": [
-                  "Rosa arkansana"
-                ]
-              },
-              {
+                "systemId": "PRODUCT_TYPE",
                 "systemName": "Product type",
                 "classCode": {
                   "value": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE"
@@ -261,6 +326,69 @@
                 "className": [
                   "Other living plants: cut flowers and branches with foliage"
                 ]
+              }
+            ],
+            "physicalReferencedLogisticsPackage": [
+              {
+                "levelCode": 4,
+                "typeCode": "8B",
+                "itemQuantity": 2
+              }
+            ]
+          },
+          {
+            "sequenceNumeric": 2,
+            "scientificName": "Rosa arkansana",
+            "netWeight": {
+              "value": "60.5",
+              "unitCode": "KGM"
+            },
+            "originCountry": {
+              "code": {
+                "value": "KE",
+                "name": "Kenya"
+              }
+            },
+            "applicableClassification": [
+              {
+                "systemId": "CN",
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": {
+                  "value": "06031100"
+                },
+                "className": [
+                  "LIVE TREES AND OTHER PLANTS; BULBS, ROOTS AND THE LIKE; CUT FLOWERS AND ORNAMENTAL FOLIAGE",
+                  "Cut flowers and flower buds of a kind suitable for bouquets or for ornamental purposes, fresh, dried, dyed, bleached, impregnated or otherwise prepared",
+                  "Fresh",
+                  "Roses"
+                ]
+              },
+              {
+                "systemId": "EPPT",
+                "systemName": "EPPO Plant Protection Thesaurus",
+                "classCode": {
+                  "value": "ROSAK"
+                },
+                "className": [
+                  "Rosa arkansana"
+                ]
+              },
+              {
+                "systemId": "PRODUCT_TYPE",
+                "systemName": "Product type",
+                "classCode": {
+                  "value": "OTHER_LIVING_PLANTS_CUT_FLOWERS_AND_BRANCHES_WITH_FOLIAGE"
+                },
+                "className": [
+                  "Other living plants: cut flowers and branches with foliage"
+                ]
+              }
+            ],
+            "physicalReferencedLogisticsPackage": [
+              {
+                "levelCode": 4,
+                "typeCode": "CR",
+                "itemQuantity": 3
               }
             ]
           }

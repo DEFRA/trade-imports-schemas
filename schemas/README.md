@@ -22,6 +22,7 @@ schemas/
 
   contexts/
     defra-unvtd-core-v1.context.jsonld
+    defra-unvtd-docom-followup-v1.context.jsonld         # DOCOM Part III terms, layered on core
 
   profiles/
     imports/
@@ -32,9 +33,11 @@ schemas/
       eu/
         defra-unvtd-profile-intra-v1.schema.json
         defra-unvtd-profile-docom-v1.schema.json
+        defra-unvtd-profile-docom-followup-v1.schema.json  # Part III follow-up records
         events/
           intra-event-certificate-updated-v1.schema.json  # sketch
           docom-event-certificate-updated-v1.schema.json  # sketch
+          docom-event-followup-updated-v1.schema.json     # sketch
       gb/
         gbn-ag-v1.schema.json
         events/                                          # GBN-AG Notification* catalogue
@@ -78,6 +81,7 @@ Primary sample locations:
 
 - `samples/imports/international/ched/json/unvtd-ched.json`
 - `samples/imports/eu/intra/json/unvtd-intra.json`
+- `samples/imports/eu/docom/json/DOCOM.ES.2026.0000001.json` (and `-followup.json`)
 - `samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json`
 - `samples/imports/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
 

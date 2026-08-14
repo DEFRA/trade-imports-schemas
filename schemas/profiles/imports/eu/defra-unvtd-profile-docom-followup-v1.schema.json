@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defra-unvtd-profile-docom-followup-v1.schema.json",
+  "title": "Defra UNVTD DOCOM follow-up profile",
+  "description": "Part III follow-up records for a DOCOM certificate (TRACES DocomFollowUp) — the redispatch details and control outcomes recorded against a certificate after it was issued. A separate aggregate from the certificate itself: TRACES appends follow-up records over time without reissuing the certificate, so they are carried on their own payload keyed to the certificate by certificateIdentifier. Follow-up concepts with no UN/CEFACT D23B equivalent are named as Defra profile terms and mapped in defra-unvtd-core-v1.context.jsonld.",
+  "type": "object",
+  "required": [
+    "$model",
+    "$type",
+    "certificateIdentifier",
+    "followUp"
+  ],
+  "properties": {
+    "$model": {
+      "const": "defra/certificate-internal/1"
+    },
+    "$type": {
+      "const": "docom-followup"
+    },
+    "certificateIdentifier": {
+      "type": "string",
+      "description": "The identifier of the DOCOM certificate these follow-up records belong to — matches exchangedDocument.identifier on the certificate payload (e.g. DOCOM.ES.2026.0000001)."
+    },
+    "followUp": {
+      "type": "array",
+      "description": "Follow-up records in the order TRACES returned them. TRACES emits one record per follow-up action, so a certificate accumulates records over its life; each record carries redispatch details, control outcomes, or both.",
+      "items": {
+        "$ref": "#/$defs/FollowUpRecord"
+      }
+    }
+  },
+  "$defs": {
+    "FollowUpRecord": {
+      "type": "object",
+      "description": "A single follow-up action recorded against the certificate (TRACES DocomFollowUp).",
+      "properties": {
+        "creationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the follow-up record was created (TRACES CreatedOn, unece:creationDateTime)."
+        },
+        "revisionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the follow-up record was last revised (TRACES UpdatedOn, unece:revisionDateTime). Same term as the certificate's revisionDateTime, scoped to this record."
+        },
+        "redispatchDetails": {
+          "$ref": "#/$defs/RedispatchDetails"
+        },
+        "controlDetails": {
+          "$ref": "#/$defs/ControlDetails"
+        },
+        "certifyingOfficerAuthentication": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Authentication",
+          "description": "The officer who signed off this follow-up action (TRACES CertifyingOfficerSPSAuthentication). Same Authentication shape as the certificate signatories: typeCode carries the action per UNCL9417, provider carries the authority and the named official."
+        }
+      }
+    },
+    "RedispatchDetails": {
+      "type": "object",
+      "description": "Where a consignment was redispatched to after a control (TRACES RedispatchDetails). Populated on redispatch follow-ups; absent or empty on control-only follow-ups.",
+      "properties": {
+        "redispatchDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the consignment was redispatched."
+        },
+        "exitAuthorityParty": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "description": "The authority at the point of exit that handled the redispatch (TRACES ExitAuthoritySPSParty) — typically a border control post. identifier is drawn from authority_activity_id."
+        },
+        "destinationCountry": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
+          "description": "The country the consignment was redispatched to (TRACES CountryOfDestination, unece:destinationCountry)."
+        },
+        "meansOfTransport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MeansOfTransport"
+          },
+          "description": "The transport used for the redispatch, one entry per leg (TRACES MeansOfTransport)."
+        },
+        "placeOfDestinationParty": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "description": "The operator at the redispatch destination (TRACES PlaceOfDestinationSPSParty). identifier is drawn from operator_activity_id."
+        }
+      }
+    },
+    "MeansOfTransport": {
+      "type": "object",
+      "description": "One leg of the redispatch journey, pairing the transport movement with the transport document covering it.",
+      "properties": {
+        "specifiedLogisticsTransportMovement": {
+          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsTransportMovement",
+          "description": "The movement for this leg (TRACES SPSTransportMovement). identifier is the conveyance identifier, with urlId naming the register it is drawn from (e.g. road_vehicle_registration_after_bcp); modeCode carries the mode per UN/ECE Recommendation 19. Aliased to unece:specifiedTransportMovement."
+        },
+        "internationalTransportDocument": {
+          "type": "string",
+          "description": "Reference of the international transport document covering this leg (TRACES InternationalTrasportDocument — the TRACES element name carries a spelling error that is corrected here)."
+        }
+      }
+    },
+    "ControlDetails": {
+      "type": "object",
+      "description": "The outcome of a follow-up control (TRACES ControlDetails). Populated on control follow-ups; absent or empty on redispatch-only follow-ups.",
+      "properties": {
+        "consignmentArrivedIndicator": {
+          "type": "boolean",
+          "description": "Whether the consignment arrived at its declared destination (TRACES ArrivalOfTheConsignment)."
+        },
+        "consignmentCompliantIndicator": {
+          "type": "boolean",
+          "description": "Whether the consignment was found compliant at the control (TRACES ComplianceOfTheConsignment). When false, the reasons are carried as includedNote entries with subject code REASON_OF_NON_COMPLIANCE."
+        },
+        "includedNote": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
+          },
+          "description": "Coded control detail. Subject codes are drawn from the TRACES ched_follow_up_note_subject_code list — TYPE_OF_CONTROL (contentCode from docom_follow_up_type_of_control) and REASON_OF_NON_COMPLIANCE (contentCode from docom_follow_up_reason_of_non_compliance, which can carry several codes on one note)."
+        }
+      }
+    }
+  }
+}
