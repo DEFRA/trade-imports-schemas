@@ -142,11 +142,8 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "identifier": "CMR-FR-2026-0017",
+          "identifier": "FR-AB-123-CD",
           "modeCode": 3,
-          "usedLogisticsTransportMeans": {
-            "name": "FR-AB-123-CD"
-          },
           "transportContractRelatedReferencedDocument": [
             {
               "typeCode": "730",
@@ -170,11 +167,8 @@
           "urlId": "https://refdata.tbc.defra.gov.uk/road_vehicle_registration"
         },
         {
-          "identifier": "VOY-26-EUR-04832",
+          "identifier": "MV ATLANTIC STAR",
           "modeCode": 1,
-          "usedLogisticsTransportMeans": {
-            "name": "MV ATLANTIC STAR"
-          },
           "transportContractRelatedReferencedDocument": [
             {
               "typeCode": "705",

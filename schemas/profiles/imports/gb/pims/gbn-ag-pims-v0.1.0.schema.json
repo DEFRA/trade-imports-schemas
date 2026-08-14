@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-pims-v0.1.0.schema.json",
   "title": "GBN-AG PIMS consumer schema (v0.1.0)",
-  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.1.0 is a point-in-time description of what the trade-imports-animals-backend currently serialises — derived from the outbox/gbnag/ Java types, not from gbn-ag-v1.schema.json. This schema is insulated from changes to the upstream GBN-AG schema; new PIMS versions are minted independently. Core envelope infrastructure is composed via event-envelope-v1.",
+  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.1.0 is a point-in-time description of what the trade-imports-animals-backend currently serialises — derived from the outbox/gbnag/ Java types, not from gbn-ag-v1.schema.json. This schema is insulated from changes to the upstream GBN-AG schema; new PIMS versions are minted independently. Core envelope infrastructure is composed via event-envelope-v1. Note: the transport identification will move to the movement's `identifier` + `urlId` register in a future PIMS version as the backend converges on the GBN-AG single-home contract; `usedLogisticsTransportMeans` here reflects the current wire only.",
   "version": "0.1.0",
 
   "allOf": [

@@ -155,11 +155,8 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "identifier": "VOY-26-EUR-04832",
+          "identifier": "MV SHIPPY",
           "modeCode": 1,
-          "usedLogisticsTransportMeans": {
-            "name": "MV SHIPPY"
-          },
           "transportContractRelatedReferencedDocument": [
             {
               "typeCode": "705",

@@ -5,7 +5,7 @@
   "subType": "GBN-AG",
   "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000001",
   "aggregateVersion": 4,
-  "eventType": "uk.gov.defra.trade.imports.animals.NotificationAmendmentCancelled",
+  "eventType": "uk.gov.defra.imports.notification.NotificationAmendmentCancelled",
   "timestamp": "2026-05-25T15:30:00.000Z",
   "data": {
     "$model": "defra/certificate-internal/1",
@@ -183,11 +183,8 @@
         },
         "mainCarriageLogisticsTransportMovement": [
           {
-            "identifier": "VOY-26-EUR-04832",
+            "identifier": "MV SHIPPY",
             "modeCode": 1,
-            "usedLogisticsTransportMeans": {
-              "name": "MV SHIPPY"
-            },
             "transportContractRelatedReferencedDocument": [
               {
                 "typeCode": "705",

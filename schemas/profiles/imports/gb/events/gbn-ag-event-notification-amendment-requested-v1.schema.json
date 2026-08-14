@@ -11,7 +11,7 @@
       "properties": {
         "aggregateType": { "const": "Notification" },
         "subType":       { "const": "GBN-AG" },
-        "eventType":     { "const": "uk.gov.defra.trade.imports.animals.NotificationAmendmentRequested" },
+        "eventType":     { "const": "uk.gov.defra.imports.notification.NotificationAmendmentRequested" },
         "data": {
           "allOf": [
             { "$ref": "gbn-ag-v1.schema.json" },

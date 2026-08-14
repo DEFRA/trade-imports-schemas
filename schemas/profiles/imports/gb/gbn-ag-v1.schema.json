@@ -75,7 +75,7 @@
               }
             },
             "referenceDocument": {
-              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline."
+              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Accompanying documents are all-or-nothing: they are optional as a group, but when one is provided its type, reference and date of issue accompany it. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline."
             }
           }
         },
@@ -127,7 +127,7 @@
               "description": "The UK port (or point) of entry the consignment arrives at, sourced from the MDM Countries API restricted to ports handling arrivals from EU and EFTA countries within scope of the GBN-AG journey under EU-Reset. `identifier` carries the port reference (typically a UN/LOCODE like `GBHUL`); `name` carries the human-readable port name. This slot is the structural anchor for identifying the UK arrival event: the `arrivalEvent` whose `occurrenceLogisticsLocation.identifier` matches this slot's `identifier` is the leg arriving at the UK port. Distinct from any inspection point under `applicableCrossBorderRegulatoryProcedure`, which is a separate regulatory concept."
             },
             "mainCarriageLogisticsTransportMovement": {
-              "description": "The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases."
+              "description": "The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. On the UK-arrival leg, `identifier` with its `urlId` register carries the V4 Transport identification value. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases."
             },
             "importer": {
               "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
