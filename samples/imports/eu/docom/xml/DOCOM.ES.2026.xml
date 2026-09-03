@@ -43,7 +43,7 @@
             <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
           </SpecifiedSPSAddress>
           <SpecifiedSPSPerson>
-            <Name>Daniel Klemm</Name>
+            <Name>Mr Test</Name>
           </SpecifiedSPSPerson>
         </ProviderSPSParty>
         <IncludedSPSClause>
@@ -53,7 +53,7 @@
         </IncludedSPSClause>
         <IncludedSPSClause>
           <ID schemeID="docom_consignment_clause" schemeName="Docom consignment' clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ID>
-          <Content>dklemm@equalexperts.com</Content>
+          <Content>mrtest@test.com</Content>
         </IncludedSPSClause>
       </SignatorySPSAuthentication>
       <SignatorySPSAuthentication xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
@@ -75,12 +75,12 @@
             <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
           </SpecifiedSPSAddress>
           <SpecifiedSPSPerson>
-            <Name>Daniel Klemm</Name>
+            <Name>Mr Test</Name>
           </SpecifiedSPSPerson>
         </ProviderSPSParty>
         <IncludedSPSClause>
           <ID schemeID="docom_declaration_clause" schemeName="Docom declaration's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ID>
-          <Content>dklemm@equalexperts.com</Content>
+          <Content>mrtest@test.com</Content>
         </IncludedSPSClause>
         <IncludedSPSClause>
           <ID schemeID="docom_declaration_clause" schemeName="Docom declaration's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DECLARATION_CLAUSES</ID>
@@ -429,7 +429,7 @@ Málaga</LineOne>
           <CountrySubDivisionName languageID="en">Northern Ireland</CountrySubDivisionName>
         </SpecifiedSPSAddress>
         <SpecifiedSPSPerson>
-          <Name>Daniel Klemm</Name>
+          <Name>Mr Test</Name>
         </SpecifiedSPSPerson>
       </ProviderSPSParty>
       <IncludedSPSClause xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
@@ -478,7 +478,7 @@ BT3 9HY</LineOne>
           <CountrySubDivisionName languageID="en">Northern Ireland</CountrySubDivisionName>
         </SpecifiedSPSAddress>
         <SpecifiedSPSPerson>
-          <Name>Daniel Klemm</Name>
+          <Name>Mr Test</Name>
         </SpecifiedSPSPerson>
       </ProviderSPSParty>
       <IncludedSPSClause xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">

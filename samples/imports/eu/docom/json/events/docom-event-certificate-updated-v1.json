@@ -79,7 +79,7 @@
           },
           "definedContact": [
             {
-              "personName": "Daniel Klemm"
+              "personName": "Mr Test"
             }
           ]
         },
@@ -92,7 +92,7 @@
           {
             "identifier": "SIGNATORY_PERSON_EMAIL",
             "urlId": "https://traces-codelists.ec.europa.eu/docom_consignment_clause",
-            "content": "dklemm@equalexperts.com"
+            "content": "mrtest@test.com"
           }
         ]
       },
@@ -124,7 +124,7 @@
           },
           "definedContact": [
             {
-              "personName": "Daniel Klemm"
+              "personName": "Mr Test"
             }
           ]
         },
@@ -132,7 +132,7 @@
           {
             "identifier": "SIGNATORY_PERSON_EMAIL",
             "urlId": "https://traces-codelists.ec.europa.eu/docom_declaration_clause",
-            "content": "dklemm@equalexperts.com"
+            "content": "mrtest@test.com"
           },
           {
             "identifier": "DECLARATION_CLAUSES",
