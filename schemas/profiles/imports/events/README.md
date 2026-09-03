@@ -11,8 +11,20 @@ These are **not** a copy of the GBN-AG `Notification*` lifecycle catalogue. TRAC
 | [`international/events/ched-event-certificate-updated-v1.schema.json`](../international/events/ched-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-ched-v1` | `Certificate` | `CHEDA` \| `CHEDP` \| `CHEDPP` \| `CHEDD` | `uk.gov.defra.trade.imports.traces.CertificateUpdated` |
 | [`eu/events/intra-event-certificate-updated-v1.schema.json`](../eu/events/intra-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-intra-v1` | `Certificate` | `INTRA` | same |
 | [`eu/events/docom-event-certificate-updated-v1.schema.json`](../eu/events/docom-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-docom-v1` | `Certificate` | `DOCOM` | same |
+| [`eu/events/docom-event-followup-updated-v1.schema.json`](../eu/events/docom-event-followup-updated-v1.schema.json) | `defra-unvtd-profile-docom-followup-v1` | `Certificate` | `DOCOM` | `uk.gov.defra.trade.imports.traces.CertificateFollowUpUpdated` |
 
-`aggregateId` form: `Imports.Certificate.${subType}.${referenceNumber}` (certificate reference from `data.exchangedDocument.identifier`).
+`aggregateId` form: `Imports.Certificate.${subType}.${referenceNumber}` (certificate reference from `data.exchangedDocument.identifier`, or from `data.certificateIdentifier` on follow-up events).
+
+### DOCOM Part III follow-ups — inline vs detached
+
+TRACES returns `DocomFollowUp` records **alongside** the certificate. Consumers see the same `FollowUpRecord` shape in two places:
+
+| When | Where | Profile |
+|------|--------|---------|
+| Certificate retrieve / change-feed includes follow-ups | Optional `data.followUp[]` on `CertificateUpdated` | `defra-unvtd-profile-docom-v1` |
+| Follow-ups append without a certificate reissue | `CertificateFollowUpUpdated` with `data.certificateIdentifier` + `data.followUp[]` | `defra-unvtd-profile-docom-followup-v1` |
+
+These are not competing models: `docom-v1` `$ref`s `FollowUpRecord` from `docom-followup-v1`. Prefer the detached event for append-only Part III updates; read inline `followUp` when the gateway returns the full certificate snapshot that already carries them. `followUp` is absent on the certificate until TRACES has recorded at least one follow-up.
 
 ## Explicitly out of scope (for now)
 
@@ -24,7 +36,8 @@ These are **not** a copy of the GBN-AG `Notification*` lifecycle catalogue. TRAC
 
 - `samples/imports/international/ched/json/events/ched-event-certificate-updated-v1.json` (wraps existing CHEDPP sample)
 - `samples/imports/eu/intra/json/events/intra-event-certificate-updated-v1.json` (wraps existing INTRA sample)
-- `samples/imports/eu/docom/json/events/docom-event-certificate-updated-v1.json` (**illustrative** minimal DOCOM — no full profile sample in-repo yet)
+- `samples/imports/eu/docom/json/events/docom-event-certificate-updated-v1.json` (wraps DOCOM certificate; `followUp` absent until Part III exists)
+- `samples/imports/eu/docom/json/events/docom-event-followup-updated-v1.json` (detached Part III payload)
 
 ## Open questions for review
 

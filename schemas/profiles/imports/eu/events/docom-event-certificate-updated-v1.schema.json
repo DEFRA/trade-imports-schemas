@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "docom-event-certificate-updated-v1.schema.json",
   "title": "DOCOM CertificateUpdated event (v1)",
-  "description": "Event emitted when a TRACES DOCOM certificate snapshot is observed or republished. Certificate aggregate; subType is DOCOM. data is the full DOCOM profile.",
+  "description": "Event emitted when a TRACES DOCOM certificate snapshot is observed or republished. Certificate aggregate; subType is DOCOM. data is the full DOCOM profile and may include optional followUp[] when TRACES returned Part III records alongside the certificate. Append-only follow-up changes without a certificate reissue are also published as CertificateFollowUpUpdated (see docom-event-followup-updated-v1).",
 
   "allOf": [
     { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "defra-unvtd-profile-docom-followup-v1.schema.json",
   "title": "Defra UNVTD DOCOM follow-up profile",
-  "description": "Part III follow-up records for a DOCOM certificate (TRACES DocomFollowUp) — the redispatch details and control outcomes recorded against a certificate after it was issued. A separate aggregate from the certificate itself: TRACES appends follow-up records over time without reissuing the certificate, so they are carried on their own payload keyed to the certificate by certificateIdentifier. Follow-up concepts with no UN/CEFACT D23B equivalent are named as Defra profile terms and mapped in defra-unvtd-core-v1.context.jsonld.",
+  "description": "Part III follow-up records for a DOCOM certificate (TRACES DocomFollowUp) — the redispatch details and control outcomes recorded against a certificate after it was issued. TRACES appends follow-up records over time without reissuing the certificate, and returns them alongside it, so the certificate carries them inline on followUp — see defra-unvtd-profile-docom-v1.schema.json, which references the FollowUpRecord shape defined here. The standalone payload below keys the same records to a certificate by certificateIdentifier, for consumers that receive them detached from it. Follow-up concepts with no UN/CEFACT D23B equivalent are named as Defra profile terms and mapped in defra-unvtd-core-v1.context.jsonld.",
   "type": "object",
   "required": [
     "$model",
