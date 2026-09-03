@@ -72,7 +72,7 @@
         },
         "definedContact": [
           {
-            "personName": "Daniel Klemm"
+            "personName": "Mr Test"
           }
         ]
       },
@@ -85,7 +85,7 @@
         {
           "identifier": "SIGNATORY_PERSON_EMAIL",
           "urlId": "https://traces-codelists.ec.europa.eu/docom_consignment_clause",
-          "content": "dklemm@equalexperts.com"
+          "content": "mrtest@test.com"
         }
       ]
     },
@@ -117,7 +117,7 @@
         },
         "definedContact": [
           {
-            "personName": "Daniel Klemm"
+            "personName": "Mr Test"
           }
         ]
       },
@@ -125,7 +125,7 @@
         {
           "identifier": "SIGNATORY_PERSON_EMAIL",
           "urlId": "https://traces-codelists.ec.europa.eu/docom_declaration_clause",
-          "content": "dklemm@equalexperts.com"
+          "content": "mrtest@test.com"
         },
         {
           "identifier": "DECLARATION_CLAUSES",
@@ -141,7 +141,7 @@
     "consignorParty": {
       "identifier": "899361",
       "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
-      "name": "DK Test",
+      "name": "Mr Test",
       "partyRoleCode": {
         "value": "CZ",
         "name": "Consignor"
@@ -170,7 +170,7 @@
     "consigneeParty": {
       "identifier": "899361",
       "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
-      "name": "DK Test",
+      "name": "Mr Test",
       "partyRoleCode": {
         "value": "CN",
         "name": "Consignee"
@@ -393,7 +393,7 @@
                 "operatorParty": {
                   "identifier": "899361",
                   "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
-                  "name": "DK Test",
+                  "name": "Mr Test",
                   "partyRoleCode": {
                     "value": "FW",
                     "name": "Freight forwarder (Transport organizer)"
