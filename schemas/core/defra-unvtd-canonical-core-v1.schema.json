@@ -381,14 +381,14 @@
     },
     "LogisticsTransportMovement": {
       "type": "object",
-      "description": "A transport movement (a leg of the consignment's journey). identifier carries the transport identifier (vessel name, flight number, vehicle registration). modeCode carries the mode-of-transport code (see its own description). arrivalEvent[] and departureEvent[] carry the importer-declared scheduled timing for the leg's start and end.",
+      "description": "A transport movement (a leg of the consignment's journey). identifier carries the declared transport identification for the leg, with the sibling urlId naming its register. modeCode carries the mode-of-transport code (see its own description). arrivalEvent[] and departureEvent[] carry the importer-declared scheduled timing for the leg's start and end.",
       "properties": {
         "identifier": {
           "oneOf": [
             { "type": "string" },
             { "type": "integer" }
           ],
-          "description": "Transport identifier as a bare string or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The sibling urlId names the register the identifier is drawn from (e.g. vessel_name, road_vehicle_registration, airplane_flight_number)."
+          "description": "The declared transport identification for this movement, as a bare string or integer (legacy INTRA shape where it was sometimes numeric). Matches the BSP D23B canonical shape where idType metadata is disabled. The value's register is named by the sibling urlId and varies by mode - road_vehicle_registration for road, vessel_name for maritime, airplane_flight_number for air - mirroring the schemeID that TRACES carries on the movement's ID. This is the single home for the means-of-transport identification; there is no separate conveyance-name slot."
         },
         "urlId": {
           "type": "string",
@@ -398,13 +398,6 @@
         "modeCode": {
           "type": "integer",
           "description": "Mode-of-transport code, held as an integer. From the UN/CEFACT TransportModeCodeList (UN/EDIFACT Recommendation 19): 1 Maritime, 2 Rail, 3 Road, 4 Air."
-        },
-        "usedLogisticsTransportMeans": {
-          "type": "object",
-          "description": "The conveyance used on this leg. `name` carries the means' identifying name (vessel name, vehicle registration, flight callsign). Distinct from `identifier` on the parent movement, which carries the movement's reference (journey number, waybill, booking). Both slots can be populated and may carry different values: identifier identifies the movement, usedLogisticsTransportMeans.name identifies the vehicle / vessel / aircraft.",
-          "properties": {
-            "name": { "type": "string" }
-          }
         },
         "transportContractRelatedReferencedDocument": {
           "type": "array",
@@ -854,7 +847,7 @@
         "mainCarriageLogisticsTransportMovement": {
           "type": "array",
           "items": { "$ref": "#/$defs/LogisticsTransportMovement" },
-          "description": "Transport movement(s) for the main carriage leg(s). An array of one entry per carriage leg, with entries distinguished by id.schemeId. The SPS profile collapses BSP's three-way pre/main/on carriage split into this slot."
+          "description": "Transport movement(s) for the main carriage leg(s). An array of one entry per carriage leg; consumers identify a specific leg by matching its arrivalEvent.occurrenceLogisticsLocation.identifier against a location anchor (for GB imports, unloadingBaseportLocation.identifier), never positionally. The SPS profile collapses BSP's three-way pre/main/on carriage split into this slot."
         },
         "transitTradeCountry": {
           "type": "array",

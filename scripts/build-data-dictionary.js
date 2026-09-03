@@ -41,7 +41,7 @@ const D23B_CONTEXT_VENDORED = resolvePath(VENDOR_DIR, "unece-context-D23B.jsonld
 const VOCAB_VENDORED = resolvePath(VENDOR_DIR, "uncefact.jsonld");
 
 const D23B_CONTEXT_URL = "https://vocabulary.uncefact.org/unece-context-D23B.jsonld";
-const VOCAB_URL = "https://service.unece.org/trade/uncefact/vocabulary/uncefact.jsonld";
+const VOCAB_URL = "https://vocabulary.uncefact.org/unece.jsonld";
 
 async function fileExists(path) {
   try {

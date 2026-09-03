@@ -132,11 +132,8 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "identifier": "VOY-26-EUR-04832",
+          "identifier": "MV SHIPPY",
           "modeCode": 1,
-          "usedLogisticsTransportMeans": {
-            "name": "MV SHIPPY"
-          },
           "arrivalEvent": [
             {
               "scheduledOccurrenceDateTime": "2026-05-06T22:00:00Z",

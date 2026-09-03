@@ -40,7 +40,7 @@ const GBN_AG = {
     "",
     "Descriptions come from the GBN-AG schema's own `description` fields (the live-animals domain), falling back to the UN/CEFACT D23B vocabulary (`uncefact.jsonld`) via the JSON-LD context chain where the schema is silent. The canonical UN/CEFACT meaning is always reachable as linked data from the property's IRI. Property names that resolve only to a Defra context - Defra extensions, profile-level slots - are listed in a separate section at the end with the context file that declares them.",
     "",
-    "Sections follow the payload's natural structure: Document, Consignment, Consignment item, Trade line item, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name."
+    "Sections follow the payload's natural structure: Document, Consignment, Transport movement, Consignment item, Trade line item, Per-animal. Each row identifies its type; where the value reuses a shared shape (`TradeParty`, `LogisticsLocation`, `IncludedNote`, ...) the type cell carries the `$def` name."
   ].join("\n"),
 
   sections: [
@@ -55,6 +55,15 @@ const GBN_AG = {
       payloadPath: "specifiedConsignment",
       descend: [{ kind: "prop", name: "specifiedConsignment" }],
       intro: "One consignment per payload. Carries the parties (consignor, consignee, delivery, importer, despatch, carrier), the transport movement(s), the regulatory procedure, the package count, and the destination."
+    },
+    {
+      heading: "Transport movement",
+      payloadPath: "specifiedConsignment.mainCarriageLogisticsTransportMovement[]",
+      descend: [
+        { kind: "prop", name: "specifiedConsignment" },
+        { kind: "prop", name: "mainCarriageLogisticsTransportMovement" }, { kind: "items" }
+      ],
+      intro: "One entry per main-carriage leg. The leg's `identifier` with its `urlId` register is the single home for the declared transport identification; consumers find the UK-arrival leg by matching `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`, never positionally."
     },
     {
       heading: "Consignment item",

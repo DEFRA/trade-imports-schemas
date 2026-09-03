@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-pims-v0.1.0.schema.json",
   "title": "GBN-AG PIMS consumer schema (v0.1.0)",
-  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.1.0 is a point-in-time description of what the trade-imports-animals-backend currently serialises — derived from the outbox/gbnag/ Java types, not from gbn-ag-v1.schema.json. This schema is insulated from changes to the upstream GBN-AG schema; new PIMS versions are minted independently. Core envelope infrastructure is composed via event-envelope-v1.",
+  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.1.0 is a point-in-time description of what the trade-imports-animals-backend currently serialises — derived from the outbox/gbnag/ Java types, not from gbn-ag-v1.schema.json. This schema is insulated from changes to the upstream GBN-AG schema; new PIMS versions are minted independently. Core envelope infrastructure is composed via event-envelope-v1. Note: the transport identification will move to the movement's `identifier` + `urlId` register in a future PIMS version as the backend converges on the GBN-AG single-home contract; `usedLogisticsTransportMeans` here reflects the current wire only.",
   "version": "0.1.0",
 
   "allOf": [
@@ -53,10 +53,6 @@
                   "type": "array",
                   "items": { "$ref": "#/$defs/logisticsTransportMovement" }
                 },
-                "transitTradeCountry": {
-                  "type": "array",
-                  "items": { "$ref": "#/$defs/tradeCountry" }
-                },
                 "isOrHasUnweanedAnimals": { "type": "boolean" },
                 "includedConsignmentItem": {
                   "type": "array",
@@ -84,21 +80,17 @@
       "type": "object",
       "properties": {
         "value": { "type": "string" },
-        "urlId": { "type": "string" },
-        "name":  { "type": "string" }
+        "urlId": { "type": "string" }
       }
     },
 
     "tradeAddress": {
       "type": "object",
       "properties": {
-        "lineOne":                { "type": "string" },
-        "lineTwo":                { "type": "string" },
-        "cityName":               { "type": "string" },
-        "postcodeCode":           { "type": "string" },
-        "countryId":              { "type": "string" },
-        "countryName":            { "type": "string" },
-        "countrySubDivisionName": { "type": "string" }
+        "lineOne":  { "type": "string" },
+        "lineTwo":  { "type": "string" },
+        "cityName": { "type": "string" },
+        "countryId": { "type": "string" }
       }
     },
 
@@ -108,48 +100,25 @@
         "identifier":    { "type": "string" },
         "urlId":         { "type": "string" },
         "name":          { "type": "string" },
-        "partyRoleCode": { "$ref": "#/$defs/codedValue" },
         "partyTypeCode": {
           "type": "array",
           "items": { "$ref": "#/$defs/codedValue" }
         },
-        "postalAddress":  { "$ref": "#/$defs/tradeAddress" },
-        "definedContact": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "personName":                      { "type": "string" },
-              "telephoneUniversalCommunication": { "type": "string" },
-              "emailURIUniversalCommunication":  { "type": "string" }
-            }
-          }
-        }
+        "postalAddress": { "$ref": "#/$defs/tradeAddress" }
       }
     },
 
     "tradeCountry": {
       "type": "object",
       "properties": {
-        "code": { "$ref": "#/$defs/codedValue" },
-        "subordinateTradeCountrySubDivision": {
-          "type": "object",
-          "properties": {
-            "identifier":       { "type": "string" },
-            "functionTypeCode": { "$ref": "#/$defs/codedValue" }
-          }
-        }
+        "code": { "$ref": "#/$defs/codedValue" }
       }
     },
 
     "logisticsLocation": {
       "type": "object",
       "properties": {
-        "identifier":    { "type": "string" },
-        "urlId":         { "type": "string" },
-        "name":          { "type": "string" },
-        "typeCode":      { "type": "string" },
-        "postalAddress": { "$ref": "#/$defs/tradeAddress" }
+        "identifier": { "type": "string" }
       }
     },
 
@@ -165,13 +134,8 @@
     "applicableClassification": {
       "type": "object",
       "properties": {
-        "systemId":   { "type": "string" },
-        "systemName": { "type": "string" },
-        "classCode":  { "$ref": "#/$defs/codedValue" },
-        "className": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
+        "systemId":  { "type": "string" },
+        "classCode": { "$ref": "#/$defs/codedValue" }
       }
     },
 
@@ -179,20 +143,17 @@
       "type": "object",
       "properties": {
         "typeCode": { "type": "string" },
-        "content":  { "type": "string" },
-        "urlId":    { "type": "string" }
+        "content":  { "type": "string" }
       }
     },
 
     "tradeProductInstance": {
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
         "identifier": {
           "type": "array",
           "items": { "$ref": "#/$defs/animalIdentifier" }
-        },
-        "permanentLocation": { "$ref": "#/$defs/tradeParty" }
+        }
       }
     },
 
@@ -202,8 +163,7 @@
         "productUnitQuantity": {
           "type": "object",
           "properties": {
-            "content":  { "type": "integer" },
-            "unitCode": { "type": "string" }
+            "content": { "type": "integer" }
           }
         }
       }
@@ -212,8 +172,6 @@
     "logisticsPackage": {
       "type": "object",
       "properties": {
-        "levelCode":    { "type": "integer" },
-        "typeCode":     { "type": "string" },
         "itemQuantity": { "type": "integer" }
       }
     },
@@ -228,29 +186,15 @@
     "transportEvent": {
       "type": "object",
       "properties": {
-        "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" },
-        "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" },
-        "occurrenceLogisticsLocation": { "$ref": "#/$defs/logisticsLocation" }
+        "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" }
       }
     },
 
     "logisticsTransportMovement": {
       "type": "object",
       "properties": {
-        "identifier": { "type": "string" },
-        "urlId":      { "type": "string" },
-        "modeCode":   { "type": "integer" },
+        "modeCode": { "type": "integer" },
         "usedLogisticsTransportMeans": { "$ref": "#/$defs/logisticsTransportMeans" },
-        "transportContractRelatedReferencedDocument": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "typeCode":   { "type": "string" },
-              "identifier": { "type": "string" }
-            }
-          }
-        },
         "arrivalEvent": {
           "type": "array",
           "items": { "$ref": "#/$defs/transportEvent" }
@@ -261,18 +205,7 @@
     "tradeLineItem": {
       "type": "object",
       "properties": {
-        "applicableClassification": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/applicableClassification" }
-        },
-        "description": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "scientificName": { "type": "string" },
-        "commonName":     { "type": "string" },
-        "typeCode":       { "type": "string" },
-        "urlId":          { "type": "string" },
+        "applicableClassification": { "$ref": "#/$defs/applicableClassification" },
         "specifiedLineTradeDelivery": {
           "type": "array",
           "items": { "$ref": "#/$defs/lineTradeDelivery" }
