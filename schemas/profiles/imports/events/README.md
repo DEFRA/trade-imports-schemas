@@ -9,7 +9,7 @@ These are **not** a copy of the GBN-AG `Notification*` lifecycle catalogue. TRAC
 | Schema | Profile `data` | `aggregateType` | `subType` | `eventType` |
 |--------|----------------|-----------------|-----------|-------------|
 | [`international/events/ched-event-certificate-updated-v1.schema.json`](../international/events/ched-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-ched-v1` | `Certificate` | `CHEDA` \| `CHEDP` \| `CHEDPP` \| `CHEDD` | `uk.gov.defra.trade.imports.traces.CertificateUpdated` |
-| [`eu/events/intra-event-certificate-updated-v1.schema.json`](../eu/events/intra-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-intra-v1` | `Certificate` | `IMP` | same |
+| [`eu/events/intra-event-certificate-updated-v1.schema.json`](../eu/events/intra-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-intra-v1` | `Certificate` | `INTRA` | same |
 | [`eu/events/docom-event-certificate-updated-v1.schema.json`](../eu/events/docom-event-certificate-updated-v1.schema.json) | `defra-unvtd-profile-docom-v1` | `Certificate` | `DOCOM` | same |
 
 `aggregateId` form: `Imports.Certificate.${subType}.${referenceNumber}` (certificate reference from `data.exchangedDocument.identifier`).
@@ -30,9 +30,8 @@ These are **not** a copy of the GBN-AG `Notification*` lifecycle catalogue. TRAC
 
 1. Is a single `CertificateUpdated` enough for TDS, or do we also need `CertificateRetrieved` on every successful gateway retrieve?
 2. Confirm FQN namespace `uk.gov.defra.trade.imports.traces.*` (vs `…eudp…` / producer-specific).
-3. Confirm INTRA envelope `subType` = `IMP` (TIG SO / ADR examples) vs `INTRA` / `ITAHC`.
-4. Should CHED `subType` ever be a single `CHED` with type only inside `data`, or keep the four-way enum (preferred — matches BTMS topic filtering)?
-5. When UK journeys later emit **Notification** events for CHED-linked UK supplements, those stay on `aggregateType: Notification` with journey `subType` — separate from these Certificate events.
+3. Should CHED `subType` ever be a single `CHED` with type only inside `data`, or keep the four-way enum (preferred — matches BTMS topic filtering)?
+4. When UK journeys later emit **Notification** events for CHED-linked UK supplements, those stay on `aggregateType: Notification` with journey `subType` — separate from these Certificate events.
 
 ## Align with
 
