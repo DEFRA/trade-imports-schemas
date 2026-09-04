@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "intra-event-certificate-updated-v1.schema.json",
+  "title": "INTRA (ITAHC) CertificateUpdated event (v1)",
+  "description": "Event emitted when a TRACES INTRA / ITAHC certificate snapshot is observed or republished. Certificate aggregate; subType is INTRA. data is the full INTRA profile. When present, TRACES LAST_UPDATE_DATETIME is copied to data.exchangedDocument.revisionDateTime and kept in includedNote.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Certificate" },
+        "subType": { "const": "INTRA" },
+        "eventType": {
+          "const": "uk.gov.defra.trade.imports.traces.CertificateUpdated"
+        },
+        "data": {
+          "$ref": "defra-unvtd-profile-intra-v1.schema.json"
+        }
+      }
+    }
+  ]
+}

@@ -18,6 +18,21 @@ export function isCodeOrIdentifierType (obj) {
   return keys.some((k) => CODE_ID_META_KEYS.has(k) || k.toLowerCase().startsWith('list') || k.toLowerCase().startsWith('scheme'))
 }
 
+/**
+ * True when a value carries codelist or identifier-scheme metadata (listID,
+ * schemeID and friends) rather than only a language tag or display name.
+ * Such values keep their metadata through normalization so the mapper can
+ * resolve it to a urlId; language-tagged values are still flattened.
+ */
+export function hasCodelistMeta (obj) {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return false
+  if (obj.value === undefined) return false
+  return Object.keys(obj).some((k) => {
+    const key = k.toLowerCase()
+    return key.startsWith('list') || key.startsWith('scheme')
+  })
+}
+
 export function isDateTimeLike (obj) {
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return false
   return (typeof obj.item === 'string') || (typeof obj.dateTime === 'string')
@@ -40,6 +55,24 @@ export function extractContentValue (content) {
   }
   if (typeof content === 'object' && content.value !== undefined) return content.value
   return content
+}
+
+/**
+ * Content value for coded fields (note and clause content). TRACES emits the
+ * code as an untagged element and repeats it as a language-tagged label
+ * (<Content>INTERNAL_MARKET</Content> plus <Content languageID="en">For free
+ * circulation</Content>). The code is the data, so prefer the untagged entry.
+ */
+export function extractCodeContentValue (content) {
+  if (Array.isArray(content)) {
+    for (const entry of content) {
+      if (typeof entry === 'string' || typeof entry === 'number') return entry
+      if (entry && entry.value !== undefined && entry.languageId === undefined && entry.languageID === undefined) {
+        return entry.value
+      }
+    }
+  }
+  return extractContentValue(content)
 }
 
 export function extractCodeValue (obj) {
@@ -82,7 +115,7 @@ export function simplifyToInternalModel (val, arrayKey = null) {
         const contentCode = item.contentCode ?? item.ContentCode
         const subjectObj = toCodeObject(subjectCode)
         if (subjectObj == null) continue
-        const contentVal = extractContentValue(content)
+        const contentVal = extractCodeContentValue(content)
         const contentCodes = toContentCodesArray(contentCode)
         const note = {
           subjectCode: subjectObj,
@@ -101,7 +134,7 @@ export function simplifyToInternalModel (val, arrayKey = null) {
         const content = item.content ?? item.Content
         const idObj = toCodeObject(id)
         if (idObj == null) continue
-        const contentVal = extractContentValue(content)
+        const contentVal = extractCodeContentValue(content)
         clauses.push({
           ...idObj,
           ...(contentVal !== undefined && { content: contentVal })
@@ -109,7 +142,12 @@ export function simplifyToInternalModel (val, arrayKey = null) {
       }
       return clauses
     }
-    if (key === 'name' && val.length > 0 && typeof val[0] === 'object' && (val[0].value !== undefined || val[0].Value !== undefined)) {
+    // Repeated Name elements are either translations of one name (every entry
+    // language-tagged, so pick one) or a packed address (mixed tagged and
+    // untagged entries, whose order carries meaning — keep them all).
+    const isNameTranslationSet = key === 'name' && val.length > 0 &&
+      val.every((n) => n && typeof n === 'object' && (n.value !== undefined || n.Value !== undefined))
+    if (isNameTranslationSet) {
       return extractContentValue(val)
     }
     return val.map((v) => simplifyToInternalModel(v, arrayKey))
@@ -117,6 +155,7 @@ export function simplifyToInternalModel (val, arrayKey = null) {
   if (typeof val !== 'object') return val
 
   if (isDateTimeLike(val)) return extractDateTime(val)
+  if (hasCodelistMeta(val)) return toCodeObject(val)
   if (isCodeOrIdentifierType(val)) return val.value
 
   const out = {}

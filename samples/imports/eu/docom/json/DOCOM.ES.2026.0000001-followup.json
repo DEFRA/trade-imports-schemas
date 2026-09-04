@@ -1,0 +1,180 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "../../../../../schemas/profiles/imports/eu/defra-unvtd-profile-docom-followup-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-docom-followup-v1.context.jsonld",
+  "$type": "docom-followup",
+  "certificateIdentifier": "DOCOM.ES.2026.0000001",
+  "followUp": [
+    {
+      "creationDateTime": "2026-08-10T08:50:33+01:00",
+      "revisionDateTime": "2026-08-10T08:50:33+01:00",
+      "redispatchDetails": {
+        "redispatchDateTime": "2026-08-13T08:00:00+01:00",
+        "exitAuthorityParty": {
+          "identifier": "BECERTEX",
+          "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+          "name": "BCP for CSW-CERTEX-BE",
+          "postalAddress": {
+            "postcodeCode": "1000",
+            "lineOne": "TAXUD CSW_CERTEX TEST",
+            "cityName": "Ville de Bruxelles - Stad Brussel",
+            "countryId": "BE",
+            "countryName": "Belgium",
+            "countrySubDivisionName": "Brussels-Capital"
+          }
+        },
+        "destinationCountry": {
+          "code": {
+            "value": "NL",
+            "name": "Netherlands"
+          }
+        },
+        "meansOfTransport": [
+          {
+            "specifiedLogisticsTransportMovement": {
+              "identifier": "test",
+              "urlId": "https://traces-codelists.ec.europa.eu/road_vehicle_registration_after_bcp",
+              "modeCode": 3
+            },
+            "internationalTransportDocument": "sdfgsdfgg444"
+          },
+          {
+            "specifiedLogisticsTransportMovement": {
+              "identifier": "TEST 1",
+              "urlId": "https://traces-codelists.ec.europa.eu/train_identifier_after_bcp",
+              "modeCode": 2
+            },
+            "internationalTransportDocument": "344ff44"
+          }
+        ],
+        "placeOfDestinationParty": {
+          "identifier": "Test",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+          "name": "RFC test NL",
+          "partyTypeCode": [
+            {
+              "value": "IMPORTER",
+              "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+              "name": "Importer"
+            },
+            {
+              "value": "OTH-OPER",
+              "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+              "name": "Other operators"
+            }
+          ],
+          "postalAddress": {
+            "postcodeCode": "3027",
+            "lineOne": "Test 123 b",
+            "cityName": "Rotterdam",
+            "countryId": "NL",
+            "countryName": "Netherlands",
+            "countrySubDivisionName": "South Holland"
+          }
+        }
+      },
+      "certifyingOfficerAuthentication": {
+        "governmentActionTypeCode": "1",
+        "actualDateTime": "2026-08-10T08:50:33+01:00",
+        "providerParty": {
+          "identifier": "XILAR1-DAERA",
+          "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+          "name": "Larne P",
+          "partyRoleCode": {
+            "value": "AM",
+            "name": "Authorized official"
+          },
+          "partyTypeCode": [
+            {
+              "value": "AUTHORITY",
+              "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+              "name": "Authority"
+            }
+          ],
+          "postalAddress": {
+            "postcodeCode": "BT40",
+            "lineOne": "Larne P",
+            "cityName": "Larne",
+            "countryId": "XI",
+            "countryName": "United Kingdom (Northern Ireland)",
+            "countrySubDivisionName": "Northern Ireland"
+          },
+          "definedContact": [
+            {
+              "personName": "Mr Test"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "creationDateTime": "2026-08-10T08:54:17+01:00",
+      "revisionDateTime": "2026-08-10T08:54:17+01:00",
+      "controlDetails": {
+        "consignmentArrivedIndicator": true,
+        "consignmentCompliantIndicator": true,
+        "includedNote": [
+          {
+            "type": "Note",
+            "noteSubjectCode": "TYPE_OF_CONTROL",
+            "content": [],
+            "contentCode": [
+              {
+                "value": "EXIT_BCP",
+                "urlId": "https://traces-codelists.ec.europa.eu/docom_follow_up_type_of_control"
+              }
+            ]
+          },
+          {
+            "type": "Note",
+            "noteSubjectCode": "REASON_OF_NON_COMPLIANCE",
+            "content": [],
+            "contentCode": [
+              {
+                "value": "ANIMALS_SUSPECTED",
+                "urlId": "https://traces-codelists.ec.europa.eu/docom_follow_up_reason_of_non_compliance"
+              },
+              {
+                "value": "ANIMALS_LOST",
+                "urlId": "https://traces-codelists.ec.europa.eu/docom_follow_up_reason_of_non_compliance"
+              }
+            ]
+          }
+        ]
+      },
+      "certifyingOfficerAuthentication": {
+        "governmentActionTypeCode": "1",
+        "actualDateTime": "2026-08-10T08:54:17+01:00",
+        "providerParty": {
+          "identifier": "XIBEL1-DAERA",
+          "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+          "name": "Belfast Port",
+          "partyRoleCode": {
+            "value": "AM",
+            "name": "Authorized official"
+          },
+          "partyTypeCode": [
+            {
+              "value": "AUTHORITY",
+              "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+              "name": "Authority"
+            }
+          ],
+          "postalAddress": {
+            "postcodeCode": "BT3",
+            "lineOne": "Belfast City Council\n5 Corry Place\nBelfast Harbour Estate\nBT3 9HY",
+            "cityName": "County Down",
+            "countryId": "XI",
+            "countryName": "United Kingdom (Northern Ireland)",
+            "countrySubDivisionName": "Northern Ireland"
+          },
+          "definedContact": [
+            {
+              "personName": "Mr Test"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
