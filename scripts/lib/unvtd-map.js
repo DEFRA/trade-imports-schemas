@@ -36,7 +36,6 @@ const GLOBAL_KEY_RENAMES = {
   examinationSPSEvent: 'examinationEvent',
   occurrenceSPSLocation: 'occurrenceLogisticsLocation',
   mainCarriageSPSTransportMovement: 'mainCarriageLogisticsTransportMovement',
-  usedSPSTransportMeans: 'usedLogisticsTransportMeans',
   utilizedSPSTransportEquipment: 'utilizedLogisticsTransportEquipment',
   affixedSPSSeal: 'affixedLogisticsSeal',
   appliedSPSProcess: 'appliedProcess',
@@ -489,16 +488,25 @@ function mapLogisticsLocation (loc, options = {}) {
 
 function mapTransportMovement (movement) {
   if (!movement || typeof movement !== 'object') return undefined
-  const out = { ...mapIdentifier(movement.id ?? movement.identifier) }
+  const idRaw = movement.id ?? movement.identifier
+  const out = { ...mapIdentifier(idRaw) }
   const mode = movement.modeCode
   if (mode != null) {
     const v = Number(typeof mode === 'object' ? mode.value : mode)
     if (!Number.isNaN(v)) out.modeCode = v
   }
+  // Single-home contract: fold TRACES UsedSPSTransportMeans/Name into identifier
+  // when the movement ID is empty. Prefer the ID's scheme for urlId when present.
   const means = movement.usedSPSTransportMeans ?? movement.usedLogisticsTransportMeans
-  if (means && typeof means === 'object') {
+  if (means && typeof means === 'object' && out.identifier == null) {
     const meansName = asString(extractContentValue(means.name) ?? means.name)
-    if (meansName) out.usedLogisticsTransportMeans = { name: meansName }
+    if (meansName) {
+      out.identifier = meansName
+      if (!out.urlId) {
+        const scheme = schemeUrlId(idRaw)
+        if (scheme) out.urlId = scheme
+      }
+    }
   }
   return Object.keys(out).length ? out : undefined
 }

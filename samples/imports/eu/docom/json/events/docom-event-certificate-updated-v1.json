@@ -352,10 +352,9 @@
       },
       "mainCarriageLogisticsTransportMovement": [
         {
-          "modeCode": 1,
-          "usedLogisticsTransportMeans": {
-            "name": "test"
-          }
+          "identifier": "test",
+          "urlId": "https://traces-codelists.ec.europa.eu/ship_imo_number",
+          "modeCode": 1
         }
       ],
       "utilizedLogisticsTransportEquipment": [

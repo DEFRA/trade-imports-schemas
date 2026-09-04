@@ -38,10 +38,6 @@
         "@id": "unece:mainCarriageTransportMovement",
         "@type": "@id"
       },
-      "usedLogisticsTransportMeans": {
-        "@id": "unece:usedTransportMeans",
-        "@type": "@id"
-      },
       "utilizedLogisticsTransportEquipment": {
         "@id": "unece:utilizedTransportEquipment",
         "@type": "@id"
