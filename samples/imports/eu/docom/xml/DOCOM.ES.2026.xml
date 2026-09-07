@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-16"?>
+<DocomCertificateType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SPSCertificate xmlns="http://ec.europa.eu/tracesnt/certificate/docom/retrieval/v1">
+    <SPSExchangedDocument xmlns="urn:un:unece:uncefact:data:standard:SPSCertificate:17">
+      <Name xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">853/2004 (2074/2005) Food chain information on porcine animals for slaughter</Name>
+      <ID xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">DOCOM.ES.2026.0000001</ID>
+      <TypeCode listID="1001" listVersionID="D16B" name="Trade data (Docom)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">332</TypeCode>
+      <StatusCode listID="4405" listVersionID="D16B" name="Ratified (SIGNED)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">86</StatusCode>
+      <IssueDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-07T13:59:40+01:00</DateTime>
+      </IssueDateTime>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>2026-08-07T15:02:15.000+02:00</Content>
+        <SubjectCode listID="docom_note_subject_code" listName="Docom Note SubjectCode list" name="Last updated">LAST_UPDATE_DATETIME</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ContentCode listID="product_temperature" listName="Product temperature" name="Ambient">AMBIENT</ContentCode>
+        <Content />
+        <SubjectCode listID="certificate_note_subject_code" listName="Certificate Note SubjectCode list" name="Product temperature">PRODUCT_TEMPERATURE</SubjectCode>
+      </IncludedSPSNote>
+      <ReferenceSPSReferencedDocument xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="1001" listVersionID="D16B" name="Trade data (Docom)">332</TypeCode>
+        <RelationshipTypeCode listID="1153_ReferenceTypeCode" listVersionID="D16B" name="Document reference, internal (Document reference, internal)">CAW</RelationshipTypeCode>
+        <ID>DOCOM.ES.2026.0000001</ID>
+        <AttachmentBinaryObject format="url" mimeCode="text/url" uri="https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/docom/DOCOM.ES.2026.0000001" />
+      </ReferenceSPSReferencedDocument>
+      <SignatorySPSAuthentication xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="9417" listVersionID="D16B" name="Inspection (Identification of Applicant)">4</TypeCode>
+        <ActualDateTime>
+          <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-07T13:59:40+01:00</DateTime>
+        </ActualDateTime>
+        <ProviderSPSParty>
+          <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">XI0000</ID>
+          <Name>Department of Agriculture, Environment and Rural Affairs (DAERA)</Name>
+          <RoleCode listID="3035" listVersionID="D16B" name="Officer (Identification of Applicant)">VJ</RoleCode>
+          <TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</TypeCode>
+          <SpecifiedSPSAddress>
+            <PostcodeCode>BT1</PostcodeCode>
+            <LineOne>DAERA main office</LineOne>
+            <CityName languageID="en">Belfast</CityName>
+            <CountryID>XI</CountryID>
+            <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+            <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
+          </SpecifiedSPSAddress>
+          <SpecifiedSPSPerson>
+            <Name>Mr Test</Name>
+          </SpecifiedSPSPerson>
+        </ProviderSPSParty>
+        <IncludedSPSClause>
+          <ID schemeID="docom_consignment_clause" schemeName="Docom consignment' clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">CERTIFIED_AS_OR_FOR</ID>
+          <Content>OTHER</Content>
+          <Content languageID="en">Other</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="docom_consignment_clause" schemeName="Docom consignment' clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ID>
+          <Content>mrtest@test.com</Content>
+        </IncludedSPSClause>
+      </SignatorySPSAuthentication>
+      <SignatorySPSAuthentication xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="9417" listVersionID="D16B" name="Clearance (Declaration)">1</TypeCode>
+        <ActualDateTime>
+          <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-07T14:02:15+01:00</DateTime>
+        </ActualDateTime>
+        <ProviderSPSParty>
+          <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">XI0000</ID>
+          <Name>Department of Agriculture, Environment and Rural Affairs (DAERA)</Name>
+          <RoleCode listID="3035" listVersionID="D16B" name="Authorized official">AM</RoleCode>
+          <TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</TypeCode>
+          <SpecifiedSPSAddress>
+            <PostcodeCode>BT1</PostcodeCode>
+            <LineOne>DAERA main office</LineOne>
+            <CityName languageID="en">Belfast</CityName>
+            <CountryID>XI</CountryID>
+            <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+            <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
+          </SpecifiedSPSAddress>
+          <SpecifiedSPSPerson>
+            <Name>Mr Test</Name>
+          </SpecifiedSPSPerson>
+        </ProviderSPSParty>
+        <IncludedSPSClause>
+          <ID schemeID="docom_declaration_clause" schemeName="Docom declaration's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ID>
+          <Content>mrtest@test.com</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="docom_declaration_clause" schemeName="Docom declaration's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DECLARATION_CLAUSES</ID>
+          <Content languageID="en">II.1.   The animals' health status 
+II.1.1.   Do the animals currently show any abnormal signs? 
+  (1)- [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  
+II.1.2.   If yes , describe signs: 
+  null 
+II.1.3.   Are the pigs kept under officially recognized controlled housing conditions in relation to Trichinella spp.?(2) 
+  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ] /(1) - [ ] ~~[UNKNOWN]~~ - [ ]  
+II.1.4   Are the animals suckling pigs, under five weeks of age, that are not weaned? 
+  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  
+ 
+II.2.   Veterinary medicinal products 
+II.2.1.   Name, dates of administration and withdrawal period 
+- of veterinary medicinal products with a withdrawal period that have been administered to any of the animals during a period of (1) - [ ] ~~[30]~~ - [ ] /(1) - [ ] ~~[60]~~ - [ ] /(1) - [ ] ~~[90]~~ - [ ]  days before slaughter and 
+- of any other veterinary medicinal product with a withdrawal period of more than 30 days: 
+Veterinary medicinal product 1: 
+·                           Name: null 
+·                           Administration date:null 
+·                           Withdrawal period: null 
+Veterinary medicinal product 2: 
+·                           Name: null 
+·                           Administration date: null 
+·                           Withdrawal period: null 
+ 
+II.3.   Occurrence of, or positive test results for, diseases that might affect the safety of meat 
+II.3.1.   Has the farm of provenance undergone testing for Salmonella in the past 12 months? (1) - [ ] ~~[YES]~~ - [ ]  /(1) - [ ] ~~[NO]~~ - [ ]  
+II.3.2.   If YES, what was the herd’s Salmonella status, following testing? 
+  (1) - [ ] ~~[Free]~~ - [ ]  /(1) - [ ] ~~[Positive]~~ - [ ]  /(1) - [ ] ~~[Unknown]~~ - [ ]  
+II.3.3.   Have you been informed, for example through laboratory results, through the veterinary practitioner or through the competent authorities, of the presence of any other disease or infection in the animals sent for slaughter that might affect the safety of the meat? (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  
+II.3.3.   If yes, name of infection/disease: 
+  null 
+ 
+II.4.   Previous ante- and post-mortem inspection results 
+II.4.1.   Do the ante- and post-mortem inspection results of the official veterinarian for the last group of animals sent in for slaughter indicate that a copy of these results should be added to the food chain information for the next group of animals sent in for slaughter? 
+  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  
+II.4.2  If yes, attach a copy of these results to this food chain information document only when the next group is sent to another slaughterhouse than the last group. 
+ 
+II.5.   
+Was the mortality rate during the fattening period over 5%? 
+  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  
+ 
+(3)II.6.   Name, address and preferably phone number of the private or official veterinarian normally attending the holding of origin 
+ null 
+ 
+II.6.   Post-mortem findings 
+II.6.1   Macroscopic findings /disease: 
+ Condition null 
+ Number of animals affected null 
+ Type/class/age null 
+ Organ or site of animal(s) affected null 
+ Date of slaughter null 
+II.6.2  Laboratory resultsnull 
+II.6.3   Other results (e.g. parasites, foreign objects, null 
+II.6.4   Welfare findings (e.g. broken legs) null 
+ 
+Notes 
+Part I: 
+  Box I.2. indicate the unique reference number of the document 
+  Box I.2a, I.3; I.4; and ISO Code in boxes I.8 and I.10 are only for the TRACES users 
+  Box I.12: Approval number: indicate the identification mark of the holding in accordance with Article 3(1)(a) of Directive 2008/71/EC. 
+  Box reference I.31.:To be completed only in case pigs are sent for slaughter in another country (the information will be copied into the Intra-EU certificate 
+ Official identification: The animals shall be identified in accordance with Council Directive 2008/71/EC. 
+ 
+ 
+Part II 
+  (1) Delete as appropriate. 
+  (2) Does not have to be completed in case the pigs are sent for slaughter in another country (replaced by health certificate). If not completed or not known, all pigs will be tested. 
+  (3) Competent authorities may derogate from providing this information when it is already available in another way. 
+ 
+</Content>
+        </IncludedSPSClause>
+      </SignatorySPSAuthentication>
+    </SPSExchangedDocument>
+    <SPSConsignment xmlns="urn:un:unece:uncefact:data:standard:SPSCertificate:17">
+      <AvailabilityDueDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-08T23:00:00+01:00</DateTime>
+      </AvailabilityDueDateTime>
+      <ExportExitDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-08T00:00:00+01:00</DateTime>
+      </ExportExitDateTime>
+      <ConsignorSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">899361</ID>
+        <Name>DK Test</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Consignor">CZ</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>BT9</PostcodeCode>
+          <LineOne>Test Street 876</LineOne>
+          <CityName languageID="en">Belfast</CityName>
+          <CountryID>XI</CountryID>
+          <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+          <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </ConsignorSPSParty>
+      <ConsigneeSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">899361</ID>
+        <Name>DK Test</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Consignee">CN</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>BT9</PostcodeCode>
+          <LineOne>Test Street 876</LineOne>
+          <CityName languageID="en">Belfast</CityName>
+          <CountryID>XI</CountryID>
+          <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+          <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </ConsigneeSPSParty>
+      <ExportSPSCountry xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID />
+        <Name />
+        <SubordinateSPSCountrySubDivision>
+          <Name />
+          <HierarchicalLevelCode name="None">0</HierarchicalLevelCode>
+          <FunctionTypeCode listID="3227" listVersionID="D16B" name="Place of authentication of document">44</FunctionTypeCode>
+          <ActivityAuthorizedSPSParty>
+            <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">ES00000</ID>
+            <Name>Servicios Veterinarios Españoles, C</Name>
+            <RoleCode listID="3035" listVersionID="D16B" name="Central bank or regulatory authority (Central competent authority)">RA</RoleCode>
+            <SpecifiedSPSAddress>
+              <PostcodeCode>28012</PostcodeCode>
+              <LineOne>.</LineOne>
+              <CityName languageID="en">Madrid</CityName>
+              <CountryID>ES</CountryID>
+              <CountryName languageID="en">Spain</CountryName>
+              <CountrySubDivisionName languageID="en">Community of Madrid</CountrySubDivisionName>
+            </SpecifiedSPSAddress>
+          </ActivityAuthorizedSPSParty>
+          <ActivityAuthorizedSPSParty>
+            <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">ES45901</ID>
+            <Name>Málaga</Name>
+            <RoleCode listID="3035" listVersionID="D16B" name="Local government sponsor (Local competent authority)">VG</RoleCode>
+            <SpecifiedSPSAddress>
+              <PostcodeCode>29002</PostcodeCode>
+              <LineOne>.</LineOne>
+              <CityName languageID="en">Málaga</CityName>
+              <CountryID>ES</CountryID>
+              <CountryName languageID="en">Spain</CountryName>
+              <CountrySubDivisionName languageID="en">Malaga</CountrySubDivisionName>
+            </SpecifiedSPSAddress>
+          </ActivityAuthorizedSPSParty>
+        </SubordinateSPSCountrySubDivision>
+      </ExportSPSCountry>
+      <LoadingBaseportSPSLocation xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces" schemeDataURI="operator_activity">ES290250000096</ID>
+        <Name>ES</Name>
+        <Name>Sea Life Centre Spain sa</Name>
+        <Name languageID="en">Benalmádena</Name>
+        <Name>29630</Name>
+        <Name>Avenida del Puerto s/n
+Málaga</Name>
+      </LoadingBaseportSPSLocation>
+      <ImportSPSCountry xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID>FR</ID>
+        <Name languageID="en">France</Name>
+      </ImportSPSCountry>
+      <ExaminationSPSEvent xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <OccurrenceSPSLocation>
+          <Name />
+        </OccurrenceSPSLocation>
+      </ExaminationSPSEvent>
+      <CarrierSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">874056</ID>
+        <Name>Test Test</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Carrier (Transporter)">CA</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Transporter">COMMERCIAL_TRANSPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Transporter">TRANSPORTER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>18184</PostcodeCode>
+          <LineOne>Test</LineOne>
+          <CityName languageID="en">Hamburg</CityName>
+          <CountryID>DE</CountryID>
+          <CountryName languageID="en">Germany</CountryName>
+          <CountrySubDivisionName languageID="en">Hamburg</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </CarrierSPSParty>
+      <DespatchSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">ES290250000096</ID>
+        <Name>Sea Life Centre Spain sa</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Despatch party (Place of origin)">PW</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Establishment">ESTABLISHMENT</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>29630</PostcodeCode>
+          <LineOne>Avenida del Puerto s/n
+Málaga</LineOne>
+          <CityName languageID="en">Benalmádena</CityName>
+          <CountryID>ES</CountryID>
+          <CountryName languageID="en">Spain</CountryName>
+          <CountrySubDivisionName languageID="en">Malaga</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </DespatchSPSParty>
+      <DeliverySPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">770308</ID>
+        <Name>francofranco</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Delivery party (Place of destination)">DP</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>81120</PostcodeCode>
+          <LineOne>avenue du choux</LineOne>
+          <CityName languageID="en">Réalmont</CityName>
+          <CountryID>FR</CountryID>
+          <CountryName languageID="en">France</CountryName>
+          <CountrySubDivisionName languageID="en">Tarn</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </DeliverySPSParty>
+      <MainCarriageSPSTransportMovement xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="ship_imo_number" schemeName="Ship IMO Number" schemeAgencyID="PE" schemeAgencyName="Peru" />
+        <ModeCode listID="Recommendation 19" listVersionID="2" name="Maritime transport">1</ModeCode>
+        <UsedSPSTransportMeans>
+          <Name>test</Name>
+        </UsedSPSTransportMeans>
+      </MainCarriageSPSTransportMovement>
+      <UtilizedSPSTransportEquipment xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="container_number" schemeName="Container number" />
+        <AffixedSPSSeal>
+          <ID schemeID="seal_number" schemeName="Seal number">fdsdf3</ID>
+        </AffixedSPSSeal>
+      </UtilizedSPSTransportEquipment>
+      <IncludedSPSConsignmentItem xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <NatureIdentificationSPSCargo>
+          <TypeCode listID="7085" listVersionID="D16B" name="General cargo (Commodities)">12</TypeCode>
+        </NatureIdentificationSPSCargo>
+        <IncludedSPSTradeLineItem>
+          <SequenceNumeric>0</SequenceNumeric>
+          <Description>Consignment totals and summary</Description>
+          <NetWeightMeasure>0</NetWeightMeasure>
+          <PhysicalSPSPackage>
+            <LevelCode name="No packaging hierarchy">4</LevelCode>
+            <TypeCode listID="7065" listVersionID="2006">NA</TypeCode>
+            <ItemQuantity>0.0</ItemQuantity>
+          </PhysicalSPSPackage>
+          <OriginSPSCountry>
+            <ID>ES</ID>
+            <Name languageID="en">Spain</Name>
+          </OriginSPSCountry>
+          <AppliedSPSProcess>
+            <TypeCode listID="7187" listVersionID="D16B" name="Planning (Transport organizer)">27</TypeCode>
+            <OperatorSPSParty>
+              <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">899361</ID>
+              <Name>DK Test</Name>
+              <RoleCode listID="3035" listVersionID="D16B" name="Freight forwarder (Transport organizer)">FW</RoleCode>
+              <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+              <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+              <SpecifiedSPSAddress>
+                <PostcodeCode>BT9</PostcodeCode>
+                <LineOne>Test Street 876</LineOne>
+                <CityName languageID="en">Belfast</CityName>
+                <CountryID>XI</CountryID>
+                <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+                <CountrySubDivisionName languageID="en">County Antrim</CountrySubDivisionName>
+              </SpecifiedSPSAddress>
+            </OperatorSPSParty>
+          </AppliedSPSProcess>
+        </IncludedSPSTradeLineItem>
+        <IncludedSPSTradeLineItem>
+          <SequenceNumeric>1</SequenceNumeric>
+          <Description />
+          <ScientificName languageID="la">Sus scrofa domesticus</ScientificName>
+          <NetVolumeMeasure unitCode="H87">1</NetVolumeMeasure>
+          <AdditionalInformationSPSNote>
+            <Content>23454</Content>
+            <SubjectCode listID="docom_commodity_note_subject_code" listName="Docom Commodity Note SubjectCode list" name="Official identification">OFFICIAL_IDENTIFICATION</SubjectCode>
+          </AdditionalInformationSPSNote>
+          <ApplicableSPSClassification>
+            <SystemID>CN</SystemID>
+            <SystemName>CN Code (Combined Nomenclature)</SystemName>
+            <ClassCode>0103</ClassCode>
+            <ClassName languageID="en">LIVE ANIMALS</ClassName>
+            <ClassName languageID="en">Live swine</ClassName>
+          </ApplicableSPSClassification>
+        </IncludedSPSTradeLineItem>
+      </IncludedSPSConsignmentItem>
+    </SPSConsignment>
+  </SPSCertificate>
+  <DocomFollowUp xmlns="http://ec.europa.eu/tracesnt/certificate/docom/retrieval/v1">
+    <RedispatchDetails xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">
+      <RedispatchDateTime>2026-08-13T08:00:00+01:00</RedispatchDateTime>
+      <ExitAuthoritySPSParty>
+        <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">BECERTEX</ID>
+        <Name xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">BCP for CSW-CERTEX-BE</Name>
+        <SpecifiedSPSAddress xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+          <PostcodeCode>1000</PostcodeCode>
+          <LineOne>TAXUD CSW_CERTEX TEST</LineOne>
+          <CityName languageID="en">Ville de Bruxelles - Stad Brussel</CityName>
+          <CountryID>BE</CountryID>
+          <CountryName languageID="en">Belgium</CountryName>
+          <CountrySubDivisionName languageID="en">Brussels-Capital</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </ExitAuthoritySPSParty>
+      <CountryOfDestination>
+        <ID xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">NL</ID>
+        <Name languageID="NL" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">Netherlands</Name>
+      </CountryOfDestination>
+      <MeansOfTransport>
+        <SPSTransportMovement>
+          <ID schemeID="road_vehicle_registration_after_bcp" schemeName="Road vehicle registration (after BCP)" schemeAgencyID="FR" schemeAgencyName="France" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">test</ID>
+          <ModeCode listID="Recommendation 19" listVersionID="2" name="Road transport" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">3</ModeCode>
+        </SPSTransportMovement>
+        <InternationalTrasportDocument>sdfgsdfgg444</InternationalTrasportDocument>
+      </MeansOfTransport>
+      <MeansOfTransport>
+        <SPSTransportMovement>
+          <ID schemeID="train_identifier_after_bcp" schemeName="Rail Identifier (after BCP)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">TEST 1</ID>
+          <ModeCode listID="Recommendation 19" listVersionID="2" name="Rail transport" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">2</ModeCode>
+        </SPSTransportMovement>
+        <InternationalTrasportDocument>344ff44</InternationalTrasportDocument>
+      </MeansOfTransport>
+      <PlaceOfDestinationSPSParty>
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">Test</ID>
+        <Name xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">RFC test NL</Name>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+          <PostcodeCode>3027</PostcodeCode>
+          <LineOne>Test 123 b</LineOne>
+          <CityName languageID="en">Rotterdam</CityName>
+          <CountryID>NL</CountryID>
+          <CountryName languageID="en">Netherlands</CountryName>
+          <CountrySubDivisionName languageID="en">South Holland</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </PlaceOfDestinationSPSParty>
+    </RedispatchDetails>
+    <ControlDetails xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1" />
+    <CertifyingOfficerSPSAuthentication xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">
+      <TypeCode listID="9417" listVersionID="D16B" name="Clearance (Follow-up control)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">1</TypeCode>
+      <ActualDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-10T08:50:33+01:00</DateTime>
+      </ActualDateTime>
+      <ProviderSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">XILAR1-DAERA</ID>
+        <Name>Larne P</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Authorized official">AM</RoleCode>
+        <TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>BT40</PostcodeCode>
+          <LineOne>Larne P</LineOne>
+          <CityName languageID="en">Larne</CityName>
+          <CountryID>XI</CountryID>
+          <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+          <CountrySubDivisionName languageID="en">Northern Ireland</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+        <SpecifiedSPSPerson>
+          <Name>Mr Test</Name>
+        </SpecifiedSPSPerson>
+      </ProviderSPSParty>
+      <IncludedSPSClause xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content />
+      </IncludedSPSClause>
+    </CertifyingOfficerSPSAuthentication>
+    <UpdatedOn xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">2026-08-10T08:50:33+01:00</UpdatedOn>
+    <CreatedOn xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">2026-08-10T08:50:33+01:00</CreatedOn>
+  </DocomFollowUp>
+  <DocomFollowUp xmlns="http://ec.europa.eu/tracesnt/certificate/docom/retrieval/v1">
+    <RedispatchDetails xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1" />
+    <ControlDetails xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">
+      <ArrivalOfTheConsignment>true</ArrivalOfTheConsignment>
+      <ComplianceOfTheConsignment>true</ComplianceOfTheConsignment>
+      <IncludedSPSNote>
+        <ContentCode listID="docom_follow_up_type_of_control" listName="DOCOM Follow-up type of control" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">EXIT_BCP</ContentCode>
+        <Content xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21" />
+        <SubjectCode listID="ched_follow_up_note_subject_code" listName="CHED Follow-up Note SubjectCode list" name="Type of control" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">TYPE_OF_CONTROL</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote>
+        <ContentCode listID="docom_follow_up_reason_of_non_compliance" listName="DOCOM Follow-up non compliance reason" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">ANIMALS_SUSPECTED</ContentCode>
+        <ContentCode listID="docom_follow_up_reason_of_non_compliance" listName="DOCOM Follow-up non compliance reason" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">ANIMALS_LOST</ContentCode>
+        <Content xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21" />
+        <SubjectCode listID="ched_follow_up_note_subject_code" listName="CHED Follow-up Note SubjectCode list" name="Reason of non-compliance" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">REASON_OF_NON_COMPLIANCE</SubjectCode>
+      </IncludedSPSNote>
+    </ControlDetails>
+    <CertifyingOfficerSPSAuthentication xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">
+      <TypeCode listID="9417" listVersionID="D16B" name="Clearance (Follow-up control)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">1</TypeCode>
+      <ActualDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-10T08:54:17+01:00</DateTime>
+      </ActualDateTime>
+      <ProviderSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">XIBEL1-DAERA</ID>
+        <Name>Belfast Port</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Authorized official">AM</RoleCode>
+        <TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>BT3</PostcodeCode>
+          <LineOne>Belfast City Council
+5 Corry Place
+Belfast Harbour Estate
+BT3 9HY</LineOne>
+          <CityName languageID="en">County Down</CityName>
+          <CountryID>XI</CountryID>
+          <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+          <CountrySubDivisionName languageID="en">Northern Ireland</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+        <SpecifiedSPSPerson>
+          <Name>Mr Test</Name>
+        </SpecifiedSPSPerson>
+      </ProviderSPSParty>
+      <IncludedSPSClause xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content />
+      </IncludedSPSClause>
+    </CertifyingOfficerSPSAuthentication>
+    <UpdatedOn xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">2026-08-10T08:54:17+01:00</UpdatedOn>
+    <CreatedOn xmlns="http://ec.europa.eu/tracesnt/certificate/docom/followup/v1">2026-08-10T08:54:17+01:00</CreatedOn>
+  </DocomFollowUp>
+</DocomCertificateType>

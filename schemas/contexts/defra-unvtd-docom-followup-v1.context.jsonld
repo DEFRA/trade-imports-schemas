@@ -1,0 +1,57 @@
+{
+  "@context": [
+    "./defra-unvtd-core-v1.context.jsonld",
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "defraUnvtdProfile": "https://defra.gov.uk/trade/unvtd/profile#",
+      "specifiedLogisticsTransportMovement": {
+        "@id": "unece:specifiedTransportMovement",
+        "@type": "@id"
+      },
+      "followUp": {
+        "@id": "defraUnvtdProfile:followUp",
+        "@type": "@id"
+      },
+      "certificateIdentifier": {
+        "@id": "defraUnvtdProfile:certificateIdentifier"
+      },
+      "redispatchDetails": {
+        "@id": "defraUnvtdProfile:redispatchDetails",
+        "@type": "@id"
+      },
+      "controlDetails": {
+        "@id": "defraUnvtdProfile:controlDetails",
+        "@type": "@id"
+      },
+      "redispatchDateTime": {
+        "@id": "defraUnvtdProfile:redispatchDateTime"
+      },
+      "exitAuthorityParty": {
+        "@id": "defraUnvtdProfile:exitAuthorityParty",
+        "@type": "@id"
+      },
+      "placeOfDestinationParty": {
+        "@id": "defraUnvtdProfile:placeOfDestinationParty",
+        "@type": "@id"
+      },
+      "meansOfTransport": {
+        "@id": "defraUnvtdProfile:meansOfTransport",
+        "@type": "@id"
+      },
+      "internationalTransportDocument": {
+        "@id": "defraUnvtdProfile:internationalTransportDocument"
+      },
+      "consignmentArrivedIndicator": {
+        "@id": "defraUnvtdProfile:consignmentArrivedIndicator"
+      },
+      "consignmentCompliantIndicator": {
+        "@id": "defraUnvtdProfile:consignmentCompliantIndicator"
+      },
+      "certifyingOfficerAuthentication": {
+        "@id": "defraUnvtdProfile:certifyingOfficerAuthentication",
+        "@type": "@id"
+      }
+    }
+  ]
+}

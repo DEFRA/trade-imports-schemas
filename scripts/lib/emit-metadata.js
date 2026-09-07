@@ -4,7 +4,7 @@ import { PROFILES, SCHEMAS } from './profile.js'
 function relativeSchemaPath (outDir, typeKey) {
   const profile = PROFILES[typeKey]
   const schemaAbs = resolve(SCHEMAS, profile.schema)
-  const contextAbs = resolve(SCHEMAS, 'contexts/defra-unvtd-core-v1.context.jsonld')
+  const contextAbs = resolve(SCHEMAS, profile.context ?? 'contexts/defra-unvtd-core-v1.context.jsonld')
 
   let schemaRel = relative(outDir, schemaAbs).split('\\').join('/')
   let contextRel = relative(outDir, contextAbs).split('\\').join('/')
@@ -33,10 +33,12 @@ export function withMetadata (payload, typeKey, outputPath) {
     $model: 'defra/certificate-internal/1',
     $schema: schemaRel,
     '@context': contextRel,
-    $type: profile.$type,
-    exchangedDocument,
-    specifiedConsignment
+    $type: profile.$type
   }
+
+  // Follow-up payloads are keyed to a certificate rather than carrying one.
+  if (exchangedDocument !== undefined) ordered.exchangedDocument = exchangedDocument
+  if (specifiedConsignment !== undefined) ordered.specifiedConsignment = specifiedConsignment
 
   if (laboratoryObservationResult !== undefined) {
     ordered.laboratoryObservationResult = laboratoryObservationResult

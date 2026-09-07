@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { normalizeTracesPayload } from './lib/traces-normalize.js'
-import { mapTracesToUnvtd } from './lib/unvtd-map.js'
+import { mapTracesToUnvtd, mapDocomFollowUps } from './lib/unvtd-map.js'
 import { parseTracesXml, loadMessageConfig } from './lib/traces-xml.js'
 import { detectProfileType, applyProfile } from './lib/profile.js'
 import { withMetadata } from './lib/emit-metadata.js'
@@ -29,6 +29,7 @@ Options:
   --type <ched|intra|docom>  Force profile type
   --no-metadata       Omit $schema, @context (default: include when writing to a file)
   --validate          Validate against profile JSON Schema
+  --followup          Emit the DOCOM Part III follow-up records instead of the certificate
   --message <id>      TRACES message type (see --list)
   --verbose           Log warnings for mapping edge cases
   --list              List configured XML message types
@@ -46,6 +47,7 @@ async function main () {
   let messageId = null
   let verbose = false
   let listOnly = false
+  let followUp = false
 
   for (let i = 0; i < args.length; i++) {
     const a = args[i]
@@ -57,6 +59,7 @@ async function main () {
     else if (a === '--with-metadata') { /* legacy alias: metadata is default when -o is used */ }
     else if (a === '--no-metadata') noMetadata = true
     else if (a === '--validate') validate = true
+    else if (a === '--followup') followUp = true
     else if (a === '--message' && args[i + 1]) messageId = args[++i]
     else if (a === '--verbose') verbose = true
     else if (a === '--list') listOnly = true
@@ -99,10 +102,21 @@ async function main () {
   }
 
   const normalized = normalizeTracesPayload(tracesPayload)
-  let unvtd = mapTracesToUnvtd(normalized, { typeOverride })
+  let unvtd
+  let profileType
 
-  const profileType = detectProfileType(unvtd, typeOverride)
-  unvtd = applyProfile(unvtd, profileType)
+  if (followUp) {
+    unvtd = mapDocomFollowUps(normalized)
+    if (!unvtd) {
+      console.error('No DOCOM follow-up records found in', inputPath)
+      process.exit(1)
+    }
+    profileType = 'docom-followup'
+  } else {
+    unvtd = mapTracesToUnvtd(normalized, { typeOverride })
+    profileType = detectProfileType(unvtd, typeOverride)
+    unvtd = applyProfile(unvtd, profileType)
+  }
 
   const includeMetadata = !noMetadata && (outputPath != null || process.argv.includes('--with-metadata'))
   if (includeMetadata) {

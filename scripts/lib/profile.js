@@ -19,6 +19,12 @@ const PROFILES = {
   docom: {
     $type: 'docom',
     schema: 'profiles/imports/eu/defra-unvtd-profile-docom-v1.schema.json',
+    documentTypeCodes: new Set(['332'])
+  },
+  'docom-followup': {
+    $type: 'docom-followup',
+    schema: 'profiles/imports/eu/defra-unvtd-profile-docom-followup-v1.schema.json',
+    context: 'contexts/defra-unvtd-docom-followup-v1.context.jsonld',
     documentTypeCodes: null
   }
 }

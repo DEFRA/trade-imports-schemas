@@ -33,6 +33,7 @@ Carried at the top of every GBN-AG payload. Identifies the pre-notification, who
 | `versionId` | integer | no | Document revision number. V1 on first submission, increments on each subsequent re-submission. Distinct from the envelope's aggregateVersion (event sequence) and the schema's structural version. |
 | `functionCode` | string | no | UNTDID 1225 message function: 9 (Original), 5 (Replace), 4 (Change), 1 (Cancellation), 3 (Deletion). Tells the consumer what the message does to its view of the document. |
 | `issueDateTime` | string | no | The datetime this version of the document was issued. For a pre-notification, issuance is the submission, so this carries the submission moment and is re-stamped on each re-submission: the original submission datetime on the NotificationSubmitted event, and the amendment's submission datetime on the latest NotificationSubmissionAmended event. This is the notification's own issuance datetime, distinct from the issue dates of accompanying documents held under referenceDocument. |
+| `revisionDateTime` | string | no | UNECE Exchanged_Document.Revision.DateTime — when this document was last revised. When present on a TRACES certificate, copied from the IncludedSPSNote with SubjectCode LAST_UPDATE_DATETIME (note content). The LAST_UPDATE_DATETIME note is retained in includedNote. Distinct from issueDateTime (document issuance) and from the event envelope timestamp (when CertificateUpdated was emitted). |
 | `issuer` | `TradeParty` | yes | The party responsible for issuing this document. For TRACES CHED and Defra import pre-notifications, this carries the responsible-person organisation with a named contact. This is the organisation of record, not the individual who submitted the notification; the submitting user is an event-level identity, not carried in this payload. |
 | `includedNote` | array of `IncludedNote` | no | General notes attached to the document as a whole, distinct from the per-line notes on a trade line's `additionalInformationNote`. |
 | `referenceDocument` | array of `ReferencedDocument` | no | Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Accompanying documents are all-or-nothing: they are optional as a group, but when one is provided its type, reference and date of issue accompany it. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline. |
@@ -60,7 +61,10 @@ One consignment per payload. Carries the parties (consignor, consignee, delivery
 | `importCountry` | `TradeCountry` | no | The country the consignment is imported into. For non-transit GBN-AG, `importCountry` is implicitly GB and may be left unpopulated. For transit cases (Reason for Import = Transit), `importCountry` carries the actual final destination country (not GB); GB then appears in `transitTradeCountry` as a country the consignment passes through. |
 | `reExportCountry` | array of `TradeCountry` | no | Re-export countries on the consignment route (TRACES ReExportSPSCountry[]). |
 | `transitCountry` | array of `TradeCountry` | no | Transit countries on the consignment route (TRACES TransitSPSCountry[]). |
+| `loadingBaseportLocation` | `LogisticsLocation` | no | Port of exit / loading baseport (TRACES `LoadingBaseportSPSLocation`, `unece:loadingBaseportLocation`) — where the consignment is loaded for despatch. |
 | `unloadingBaseportLocation` | `LogisticsLocation` | yes | The UK port (or point) of entry the consignment arrives at, sourced from the MDM Countries API restricted to ports handling arrivals from EU and EFTA countries within scope of the GBN-AG journey under EU-Reset. `identifier` carries the port reference (typically a UN/LOCODE like `GBHUL`); `name` carries the human-readable port name. This slot is the structural anchor for identifying the UK arrival event: the `arrivalEvent` whose `occurrenceLogisticsLocation.identifier` matches this slot's `identifier` is the leg arriving at the UK port. Distinct from any inspection point under `applicableCrossBorderRegulatoryProcedure`, which is a separate regulatory concept. |
+| `examinationEvent` | array of `ExaminationEvent` | no | Examination (inspection) events on the consignment (TRACES `ExaminationSPSEvent`, `unece:examinationEvent`). |
+| `utilizedLogisticsTransportEquipment` | array of `LogisticsTransportEquipment` | no | Transport equipment carrying the consignment, with any seals affixed to it (TRACES `UtilizedSPSTransportEquipment`). Aliased to `unece:utilizedTransportEquipment` in defra-unvtd-core-v1.context.jsonld. |
 | `mainCarriageLogisticsTransportMovement` | array of `LogisticsTransportMovement` | yes | The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. On the UK-arrival leg, `identifier` with its `urlId` register carries the V4 Transport identification value. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases. |
 | `transitTradeCountry` | array of `TradeCountry` | no | The countries the consignment passes through between origin and destination, one entry per country with `code.value` carrying the ISO 3166-1 alpha-2 code. Material for live animals because each transit country may impose its own welfare checks under long-journey transport rules. Present only when the route crosses other countries. |
 | `includedConsignmentItem` | array of `ConsignmentItem` | yes (exactly 1) | GBN-AG consignment item. Exactly one per consignment - a GBN-AG certificate covers a single consignment item, which carries the 'trade lines', one per species or commodity. In UN/CEFACT D23B a `ConsignmentItem` is an item within a consignment separately identified for transport and customs purposes; here it groups the species or commodities carried by the consignment. |
@@ -97,11 +101,14 @@ One line per species or commodity on the certificate. A line carries the species
 
 | Property | Type | Required | Description |
 |---|---|---|---|
-| `sequenceNumeric` | integer | no | A sequence number differentiating this logistics transport movement from others in a set of transport movements. |
+| `sequenceNumeric` | integer | no | A sequence number. |
 | `description` | array of string | yes | The free-text description of the commodity on this line, paired with `scientificName` and `commonName` for full species identification. Inherits the core line's array-of-strings form. |
 | `scientificName` | string | yes | The species name for the commodity in Latin, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species. |
 | `netWeight` | `UneceWeightMeasureType` | no | - |
 | `grossWeight` | `UneceWeightMeasureType` | no | - |
+| `netVolume` | `UneceMeasureType` | no | Net volume of the goods on this line, with unitCode carrying the UN/ECE Rec 20 unit (e.g. H87 piece, LTR litre). Aliased to `unece:netVolumeMeasure` in defra-unvtd-core-v1.context.jsonld. |
+| `originCountry` | `TradeCountry` | no | Country of origin of the goods on this line (TRACES line-level `OriginSPSCountry`, `unece:originCountry`). Line-level origin, distinct from the consignment-level `originCountry`, for consignments whose lines originate in different countries. |
+| `appliedProcess` | array of `AppliedProcess` | no | Processes applied to the goods on this line (TRACES `AppliedSPSProcess`, `unece:appliedProcess`). |
 | `applicableClassification` | array of `ApplicableClassification` | yes (at least 1) | A classification entry on a trade line. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade line can carry multiple classification entries when more than one system applies. |
 | `physicalReferencedLogisticsPackage` | array of `LogisticsPackage` | no | The packages the line's animals are transported in - one entry per package group, carried per species, so a mixed consignment has a package group on each line and the consignment carries no aggregate. `itemQuantity` is the package count, `typeCode` the package type (an open string per UNECE PackageTypeCode), and `levelCode` the packaging level. Optional: consignments where the animals are loose-loaded (for example livestock in a single trailer compartment) omit it. |
 | `specifiedTradeProduct` | array of `TradeProduct` | no | The trade product on this line. BSP-canonical structural slot; profile schemas may narrow shape and cardinality. |
@@ -140,12 +147,16 @@ Property names declared in one of the local Defra JSON-LD context files rather t
 
 | Property | Declared in | Notes |
 |---|---|---|
+| `LogisticsSeal` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:Seal` |
 | `LogisticsTransportMovement` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:TransportMovement` |
+| `affixedLogisticsSeal` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:affixedSeal` |
 | `carrier` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:carrierParty` |
 | `entryCustomsOfficeSpecifiedLogisticsLocation` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:entryCustomsOfficeSpecifiedLocation` |
 | `importer` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:importerParty` |
 | `individualTradeProductInstance` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:individualProductInstance` |
 | `mainCarriageLogisticsTransportMovement` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:mainCarriageTransportMovement` |
+| `netVolume` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:netVolumeMeasure` |
+| `utilizedLogisticsTransportEquipment` | `defra-unvtd-core-v1.context.jsonld` | Re-binds to canonical `unece:utilizedTransportEquipment` |
 
 
 ## Generation

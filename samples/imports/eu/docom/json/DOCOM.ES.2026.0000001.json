@@ -1,0 +1,459 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "../../../../../schemas/profiles/imports/eu/defra-unvtd-profile-docom-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "docom",
+  "exchangedDocument": {
+    "name": "853/2004 (2074/2005) Food chain information on porcine animals for slaughter",
+    "identifier": "DOCOM.ES.2026.0000001",
+    "documentTypeCode": "332",
+    "documentStatusCode": "86",
+    "issueDateTime": "2026-08-07T13:59:40+01:00",
+    "includedNote": [
+      {
+        "type": "Note",
+        "noteSubjectCode": "LAST_UPDATE_DATETIME",
+        "content": [
+          "2026-08-07T15:02:15.000+02:00"
+        ],
+        "contentCode": []
+      },
+      {
+        "type": "Note",
+        "noteSubjectCode": "PRODUCT_TEMPERATURE",
+        "content": [],
+        "contentCode": [
+          {
+            "value": "AMBIENT",
+            "urlId": "https://traces-codelists.ec.europa.eu/product_temperature",
+            "name": "Ambient"
+          }
+        ]
+      }
+    ],
+    "revisionDateTime": "2026-08-07T15:02:15.000+02:00",
+    "referenceDocument": [
+      {
+        "identifier": "DOCOM.ES.2026.0000001",
+        "documentTypeCode": "332",
+        "relationshipTypeCode": "CAW",
+        "attachmentBinaryObject": {
+          "format": "url",
+          "mimeCode": "text/url",
+          "uri": "https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/docom/DOCOM.ES.2026.0000001"
+        }
+      }
+    ],
+    "firstSignatoryAuthentication": {
+      "governmentActionTypeCode": "4",
+      "actualDateTime": "2026-08-07T13:59:40+01:00",
+      "providerParty": {
+        "identifier": "XI0000",
+        "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+        "name": "Department of Agriculture, Environment and Rural Affairs (DAERA)",
+        "partyRoleCode": {
+          "value": "VJ",
+          "name": "Officer (Identification of Applicant)"
+        },
+        "partyTypeCode": [
+          {
+            "value": "AUTHORITY",
+            "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+            "name": "Authority"
+          }
+        ],
+        "postalAddress": {
+          "postcodeCode": "BT1",
+          "lineOne": "DAERA main office",
+          "cityName": "Belfast",
+          "countryId": "XI",
+          "countryName": "United Kingdom (Northern Ireland)",
+          "countrySubDivisionName": "County Antrim"
+        },
+        "definedContact": [
+          {
+            "personName": "Mr Test"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "CERTIFIED_AS_OR_FOR",
+          "urlId": "https://traces-codelists.ec.europa.eu/docom_consignment_clause",
+          "content": "OTHER"
+        },
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "urlId": "https://traces-codelists.ec.europa.eu/docom_consignment_clause",
+          "content": "mrtest@test.com"
+        }
+      ]
+    },
+    "secondSignatoryAuthentication": {
+      "governmentActionTypeCode": "1",
+      "actualDateTime": "2026-08-07T14:02:15+01:00",
+      "providerParty": {
+        "identifier": "XI0000",
+        "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+        "name": "Department of Agriculture, Environment and Rural Affairs (DAERA)",
+        "partyRoleCode": {
+          "value": "AM",
+          "name": "Authorized official"
+        },
+        "partyTypeCode": [
+          {
+            "value": "AUTHORITY",
+            "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+            "name": "Authority"
+          }
+        ],
+        "postalAddress": {
+          "postcodeCode": "BT1",
+          "lineOne": "DAERA main office",
+          "cityName": "Belfast",
+          "countryId": "XI",
+          "countryName": "United Kingdom (Northern Ireland)",
+          "countrySubDivisionName": "County Antrim"
+        },
+        "definedContact": [
+          {
+            "personName": "Mr Test"
+          }
+        ]
+      },
+      "includedClause": [
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "urlId": "https://traces-codelists.ec.europa.eu/docom_declaration_clause",
+          "content": "mrtest@test.com"
+        },
+        {
+          "identifier": "DECLARATION_CLAUSES",
+          "urlId": "https://traces-codelists.ec.europa.eu/docom_declaration_clause",
+          "content": "II.1.   The animals' health status \nII.1.1.   Do the animals currently show any abnormal signs? \n  (1)- [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  \nII.1.2.   If yes , describe signs: \n  null \nII.1.3.   Are the pigs kept under officially recognized controlled housing conditions in relation to Trichinella spp.?(2) \n  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ] /(1) - [ ] ~~[UNKNOWN]~~ - [ ]  \nII.1.4   Are the animals suckling pigs, under five weeks of age, that are not weaned? \n  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  \n \nII.2.   Veterinary medicinal products \nII.2.1.   Name, dates of administration and withdrawal period \n- of veterinary medicinal products with a withdrawal period that have been administered to any of the animals during a period of (1) - [ ] ~~[30]~~ - [ ] /(1) - [ ] ~~[60]~~ - [ ] /(1) - [ ] ~~[90]~~ - [ ]  days before slaughter and \n- of any other veterinary medicinal product with a withdrawal period of more than 30 days: \nVeterinary medicinal product 1: \n·                           Name: null \n·                           Administration date:null \n·                           Withdrawal period: null \nVeterinary medicinal product 2: \n·                           Name: null \n·                           Administration date: null \n·                           Withdrawal period: null \n \nII.3.   Occurrence of, or positive test results for, diseases that might affect the safety of meat \nII.3.1.   Has the farm of provenance undergone testing for Salmonella in the past 12 months? (1) - [ ] ~~[YES]~~ - [ ]  /(1) - [ ] ~~[NO]~~ - [ ]  \nII.3.2.   If YES, what was the herd’s Salmonella status, following testing? \n  (1) - [ ] ~~[Free]~~ - [ ]  /(1) - [ ] ~~[Positive]~~ - [ ]  /(1) - [ ] ~~[Unknown]~~ - [ ]  \nII.3.3.   Have you been informed, for example through laboratory results, through the veterinary practitioner or through the competent authorities, of the presence of any other disease or infection in the animals sent for slaughter that might affect the safety of the meat? (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  \nII.3.3.   If yes, name of infection/disease: \n  null \n \nII.4.   Previous ante- and post-mortem inspection results \nII.4.1.   Do the ante- and post-mortem inspection results of the official veterinarian for the last group of animals sent in for slaughter indicate that a copy of these results should be added to the food chain information for the next group of animals sent in for slaughter? \n  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  \nII.4.2  If yes, attach a copy of these results to this food chain information document only when the next group is sent to another slaughterhouse than the last group. \n \nII.5.   \nWas the mortality rate during the fattening period over 5%? \n  (1) - [ ] ~~[YES]~~ - [ ] /(1) - [ ] ~~[NO]~~ - [ ]  \n \n(3)II.6.   Name, address and preferably phone number of the private or official veterinarian normally attending the holding of origin \n null \n \nII.6.   Post-mortem findings \nII.6.1   Macroscopic findings /disease: \n Condition null \n Number of animals affected null \n Type/class/age null \n Organ or site of animal(s) affected null \n Date of slaughter null \nII.6.2  Laboratory resultsnull \nII.6.3   Other results (e.g. parasites, foreign objects, null \nII.6.4   Welfare findings (e.g. broken legs) null \n \nNotes \nPart I: \n  Box I.2. indicate the unique reference number of the document \n  Box I.2a, I.3; I.4; and ISO Code in boxes I.8 and I.10 are only for the TRACES users \n  Box I.12: Approval number: indicate the identification mark of the holding in accordance with Article 3(1)(a) of Directive 2008/71/EC. \n  Box reference I.31.:To be completed only in case pigs are sent for slaughter in another country (the information will be copied into the Intra-EU certificate \n Official identification: The animals shall be identified in accordance with Council Directive 2008/71/EC. \n \n \nPart II \n  (1) Delete as appropriate. \n  (2) Does not have to be completed in case the pigs are sent for slaughter in another country (replaced by health certificate). If not completed or not known, all pigs will be tested. \n  (3) Competent authorities may derogate from providing this information when it is already available in another way."
+        }
+      ]
+    }
+  },
+  "specifiedConsignment": {
+    "availabilityDueDateTime": "2026-08-08T23:00:00+01:00",
+    "exportExitDateTime": "2026-08-08T00:00:00+01:00",
+    "consignorParty": {
+      "identifier": "899361",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
+      "name": "Mr Test",
+      "partyRoleCode": {
+        "value": "CZ",
+        "name": "Consignor"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "BT9",
+        "lineOne": "Test Street 876",
+        "cityName": "Belfast",
+        "countryId": "XI",
+        "countryName": "United Kingdom (Northern Ireland)",
+        "countrySubDivisionName": "County Antrim"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "899361",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
+      "name": "Mr Test",
+      "partyRoleCode": {
+        "value": "CN",
+        "name": "Consignee"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "BT9",
+        "lineOne": "Test Street 876",
+        "cityName": "Belfast",
+        "countryId": "XI",
+        "countryName": "United Kingdom (Northern Ireland)",
+        "countrySubDivisionName": "County Antrim"
+      }
+    },
+    "exportCountry": {
+      "subordinateTradeCountrySubDivision": {
+        "functionTypeCode": {
+          "content": "44"
+        },
+        "activityAuthorizedParty": [
+          {
+            "identifier": "ES00000",
+            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+            "name": "Servicios Veterinarios Españoles, C",
+            "partyRoleCode": {
+              "value": "RA",
+              "name": "Central bank or regulatory authority (Central competent authority)"
+            },
+            "postalAddress": {
+              "postcodeCode": "28012",
+              "lineOne": ".",
+              "cityName": "Madrid",
+              "countryId": "ES",
+              "countryName": "Spain",
+              "countrySubDivisionName": "Community of Madrid"
+            }
+          },
+          {
+            "identifier": "ES45901",
+            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+            "name": "Málaga",
+            "partyRoleCode": {
+              "value": "VG",
+              "name": "Local government sponsor (Local competent authority)"
+            },
+            "postalAddress": {
+              "postcodeCode": "29002",
+              "lineOne": ".",
+              "cityName": "Málaga",
+              "countryId": "ES",
+              "countryName": "Spain",
+              "countrySubDivisionName": "Malaga"
+            }
+          }
+        ]
+      }
+    },
+    "loadingBaseportLocation": {
+      "identifier": "ES290250000096",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+      "name": "Sea Life Centre Spain sa",
+      "postalAddress": {
+        "countryId": "ES",
+        "cityName": "Benalmádena",
+        "postcodeCode": "29630",
+        "lineOne": "Avenida del Puerto s/n\nMálaga"
+      }
+    },
+    "importCountry": {
+      "code": {
+        "value": "FR",
+        "name": "France"
+      }
+    },
+    "carrier": {
+      "identifier": "874056",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
+      "name": "Test Test",
+      "partyRoleCode": {
+        "value": "CA",
+        "name": "Carrier (Transporter)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "COMMERCIAL_TRANSPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Transporter"
+        },
+        {
+          "value": "TRANSPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Transporter"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "18184",
+        "lineOne": "Test",
+        "cityName": "Hamburg",
+        "countryId": "DE",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Hamburg"
+      }
+    },
+    "despatchParty": {
+      "identifier": "ES290250000096",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+      "name": "Sea Life Centre Spain sa",
+      "partyRoleCode": {
+        "value": "PW",
+        "name": "Despatch party (Place of origin)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "ESTABLISHMENT",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Establishment"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "29630",
+        "lineOne": "Avenida del Puerto s/n\nMálaga",
+        "cityName": "Benalmádena",
+        "countryId": "ES",
+        "countryName": "Spain",
+        "countrySubDivisionName": "Malaga"
+      }
+    },
+    "deliveryParty": {
+      "identifier": "770308",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
+      "name": "francofranco",
+      "partyRoleCode": {
+        "value": "DP",
+        "name": "Delivery party (Place of destination)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "81120",
+        "lineOne": "avenue du choux",
+        "cityName": "Réalmont",
+        "countryId": "FR",
+        "countryName": "France",
+        "countrySubDivisionName": "Tarn"
+      }
+    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "identifier": "test",
+        "urlId": "https://traces-codelists.ec.europa.eu/ship_imo_number",
+        "modeCode": 1
+      }
+    ],
+    "utilizedLogisticsTransportEquipment": [
+      {
+        "affixedLogisticsSeal": [
+          {
+            "identifier": "fdsdf3",
+            "urlId": "https://traces-codelists.ec.europa.eu/seal_number"
+          }
+        ]
+      }
+    ],
+    "includedConsignmentItem": [
+      {
+        "natureIdCargo": [
+          {
+            "typeCode": "12"
+          }
+        ],
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ],
+            "originCountry": {
+              "code": {
+                "value": "ES",
+                "name": "Spain"
+              }
+            },
+            "physicalReferencedLogisticsPackage": [
+              {
+                "levelCode": 4,
+                "typeCode": "NA",
+                "itemQuantity": 0
+              }
+            ],
+            "appliedProcess": [
+              {
+                "typeCode": "27",
+                "operatorParty": {
+                  "identifier": "899361",
+                  "urlId": "https://traces-codelists.ec.europa.eu/operator_internal_activity_id",
+                  "name": "Mr Test",
+                  "partyRoleCode": {
+                    "value": "FW",
+                    "name": "Freight forwarder (Transport organizer)"
+                  },
+                  "partyTypeCode": [
+                    {
+                      "value": "IMPORTER",
+                      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+                      "name": "Importer"
+                    },
+                    {
+                      "value": "OTH-OPER",
+                      "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+                      "name": "Other operators"
+                    }
+                  ],
+                  "postalAddress": {
+                    "postcodeCode": "BT9",
+                    "lineOne": "Test Street 876",
+                    "cityName": "Belfast",
+                    "countryId": "XI",
+                    "countryName": "United Kingdom (Northern Ireland)",
+                    "countrySubDivisionName": "County Antrim"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "sequenceNumeric": 1,
+            "scientificName": "Sus scrofa domesticus",
+            "netVolume": {
+              "value": "1",
+              "unitCode": "H87"
+            },
+            "applicableClassification": [
+              {
+                "systemId": "CN",
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": {
+                  "value": "0103"
+                },
+                "className": [
+                  "LIVE ANIMALS",
+                  "Live swine"
+                ]
+              }
+            ],
+            "additionalInformationNote": [
+              {
+                "type": "Note",
+                "noteSubjectCode": "OFFICIAL_IDENTIFICATION",
+                "content": [
+                  "23454"
+                ],
+                "contentCode": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,7 +6,16 @@
   "exchangedDocument": {
     "name": "CHED-PP Common Health Entry Document",
     "issueDateTime": "2021-02-18T16:09:51.000+01:00",
+    "revisionDateTime": "2026-07-22T12:38:45.000+02:00",
     "includedNote": [
+      {
+        "type": "Note",
+        "content": [
+          "2026-07-22T12:38:45.000+02:00"
+        ],
+        "contentCode": [],
+        "noteSubjectCode": "LAST_UPDATE_DATETIME"
+      },
       {
         "type": "Note",
         "content": [],

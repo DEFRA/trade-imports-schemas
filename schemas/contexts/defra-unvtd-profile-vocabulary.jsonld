@@ -54,6 +54,100 @@
       "rdfs:label": "specifiedConsignment",
       "rdfs:comment": "The consignment carried by a Defra UNVTD certificate payload.",
       "schema:rangeIncludes": { "@id": "uncefact:Consignment" }
+    },
+    {
+      "@id": "defraUnvtdProfile:certificateIdentifier",
+      "@type": "rdf:Property",
+      "rdfs:label": "certificateIdentifier",
+      "rdfs:comment": "The identifier of the certificate a follow-up payload belongs to. Follow-up records are a separate aggregate from the certificate, so they carry the certificate's document identifier rather than the document itself.",
+      "schema:rangeIncludes": { "@id": "xsd:string" }
+    },
+    {
+      "@id": "defraUnvtdProfile:followUp",
+      "@type": "rdf:Property",
+      "rdfs:label": "followUp",
+      "rdfs:comment": "The Part III follow-up records held against a certificate: the redispatch details and control outcomes recorded after the certificate was issued. TRACES appends records over the certificate's life without reissuing it.",
+      "schema:rangeIncludes": { "@id": "defraUnvtdProfile:FollowUpRecord" }
+    },
+    {
+      "@id": "defraUnvtdProfile:redispatchDetails",
+      "@type": "rdf:Property",
+      "rdfs:label": "redispatchDetails",
+      "rdfs:comment": "Where a consignment was sent after a follow-up control redispatched it, covering the exit authority, the destination country, the transport used, and the operator at the destination.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:FollowUpRecord" },
+      "schema:rangeIncludes": { "@id": "defraUnvtdProfile:RedispatchDetails" }
+    },
+    {
+      "@id": "defraUnvtdProfile:redispatchDateTime",
+      "@type": "rdf:Property",
+      "rdfs:label": "redispatchDateTime",
+      "rdfs:comment": "When the consignment was redispatched.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:RedispatchDetails" },
+      "schema:rangeIncludes": { "@id": "xsd:dateTime" }
+    },
+    {
+      "@id": "defraUnvtdProfile:exitAuthorityParty",
+      "@type": "rdf:Property",
+      "rdfs:label": "exitAuthorityParty",
+      "rdfs:comment": "The authority at the point of exit that handled a redispatch, typically a border control post.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:RedispatchDetails" },
+      "schema:rangeIncludes": { "@id": "uncefact:TradeParty" }
+    },
+    {
+      "@id": "defraUnvtdProfile:placeOfDestinationParty",
+      "@type": "rdf:Property",
+      "rdfs:label": "placeOfDestinationParty",
+      "rdfs:comment": "The operator at the destination a consignment was redispatched to.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:RedispatchDetails" },
+      "schema:rangeIncludes": { "@id": "uncefact:TradeParty" }
+    },
+    {
+      "@id": "defraUnvtdProfile:meansOfTransport",
+      "@type": "rdf:Property",
+      "rdfs:label": "meansOfTransport",
+      "rdfs:comment": "The transport used for a redispatch, one entry per leg, pairing the transport movement with the international transport document covering it.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:RedispatchDetails" },
+      "schema:rangeIncludes": { "@id": "defraUnvtdProfile:MeansOfTransport" }
+    },
+    {
+      "@id": "defraUnvtdProfile:internationalTransportDocument",
+      "@type": "rdf:Property",
+      "rdfs:label": "internationalTransportDocument",
+      "rdfs:comment": "Reference of the international transport document covering a leg of a redispatch journey.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:MeansOfTransport" },
+      "schema:rangeIncludes": { "@id": "xsd:string" }
+    },
+    {
+      "@id": "defraUnvtdProfile:controlDetails",
+      "@type": "rdf:Property",
+      "rdfs:label": "controlDetails",
+      "rdfs:comment": "The outcome of a follow-up control: whether the consignment arrived, whether it was compliant, and the coded control detail behind that finding.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:FollowUpRecord" },
+      "schema:rangeIncludes": { "@id": "defraUnvtdProfile:ControlDetails" }
+    },
+    {
+      "@id": "defraUnvtdProfile:consignmentArrivedIndicator",
+      "@type": "rdf:Property",
+      "rdfs:label": "consignmentArrivedIndicator",
+      "rdfs:comment": "True when the consignment arrived at its declared destination.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:ControlDetails" },
+      "schema:rangeIncludes": { "@id": "xsd:boolean" }
+    },
+    {
+      "@id": "defraUnvtdProfile:consignmentCompliantIndicator",
+      "@type": "rdf:Property",
+      "rdfs:label": "consignmentCompliantIndicator",
+      "rdfs:comment": "True when the consignment was found compliant at the follow-up control. When false, the reasons are carried as included notes with subject code REASON_OF_NON_COMPLIANCE.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:ControlDetails" },
+      "schema:rangeIncludes": { "@id": "xsd:boolean" }
+    },
+    {
+      "@id": "defraUnvtdProfile:certifyingOfficerAuthentication",
+      "@type": "rdf:Property",
+      "rdfs:label": "certifyingOfficerAuthentication",
+      "rdfs:comment": "The officer who signed off a follow-up action, carried as a document authentication in the same shape as the certificate signatories.",
+      "schema:domainIncludes": { "@id": "defraUnvtdProfile:FollowUpRecord" },
+      "schema:rangeIncludes": { "@id": "uncefact:DocumentAuthentication" }
     }
   ]
 }

@@ -32,9 +32,18 @@
     "DocomCertificate/v1/getDocomCertificate.response": {
       "xmlRoot": "GetDocomCertificateResponse",
       "rootMap": {
-        "SPSCertificate": "spsCertificate"
+        "SPSCertificate": "spsCertificate",
+        "DocomFollowUp": "docomFollowUp"
       },
-      "arrayKeys": []
+      "arrayKeys": ["docomFollowUp"]
+    },
+    "DocomCertificate/retrieval/DocomCertificateType": {
+      "xmlRoot": "DocomCertificateType",
+      "rootMap": {
+        "SPSCertificate": "spsCertificate",
+        "DocomFollowUp": "docomFollowUp"
+      },
+      "arrayKeys": ["docomFollowUp"]
     }
   }
 }

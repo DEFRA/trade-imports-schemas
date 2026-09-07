@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ched-event-certificate-updated-v1.schema.json",
+  "title": "CHED CertificateUpdated event (v1)",
+  "description": "Event emitted when a TRACES CHED certificate snapshot is observed or republished. Certificate aggregate; CHED family is on subType (CHEDA | CHEDP | CHEDPP | CHEDD). data is the full CHED profile. When present, TRACES LAST_UPDATE_DATETIME is copied to data.exchangedDocument.revisionDateTime and kept in includedNote.",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Certificate" },
+        "subType": {
+          "type": "string",
+          "enum": ["CHEDA", "CHEDP", "CHEDPP", "CHEDD"],
+          "description": "TRACES CHED type for this Certificate aggregate. Derived from the CHED_TYPE note (contentCode A/P/PP/D → CHEDA/CHEDP/CHEDPP/CHEDD). Canonical discriminator for consumers; the CHED_TYPE note is retained on data.exchangedDocument.includedNote for round-trip."
+        },
+        "eventType": {
+          "const": "uk.gov.defra.trade.imports.traces.CertificateUpdated"
+        },
+        "data": {
+          "$ref": "defra-unvtd-profile-ched-v1.schema.json"
+        }
+      }
+    }
+  ]
+}

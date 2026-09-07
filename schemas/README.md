@@ -22,18 +22,29 @@ schemas/
 
   contexts/
     defra-unvtd-core-v1.context.jsonld
+    defra-unvtd-docom-followup-v1.context.jsonld         # DOCOM Part III terms, layered on core
 
   profiles/
     imports/
       international/
         defra-unvtd-profile-ched-v1.schema.json
+        events/
+          ched-event-certificate-updated-v1.schema.json
       eu/
         defra-unvtd-profile-intra-v1.schema.json
         defra-unvtd-profile-docom-v1.schema.json
+        defra-unvtd-profile-docom-followup-v1.schema.json  # FollowUpRecord shape + standalone follow-up payload
+        events/
+          intra-event-certificate-updated-v1.schema.json
+          docom-event-certificate-updated-v1.schema.json
+          docom-event-followup-updated-v1.schema.json
       gb/
         gbn-ag-v1.schema.json
-        pims/
-          gbn-ag-pims-v0.1.0.schema.json
+        events/                                          # GBN-AG Notification* catalogue
+      events/
+        README.md                                        # Certificate vs Notification guidance
+      pims/
+        gbn-ag-pims-v0.1.0.schema.json
       messaging/
         event-envelope-v1.schema.json
 
@@ -70,6 +81,7 @@ Primary sample locations:
 
 - `samples/imports/international/ched/json/unvtd-ched.json`
 - `samples/imports/eu/intra/json/unvtd-intra.json`
+- `samples/imports/eu/docom/json/DOCOM.ES.2026.0000001.json` (certificate; optional inline `followUp`) and `-followup.json` (standalone Part III payload)
 - `samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json`
 - `samples/imports/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
 

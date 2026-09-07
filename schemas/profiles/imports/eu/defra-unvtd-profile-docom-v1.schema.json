@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "defra-unvtd-profile-docom-v1.schema.json",
   "title": "Defra UNVTD DOCOM profile",
+  "description": "Intra-Union commercial document (DOCOM) certificate, as issued by TRACES for movements of animals and products not requiring an INTRA certificate. Part III follow-up records (redispatch and control outcomes) are carried on followUp; TRACES returns them alongside the certificate, and their shapes are defined in defra-unvtd-profile-docom-followup-v1.schema.json.",
   "allOf": [
     {
       "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
@@ -15,8 +16,29 @@
         "$type": {
           "const": "docom"
         },
+        "exchangedDocument": {
+          "allOf": [
+            { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ExchangedDocument" },
+            {
+              "type": "object",
+              "properties": {
+                "documentTypeCode": {
+                  "const": "332",
+                  "description": "UNTDID 1001 code 332 — commercial document. TRACES issues DOCOM under this code."
+                }
+              }
+            }
+          ]
+        },
         "specifiedConsignment": {
           "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
+        },
+        "followUp": {
+          "type": "array",
+          "description": "Part III follow-up records in the order TRACES returned them (TRACES DocomFollowUp). TRACES appends one record per follow-up action over the certificate's life, each carrying redispatch details, control outcomes, or both. Absent until the first follow-up is recorded.",
+          "items": {
+            "$ref": "defra-unvtd-profile-docom-followup-v1.schema.json#/$defs/FollowUpRecord"
+          }
         }
       },
       "required": [

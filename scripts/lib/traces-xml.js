@@ -20,7 +20,13 @@ const FXP_ARRAY_TAGS = [
   'IncludedSPSClause',
   'IncludedSPSConsignmentItem',
   'IncludedSPSTradeLineItem',
-  'ApplicableSPSClassification'
+  'ApplicableSPSClassification',
+  'UtilizedSPSTransportEquipment',
+  'AffixedSPSSeal',
+  'AdditionalInformationSPSNote',
+  'AppliedSPSProcess',
+  'DocomFollowUp',
+  'MeansOfTransport'
 ]
 
 export function toCamelCase (str) {
@@ -34,7 +40,9 @@ export function toCamelCase (str) {
       })
       .join('')
   }
-  const segments = str.match(/[A-Z]+(?=[A-Z])|[A-Z]+[a-z]*|[a-z]+/g)
+  // An uppercase run only ends a segment when a new capitalised word follows,
+  // so trailing acronyms stay whole: CountryID → countryID, not countryid.
+  const segments = str.match(/[A-Z]+(?=[A-Z][a-z])|[A-Z]+[a-z]*|[a-z]+/g)
   if (!segments || segments.length === 0) return str
   const isAcronym = (s) => s.length > 1 && /^[A-Z]+$/.test(s)
   return segments
@@ -210,6 +218,9 @@ export function parseTracesXml (xml, messageId = null) {
     attributeNamePrefix: '@_',
     textNodeName: '#text',
     parseTagValue: true,
+    // Values with leading zeros stay strings: CN codes (0103), postcodes and
+    // scheme identifiers lose their meaning if coerced to numbers.
+    numberParseOptions: { leadingZeros: false, hex: false, eNotation: false },
     trimValues: true,
     removeNSPrefix: true,
     isArray: (name) => FXP_ARRAY_TAGS.includes(name)

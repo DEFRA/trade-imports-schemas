@@ -33,7 +33,7 @@
     },
     "subType": {
       "type": "string",
-      "description": "Discriminator for aggregate sub-types (e.g., IMP, CVEDA)"
+      "description": "Discriminator for aggregate sub-types (e.g., INTRA, CHEDA, DOCOM)"
     },
     "aggregateId": {
       "type": "string",
