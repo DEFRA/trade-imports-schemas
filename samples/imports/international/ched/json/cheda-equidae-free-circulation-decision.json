@@ -1,0 +1,419 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$schema": "../../../../../schemas/profiles/imports/international/defra-unvtd-profile-ched-v1.schema.json",
+  "@context": "../../../../../schemas/contexts/defra-unvtd-core-v1.context.jsonld",
+  "$type": "ched",
+  "exchangedDocument": {
+    "name": "CHED-A - Common Health Entry Document for Animal",
+    "identifier": "CHEDA.XI.2026.0000097",
+    "documentTypeCode": "636",
+    "documentStatusCode": "1",
+    "issueDateTime": "2026-07-30T17:31:46+01:00",
+    "issuer": {
+      "identifier": "XIWPT1-DAERA",
+      "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+      "name": "Warrenpoint Port",
+      "partyRoleCode": {
+        "value": "VJ",
+        "urlId": "https://traces-codelists.ec.europa.eu/3035",
+        "name": "Officer (Identification of Applicant)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "AUTHORITY",
+          "urlId": "https://traces-codelists.ec.europa.eu/user_body_role",
+          "name": "Authority"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "BT34",
+        "lineOne": "Warrenpoint Harbour Authority, Harbour Office,\nThe Docks",
+        "cityName": "Warrenpoint",
+        "countryId": "XI",
+        "countryName": "United Kingdom (Northern Ireland)",
+        "countrySubDivisionName": "County Down"
+      },
+      "definedContact": [
+        {
+          "personName": "BTMS BTMS"
+        }
+      ]
+    },
+    "includedNote": [
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "CHED_TYPE",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [],
+        "contentCode": [
+          {
+            "value": "A",
+            "urlId": "https://traces-codelists.ec.europa.eu/ched_type"
+          }
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "LAST_UPDATE_DATETIME",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "2026-08-11T13:09:24.000+02:00"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "DEPARTURE_FROM_BCP_DATETIME",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "2026-08-12T00:00:00.000+02:00"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "LABORATORY_TESTS_COMMODITIES_TOTAL",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "0"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "LABORATORY_TESTS_COMMODITIES_SATISFACTORY",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "0"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "LABORATORY_TESTS_COMMODITIES_NOT_SATISFACTORY",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "0"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "LABORATORY_TESTS_COMMODITIES_PENDING",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [
+          "0"
+        ]
+      },
+      {
+        "type": "Note",
+        "subjectCode": {
+          "value": "NON_COMPLIANCE_DETAILS_PRESENT",
+          "urlId": "https://traces-codelists.ec.europa.eu/ched_note_subject_code"
+        },
+        "content": [],
+        "contentCode": [
+          {
+            "value": "NO",
+            "urlId": "https://traces-codelists.ec.europa.eu/boolean"
+          }
+        ]
+      }
+    ],
+    "referenceDocument": [
+      {
+        "typeCode": "636",
+        "relationshipTypeCode": "CAW",
+        "identifier": "CHEDA.XI.2026.0000097"
+      },
+      {
+        "typeCode": "636",
+        "relationshipTypeCode": "ZZZ",
+        "identifier": "123456"
+      }
+    ],
+    "firstSignatoryAuthentication": {
+      "typeCode": "4",
+      "actualDateTime": "2026-08-11T12:09:24+01:00",
+      "governmentActionTypeCode": "Inspection (Identification of Applicant)",
+      "includedClause": [
+        {
+          "identifier": "PURPOSE",
+          "content": "FREE_CIRCULATION"
+        },
+        {
+          "identifier": "GOODS_CERTIFIED_AS",
+          "content": "BREEDING_PRODUCTION"
+        },
+        {
+          "identifier": "SIGNATORY_PERSON_EMAIL",
+          "content": "btms@defra.gov.uk"
+        }
+      ]
+    },
+    "secondSignatoryAuthentication": {
+      "typeCode": "1",
+      "governmentActionTypeCode": "Clearance (Official inspector)",
+      "includedClause": [
+        {
+          "identifier": "DECISION_CONCLUSION",
+          "content": "ACCEPTABLE_FOR_FREE_CIRCULATION"
+        },
+        {
+          "identifier": "DOCUMENTARY_CHECK",
+          "content": "NO"
+        },
+        {
+          "identifier": "IDENTITY_CHECK",
+          "content": "NO"
+        },
+        {
+          "identifier": "PHYSICAL_CHECK",
+          "content": "NO"
+        },
+        {
+          "identifier": "WELFARE_CHECK",
+          "content": "NO"
+        }
+      ]
+    }
+  },
+  "specifiedConsignment": {
+    "availabilityDueDateTime": "2026-07-28T23:00:00+01:00",
+    "consignorParty": {
+      "identifier": "test",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+      "name": "testest",
+      "partyRoleCode": {
+        "value": "EX",
+        "urlId": "https://traces-codelists.ec.europa.eu/3035",
+        "name": "Exporter"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "81549",
+        "lineOne": "test",
+        "cityName": "Stadtbezirk 16 Ramersdorf - Perlach",
+        "countryId": "DE",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Munich"
+      }
+    },
+    "consigneeParty": {
+      "identifier": "test",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+      "name": "testest",
+      "partyRoleCode": {
+        "value": "CN",
+        "urlId": "https://traces-codelists.ec.europa.eu/3035",
+        "name": "Consignee (Importer)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "81549",
+        "lineOne": "test",
+        "cityName": "Stadtbezirk 16 Ramersdorf - Perlach",
+        "countryId": "DE",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Munich"
+      }
+    },
+    "deliveryParty": {
+      "identifier": "test",
+      "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_id",
+      "name": "testest",
+      "partyRoleCode": {
+        "value": "DP",
+        "urlId": "https://traces-codelists.ec.europa.eu/3035",
+        "name": "Delivery party (Place of destination)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "IMPORTER",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Importer"
+        },
+        {
+          "value": "OTH-OPER",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Other operators"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "81549",
+        "lineOne": "test",
+        "cityName": "Stadtbezirk 16 Ramersdorf - Perlach",
+        "countryId": "DE",
+        "countryName": "Germany",
+        "countrySubDivisionName": "Munich"
+      }
+    },
+    "customsTransitAgentParty": {
+      "identifier": "BE0779401433",
+      "urlId": "https://traces-codelists.ec.europa.eu/eori_number",
+      "name": "Organic Importer test",
+      "partyRoleCode": {
+        "value": "CB",
+        "urlId": "https://traces-codelists.ec.europa.eu/3035",
+        "name": "Customs broker (Responsible for consignment)"
+      },
+      "partyTypeCode": [
+        {
+          "value": "RESPONSIBLE_FOR_THE_LOAD",
+          "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type",
+          "name": "Responsible for the load"
+        },
+        {
+          "value": "RFL",
+          "urlId": "https://traces-codelists.ec.europa.eu/classification_section_code",
+          "name": "Responsible For the Load (Freight Forwarder)"
+        }
+      ],
+      "postalAddress": {
+        "postcodeCode": "8000",
+        "lineOne": "bruges",
+        "cityName": "Bruges",
+        "countryId": "BE",
+        "countryName": "Belgium",
+        "countrySubDivisionName": "West Flanders"
+      }
+    },
+    "unloadingBaseportLocation": {
+      "identifier": "GBBEL",
+      "urlId": "https://traces-codelists.ec.europa.eu/un_locode",
+      "name": "County Down"
+    },
+    "mainCarriageLogisticsTransportMovement": [
+      {
+        "identifier": "R331",
+        "modeCode": 3
+      },
+      {
+        "identifier": "R331",
+        "modeCode": 3
+      }
+    ],
+    "includedConsignmentItem": [
+      {
+        "natureIdCargo": [
+          {
+            "typeCode": "12"
+          }
+        ],
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 0,
+            "description": [
+              "Consignment totals and summary"
+            ],
+            "netWeight": {
+              "content": "0"
+            },
+            "grossWeight": {
+              "content": "100",
+              "unitCode": "KGM"
+            },
+            "physicalReferencedLogisticsPackage": [
+              {
+                "levelCode": 4,
+                "typeCode": "NA",
+                "itemQuantity": 0
+              }
+            ]
+          },
+          {
+            "sequenceNumeric": 1,
+            "description": [],
+            "scientificName": "Eq cabalus*asinus",
+            "applicableClassification": [
+              {
+                "systemId": "CN",
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": {
+                  "value": "0101",
+                  "urlId": "https://traces-codelists.ec.europa.eu/class_code_system/CN"
+                },
+                "className": [
+                  "LIVE ANIMALS",
+                  "Live horses, asses, mules and hinnies"
+                ]
+              },
+              {
+                "systemId": "IDENTIFICATION_SYSTEM",
+                "systemName": "Identification system",
+                "classCode": {
+                  "value": "BRAND",
+                  "urlId": "https://traces-codelists.ec.europa.eu/class_code_system/IDENTIFICATION_SYSTEM"
+                },
+                "className": [
+                  "Brand"
+                ]
+              }
+            ]
+          },
+          {
+            "sequenceNumeric": 2,
+            "description": [],
+            "scientificName": "Eq cabalus*asinus",
+            "applicableClassification": [
+              {
+                "systemId": "CN",
+                "systemName": "CN Code (Combined Nomenclature)",
+                "classCode": {
+                  "value": "0101",
+                  "urlId": "https://traces-codelists.ec.europa.eu/class_code_system/CN"
+                },
+                "className": [
+                  "LIVE ANIMALS",
+                  "Live horses, asses, mules and hinnies"
+                ]
+              },
+              {
+                "systemId": "IDENTIFICATION_SYSTEM",
+                "systemName": "Identification system",
+                "classCode": {
+                  "value": "PASSPORT",
+                  "urlId": "https://traces-codelists.ec.europa.eu/class_code_system/IDENTIFICATION_SYSTEM"
+                },
+                "className": [
+                  "Passport"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

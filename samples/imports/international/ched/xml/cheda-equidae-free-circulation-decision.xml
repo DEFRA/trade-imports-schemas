@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ChedCertificateType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SPSCertificate xmlns="urn:un:unece:uncefact:data:standard:SPSCertificate:17">
+    <SPSExchangedDocument>
+      <Name languageID="en" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">CHED-A - Common Health Entry Document for Animal</Name>
+      <ID xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">CHEDA.XI.2026.0000097</ID>
+      <TypeCode listID="1001" listVersionID="D16B" name="Health certificate (CHED - Common Health Entry Document)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">636</TypeCode>
+      <StatusCode listID="4405" listVersionID="D16B" name="To be done (New)" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">1</StatusCode>
+      <IssueDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-07-30T17:31:46+01:00</DateTime>
+      </IssueDateTime>
+      <IssuerSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="authority_activity_id" schemeName="Authority activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">XIWPT1-DAERA</ID>
+        <Name>Warrenpoint Port</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Officer (Identification of Applicant)">VJ</RoleCode>
+        <TypeCode listID="user_body_role" listName="User body role" name="Authority">AUTHORITY</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>BT34</PostcodeCode>
+          <LineOne>Warrenpoint Harbour Authority, Harbour Office,
+The Docks</LineOne>
+          <CityName languageID="en">Warrenpoint</CityName>
+          <CountryID>XI</CountryID>
+          <CountryName languageID="en">United Kingdom (Northern Ireland)</CountryName>
+          <CountrySubDivisionName languageID="en">County Down</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+        <SpecifiedSPSPerson>
+          <Name>BTMS BTMS</Name>
+        </SpecifiedSPSPerson>
+      </IssuerSPSParty>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ContentCode listID="ched_type" listName="CHED type" name="CHED-A - Common Health Entry Document for Animal">A</ContentCode>
+        <Content />
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Type of CHED">CHED_TYPE</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>2026-08-11T13:09:24.000+02:00</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Last updated">LAST_UPDATE_DATETIME</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>2026-08-12T00:00:00.000+02:00</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Date of departure from BCP">DEPARTURE_FROM_BCP_DATETIME</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>0</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Total number of laboratory tests on commodities">LABORATORY_TESTS_COMMODITIES_TOTAL</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>0</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Number of satisfactory laboratory tests on commodities">LABORATORY_TESTS_COMMODITIES_SATISFACTORY</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>0</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Number of not-satisfactory laboratory tests on commodities">LABORATORY_TESTS_COMMODITIES_NOT_SATISFACTORY</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <Content>0</Content>
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Number of pending laboratory tests on commodities">LABORATORY_TESTS_COMMODITIES_PENDING</SubjectCode>
+      </IncludedSPSNote>
+      <IncludedSPSNote xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ContentCode listID="boolean" listName="Boolean (yes/no)">NO</ContentCode>
+        <Content />
+        <SubjectCode listID="ched_note_subject_code" listName="CHED Note SubjectCode list" name="Presence of details on non-compliance">NON_COMPLIANCE_DETAILS_PRESENT</SubjectCode>
+      </IncludedSPSNote>
+      <ReferenceSPSReferencedDocument xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="1001" listVersionID="D16B" name="Health certificate (CHED - Common Health Entry Document)">636</TypeCode>
+        <RelationshipTypeCode listID="1153_ReferenceTypeCode" listVersionID="D16B" name="Document reference, internal (Document reference, internal)">CAW</RelationshipTypeCode>
+        <ID>CHEDA.XI.2026.0000097</ID>
+        <AttachmentBinaryObject format="url" mimeCode="text/url" uri="https://webgate.acceptance.ec.europa.eu/tracesnt/certificate/ched/CHEDA.XI.2026.0000097" />
+      </ReferenceSPSReferencedDocument>
+      <ReferenceSPSReferencedDocument xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <IssueDateTime>2026-07-29T00:00:00.000+02:00</IssueDateTime>
+        <TypeCode listID="1001" listVersionID="D16B" name="Health certificate (Health certificate)">636</TypeCode>
+        <RelationshipTypeCode listID="1153_ReferenceTypeCode" listVersionID="D16B" name="Mutually defined reference number (Supporting document)">ZZZ</RelationshipTypeCode>
+        <ID schemeAgencyID="GB">123456</ID>
+      </ReferenceSPSReferencedDocument>
+      <SignatorySPSAuthentication xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="9417" listVersionID="D16B" name="Inspection (Identification of Applicant)">4</TypeCode>
+        <ActualDateTime>
+          <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-08-11T12:09:24+01:00</DateTime>
+        </ActualDateTime>
+        <ProviderSPSParty>
+          <Name />
+        </ProviderSPSParty>
+        <IncludedSPSClause>
+          <ID schemeID="ched_consignment_clause" schemeName="CHED consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PURPOSE</ID>
+          <Content>FREE_CIRCULATION</Content>
+          <Content languageID="en">For free circulation</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_consignment_clause" schemeName="CHED consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">GOODS_CERTIFIED_AS</ID>
+          <Content>BREEDING_PRODUCTION</Content>
+          <Content languageID="en">Breeding/production</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_consignment_clause" schemeName="CHED consignment's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">SIGNATORY_PERSON_EMAIL</ID>
+          <Content>btms@defra.gov.uk</Content>
+        </IncludedSPSClause>
+      </SignatorySPSAuthentication>
+      <SignatorySPSAuthentication xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <TypeCode listID="9417" listVersionID="D16B" name="Clearance (Official inspector)">1</TypeCode>
+        <ActualDateTime>
+          <DateTimeString xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21" />
+        </ActualDateTime>
+        <ProviderSPSParty>
+          <Name />
+        </ProviderSPSParty>
+        <IncludedSPSClause>
+          <ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DECISION_CONCLUSION</ID>
+          <Content>ACCEPTABLE_FOR_FREE_CIRCULATION</Content>
+          <Content languageID="en">Acceptable for free circulation</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">DOCUMENTARY_CHECK</ID>
+          <Content>NO</Content>
+          <Content languageID="en">False</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">IDENTITY_CHECK</ID>
+          <Content>NO</Content>
+          <Content languageID="en">False</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">PHYSICAL_CHECK</ID>
+          <Content>NO</Content>
+          <Content languageID="en">False</Content>
+        </IncludedSPSClause>
+        <IncludedSPSClause>
+          <ID schemeID="ched_decision_clause" schemeName="CHED decision's clauses" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">WELFARE_CHECK</ID>
+          <Content>NO</Content>
+          <Content languageID="en">False</Content>
+        </IncludedSPSClause>
+      </SignatorySPSAuthentication>
+    </SPSExchangedDocument>
+    <SPSConsignment>
+      <AvailabilityDueDateTime xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <DateTime xmlns="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">2026-07-28T23:00:00+01:00</DateTime>
+      </AvailabilityDueDateTime>
+      <ConsignorSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">test</ID>
+        <Name>testest</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Exporter">EX</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>81549</PostcodeCode>
+          <LineOne>test</LineOne>
+          <CityName languageID="en">Stadtbezirk 16 Ramersdorf - Perlach</CityName>
+          <CountryID>DE</CountryID>
+          <CountryName languageID="en">Germany</CountryName>
+          <CountrySubDivisionName languageID="en">Munich</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </ConsignorSPSParty>
+      <ConsigneeSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">test</ID>
+        <Name>testest</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Consignee (Importer)">CN</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>81549</PostcodeCode>
+          <LineOne>test</LineOne>
+          <CityName languageID="en">Stadtbezirk 16 Ramersdorf - Perlach</CityName>
+          <CountryID>DE</CountryID>
+          <CountryName languageID="en">Germany</CountryName>
+          <CountrySubDivisionName languageID="en">Munich</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </ConsigneeSPSParty>
+      <ExportSPSCountry xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID />
+        <Name />
+      </ExportSPSCountry>
+      <ImportSPSCountry xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID />
+        <Name />
+      </ImportSPSCountry>
+      <UnloadingBaseportSPSLocation xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="un_locode" schemeName="UN/LOCODE" schemeAgencyID="un" schemeAgencyName="United Nations" schemeDataURI="authority_activity">GBBEL</ID>
+        <Name>XI</Name>
+        <Name languageID="en">County Down</Name>
+        <Name>XIBEL1-DAERA</Name>
+        <Name>Belfast Port</Name>
+        <Name>Belfast City Council
+5 Corry Place
+Belfast Harbour Estate
+BT3 9HY</Name>
+        <Name>GBBEL</Name>
+      </UnloadingBaseportSPSLocation>
+      <ExaminationSPSEvent xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <OccurrenceSPSLocation>
+          <Name />
+        </OccurrenceSPSLocation>
+      </ExaminationSPSEvent>
+      <CarrierSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_internal_activity_id" schemeName="Operator internal activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">879328</ID>
+        <Name>Destock Logistics Belgium</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Carrier (Transporter)">CA</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Transporter">COMMERCIAL_TRANSPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Transporter">TRANSPORTER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>7700</PostcodeCode>
+          <LineOne>Rue de l'Echauffouree 1</LineOne>
+          <CityName languageID="en">Mouscron</CityName>
+          <CountryID>BE</CountryID>
+          <CountryName languageID="en">Belgium</CountryName>
+          <CountrySubDivisionName languageID="en">Hainaut</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </CarrierSPSParty>
+      <DeliverySPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="operator_activity_id" schemeName="Operator activity ID" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">test</ID>
+        <Name>testest</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Delivery party (Place of destination)">DP</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Importer">IMPORTER</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Other operators">OTH-OPER</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>81549</PostcodeCode>
+          <LineOne>test</LineOne>
+          <CityName languageID="en">Stadtbezirk 16 Ramersdorf - Perlach</CityName>
+          <CountryID>DE</CountryID>
+          <CountryName languageID="en">Germany</CountryName>
+          <CountrySubDivisionName languageID="en">Munich</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </DeliverySPSParty>
+      <CustomsTransitAgentSPSParty xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="eori_number" schemeName="EORI Number" schemeAgencyID="ec_sante_traces" schemeAgencyName="European commission - DG SANTE - Traces">BE0779401433</ID>
+        <Name>Organic Importer test</Name>
+        <RoleCode listID="3035" listVersionID="D16B" name="Customs broker (Responsible for consignment)">CB</RoleCode>
+        <TypeCode listID="operator_activity_type" listName="Operator activity type" name="Responsible for the load">RESPONSIBLE_FOR_THE_LOAD</TypeCode>
+        <TypeCode listID="classification_section_code" listName="Operator classification section code" name="Responsible For the Load (Freight Forwarder)">RFL</TypeCode>
+        <SpecifiedSPSAddress>
+          <PostcodeCode>8000</PostcodeCode>
+          <LineOne>bruges</LineOne>
+          <CityName languageID="en">Bruges</CityName>
+          <CountryID>BE</CountryID>
+          <CountryName languageID="en">Belgium</CountryName>
+          <CountrySubDivisionName languageID="en">West Flanders</CountrySubDivisionName>
+        </SpecifiedSPSAddress>
+      </CustomsTransitAgentSPSParty>
+      <MainCarriageSPSTransportMovement xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="road_vehicle_registration_before_bcp" schemeName="Road vehicle registration (before BCP)" schemeAgencyID="GB" schemeAgencyName="United Kingdom">R331</ID>
+        <ModeCode listID="Recommendation 19" listVersionID="2" name="Road transport">3</ModeCode>
+      </MainCarriageSPSTransportMovement>
+      <MainCarriageSPSTransportMovement xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <ID schemeID="road_vehicle_registration_after_bcp" schemeName="Road vehicle registration (after BCP)" schemeAgencyID="GB" schemeAgencyName="United Kingdom">R331</ID>
+        <ModeCode listID="Recommendation 19" listVersionID="2" name="Road transport">3</ModeCode>
+      </MainCarriageSPSTransportMovement>
+      <IncludedSPSConsignmentItem xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21">
+        <NatureIdentificationSPSCargo>
+          <TypeCode listID="7085" listVersionID="D16B" name="General cargo (Commodities)">12</TypeCode>
+        </NatureIdentificationSPSCargo>
+        <IncludedSPSTradeLineItem>
+          <SequenceNumeric>0</SequenceNumeric>
+          <Description>Consignment totals and summary</Description>
+          <NetWeightMeasure>0</NetWeightMeasure>
+          <GrossWeightMeasure unitCode="KGM">100</GrossWeightMeasure>
+          <NetVolumeMeasure unitCode="H87">2</NetVolumeMeasure>
+          <GrossVolumeMeasure unitCode="MTQ">100</GrossVolumeMeasure>
+          <PhysicalSPSPackage>
+            <LevelCode name="No packaging hierarchy">4</LevelCode>
+            <TypeCode listID="7065" listVersionID="2006">NA</TypeCode>
+            <ItemQuantity>0.0</ItemQuantity>
+          </PhysicalSPSPackage>
+        </IncludedSPSTradeLineItem>
+        <IncludedSPSTradeLineItem>
+          <SequenceNumeric>1</SequenceNumeric>
+          <Description />
+          <ScientificName languageID="la">Eq cabalus*asinus</ScientificName>
+          <NetVolumeMeasure unitCode="H87">1</NetVolumeMeasure>
+          <AdditionalInformationSPSNote>
+            <Content>123456789123456</Content>
+            <SubjectCode listID="ched_commodity_note_subject_code" listName="CHED Commodity Note SubjectCode list" name="Individual identification number">INDIVIDUAL_IDENTIFICATION_NUMBER</SubjectCode>
+          </AdditionalInformationSPSNote>
+          <AdditionalInformationSPSNote>
+            <ContentCode listID="boolean" listName="Boolean (yes/no)">NO</ContentCode>
+            <Content />
+            <SubjectCode listID="ched_commodity_note_subject_code" listName="CHED Commodity Note SubjectCode list" name="Includes unweaned animals">INCLUDES_UNWEANED_ANIMALS</SubjectCode>
+          </AdditionalInformationSPSNote>
+          <ApplicableSPSClassification>
+            <SystemID>CN</SystemID>
+            <SystemName>CN Code (Combined Nomenclature)</SystemName>
+            <ClassCode>0101</ClassCode>
+            <ClassName languageID="en">LIVE ANIMALS</ClassName>
+            <ClassName languageID="en">Live horses, asses, mules and hinnies</ClassName>
+          </ApplicableSPSClassification>
+          <ApplicableSPSClassification>
+            <SystemID>IDENTIFICATION_SYSTEM</SystemID>
+            <SystemName>Identification system</SystemName>
+            <ClassCode>BRAND</ClassCode>
+            <ClassName languageID="en">Brand</ClassName>
+          </ApplicableSPSClassification>
+          <OriginSPSCountry>
+            <ID>GB</ID>
+            <Name languageID="en">United Kingdom</Name>
+          </OriginSPSCountry>
+        </IncludedSPSTradeLineItem>
+        <IncludedSPSTradeLineItem>
+          <SequenceNumeric>2</SequenceNumeric>
+          <Description />
+          <ScientificName languageID="la">Eq cabalus*asinus</ScientificName>
+          <NetVolumeMeasure unitCode="H87">1</NetVolumeMeasure>
+          <AdditionalInformationSPSNote>
+            <Content>DFGDGDFG343434</Content>
+            <SubjectCode listID="ched_commodity_note_subject_code" listName="CHED Commodity Note SubjectCode list" name="Individual identification number">INDIVIDUAL_IDENTIFICATION_NUMBER</SubjectCode>
+          </AdditionalInformationSPSNote>
+          <AdditionalInformationSPSNote>
+            <ContentCode listID="boolean" listName="Boolean (yes/no)">NO</ContentCode>
+            <Content />
+            <SubjectCode listID="ched_commodity_note_subject_code" listName="CHED Commodity Note SubjectCode list" name="Includes unweaned animals">INCLUDES_UNWEANED_ANIMALS</SubjectCode>
+          </AdditionalInformationSPSNote>
+          <ApplicableSPSClassification>
+            <SystemID>CN</SystemID>
+            <SystemName>CN Code (Combined Nomenclature)</SystemName>
+            <ClassCode>0101</ClassCode>
+            <ClassName languageID="en">LIVE ANIMALS</ClassName>
+            <ClassName languageID="en">Live horses, asses, mules and hinnies</ClassName>
+          </ApplicableSPSClassification>
+          <ApplicableSPSClassification>
+            <SystemID>IDENTIFICATION_SYSTEM</SystemID>
+            <SystemName>Identification system</SystemName>
+            <ClassCode>PASSPORT</ClassCode>
+            <ClassName languageID="en">Passport</ClassName>
+          </ApplicableSPSClassification>
+          <OriginSPSCountry>
+            <ID>GB</ID>
+            <Name languageID="en">United Kingdom</Name>
+            <SubordinateSPSCountrySubDivision>
+              <Name languageID="en">England</Name>
+              <HierarchicalLevelCode name="Region">1</HierarchicalLevelCode>
+              <FunctionTypeCode listID="3227" listVersionID="D16B" name="Region of Origin">106</FunctionTypeCode>
+            </SubordinateSPSCountrySubDivision>
+          </OriginSPSCountry>
+        </IncludedSPSTradeLineItem>
+      </IncludedSPSConsignmentItem>
+    </SPSConsignment>
+  </SPSCertificate>
+</ChedCertificateType>
