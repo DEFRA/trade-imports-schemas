@@ -45,6 +45,7 @@ schemas/
         README.md                                        # Certificate vs Notification guidance
       pims/
         gbn-ag-pims-v0.1.0.schema.json
+        gbn-ag-pims-v0.2.0.schema.json                    # target contract, minted ahead of the mapper code (EUDPA-370)
       messaging/
         event-envelope-v1.schema.json
 
