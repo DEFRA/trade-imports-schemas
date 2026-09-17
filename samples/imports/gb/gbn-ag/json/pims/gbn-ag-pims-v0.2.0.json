@@ -1,0 +1,236 @@
+{
+  "$schema": "gbn-ag-pims-v0.2.0.schema.json",
+  "eventId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "aggregateType": "Notification",
+  "subType": "GBN-AG",
+  "aggregateId": "Imports.Notification.GBN-AG.GBN-AG-26-0000002",
+  "aggregateVersion": 1,
+  "eventType": "uk.gov.defra.imports.notification.NotificationSubmitted",
+  "timestamp": "2026-09-16T10:15:00.000Z",
+  "data": {
+    "$model": "defra/certificate-internal/1",
+    "$type": "gbn-ag",
+    "exchangedDocument": {
+      "identifier": "GBN-AG-26-0000002",
+      "traderAssignedId": "Imports789_GB",
+      "notificationStatusCode": "SUBMITTED",
+      "versionId": 1,
+      "issueDateTime": "2026-09-16T10:15:00Z",
+      "firstSignatoryAuthentication": {
+        "includedClause": [
+          { "identifier": "PURPOSE",                "content": "INTERNAL_MARKET", "urlId": null },
+          { "identifier": "INTERNAL_MARKET_PURPOSE", "content": "BREEDING",       "urlId": null },
+          { "identifier": "GOODS_CERTIFIED_AS",     "content": "BREEDING",        "urlId": null }
+        ]
+      },
+      "referenceDocument": [
+        {
+          "typeCode": "853",
+          "identifier": "GBHC1234567890",
+          "issueDateTime": "2026-09-10"
+        }
+      ]
+    },
+    "specifiedConsignment": {
+      "consignorParty": {
+        "name": "Ferme Dupont",
+        "partyRoleCode": { "value": "SZ" },
+        "postalAddress": {
+          "lineOne": "12 Rue de la Vallée",
+          "cityName": "Lyon",
+          "countryId": "FR",
+          "postcodeCode": "69001",
+          "countryName": "France"
+        },
+        "definedContact": [
+          { "personName": "Jean Dupont", "telephoneUniversalCommunication": "+33 4 12 34 56 78", "emailURIUniversalCommunication": "jean.dupont@example.fr" }
+        ]
+      },
+      "consigneeParty": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB",
+          "postcodeCode": "GU1 1AA",
+          "countryName": "United Kingdom",
+          "countrySubDivisionName": "Surrey"
+        }
+      },
+      "despatchParty": {
+        "identifier": "FR-69-HLD-00012",
+        "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
+        "name": "Ferme du Massif Central",
+        "partyRoleCode": { "value": "PW" },
+        "postalAddress": {
+          "lineOne": "Route de la Vallée 12",
+          "cityName": "Saint-Flour",
+          "countryId": "FR"
+        }
+      },
+      "deliveryParty": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB"
+        }
+      },
+      "importer": {
+        "name": "Green Pastures Ltd",
+        "postalAddress": {
+          "lineOne": "45 Farm Lane",
+          "cityName": "Guildford",
+          "countryId": "GB"
+        }
+      },
+      "carrier": {
+        "name": "Ulster Livestock Transport Ltd",
+        "identifier": "UK/NEWCA/T1/00090953",
+        "urlId": "https://refdata.tbc.defra.gov.uk/uk_transporter_authorisation",
+        "partyRoleCode": { "value": "CA" },
+        "partyTypeCode": [
+          { "value": "COMMERCIAL_TRANSPORTER", "urlId": "https://traces-codelists.ec.europa.eu/operator_activity_type" }
+        ],
+        "postalAddress": {
+          "lineOne": "Unit 6, Bally Business Centre",
+          "cityName": "Ballymena",
+          "countryId": "GB"
+        }
+      },
+      "originCountry": {
+        "code": { "value": "FR" },
+        "subordinateTradeCountrySubDivision": [
+          {
+            "identifier": "FR-75",
+            "urlId": "https://service.unece.org/locode/",
+            "functionTypeCode": { "content": "106" }
+          }
+        ]
+      },
+      "unloadingBaseportLocation": {
+        "identifier": "GBDVR"
+      },
+      "finalDestinationLocation": {
+        "identifier": "19876",
+        "urlId": "https://refdata.tbc.defra.gov.uk/cph_number"
+      },
+      "mainCarriageLogisticsTransportMovement": [
+        {
+          "identifier": "MV CATTLE CARRIER",
+          "urlId": "https://refdata.tbc.defra.gov.uk/vessel_name",
+          "modeCode": 1,
+          "usedLogisticsTransportMeans": { "name": "MV CATTLE CARRIER" },
+          "transportContractRelatedReferencedDocument": [
+            { "typeCode": "705", "identifier": "BOL-2026-CC-0042" }
+          ],
+          "arrivalEvent": [
+            {
+              "scheduledOccurrenceDateTime": "2026-08-15T00:00:00Z",
+              "actualOccurrenceDateTime": "2026-08-15T02:30:00Z",
+              "occurrenceLogisticsLocation": { "identifier": "GBDVR" }
+            }
+          ]
+        }
+      ],
+      "transitTradeCountry": [
+        { "code": { "value": "BE" } }
+      ],
+      "isOrHasUnweanedAnimals": false,
+      "includedConsignmentItem": [
+        {
+          "includedTradeLineItem": [
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
+                  "systemName": "Combined Nomenclature",
+                  "classCode": { "value": "01020000" }
+                }
+              ],
+              "description": ["Cattle"],
+              "scientificName": "Bos taurus",
+              "commonName": "Cattle",
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": { "content": 10, "unitCode": "H87" }
+                }
+              ],
+              "physicalReferencedLogisticsPackage": [
+                { "itemQuantity": 2, "levelCode": 4, "typeCode": "CR" }
+              ],
+              "individualTradeProductInstance": [
+                {
+                  "identifier": [
+                    { "typeCode": "EAR_TAG", "content": "UK123456789012" }
+                  ],
+                  "permanentLocation": {
+                    "name": "Green Pastures Ltd",
+                    "postalAddress": {
+                      "lineOne": "45 Farm Lane",
+                      "cityName": "Guildford",
+                      "countryId": "GB",
+                      "postcodeCode": "GU1 1AA"
+                    },
+                    "definedContact": [
+                      { "telephoneUniversalCommunication": "01483 555017", "emailURIUniversalCommunication": "farm@greenpastures.example" }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "applicableClassification": [
+                {
+                  "systemId": "CN",
+                  "classCode": { "value": "01012910" }
+                }
+              ],
+              "description": ["Live horses"],
+              "scientificName": "Equus caballus",
+              "commonName": "Horse",
+              "specifiedLineTradeDelivery": [
+                {
+                  "productUnitQuantity": { "content": 1, "unitCode": "H87" }
+                }
+              ],
+              "individualTradeProductInstance": [
+                {
+                  "name": "Starlight",
+                  "identifier": [
+                    { "typeCode": "PASSPORT", "content": "826003200123456", "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "correlationId": "cid-20260916-101500",
+    "schemaVersion": "0.2.0",
+    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/pims/gbn-ag-pims-v0.2.0.schema.json"
+  },
+  "actor": {
+    "id": "user-123",
+    "source": "defra-id",
+    "userType": "INTERNAL",
+    "displayName": "Test User",
+    "organisationId": "org-456"
+  },
+  "statusChanges": [
+    {
+      "status": "SUBMITTED",
+      "dateChanged": "2026-09-16T10:15:00.000Z",
+      "actor": {
+        "id": "user-123",
+        "source": "defra-id",
+        "userType": "INTERNAL",
+        "displayName": "Test User",
+        "organisationId": "org-456"
+      }
+    }
+  ]
+}
