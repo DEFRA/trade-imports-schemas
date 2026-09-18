@@ -87,3 +87,18 @@ revisiting once the mapper-code phase starts — not blockers to publishing v0.2
   anywhere else in this repo, so `description` was used to stay consistent with every
   other schema here — confirm this reading of "per-field-group comments" is what was
   wanted before treating it as settled convention for future version bumps.
+
+## Correction (2026-09-18)
+
+`originCountry.subordinateTradeCountrySubDivision` was originally merged as an **array**
+of the region-subdivision shape. That was wrong: the generic `gbn-ag-v1.schema.json`
+def, the core canonical schema, and `trade-imports-animals-backend`'s own
+`TradeCountry` record (`outbox/gbnag/TradeCountry.java`) all carry it as a **single**
+object, not a list — `pims-data-mapping.md`'s informal `subordinateTradeCountrySubDivision[0]`
+wording was misread as "this is an array" rather than "read the one entry this array-ish
+BSP concept resolves to." Caught during mapper-code planning, before any
+`trade-imports-dynamics-gateway` code was written against the array shape, so fixed
+directly in `v0.2.0` (schema + sample) rather than deferred to `v0.3.0`. No other field
+in this document needed a similar correction — every other row was cross-checked
+field-for-field and cardinality-for-cardinality against the current generic-side Java
+records during the same pass.
