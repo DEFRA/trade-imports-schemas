@@ -156,10 +156,7 @@
       "description": "New in v0.2.0: `subordinateTradeCountrySubDivision` (region of origin) — previously omitted, PR #52.",
       "properties": {
         "code": { "$ref": "#/$defs/codedValue" },
-        "subordinateTradeCountrySubDivision": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tradeCountrySubDivision" }
-        }
+        "subordinateTradeCountrySubDivision": { "$ref": "#/$defs/tradeCountrySubDivision" }
       }
     },
 

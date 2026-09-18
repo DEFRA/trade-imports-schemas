@@ -100,13 +100,11 @@
       },
       "originCountry": {
         "code": { "value": "FR" },
-        "subordinateTradeCountrySubDivision": [
-          {
-            "identifier": "FR-75",
-            "urlId": "https://service.unece.org/locode/",
-            "functionTypeCode": { "content": "106" }
-          }
-        ]
+        "subordinateTradeCountrySubDivision": {
+          "identifier": "FR-75",
+          "urlId": "https://service.unece.org/locode/",
+          "functionTypeCode": { "content": "106" }
+        }
       },
       "unloadingBaseportLocation": {
         "identifier": "GBDVR"
