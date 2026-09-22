@@ -61,7 +61,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 ## Region of origin code requirement
 
 - **Schema path:** _none_
-- **Description:** UI Journey related workflow flag, not part of the model. Controls whether the origin code needs to be captured. Default to no; when it is collected it's held at `specifiedConsignment.originCountry.subordinateTradeCountrySubDivision[]`.
+- **Description:** UI Journey related workflow flag, not part of the model. Controls whether the origin code needs to be captured. Default to no; when it is collected it's held at `specifiedConsignment.originCountry.subordinateTradeCountrySubDivision`.
 
 ## Region of origin code
 
@@ -71,10 +71,10 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   ```
   specifiedConsignment
   └── originCountry
-      └── subordinateTradeCountrySubDivision[0]
+      └── subordinateTradeCountrySubDivision
           └── identifier
   ```
-- **Description:** The region within the country of origin (e.g. `FR-75` for a French department). Sourced from MDM. Read the first entry of `subordinateTradeCountrySubDivision[]`. GBN-AG only carries region-of-origin subdivisions (UNCL3227 `functionTypeCode = 106`), so the array has at most one entry; the first value assumption is structurally correct. **Confirmed PIMS row 18.**
+- **Description:** The region within the country of origin (e.g. `FR-75` for a French department). Sourced from MDM. Read `subordinateTradeCountrySubDivision.identifier` directly. GBN-AG only carries region-of-origin subdivisions (UNCL3227 `functionTypeCode = 106`), so this is a single object, not an array. **Confirmed PIMS row 18.**
 
 ## Internal reference number
 
