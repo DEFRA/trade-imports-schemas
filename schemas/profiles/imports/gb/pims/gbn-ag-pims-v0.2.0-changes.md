@@ -102,3 +102,24 @@ directly in `v0.2.0` (schema + sample) rather than deferred to `v0.3.0`. No othe
 in this document needed a similar correction — every other row was cross-checked
 field-for-field and cardinality-for-cardinality against the current generic-side Java
 records during the same pass.
+
+## Confirmation status (2026-09-22)
+
+**PIMS have confirmed the shape currently in this repo** — that is, `v0.2.0` *after* the
+2026-09-18 correction above, with `subordinateTradeCountrySubDivision` as a single object.
+
+Recorded explicitly because the correction amended `v0.2.0` in place rather than minting a
+`v0.2.1`, so the version string alone denotes two different contracts depending on when it
+was fetched: array-shaped from `91a0396` (on `main` 2026-09-17), single-object from
+`8e4ab08` (on `main` 2026-09-18). "PIMS confirmed v0.2.0" is therefore ambiguous without
+this note; the single-object shape is the confirmed one.
+
+This was acceptable here only because the `v0.2.0` PIMS stream is not yet live — there was
+no consumer pinned to the version string to mislead. **Once a schema version has live
+consumers, correct it by minting a patch version rather than amending in place**, so a
+confirmed version identifier keeps denoting exactly one contract.
+
+The `pims-data-mapping.md` wording that caused the original error — `subordinateTradeCountrySubDivision[0]`
+and "read the first entry of `subordinateTradeCountrySubDivision[]`" — has been corrected to
+the single-object form in the same change as this note, so the next reader of that document
+is not led into the same mistake.
