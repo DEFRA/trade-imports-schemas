@@ -1,13 +1,19 @@
 {
   "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
   "title": "GBN-AG accompanying document types",
-  "description": "The document types a notifier can attach to a GBN-AG pre-notification, and the code each one is sent as in exchangedDocument.referenceDocument[].typeCode. Most types map to a UN/CEFACT document code (UNTDID 1001, D16B); the three types UNTDID 1001 does not cover are given Defra codes GBN1 to GBN3. Each entry's codeList is the urlId that accompanies its typeCode, so a consumer always knows which vocabulary a code belongs to. A document type with no confident mapping defaults to 916 (Related document). All codes are strings. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "description": "The document types a notifier can attach to a GBN-AG pre-notification, and the code each one is sent as in exchangedDocument.referenceDocument[].typeCode. Most types map to a UN/CEFACT document code (UNTDID 1001, D16B); the three types UNTDID 1001 does not cover are given Defra codes GBN1 to GBN3. Each entry's codeList is the urlId that accompanies its typeCode, so a consumer always knows which vocabulary a code belongs to. A document type with no confident mapping defaults to 916 (Related document). All codes are strings. Values are listed with the UNTDID 1001 codes first in numerical order, then the Defra codes in numerical order. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
   "values": [
     {
-      "code": "853",
-      "label": "Veterinary health certificate",
+      "code": "4",
+      "label": "Laboratory sampling results for aflatoxin (Reg 2019/1793)",
       "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Veterinary certificate."
+      "description": "UNTDID 1001 Test report."
+    },
+    {
+      "code": "380",
+      "label": "Commercial invoice",
+      "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
+      "description": "UNTDID 1001 Commercial invoice."
     },
     {
       "code": "636",
@@ -16,10 +22,10 @@
       "description": "UNTDID 1001 Health certificate."
     },
     {
-      "code": "740",
-      "label": "Air waybill",
+      "code": "705",
+      "label": "Bill of lading",
       "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Air waybill."
+      "description": "UNTDID 1001 Bill of lading."
     },
     {
       "code": "710",
@@ -34,16 +40,16 @@
       "description": "UNTDID 1001 Rail consignment note (generic term)."
     },
     {
-      "code": "705",
-      "label": "Bill of lading",
+      "code": "740",
+      "label": "Air waybill",
       "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Bill of lading."
+      "description": "UNTDID 1001 Air waybill."
     },
     {
-      "code": "380",
-      "label": "Commercial invoice",
+      "code": "853",
+      "label": "Veterinary health certificate",
       "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Commercial invoice."
+      "description": "UNTDID 1001 Veterinary certificate."
     },
     {
       "code": "856",
@@ -58,6 +64,12 @@
       "description": "UNTDID 1001 Import licence."
     },
     {
+      "code": "916",
+      "label": "Other",
+      "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
+      "description": "UNTDID 1001 Related document. Also the default for a document type with no confident mapping."
+    },
+    {
       "code": "GBN1",
       "label": "Letter of authority (Directive 2008/61/EC)",
       "codeList": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
@@ -70,22 +82,10 @@
       "description": "Defra code. UNTDID 1001 has no equivalent."
     },
     {
-      "code": "4",
-      "label": "Laboratory sampling results for aflatoxin (Reg 2019/1793)",
-      "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Test report."
-    },
-    {
       "code": "GBN3",
       "label": "Journey log",
       "codeList": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
       "description": "Defra code. UNTDID 1001 has no equivalent."
-    },
-    {
-      "code": "916",
-      "label": "Other",
-      "codeList": "https://vocabulary.uncefact.org/DocumentCodeList",
-      "description": "UNTDID 1001 Related document. Also the default for a document type with no confident mapping."
     }
   ]
 }
