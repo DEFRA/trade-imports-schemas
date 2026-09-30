@@ -56,6 +56,7 @@
       "referenceDocument": [
         {
           "typeCode": "853",
+          "urlId": "https://vocabulary.uncefact.org/DocumentCodeList",
           "relationshipTypeCode": "ZZZ",
           "identifier": "doc-ref",
           "issueDateTime": "2026-04-01",
@@ -67,6 +68,7 @@
         },
         {
           "typeCode": "705",
+          "urlId": "https://vocabulary.uncefact.org/DocumentCodeList",
           "relationshipTypeCode": "ZZZ",
           "identifier": "BOL-2026-884721",
           "issueDateTime": "2026-05-09",
