@@ -321,7 +321,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Document Type / Veterinary Document
 - **Schema path:** `exchangedDocument.referenceDocument[].typeCode`
-- **Description:** The type of accompanying document. Sent as a code per UNTDID 1001 (e.g. `853` for veterinary health certificate, `636` for health certificate). PIMS would need the UNTDID 1001 codelist to resolve codes to the V4 human-readable labels. **Confirmed PIMS Document Fields row 1.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 12.** Confirmed. Veterinary documents carry on exchangedDocument.referenceDocument[] with typeCode 853 (UNTDID 1001). Legacy flat 'Veterinary Document' field superseded by the related-documents table.
+- **Description:** The type of accompanying document. Sent as a code from the GBN-AG document-type codelist, `https://refdata.tbc.defra.gov.uk/gbn-ag-document-types` (`schemas/codelists/gbn-ag-document-types.json`): a UNTDID 1001 code where one fits (e.g. `853` for veterinary health certificate, `636` for health certificate, `856` for ITAHC), or a Defra code (`GBN1` letter of authority, `GBN2` catch certificate, `GBN3` journey log) where UNTDID 1001 has none. The codelist is the authority for the V4 human-readable labels of all fourteen types, so PIMS resolves every `typeCode` against that one list. On the generic GBN-AG event each entry also carries `urlId` naming the system that defines the code (the UN/CEFACT DocumentCodeList or the Defra list); the PIMS v0.2.0 schema does not carry `urlId`. **Confirmed PIMS Document Fields row 1.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 12.** Confirmed. Veterinary documents carry on exchangedDocument.referenceDocument[] with typeCode 853 (UNTDID 1001). Legacy flat 'Veterinary Document' field superseded by the related-documents table.
 
 ## Accompanying Document: Reference
 
@@ -333,7 +333,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Document Issue Date
 - **Schema path:** `exchangedDocument.referenceDocument[].issueDateTime`
-- **Description:** The date an accompanying document was issued. Carried as `issueDateTime` (date-time); PIMS may take the date component only. Read on each `referenceDocument[]` entry. **Confirmed PIMS Document Fields row 3.**
+- **Description:** The date an accompanying document was issued. Carried as `issueDateTime`, a date only (`YYYY-MM-DD`). Read on each `referenceDocument[]` entry. **Confirmed PIMS Document Fields row 3.**
 
 ## Transition Countries
 

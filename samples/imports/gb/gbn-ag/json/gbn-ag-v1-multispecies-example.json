@@ -45,6 +45,7 @@
     "referenceDocument": [
       {
         "typeCode": "853",
+        "urlId": "https://vocabulary.uncefact.org/DocumentCodeList",
         "relationshipTypeCode": "ZZZ",
         "identifier": "docref-vet",
         "issueDateTime": "2026-05-05",
