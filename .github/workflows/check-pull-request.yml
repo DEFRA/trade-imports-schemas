@@ -1,0 +1,107 @@
+name: Check Pull Request
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+jobs:
+  pr-validator:
+    name: Run Pull Request Checks
+    # The weekly cron exists for the security audit only. These checks depend
+    # only on the repo's own code, so they skip the scheduled run.
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Validate schemas
+        run: npm run validate-schemas
+
+      - name: Validate samples
+        run: npm run validate-samples
+
+      - name: Validate coherence
+        run: npm run validate-coherence
+
+  # Deliberately a separate job from pr-validator. The audit (audit-ci over
+  # `npm audit`) scans the whole installed tree against a live advisory feed,
+  # so a newly published advisory turns every open PR red regardless of what
+  # that PR changed — and advisories on indirect dependencies often have no
+  # upgrade path, needing an `overrides` entry or an audit-ci.jsonc allowlist
+  # entry on main to clear. Folded into pr-validator, that failure mode blocks
+  # the very PR carrying the fix. Kept separate, the audit stays visible on
+  # every PR without being the check that gates the merge.
+  #
+  # Before the audit, "Check audit allowlist" enforces the allowlist rules:
+  # every entry is {"GHSA-...": {active: true, notes, expiry}}, the notes give
+  # a reason and "Owner: <name>", and the expiry is a real date no more than
+  # 3 months away. An expired entry is named as EXPIRED, which audit-ci alone
+  # does not say. The weekly cron catches expiries between PRs.
+  security-audit:
+    name: Security audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check audit allowlist
+        run: |
+          set -euo pipefail
+          today=$(date -u +%F)
+          limit=$(date -u -d '+3 months' +%F)
+          problems=$(jq -r --arg today "$today" --arg limit "$limit" '
+            .allowlist[]
+            | if type != "object" or length == 0 then "\(tojson): must be {\"GHSA-...\": {active, notes, expiry}}"
+              else to_entries[] | .key as $id | .value as $e
+                | if ($e | type) != "object" then "\($id): must be {active, notes, expiry}"
+                  else
+                    (if ($id | test("^GHSA-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}$") | not) then "\($id): key is not a GHSA ID" else empty end),
+                    (if $e.active != true then "\($id): active must be true, or audit-ci ignores the entry" else empty end),
+                    (if (($e.notes // "") | tostring | test("\\S.*Owner: \\S")) | not then "\($id): notes must give a reason and \"Owner: <name>\"" else empty end),
+                    (if ($e.expiry | type) != "string"
+                        or ($e.expiry | try (strptime("%Y-%m-%d") | mktime | strftime("%Y-%m-%d")) catch null) != $e.expiry
+                       then "\($id): expiry is missing or not a real YYYY-MM-DD date"
+                     elif $e.expiry <= $today then "\($id): EXPIRED on \($e.expiry). Re-check the advisory, then renew or remove the entry"
+                     elif $e.expiry > $limit then "\($id): expiry \($e.expiry) is more than 3 months away (latest allowed \($limit))"
+                     else empty end)
+                  end
+              end' audit-ci.jsonc)
+          if [ -n "$problems" ]; then
+            echo "::error title=Audit allowlist::audit-ci.jsonc breaks the allowlist rules"
+            echo "$problems"
+            exit 1
+          fi
+          echo "Audit allowlist entries meet the rules"
+
+      - name: Security audit
+        run: npm run security-audit
