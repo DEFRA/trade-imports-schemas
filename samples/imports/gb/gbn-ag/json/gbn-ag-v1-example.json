@@ -45,7 +45,7 @@
     "referenceDocument": [
       {
         "typeCode": "853",
-        "urlId": "https://vocabulary.uncefact.org/DocumentCodeList",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
         "identifier": "doc-ref",
         "issueDateTime": "2026-04-01",
@@ -57,7 +57,7 @@
       },
       {
         "typeCode": "705",
-        "urlId": "https://vocabulary.uncefact.org/DocumentCodeList",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
         "identifier": "BOL-2026-884721",
         "issueDateTime": "2026-05-09",

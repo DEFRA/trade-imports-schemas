@@ -75,7 +75,7 @@
               }
             },
             "referenceDocument": {
-              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Accompanying documents are all-or-nothing: they are optional as a group, but when one is provided its type, reference and date of issue accompany it. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline. The transport document for a movement leg stays on that leg's `transportContractRelatedReferencedDocument[]`; a copy declared among the accompanying documents goes here, linked by the same `identifier`. Each entry's `typeCode` is drawn from `https://refdata.tbc.defra.gov.uk/gbn-ag-document-types`, with the sibling `urlId` naming the system that defines the code: `https://vocabulary.uncefact.org/DocumentCodeList` for UNTDID 1001 codes, the Defra list for the Defra codes `GBN1` to `GBN3`.",
+              "description": "Carries the regulatory documents that accompany the consignment: typically the veterinary health certificate (`typeCode` `853` on UNTDID 1001), plus transport documents and other accompanying documents, each distinguished by its `typeCode`. Accompanying documents are all-or-nothing: they are optional as a group, but when one is provided its type, reference and date of issue accompany it. Attachments are referenced by `uri`, `filename`, and `mimeCode` rather than embedded inline. The transport document for a movement leg stays on that leg's `transportContractRelatedReferencedDocument[]`; a copy declared among the accompanying documents goes here, linked by the same `identifier`. Each entry's `typeCode` is a code from the GBN-AG document-type codelist, and the sibling `urlId` always names that codelist: `https://refdata.tbc.defra.gov.uk/gbn-ag-document-types`.",
               "items": { "$ref": "#/$defs/accompanyingReferencedDocument" }
             }
           }
@@ -173,18 +173,11 @@
   "$defs": {
     "accompanyingReferencedDocument": {
       "type": "object",
-      "description": "An accompanying document. typeCode is drawn from the GBN-AG document-type codelist (https://refdata.tbc.defra.gov.uk/gbn-ag-document-types): a UN/CEFACT UNTDID 1001 code where one fits, or a Defra code (GBN1 to GBN3) where UNTDID 1001 has none. The sibling urlId names the system that defines the code - the UN/CEFACT DocumentCodeList for UNTDID 1001 codes, the Defra list for Defra codes. A document type with no confident mapping defaults to 916 (Related document).",
+      "description": "An accompanying document. typeCode is a code from the GBN-AG document-type codelist (https://refdata.tbc.defra.gov.uk/gbn-ag-document-types), a static list that copies in the UNTDID 1001 codes GBN-AG uses and adds Defra codes GBN1 to GBN3 for document types UNTDID 1001 has no code for. The sibling urlId always names that codelist. 916 (Related document) is sent only when the notifier chooses \"Other\"; it is never a default.",
       "required": ["typeCode", "urlId"],
       "properties": {
         "typeCode": { "type": "string" },
-        "urlId": {
-          "type": "string",
-          "format": "uri",
-          "enum": [
-            "https://vocabulary.uncefact.org/DocumentCodeList",
-            "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types"
-          ]
-        }
+        "urlId": { "type": "string", "format": "uri", "const": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types" }
       }
     },
     "finalDestinationLocation": {
