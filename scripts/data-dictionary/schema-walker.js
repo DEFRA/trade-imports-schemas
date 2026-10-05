@@ -160,6 +160,12 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
       if (inner.constValue !== null && inner.constValue !== undefined && out.constValue === null) {
         out.constValue = inner.constValue;
       }
+      // A codelist URL pinned in any branch (e.g. a profile const on urlId over
+      // an open core urlId) must survive the merge, or the dictionary drops the
+      // slot's reference-data line.
+      if (inner.codelistConst && !out.codelistConst) {
+        out.codelistConst = inner.codelistConst;
+      }
       // Item-count constraints from an allOf branch: take the more restrictive
       // bound (higher minimum, lower maximum), so a profile narrowing on top
       // of a permissive core wins.

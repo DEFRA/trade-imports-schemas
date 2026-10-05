@@ -1,9 +1,12 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
-import { resolve, dirname } from 'node:path'
+import { resolve, dirname, join } from 'node:path'
+import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
+
+import { walkSchema } from './data-dictionary/schema-walker.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -93,6 +96,71 @@ test('Defra-declared section splits concepts from TRACES-aligned aliases', () =>
   const aliasesRow = /\| `carrier` \| `[^`]+` \| Re-binds to canonical `unece:carrierParty` \|/
   assert.match(body, conceptsRow, 'isOrHasUnweanedAnimals should appear in the Defra concepts table row form')
   assert.match(body, aliasesRow, 'carrier should appear in the TRACES aliases table row form')
+})
+
+test('a profile const on urlId survives an allOf merge with a core urlId', () => {
+  // The core declares an open urlId on Doc; the profile overlays the same array
+  // with PinnedDoc, which pins urlId with const. The walker merges the two
+  // definitions, and the codelist URL must still reach the item node.
+  const dir = mkdtempSync(join(tmpdir(), 'walker-codelist-'))
+  try {
+    const core = {
+      $defs: {
+        Doc: {
+          type: 'object',
+          properties: {
+            typeCode: { type: 'string' },
+            urlId: { type: 'string', format: 'uri' }
+          }
+        },
+        Payload: {
+          type: 'object',
+          properties: {
+            docs: { type: 'array', items: { $ref: '#/$defs/Doc' } }
+          }
+        }
+      }
+    }
+    const profile = {
+      allOf: [
+        { $ref: 'core.json#/$defs/Payload' },
+        {
+          type: 'object',
+          properties: {
+            docs: { items: { $ref: '#/$defs/PinnedDoc' } }
+          }
+        }
+      ],
+      $defs: {
+        PinnedDoc: {
+          type: 'object',
+          properties: {
+            typeCode: { type: 'string' },
+            urlId: { type: 'string', format: 'uri', const: 'https://example.test/list' }
+          }
+        }
+      }
+    }
+    const corePath = join(dir, 'core.json')
+    const profilePath = join(dir, 'profile.json')
+    writeFileSync(corePath, JSON.stringify(core))
+    writeFileSync(profilePath, JSON.stringify(profile))
+
+    const { root } = walkSchema({ profilePath, corePath })
+    const docs = root.properties.get('docs')
+    assert.equal(docs.items.codelistConst, 'https://example.test/list')
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+test('referenceDocument row names the document-type codelist as reference data', () => {
+  const body = readFileSync(OUTPUT, 'utf-8')
+  assert.match(
+    body,
+    /\| `referenceDocument` \|[^\n]*Reference data: `https:\/\/refdata\.tbc\.defra\.gov\.uk\/gbn-ag-document-types`\. \|/,
+    'referenceDocument row is missing its reference-data line for the GBN-AG document-type codelist'
+  )
 })
 
 test('generator is idempotent', () => {
