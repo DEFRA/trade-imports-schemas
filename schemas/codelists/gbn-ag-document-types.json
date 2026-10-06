@@ -1,0 +1,77 @@
+{
+  "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
+  "title": "GBN-AG accompanying document types",
+  "description": "The document types a notifier can attach to a GBN-AG pre-notification, used as the value space for exchangedDocument.referenceDocument[].typeCode. A static list: where a UN/CEFACT UNTDID 1001 code fits a document type, the code is copied in; the three types UNTDID 1001 has no code for are given Defra codes GBN1 to GBN3. The list does not reference any other codelist. 916 (Related document) is the code for a notifier who chooses \"Other\"; it is never a default. All codes are strings. Values are listed with the UNTDID 1001 codes first in numerical order, then the Defra codes in numerical order. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "4",
+      "label": "Laboratory sampling results for aflatoxin (Reg 2019/1793)",
+      "description": "UNTDID 1001 Test report."
+    },
+    {
+      "code": "380",
+      "label": "Commercial invoice",
+      "description": "UNTDID 1001 Commercial invoice."
+    },
+    {
+      "code": "636",
+      "label": "Health certificate",
+      "description": "UNTDID 1001 Health certificate."
+    },
+    {
+      "code": "705",
+      "label": "Bill of lading",
+      "description": "UNTDID 1001 Bill of lading."
+    },
+    {
+      "code": "710",
+      "label": "Sea waybill",
+      "description": "UNTDID 1001 Sea waybill."
+    },
+    {
+      "code": "720",
+      "label": "Rail waybill",
+      "description": "UNTDID 1001 Rail consignment note (generic term)."
+    },
+    {
+      "code": "740",
+      "label": "Air waybill",
+      "description": "UNTDID 1001 Air waybill."
+    },
+    {
+      "code": "853",
+      "label": "Veterinary health certificate",
+      "description": "UNTDID 1001 Veterinary certificate."
+    },
+    {
+      "code": "856",
+      "label": "Intra Trade Animal Health Certificate (ITAHC)",
+      "description": "UNTDID 1001 Inspection certificate. TRACES sends 856 for the EU INTRA certificate (\"Inspection certificate (EU Intra Certificate)\"); see defra-unvtd-profile-intra-v1.schema.json."
+    },
+    {
+      "code": "911",
+      "label": "Import permit",
+      "description": "UNTDID 1001 Import licence."
+    },
+    {
+      "code": "916",
+      "label": "Other",
+      "description": "UNTDID 1001 Related document. Used only when the notifier chooses \"Other\"."
+    },
+    {
+      "code": "GBN1",
+      "label": "Letter of authority (Directive 2008/61/EC)",
+      "description": "Defra code. UNTDID 1001 has no equivalent."
+    },
+    {
+      "code": "GBN2",
+      "label": "Catch certificate",
+      "description": "Defra code. UNTDID 1001 has no equivalent."
+    },
+    {
+      "code": "GBN3",
+      "label": "Journey log",
+      "description": "Defra code. UNTDID 1001 has no equivalent."
+    }
+  ]
+}

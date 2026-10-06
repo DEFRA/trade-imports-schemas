@@ -45,6 +45,7 @@
     "referenceDocument": [
       {
         "typeCode": "853",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
         "identifier": "doc-ref",
         "issueDateTime": "2026-04-01",
@@ -56,12 +57,25 @@
       },
       {
         "typeCode": "705",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
         "identifier": "BOL-2026-884721",
         "issueDateTime": "2026-05-09",
         "attachmentBinaryObject": {
           "uri": "uri:documentid:da8c31f5-91e4-4014-ad99-15e459896cca",
           "filename": "bill-of-lading.pdf",
+          "mimeCode": "application/pdf"
+        }
+      },
+      {
+        "typeCode": "GBN1",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
+        "relationshipTypeCode": "ZZZ",
+        "identifier": "LOA-2026-0417",
+        "issueDateTime": "2026-05-02",
+        "attachmentBinaryObject": {
+          "uri": "uri:documentid:0b7e2c94-3f1a-4d5e-9c68-2a41d7f0e3b5",
+          "filename": "letter-of-authority.pdf",
           "mimeCode": "application/pdf"
         }
       }

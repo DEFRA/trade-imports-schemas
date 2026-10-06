@@ -45,6 +45,7 @@
     "referenceDocument": [
       {
         "typeCode": "853",
+        "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
         "identifier": "docref-vet",
         "issueDateTime": "2026-05-05",
