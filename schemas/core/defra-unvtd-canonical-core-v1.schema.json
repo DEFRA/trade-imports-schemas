@@ -328,7 +328,7 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / export / transit / re-export). The country code lives on `code.value` (ISO 3166-1 alpha-2 expected). `subordinateTradeCountrySubDivision` carries a single sub-division within the country: a region (UNCL3227 functionTypeCode '106') where regulation is regionalised, such as disease zoning on live-animal imports; the authorities attached to the country (functionTypeCode '44', '42', '41'); or an operator-anchored location — a government approved establishment ('272') or a designated goods disposal location ('283'). `code` may be absent when TRACES sends the country purely as a carrier for the sub-division.",
+      "description": "A country reference (origin / export / transit / re-export). The country code lives on `code.value` (ISO 3166-1 alpha-2 expected). `subordinateTradeCountrySubDivision` carries the sub-divisions within the country, usually one: a region (UNCL3227 functionTypeCode '106') where regulation is regionalised, such as disease zoning on live-animal imports; the authorities attached to the country (functionTypeCode '44', '42', '41'); or an operator-anchored location — a government approved establishment ('272') or a designated goods disposal location ('283'). A validated INTRA can carry more than one (its place of authentication plus a consignment exit customs office), hence the array. `code` may be absent when TRACES sends the country purely as a carrier for those sub-divisions.",
       "properties": {
         "code": {
           "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use.",
@@ -336,7 +336,8 @@
         }
         ,
         "subordinateTradeCountrySubDivision": {
-          "$ref": "#/$defs/TradeCountrySubDivision"
+          "type": "array",
+          "items": { "$ref": "#/$defs/TradeCountrySubDivision" }
         }
       }
     },
