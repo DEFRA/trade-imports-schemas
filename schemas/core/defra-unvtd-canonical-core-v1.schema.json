@@ -657,6 +657,7 @@
     },
     "LaboratoryObservationResult": {
       "type": "object",
+      "description": "Laboratory observation results on a certificate (TRACES `SPSConsignmentItemLaboratoryTest`). `natureIdCargo` repeats the consignment item's cargo nature; `productLaboratoryTest` carries the per-product laboratory tests.",
       "properties": {
         "natureIdCargo": {
           "$ref": "#/$defs/CargoNature"
@@ -671,6 +672,7 @@
     },
     "ProductLaboratoryTest": {
       "type": "object",
+      "description": "Laboratory tests for one product (TRACES `ProductSPSLaboratoryTest`). `applicableProductClassification` names the product per UNCL7143 / product-detail classification; `laboratoryTest` carries the individual test records.",
       "properties": {
         "applicableProductClassification": {
           "oneOf": [
@@ -688,8 +690,104 @@
         "laboratoryTest": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/$defs/LaboratoryTest"
           }
+        }
+      }
+    },
+    "LaboratoryTest": {
+      "type": "object",
+      "description": "A single laboratory test (TRACES `SPSLaboratoryTest`, `laboratorytest:v1`). `reference` is the TRACES-side test reference; `testDescriptor` names the test; `testMotivationCode` records why the test was taken; `inspectorConclusionCode` is the inspector's outcome; `analysis` carries the analysis performed for the test.",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "testDescriptor": {
+          "type": "object",
+          "description": "Test descriptor (TRACES `LaboratoryTestDescriptor`). Samples carry the identifier either numerically (`id`) or as text (`identifier`), so both slots are permitted.",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "identifier": {
+              "type": "string"
+            },
+            "description": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    },
+                    "languageId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "categoryCode": {
+              "type": "string"
+            }
+          }
+        },
+        "testMotivationCode": {
+          "type": "string"
+        },
+        "inspectorConclusionCode": {
+          "type": "string"
+        },
+        "analysis": {
+          "$ref": "#/$defs/LaboratoryTestAnalysis"
+        }
+      }
+    },
+    "LaboratoryTestAnalysis": {
+      "type": "object",
+      "description": "The analysis performed for a laboratory test (TRACES `SPSLaboratoryTestAnalysis`). `samplingDateTime` / `laboratoryReceiptDateTime` / `laboratoryReportDateTime` are the sample taken, laboratory receipt and report times; `laboratory` is the testing laboratory; `laboratoryResults` holds the reported outcome.",
+      "properties": {
+        "analysisTypeCode": {
+          "type": "string"
+        },
+        "samplingDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sampleBatchNumber": {
+          "type": "integer"
+        },
+        "numberOfSamples": {
+          "type": "integer"
+        },
+        "sampleTypeCode": {
+          "type": "string"
+        },
+        "sampleConservationCode": {
+          "type": "string"
+        },
+        "laboratory": {
+          "$ref": "#/$defs/TradeParty"
+        },
+        "laboratoryReceiptDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "laboratoryReportDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "laboratoryTestMethod": {
+          "type": "string"
+        },
+        "laboratoryResults": {
+          "type": "string"
+        },
+        "laboratoryConclusionCode": {
+          "type": "string"
         }
       }
     },
