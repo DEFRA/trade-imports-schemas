@@ -101,7 +101,7 @@ One line per species or commodity on the certificate. A line carries the species
 
 | Property | Type | Required | Description |
 |---|---|---|---|
-| `sequenceNumeric` | integer | no | A sequence number. |
+| `sequenceNumeric` | integer | no | A sequence number differentiating this logistics transport movement from others in a set of transport movements. |
 | `description` | array of string | yes | The free-text description of the commodity on this line, paired with `scientificName` and `commonName` for full species identification. Inherits the core line's array-of-strings form. |
 | `scientificName` | string | yes | The species name for the commodity in Latin, resolved from Defra reference data keyed on the CN code rather than entered by the trader. Required for live animals, where every commodity code maps to a species. |
 | `netWeight` | `UneceWeightMeasureType` | no | - |
