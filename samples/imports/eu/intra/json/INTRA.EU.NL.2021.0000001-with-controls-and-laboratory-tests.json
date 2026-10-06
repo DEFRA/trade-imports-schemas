@@ -433,45 +433,47 @@
       }
     },
     "exportCountry": {
-      "subordinateTradeCountrySubDivision": {
-        "functionTypeCode": {
-          "content": "44"
-        },
-        "activityAuthorizedParty": [
-          {
-            "identifier": "NL0002",
-            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
-            "name": "Netherlands Food and Consumer Product Safety Authority",
-            "partyRoleCode": {
-              "value": "RA"
-            },
-            "postalAddress": {
-              "postcodeCode": "3511",
-              "lineOne": "Catharijnesingel 59",
-              "cityName": "Utrecht",
-              "countryId": "NL",
-              "countryName": "Netherlands",
-              "countrySubDivisionName": "Utrecht"
-            }
+      "subordinateTradeCountrySubDivision": [
+        {
+          "functionTypeCode": {
+            "content": "44"
           },
-          {
-            "identifier": "NL0002",
-            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
-            "name": "Netherlands Food and Consumer Product Safety Authority",
-            "partyRoleCode": {
-              "value": "VG"
+          "activityAuthorizedParty": [
+            {
+              "identifier": "NL0002",
+              "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+              "name": "Netherlands Food and Consumer Product Safety Authority",
+              "partyRoleCode": {
+                "value": "RA"
+              },
+              "postalAddress": {
+                "postcodeCode": "3511",
+                "lineOne": "Catharijnesingel 59",
+                "cityName": "Utrecht",
+                "countryId": "NL",
+                "countryName": "Netherlands",
+                "countrySubDivisionName": "Utrecht"
+              }
             },
-            "postalAddress": {
-              "postcodeCode": "3511",
-              "lineOne": "Catharijnesingel 59",
-              "cityName": "Utrecht",
-              "countryId": "NL",
-              "countryName": "Netherlands",
-              "countrySubDivisionName": "Utrecht"
+            {
+              "identifier": "NL0002",
+              "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+              "name": "Netherlands Food and Consumer Product Safety Authority",
+              "partyRoleCode": {
+                "value": "VG"
+              },
+              "postalAddress": {
+                "postcodeCode": "3511",
+                "lineOne": "Catharijnesingel 59",
+                "cityName": "Utrecht",
+                "countryId": "NL",
+                "countryName": "Netherlands",
+                "countrySubDivisionName": "Utrecht"
+              }
             }
-          }
-        ]
-      }
+          ]
+        }
+      ]
     },
     "importCountry": {
       "code": {

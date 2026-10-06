@@ -197,47 +197,49 @@
       }
     },
     "exportCountry": {
-      "subordinateTradeCountrySubDivision": {
-        "functionTypeCode": {
-          "content": "44"
-        },
-        "activityAuthorizedParty": [
-          {
-            "identifier": "ES00000",
-            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
-            "name": "Servicios Veterinarios Españoles, C",
-            "partyRoleCode": {
-              "value": "RA",
-              "name": "Central bank or regulatory authority (Central competent authority)"
-            },
-            "postalAddress": {
-              "postcodeCode": "28012",
-              "lineOne": ".",
-              "cityName": "Madrid",
-              "countryId": "ES",
-              "countryName": "Spain",
-              "countrySubDivisionName": "Community of Madrid"
-            }
+      "subordinateTradeCountrySubDivision": [
+        {
+          "functionTypeCode": {
+            "content": "44"
           },
-          {
-            "identifier": "ES45901",
-            "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
-            "name": "Málaga",
-            "partyRoleCode": {
-              "value": "VG",
-              "name": "Local government sponsor (Local competent authority)"
+          "activityAuthorizedParty": [
+            {
+              "identifier": "ES00000",
+              "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+              "name": "Servicios Veterinarios Españoles, C",
+              "partyRoleCode": {
+                "value": "RA",
+                "name": "Central bank or regulatory authority (Central competent authority)"
+              },
+              "postalAddress": {
+                "postcodeCode": "28012",
+                "lineOne": ".",
+                "cityName": "Madrid",
+                "countryId": "ES",
+                "countryName": "Spain",
+                "countrySubDivisionName": "Community of Madrid"
+              }
             },
-            "postalAddress": {
-              "postcodeCode": "29002",
-              "lineOne": ".",
-              "cityName": "Málaga",
-              "countryId": "ES",
-              "countryName": "Spain",
-              "countrySubDivisionName": "Malaga"
+            {
+              "identifier": "ES45901",
+              "urlId": "https://traces-codelists.ec.europa.eu/authority_activity_id",
+              "name": "Málaga",
+              "partyRoleCode": {
+                "value": "VG",
+                "name": "Local government sponsor (Local competent authority)"
+              },
+              "postalAddress": {
+                "postcodeCode": "29002",
+                "lineOne": ".",
+                "cityName": "Málaga",
+                "countryId": "ES",
+                "countryName": "Spain",
+                "countrySubDivisionName": "Malaga"
+              }
             }
-          }
-        ]
-      }
+          ]
+        }
+      ]
     },
     "loadingBaseportLocation": {
       "identifier": "ES290250000096",

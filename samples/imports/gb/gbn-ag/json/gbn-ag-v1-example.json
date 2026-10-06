@@ -123,12 +123,14 @@
       },
       "originCountry": {
         "code": { "value": "FR" },
-        "subordinateTradeCountrySubDivision": {
-          "identifier": "FR-12345",
-          "functionTypeCode": {
-            "content": "106"
+        "subordinateTradeCountrySubDivision": [
+          {
+            "identifier": "FR-12345",
+            "functionTypeCode": {
+              "content": "106"
+            }
           }
-        }
+        ]
       },
       "finalDestinationLocation": {
         "identifier": "CPH19876",
