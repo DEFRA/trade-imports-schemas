@@ -328,7 +328,7 @@
     },
     "TradeCountry": {
       "type": "object",
-      "description": "A country reference (origin / export / transit / re-export). The country code lives on `code.value` (ISO 3166-1 alpha-2 expected). `subordinateTradeCountrySubDivision` carries a single sub-division within the country: either a region (UNCL3227 functionTypeCode '106') where regulation is regionalised, such as disease zoning on live-animal imports, or the authorities attached to the country (functionTypeCode '44', '42', '41'). `code` may be absent when TRACES sends the country purely as a carrier for those authorities.",
+      "description": "A country reference (origin / export / transit / re-export). The country code lives on `code.value` (ISO 3166-1 alpha-2 expected). `subordinateTradeCountrySubDivision` carries a single sub-division within the country: a region (UNCL3227 functionTypeCode '106') where regulation is regionalised, such as disease zoning on live-animal imports; the authorities attached to the country (functionTypeCode '44', '42', '41'); or an operator-anchored location — a government approved establishment ('272') or a designated goods disposal location ('283'). `code` may be absent when TRACES sends the country purely as a carrier for the sub-division.",
       "properties": {
         "code": {
           "description": "Country code; ISO 3166-1 alpha-2 expected. ISO 3166-1 is well-known so urlId is usually omitted, but a sibling urlId can be added when a non-ISO scheme is in use.",
@@ -342,7 +342,7 @@
     },
     "TradeCountrySubDivision": {
       "type": "object",
-      "description": "A sub-division of a country, whose meaning is set by `functionTypeCode`. For a region (UNCL3227 '106') `identifier` carries the region code drawn from the codelist named by the optional sibling `urlId`. For a place of authentication or a customs office ('44', '42', '41') the sub-division is a positional wrapper with no identifier of its own, and `activityAuthorizedParty` carries the authorities themselves — the shape TRACES uses to attach competent authorities and border control posts to the export, transit and re-export country.",
+      "description": "A sub-division of a country, whose meaning is set by `functionTypeCode`. On a region ('106') the sub-division carries only a name — `identifier` and `urlId` are unpopulated for the records observed so far, so the region is not named by a codelist identifier. On every other code ('44', '42', '41', '272', '283') it is a positional wrapper: no identifier of its own, with the parties on `activityAuthorizedParty` — the shape TRACES uses to attach competent authorities and border control posts to the export, transit and re-export country, and to anchor an establishment or disposal location to its operator.",
       "required": ["functionTypeCode"],
       "properties": {
         "identifier": {
@@ -351,21 +351,21 @@
         "urlId": {
           "type": "string",
           "format": "uri",
-          "description": "URL to the codelist this region identifier is drawn from."
+          "description": "URL to the codelist the `identifier` is drawn from, when a sub-division carries one."
         },
         "functionTypeCode": {
           "type": "object",
           "required": ["content"],
           "properties": {
             "content": {
-              "enum": ["41", "42", "44", "106"],
-              "description": "UNCL3227 location function. '106' Region of origin, '44' Place of authentication of document (competent authority), '42' Consignment exit customs office, '41' Consignment entry customs office."
+              "type": "string",
+              "description": "UNCL3227 location function code. Deliberately an open string, not an enum: TRACES emits this code from the wider UNCL3227 list (see https://service.unece.org/trade/untdid/d95a/uncl/uncl3227.htm), and an enumerated list would be a snapshot that goes stale on the next certificate type or UNCEFACT release. The code tells you how to read the rest of the sub-division: '106' is a region of origin; the others ('44' place of authentication, '42'/'41' consignment exit/entry customs office, '272' government approved establishment, '283' goods disposal location) carry the parties on `activityAuthorizedParty`."
             }
           }
         },
         "activityAuthorizedParty": {
           "type": "array",
-          "description": "Authorities authorised for the activity this sub-division represents. Distinguish them by `partyRoleCode`: 'RA' central competent authority, 'VG' local competent authority, 'CM' customs / border control post.",
+          "description": "Parties attached to this sub-division, distinguished by `partyRoleCode`. On an authority sub-division ('44', '42', '41'): 'RA' central competent authority, 'VG' local competent authority, 'CM' customs / border control post. On a non-authority one the party is the operator — 'EX' exporter on a government approved establishment ('272'), 'DP' on a designated goods disposal location ('283'). Absent on a region ('106'), which carries only a name.",
           "items": { "$ref": "#/$defs/TradeParty" }
         }
       }
