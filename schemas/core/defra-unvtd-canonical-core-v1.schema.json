@@ -348,7 +348,7 @@
     },
     "TradeCountrySubDivision": {
       "type": "object",
-      "description": "A sub-division of a country, whose meaning is set by `functionTypeCode`. On a region ('106') the sub-division carries only a name — `identifier` and `urlId` are unpopulated for the records observed so far, so the region is not named by a codelist identifier. On every other code ('44', '42', '41', '272', '283') it is a positional wrapper: no identifier of its own, with the parties on `activityAuthorizedParty` — the shape TRACES uses to attach competent authorities and border control posts to the export, transit and re-export country, and to anchor an establishment or disposal location to its operator.",
+      "description": "A sub-division of a country, whose meaning is set by `functionTypeCode`. On a region ('106') it carries the region's `name` (e.g. 'Greater London') and, where TRACES supplies one, `hierarchicalLevelCode`; `identifier`/`urlId` are populated only when the region is also named by a codelist. On every other code ('44', '42', '41', '272', '283') it is a positional wrapper: no identifier or name of its own, with the parties on `activityAuthorizedParty` — the shape TRACES uses to attach competent authorities and border control posts to the export, transit and re-export country, and to anchor an establishment or disposal location to its operator.",
       "required": ["functionTypeCode"],
       "properties": {
         "identifier": {
@@ -359,6 +359,14 @@
           "format": "uri",
           "description": "URL to the codelist the `identifier` is drawn from, when a sub-division carries one."
         },
+        "name": {
+          "type": "string",
+          "description": "Human-readable sub-division name, language-preferred. Carried on a region ('106'), e.g. 'Greater London'."
+        },
+        "hierarchicalLevelCode": {
+          "$ref": "#/$defs/CodedValue",
+          "description": "UNCL3227 hierarchical level of the sub-division (e.g. value '1', name 'Region'), where TRACES supplies one."
+        },
         "functionTypeCode": {
           "type": "object",
           "required": ["content"],
@@ -366,12 +374,16 @@
             "content": {
               "type": "string",
               "description": "UNCL3227 location function code. Deliberately an open string, not an enum: TRACES emits this code from the wider UNCL3227 list (see https://service.unece.org/trade/untdid/d95a/uncl/uncl3227.htm), and an enumerated list would be a snapshot that goes stale on the next certificate type or UNCEFACT release. The code tells you how to read the rest of the sub-division: '106' is a region of origin; the others ('44' place of authentication, '42'/'41' consignment exit/entry customs office, '272' government approved establishment, '283' goods disposal location) carry the parties on `activityAuthorizedParty`."
+            },
+            "name": {
+              "type": "string",
+              "description": "Human-readable label for the function code as sent by TRACES (e.g. 'Region of Origin')."
             }
           }
         },
         "activityAuthorizedParty": {
           "type": "array",
-          "description": "Parties attached to this sub-division, distinguished by `partyRoleCode`. On an authority sub-division ('44', '42', '41'): 'RA' central competent authority, 'VG' local competent authority, 'CM' customs / border control post. On a non-authority one the party is the operator — 'EX' exporter on a government approved establishment ('272'), 'DP' on a designated goods disposal location ('283'). Absent on a region ('106'), which carries only a name.",
+          "description": "Parties attached to this sub-division, distinguished by `partyRoleCode`. On an authority sub-division ('44', '42', '41'): 'RA' central competent authority, 'VG' local competent authority, 'CM' customs / border control post. On a non-authority one the party is the operator — 'EX' exporter on a government approved establishment ('272'), 'DP' on a designated goods disposal location ('283'). Absent on a region ('106'), which carries a name rather than parties.",
           "items": { "$ref": "#/$defs/TradeParty" }
         }
       }
