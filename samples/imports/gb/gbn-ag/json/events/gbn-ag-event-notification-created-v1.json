@@ -35,7 +35,7 @@
     },
     "specifiedConsignment": {
         "originCountry": {
-          "code": { "value": "FR" }
+          "code": { "value": "ES" }
         },
         "includedConsignmentItem": [
           {

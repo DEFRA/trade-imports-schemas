@@ -41,6 +41,14 @@
       "schema:rangeIncludes": { "@id": "uncefact:TradeParty" }
     },
     {
+      "@id": "defraUnvtdProfile:regionOfOriginCode",
+      "@type": "rdf:Property",
+      "rdfs:label": "regionOfOriginCode",
+      "rdfs:comment": "The region of origin code printed on the health certificate: the zone the animals are certified from under GB disease regionalisation rules, as listed in the approved third-country lists for the species or commodity. Carried exactly as the certificate shows it, including its country prefix. Distinct from the region of origin (UNCL3227 '106') country subdivision, which is the administrative area the animals came from; neither can be derived from the other. No UN/CEFACT or TRACES equivalent.",
+      "schema:domainIncludes": { "@id": "uncefact:Country" },
+      "schema:rangeIncludes": { "@id": "xsd:string" }
+    },
+    {
       "@id": "uncefact:individualProductInstance",
       "@type": "rdf:Property",
       "rdfs:label": "individualTradeProductInstance",

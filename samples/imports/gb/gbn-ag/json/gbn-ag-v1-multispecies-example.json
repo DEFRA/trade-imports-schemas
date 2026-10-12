@@ -123,14 +123,7 @@
       },
       "originCountry": {
         "code": { "value": "FR" },
-        "subordinateTradeCountrySubDivision": [
-          {
-            "identifier": "FR-12436",
-            "functionTypeCode": {
-              "content": "106"
-            }
-          }
-        ]
+        "regionOfOriginCode": "FR-12436"
       },
       "unloadingBaseportLocation": {
         "identifier": "GBBRS",
