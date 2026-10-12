@@ -234,12 +234,63 @@ test('competent authorities survive an export country with no country code', () 
   // TRACES sends this country as a wrapper for the authorities alone.
   assert.equal(exportCountry.code, undefined)
 
-  const subDivision = exportCountry.subordinateTradeCountrySubDivision
+  const [subDivision, ...rest] = exportCountry.subordinateTradeCountrySubDivision
+  assert.equal(rest.length, 0)
   assert.deepEqual(subDivision.functionTypeCode, { content: '44' })
   assert.deepEqual(
     subDivision.activityAuthorizedParty.map((p) => [p.partyRoleCode.value, p.identifier]),
     [['RA', 'ES00000'], ['VG', 'ES45901']]
   )
+})
+
+// Shaped as parseTracesXml + normalizeTracesPayload leave a TRACES certificate.
+function consignmentWith (countries) {
+  return normalizeTracesPayload({
+    spsCertificate: {
+      spsExchangedDocument: { id: 'CHEDA.XI.2026.0000001', typeCode: '636' },
+      spsConsignment: countries
+    }
+  })
+}
+
+test('every sub-division on a country survives, in TRACES order', () => {
+  const out = mapTracesToUnvtd(consignmentWith({
+    exportSPSCountry: {
+      id: 'NL',
+      subordinateSPSCountrySubDivision: [
+        { functionTypeCode: { value: '44' } },
+        { functionTypeCode: { value: '42' } }
+      ]
+    }
+  }))
+  assert.deepEqual(
+    out.specifiedConsignment.exportCountry.subordinateTradeCountrySubDivision.map((s) => s.functionTypeCode.content),
+    ['44', '42']
+  )
+})
+
+test('a region of origin keeps its name and hierarchical level', () => {
+  // As TRACES sends a Canary Islands origin on CHEDPP.XI.2026.0000167.
+  const out = mapTracesToUnvtd(consignmentWith({
+    originSPSCountry: {
+      id: 'ES',
+      name: { languageID: 'en', value: 'Spain' },
+      subordinateSPSCountrySubDivision: {
+        name: { languageID: 'en', value: 'Santa Cruz De Tenerife' },
+        hierarchicalLevelCode: { name: 'Region', value: '1' },
+        functionTypeCode: { name: 'Region of Origin', value: '106' }
+      }
+    }
+  }))
+  const origin = out.specifiedConsignment.originCountry
+  assert.equal(origin.code.value, 'ES')
+  assert.deepEqual(origin.subordinateTradeCountrySubDivision, [
+    {
+      name: 'Santa Cruz De Tenerife',
+      hierarchicalLevelCode: { value: '1' },
+      functionTypeCode: { content: '106' }
+    }
+  ])
 })
 
 test('DOCOM JSON fixture maps with docom profile override', async () => {
