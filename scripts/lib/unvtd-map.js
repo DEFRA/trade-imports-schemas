@@ -540,9 +540,10 @@ function mapExaminationEvent (event) {
 }
 
 /**
- * A country sub-division: either a region, or the wrapper TRACES uses to hang
- * competent authorities and customs offices off a country (functionTypeCode
- * 44 / 42 / 41), in which case it has no identifier of its own.
+ * A country sub-division: either a region of origin (functionTypeCode 106),
+ * which TRACES sends as a name and hierarchical level with no identifier, or
+ * the wrapper TRACES uses to hang competent authorities and customs offices off
+ * a country (functionTypeCode 44 / 42 / 41), which has no identifier of its own.
  */
 function mapCountrySubDivision (subDivision) {
   if (!subDivision || typeof subDivision !== 'object') return undefined
@@ -550,6 +551,10 @@ function mapCountrySubDivision (subDivision) {
   const content = asString(typeof ftc === 'object' ? ftc?.value : ftc)
   if (!content) return undefined
   const out = { ...mapIdentifier(subDivision.id ?? subDivision.identifier) }
+  const name = asString(extractContentValue(subDivision.name))
+  if (name) out.name = name
+  const level = mapCodeType(subDivision.hierarchicalLevelCode)
+  if (level) out.hierarchicalLevelCode = level
   out.functionTypeCode = { content }
   const parties = subDivision.activityAuthorizedSPSParty ?? subDivision.activityAuthorizedParty
   if (parties) {
@@ -572,8 +577,10 @@ function mapTradeCountry (country) {
   // the competent authorities (DOCOM I.3 / I.4), so the sub-division is mapped
   // whether or not there is a country code to go with it.
   const sub = country.subordinateSPSCountrySubDivision ?? country.subordinateTradeCountrySubDivision
-  const subDivision = mapCountrySubDivision(Array.isArray(sub) ? sub[0] : sub)
-  if (subDivision) out.subordinateTradeCountrySubDivision = subDivision
+  if (sub) {
+    const subDivisions = (Array.isArray(sub) ? sub : [sub]).map(mapCountrySubDivision).filter(Boolean)
+    if (subDivisions.length) out.subordinateTradeCountrySubDivision = subDivisions
+  }
   return Object.keys(out).length ? out : undefined
 }
 

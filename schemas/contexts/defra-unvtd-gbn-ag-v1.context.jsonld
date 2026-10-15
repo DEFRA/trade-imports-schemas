@@ -12,6 +12,10 @@
       "permanentLocation": {
         "@id": "defraUnvtdProfile:permanentLocation",
         "@type": "@id"
+      },
+      "regionOfOriginCode": {
+        "@id": "defraUnvtdProfile:regionOfOriginCode",
+        "@type": "xsd:string"
       }
     }
   ]

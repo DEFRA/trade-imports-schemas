@@ -79,16 +79,16 @@
         }
       },
       "despatchParty": {
-        "identifier": "FR-15-HLD-00427",
+        "identifier": "ES-38-HLD-00427",
         "urlId": "https://refdata.tbc.defra.gov.uk/operator_activity_id",
-        "name": "Centre de Collecte Embryonnaire",
+        "name": "Centro de Recogida de Embriones de Tenerife",
         "partyRoleCode": { "value": "PW" },
         "postalAddress": {
-          "lineOne": "Route de la Vallée 12",
-          "cityName": "Saint-Flour",
-          "postcodeCode": "15100",
-          "countryId": "FR",
-          "countrySubDivisionName": "Cantal"
+          "lineOne": "Camino La Hornera 12",
+          "cityName": "San Cristóbal de La Laguna",
+          "postcodeCode": "38205",
+          "countryId": "ES",
+          "countrySubDivisionName": "Santa Cruz de Tenerife"
         }
       },
       "deliveryParty": {
@@ -112,15 +112,17 @@
         }
       },
       "originCountry": {
-        "code": { "value": "FR" },
+        "code": { "value": "ES" },
         "subordinateTradeCountrySubDivision": [
           {
-            "identifier": "FR-12345",
+            "identifier": "ES-CN",
+            "urlId": "https://refdata.tbc.defra.gov.uk/country_subdivisions",
             "functionTypeCode": {
               "content": "106"
             }
           }
-        ]
+        ],
+        "regionOfOriginCode": "ES-12345"
       },
       "unloadingBaseportLocation": {
         "identifier": "GBDVR",
