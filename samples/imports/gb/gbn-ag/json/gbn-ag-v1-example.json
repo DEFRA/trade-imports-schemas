@@ -140,6 +140,7 @@
         "subordinateTradeCountrySubDivision": [
           {
             "identifier": "ES-CN",
+            "urlId": "https://refdata.tbc.defra.gov.uk/country_subdivisions",
             "functionTypeCode": {
               "content": "106"
             }
