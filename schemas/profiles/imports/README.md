@@ -62,6 +62,8 @@ Each journey follows an architecturally similar pattern. It raises events using 
 
 Events emitted by the journey services share a common envelope. The data section of each event is a JSON object that conforms to a schema based on the UN/CEFACT SPS Certificate. The envelope's `eventType` is deliberately not domain-qualified — a plants journey's `NotificationCreated` carries the same `eventType` value as the animals one; the journey is discriminated by `subType` (`GBN-AG` today, `GBN-P`/`GBN-PP` for future plants journeys). Consumers must key on the `(eventType, subType)` pair, never `eventType` alone.
 
+The GBN-AG events, their payloads and how they are versioned are documented in the [GBN-AG profile README](gb/README.md).
+
 # Lessons from IPAFFS Schema Analysis
 
 ## Conflating Concerns

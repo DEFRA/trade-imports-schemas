@@ -51,6 +51,16 @@ stateDiagram-v2
     DELETED --> [*]
 ```
 
+## Internal event: `NotificationEdited`
+
+`NotificationEdited` is internal to the Import Notification Service (INS): the import journey services, GBN-AG among them, plus an aggregation service that keeps a searchable, current-state view of every notification. It is not available to consumers outside INS. The Trade Gateway's outbound filter does not include it, so it never leaves the INS domain.
+
+The lifecycle events above fire only when the status changes, so a change made between them, such as a new origin country or commodity code on a draft, would not otherwise reach the INS dashboard and search. `NotificationEdited` is raised each time a notification is saved without a change of status, which can be on every page transition, so one notification can produce many of them. Its `data` contains the current view of the data captured by the journey so far.
+
+`NotificationEdited` shares the notification's `aggregateVersion` sequence with the lifecycle events. Consumers outside INS do not receive it, so they see gaps in `aggregateVersion`.
+
+The decision is recorded in ADR-EUDP-006, Import Notification Service Data Aggregation.
+
 ## Revision numbering
 
 V1 / V2 refer to the notification revision (Submit, then Re-submit), not the schema version. A notification that goes Submit → Amend → Re-submit → Amend → Re-submit carries revisions V1, V2, V3. Cancel Amend abandons an in-progress amendment without minting a revision: the notification returns to its last submitted revision unchanged.
