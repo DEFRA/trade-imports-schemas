@@ -74,7 +74,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
       └── subordinateTradeCountrySubDivision
           └── identifier
   ```
-- **Description:** The region within the country of origin (e.g. `FR-75` for a French department). Sourced from MDM. Read `subordinateTradeCountrySubDivision.identifier` directly. GBN-AG only carries region-of-origin subdivisions (UNCL3227 `functionTypeCode = 106`), so this is a single object, not an array. **Confirmed PIMS row 18.**
+- **Description:** The country subdivision within the country of origin (e.g. `ES-CN`, the Canary Islands), as an MDM subdivision code. Read `subordinateTradeCountrySubDivision.identifier` directly. PIMS v0.2.0 takes only the subdivision ('106') entry (UNCL3227 `functionTypeCode = 106`), so this is a single object, not an array. **Confirmed PIMS row 18.**
 
 ## Internal reference number
 

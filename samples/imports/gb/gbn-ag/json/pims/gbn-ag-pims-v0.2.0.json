@@ -101,8 +101,8 @@
       "originCountry": {
         "code": { "value": "FR" },
         "subordinateTradeCountrySubDivision": {
-          "identifier": "FR-75",
-          "urlId": "https://service.unece.org/locode/",
+          "identifier": "FR-MQ",
+          "urlId": "https://refdata.tbc.defra.gov.uk/country_subdivisions",
           "functionTypeCode": { "content": "106" }
         }
       },
