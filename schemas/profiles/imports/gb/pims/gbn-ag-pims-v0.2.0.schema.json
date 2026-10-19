@@ -162,7 +162,7 @@
 
     "tradeCountrySubDivision": {
       "type": "object",
-      "description": "New in v0.2.0. Deliberately narrower than the generic schema's `TradeCountrySubDivision`: `trade-imports-animals-backend` only ever constructs the region-of-origin case (`functionTypeCode` `106`) via its `regionOfOrigin(String)` factory, and never populates the competent-authority/customs-office case (`44`/`42`/`41`) or its `activityAuthorizedParty` list — so that list is not modelled here. `functionTypeCode` is kept (not hardcoded away) because this schema/mapper path is shared plumbing other, non-animal journeys may reuse later, where `content` would distinguish a different use of this shape.",
+      "description": "New in v0.2.0. Deliberately narrower than the generic schema's `TradeCountrySubDivision`: `trade-imports-animals-backend` only ever constructs the country subdivision case (`functionTypeCode` `106`) via its `ofOrigin(String)` factory, and never populates the competent-authority/customs-office case (`44`/`42`/`41`) or its `activityAuthorizedParty` list — so that list is not modelled here. `functionTypeCode` is kept (not hardcoded away) because this schema/mapper path is shared plumbing other, non-animal journeys may reuse later, where `content` would distinguish a different use of this shape.",
       "required": ["functionTypeCode"],
       "properties": {
         "identifier": { "type": "string" },
