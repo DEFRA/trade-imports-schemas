@@ -47,6 +47,8 @@ schemas/
         gbn-ag-pims-v0.1.0.schema.json
         gbn-ag-pims-v0.2.0.schema.json                    # target contract, minted ahead of the mapper code (EUDPA-370)
         gbn-ag-pims-v0.2.0-changes.md                     # field-by-field v0.1.0 -> v0.2.0 diff + open questions
+        gbn-ag-pims-v0.3.0.schema.json                    # adds issuer, regionOfOriginCode and a urlId on every coded field
+        gbn-ag-pims-v0.3.0-changes.md                     # v0.2.0 -> v0.3.0 diff and the value lists
       messaging/
         event-envelope-v1.schema.json
 

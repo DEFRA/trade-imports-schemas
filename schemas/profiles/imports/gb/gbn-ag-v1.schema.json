@@ -47,7 +47,7 @@
             },
             "firstSignatoryAuthentication": {
               "type": "object",
-              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying its value in `content` with the sibling `urlId` naming the `ched_consignment_clause` codelist. GBN-AG requires both clauses to be present. When the `PURPOSE` clause `content` is `INTERNAL_MARKET`, the payload must also include a clause with `identifier` `INTERNAL_MARKET_PURPOSE` declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership), drawn from the same codelist.",
+              "description": "Beyond the primary signature, this hosts the consignment's coded declaration clauses on `includedClause[]`: the reason for import (`identifier` `PURPOSE`) and what the animals are certified for (`identifier` `GOODS_CERTIFIED_AS`), each carrying a code in `content` with the sibling `urlId` naming the list it is drawn from: https://refdata.tbc.defra.gov.uk/gbn-ag-purposes and https://refdata.tbc.defra.gov.uk/gbn-ag-goods-certified-as (schemas/codelists/). GBN-AG requires both clauses to be present. When the `PURPOSE` clause `content` is `INTERNAL_MARKET`, the payload must also include a clause with `identifier` `INTERNAL_MARKET_PURPOSE` declaring the fine-grained agricultural intent (slaughter / breeding / fattening / production / transfer of ownership), drawn from https://refdata.tbc.defra.gov.uk/gbn-ag-internal-market-purposes. Each list reuses the TRACES ched_consignment_clause code where TRACES has one for the same value, and uses a Defra code otherwise.",
               "required": ["includedClause"],
               "properties": {
                 "includedClause": {
@@ -60,7 +60,7 @@
                         "properties": { "identifier": { "const": "PURPOSE" } },
                         "required": ["identifier"]
                       },
-                      "description": "Must contain a clause declaring the Reason for Import (identifier='PURPOSE'; urlId points at the ched_consignment_clause codelist)."
+                      "description": "Must contain a clause declaring the Reason for Import (identifier='PURPOSE'; urlId points at the gbn-ag-purposes codelist)."
                     },
                     {
                       "contains": {
@@ -68,7 +68,7 @@
                         "properties": { "identifier": { "const": "GOODS_CERTIFIED_AS" } },
                         "required": ["identifier"]
                       },
-                      "description": "Must contain a clause declaring the Animals Certified For category (identifier='GOODS_CERTIFIED_AS'; urlId points at the ched_consignment_clause codelist)."
+                      "description": "Must contain a clause declaring the Animals Certified For category (identifier='GOODS_CERTIFIED_AS'; urlId points at the gbn-ag-goods-certified-as codelist)."
                     }
                   ]
                 }
@@ -289,7 +289,7 @@
               "description": "Per-animal records. Each entry represents one individual animal on the line. See `tradeProductInstance` for the fields each entry carries (regulatory identifiers, permanent location)."
             },
             "additionalInformationNote": {
-              "description": "GBN-AG carries per-animal identifiers (microchip, passport, ear tag, tattoo, leg ring) here as separate note entries: `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER` and the identifier value in `content` - one note per identifier."
+              "description": "GBN-AG carries per-animal identifiers (microchip, passport, ear tag, tattoo) here as separate note entries: `subjectCode` `INDIVIDUAL_IDENTIFICATION_NUMBER` and the identifier value in `content` - one note per identifier."
             }
           }
         }
@@ -316,7 +316,7 @@
 
     "tradeProductInstance": {
       "type": "object",
-      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag, leg ring) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address and contact details for where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
+      "description": "An individual animal. `identifier` is an array of regulatory IDs (microchip, passport, tattoo, ear tag) - an animal can carry several types at once, and which types apply varies by species. `permanentLocation` is the address and contact details for where this individual animal will permanently live after import; different animals on the same line can carry different permanent addresses (common when pets are imported to a business address and shipped onwards to their owners). All properties are optional; populate whichever apply to the species.",
       "properties": {
         "name": {
           "type": "string",
@@ -328,7 +328,7 @@
           "items": {
             "type": "object",
             "required": ["typeCode", "content"],
-            "description": "A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO, LEG_RING) as a bare string; `urlId` names the codelist the typeCode is drawn from. `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip).",
+            "description": "A per-animal identifier. `typeCode` names the kind of identifier (EAR_TAG, PASSPORT, MICROCHIP, TATTOO) as a bare string; `urlId` names the codelist the typeCode is drawn from (schemas/codelists/gbn-ag-animal-identifier-types.json). `content` is the identifier value itself - it is not drawn from a central registry (an ear-tag is issued by the farm; a microchip number is unique to the chip).",
             "properties": {
               "content":  { "type": "string" },
               "typeCode": { "type": "string" },

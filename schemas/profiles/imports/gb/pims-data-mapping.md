@@ -50,7 +50,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Person Responsible Address / Country / Company Name / Email / Name / Phone / Person Responsible City / Company Id / Contact Id / Fax / Id / Postcode / Type
 - **Schema path:** `exchangedDocument.issuer`
-- **Description:** The Great Britain-based responsible-person organisation of record for the load. Modelled as a `TradeParty` at `exchangedDocument.issuer`. Organisation name and address live at `name` and `postalAddress`; the named person and their phone and email live as a `definedContact[]` entry. This is the organisation of record, not the individual who submitted the notification; that acting user is an event-level identity and is not carried in the payload. The schema only carries a single contact line per entry. If a second number is needed (personal and organisational) another `definedContact[]` entry can be added in future. **Confirmed PIMS row 14.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 10.** Address normalised to a single postalAddress block (city / postcode live inside it); no separate Id / Type / Fax slots.
+- **Description:** The person responsible's company details: the GB contact the notifier picks for the consignment on the "Contact address for consignment" page, from their organisation's address book. Modelled as a `TradeParty` at `exchangedDocument.issuer`: organisation name at `name`, address at `postalAddress`, and phone and email as a `definedContact[]` entry with no `personName`, because address-book entries hold no person's name. The person responsible is the user who submits the notification and makes its declaration: the event's `actor` (`displayName`), with the actor of every status change on `statusChanges[]`. PIMS compose the Person Responsible from the submitting actor and `issuer`. In PIMS schema v0.3.0 and later. **Confirmed PIMS row 14.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 10.** Address normalised to a single postalAddress block (city / postcode live inside it); no separate Id / Type / Fax slots.
 
 ## Country of origin
 
@@ -61,7 +61,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 ## Region of origin code requirement
 
 - **Schema path:** _none_
-- **Description:** UI Journey related workflow flag, not part of the model. Controls whether the origin code needs to be captured. Default to no; when it is collected it's held at `specifiedConsignment.originCountry.subordinateTradeCountrySubDivision`.
+- **Description:** UI Journey related workflow flag, not part of the model. Controls whether the origin code needs to be captured. Default to no; when it is collected it's held at `specifiedConsignment.originCountry.regionOfOriginCode`.
 
 ## Region of origin code
 
@@ -71,10 +71,11 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
   ```
   specifiedConsignment
   └── originCountry
+      ├── regionOfOriginCode
       └── subordinateTradeCountrySubDivision
           └── identifier
   ```
-- **Description:** The country subdivision within the country of origin (e.g. `ES-CN`, the Canary Islands), as an MDM subdivision code. Read `subordinateTradeCountrySubDivision.identifier` directly. PIMS v0.2.0 takes only the subdivision ('106') entry (UNCL3227 `functionTypeCode = 106`), so this is a single object, not an array. **Confirmed PIMS row 18.**
+- **Description:** Two separate facts about where in the country of origin the animals came from. `regionOfOriginCode` is the region of origin code from the health certificate, a disease-control zone; it is present only when the notifier says the certificate carries one, and is in PIMS schema v0.3.0 and later. `subordinateTradeCountrySubDivision` is the country subdivision (e.g. `ES-CN`, the Canary Islands): `identifier` is an MDM subdivision code and `urlId` names the MDM subdivision list. PIMS takes only the subdivision ('106') entry (UNCL3227 `functionTypeCode = 106`), so this is a single object, not an array. A whole-country origin carries neither. **Confirmed PIMS row 18.**
 
 ## Internal reference number
 
@@ -122,7 +123,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - Confirm that scientificName and commonName landing on the Commodity Species child table is acceptable.
 
-## Animal Identifier (Microchip, Leg Ring, Passport, Tattoo, Ear Tag, Identification details, Description)
+## Animal Identifier (Microchip, Passport, Tattoo, Ear Tag)
 
 - **Schema path:**
 
@@ -133,11 +134,10 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
           └── individualTradeProductInstance[]
               └── identifier[]
   ```
-- **Description:** Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade line; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` pinning the `animal_identifier_types` codelist. Established typeCodes: `MICROCHIP`, `LEG_RING`, `PASSPORT`, `TATTOO`, `EAR_TAG`. For commodities with no specific identifier type, the V4 form falls back to `IDENTIFICATION_DETAILS` (free-text identifier) and `DESCRIPTION` (free-text animal description); these typeCodes need adding to the `animal_identifier_types` codelist. **Confirmed PIMS Commodity Species row 6.** Per-animal-per-identifier model: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal. **Confirmed PIMS Commodity Species row 9.** Confirms per-animal-per-identifier child table model; same as the parent Animal Identifier row.
+- **Description:** Per-animal identifiers. Each animal is one `individualTradeProductInstance[]` entry on the trade line; within each, `identifier[]` carries one entry per identifier the animal holds. Each identifier entry has a `typeCode` (the kind of identifier), a `content` (the value), and a `urlId` naming the list `typeCode` is drawn from, `https://codelists.tbc.defra.gov.uk/animal_identifier_types` (`schemas/codelists/gbn-ag-animal-identifier-types.json`). The typeCodes are `EAR_TAG`, `PASSPORT`, `MICROCHIP` and `TATTOO`. **Confirmed PIMS Commodity Species row 6.** Per-animal-per-identifier model: individualTradeProductInstance[] for animals, identifier[] for identifiers per animal. **Confirmed PIMS Commodity Species row 9.** Confirms per-animal-per-identifier child table model; same as the parent Animal Identifier row.
 
 **Actions:**
 
-- Add IDENTIFICATION_DETAILS and DESCRIPTION typeCodes to the animal_identifier_types codelist on the Defra side.
 - Confirm that the per-animal-per-identifier model is acceptable.
 
 ## Number of packages
@@ -180,7 +180,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
       └── includedClause[]
           └── content
   ```
-- **Description:** The category the animals are certified for (e.g. Slaughter, Further keeping, Breeding). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = GOODS_CERTIFIED_AS`. Read the `content` of that clause. **Confirmed PIMS row 3.**
+- **Description:** The category the animals are certified for (e.g. Further keeping, Slaughter). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = GOODS_CERTIFIED_AS`. Read the `content` of that clause: a code from `https://refdata.tbc.defra.gov.uk/gbn-ag-goods-certified-as` (`schemas/codelists/gbn-ag-goods-certified-as.json`), which the clause's `urlId` names. **Confirmed PIMS row 3.**
 
 ## Contains Unweaned Animals
 
@@ -203,7 +203,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
       └── includedClause[]
           └── content
   ```
-- **Description:** The reason for importing the consignment (e.g. Internal market, Transit, Re-entry). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = PURPOSE`. Read the `content` of that clause. **Confirmed PIMS row 16.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 13.** Confirmed. Purpose of Movement is superseded by Reason for Import (PURPOSE clause on firstSignatoryAuthentication).
+- **Description:** The reason for importing the consignment (e.g. Internal market, Transit, Re-entry). Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = PURPOSE`. Read the `content` of that clause: a code from `https://refdata.tbc.defra.gov.uk/gbn-ag-purposes` (`schemas/codelists/gbn-ag-purposes.json`), which the clause's `urlId` names. **Confirmed PIMS row 16.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 13.** Confirmed. Purpose of Movement is superseded by Reason for Import (PURPOSE clause on firstSignatoryAuthentication).
 
 ## Purpose in internal market
 
@@ -216,7 +216,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
       └── includedClause[]
           └── content
   ```
-- **Description:** The specific agricultural intent within the internal market (Slaughter, Breeding, Fattening, etc.). Conditional: only present when Reason for import = Internal market. Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = INTERNAL_MARKET_PURPOSE`. Read the `content` of that clause. **Modified PIMS row 10.** PIMS pointed at the PURPOSE clause; the fine-grained intent lives on a separate INTERNAL_MARKET_PURPOSE clause.
+- **Description:** The specific agricultural intent within the internal market (Slaughter, Breeding, Fattening, etc.). Conditional: only present when the PURPOSE clause content is `INTERNAL_MARKET`. Carried as a clause on `firstSignatoryAuthentication.includedClause[]` where `identifier = INTERNAL_MARKET_PURPOSE`. Read the `content` of that clause: a code from `https://refdata.tbc.defra.gov.uk/gbn-ag-internal-market-purposes` (`schemas/codelists/gbn-ag-internal-market-purposes.json`), which the clause's `urlId` names. **Modified PIMS row 10.** PIMS pointed at the PURPOSE clause; the fine-grained intent lives on a separate INTERNAL_MARKET_PURPOSE clause.
 
 ## Place of Origin
 
@@ -321,7 +321,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **PIMS field:** Document Type / Veterinary Document
 - **Schema path:** `exchangedDocument.referenceDocument[].typeCode`
-- **Description:** The type of accompanying document. Sent as a code from the GBN-AG document-type codelist, `https://refdata.tbc.defra.gov.uk/gbn-ag-document-types` (`schemas/codelists/gbn-ag-document-types.json`). The list is static: it copies in the UNTDID 1001 code where one fits (e.g. `853` for veterinary health certificate, `636` for health certificate, `856` for ITAHC) and uses Defra codes where UNTDID 1001 has none (`GBN1` letter of authority, `GBN2` catch certificate, `GBN3` journey log). `916` is sent only when the notifier chooses "Other". The codelist is the authority for the V4 human-readable labels of all fourteen types, so PIMS resolves every `typeCode` against that one list. On the generic GBN-AG event each entry also carries `urlId` naming that codelist; the PIMS v0.2.0 schema does not carry `urlId`. **Confirmed PIMS Document Fields row 1.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 12.** Confirmed. Veterinary documents carry on exchangedDocument.referenceDocument[] with typeCode 853 (UNTDID 1001). Legacy flat 'Veterinary Document' field superseded by the related-documents table.
+- **Description:** The type of accompanying document. Sent as a code from the GBN-AG document-type codelist, `https://refdata.tbc.defra.gov.uk/gbn-ag-document-types` (`schemas/codelists/gbn-ag-document-types.json`). The list is static: it copies in the UNTDID 1001 code where one fits (e.g. `853` for veterinary health certificate, `636` for health certificate, `856` for ITAHC) and uses Defra codes where UNTDID 1001 has none (`GBN1` letter of authority, `GBN2` catch certificate, `GBN3` journey log). `916` is sent only when the notifier chooses "Other". The codelist is the authority for the V4 human-readable labels of all fourteen types, so PIMS resolves every `typeCode` against that one list. Each entry also carries `urlId` naming that codelist, in PIMS schema v0.3.0 and later. **Confirmed PIMS Document Fields row 1.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 12.** Confirmed. Veterinary documents carry on exchangedDocument.referenceDocument[] with typeCode 853 (UNTDID 1001). Legacy flat 'Veterinary Document' field superseded by the related-documents table.
 
 ## Accompanying Document: Reference
 
@@ -344,7 +344,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 ## Contact Address
 
 - **Schema path:** `exchangedDocument.issuer.postalAddress`
-- **Description:** The submitter's preferred contact postal address for the notification, sourced from the gov.uk identity of the signed-in user (the user picks one when their profile carries more than one; they may supply a standard address block). Lands on the same slot as the Responsible Person for Load's organisation address: `exchangedDocument.issuer.postalAddress`. The V4 selection step is workflow flow; the schema does not carry a separate contact-address slot distinct from the responsible-person slot. **Confirmed PIMS row 30.** Confirms the submitter's preferred address lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load (V4 row 2).
+- **Description:** The address of the contact the notifier picks for the consignment from their organisation's address book. Lands on the same slot as the Responsible Person for Load's organisation address: `exchangedDocument.issuer.postalAddress`. The schema does not carry a separate contact-address slot distinct from the responsible-person slot. **Confirmed PIMS row 30.** Confirms the submitter's preferred address lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load (V4 row 2).
 
 ## (none - PIMS-only descope)
 
@@ -411,7 +411,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 ]
 ```
 
-### Animal Identifier (Microchip, Leg Ring, Passport, Tattoo, Ear Tag, Identification details, Description)
+### Animal Identifier (Microchip, Passport, Tattoo, Ear Tag)
 
 **One animal carrying ear-tag and passport**
 
@@ -419,8 +419,8 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 "individualTradeProductInstance": [
   {
     "identifier": [
-      { "typeCode": "EAR_TAG",  "content": "UK123456789012", "urlId": "https://refdata.tbc.defra.gov.uk/animal_identifier_types" },
-      { "typeCode": "PASSPORT", "content": "UK123456789",    "urlId": "https://refdata.tbc.defra.gov.uk/animal_identifier_types" }
+      { "typeCode": "EAR_TAG",  "content": "UK123456789012", "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" },
+      { "typeCode": "PASSPORT", "content": "UK123456789",    "urlId": "https://codelists.tbc.defra.gov.uk/animal_identifier_types" }
     ]
   }
 ]
