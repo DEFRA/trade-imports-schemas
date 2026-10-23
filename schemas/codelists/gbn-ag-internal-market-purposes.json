@@ -1,0 +1,62 @@
+{
+  "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-internal-market-purposes",
+  "title": "GBN-AG purposes in the internal market",
+  "description": "The purpose of a GBN-AG consignment imported for the internal market, used as the value space for the INTERNAL_MARKET_PURPOSE clause content on exchangedDocument.firstSignatoryAuthentication.includedClause[]. The clause is present only when the PURPOSE clause content is INTERNAL_MARKET. TRACES CHED data has no internal market purpose clause, so every code is a Defra code. Each value's description names the journey value it is sent for. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "TRANSFER_OF_OWNERSHIP_SALE_GIFT",
+      "label": "Transfer of ownership - Sale/gift",
+      "description": "Defra code. Journey value: transfer-of-ownership-sale-gift."
+    },
+    {
+      "code": "TRANSFER_OF_OWNERSHIP_RESCUE",
+      "label": "Transfer of ownership - Rescue",
+      "description": "Defra code. Journey value: transfer-of-ownership-rescue."
+    },
+    {
+      "code": "BREEDING",
+      "label": "Breeding",
+      "description": "Defra code. Journey value: breeding."
+    },
+    {
+      "code": "RESEARCH",
+      "label": "Research",
+      "description": "Defra code. Journey value: research."
+    },
+    {
+      "code": "RACING_COMPETITION_SHOW_OR_TRAINING",
+      "label": "Racing, competition, show or training",
+      "description": "Defra code. Journey value: racing-competition-show-or-training."
+    },
+    {
+      "code": "APPROVED_PREMISES_OR_BODY",
+      "label": "Approved premises or body",
+      "description": "Defra code. Journey value: approved-premises-or-body."
+    },
+    {
+      "code": "COMPANION_ANIMAL_NOT_FOR_RESALE_OR_REHOMING",
+      "label": "Companion animal not for resale or rehoming",
+      "description": "Defra code. Journey value: companion-animal-not-for-resale-or-rehoming."
+    },
+    {
+      "code": "PRODUCTION",
+      "label": "Production",
+      "description": "Defra code. Journey value: production."
+    },
+    {
+      "code": "SLAUGHTER",
+      "label": "Slaughter",
+      "description": "Defra code. Journey value: slaughter."
+    },
+    {
+      "code": "FATTENING",
+      "label": "Fattening",
+      "description": "Defra code. Journey value: fattening."
+    },
+    {
+      "code": "RESTOCKING",
+      "label": "Restocking",
+      "description": "Defra code. Journey value: restocking."
+    }
+  ]
+}

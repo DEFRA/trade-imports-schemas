@@ -1,0 +1,27 @@
+{
+  "$id": "https://codelists.tbc.defra.gov.uk/animal_identifier_types",
+  "title": "GBN-AG animal identifier types",
+  "description": "The kinds of identifier recorded for an individual animal, used as the value space for typeCode on individualTradeProductInstance[].identifier[]. All codes are Defra codes. The $id is the URL the GBN-AG schema already pins identifier urlId to. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "EAR_TAG",
+      "label": "Ear tag",
+      "description": "Defra code."
+    },
+    {
+      "code": "PASSPORT",
+      "label": "Passport",
+      "description": "Defra code."
+    },
+    {
+      "code": "MICROCHIP",
+      "label": "Microchip",
+      "description": "Defra code."
+    },
+    {
+      "code": "TATTOO",
+      "label": "Tattoo",
+      "description": "Defra code."
+    }
+  ]
+}
