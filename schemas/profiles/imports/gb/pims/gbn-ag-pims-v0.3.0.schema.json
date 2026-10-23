@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gbn-ag-pims-v0.3.0.schema.json",
+  "title": "GBN-AG PIMS consumer schema (v0.3.0)",
+  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.3.0 is v0.2.0 plus: the person responsible (exchangedDocument.issuer), the region of origin code (originCountry.regionOfOriginCode), a list name (urlId) on every accompanying document, and a published list of expected values for every coded clause and animal identifier, each named by its urlId. The subdivision of origin is now the MDM subdivision code. Every addition is optional, so a v0.2.0 payload is also a valid v0.3.0 payload. What changed and why is in gbn-ag-pims-v0.3.0-changes.md beside this file. v0.1.0 and v0.2.0 are published alongside and are unchanged. This schema is insulated from changes to the upstream GBN-AG schema; new PIMS versions are minted independently. Core envelope infrastructure is composed via event-envelope-v1.",
+  "version": "0.3.0",
+
+  "allOf": [
+    { "$ref": "profiles/imports/messaging/event-envelope-v1.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "aggregateType": { "const": "Notification" },
+        "subType":       { "const": "GBN-AG" },
+        "data": {
+          "type": "object",
+          "required": ["$model", "$type", "exchangedDocument", "specifiedConsignment"],
+          "properties": {
+            "$model": { "const": "defra/certificate-internal/1" },
+            "$type":  { "const": "gbn-ag" },
+            "exchangedDocument": {
+              "type": "object",
+              "required": ["identifier"],
+              "properties": {
+                "identifier":             { "type": "string" },
+                "traderAssignedId":       { "type": "string" },
+                "notificationStatusCode": { "type": "string" },
+                "versionId":              { "type": "integer" },
+                "issueDateTime":          { "type": "string", "format": "date-time" },
+                "issuer": {
+                  "$ref": "#/$defs/tradeParty",
+                  "description": "New in v0.3.0 — the GB contact for the consignment that the notifier picks in the notification: organisation `name`, `postalAddress`, and email and phone on `definedContact[]`. It carries no `personName`, because the contact is chosen from the organisation's address book, which holds no person's name. The person who submitted the notification and declared responsibility for it is the event's `actor`, and the actor of each status change is on `statusChanges[]`."
+                },
+                "firstSignatoryAuthentication": {
+                  "type": "object",
+                  "properties": {
+                    "includedClause": {
+                      "type": "array",
+                      "items": { "$ref": "#/$defs/clause" }
+                    }
+                  }
+                },
+                "referenceDocument": {
+                  "type": "array",
+                  "items": { "$ref": "#/$defs/referencedDocument" },
+                  "description": "New in v0.2.0 — accompanying documents (e.g. veterinary health certificate). Previously dropped entirely (PR #52). See docs/analysis/gbn-ag-field-lineage.md §3 and pims-data-mapping.md 'Accompanying Document: Type/Reference/Date of Issue'."
+                }
+              }
+            },
+            "specifiedConsignment": {
+              "type": "object",
+              "properties": {
+                "consignorParty":    { "$ref": "#/$defs/tradeParty" },
+                "consigneeParty":    { "$ref": "#/$defs/tradeParty" },
+                "despatchParty":     { "$ref": "#/$defs/tradeParty" },
+                "deliveryParty":     { "$ref": "#/$defs/tradeParty" },
+                "importer":          { "$ref": "#/$defs/tradeParty" },
+                "carrier":           { "$ref": "#/$defs/tradeParty" },
+                "originCountry":     { "$ref": "#/$defs/tradeCountry" },
+                "unloadingBaseportLocation": { "$ref": "#/$defs/logisticsLocation" },
+                "finalDestinationLocation": {
+                  "$ref": "#/$defs/logisticsLocation",
+                  "description": "New in v0.2.0 — the CPH (County Parish Holding) number of the destination farm, on `identifier`, with `urlId` naming the Defra-curated CPH register. Reuses `logisticsLocation` rather than a richer CPH-specific shape: the generic event's own `finalDestinationLocation.postalAddress` is never populated either (no agreed source for which address belongs to the holding), so this deliberately doesn't require one. Previously dropped entirely — no PIMS destination existed for `cphNumber` until now. See docs/analysis/gbn-ag-field-lineage.md §3 and the EUDPA-370 planning notes there."
+                },
+                "mainCarriageLogisticsTransportMovement": {
+                  "type": "array",
+                  "items": { "$ref": "#/$defs/logisticsTransportMovement" }
+                },
+                "transitTradeCountry": {
+                  "type": "array",
+                  "items": { "$ref": "#/$defs/tradeCountry" },
+                  "description": "New in v0.2.0 — countries the consignment passes through between origin and destination. Previously dropped entirely (PR #52); the generic event only started populating this once EUDPA-369 wired `transport.transitedCountries` through. See docs/analysis/gbn-ag-field-lineage.md §3 and pims-data-mapping.md 'Transition Countries'."
+                },
+                "isOrHasUnweanedAnimals": { "type": "boolean" },
+                "includedConsignmentItem": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "includedTradeLineItem": {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/tradeLineItem" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+
+  "$defs": {
+
+    "codedValue": {
+      "type": "object",
+      "description": "New in v0.2.0: `name` (human-readable label for the code) — previously omitted, PR #52.",
+      "properties": {
+        "value": { "type": "string" },
+        "urlId": { "type": "string" },
+        "name":  { "type": "string" }
+      }
+    },
+
+    "referencedDocument": {
+      "type": "object",
+      "description": "A document reference: an accompanying document on `exchangedDocument.referenceDocument[]`, or a transport document on `transportContractRelatedReferencedDocument[]`. New in v0.3.0: `urlId`, naming the list `typeCode` is drawn from. An accompanying document's `typeCode` is from https://refdata.tbc.defra.gov.uk/gbn-ag-document-types (schemas/codelists/gbn-ag-document-types.json). A link to open the stored file is not part of this version.",
+      "properties": {
+        "typeCode":      { "type": "string" },
+        "urlId":         { "type": "string" },
+        "identifier":    { "type": "string" },
+        "issueDateTime": { "type": "string", "format": "date" }
+      }
+    },
+
+    "tradeAddress": {
+      "type": "object",
+      "description": "New in v0.2.0: `postcodeCode`, `countryName`, `countrySubDivisionName` — previously omitted, PR #52.",
+      "properties": {
+        "lineOne":  { "type": "string" },
+        "lineTwo":  { "type": "string" },
+        "cityName": { "type": "string" },
+        "countryId": { "type": "string" },
+        "postcodeCode":           { "type": "string" },
+        "countryName":            { "type": "string" },
+        "countrySubDivisionName": { "type": "string" }
+      }
+    },
+
+    "tradeParty": {
+      "type": "object",
+      "description": "New in v0.2.0: `partyRoleCode`, `definedContact` — previously omitted, PR #52. Both dropped for every party role (consignor, consignee, despatch, delivery, importer, carrier, and — via `tradeProductInstance.permanentLocation` below — the per-animal permanent-address party too).",
+      "properties": {
+        "identifier":    { "type": "string" },
+        "urlId":         { "type": "string" },
+        "name":          { "type": "string" },
+        "partyRoleCode": { "$ref": "#/$defs/codedValue" },
+        "partyTypeCode": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/codedValue" }
+        },
+        "postalAddress": { "$ref": "#/$defs/tradeAddress" },
+        "definedContact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "personName": { "type": "string" },
+              "emailURIUniversalCommunication": { "type": "string" },
+              "telephoneUniversalCommunication": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "tradeCountry": {
+      "type": "object",
+      "description": "A country on the consignment. Only `originCountry` carries `subordinateTradeCountrySubDivision` and `regionOfOriginCode`, the two facts that say where in the country the animals came from. A whole-country origin carries neither. New in v0.3.0: `regionOfOriginCode`.",
+      "properties": {
+        "code": { "$ref": "#/$defs/codedValue" },
+        "subordinateTradeCountrySubDivision": { "$ref": "#/$defs/tradeCountrySubDivision" },
+        "regionOfOriginCode": {
+          "type": "string",
+          "description": "New in v0.3.0 — the region of origin code from the health certificate: a disease-control zone, such as one under EU regionalisation measures. It is not the subdivision, and cannot be derived from it. Present only when the notifier says the certificate carries one."
+        }
+      }
+    },
+
+    "tradeCountrySubDivision": {
+      "type": "object",
+      "description": "The country subdivision the animals came from, such as the Canary Islands, as the `106` (UNCL3227 location function) entry a TRACES CHED uses. Described in v0.3.0, and already true of the v0.2.0 stream: `identifier` is the MDM subdivision code, such as `ES-CN`, and `urlId` names the MDM subdivision list, https://refdata.tbc.defra.gov.uk/country_subdivisions, because those codes are not all ISO 3166-2. The region of origin code is a separate field on `tradeCountry`. A single object, as in v0.2.0. Narrower than the generic schema's `TradeCountrySubDivision`: only the `106` case is sent, so the competent-authority and customs-office cases and their `activityAuthorizedParty` list are not modelled.",
+      "required": ["functionTypeCode"],
+      "properties": {
+        "identifier": { "type": "string" },
+        "urlId":      { "type": "string" },
+        "functionTypeCode": {
+          "type": "object",
+          "required": ["content"],
+          "properties": {
+            "content": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "logisticsLocation": {
+      "type": "object",
+      "description": "New in v0.2.0: `urlId`, `name`, `typeCode`, `postalAddress` — previously omitted, PR #52. Used for `unloadingBaseportLocation` (unchanged) and, new in v0.2.0, `finalDestinationLocation` above — see that property's own description for why `postalAddress` isn't required.",
+      "properties": {
+        "identifier":    { "type": "string" },
+        "urlId":         { "type": "string" },
+        "name":          { "type": "string" },
+        "typeCode":      { "type": "string" },
+        "postalAddress": { "$ref": "#/$defs/tradeAddress" }
+      }
+    },
+
+    "clause": {
+      "type": "object",
+      "description": "A coded declaration clause on `exchangedDocument.firstSignatoryAuthentication.includedClause[]`. New in v0.3.0: `content` is a code from a published list, and `urlId` names that list. `PURPOSE` (the reason for import): https://refdata.tbc.defra.gov.uk/gbn-ag-purposes. `INTERNAL_MARKET_PURPOSE`, present only when the `PURPOSE` content is `INTERNAL_MARKET`: https://refdata.tbc.defra.gov.uk/gbn-ag-internal-market-purposes. `GOODS_CERTIFIED_AS`: https://refdata.tbc.defra.gov.uk/gbn-ag-goods-certified-as. The lists are in schemas/codelists/ in this repo. A list reuses the TRACES ched_consignment_clause code where TRACES has one for the same value, and uses a Defra code otherwise.",
+      "properties": {
+        "identifier": { "type": "string" },
+        "content":    { "type": ["string", "null"] },
+        "urlId":      { "type": ["string", "null"] }
+      }
+    },
+
+    "applicableClassification": {
+      "type": "object",
+      "description": "New in v0.2.0: `systemName`, `className` — previously omitted, PR #52.",
+      "properties": {
+        "systemId":   { "type": "string" },
+        "systemName": { "type": "string" },
+        "classCode":  { "$ref": "#/$defs/codedValue" },
+        "className": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "animalIdentifier": {
+      "type": "object",
+      "description": "One identifier of an individual animal. New in v0.3.0: `typeCode` is from the published list https://codelists.tbc.defra.gov.uk/animal_identifier_types (schemas/codelists/gbn-ag-animal-identifier-types.json): `EAR_TAG`, `PASSPORT`, `MICROCHIP` or `TATTOO`, and `urlId` names that list. `content` is the identifier as written.",
+      "properties": {
+        "typeCode": { "type": "string" },
+        "content":  { "type": "string" },
+        "urlId":    { "type": "string" }
+      }
+    },
+
+    "tradeProductInstance": {
+      "type": "object",
+      "description": "New in v0.2.0: `name`, `permanentLocation` (permanent address) — previously omitted, PR #52. `permanentLocation` is a full `tradeParty`, matching the generic schema (name, postal address and contact details), not an address-only shape.",
+      "properties": {
+        "name": { "type": "string", "maxLength": 58 },
+        "identifier": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/animalIdentifier" }
+        },
+        "permanentLocation": { "$ref": "#/$defs/tradeParty" }
+      }
+    },
+
+    "lineTradeDelivery": {
+      "type": "object",
+      "properties": {
+        "productUnitQuantity": {
+          "type": "object",
+          "properties": {
+            "content": { "type": "integer" },
+            "unitCode": {
+              "type": "string",
+              "description": "New in v0.2.0 — previously omitted, PR #52."
+            }
+          }
+        }
+      }
+    },
+
+    "logisticsPackage": {
+      "type": "object",
+      "description": "New in v0.2.0: `levelCode`, `typeCode` — previously omitted, PR #52.",
+      "properties": {
+        "levelCode":    { "type": "integer" },
+        "typeCode":     { "type": "string" },
+        "itemQuantity": { "type": "integer" }
+      }
+    },
+
+    "logisticsTransportMeans": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" }
+      }
+    },
+
+    "transportEvent": {
+      "type": "object",
+      "description": "New in v0.2.0: `actualOccurrenceDateTime`, `occurrenceLogisticsLocation` — previously omitted, PR #52.",
+      "properties": {
+        "scheduledOccurrenceDateTime": { "type": "string", "format": "date-time" },
+        "actualOccurrenceDateTime":    { "type": "string", "format": "date-time" },
+        "occurrenceLogisticsLocation": { "$ref": "#/$defs/logisticsLocation" }
+      }
+    },
+
+    "logisticsTransportMovement": {
+      "type": "object",
+      "description": "New in v0.2.0: `identifier`, `urlId`, `transportContractRelatedReferencedDocument` — previously omitted, PR #52.",
+      "properties": {
+        "identifier": { "type": "string" },
+        "urlId":      { "type": "string" },
+        "modeCode": { "type": "integer" },
+        "usedLogisticsTransportMeans": { "$ref": "#/$defs/logisticsTransportMeans" },
+        "transportContractRelatedReferencedDocument": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/referencedDocument" }
+        },
+        "arrivalEvent": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/transportEvent" }
+        }
+      }
+    },
+
+    "tradeLineItem": {
+      "type": "object",
+      "description": "New in v0.2.0: `description`, `scientificName`, `commonName` — previously hardcoded null (moot until EUDPA-369 threads these through from the generic event's `commodity.name`/`species[].value`/`text`). Also new: `applicableClassification` changes from a single object to an array (`minItems: 1`) — the backend currently always produces exactly one, but the generic schema already models it as a list. Deliberately excludes `typeCode`/`urlId`: those stay null by design, resolved from CN-code reference data downstream rather than sourced from the notification (gap G18).",
+      "properties": {
+        "applicableClassification": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/applicableClassification" }
+        },
+        "description": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scientificName": { "type": "string" },
+        "commonName":     { "type": "string" },
+        "specifiedLineTradeDelivery": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lineTradeDelivery" }
+        },
+        "physicalReferencedLogisticsPackage": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/logisticsPackage" }
+        },
+        "individualTradeProductInstance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tradeProductInstance" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-purposes",
+  "title": "GBN-AG reasons for import",
+  "description": "The main reason for importing a GBN-AG consignment, used as the value space for the PURPOSE clause content on exchangedDocument.firstSignatoryAuthentication.includedClause[]. Where TRACES ched_consignment_clause has a code for the same purpose, that code is used; otherwise the code is a Defra code. TRACES codes are those seen in TRACES CHED data. Each value's description names the journey value it is sent for. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "INTERNAL_MARKET",
+      "label": "Internal market",
+      "description": "TRACES ched_consignment_clause code. Journey value: internalMarket."
+    },
+    {
+      "code": "TRANSHIPMENT_OR_ONWARD_TRAVEL",
+      "label": "Transhipment or onward travel",
+      "description": "Defra code. TRACES ONWARD_TRAVEL covers onward travel only. Journey value: transhipmentOrOnwardTravel."
+    },
+    {
+      "code": "TRANSIT",
+      "label": "Transit",
+      "description": "Defra code. Journey value: transit."
+    },
+    {
+      "code": "RE_ENTRY",
+      "label": "Re-entry",
+      "description": "Defra code. Journey value: reEntry."
+    },
+    {
+      "code": "TEMPORARY_ADMISSION",
+      "label": "Temporary admission horses",
+      "description": "TRACES ched_consignment_clause code. Journey value: temporaryAdmissionHorses."
+    }
+  ]
+}
