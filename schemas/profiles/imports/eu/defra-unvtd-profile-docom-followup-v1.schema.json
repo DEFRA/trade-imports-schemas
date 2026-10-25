@@ -51,7 +51,7 @@
           "$ref": "#/$defs/ControlDetails"
         },
         "certifyingOfficerAuthentication": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Authentication",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/Authentication",
           "description": "The officer who signed off this follow-up action (TRACES CertifyingOfficerSPSAuthentication). Same Authentication shape as the certificate signatories: typeCode carries the action per UNCL9417, provider carries the authority and the named official."
         }
       }
@@ -66,11 +66,11 @@
           "description": "When the consignment was redispatched."
         },
         "exitAuthorityParty": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
           "description": "The authority at the point of exit that handled the redispatch (TRACES ExitAuthoritySPSParty) — typically a border control post. identifier is drawn from authority_activity_id."
         },
         "destinationCountry": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry",
           "description": "The country the consignment was redispatched to (TRACES CountryOfDestination, unece:destinationCountry)."
         },
         "meansOfTransport": {
@@ -81,7 +81,7 @@
           "description": "The transport used for the redispatch, one entry per leg (TRACES MeansOfTransport)."
         },
         "placeOfDestinationParty": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
           "description": "The operator at the redispatch destination (TRACES PlaceOfDestinationSPSParty). identifier is drawn from operator_activity_id."
         }
       }
@@ -91,7 +91,7 @@
       "description": "One leg of the redispatch journey, pairing the transport movement with the transport document covering it.",
       "properties": {
         "specifiedLogisticsTransportMovement": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsTransportMovement",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsTransportMovement",
           "description": "The movement for this leg (TRACES SPSTransportMovement). identifier is the conveyance identifier, with urlId naming the register it is drawn from (e.g. road_vehicle_registration_after_bcp); modeCode carries the mode per UN/ECE Recommendation 19. Aliased to unece:specifiedTransportMovement."
         },
         "internationalTransportDocument": {
@@ -115,7 +115,7 @@
         "includedNote": {
           "type": "array",
           "items": {
-            "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
+            "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/IncludedNote"
           },
           "description": "Coded control detail. Subject codes are drawn from the TRACES ched_follow_up_note_subject_code list — TYPE_OF_CONTROL (contentCode from docom_follow_up_type_of_control) and REASON_OF_NON_COMPLIANCE (contentCode from docom_follow_up_reason_of_non_compliance, which can carry several codes on one note)."
         }

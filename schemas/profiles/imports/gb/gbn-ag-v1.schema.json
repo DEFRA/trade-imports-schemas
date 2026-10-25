@@ -7,7 +7,7 @@
 
   "allOf": [
     {
-      "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
+      "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
     },
     {
       "type": "object",
@@ -131,7 +131,7 @@
               "description": "The transport legs that move the consignment to the UK port of entry. Producers may populate any number of legs. The consumer rule for finding the UK port arrival is to match `arrivalEvent.occurrenceLogisticsLocation.identifier` against `unloadingBaseportLocation.identifier`. On the UK-arrival leg, `identifier` with its `urlId` register carries the V4 Transport identification value. Intra-EU upstream legs are modelled here; post-port onward legs are not. The Reason for Import clause distinguishes transit from internal-market cases."
             },
             "importer": {
-              "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+              "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
               "description": "The Great Britain-based party responsible for the consignment on the import side. Makes the regulatory declarations to UK competent authorities and is the party of record for the import. Distinct from `consigneeParty` (the contractual receiver under the trade contract) and `deliveryParty` (the immediate delivery point) - the importer of record, the contractual receiver, and the delivery party are frequently three different legal entities on UK live-animal imports. Held as a full party with its own address and contacts."
             },
             "finalDestinationLocation": {
@@ -191,14 +191,14 @@
           "type": "string"
         },
         "postalAddress": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
         }
       }
     },
 
     "gbnAgOriginCountry": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry" },
+        { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry" },
         {
           "type": "object",
           "description": "GBN-AG country of origin. The core country, plus the region of origin code from the health certificate.",
@@ -233,7 +233,7 @@
               "type": "string"
             },
             "postalAddress": {
-              "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
+              "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeAddress"
             }
           }
         }
@@ -242,7 +242,7 @@
 
     "gbnAgTradeLineItem": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeLineItem" },
+        { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeLineItem" },
         {
           "type": "object",
           "description": "GBN-AG trade line item. One line per species or commodity on the certificate. Each line carries the commodity itself (classification, scientific and common names, type), the line quantity (head count for animals; weight for some germinals), the per-animal records, and any notes about that line. Mixed consignments (for example cattle plus sheep, or live animals plus germinals) split across multiple lines, one per species or commodity.",
@@ -298,7 +298,7 @@
 
     "gbnAgApplicableClassification": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ApplicableClassification" },
+        { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/ApplicableClassification" },
         {
           "type": "object",
           "description": "A classification entry on a trade line. `systemId` names the coding system the value is drawn from (`CN` for the customs nomenclature, `SPECIES_CLASS` for the taxonomic class, others as registered). `classCode` is the value within that system. A trade line can carry multiple classification entries when more than one system applies.",
@@ -337,7 +337,7 @@
           }
         },
         "permanentLocation": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeParty",
           "description": "Per-animal permanent address: the name, postal address, and contact details (telephone and email) for where the individual animal will permanently reside after import. Different animals on the same trade line can carry different addresses, common when pets are imported to a business address and then shipped onwards to their owners' homes. Populated for the species to which a permanent residence applies. Optional in the schema; the per-species requirement and the mandatory telephone and email are enforced at source."
         }
       }
@@ -345,7 +345,7 @@
 
     "gbnAgLineTradeDelivery": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LineTradeDelivery" },
+        { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/LineTradeDelivery" },
         {
           "type": "object",
           "description": "GBN-AG line delivery: the per-line quantity on `productUnitQuantity`. The unit varies by commodity per Defra refdata routing: live animals use `H87` (a head count), and weighed germinals such as embryos or ova use `KGM` (kilograms). The schema accepts any positive number with any string unit code; the source system enforces the refdata-driven unit per commodity.",
@@ -364,7 +364,7 @@
 
     "gbnAgLogisticsPackage": {
       "allOf": [
-        { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsPackage" },
+        { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/LogisticsPackage" },
         {
           "type": "object",
           "required": ["itemQuantity", "typeCode"],

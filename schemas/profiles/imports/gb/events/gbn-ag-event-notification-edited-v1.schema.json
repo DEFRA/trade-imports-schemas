@@ -31,7 +31,7 @@
               "required": ["originCountry", "includedConsignmentItem"],
               "properties": {
                 "originCountry": {
-                  "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry"
+                  "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/TradeCountry"
                 },
                 "includedConsignmentItem": {
                   "type": "array",
