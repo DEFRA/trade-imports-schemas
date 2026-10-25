@@ -5,7 +5,7 @@
   "description": "Intra-Union commercial document (DOCOM) certificate, as issued by TRACES for movements of animals and products not requiring an INTRA certificate. Part III follow-up records (redispatch and control outcomes) are carried on followUp; TRACES returns them alongside the certificate, and their shapes are defined in defra-unvtd-profile-docom-followup-v1.schema.json.",
   "allOf": [
     {
-      "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
+      "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/CertificatePayload"
     },
     {
       "type": "object",
@@ -18,7 +18,7 @@
         },
         "exchangedDocument": {
           "allOf": [
-            { "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/ExchangedDocument" },
+            { "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/ExchangedDocument" },
             {
               "type": "object",
               "properties": {
@@ -31,7 +31,7 @@
           ]
         },
         "specifiedConsignment": {
-          "$ref": "../../../core/defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
+          "$ref": "defra-unvtd-canonical-core-v1.schema.json#/$defs/Consignment"
         },
         "followUp": {
           "type": "array",

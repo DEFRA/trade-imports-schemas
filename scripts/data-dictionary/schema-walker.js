@@ -9,7 +9,7 @@
  * resolver handles two `$ref` forms:
  *
  *   - "#/$defs/X"                     - same file
- *   - "../../../core/...#/$defs/X"    - sibling file under schemas/
+ *   - "defra-unvtd-canonical-core-v1.schema.json#/$defs/X" - the core, by its $id
  *
  * The cross-file form is resolved by matching the trailing
  * `#/$defs/<name>` against the core `$defs`. The walker never fetches
