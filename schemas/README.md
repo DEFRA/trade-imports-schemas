@@ -41,12 +41,14 @@ schemas/
       gb/
         gbn-ag-v1.schema.json
         events/                                          # GBN-AG Notification* catalogue
+        pims/
+          gbn-ag-pims-v0.1.0.schema.json
+          gbn-ag-pims-v0.2.0.schema.json                  # adds the fields dropped between the GBN-AG event and v0.1.0, the CPH number and per-animal permanent address
+          gbn-ag-pims-v0.2.0-changes.md                   # field-by-field v0.1.0 -> v0.2.0 diff + open questions
+          gbn-ag-pims-v0.3.0.schema.json                  # adds issuer, regionOfOriginCode, a urlId on every accompanying document, and a published list named by urlId for each coded clause and animal identifier
+          gbn-ag-pims-v0.3.0-changes.md                   # v0.2.0 -> v0.3.0 diff and the value lists
       events/
         README.md                                        # Certificate vs Notification guidance
-      pims/
-        gbn-ag-pims-v0.1.0.schema.json
-        gbn-ag-pims-v0.2.0.schema.json                    # target contract, minted ahead of the mapper code (EUDPA-370)
-        gbn-ag-pims-v0.2.0-changes.md                     # field-by-field v0.1.0 -> v0.2.0 diff + open questions
       messaging/
         event-envelope-v1.schema.json
 

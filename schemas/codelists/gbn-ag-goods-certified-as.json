@@ -1,0 +1,87 @@
+{
+  "$id": "https://refdata.tbc.defra.gov.uk/gbn-ag-goods-certified-as",
+  "title": "GBN-AG animals certified as",
+  "description": "What the animals in a GBN-AG consignment are certified as, used as the value space for the GOODS_CERTIFIED_AS clause content on exchangedDocument.firstSignatoryAuthentication.includedClause[]. Where TRACES ched_consignment_clause has a code for the same certification, that code is used; otherwise the code is a Defra code. TRACES codes are those seen in TRACES CHED data. Each value's description names the journey value it is sent for. This file is the working source of truth in the absence of a live Defra reference-data service; when that service goes live at https://refdata.tbc.defra.gov.uk/, this file is retired and the URL stays the same.",
+  "values": [
+    {
+      "code": "FURTHER_KEEPING",
+      "label": "Further keeping",
+      "description": "Defra code. Journey value: further-keeping."
+    },
+    {
+      "code": "SLAUGHTER",
+      "label": "Slaughter",
+      "description": "Defra code. Journey value: slaughter."
+    },
+    {
+      "code": "CONFINED_ESTABLISHMENT",
+      "label": "Confined establishment",
+      "description": "Defra code. Journey value: confined-establishment."
+    },
+    {
+      "code": "GERMINAL_PRODUCTS",
+      "label": "Germinal products",
+      "description": "Defra code. Journey value: germinal-products."
+    },
+    {
+      "code": "REGISTERED_EQUIDAE",
+      "label": "Registered equine animal",
+      "description": "TRACES ched_consignment_clause code. Journey value: registered-equine-animal."
+    },
+    {
+      "code": "TRAVELLING_CIRCUS_ANIMAL_ACT",
+      "label": "Travelling circus/animal act",
+      "description": "Defra code. Journey value: travelling-circus-animal-act."
+    },
+    {
+      "code": "EXHIBITION",
+      "label": "Exhibition",
+      "description": "Defra code. Journey value: exhibition."
+    },
+    {
+      "code": "EVENT_OR_ACTIVITY_NEAR_BORDERS",
+      "label": "Event or activity near borders",
+      "description": "Defra code. Journey value: event-or-activity-near-borders."
+    },
+    {
+      "code": "RELEASE_INTO_THE_WILD",
+      "label": "Release into the wild",
+      "description": "Defra code. Journey value: release-into-the-wild."
+    },
+    {
+      "code": "DISPATCH_CENTRE",
+      "label": "Dispatch centre",
+      "description": "Defra code. Journey value: dispatch-centre."
+    },
+    {
+      "code": "RELAYING_AREA_PURIFICATION_CENTRE",
+      "label": "Relaying area / purification centre",
+      "description": "Defra code. Journey value: relaying-area-purification-centre."
+    },
+    {
+      "code": "ORNAMENTAL_AQUACULTURE_ESTABLISHMENT",
+      "label": "Ornamental aquaculture establishment",
+      "description": "Defra code. Journey value: ornamental-aquaculture-establishment."
+    },
+    {
+      "code": "TECHNICAL_USE",
+      "label": "Technical use",
+      "description": "Defra code. Journey value: technical-use."
+    },
+    {
+      "code": "QUARANTINE_OR_SIMILAR_ESTABLISHMENT",
+      "label": "Quarantine or similar establishment",
+      "description": "Defra code. Journey value: quarantine-or-similar-establishment."
+    },
+    {
+      "code": "LIVE_AQUATIC_ANIMALS_FOR_HUMAN_CONSUMPTION",
+      "label": "Live aquatic animals for human consumption",
+      "description": "Defra code. Journey value: live-aquatic-animals-for-human-consumption."
+    },
+    {
+      "code": "OTHER",
+      "label": "Other",
+      "description": "Defra code. Journey value: other."
+    }
+  ]
+}
