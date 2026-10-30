@@ -68,14 +68,14 @@
         }
       },
       {
-        "typeCode": "GBN1",
+        "typeCode": "GBN5",
         "urlId": "https://refdata.tbc.defra.gov.uk/gbn-ag-document-types",
         "relationshipTypeCode": "ZZZ",
-        "identifier": "LOA-2026-0417",
+        "identifier": "CITES-2026-0417",
         "issueDateTime": "2026-05-02",
         "attachmentBinaryObject": {
           "uri": "uri:documentid:0b7e2c94-3f1a-4d5e-9c68-2a41d7f0e3b5",
-          "filename": "letter-of-authority.pdf",
+          "filename": "cites-permit.pdf",
           "mimeCode": "application/pdf"
         }
       }

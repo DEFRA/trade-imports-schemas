@@ -173,7 +173,7 @@
   "$defs": {
     "accompanyingReferencedDocument": {
       "type": "object",
-      "description": "An accompanying document. typeCode is a code from the GBN-AG document-type codelist (https://refdata.tbc.defra.gov.uk/gbn-ag-document-types), a static list that copies in the UNTDID 1001 codes GBN-AG uses and adds Defra codes GBN1 to GBN3 for document types UNTDID 1001 has no code for. The sibling urlId always names that codelist. 916 (Related document) is sent only when the notifier chooses \"Other\"; it is never a default.",
+      "description": "An accompanying document. typeCode is a code from the GBN-AG document-type codelist (https://refdata.tbc.defra.gov.uk/gbn-ag-document-types), a static list that copies in the UNTDID 1001 codes GBN-AG uses and adds Defra codes in the GBN series for document types UNTDID 1001 has no code for. The sibling urlId always names that codelist. 916 (Related document) is sent only when the notifier chooses \"Other supporting documents\"; it is never a default.",
       "required": ["typeCode", "urlId"],
       "properties": {
         "typeCode": { "type": "string" },
