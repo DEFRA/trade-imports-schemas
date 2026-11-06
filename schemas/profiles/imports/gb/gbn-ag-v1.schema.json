@@ -3,7 +3,8 @@
   "$id": "gbn-ag-v1.schema.json",
   "title": "GBN-AG - GB Notification for Animals and Germinals (v1)",
   "description": "Defra import pre-notification schema for live animals and germinals. Derives from the canonical Defra UNVTD core (CertificatePayload)",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "x-context": "../../../contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
 
   "allOf": [
     {
