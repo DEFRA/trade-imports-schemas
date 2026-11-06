@@ -1,7 +1,7 @@
 {
   "$model": "defra/certificate-internal/1",
   "$schema": "gbn-ag-v1.schema.json",
-  "@context": "../../../../../schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
+  "@context": "https://raw.githubusercontent.com/DEFRA/trade-imports-schemas/release-20261106-01/schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
   "$type": "gbn-ag",
   "exchangedDocument": {
     "identifier": "GBN-AG-26-1481364-X",

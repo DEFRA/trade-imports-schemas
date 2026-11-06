@@ -8,6 +8,7 @@
   "eventType": "uk.gov.defra.imports.notification.NotificationAmendmentCancelled",
   "timestamp": "2026-05-25T15:30:00.000Z",
   "data": {
+    "@context": "https://raw.githubusercontent.com/DEFRA/trade-imports-schemas/release-20261106-01/schemas/contexts/defra-unvtd-gbn-ag-v1.context.jsonld",
     "$model": "defra/certificate-internal/1",
     "$type": "gbn-ag",
     "exchangedDocument": {
@@ -298,6 +299,6 @@
   "metadata": {
     "correlationId": "cid-20260525-153000",
     "schemaVersion": "1.0.0",
-    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/events/gbn-ag-event-notification-amendment-cancelled-v1.schema.json"
+    "schemaUri": "https://raw.githubusercontent.com/DEFRA/trade-imports-schemas/release-20261106-01/schemas/profiles/imports/gb/events/gbn-ag-event-notification-amendment-cancelled-v1.schema.json"
   }
 }

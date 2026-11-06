@@ -3,6 +3,8 @@
  * Validate all JSON samples in /samples:
  *  - against their declared $schema
  *  - with basic JSON-LD context checks against UNECE D23B context usage
+ *  - for GBN-AG samples that carry metadata, against the release process:
+ *    metadata.schemaUri, metadata.schemaVersion and, for events, data["@context"]
  */
 
 import Ajv from 'ajv'
@@ -13,7 +15,7 @@ import { join, dirname, relative, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 import { ensureRemoteJson, fileExists } from './lib/vendor.js'
-import { contextIncludesOfficial } from './lib/context-chain.js'
+import { contextIncludesOfficial, parseRepoRawUrl } from './lib/context-chain.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -28,6 +30,14 @@ const BSP_BASICCOMPONENTS_LEGACY_URL =
 const VENDOR_DIR = join(ROOT, 'build/vendor/uncefact')
 const BSP_VENDOR_PATH = join(VENDOR_DIR, 'UNECE-BasicComponents.json')
 const CONTEXT_VENDOR_PATH = join(VENDOR_DIR, 'unece-context-D23B.jsonld')
+
+const ENVELOPE_SCHEMA_PATH = 'schemas/profiles/imports/messaging/event-envelope-v1.schema.json'
+const REPO_RAW_BASE = 'https://raw.githubusercontent.com/DEFRA/trade-imports-schemas'
+const RELEASE_SCHEMA_URI =
+  /^https:\/\/raw\.githubusercontent\.com\/DEFRA\/trade-imports-schemas\/((?:release|prerelease)-\d{8}-\d{2})\/(.+)$/
+// The release rules cover GBN-AG only. The CHED, DOCOM and INTRA event samples
+// still use the earlier metadata form; widen this when those journeys migrate.
+const RELEASE_RULES_SAMPLE_PREFIX = 'samples/imports/gb/gbn-ag/'
 
 function toPosix(p) {
   return p.split('\\').join('/')
@@ -85,6 +95,119 @@ function registerSchemaAliases(ajv, schema, schemaAbsPath) {
   safeAddSchema(ajv, schema, relFromRoot)
   safeAddSchema(ajv, schema, relFromSchemas)
   safeAddSchema(ajv, schema, schema.$id)
+}
+
+function collectRefs(node, acc = new Set()) {
+  if (Array.isArray(node)) {
+    node.forEach(item => collectRefs(item, acc))
+  } else if (node && typeof node === 'object') {
+    for (const [key, value] of Object.entries(node)) {
+      if (key === '$ref' && typeof value === 'string') acc.add(value)
+      else collectRefs(value, acc)
+    }
+  }
+  return acc
+}
+
+/**
+ * Find the profile schemas behind an event schema: the profile schemas it
+ * references, other than the envelope. An event schema that references none,
+ * such as NotificationDeleted, is matched to the profile by the `$type` const
+ * they share.
+ */
+function profilesForEvent(eventEntry, schemaEntries) {
+  const isProfile = e => {
+    const rel = toPosix(relative(ROOT, e.path))
+    return rel.startsWith('schemas/profiles/') && rel !== ENVELOPE_SCHEMA_PATH
+  }
+
+  const referenced = new Set()
+  for (const ref of collectRefs(eventEntry.schema)) {
+    const target = ref.split('#')[0]
+    const entry = target && schemaEntries.find(e =>
+      e.schema.$id === target ||
+      toPosix(relative(SCHEMAS_DIR, e.path)) === target ||
+      toPosix(relative(ROOT, e.path)) === target
+    )
+    if (entry && isProfile(entry)) referenced.add(entry)
+  }
+  if (referenced.size > 0) return [...referenced]
+
+  const dataType = eventEntry.schema.allOf
+    ?.map(branch => branch.properties?.data?.properties?.$type?.const)
+    .find(Boolean)
+  return schemaEntries.filter(e =>
+    dataType && isProfile(e) &&
+    e.schema.allOf?.some(branch => branch.properties?.$type?.const === dataType)
+  )
+}
+
+/**
+ * Check a sample against the release process: metadata.schemaUri,
+ * metadata.schemaVersion and, for an event, data["@context"]. Returns one
+ * message for each problem found.
+ */
+function releaseRuleProblems(sample, relSample, schemaEntry, schemaEntries) {
+  const problems = []
+  const report = (field, found, expected) => problems.push(
+    `${relSample}: ${field} is ${JSON.stringify(found)}, expected ${expected}`
+  )
+
+  const schemaPath = toPosix(relative(ROOT, schemaEntry.path))
+  const { schemaUri, schemaVersion } = sample.metadata
+
+  const uriMatch = RELEASE_SCHEMA_URI.exec(schemaUri)
+  const ref = uriMatch?.[1]
+  if (!uriMatch || uriMatch[2] !== schemaPath) {
+    report(
+      'metadata.schemaUri',
+      schemaUri,
+      `${REPO_RAW_BASE}/${ref ?? '<release-YYYYMMDD-NN or prerelease-YYYYMMDD-NN>'}/${schemaPath} (the raw URL, at a release tag, of the schema named by $schema)`
+    )
+  }
+
+  const declaredVersion = schemaEntry.schema.version
+  if (declaredVersion === undefined) {
+    problems.push(
+      `${relSample}: metadata.schemaVersion is ${JSON.stringify(schemaVersion)}, but ${schemaPath} has no "version" keyword to compare it with. Add "version" to the schema.`
+    )
+  } else if (schemaVersion !== declaredVersion) {
+    report('metadata.schemaVersion', schemaVersion, `${JSON.stringify(declaredVersion)} (the "version" keyword of ${schemaPath})`)
+  }
+
+  if (!schemaPath.includes('/events/')) return problems
+
+  const profiles = profilesForEvent(schemaEntry, schemaEntries)
+  if (profiles.length !== 1) {
+    const names = profiles.map(e => toPosix(relative(ROOT, e.path))).join(', ') || 'none'
+    problems.push(
+      `${relSample}: data["@context"] cannot be checked, because ${schemaPath} must identify exactly one profile schema through a $ref or its data $type const (found: ${names})`
+    )
+    return problems
+  }
+
+  const profile = profiles[0]
+  const profilePath = toPosix(relative(ROOT, profile.path))
+  const xContext = profile.schema['x-context']
+  if (!xContext) {
+    problems.push(
+      `${relSample}: data["@context"] cannot be checked, because ${profilePath} has no "x-context" keyword. Add "x-context" to the schema, as the relative path of its context file.`
+    )
+    return problems
+  }
+
+  const contextAbs = resolve(dirname(profile.path), xContext)
+  const contextPath = toPosix(relative(ROOT, contextAbs))
+  const found = sample.data?.['@context']
+  const expectedContext =
+    `${REPO_RAW_BASE}/${ref ?? '<the ref used in metadata.schemaUri>'}/${contextPath} (the raw URL of the "x-context" of ${profilePath}, at the same ref as metadata.schemaUri)`
+  const parsed = typeof found === 'string' ? parseRepoRawUrl(found) : null
+  if (found === undefined) {
+    problems.push(`${relSample}: data["@context"] is missing, expected ${expectedContext}`)
+  } else if (!parsed || parsed.absPath !== contextAbs || (ref && parsed.ref !== ref)) {
+    report('data["@context"]', found, expectedContext)
+  }
+  return problems
 }
 
 async function main() {
@@ -191,6 +314,20 @@ async function main() {
         const hasOfficial = await contextIncludesOfficial(sample['@context'], dirname(samplePath), UNECE_CONTEXT_URL)
         if (!hasOfficial) {
           throw new Error(`@context does not include ${UNECE_CONTEXT_URL}`)
+        }
+      }
+      const dataContext = sample.data?.['@context']
+      if (dataContext) {
+        const hasOfficial = await contextIncludesOfficial(dataContext, dirname(samplePath), UNECE_CONTEXT_URL)
+        if (!hasOfficial) {
+          throw new Error(`${relSample}: data["@context"] is ${JSON.stringify(dataContext)}, expected a context whose chain reaches ${UNECE_CONTEXT_URL}`)
+        }
+      }
+
+      if (sample.metadata && relSample.startsWith(RELEASE_RULES_SAMPLE_PREFIX)) {
+        const problems = releaseRuleProblems(sample, relSample, schemaEntry, schemaEntries)
+        if (problems.length > 0) {
+          throw new Error(problems.join('\n    '))
         }
       }
 
