@@ -113,7 +113,7 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
       └── includedTradeLineItem[]
           └── typeCode
   ```
-- **Description:** The product type for the commodity on this line, used as a filter in the notifier UI when picking species. Stored at `typeCode` on the line with `urlId` naming the Defra `species_type` codelist. **Confirmed PIMS Commodity Species row 7.** Maps to typeCode on the trade line (Defra species_type scheme); V4 row 8 Type selection populates this.
+- **Description:** The commodity's form on this line - live animal, semen, embryo, or ova - used as a filter in the notifier UI when picking species. Resolved downstream from Defra reference data keyed on the CN code rather than entered by the trader. The live animals journey does not send it. A germinal sender may, at `typeCode` on the line with `urlId` naming the Defra `species_type` codelist. **Confirmed PIMS Commodity Species row 7.**
 
 ## Species selection
 

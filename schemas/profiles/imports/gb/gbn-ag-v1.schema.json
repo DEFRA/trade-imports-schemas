@@ -258,7 +258,7 @@
             },
             "typeCode": {
               "type": "string",
-              "description": "The commodity's type or form - live animal, semen, embryo, or ova. Drawn from a Defra-curated species-type codelist named by the sibling `urlId`."
+              "description": "The commodity's form - live animal, semen, embryo, or ova - resolved downstream from Defra reference data keyed on the CN code rather than entered by the trader. The live animals journey does not send it. A germinal sender may, with the sibling `urlId` naming the Defra `species_type` codelist."
             },
             "urlId": {
               "type": "string",
