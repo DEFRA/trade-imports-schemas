@@ -18,7 +18,7 @@
 
         "exchangedDocument": {
           "type": "object",
-          "required": ["identifier", "issuer", "firstSignatoryAuthentication"],
+          "required": ["identifier", "firstSignatoryAuthentication"],
           "properties": {
             "identifier": {
               "type": "string",
