@@ -13,15 +13,32 @@
  * The official URL is passed in so the helper does not bake in a specific
  * version; both callers point at the D23B URL today and can update without
  * touching this file.
+ *
+ * A raw GitHub URL for this repository, at any ref, resolves to the file in the
+ * working tree. The walk stays offline: it never fetches the URL, and so checks
+ * the checkout rather than the content published at that ref.
  */
 
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { fileExists } from './vendor.js'
 
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const REPO_RAW_URL = /^https:\/\/raw\.githubusercontent\.com\/DEFRA\/trade-imports-schemas\/([^/]+)\/(.+)$/
+
 async function loadJson(path) {
   return JSON.parse(await readFile(path, 'utf-8'))
+}
+
+/**
+ * Split a raw GitHub URL for this repository into its ref and the absolute path
+ * of the file in the working tree. Returns null for any other string.
+ */
+export function parseRepoRawUrl(value) {
+  const match = REPO_RAW_URL.exec(value)
+  return match ? { ref: match[1], absPath: resolve(REPO_ROOT, match[2]) } : null
 }
 
 export async function contextIncludesOfficial(contextValue, baseDir, officialUrl) {
@@ -29,10 +46,11 @@ export async function contextIncludesOfficial(contextValue, baseDir, officialUrl
 
   if (typeof contextValue === 'string') {
     if (contextValue === officialUrl) return true
-    if (contextValue.startsWith('http://') || contextValue.startsWith('https://')) {
+    const repoFile = parseRepoRawUrl(contextValue)
+    if (!repoFile && (contextValue.startsWith('http://') || contextValue.startsWith('https://'))) {
       return false
     }
-    const resolved = resolve(baseDir, contextValue)
+    const resolved = repoFile ? repoFile.absPath : resolve(baseDir, contextValue)
     if (!(await fileExists(resolved))) return false
     const localCtx = await loadJson(resolved)
     return contextIncludesOfficial(localCtx['@context'], dirname(resolved), officialUrl)
