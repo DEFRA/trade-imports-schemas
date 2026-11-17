@@ -108,6 +108,81 @@
         }
       }
     },
+    "DescriptorColumnAttribute": {
+      "type": "object",
+      "required": [
+        "key",
+        "descriptorColumns"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Identifier for this descriptor column attribute"
+        },
+        "description": {
+          "type": "string"
+        },
+        "descriptorColumns": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/DescriptorColumn"
+          }
+        }
+      }
+    },
+    "DescriptorColumn": {
+      "type": "object",
+      "required": [
+        "key",
+        "columnType",
+        "label",
+        "cardinality"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Identifier for this descriptor column"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human readable description"
+        },
+        "columnType": {
+          "type": "string",
+          "enum": [
+            "QUANTITY",
+            "BOOLEAN",
+            "STRING",
+            "DATETIME",
+            "PARTIAL_TIME",
+            "ENUMERATION",
+            "COUNTRY_CODE",
+            "REGION",
+            "SANITARY_REGION",
+            "TAXON",
+            "TAXON_INVASIVE",
+            "MEANS_OF_TRANSPORT_SHIP",
+            "OPERATOR_ACTIVITY",
+            "ORGANIC_CONTROL_BODY_ACTIVITY",
+            "CATCH_AREA",
+            "DESCRIPTOR_ROW",
+            "CLASSIFICATION_NODE_REFERENCE",
+            "DYNAMIC"
+          ]
+        },
+        "cardinality": {
+          "type": "string",
+          "enum": [
+            "OPTIONAL",
+            "MANDATORY",
+            "OPTIONAL_MULTIPLE",
+            "MANDATORY_MULTIPLE"
+          ],
+          "description": "Cardinality: OPTIONAL (0..1), MANDATORY (1..1), OPTIONAL_MULTIPLE (0..n), MANDATORY_MULTIPLE (1..n)"
+        }
+      }
+    },
     "DocumentNodeAttributeValue": {
       "type": "object",
       "required": [
