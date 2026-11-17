@@ -47,6 +47,8 @@ schemas/
           gbn-ag-pims-v0.2.0-changes.md                   # field-by-field v0.1.0 -> v0.2.0 diff + open questions
           gbn-ag-pims-v0.3.0.schema.json                  # adds issuer, regionOfOriginCode, a urlId on every accompanying document, and a published list named by urlId for each coded clause and animal identifier
           gbn-ag-pims-v0.3.0-changes.md                   # v0.2.0 -> v0.3.0 diff and the value lists
+          gbn-ag-pims-v0.4.0.schema.json                  # v0.3.0 without issuer while the contact address page is out of the journey
+          gbn-ag-pims-v0.4.0-changes.md                   # v0.3.0 -> v0.4.0 diff
       events/
         README.md                                        # Certificate vs Notification guidance
       messaging/
