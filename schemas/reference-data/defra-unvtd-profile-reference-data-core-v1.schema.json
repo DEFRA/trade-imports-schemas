@@ -126,12 +126,12 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/$defs/DescriptorColumn"
+            "$ref": "#/$defs/DescriptorColumnValue"
           }
         }
       }
     },
-    "DescriptorColumn": {
+    "DescriptorColumnValue": {
       "type": "object",
       "required": [
         "key",
