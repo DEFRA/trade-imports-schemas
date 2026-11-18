@@ -95,6 +95,10 @@
           "actor":       { "$ref": "#/$defs/actor" }
         }
       }
+    },
+    "organisationId": {
+      "type": "string",
+      "description": "Organisation that owns the notification aggregate. Copied from the aggregate's stored organisation ID when the publisher writes the outbox event. Use this field for organisation-scoped reads (for example an INS dashboard). actor.organisationId is the acting user's organisation at write time and may differ when someone acts for another organisation."
     }
   },
 
