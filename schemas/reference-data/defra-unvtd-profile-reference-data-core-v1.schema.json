@@ -242,6 +242,10 @@
         "description": {
           "type": "string"
         },
+        "active": {
+          "type": "boolean",
+          "default": true
+        },
         "scopes": {
           "type": "array",
           "minItems": 1,
