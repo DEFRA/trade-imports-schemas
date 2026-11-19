@@ -1,4 +1,6 @@
 {
+    "$schema": "../../../../schemas/reference-data/defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse-v1.schema.json",
+    "@context": "https://vocabulary.uncefact.org/unece-context-D23B.jsonld",
     "source": "traces",
     "treeId": "intra_trade",
     "nodePath": "R/N-10000/N-10070/N-10430/N-10607/N-11631/C-10549",
