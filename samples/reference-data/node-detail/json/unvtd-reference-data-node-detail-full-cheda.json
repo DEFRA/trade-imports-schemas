@@ -939,6 +939,7 @@
                 {
                     "classCode": "DEL",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Dealers",
                     "scopes": [
                         "EFTA",
@@ -951,6 +952,7 @@
                 {
                     "classCode": "EMB",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Embryo collection and production teams",
                     "scopes": [
                         "EFTA",
@@ -985,6 +987,7 @@
                 {
                     "classCode": "OTHERHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other species locations",
                     "scopes": [
                         "EFTA",
@@ -997,6 +1000,7 @@
                 {
                     "classCode": "OTH-OPER",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other operators",
                     "scopes": [
                         "EFTA",
@@ -1028,6 +1032,7 @@
                 {
                     "classCode": "SEM",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Semen collection and storage centres",
                     "scopes": [
                         "EFTA",
@@ -1075,6 +1080,7 @@
                 {
                     "classCode": "AQUAHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Aquaculture Holdings",
                     "scopes": [
                         "EFTA",
@@ -1126,6 +1132,7 @@
                 {
                     "classCode": "IMP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Importer",
                     "scopes": [
                         "EFTA",
@@ -1141,6 +1148,7 @@
                 {
                     "classCode": "ASC",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Assembly Centres",
                     "scopes": [
                         "EFTA",
@@ -1153,6 +1161,7 @@
                 {
                     "classCode": "ZOO",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Bodies, institutes and centers",
                     "scopes": [
                         "EFTA",
@@ -1170,6 +1179,7 @@
             "sections": [
                 {
                     "classCode": "TRANSPORTER",
+                    "lms": false,
                     "description": "Transporter",
                     "scopes": [
                         "ALL_COUNTRIES"
@@ -1188,6 +1198,7 @@
                 {
                     "classCode": "AQUAHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Aquaculture Holdings",
                     "scopes": [
                         "EFTA",
@@ -1226,6 +1237,7 @@
                 {
                     "classCode": "EMB",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Embryo collection and production teams",
                     "scopes": [
                         "EFTA",
@@ -1247,6 +1259,7 @@
                 {
                     "classCode": "OTHERHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other species locations",
                     "scopes": [
                         "EFTA",
@@ -1259,6 +1272,7 @@
                 {
                     "classCode": "ASC",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Assembly Centres",
                     "scopes": [
                         "EFTA",
@@ -1271,6 +1285,7 @@
                 {
                     "classCode": "SEM",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Semen collection and storage centres",
                     "scopes": [
                         "EFTA",
@@ -1292,6 +1307,7 @@
                 {
                     "classCode": "DEL",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Dealers",
                     "scopes": [
                         "EFTA",
@@ -1304,6 +1320,7 @@
                 {
                     "classCode": "OTH-OPER",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other operators",
                     "scopes": [
                         "EFTA",
@@ -1322,6 +1339,7 @@
                 {
                     "classCode": "IMP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Importer",
                     "scopes": [
                         "EFTA",
@@ -1376,6 +1394,7 @@
                 {
                     "classCode": "ZOO",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Bodies, institutes and centers",
                     "scopes": [
                         "EFTA",
@@ -1406,6 +1425,7 @@
             "sections": [
                 {
                     "classCode": "RFL",
+                    "lms": false,
                     "description": "Responsible For the Load (Freight Forwarder)",
                     "scopes": [
                         "EFTA",
@@ -1424,6 +1444,7 @@
                 {
                     "classCode": "EXP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Animal exporter",
                     "scopes": [
                         "THIRD_COUNTRIES"
@@ -1449,6 +1470,7 @@
                 {
                     "classCode": "OTH-OPER",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other operators",
                     "scopes": [
                         "EFTA",
@@ -1467,6 +1489,7 @@
                 {
                     "classCode": "IMP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Importer",
                     "scopes": [
                         "EFTA",
@@ -1510,6 +1533,7 @@
                 {
                     "classCode": "EMB",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Embryo collection and production teams",
                     "scopes": [
                         "EFTA",
@@ -1581,6 +1605,7 @@
                 {
                     "classCode": "ZOO",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Bodies, institutes and centers",
                     "scopes": [
                         "EFTA",
@@ -1593,6 +1618,7 @@
                 {
                     "classCode": "AQUAHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Aquaculture Holdings",
                     "scopes": [
                         "EFTA",
@@ -1605,6 +1631,7 @@
                 {
                     "classCode": "OTHERHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other species locations",
                     "scopes": [
                         "EFTA",
@@ -1617,6 +1644,7 @@
                 {
                     "classCode": "OTH-OPER",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other operators",
                     "scopes": [
                         "EFTA",
@@ -1648,6 +1676,7 @@
                 {
                     "classCode": "DEL",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Dealers",
                     "scopes": [
                         "EFTA",
@@ -1660,6 +1689,7 @@
                 {
                     "classCode": "EXP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Animal exporter",
                     "scopes": [
                         "THIRD_COUNTRIES"
@@ -1672,6 +1702,7 @@
                 {
                     "classCode": "ASC",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Assembly Centres",
                     "scopes": [
                         "EFTA",
@@ -1736,6 +1767,7 @@
                 {
                     "classCode": "SEM",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Semen collection and storage centres",
                     "scopes": [
                         "EFTA",
@@ -1775,6 +1807,7 @@
                 {
                     "classCode": "IMP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Importer",
                     "scopes": [
                         "EFTA",
@@ -1790,6 +1823,7 @@
                 {
                     "classCode": "EMB",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Embryo collection and production teams",
                     "scopes": [
                         "EFTA",
@@ -1855,6 +1889,7 @@
                 {
                     "classCode": "ZOO",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Bodies, institutes and centers",
                     "scopes": [
                         "EFTA",
@@ -1867,6 +1902,7 @@
                 {
                     "classCode": "DEL",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Dealers",
                     "scopes": [
                         "EFTA",
@@ -2022,6 +2058,7 @@
                 {
                     "classCode": "SEM",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Semen collection and storage centres",
                     "scopes": [
                         "EFTA",
@@ -2097,6 +2134,7 @@
                 {
                     "classCode": "AQUAHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Aquaculture Holdings",
                     "scopes": [
                         "EFTA",
@@ -2109,6 +2147,7 @@
                 {
                     "classCode": "OTH-OPER",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other operators",
                     "scopes": [
                         "EFTA",
@@ -2234,6 +2273,7 @@
                 {
                     "classCode": "EMB",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Embryo collection and production teams",
                     "scopes": [
                         "EFTA",
@@ -2281,6 +2321,7 @@
                 {
                     "classCode": "IMP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Importer",
                     "scopes": [
                         "EFTA",
@@ -2322,6 +2363,7 @@
                 {
                     "classCode": "TPA",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "TPA",
                     "scopes": [
                         "EFTA",
@@ -2335,6 +2377,7 @@
                 {
                     "classCode": "ASC",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Assembly Centres",
                     "scopes": [
                         "EFTA",
@@ -2360,6 +2403,7 @@
                 {
                     "classCode": "EXP",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Animal exporter",
                     "scopes": [
                         "THIRD_COUNTRIES"
@@ -2385,6 +2429,7 @@
                 {
                     "classCode": "OTHERHOLD",
                     "chapter": "veterinary",
+                    "lms": false,
                     "description": "Other species locations",
                     "scopes": [
                         "EFTA",
@@ -2457,6 +2502,7 @@
                     {
                         "classCode": "IMP",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Importer",
                         "scopes": [
                             "EFTA",
@@ -2539,6 +2585,7 @@
                     {
                         "classCode": "AQUAHOLD",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Aquaculture Holdings",
                         "scopes": [
                             "EFTA",
@@ -2577,6 +2624,7 @@
                     {
                         "classCode": "ASC",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Assembly Centres",
                         "scopes": [
                             "EFTA",
@@ -2719,6 +2767,7 @@
                     {
                         "classCode": "ZOO",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Bodies, institutes and centers",
                         "scopes": [
                             "EFTA",
@@ -2912,6 +2961,7 @@
                     {
                         "classCode": "DEL",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Dealers",
                         "scopes": [
                             "EFTA",
@@ -2969,6 +3019,7 @@
                     {
                         "classCode": "EMB",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Embryo collection and production teams",
                         "scopes": [
                             "EFTA",
@@ -3549,6 +3600,7 @@
                     {
                         "classCode": "OTH-OPER",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Other operators",
                         "scopes": [
                             "EFTA",
@@ -3620,6 +3672,7 @@
                     {
                         "classCode": "OTHERHOLD",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Other species locations",
                         "scopes": [
                             "EFTA",
@@ -3877,6 +3930,7 @@
                     {
                         "classCode": "SEM",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Semen collection and storage centres",
                         "scopes": [
                             "EFTA",
@@ -3966,6 +4020,7 @@
                     {
                         "classCode": "TPA",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "TPA",
                         "scopes": [
                             "EFTA",
@@ -4089,6 +4144,7 @@
                     {
                         "classCode": "EXP",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Animal exporter",
                         "scopes": [
                             "THIRD_COUNTRIES"
@@ -4101,6 +4157,7 @@
                     {
                         "classCode": "IMP",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Importer",
                         "scopes": [
                             "EFTA",
@@ -4183,6 +4240,7 @@
                     {
                         "classCode": "AQUAHOLD",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Aquaculture Holdings",
                         "scopes": [
                             "EFTA",
@@ -4221,6 +4279,7 @@
                     {
                         "classCode": "ASC",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Assembly Centres",
                         "scopes": [
                             "EFTA",
@@ -4350,6 +4409,7 @@
                     {
                         "classCode": "ZOO",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Bodies, institutes and centers",
                         "scopes": [
                             "EFTA",
@@ -4531,6 +4591,7 @@
                     {
                         "classCode": "DEL",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Dealers",
                         "scopes": [
                             "EFTA",
@@ -4573,6 +4634,7 @@
                     {
                         "classCode": "EMB",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Embryo collection and production teams",
                         "scopes": [
                             "EFTA",
@@ -4925,6 +4987,7 @@
                     {
                         "classCode": "OTH-OPER",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Other operators",
                         "scopes": [
                             "EFTA",
@@ -4956,6 +5019,7 @@
                     {
                         "classCode": "FOOD-OTH",
                         "chapter": "food",
+                        "lms": false,
                         "description": "Other establishments",
                         "scopes": [
                             "THIRD_COUNTRIES"
@@ -4996,6 +5060,7 @@
                     {
                         "classCode": "OTHERHOLD",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Other species locations",
                         "scopes": [
                             "EFTA",
@@ -5187,6 +5252,7 @@
                     {
                         "classCode": "SEM",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "Semen collection and storage centres",
                         "scopes": [
                             "EFTA",
@@ -5248,6 +5314,7 @@
                     {
                         "classCode": "TPA",
                         "chapter": "veterinary",
+                        "lms": false,
                         "description": "TPA",
                         "scopes": [
                             "EFTA",
@@ -5322,5 +5389,5 @@
             "languageId": "la"
         }
     ],
-    "retrievedAt": "2026-11-19T14:25:36.4836029+00:00"
+    "retrievedAt": "2026-11-19T14:46:51.6395023+00:00"
 }
