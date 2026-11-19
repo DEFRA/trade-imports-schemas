@@ -6,7 +6,6 @@
   "nodePath": "R/N-10000/N-10102",
   "nodeId": "R_N-10000_N-10102",
   "node": {
-        "cnCode": null,
         "certificateModel": {
             "modelId": 10549,
             "shortTitle": "10549",
@@ -67,8 +66,7 @@
         },
         {
             "key": "SELECTABLE_DOCUMENT_LINKS_BUCKET",
-            "description": "Selectable Document Links (Bucket)",
-            "documentLinkTypes": null
+            "description": "Selectable Document Links (Bucket)"
         }
     ],
     "classificationSectionGroups": [
@@ -153,9 +151,6 @@
             "description": "Legislation",
             "legislation": {
                 "legislationId": 10100,
-                "celexIdentifiers": null,
-                "certificateModels": null,
-                "originCountries": null,
                 "destinationCountries": [
                     "AD",
                     "FO",
@@ -169,7 +164,6 @@
                         "chapter": "veterinary",
                         "lms": true,
                         "description": "Animal act",
-                        "active": null,
                         "scopes": [
                             "EFTA",
                             "EU"
@@ -183,7 +177,6 @@
                         "chapter": "animal_byproducts",
                         "lms": true,
                         "description": "Establishments or plants handling animal by-products or derived products for purposes outside the feed chain",
-                        "active": null,
                         "scopes": [
                             "EFTA",
                             "EU"
@@ -204,25 +197,21 @@
         {
             "taxonId": 65539,
             "eppoCode": "BORICO",
-            "faoCode": null,
             "name": "Boriomyia concinnus",
             "languageId": "la"
         },
         {
             "taxonId": 65541,
             "eppoCode": "BORISP",
-            "faoCode": null,
             "name": "Boriomyia sp.",
             "languageId": "la"
         },
         {
             "taxonId": 65528,
             "eppoCode": "BOOHSP",
-            "faoCode": null,
             "name": "Boophthora sp.",
             "languageId": "la"
         }
     ],
-    "invasiveTaxons": null,
     "retrievedAt": "2026-11-19T11:14:26.8332925+00:00"
 }
