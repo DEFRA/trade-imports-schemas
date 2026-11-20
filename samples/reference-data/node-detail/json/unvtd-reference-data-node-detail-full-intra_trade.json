@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../../schemas/reference-data/defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse-v1.schema.json",
+	"$schema": "../../../../schemas/reference-data/defra-unvtd-profile-reference-data-ClassificationTreeNodeDetailResponse-v1.schema.json",
     "@context": "https://vocabulary.uncefact.org/unece-context-D23B.jsonld",
     "source": "traces",
     "treeId": "intra_trade",
@@ -19,178 +19,18 @@
     },
     "attributes": [
         {
-            "key": "PURPOSE_FOR_TRANSHIPMENT_ACCESS",
-            "description": "Purpose: For transhipment access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "RELATED_ORIGINAL_CERTIFICATE_ACCESS",
-            "description": "Related original certificate access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "SEAL_CONTAINER_ACCESS",
-            "description": "Seal container access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_REENTRY_ACCESS",
-            "description": "Re-entry (Re-import) purpose access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "NUMBER_OF_ANIMALS_CHECKED_ACCESS",
-            "description": "Access to number of animals checked",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_TRANSFER_ACCESS",
-            "description": "Acceptable for transfer access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CHECK_DOCUMENTARY_NATIONAL_REQUIREMENTS_ACCESS",
-            "description": "Documentary check - National requirements access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_TRANSFER_ACCESS",
-            "description": "Purpose: For transfer access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_TRANSIT_TO_US_OR_NATO_BASE_ACCESS",
-            "description": "Purpose: For transit to US / NATO base access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "ROUTE_PLAN_ACCESS",
-            "description": "Route plan access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "NO_PHYSICAL_CHECK_REASON_ACCESS",
-            "description": "No physical checks reason access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "EXIT_INFORMATION_ACCESS",
-            "description": "Exit information access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "IDENTITY_CHECK_TYPE_ACCESS",
-            "description": "Identity check type access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CHECK_WELFARE_ACCESS",
-            "description": "Welfare check",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "MEANS_OF_TRANSPORT_DETAILS_ACCESS",
-            "description": "Means of Transport details access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_FREE_CIRCULATION_ACCESS",
-            "description": "Purpose: For internal market access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_INDIRECT_TRANSIT_ACCESS",
-            "description": "Conformity of the goods to EU requirements",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_DIRECT_TRANSIT_ACCESS",
-            "description": "Purpose: For transit access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_DIRECT_TRANSIT_ACCESS",
-            "description": "Acceptable for transit access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_TRANSIT_TO_US_OR_NATO_BASE_ACCESS",
-            "description": "Acceptable for transit to US / NATO base access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "QUALITY_CONTROL_ACCESS",
-            "description": "Quality control access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "IMPACT_OF_THE_TRANSPORT_ON_ANIMALS_ACCESS",
-            "description": "Access to impact of the transport on animals",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "TRANSPORTER_ACCESS",
-            "description": "Transporter access",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "INSPECTION_PLANNER_ACCESS",
-            "description": "Inspection planner access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CERTIFIED_AS_ACCESS",
-            "description": "Certified as access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CASE_OF_MEAT_AND_BONE_MEAL_AND_RENDERED_FATS_ACCESS",
-            "description": "Access in case of Meat, Bone meal and rendered fats",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_PRIVATE_IMPORT_ACCESS",
-            "description": "Acceptable for private import access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_TEMPORARY_ADMISSION_ACCESS",
-            "description": "Purpose: For temporary admission access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "MEANS_OF_TRANSPORT_ACCESS",
-            "description": "Means of Transport access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DATE_OF_DEPARTURE_ACCESS",
-            "description": "Date of departure access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "ASSEMBLY_OPERATOR_ACCESS",
-            "description": "Assembly Operator Access",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "DESTINATION_REGION_ACCESS",
-            "description": "Region of destination access",
-            "value": "OPTIONAL"
-        },
-        {
             "key": "TOTAL_GROSS_WEIGHT_ACCESS",
             "description": "Total gross weight access",
             "value": "OPTIONAL"
         },
         {
-            "key": "PURPOSE_FOR_ONWARD_TRAVEL_ACCESS",
-            "description": "Purpose: For onward travel access",
-            "value": "NOT_AVAILABLE"
+            "key": "DATE_OF_ARRIVAL_ACCESS",
+            "description": "Date of arrival access",
+            "value": "OPTIONAL"
         },
         {
-            "key": "DEALER_ACCESS",
-            "description": "Dealer access",
+            "key": "ACCOMPANYING_DOCUMENT_ACCESS",
+            "description": "Accompanying document access",
             "value": "NOT_AVAILABLE"
         },
         {
@@ -199,103 +39,8 @@
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "RESPONSIBLE_FOR_LOAD_ACCESS",
-            "description": "Responsible for load access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_ONWARD_TRAVEL_ACCESS",
-            "description": "Decision: for onward travel access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "TOTAL_SPACE_ACCESS",
-            "description": "Total Space Access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_FREE_CIRCULATION_DETAILS_ACCESS",
-            "description": "Access to details in case of Acceptable for internal market",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "TOTAL_GROSS_VOLUME_ACCESS",
-            "description": "Total gross volume access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_TEMPORARY_ADMISSION_ACCESS",
-            "description": "Acceptable for temporary admission access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "WELFARE_CHECK_ACCESS",
-            "description": "Access to welfare check",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "CHECK_IMPACT_TRANSPORT_ANIMALS_ACCESS",
-            "description": "Transport animal impact access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
             "key": "ENTRY_BORDER_CONTROL_POST_ACCESS",
             "description": "Entry Border Control Post Access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CHECK_IDENTITY_ACCESS",
-            "description": "Access to Check Identity section",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DIGITAL_SIGNATURE_ACCESS",
-            "description": "Digital signature access",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_ONWARD_TRANSPORTATION_ACCESS",
-            "description": "Acceptable for onward transportation access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DATE_OF_ARRIVAL_ACCESS",
-            "description": "Date of arrival access",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "GOODS_COMPLIANCE_ACCESS",
-            "description": "Goods compliance access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PRODUCT_TEMPERATURE_ACCESS",
-            "description": "Product temperature access",
-            "value": "DISABLED"
-        },
-        {
-            "key": "CONTROLLED_DESTINATION_ACCESS",
-            "description": "Controlled destination access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "PURPOSE_FOR_PRIVATE_IMPORT_ACCESS",
-            "description": "Purpose: For private import access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "DECISION_ACCEPTABLE_FOR_TRANSHIPMENT_ACCESS",
-            "description": "Acceptable for transhipment access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "CITES_CERTIFICATE_ACCESS",
-            "description": "CITES certificate Access",
-            "value": "NOT_AVAILABLE"
-        },
-        {
-            "key": "ORIGIN_REGION_ACCESS",
-            "description": "Region of origin access",
             "value": "NOT_AVAILABLE"
         },
         {
@@ -304,48 +49,48 @@
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "NON_COMPLIANCE_WITH_WELFARE_LEGISLATION_ACCESS",
-            "description": "Access to non-compliance with welfare legislation",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "NOT_ACCEPTABLE_MEASURE_EXTENT_ACCESS",
-            "description": "Not acceptable measure extent access",
+            "key": "PURPOSE_FOR_TRANSHIPMENT_ACCESS",
+            "description": "Purpose: For transhipment access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "CASE_OF_FISH_OIL_FOR_DETOXIFICATION_ACCESS",
-            "description": "Fish oil for detoxification Box Access",
+            "key": "QUALITY_CONTROL_ACCESS",
+            "description": "Quality control access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "PURPOSE_FOR_ENTRY_INTO_NORTHERN_IRELAND_ACCESS",
-            "description": "Purpose For entry into Northern Ireland access",
+            "key": "PURPOSE_FOR_PRIVATE_IMPORT_ACCESS",
+            "description": "Purpose: For private import access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "LINKED_RELATED_CERTIFICATE_ACCESS",
-            "description": "Linked related certificates access",
+            "key": "PURPOSE_FOR_REENTRY_ACCESS",
+            "description": "Re-entry (Re-import) purpose access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "CHECK_DOCUMENTARY_ACCESS",
-            "description": "Documentary check access",
+            "key": "PURPOSE_FOR_DIRECT_TRANSIT_ACCESS",
+            "description": "Purpose: For transit access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "PLACE_OF_DESTINATION_ACCESS",
-            "description": "Access to place of destination",
-            "value": "OPTIONAL"
-        },
-        {
-            "key": "PURPOSE_FOR_INDIRECT_TRANSIT_ACCESS",
-            "description": "Purpose: Conformity of the goods",
+            "key": "MEANS_OF_TRANSPORT_DETAILS_ACCESS",
+            "description": "Means of Transport details access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "DISPATCH_COUNTRY_ACCESS",
-            "description": "Country of dispatch",
+            "key": "CHECK_WELFARE_ACCESS",
+            "description": "Welfare check",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_TRANSFER_ACCESS",
+            "description": "Acceptable for transfer access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "ORIGIN_REGION_ACCESS",
+            "description": "Region of origin access",
             "value": "NOT_AVAILABLE"
         },
         {
@@ -354,18 +99,123 @@
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "PLANT_HEALTH_NON_COMPLIANCE_ACCESS",
-            "description": "Plant Health Non-Compliance Access",
+            "key": "PURPOSE_FOR_TRANSIT_TO_US_OR_NATO_BASE_ACCESS",
+            "description": "Purpose: For transit to US / NATO base access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "FOLLOW_UP_OF_QUARANTINE_OR_ISOLATION_ACCESS",
-            "description": "Access to follow-up of quarantine or isolation",
+            "key": "NUMBER_OF_ANIMALS_CHECKED_ACCESS",
+            "description": "Access to number of animals checked",
             "value": "OPTIONAL"
+        },
+        {
+            "key": "TRANSPORTER_ACCESS",
+            "description": "Transporter access",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_INDIRECT_TRANSIT_ACCESS",
+            "description": "Conformity of the goods to EU requirements",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PURPOSE_FOR_ONWARD_TRAVEL_ACCESS",
+            "description": "Purpose: For onward travel access",
+            "value": "NOT_AVAILABLE"
         },
         {
             "key": "EU_EXPORT_PART_THREE_ACCESS",
             "description": "EU Export Part III Access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_PRIVATE_IMPORT_ACCESS",
+            "description": "Acceptable for private import access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CHECK_IDENTITY_ACCESS",
+            "description": "Access to Check Identity section",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CHECK_DOCUMENTARY_ACCESS",
+            "description": "Documentary check access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_FREE_CIRCULATION_DETAILS_ACCESS",
+            "description": "Access to details in case of Acceptable for internal market",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PURPOSE_FOR_TRANSFER_ACCESS",
+            "description": "Purpose: For transfer access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "NOT_ACCEPTABLE_MEASURE_EXTENT_ACCESS",
+            "description": "Not acceptable measure extent access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "TOTAL_SPACE_ACCESS",
+            "description": "Total Space Access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "IDENTITY_CHECK_TYPE_ACCESS",
+            "description": "Identity check type access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "EXIT_INFORMATION_ACCESS",
+            "description": "Exit information access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_TEMPORARY_ADMISSION_ACCESS",
+            "description": "Acceptable for temporary admission access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CHECK_IMPACT_TRANSPORT_ANIMALS_ACCESS",
+            "description": "Transport animal impact access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CASE_OF_FISH_OIL_FOR_DETOXIFICATION_ACCESS",
+            "description": "Fish oil for detoxification Box Access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DATE_OF_DEPARTURE_ACCESS",
+            "description": "Date of departure access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CHECK_DOCUMENTARY_NATIONAL_REQUIREMENTS_ACCESS",
+            "description": "Documentary check - National requirements access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PURPOSE_FOR_INDIRECT_TRANSIT_ACCESS",
+            "description": "Purpose: Conformity of the goods",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "INSPECTION_PLANNER_ACCESS",
+            "description": "Inspection planner access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "GOODS_COMPLIANCE_ACCESS",
+            "description": "Goods compliance access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PLANT_HEALTH_NON_COMPLIANCE_ACCESS",
+            "description": "Plant Health Non-Compliance Access",
             "value": "NOT_AVAILABLE"
         },
         {
@@ -374,8 +224,63 @@
             "value": "MANDATORY"
         },
         {
-            "key": "ACCOMPANYING_DOCUMENT_ACCESS",
-            "description": "Accompanying document access",
+            "key": "DIGITAL_SIGNATURE_ACCESS",
+            "description": "Digital signature access",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_TRANSHIPMENT_ACCESS",
+            "description": "Acceptable for transhipment access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DESTINATION_REGION_ACCESS",
+            "description": "Region of destination access",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "LINKED_RELATED_CERTIFICATE_ACCESS",
+            "description": "Linked related certificates access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "RESPONSIBLE_FOR_LOAD_ACCESS",
+            "description": "Responsible for load access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "FOLLOW_UP_OF_QUARANTINE_OR_ISOLATION_ACCESS",
+            "description": "Access to follow-up of quarantine or isolation",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DEALER_ACCESS",
+            "description": "Dealer access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CONTROLLED_DESTINATION_ACCESS",
+            "description": "Controlled destination access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "IMPACT_OF_THE_TRANSPORT_ON_ANIMALS_ACCESS",
+            "description": "Access to impact of the transport on animals",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "CITES_CERTIFICATE_ACCESS",
+            "description": "CITES certificate Access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "WELFARE_CHECK_ACCESS",
+            "description": "Access to welfare check",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_TRANSIT_TO_US_OR_NATO_BASE_ACCESS",
+            "description": "Acceptable for transit to US / NATO base access",
             "value": "NOT_AVAILABLE"
         },
         {
@@ -384,23 +289,108 @@
             "value": "NOT_AVAILABLE"
         },
         {
+            "key": "PRODUCT_TEMPERATURE_ACCESS",
+            "description": "Product temperature access",
+            "value": "DISABLED"
+        },
+        {
+            "key": "SEAL_CONTAINER_ACCESS",
+            "description": "Seal container access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "NON_COMPLIANCE_WITH_WELFARE_LEGISLATION_ACCESS",
+            "description": "Access to non-compliance with welfare legislation",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_DIRECT_TRANSIT_ACCESS",
+            "description": "Acceptable for transit access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
             "key": "DECISION_ACCEPTABLE_FOR_MONITORING_ACCESS",
             "description": "Acceptable for monitoring access",
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "BULK_VALIDATION_ALLOWED",
-            "description": "Bulk Validation Allowed",
-            "value": "ALLOWED"
+            "key": "PURPOSE_FOR_ENTRY_INTO_NORTHERN_IRELAND_ACCESS",
+            "description": "Purpose For entry into Northern Ireland access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "ASSEMBLY_OPERATOR_ACCESS",
+            "description": "Assembly Operator Access",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "DISPATCH_COUNTRY_ACCESS",
+            "description": "Country of dispatch",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PURPOSE_FOR_TEMPORARY_ADMISSION_ACCESS",
+            "description": "Purpose: For temporary admission access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "RELATED_ORIGINAL_CERTIFICATE_ACCESS",
+            "description": "Related original certificate access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CERTIFIED_AS_ACCESS",
+            "description": "Certified as access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "ROUTE_PLAN_ACCESS",
+            "description": "Route plan access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "CASE_OF_MEAT_AND_BONE_MEAL_AND_RENDERED_FATS_ACCESS",
+            "description": "Access in case of Meat, Bone meal and rendered fats",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_ONWARD_TRAVEL_ACCESS",
+            "description": "Decision: for onward travel access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "DECISION_ACCEPTABLE_FOR_ONWARD_TRANSPORTATION_ACCESS",
+            "description": "Acceptable for onward transportation access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "PLACE_OF_DESTINATION_ACCESS",
+            "description": "Access to place of destination",
+            "value": "OPTIONAL"
+        },
+        {
+            "key": "PURPOSE_FOR_FREE_CIRCULATION_ACCESS",
+            "description": "Purpose: For internal market access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "MEANS_OF_TRANSPORT_ACCESS",
+            "description": "Means of Transport access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "TOTAL_GROSS_VOLUME_ACCESS",
+            "description": "Total gross volume access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "NO_PHYSICAL_CHECK_REASON_ACCESS",
+            "description": "No physical checks reason access",
+            "value": "NOT_AVAILABLE"
         },
         {
             "key": "PARTIAL_REJECTION_ALLOWED",
             "description": "Partial rejection allowed",
-            "value": "ALLOWED"
-        },
-        {
-            "key": "SPLITTING_CONFORM_CONSIGNMENT_ALLOWED",
-            "description": "Splitting Conforming Consignment Allowed",
             "value": "ALLOWED"
         },
         {
@@ -409,9 +399,19 @@
             "value": "ALLOWED"
         },
         {
-            "key": "UNREGISTERED_CONSIGNEE_ALLOWED",
-            "description": "Unregistered consignee allowed",
+            "key": "BULK_VALIDATION_ALLOWED",
+            "description": "Bulk Validation Allowed",
             "value": "ALLOWED"
+        },
+        {
+            "key": "SPLITTING_CONFORM_CONSIGNMENT_ALLOWED",
+            "description": "Splitting Conforming Consignment Allowed",
+            "value": "ALLOWED"
+        },
+        {
+            "key": "UNREGISTERED_TRANSPORTER_ALLOWED",
+            "description": "Unregistered transporter allowed",
+            "value": "DISALLOWED"
         },
         {
             "key": "UNREGISTERED_OWNER_OF_THE_GOODS_ALLOWED",
@@ -419,13 +419,13 @@
             "value": "DISALLOWED"
         },
         {
-            "key": "UNREGISTERED_CONSIGNOR_ALLOWED",
-            "description": "Unregistered consignor allowed",
-            "value": "DISALLOWED"
+            "key": "UNREGISTERED_CONSIGNEE_ALLOWED",
+            "description": "Unregistered consignee allowed",
+            "value": "ALLOWED"
         },
         {
-            "key": "UNREGISTERED_TRANSPORTER_ALLOWED",
-            "description": "Unregistered transporter allowed",
+            "key": "UNREGISTERED_CONSIGNOR_ALLOWED",
+            "description": "Unregistered consignor allowed",
             "value": "DISALLOWED"
         },
         {
@@ -434,123 +434,47 @@
             "value": "ALLOWED"
         },
         {
+            "key": "ESTABLISHMENTS_FROM_MULTIPLE_COUNTRIES_ALLOWED",
+            "description": "Establishments from multiple countries allowed",
+            "value": false
+        },
+        {
             "key": "NOTIFY_REUSED_IDENTIFICATION_NUMBER",
             "description": "Notify reused Identification Number",
             "value": true
         },
         {
-            "key": "ESTABLISHMENTS_FROM_MULTIPLE_COUNTRIES_ALLOWED",
-            "description": "Establishments from multiple countries allowed",
-            "value": false
+            "key": "NATURE_OF_COMMODITY_POSSIBLE_VALUES",
+            "description": "Nature of Commodity Possible Values",
+            "value": [
+                "AQUARIUM",
+                "BLOOD",
+                "SPF",
+                "GGIB",
+                "OVA_EMBRYO",
+                "BREEDING_EGGS",
+                "SEMEN_EMBRYO_OVUM",
+                "EMBRYOS",
+                "ANIMAL",
+                "OTHER",
+                "GIBIER",
+                "COLOSTRUM",
+                "HATCHING_EGGS",
+                "GIBEL",
+                "GELEEROY",
+                "GIBSAUV",
+                "SEMEN",
+                "GRGIBSAUV",
+                "GGIBEL",
+                "DOMESTIC",
+                "BILE"
+            ]
         },
         {
             "key": "PLACE_OF_LOADING_POSSIBLE_META_COUNTRY_GROUPS",
             "description": "Place Of Loading meta country groups",
             "value": [
                 "ALL_COUNTRIES"
-            ]
-        },
-        {
-            "key": "AREA_UNIT_POSSIBLE_VALUES",
-            "description": "Area Unit possible values",
-            "value": [
-                "M2"
-            ]
-        },
-        {
-            "key": "PACKAGE_TYPE_POSSIBLE_VALUES",
-            "description": "Possible types of packaging",
-            "value": [
-                "CASE_PALLET_BASE_WOODEN",
-                "BOX",
-                "PACKAGE_DISPLAY_WOODEN",
-                "LUG",
-                "CRATE",
-                "POT",
-                "BULK",
-                "CASE",
-                "BARREL_WOODEN_BUNG",
-                "PACKET",
-                "TRAY",
-                "SACK",
-                "PUNNET",
-                "TANK",
-                "BARREL",
-                "CONTAINER",
-                "JAR",
-                "WOOD_BUNDLE",
-                "PLASTIC_FILM",
-                "BAG",
-                "TUBE",
-                "DRUM",
-                "PALLET",
-                "COFFER",
-                "BOX_WOODEN_PROOF_WALLS",
-                "SHEET",
-                "DUNNAGE",
-                "PACKAGE",
-                "BUNDLE",
-                "BOX_WOODEN_ORDINARY",
-                "VIAL",
-                "FLEXIBAG",
-                "INTERMEDIATE_BULK_CONTAINER",
-                "BOARD_IN_BUNDLE_BUNCH_TRUSS",
-                "BUNCH",
-                "BALE",
-                "CAN",
-                "SKID",
-                "POLYSTYRENE_BOX",
-                "CRATE_WOODEN",
-                "BIN",
-                "CARTON",
-                "TANK_CYLINDRICAL",
-                "PAIL",
-                "POUCH",
-                "SACHET",
-                "CANISTER",
-                "REDNET",
-                "LOGS",
-                "LUGGAGE",
-                "TOTE",
-                "BARREL_WOODEN_REMOVABLE_HEAD",
-                "GLASS_PACKAGES",
-                "CASK"
-            ]
-        },
-        {
-            "key": "PLACE_OF_LOADING_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
-            "description": "Place of loading allowed statuses",
-            "value": [
-                "N",
-                "V"
-            ]
-        },
-        {
-            "key": "LABORATORY_TEST_MOTIVATION_POSSIBLE_VALUES",
-            "description": "Possible laboratory test motivations",
-            "value": [
-                "SUSPICION",
-                "REQUIRED",
-                "TEMPORARY_INCREASE_OF_CONTROLS",
-                "EMERGENCY_MEASURES",
-                "RANDOM"
-            ]
-        },
-        {
-            "key": "BREED_CATEGORY_POSSIBLE_VALUES",
-            "description": "Possible breed categories",
-            "value": [
-                "HONEYBEE_OR_BUMBLEBEE_QUEENS_WITH_MAX_20_ATTENDANTS",
-                "HONEYBEES_OR_BUMBLEBEES_WITH_BROOD",
-                "OTHER_HONEYBEES_OR_BUMBLEBEES"
-            ]
-        },
-        {
-            "key": "PLACE_OF_DESTINATION_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
-            "description": "Place of destination allowed statuses",
-            "value": [
-                "V",
-                "N"
             ]
         },
         {
@@ -564,186 +488,11 @@
             ]
         },
         {
-            "key": "CONSIGNOR_POSSIBLE_META_COUNTRY_GROUPS",
-            "description": "Consignor possible meta country groups",
-            "value": [
-                "ALL_COUNTRIES"
-            ]
-        },
-        {
-            "key": "ANIMAL_SUBCATEGORY_POSSIBLE_VALUES",
-            "description": "Animal category",
-            "value": [
-                "POULTRY_LESS_THAN_1_6_KG",
-                "PIGS_15_KG",
-                "HEAVY_CALVES",
-                "POULTRY_3_KG_TO_5_KG",
-                "PONIES",
-                "SHORN_SHEEP",
-                "YOUNG_HORSES_LONG_JOURNEY",
-                "YOUNG_HORSES_SHORT_JOURNEY",
-                "GOATS",
-                "POULTRY_MORE_THAN_5_KG",
-                "FOALS",
-                "PIGS_50_KG",
-                "PIGS_140_KG",
-                "MEDIUM_SIZED_CATTLE",
-                "PIGS_270_KG",
-                "HEAVILY_PREGNANT_EWES",
-                "POULTRY_1_6_KG_TO_3_KG",
-                "VERY_HEAVY_CATTLE",
-                "HEAVILY_PREGNANT_GOATS",
-                "PIGS_180_KG",
-                "PIGS_25_KG",
-                "ADULT_HORSES",
-                "UNSHORN_SHEEP",
-                "HEAVY_CATTLE",
-                "PIGS_100_KG",
-                "SMALL_CALVES",
-                "MEDIUM_SIZED_CALVES"
-            ]
-        },
-        {
-            "key": "CATEGORY_OF_MATERIAL_POSSIBLE_VALUES",
-            "description": "Category (of material) choices",
-            "value": [
-                "CATEGORY_2",
-                "CATEGORY_3",
-                "CATEGORY_1"
-            ]
-        },
-        {
-            "key": "PLACE_OF_DISPATCH_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
-            "description": "Place of dispatch allowed statuses",
-            "value": [
-                "N",
-                "V"
-            ]
-        },
-        {
-            "key": "ACCOMPANYING_DOCUMENT_TYPE_POSSIBLE_VALUES",
-            "description": "Possible accompanying documents",
-            "value": [
-                "PURCHASE_ORDER",
-                "INFORMAL_EMBASSY_ATTESTATION",
-                "CERTIFICATE_ORIGIN",
-                "OTHER",
-                "CATCH_PROCESSING_STATEMENT",
-                "RAILWAY_BILL",
-                "AIRWAY_BILL",
-                "SEAWAY_BILL",
-                "CONTRACT",
-                "IMPORT_PERMIT",
-                "NEGOTIABLE_MARITIME_TRANSPORT",
-                "CUSTOMS_DECLARATION",
-                "CATCH_CERTIFICATE",
-                "LANDING_BILL",
-                "LABORATORY_REPORT",
-                "AUTHORITY_LETTER",
-                "ANALYTICAL_REPORT",
-                "CUSTOMS_INTERNATIONAL_TIF_TIR",
-                "CERTIFICATE_INSPECTION",
-                "CERTIFICATE_HEALTH",
-                "CARGO_MANIFEST",
-                "CERTIFICATE_VETERINARY",
-                "CUSTOMS_INVOICE",
-                "CERTIFICATE_HEAT_TREATMENT",
-                "PROFORMA_INVOICE",
-                "DELIVERY_NOTICE",
-                "REPLACEMENT_CUSTOMS_DECLARATION",
-                "CERTIFICATE_INTERNAL",
-                "PACKING_LIST",
-                "CUSTOMS_CUSTODY_RECEIPT",
-                "PRIVATE_ATTESTATION",
-                "COMMERCIAL_INVOICE",
-                "CUSTOMS_DECLARATION_POST_PARCELS",
-                "DELIVERY_ORDER",
-                "IMPORT_REQUEST",
-                "ORDER",
-                "UNIVERSAL_TRANSPORT",
-                "CONTAINER_MANIFEST",
-                "FREIGHT_INVOICE"
-            ]
-        },
-        {
-            "key": "CONSIGNEE_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
-            "description": "Consignee allowed statuses",
+            "key": "PLACE_OF_DESTINATION_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
+            "description": "Place of destination allowed statuses",
             "value": [
                 "V",
                 "N"
-            ]
-        },
-        {
-            "key": "PLACE_OF_DISPATCH_POSSIBLE_META_COUNTRY_GROUPS",
-            "description": "Place Of Dispatch meta country groups",
-            "value": [
-                "ALL_COUNTRIES"
-            ]
-        },
-        {
-            "key": "TREATMENT_TYPE_POSSIBLE_VALUES",
-            "description": "Treatment types",
-            "value": [
-                "RAW_MILK",
-                "UHT",
-                "UNEVISCERATED",
-                "SALTED",
-                "B",
-                "COOKED",
-                "PREPARED",
-                "IN_SHELL",
-                "BONE_IN",
-                "CHILLED",
-                "SINGLE_HEAT_TREATMENT",
-                "NO_TERMAL",
-                "PRESERVED",
-                "E",
-                "OTHER_PROCESS",
-                "D",
-                "UNSKINNED",
-                "TREATED",
-                "DRIED",
-                "DEBONED",
-                "ULTRASONICATION",
-                "MINCED",
-                "ANIMAL_BY_PRODUCTS_OF_CATEGORY_2",
-                "C",
-                "COMBINED_HEAT_TREATMENT",
-                "F",
-                "ROASTED",
-                "A",
-                "SKINNED",
-                "MATURED",
-                "ULTRAFILTRATION",
-                "ANIMAL_BY_PRODUCTS_OF_CATEGORY_1",
-                "SHELLED",
-                "HOMOGENISATION",
-                "STERILISATION",
-                "PROCESSED",
-                "FRESH",
-                "LIVE",
-                "FROZEN",
-                "SMOKED",
-                "PASTEURISATION",
-                "EVISCERATED",
-                "UNPLUCKED",
-                "PLUCKED"
-            ]
-        },
-        {
-            "key": "COUNT_UNIT_POSSIBLE_VALUES",
-            "description": "Quantity units",
-            "value": [
-                "UNIT",
-                "PIECE"
-            ]
-        },
-        {
-            "key": "TRANSPORTER_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
-            "description": "Transporter allowed statuses",
-            "value": [
-                "N",
-                "V"
             ]
         },
         {
@@ -764,10 +513,21 @@
             ]
         },
         {
-            "key": "ASSEMBLY_OPERATOR_POSSIBLE_META_COUNTRY_GROUPS",
-            "description": "Assembly Operator meta country groups",
+            "key": "CONSIGNEE_POSSIBLE_META_COUNTRY_GROUPS",
+            "description": "Consignee possible meta country groups",
             "value": [
                 "ALL_COUNTRIES"
+            ]
+        },
+        {
+            "key": "LABORATORY_TEST_MOTIVATION_POSSIBLE_VALUES",
+            "description": "Possible laboratory test motivations",
+            "value": [
+                "SUSPICION",
+                "REQUIRED",
+                "TEMPORARY_INCREASE_OF_CONTROLS",
+                "EMERGENCY_MEASURES",
+                "RANDOM"
             ]
         },
         {
@@ -846,38 +606,252 @@
             ]
         },
         {
-            "key": "WEIGHT_UNIT_POSSIBLE_VALUES",
-            "description": "Weight units",
+            "key": "ASSEMBLY_OPERATOR_POSSIBLE_META_COUNTRY_GROUPS",
+            "description": "Assembly Operator meta country groups",
             "value": [
-                "KG",
-                "G"
+                "ALL_COUNTRIES"
             ]
         },
         {
-            "key": "NATURE_OF_COMMODITY_POSSIBLE_VALUES",
-            "description": "Nature of Commodity Possible Values",
+            "key": "PLACE_OF_LOADING_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
+            "description": "Place of loading allowed statuses",
             "value": [
-                "AQUARIUM",
-                "BLOOD",
-                "SPF",
-                "GGIB",
-                "OVA_EMBRYO",
-                "BREEDING_EGGS",
-                "SEMEN_EMBRYO_OVUM",
-                "EMBRYOS",
-                "ANIMAL",
+                "N",
+                "V"
+            ]
+        },
+        {
+            "key": "ACCOMPANYING_DOCUMENT_TYPE_POSSIBLE_VALUES",
+            "description": "Possible accompanying documents",
+            "value": [
+                "PURCHASE_ORDER",
+                "INFORMAL_EMBASSY_ATTESTATION",
+                "CERTIFICATE_ORIGIN",
                 "OTHER",
-                "GIBIER",
-                "COLOSTRUM",
-                "HATCHING_EGGS",
-                "GIBEL",
-                "GELEEROY",
-                "GIBSAUV",
-                "SEMEN",
-                "GRGIBSAUV",
-                "GGIBEL",
-                "DOMESTIC",
-                "BILE"
+                "CATCH_PROCESSING_STATEMENT",
+                "RAILWAY_BILL",
+                "AIRWAY_BILL",
+                "SEAWAY_BILL",
+                "CONTRACT",
+                "IMPORT_PERMIT",
+                "NEGOTIABLE_MARITIME_TRANSPORT",
+                "CUSTOMS_DECLARATION",
+                "CATCH_CERTIFICATE",
+                "LANDING_BILL",
+                "LABORATORY_REPORT",
+                "AUTHORITY_LETTER",
+                "ANALYTICAL_REPORT",
+                "CUSTOMS_INTERNATIONAL_TIF_TIR",
+                "CERTIFICATE_INSPECTION",
+                "CERTIFICATE_HEALTH",
+                "CARGO_MANIFEST",
+                "CERTIFICATE_VETERINARY",
+                "CUSTOMS_INVOICE",
+                "CERTIFICATE_HEAT_TREATMENT",
+                "PROFORMA_INVOICE",
+                "DELIVERY_NOTICE",
+                "REPLACEMENT_CUSTOMS_DECLARATION",
+                "CERTIFICATE_INTERNAL",
+                "PACKING_LIST",
+                "CUSTOMS_CUSTODY_RECEIPT",
+                "PRIVATE_ATTESTATION",
+                "COMMERCIAL_INVOICE",
+                "CUSTOMS_DECLARATION_POST_PARCELS",
+                "DELIVERY_ORDER",
+                "IMPORT_REQUEST",
+                "ORDER",
+                "UNIVERSAL_TRANSPORT",
+                "CONTAINER_MANIFEST",
+                "FREIGHT_INVOICE"
+            ]
+        },
+        {
+            "key": "TRANSPORTER_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
+            "description": "Transporter allowed statuses",
+            "value": [
+                "N",
+                "V"
+            ]
+        },
+        {
+            "key": "PACKAGE_TYPE_POSSIBLE_VALUES",
+            "description": "Possible types of packaging",
+            "value": [
+                "CASE_PALLET_BASE_WOODEN",
+                "BOX",
+                "PACKAGE_DISPLAY_WOODEN",
+                "LUG",
+                "CRATE",
+                "POT",
+                "BULK",
+                "CASE",
+                "BARREL_WOODEN_BUNG",
+                "PACKET",
+                "TRAY",
+                "SACK",
+                "PUNNET",
+                "TANK",
+                "BARREL",
+                "CONTAINER",
+                "JAR",
+                "WOOD_BUNDLE",
+                "PLASTIC_FILM",
+                "BAG",
+                "TUBE",
+                "DRUM",
+                "PALLET",
+                "COFFER",
+                "BOX_WOODEN_PROOF_WALLS",
+                "SHEET",
+                "DUNNAGE",
+                "PACKAGE",
+                "BUNDLE",
+                "BOX_WOODEN_ORDINARY",
+                "VIAL",
+                "FLEXIBAG",
+                "INTERMEDIATE_BULK_CONTAINER",
+                "BOARD_IN_BUNDLE_BUNCH_TRUSS",
+                "BUNCH",
+                "BALE",
+                "CAN",
+                "SKID",
+                "POLYSTYRENE_BOX",
+                "CRATE_WOODEN",
+                "BIN",
+                "CARTON",
+                "TANK_CYLINDRICAL",
+                "PAIL",
+                "POUCH",
+                "SACHET",
+                "CANISTER",
+                "REDNET",
+                "LOGS",
+                "LUGGAGE",
+                "TOTE",
+                "BARREL_WOODEN_REMOVABLE_HEAD",
+                "GLASS_PACKAGES",
+                "CASK"
+            ]
+        },
+        {
+            "key": "CONSIGNOR_POSSIBLE_META_COUNTRY_GROUPS",
+            "description": "Consignor possible meta country groups",
+            "value": [
+                "ALL_COUNTRIES"
+            ]
+        },
+        {
+            "key": "BREED_CATEGORY_POSSIBLE_VALUES",
+            "description": "Possible breed categories",
+            "value": [
+                "HONEYBEE_OR_BUMBLEBEE_QUEENS_WITH_MAX_20_ATTENDANTS",
+                "HONEYBEES_OR_BUMBLEBEES_WITH_BROOD",
+                "OTHER_HONEYBEES_OR_BUMBLEBEES"
+            ]
+        },
+        {
+            "key": "CONSIGNEE_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
+            "description": "Consignee allowed statuses",
+            "value": [
+                "V",
+                "N"
+            ]
+        },
+        {
+            "key": "TREATMENT_TYPE_POSSIBLE_VALUES",
+            "description": "Treatment types",
+            "value": [
+                "RAW_MILK",
+                "UHT",
+                "UNEVISCERATED",
+                "SALTED",
+                "B",
+                "COOKED",
+                "PREPARED",
+                "IN_SHELL",
+                "BONE_IN",
+                "CHILLED",
+                "SINGLE_HEAT_TREATMENT",
+                "NO_TERMAL",
+                "PRESERVED",
+                "E",
+                "OTHER_PROCESS",
+                "D",
+                "UNSKINNED",
+                "TREATED",
+                "DRIED",
+                "DEBONED",
+                "ULTRASONICATION",
+                "MINCED",
+                "ANIMAL_BY_PRODUCTS_OF_CATEGORY_2",
+                "C",
+                "COMBINED_HEAT_TREATMENT",
+                "F",
+                "ROASTED",
+                "A",
+                "SKINNED",
+                "MATURED",
+                "ULTRAFILTRATION",
+                "ANIMAL_BY_PRODUCTS_OF_CATEGORY_1",
+                "SHELLED",
+                "HOMOGENISATION",
+                "STERILISATION",
+                "PROCESSED",
+                "FRESH",
+                "LIVE",
+                "FROZEN",
+                "SMOKED",
+                "PASTEURISATION",
+                "EVISCERATED",
+                "UNPLUCKED",
+                "PLUCKED"
+            ]
+        },
+        {
+            "key": "AREA_UNIT_POSSIBLE_VALUES",
+            "description": "Area Unit possible values",
+            "value": [
+                "M2"
+            ]
+        },
+        {
+            "key": "PLACE_OF_DISPATCH_POSSIBLE_META_COUNTRY_GROUPS",
+            "description": "Place Of Dispatch meta country groups",
+            "value": [
+                "ALL_COUNTRIES"
+            ]
+        },
+        {
+            "key": "ANIMAL_SUBCATEGORY_POSSIBLE_VALUES",
+            "description": "Animal category",
+            "value": [
+                "POULTRY_LESS_THAN_1_6_KG",
+                "PIGS_15_KG",
+                "HEAVY_CALVES",
+                "POULTRY_3_KG_TO_5_KG",
+                "PONIES",
+                "SHORN_SHEEP",
+                "YOUNG_HORSES_LONG_JOURNEY",
+                "YOUNG_HORSES_SHORT_JOURNEY",
+                "GOATS",
+                "POULTRY_MORE_THAN_5_KG",
+                "FOALS",
+                "PIGS_50_KG",
+                "PIGS_140_KG",
+                "MEDIUM_SIZED_CATTLE",
+                "PIGS_270_KG",
+                "HEAVILY_PREGNANT_EWES",
+                "POULTRY_1_6_KG_TO_3_KG",
+                "VERY_HEAVY_CATTLE",
+                "HEAVILY_PREGNANT_GOATS",
+                "PIGS_180_KG",
+                "PIGS_25_KG",
+                "ADULT_HORSES",
+                "UNSHORN_SHEEP",
+                "HEAVY_CATTLE",
+                "PIGS_100_KG",
+                "SMALL_CALVES",
+                "MEDIUM_SIZED_CALVES"
             ]
         },
         {
@@ -889,11 +863,52 @@
             ]
         },
         {
-            "key": "CONSIGNEE_POSSIBLE_META_COUNTRY_GROUPS",
-            "description": "Consignee possible meta country groups",
+            "key": "CATEGORY_OF_MATERIAL_POSSIBLE_VALUES",
+            "description": "Category (of material) choices",
             "value": [
-                "ALL_COUNTRIES"
+                "CATEGORY_2",
+                "CATEGORY_3",
+                "CATEGORY_1"
             ]
+        },
+        {
+            "key": "COUNT_UNIT_POSSIBLE_VALUES",
+            "description": "Quantity units",
+            "value": [
+                "UNIT",
+                "PIECE"
+            ]
+        },
+        {
+            "key": "WEIGHT_UNIT_POSSIBLE_VALUES",
+            "description": "Weight units",
+            "value": [
+                "KG",
+                "G"
+            ]
+        },
+        {
+            "key": "PLACE_OF_DISPATCH_ALLOWED_OPERATOR_ACTIVITY_STATUSES",
+            "description": "Place of dispatch allowed statuses",
+            "value": [
+                "N",
+                "V"
+            ]
+        },
+        {
+            "key": "TOTAL_QUANTITY_WARNING_THRESHOLD",
+            "description": "Total quantity warning threshold",
+            "value": 1000
+        },
+        {
+            "key": "MAX_GAP_SUBMISSION_AFTER_DEPARTURE",
+            "description": "Max. Submission after departure gap",
+            "value": 365
+        },
+        {
+            "key": "JOURNEY_LOG_THRESHOLD",
+            "description": "Journey Log Threshold",
+            "value": 8
         },
         {
             "key": "TRANSFER_POINT_THRESHOLD",
@@ -911,19 +926,12 @@
             "value": 365
         },
         {
-            "key": "JOURNEY_LOG_THRESHOLD",
-            "description": "Journey Log Threshold",
-            "value": 8
-        },
-        {
-            "key": "MAX_GAP_SUBMISSION_AFTER_DEPARTURE",
-            "description": "Max. Submission after departure gap",
-            "value": 365
-        },
-        {
-            "key": "TOTAL_QUANTITY_WARNING_THRESHOLD",
-            "description": "Total quantity warning threshold",
-            "value": 1000
+            "key": "GROSS_WEIGHT_RANGE",
+            "description": "Gross weight range",
+            "value": [
+                "0",
+                "9999999"
+            ]
         },
         {
             "key": "NET_WEIGHT_RANGE",
@@ -931,14 +939,6 @@
             "value": [
                 "0",
                 "99999999"
-            ]
-        },
-        {
-            "key": "GROSS_WEIGHT_RANGE",
-            "description": "Gross weight range",
-            "value": [
-                "0",
-                "9999999"
             ]
         },
         {
@@ -955,27 +955,27 @@
             "key": "IDENTIFICATION_SYSTEM_POSSIBLE_VALUES",
             "description": "Identification System Possible Values",
             "value": [
-                "CONVENTIONAL_PASTERN_BAND",
-                "TAG",
-                "MARK",
-                "PASSPORT",
-                "LEG_RING",
-                "TATTOO",
-                "AUTHORISED_ALTERNATIVE_METHOD_FOR_REINDEER",
-                "APPROVED_ELECTRONIC_IDENTIFIER",
-                "INJECTABLE_TRANSPONDER",
-                "UNIQUE_CODE",
-                "ELECTRONIC_EAR_TAG",
-                "AUTHORISED_ALTERNATIVE_METHOD",
-                "CONVENTIONAL_EAR_TAG",
-                "RUMINAL_BOLUS",
-                "LEG_BAND",
                 "NECK_TAG",
-                "TRANSPONDER",
+                "ELECTRONIC_PASTERN_BAND",
+                "TAG",
+                "APPROVED_ELECTRONIC_IDENTIFIER",
                 "MICROCHIP",
+                "AUTHORISED_ALTERNATIVE_METHOD_FOR_REINDEER",
+                "CONVENTIONAL_EAR_TAG",
+                "PASSPORT",
                 "CLIP",
+                "MARK",
+                "TRANSPONDER",
+                "INJECTABLE_TRANSPONDER",
+                "AUTHORISED_ALTERNATIVE_METHOD",
+                "CONVENTIONAL_PASTERN_BAND",
+                "LEG_RING",
+                "RUMINAL_BOLUS",
+                "TATTOO",
+                "ELECTRONIC_EAR_TAG",
+                "LEG_BAND",
                 "BRAND",
-                "ELECTRONIC_PASTERN_BAND"
+                "UNIQUE_CODE"
             ]
         }
     ],
@@ -1058,709 +1058,6 @@
         }
     ],
     "classificationSectionGroups": [
-        {
-            "id": "ASSEMBLY_OPERATOR_CLASSIFICATION_SECTIONS",
-            "description": "Assembly Operator sections",
-            "sections": [
-                {
-                    "classCode": "REG-TRANS",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered transporter",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "registered_transporter"
-                    ]
-                },
-                {
-                    "classCode": "QUR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Quarantine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_q"
-                    ]
-                },
-                {
-                    "classCode": "HBEE-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Honeybees establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "EQU-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Equine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "equine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "BOV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bovine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bovine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "DCF-SHEL",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Animal shelters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "cats",
-                        "dogs",
-                        "ferrets"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "SEM",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Semen collection and storage centres",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bov_scc",
-                        "bov_ssc",
-                        "equ_scc",
-                        "equ_ssc",
-                        "other_scc",
-                        "other_ssc",
-                        "ov_scc",
-                        "ov_ssc",
-                        "porc_scc",
-                        "porc_ssc"
-                    ]
-                },
-                {
-                    "classCode": "DCF-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Dogs, cats and ferrets establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "cats",
-                        "dogs",
-                        "ferrets"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-II",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type II authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_ii"
-                    ]
-                },
-                {
-                    "classCode": "BIRDHATCH",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Captive birds hatcheries",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "hatchery"
-                    ]
-                },
-                {
-                    "classCode": "BBEEISO-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bumble bees isolated establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "CIRCUS",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Travelling circus",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "travelling_circus"
-                    ]
-                },
-                {
-                    "classCode": "CAM-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Camelid establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "POU-SLA-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Establishments  of poultry for slaughter",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "CERV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Cervid establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Assembly Centres",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "ASC-POU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "OTHUN-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Other ungulates establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "OTH-OPER",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Other operators",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "animal_establishment",
-                        "establishment",
-                        "exporter",
-                        "food_establishment",
-                        "habitat",
-                        "importer",
-                        "port_of_loading"
-                    ]
-                },
-                {
-                    "classCode": "ZOO",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Bodies, institutes and centers",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ab"
-                    ]
-                },
-                {
-                    "classCode": "OV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Ovine/caprine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "ovine_caprine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "HATCH-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered Hatcheries",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "hatchery"
-                    ]
-                },
-                {
-                    "classCode": "DEL",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Dealers",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_d"
-                    ]
-                },
-                {
-                    "classCode": "PORC-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Porcine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "porcine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC-DCF",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres dogs, cats and ferrets",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-DISEASE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Disease control aquatic food establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-I",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type I authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_i"
-                    ]
-                },
-                {
-                    "classCode": "EMB",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Embryo collection and production teams",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bov_ect",
-                        "bov_fiv",
-                        "equ_ect",
-                        "equ_fiv",
-                        "other_ect",
-                        "other_fiv",
-                        "ov_ect",
-                        "ov_fiv",
-                        "porc_ect",
-                        "porc_fiv"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-AP-GR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Group of approved aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "MPA",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Multi-party agreement for registered race horses",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "TPA",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "TPA",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_tpa",
-                        "exporter_tpa"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-AP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Approved aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "AQUAHOLD",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Aquaculture Holdings",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_holding"
-                    ]
-                },
-                {
-                    "classCode": "POU-EST-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered establishments keeping breeding or productive poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "ASOP-UNG",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly operations for ungulates independently of an establishment",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "assembly_operator"
-                    ]
-                },
-                {
-                    "classCode": "ACT",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Animal act",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "animal_act"
-                    ]
-                },
-                {
-                    "classCode": "COP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Control posts",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_s"
-                    ]
-                },
-                {
-                    "classCode": "ASOP-POU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly operations for poultry independently of an establishment",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "assembly_operator"
-                    ]
-                },
-                {
-                    "classCode": "BBEE-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bumble bees open establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "POU-EST-AP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Approved establishments keeping breeding or productive poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "CONF",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Confined establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "laboratory",
-                        "zoo"
-                    ]
-                },
-                {
-                    "classCode": "OTHERHOLD",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Other species locations",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "other_species_location"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-RE-GR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Group of registered aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC-UNG",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres ungulates",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "BIRD-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Captive birds establishments",
-                    "scopes": [
-                        "THIRD_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC-EQU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres certain equidae",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "TRANSPORTER_CLASSIFICATION_SECTIONS",
-            "description": "Transporter sections",
-            "sections": [
-                {
-                    "classCode": "TRANSPORTER",
-                    "lms": false,
-                    "description": "Transporter",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "ro_ro_ferry",
-                        "com_transport"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-I",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type I authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_i"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered transporter",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "registered_transporter"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-II",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type II authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_ii"
-                    ]
-                }
-            ]
-        },
         {
             "id": "CONSIGNOR_CLASSIFICATION_SECTIONS",
             "description": "Consignor sections",
@@ -2891,6 +2188,840 @@
             ]
         },
         {
+            "id": "PLACE_OF_DISPATCH_CLASSIFICATION_SECTIONS",
+            "description": "Place of dispatch sections",
+            "sections": [
+                {
+                    "classCode": "HATCH-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered Hatcheries",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "hatchery"
+                    ]
+                },
+                {
+                    "classCode": "ASC-DCF",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres dogs, cats and ferrets",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "MPA",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Multi-party agreement for registered race horses",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "OTH-OPER",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Other operators",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_establishment",
+                        "establishment",
+                        "exporter",
+                        "food_establishment",
+                        "habitat",
+                        "importer",
+                        "port_of_loading"
+                    ]
+                },
+                {
+                    "classCode": "SEM",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Semen collection and storage centres",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bov_scc",
+                        "bov_ssc",
+                        "equ_scc",
+                        "equ_ssc",
+                        "other_scc",
+                        "other_ssc",
+                        "ov_scc",
+                        "ov_ssc",
+                        "porc_scc",
+                        "porc_ssc"
+                    ]
+                },
+                {
+                    "classCode": "GERM-STO",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Germinal product storage centres",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "bovine_gps_establishment",
+                        "equine_gps_centre",
+                        "ovine_caprine_gps_centre",
+                        "porcine_gps_centre"
+                    ]
+                },
+                {
+                    "classCode": "AQUAHOLD",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Aquaculture Holdings",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_holding"
+                    ]
+                },
+                {
+                    "classCode": "GERM-CONF",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Germinal product establishments - confined animals",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "germinal_product_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ZOO",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Bodies, institutes and centers",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ab"
+                    ]
+                },
+                {
+                    "classCode": "HBEE-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Honeybees establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered transporter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "registered_transporter"
+                    ]
+                },
+                {
+                    "classCode": "ACT",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Animal act",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_act"
+                    ]
+                },
+                {
+                    "classCode": "CONF",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Confined establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "laboratory",
+                        "zoo"
+                    ]
+                },
+                {
+                    "classCode": "TPA",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "TPA",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_tpa",
+                        "exporter_tpa"
+                    ]
+                },
+                {
+                    "classCode": "GERM-PRO",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Germinal product processing establishments",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "bovine_gpp_establishment",
+                        "equine_gpp_establishment",
+                        "ovine_caprine_gpp_establishment",
+                        "porcine_gpp_establishment"
+                    ]
+                },
+                {
+                    "classCode": "EMB-COL",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Embryo collection teams",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "bovine_collection_team",
+                        "equine_collection_team",
+                        "ovine_caprine_collection_team",
+                        "porcine_collection_team"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-DISEASE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Disease control aquatic food establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "EXP",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Animal exporter",
+                    "scopes": [
+                        "THIRD_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "animal_exporter",
+                        "port_of_loading"
+                    ]
+                },
+                {
+                    "classCode": "POU-EST-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered establishments keeping breeding or productive poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "EMB-PRO",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Embryo production teams",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "bovine_production_team",
+                        "equine_production_team",
+                        "ovine_caprine_production_team",
+                        "porcine_production_team"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-II",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type II authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_ii"
+                    ]
+                },
+                {
+                    "classCode": "BBEEISO-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bumble bees isolated establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "IMP",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Importer",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_importer",
+                        "establishment",
+                        "exporter",
+                        "importer"
+                    ]
+                },
+                {
+                    "classCode": "QUR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Quarantine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_q"
+                    ]
+                },
+                {
+                    "classCode": "ASC-UNG",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres ungulates",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "ASOP-UNG",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly operations for ungulates independently of an establishment",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "assembly_operator"
+                    ]
+                },
+                {
+                    "classCode": "BBEE-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bumble bees open establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "POU-EST-AP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Approved establishments keeping breeding or productive poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "OTHERHOLD",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Other species locations",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "other_species_location"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASOP-POU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly operations for poultry independently of an establishment",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "assembly_operator"
+                    ]
+                },
+                {
+                    "classCode": "EQU-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Equine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "equine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-AP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Approved aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC-EQU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres certain equidae",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "CIRCUS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Travelling circus",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "travelling_circus"
+                    ]
+                },
+                {
+                    "classCode": "PORC-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Porcine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "porcine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "OV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Ovine/caprine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "ovine_caprine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-AP-GR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Group of approved aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "BIRD-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Captive birds establishments",
+                    "scopes": [
+                        "THIRD_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "SEM-COL",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Semen collection centres",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "bovine_collection_centre",
+                        "equine_collection_centre",
+                        "ovine_caprine_collection_centre",
+                        "porcine_collection_centre"
+                    ]
+                },
+                {
+                    "classCode": "CAM-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Camelid establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Assembly Centres",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "BOV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bovine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bovine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "EMB",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Embryo collection and production teams",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bov_ect",
+                        "bov_fiv",
+                        "equ_ect",
+                        "equ_fiv",
+                        "other_ect",
+                        "other_fiv",
+                        "ov_ect",
+                        "ov_fiv",
+                        "porc_ect",
+                        "porc_fiv"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-I",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type I authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_i"
+                    ]
+                },
+                {
+                    "classCode": "POU-SLA-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Establishments  of poultry for slaughter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "ASC-POU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "DCF-SHEL",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Animal shelters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "cats",
+                        "dogs",
+                        "ferrets"
+                    ]
+                },
+                {
+                    "classCode": "OTHUN-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Other ungulates establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-RE-GR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Group of registered aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "GERM-OTH",
+                    "chapter": "germinal_products",
+                    "lms": true,
+                    "description": "Other establishments related to certain germinal products",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "germinal_product_establishment_scientific_purposes",
+                        "gene_bank"
+                    ]
+                },
+                {
+                    "classCode": "CERV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Cervid establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "OTHCARN-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Other carnivores establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "COP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Control posts",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_s"
+                    ]
+                },
+                {
+                    "classCode": "BIRDHATCH",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Captive birds hatcheries",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "hatchery"
+                    ]
+                },
+                {
+                    "classCode": "DCF-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Dogs, cats and ferrets establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "cats",
+                        "dogs",
+                        "ferrets"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "TRANSPORTER_CLASSIFICATION_SECTIONS",
+            "description": "Transporter sections",
+            "sections": [
+                {
+                    "classCode": "TRANSPORTER",
+                    "lms": false,
+                    "description": "Transporter",
+                    "scopes": [
+                        "ALL_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "ro_ro_ferry",
+                        "com_transport"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-I",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type I authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_i"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered transporter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "registered_transporter"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-II",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type II authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_ii"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "CONSIGNEE_CLASSIFICATION_SECTIONS",
             "description": "Consignee sections",
             "sections": [
@@ -3943,783 +4074,6 @@
             ]
         },
         {
-            "id": "PLACE_OF_DISPATCH_CLASSIFICATION_SECTIONS",
-            "description": "Place of dispatch sections",
-            "sections": [
-                {
-                    "classCode": "HATCH-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered Hatcheries",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "hatchery"
-                    ]
-                },
-                {
-                    "classCode": "ASC-DCF",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres dogs, cats and ferrets",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "MPA",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Multi-party agreement for registered race horses",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "OTH-OPER",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Other operators",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "animal_establishment",
-                        "establishment",
-                        "exporter",
-                        "food_establishment",
-                        "habitat",
-                        "importer",
-                        "port_of_loading"
-                    ]
-                },
-                {
-                    "classCode": "SEM",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Semen collection and storage centres",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bov_scc",
-                        "bov_ssc",
-                        "equ_scc",
-                        "equ_ssc",
-                        "other_scc",
-                        "other_ssc",
-                        "ov_scc",
-                        "ov_ssc",
-                        "porc_scc",
-                        "porc_ssc"
-                    ]
-                },
-                {
-                    "classCode": "GERM-STO",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Germinal product storage centres",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "bovine_gps_establishment",
-                        "equine_gps_centre",
-                        "ovine_caprine_gps_centre",
-                        "porcine_gps_centre"
-                    ]
-                },
-                {
-                    "classCode": "AQUAHOLD",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Aquaculture Holdings",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_holding"
-                    ]
-                },
-                {
-                    "classCode": "GERM-CONF",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Germinal product establishments - confined animals",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "germinal_product_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ZOO",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Bodies, institutes and centers",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ab"
-                    ]
-                },
-                {
-                    "classCode": "HBEE-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Honeybees establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered transporter",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "registered_transporter"
-                    ]
-                },
-                {
-                    "classCode": "ACT",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Animal act",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "animal_act"
-                    ]
-                },
-                {
-                    "classCode": "CONF",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Confined establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "laboratory",
-                        "zoo"
-                    ]
-                },
-                {
-                    "classCode": "TPA",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "TPA",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_tpa",
-                        "exporter_tpa"
-                    ]
-                },
-                {
-                    "classCode": "GERM-PRO",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Germinal product processing establishments",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "bovine_gpp_establishment",
-                        "equine_gpp_establishment",
-                        "ovine_caprine_gpp_establishment",
-                        "porcine_gpp_establishment"
-                    ]
-                },
-                {
-                    "classCode": "EMB-COL",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Embryo collection teams",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "bovine_collection_team",
-                        "equine_collection_team",
-                        "ovine_caprine_collection_team",
-                        "porcine_collection_team"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-DISEASE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Disease control aquatic food establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "EXP",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Animal exporter",
-                    "scopes": [
-                        "THIRD_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "animal_exporter",
-                        "port_of_loading"
-                    ]
-                },
-                {
-                    "classCode": "POU-EST-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered establishments keeping breeding or productive poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "EMB-PRO",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Embryo production teams",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "bovine_production_team",
-                        "equine_production_team",
-                        "ovine_caprine_production_team",
-                        "porcine_production_team"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-II",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type II authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_ii"
-                    ]
-                },
-                {
-                    "classCode": "BBEEISO-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bumble bees isolated establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "IMP",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Importer",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "animal_importer",
-                        "establishment",
-                        "exporter",
-                        "importer"
-                    ]
-                },
-                {
-                    "classCode": "QUR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Quarantine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_q"
-                    ]
-                },
-                {
-                    "classCode": "ASC-UNG",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres ungulates",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "ASOP-UNG",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly operations for ungulates independently of an establishment",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "assembly_operator"
-                    ]
-                },
-                {
-                    "classCode": "BBEE-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bumble bees open establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "POU-EST-AP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Approved establishments keeping breeding or productive poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "OTHERHOLD",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Other species locations",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "other_species_location"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-RE",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Registered aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASOP-POU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly operations for poultry independently of an establishment",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "assembly_operator"
-                    ]
-                },
-                {
-                    "classCode": "EQU-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Equine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "equine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-AP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Approved aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC-EQU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres certain equidae",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "CIRCUS",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Travelling circus",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "travelling_circus"
-                    ]
-                },
-                {
-                    "classCode": "PORC-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Porcine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "porcine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "OV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Ovine/caprine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "ovine_caprine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-AP-GR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Group of approved aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "BIRD-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Captive birds establishments",
-                    "scopes": [
-                        "THIRD_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "SEM-COL",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Semen collection centres",
-                    "scopes": [
-                        "ALL_COUNTRIES"
-                    ],
-                    "operatorActivities": [
-                        "bovine_collection_centre",
-                        "equine_collection_centre",
-                        "ovine_caprine_collection_centre",
-                        "porcine_collection_centre"
-                    ]
-                },
-                {
-                    "classCode": "CAM-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Camelid establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "ASC",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Assembly Centres",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "BOV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Bovine establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bovine_establishment"
-                    ]
-                },
-                {
-                    "classCode": "EMB",
-                    "chapter": "veterinary",
-                    "lms": false,
-                    "description": "Embryo collection and production teams",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "bov_ect",
-                        "bov_fiv",
-                        "equ_ect",
-                        "equ_fiv",
-                        "other_ect",
-                        "other_fiv",
-                        "ov_ect",
-                        "ov_fiv",
-                        "porc_ect",
-                        "porc_fiv"
-                    ]
-                },
-                {
-                    "classCode": "REG-TRANS-AUTH-I",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Type I authorised transporters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "authorized_transporter_type_i"
-                    ]
-                },
-                {
-                    "classCode": "POU-SLA-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Establishments  of poultry for slaughter",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_pf"
-                    ]
-                },
-                {
-                    "classCode": "ASC-POU",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Assembly centres poultry",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_ac"
-                    ]
-                },
-                {
-                    "classCode": "DCF-SHEL",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Animal shelters",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "cats",
-                        "dogs",
-                        "ferrets"
-                    ]
-                },
-                {
-                    "classCode": "OTHUN-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Other ungulates establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "AQUA-EST-RE-GR",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Group of registered aquaculture establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "aquaculture_establishment"
-                    ]
-                },
-                {
-                    "classCode": "GERM-OTH",
-                    "chapter": "germinal_products",
-                    "lms": true,
-                    "description": "Other establishments related to certain germinal products",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "germinal_product_establishment_scientific_purposes",
-                        "gene_bank"
-                    ]
-                },
-                {
-                    "classCode": "CERV-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Cervid establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "OTHCARN-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Other carnivores establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "terrestrial_animal_establishment"
-                    ]
-                },
-                {
-                    "classCode": "COP",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Control posts",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "establish_s"
-                    ]
-                },
-                {
-                    "classCode": "BIRDHATCH",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Captive birds hatcheries",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "hatchery"
-                    ]
-                },
-                {
-                    "classCode": "DCF-EST",
-                    "chapter": "veterinary",
-                    "lms": true,
-                    "description": "Dogs, cats and ferrets establishments",
-                    "scopes": [
-                        "EFTA",
-                        "EU"
-                    ],
-                    "operatorActivities": [
-                        "cats",
-                        "dogs",
-                        "ferrets"
-                    ]
-                }
-            ]
-        },
-        {
             "id": "PLACE_OF_LOADING_CLASSIFICATION_SECTIONS",
             "description": "Place of loading sections",
             "sections": [
@@ -5470,6 +4824,652 @@
                     ],
                     "operatorActivities": [
                         "assembly_operator"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ASSEMBLY_OPERATOR_CLASSIFICATION_SECTIONS",
+            "description": "Assembly Operator sections",
+            "sections": [
+                {
+                    "classCode": "REG-TRANS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered transporter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "registered_transporter"
+                    ]
+                },
+                {
+                    "classCode": "QUR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Quarantine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_q"
+                    ]
+                },
+                {
+                    "classCode": "HBEE-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Honeybees establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "EQU-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Equine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "equine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "BOV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bovine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bovine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "DCF-SHEL",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Animal shelters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "cats",
+                        "dogs",
+                        "ferrets"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "SEM",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Semen collection and storage centres",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bov_scc",
+                        "bov_ssc",
+                        "equ_scc",
+                        "equ_ssc",
+                        "other_scc",
+                        "other_ssc",
+                        "ov_scc",
+                        "ov_ssc",
+                        "porc_scc",
+                        "porc_ssc"
+                    ]
+                },
+                {
+                    "classCode": "DCF-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Dogs, cats and ferrets establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "cats",
+                        "dogs",
+                        "ferrets"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-II",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type II authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_ii"
+                    ]
+                },
+                {
+                    "classCode": "BIRDHATCH",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Captive birds hatcheries",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "hatchery"
+                    ]
+                },
+                {
+                    "classCode": "BBEEISO-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bumble bees isolated establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "CIRCUS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Travelling circus",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "travelling_circus"
+                    ]
+                },
+                {
+                    "classCode": "CAM-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Camelid establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "POU-SLA-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Establishments  of poultry for slaughter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "CERV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Cervid establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Assembly Centres",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "ASC-POU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "OTHUN-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Other ungulates establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "OTH-OPER",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Other operators",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_establishment",
+                        "establishment",
+                        "exporter",
+                        "food_establishment",
+                        "habitat",
+                        "importer",
+                        "port_of_loading"
+                    ]
+                },
+                {
+                    "classCode": "ZOO",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Bodies, institutes and centers",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ab"
+                    ]
+                },
+                {
+                    "classCode": "OV-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Ovine/caprine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "ovine_caprine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "HATCH-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered Hatcheries",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "hatchery"
+                    ]
+                },
+                {
+                    "classCode": "DEL",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Dealers",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_d"
+                    ]
+                },
+                {
+                    "classCode": "PORC-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Porcine establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "porcine_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC-DCF",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres dogs, cats and ferrets",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-DISEASE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Disease control aquatic food establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "REG-TRANS-AUTH-I",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Type I authorised transporters",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "authorized_transporter_type_i"
+                    ]
+                },
+                {
+                    "classCode": "EMB",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Embryo collection and production teams",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "bov_ect",
+                        "bov_fiv",
+                        "equ_ect",
+                        "equ_fiv",
+                        "other_ect",
+                        "other_fiv",
+                        "ov_ect",
+                        "ov_fiv",
+                        "porc_ect",
+                        "porc_fiv"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-AP-GR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Group of approved aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "MPA",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Multi-party agreement for registered race horses",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "TPA",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "TPA",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_tpa",
+                        "exporter_tpa"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-AP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Approved aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "AQUAHOLD",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Aquaculture Holdings",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_holding"
+                    ]
+                },
+                {
+                    "classCode": "POU-EST-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered establishments keeping breeding or productive poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "ASOP-UNG",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly operations for ungulates independently of an establishment",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "assembly_operator"
+                    ]
+                },
+                {
+                    "classCode": "ACT",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Animal act",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_act"
+                    ]
+                },
+                {
+                    "classCode": "COP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Control posts",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_s"
+                    ]
+                },
+                {
+                    "classCode": "ASOP-POU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly operations for poultry independently of an establishment",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "assembly_operator"
+                    ]
+                },
+                {
+                    "classCode": "BBEE-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Bumble bees open establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "POU-EST-AP",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Approved establishments keeping breeding or productive poultry",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_pf"
+                    ]
+                },
+                {
+                    "classCode": "CONF",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Confined establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "laboratory",
+                        "zoo"
+                    ]
+                },
+                {
+                    "classCode": "OTHERHOLD",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Other species locations",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "other_species_location"
+                    ]
+                },
+                {
+                    "classCode": "AQUA-EST-RE-GR",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Group of registered aquaculture establishments",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "aquaculture_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC-UNG",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres ungulates",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                },
+                {
+                    "classCode": "BIRD-EST",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Captive birds establishments",
+                    "scopes": [
+                        "THIRD_COUNTRIES"
+                    ],
+                    "operatorActivities": [
+                        "terrestrial_animal_establishment"
+                    ]
+                },
+                {
+                    "classCode": "ASC-EQU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres certain equidae",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
                     ]
                 }
             ]
@@ -179948,5 +179948,5 @@
             "languageId": "la"
         }
     ],
-    "retrievedAt": "2026-11-19T14:44:21.5958793+00:00"
+    "retrievedAt": "2026-11-20T13:37:05.4597039+00:00"
 }
