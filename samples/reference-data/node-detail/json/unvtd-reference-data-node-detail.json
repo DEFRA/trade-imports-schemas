@@ -79,7 +79,6 @@
                     "chapter": "veterinary",
                     "lms": true,
                     "description": "Registered transporter",
-                    "active": null,
                     "scopes": [
                         "EFTA",
                         "EU"
@@ -93,7 +92,6 @@
                     "chapter": "veterinary",
                     "lms": true,
                     "description": "Assembly centres certain equidae",
-                    "active": null,
                     "scopes": [
                         "EFTA",
                         "EU"
@@ -113,7 +111,6 @@
                     "chapter": "veterinary",
                     "lms": true,
                     "description": "Registered Hatcheries",
-                    "active": null,
                     "scopes": [
                         "EFTA",
                         "EU"
@@ -127,7 +124,6 @@
                     "chapter": "veterinary",
                     "lms": false,
                     "description": "Other operators",
-                    "active": null,
                     "scopes": [
                         "EFTA",
                         "EU"
