@@ -64,10 +64,10 @@ updates:
       # govuk-upgrade skill, one version at a time, across every frontend.
       - dependency-name: 'govuk-frontend'
 
-    # Wait 3 days after a release before proposing it, so a broken release is
+    # Wait 7 days after a release before proposing it, so a broken release is
     # usually withdrawn first.
     cooldown:
-      default-days: 3
+      default-days: 7
 
     # Check for updates on this schedule, local time
     schedule:
@@ -97,10 +97,10 @@ updates:
         patterns:
           - '*'
 
-    # Wait 3 days after a release before proposing it, so a broken release is
+    # Wait 7 days after a release before proposing it, so a broken release is
     # usually withdrawn first.
     cooldown:
-      default-days: 3
+      default-days: 7
 
     # Check for updates on this schedule, local time
     schedule:
