@@ -58,6 +58,12 @@
             "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/NodeAttribute"
           }
         },
+        "descriptorColumns": {
+          "type": "array",
+          "items": {
+            "$ref": "defra-unvtd-profile-reference-data-core-v1.schema.json#/$defs/DescriptorColumnAttribute"
+          }
+        },
         "documentTypes": {
           "type": "array",
           "items": {
