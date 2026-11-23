@@ -89,6 +89,16 @@ Primary sample locations:
 - `samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json`
 - `samples/imports/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
 
+Every sample declares `$schema`. This is the validator's hook: a path relative to the sample, or a registered schema identity. It is not part of a runtime event.
+
+GBN-AG samples also name a release tag. `npm run validate-samples` enforces these rules for samples that carry `metadata`:
+
+- `metadata.schemaUri` is the raw GitHub URL of the schema named by `$schema`, at a `release-YYYYMMDD-NN` or `prerelease-YYYYMMDD-NN` tag.
+- `metadata.schemaVersion` equals the `version` keyword of that schema.
+- For an event, `data["@context"]` is the raw GitHub URL of the `x-context` of the profile schema, at the same tag as `metadata.schemaUri`.
+
+GBN-AG payload examples use the same raw URL for `@context`. PIMS samples have no `@context`, because PIMS payloads have no context layer. The validator resolves these URLs against the working tree and does not fetch them. The tag must contain the samples that name it, so create the tag last, on the final commit.
+
 ## Migration note
 
 During migration to versioned filenames/paths, transitional internal `$id` and `$ref` values may still be present. Use file locations in this README as the source of truth for where artefacts live now.

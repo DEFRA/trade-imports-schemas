@@ -209,7 +209,7 @@
   "metadata": {
     "correlationId": "cid-20260916-101500",
     "schemaVersion": "0.2.0",
-    "schemaUri": "https://github.com/DEFRA/trade-imports-schemas/blob/main/schemas/profiles/imports/gb/pims/gbn-ag-pims-v0.2.0.schema.json"
+    "schemaUri": "https://raw.githubusercontent.com/DEFRA/trade-imports-schemas/release-20261106-01/schemas/profiles/imports/gb/pims/gbn-ag-pims-v0.2.0.schema.json"
   },
   "actor": {
     "id": "user-123",

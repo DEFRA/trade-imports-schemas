@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-event-notification-amendment-cancelled-v1.schema.json",
+  "version": "1.0.0",
   "title": "GBN-AG NotificationAmendmentCancelled event (v1)",
   "description": "Event emitted when an in-progress amendment to a GBN-AG notification is abandoned and the notification reverts to its last submitted snapshot (AMEND -> SUBMITTED). The data payload is that snapshot, with `notificationStatusCode = SUBMITTED`. `versionId` carries forward unchanged - no new revision is minted, since nothing was re-submitted.",
 
