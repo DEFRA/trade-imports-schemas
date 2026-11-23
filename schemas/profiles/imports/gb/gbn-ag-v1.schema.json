@@ -18,8 +18,10 @@
 
         "exchangedDocument": {
           "type": "object",
+          "description": "The document container at the root of a Defra UNVTD certificate payload. Holds the document identifier, signatory authentications, included clauses (reason for import, animals certified for, sub-purpose when applicable), and the accompanying reference documents.",
           "required": ["identifier", "firstSignatoryAuthentication"],
           "properties": {
+            "issuer": false,
             "identifier": {
               "type": "string",
               "description": "The final agreed format is `GBN-AG-26-7K8M2P`. `GBN` is Great Britain Notification, `AG` is Animals and Germinals, `26` is the two-digit year of allocation, and `7K8M2P` is a six-character Crockford base32 non-guessable body. The scheme is reusable for other GB import journeys (for example `GBN-P-26-XXXXXX` for Products of Animal Origin, `GBN-PP-26-XXXXXX` for Plants)."

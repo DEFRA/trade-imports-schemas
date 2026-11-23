@@ -354,7 +354,8 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **Schema path:** `exchangedDocument.issuer.postalAddress`
 - **Description:** The submitter's preferred contact postal address for the notification, sourced from the gov.uk identity of the signed-in user (the user picks one when their profile carries more than one; they may supply a standard address block). Lands on the same slot as the Responsible Person for Load's organisation address: `exchangedDocument.issuer.postalAddress`. The V4 selection step is workflow flow; the schema does not carry a separate contact-address slot distinct from the responsible-person slot. **Confirmed PIMS row 30.** Confirms the submitter's preferred address lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load (V4 row 2).
-- **From PIMS v0.3.0:** the address is that of the contact the notifier picks for the consignment from their organisation's address book.
+- **From PIMS v0.3.0:** `issuer` held the contact address when the live animals journey collected a consignment contact address. The gateway no longer maps `issuer` on any PIMS stream while that page is out of the journey.
+- **From PIMS v0.4.0:** `exchangedDocument.issuer.postalAddress` is not in the schema and is not sent.
 
 ## (none - PIMS-only descope)
 

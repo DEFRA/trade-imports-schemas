@@ -163,6 +163,18 @@ test('referenceDocument row names the document-type codelist as reference data',
   )
 })
 
+test('a property the profile forbids with a false schema is left out of the tree and the dictionary', () => {
+  const tree = walkSchema({
+    profilePath: resolve(ROOT, 'schemas/profiles/imports/gb/gbn-ag-v1.schema.json'),
+    corePath: resolve(ROOT, 'schemas/core/defra-unvtd-canonical-core-v1.schema.json')
+  })
+  const exchangedDocument = tree.root.properties.get('exchangedDocument')
+  assert.ok(exchangedDocument.properties.has('identifier'), 'exchangedDocument lost a property it still defines')
+  assert.equal(exchangedDocument.properties.has('issuer'), false, 'exchangedDocument still lists issuer')
+
+  assert.doesNotMatch(readFileSync(OUTPUT, 'utf-8'), /issuer/i, 'the dictionary still mentions the issuer')
+})
+
 test('generator is idempotent', () => {
   const before = readFileSync(OUTPUT, 'utf-8')
   runGenerator()

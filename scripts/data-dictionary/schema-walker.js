@@ -136,10 +136,17 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
   // (e.g. CertificatePayload) with additional narrowings on the same key
   // (e.g. exchangedDocument). Last-wins would silently drop the $ref'd shape.
   if (Array.isArray(node.allOf)) {
+    const excludedProperties = new Set();
     for (const branch of node.allOf) {
       const inner = flatten(branch, profile, core, depth + 1, seenRefs);
       if (inner.type) out.type = inner.type;
       for (const [k, v] of Object.entries(inner.properties)) {
+        if (v === false) {
+          delete out.properties[k];
+          excludedProperties.add(k);
+          continue;
+        }
+        if (excludedProperties.has(k)) continue;
         if (out.properties[k]) {
           out.properties[k] = { allOf: [out.properties[k], v] };
         } else {
@@ -263,6 +270,7 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
   // Recurse into properties
   if (depth < DEPTH_LIMIT) {
     for (const [propName, propSchema] of Object.entries(flat.properties || {})) {
+      if (propSchema === false) continue;
       const propFlat = flatten(propSchema, profile, core, depth + 1);
       const childPath = path ? `${path}.${propName}` : propName;
       const child = buildNode(propFlat, propName, childPath, flat.required, profile, core, trackDef, depth + 1);
