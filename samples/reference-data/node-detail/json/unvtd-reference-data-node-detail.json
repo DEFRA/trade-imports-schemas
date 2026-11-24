@@ -4,46 +4,233 @@
   "source": "traces",
   "treeId": "chedpp",
   "nodePath": "R/N-10000/N-10102",
-  "nodeId": "N-10102",
+  "nodeId": "R_N-10000_N-10102",
   "node": {
-    "cnCode": "0102",
-    "selectable": true,
-    "nodeType": "nomenclature"
+        "certificateModel": {
+            "modelId": 10549,
+            "shortTitle": "10549",
+            "longTitle": "Non Harmonized",
+            "createdOn": "2022-04-29T13:27:48+00:00",
+            "updatedOn": "2022-04-29T13:27:48+00:00"
+        },
+        "selectable": true,
+        "nodeType": "certificate",
+        "label": "Non Harmonized"
   },
-  "classificationSections": [
-    {
-      "classCode": "I",
-      "description": "Live animals; animal products",
-      "scopes": ["ALL"],
-      "lms": false
-    }
-  ],
-  "taxons": [
-    {
-      "taxonId": 12345,
-      "eppoCode": "BOVINAE",
-      "name": "Bos taurus"
-    }
-  ],
   "attributes": [
-    {
-      "key": "minimumTemperature",
-      "value": {
-        "content": "2.0",
-        "unitCode": "CEL"
-      }
-    },
-    {
-      "key": "requiresLaboratoryTest",
-      "value": true
-    }
-  ],
-  "resolvedProductClassification": {
-    "systemId": "CN",
-    "classCode": "0102",
-    "className": [
-      "Live bovine animals"
-    ]
-  },
-  "retrievedAt": "2026-05-12T09:40:00Z"
+        {
+            "key": "PURPOSE_FOR_ENTRY_INTO_NORTHERN_IRELAND_ACCESS",
+            "description": "Purpose For entry into Northern Ireland access",
+            "value": "NOT_AVAILABLE"
+        },
+        {
+            "key": "COUNTRY_OF_ORIGIN_IS_MULTIPLE_CHOICE",
+            "description": "Establishment / country of origin: multiple countries allowed",
+            "value": false
+        },
+		        {
+            "key": "CHED_FREE_CIRCULATION_DESTINATION_TYPE_POSSIBLE_VALUES",
+            "description": "Free circulation destination types",
+            "value": [
+                "QUARANTINE",
+                "LOCAL_USE",
+                "CONFINED_ESTABLISHMENT",
+                "SLAUGHTER"
+            ]
+        },
+		{
+            "key": "CHED_SIMILAR_REJECTED_DAYS_GAP",
+            "description": "Similar CHEDs rejected within",
+            "value": 20
+        },
+		{
+            "key": "NET_VOLUME_RANGE",
+            "description": "Net volume range",
+            "value": [
+                "0",
+                "1000000000000"
+            ]
+        }
+    ],
+    "descriptorColumns": [
+        {
+            "key": "AVAILABLE_EU_INTRA_DESCRIPTOR_COLUMNS",
+            "description": "Descriptor Columns",
+            "descriptorColumns": [
+                {
+                    "key": "TAXON_ID",
+                    "label": "Species",
+                    "columnType": "TAXON",
+                    "cardinality": "MANDATORY"
+                },
+                {
+                    "key": "QUANTITY",
+                    "label": "Quantity",
+                    "columnType": "QUANTITY",
+                    "cardinality": "MANDATORY"
+                }
+            ]
+        }
+    ],
+    "documentTypes": [
+        {
+            "key": "SELECTABLE_DOCUMENT_LINKS",
+            "description": "Selectable document links",
+            "documentLinkTypes": [
+                {
+                    "documentType": "EU_INTRA",
+                    "linkType": "ATTACHED_TO"
+                },
+                {
+                    "documentType": "ACCOMPANYING_DOCUMENT",
+                    "linkType": "ATTACHED_TO"
+                }
+            ]
+        },
+        {
+            "key": "SELECTABLE_DOCUMENT_LINKS_BUCKET",
+            "description": "Selectable Document Links (Bucket)"
+        }
+    ],
+    "classificationSectionGroups": [
+        {
+            "id": "ASSEMBLY_OPERATOR_CLASSIFICATION_SECTIONS",
+            "description": "Assembly Operator sections",
+            "sections": [
+                {
+                    "classCode": "REG-TRANS",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered transporter",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "registered_transporter"
+                    ]
+                },
+                {
+                    "classCode": "ASC-EQU",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Assembly centres certain equidae",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "establish_ac"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "PLACE_OF_DISPATCH_CLASSIFICATION_SECTIONS",
+            "description": "Place of dispatch sections",
+            "sections": [
+                {
+                    "classCode": "HATCH-RE",
+                    "chapter": "veterinary",
+                    "lms": true,
+                    "description": "Registered Hatcheries",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "hatchery"
+                    ]
+                },
+                {
+                    "classCode": "OTH-OPER",
+                    "chapter": "veterinary",
+                    "lms": false,
+                    "description": "Other operators",
+                    "scopes": [
+                        "EFTA",
+                        "EU"
+                    ],
+                    "operatorActivities": [
+                        "animal_establishment",
+                        "establishment",
+                        "exporter",
+                        "food_establishment",
+                        "habitat",
+                        "importer",
+                        "port_of_loading"
+                    ]
+                }
+            ]
+        }
+    ],
+	"legislationAttributes": [
+        {
+            "key": "LEGISLATION",
+            "description": "Legislation",
+            "legislation": {
+                "legislationId": 10100,
+                "destinationCountries": [
+                    "AD",
+                    "FO",
+                    "GL",
+                    "MC",
+                    "SM"
+                ],
+                "originClassificationSections": [
+                    {
+                        "classCode": "ACT",
+                        "chapter": "veterinary",
+                        "lms": true,
+                        "description": "Animal act",
+                        "scopes": [
+                            "EFTA",
+                            "EU"
+                        ],
+                        "operatorActivities": [
+                            "animal_act"
+                        ]
+                    },
+                    {
+                        "classCode": "ABP-TECHP",
+                        "chapter": "animal_byproducts",
+                        "lms": true,
+                        "description": "Establishments or plants handling animal by-products or derived products for purposes outside the feed chain",
+                        "scopes": [
+                            "EFTA",
+                            "EU"
+                        ],
+                        "operatorActivities": [
+                            "establish_gatrp",
+                            "establish_phar",
+                            "establish_tan",
+                            "establish_ucosm",
+                            "establish_tech"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "taxons": [
+        {
+            "taxonId": 65539,
+            "eppoCode": "BORICO",
+            "name": "Boriomyia concinnus",
+            "languageId": "la"
+        },
+        {
+            "taxonId": 65541,
+            "eppoCode": "BORISP",
+            "name": "Boriomyia sp.",
+            "languageId": "la"
+        },
+        {
+            "taxonId": 65528,
+            "eppoCode": "BOOHSP",
+            "name": "Boophthora sp.",
+            "languageId": "la"
+        }
+    ],
+    "retrievedAt": "2026-11-19T11:14:26.8332925+00:00"
 }
