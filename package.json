@@ -25,12 +25,12 @@
   "license": "UNLICENSED",
   "private": true,
   "engines": {
-    "node": ">=24.22.1"
+    "node": ">=26.13.1"
   },
   "dependencies": {
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "fast-xml-parser": "^5.11.2"
+    "fast-xml-parser": "^5.12.1"
   },
   "devDependencies": {
     "audit-ci": "7.1.0"
