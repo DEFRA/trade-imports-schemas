@@ -24,9 +24,32 @@
             "value": "NOT_AVAILABLE"
         },
         {
-            "key": "DATE_OF_DEPARTURE_ACCESS",
-            "description": "Date of departure access",
-            "value": "NOT_AVAILABLE"
+            "key": "COUNTRY_OF_ORIGIN_IS_MULTIPLE_CHOICE",
+            "description": "Establishment / country of origin: multiple countries allowed",
+            "value": false
+        },
+		        {
+            "key": "CHED_FREE_CIRCULATION_DESTINATION_TYPE_POSSIBLE_VALUES",
+            "description": "Free circulation destination types",
+            "value": [
+                "QUARANTINE",
+                "LOCAL_USE",
+                "CONFINED_ESTABLISHMENT",
+                "SLAUGHTER"
+            ]
+        },
+		{
+            "key": "CHED_SIMILAR_REJECTED_DAYS_GAP",
+            "description": "Similar CHEDs rejected within",
+            "value": 20
+        },
+		{
+            "key": "NET_VOLUME_RANGE",
+            "description": "Net volume range",
+            "value": [
+                "0",
+                "1000000000000"
+            ]
         }
     ],
     "descriptorColumns": [
