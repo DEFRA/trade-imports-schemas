@@ -192,7 +192,7 @@
               },
               "emailURIUniversalCommunication": {
                 "type": "string",
-                "description": "Contact email. Additive to the legacy personName-only shape — TRACES SOAP does not carry contact email/phone, but Defra import pre-notifications source these from IPAFFS and need to carry them on consignor / consignee / delivery / carrier / issuer parties."
+                "description": "Contact email. Additive to the legacy personName-only shape — TRACES SOAP does not carry contact email/phone, but Defra import pre-notifications source these from IPAFFS and need to carry them on consignor / consignee / delivery / carrier parties; a TRACES CHED also carries them on its issuer party."
               },
               "telephoneUniversalCommunication": {
                 "type": "string",

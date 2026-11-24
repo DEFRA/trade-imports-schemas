@@ -169,10 +169,30 @@ test('a property the profile forbids with a false schema is left out of the tree
     corePath: resolve(ROOT, 'schemas/core/defra-unvtd-canonical-core-v1.schema.json')
   })
   const exchangedDocument = tree.root.properties.get('exchangedDocument')
-  assert.ok(exchangedDocument.properties.has('identifier'), 'exchangedDocument lost a property it still defines')
-  assert.equal(exchangedDocument.properties.has('issuer'), false, 'exchangedDocument still lists issuer')
+  const exchangedDocumentProperties = [
+    'documentStatusCode',
+    'documentTypeCode',
+    'firstSignatoryAuthentication',
+    'fourthSignatoryAuthentication',
+    'functionCode',
+    'identifier',
+    'includedNote',
+    'issueDateTime',
+    'name',
+    'notificationStatusCode',
+    'referenceDocument',
+    'revisionDateTime',
+    'secondSignatoryAuthentication',
+    'thirdSignatoryAuthentication',
+    'traderAssignedId',
+    'versionId'
+  ]
+  assert.deepEqual([...exchangedDocument.properties.keys()].sort(), exchangedDocumentProperties)
 
-  assert.doesNotMatch(readFileSync(OUTPUT, 'utf-8'), /issuer/i, 'the dictionary still mentions the issuer')
+  const dictionary = readFileSync(OUTPUT, 'utf-8')
+  for (const property of exchangedDocumentProperties) {
+    assert.match(dictionary, new RegExp(`\\| \`${property}\` \\|`), `the dictionary has no row for ${property}`)
+  }
 })
 
 test('generator is idempotent', () => {
