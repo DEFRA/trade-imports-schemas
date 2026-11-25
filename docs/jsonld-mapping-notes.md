@@ -35,12 +35,3 @@ These are different roles (type vs edge/property), so one does not replace the o
 ## Future cleanup rule
 
 If UNECE publishes official D23B mappings for `exchangedDocument` and `specifiedConsignment`, remove the two Defra aliases from `defra-unvtd-core-v1.context.jsonld` and use the official context directly.
-
-## How the data dictionary generator merges `allOf`
-
-`scripts/data-dictionary/schema-walker.js` flattens a profile that overlays core `$defs` through `allOf`.
-
-- When two `allOf` branches give a property the same key, the generator wraps them in one `allOf` so the next pass merges both shapes. Keeping only the later one would drop the core `$ref` shape that a profile narrowing sits on top of.
-- A branch that gives a property the schema `false` forbids it. The property is removed and stays out when a later branch adds it again.
-- The later branch's description replaces the earlier one. The shape is still merged.
-- For `minItems` and `maxItems` the stricter bound wins.
