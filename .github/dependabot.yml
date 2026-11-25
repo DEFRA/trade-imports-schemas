@@ -49,20 +49,37 @@ updates:
           - '*'
 
     # The nightly job moves these sets in every repo at once, on one branch
-    # name, so Dependabot leaves them alone.
+    # name, so Dependabot proposes no version update for them. It still raises
+    # security updates, because each entry names every version update type.
     ignore:
       # playwright
       # The frontends record traces that the tests repo and tim read, and a
       # trace from one Playwright version will not open in another, so every
       # repo moves to the same version on one branch name.
       - dependency-name: 'playwright'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
       - dependency-name: 'playwright-core'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
       - dependency-name: '@playwright/*'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
       # govuk-frontend
       # Its minors ship new components, deprecations and visual changes that
       # green CI cannot prove were applied, so every version goes through the
       # govuk-upgrade skill, one version at a time, across every frontend.
       - dependency-name: 'govuk-frontend'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
 
     # Wait 7 days after a release before proposing it, so a broken release is
     # usually withdrawn first.
