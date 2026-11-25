@@ -51,7 +51,8 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 - **PIMS field:** Person Responsible Address / Country / Company Name / Email / Name / Phone / Person Responsible City / Company Id / Contact Id / Fax / Id / Postcode / Type
 - **Schema path:** `exchangedDocument.issuer`
 - **Description:** The Great Britain-based responsible-person organisation of record for the load. Modelled as a `TradeParty` at `exchangedDocument.issuer`. Organisation name and address live at `name` and `postalAddress`; the named person and their phone and email live as a `definedContact[]` entry. This is the organisation of record, not the individual who submitted the notification; that acting user is an event-level identity and is not carried in the payload. The schema only carries a single contact line per entry. If a second number is needed (personal and organisational) another `definedContact[]` entry can be added in future. **Confirmed PIMS row 14.** **Confirmed PIMS Importer Notification - PIMS fields believed not required row 10.** Address normalised to a single postalAddress block (city / postcode live inside it); no separate Id / Type / Fax slots.
-- **From PIMS v0.3.0:** `issuer` holds the person responsible's company details: the GB contact the notifier picks for the consignment on the "Contact address for consignment" page, from their organisation's address book. Organisation name at `name`, address at `postalAddress`, and phone and email as a `definedContact[]` entry with no `personName`, because address-book entries hold no person's name. The person responsible is the user who submits the notification: the event's `actor` (`displayName`), with the actor of every status change on `statusChanges[]`. PIMS compose the Person Responsible from the submitting actor and `issuer`.
+- **From PIMS v0.3.0:** `issuer` held the person responsible's company details when the live animals journey collected a consignment contact address. The gateway no longer maps `issuer` on any PIMS stream while that page is out of the journey.
+- **From PIMS v0.4.0:** `exchangedDocument.issuer` is not in the schema and is not sent.
 
 ## Country of origin
 
@@ -353,7 +354,8 @@ Each line's declared quantity sits in one slot, `productUnitQuantity`: a number 
 
 - **Schema path:** `exchangedDocument.issuer.postalAddress`
 - **Description:** The submitter's preferred contact postal address for the notification, sourced from the gov.uk identity of the signed-in user (the user picks one when their profile carries more than one; they may supply a standard address block). Lands on the same slot as the Responsible Person for Load's organisation address: `exchangedDocument.issuer.postalAddress`. The V4 selection step is workflow flow; the schema does not carry a separate contact-address slot distinct from the responsible-person slot. **Confirmed PIMS row 30.** Confirms the submitter's preferred address lands on exchangedDocument.issuer.postalAddress, same slot as Responsible Person for Load (V4 row 2).
-- **From PIMS v0.3.0:** the address is that of the contact the notifier picks for the consignment from their organisation's address book.
+- **From PIMS v0.3.0:** `issuer` held the contact address when the live animals journey collected a consignment contact address. The gateway no longer maps `issuer` on any PIMS stream while that page is out of the journey.
+- **From PIMS v0.4.0:** `exchangedDocument.issuer.postalAddress` is not in the schema and is not sent.
 
 ## (none - PIMS-only descope)
 

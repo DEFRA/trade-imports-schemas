@@ -14,24 +14,7 @@
       "identifier": "GBN-AG-26-0000001-8",
       "traderAssignedId": "Imports456_GB",
       "notificationStatusCode": "DRAFT",
-      "issueDateTime": "2026-05-15T09:30:00.000Z",
-      "issuer": {
-        "name": "Kai Inc.",
-        "postalAddress": {
-          "lineOne": "UNCANNY COMICS",
-          "lineTwo": "3 TARRING ROAD",
-          "cityName": "WORTHING",
-          "postcodeCode": "BN11 4SS",
-          "countryId": "GB"
-        },
-        "definedContact": [
-          {
-            "personName": "Kai Atkinson",
-            "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
-            "telephoneUniversalCommunication": "0123456788"
-          }
-        ]
-      }
+      "issueDateTime": "2026-05-15T09:30:00.000Z"
     },
     "specifiedConsignment": {
         "originCountry": {

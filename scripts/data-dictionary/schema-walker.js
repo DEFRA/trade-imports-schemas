@@ -63,22 +63,21 @@ function resolveRef(ref, profile, core) {
   return null;
 }
 
-// Flatten allOf/oneOf/anyOf/$ref into a single { properties, items, type,
-// description, required, oneOfBranches, schemaDef } record. Properties from
-// sibling allOf branches that share a key get merged (the later one wins on
-// scalar conflicts, deep keys union). schemaDef is set when the node started
-// from a $ref; downstream callers use it to decide whether to inline or
-// reference.
+function mergeBranchProperty(out, key, schema, excludedProperties) {
+  if (schema === false) {
+    delete out.properties[key];
+    excludedProperties.add(key);
+    return;
+  }
+  if (excludedProperties.has(key)) return;
+  out.properties[key] = out.properties[key] ? { allOf: [out.properties[key], schema] } : schema;
+}
+
 function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
   if (!node || typeof node !== "object" || depth > DEPTH_LIMIT) {
     return { type: null, properties: {}, items: null, required: [], description: null, oneOfBranches: null, schemaDef: null };
   }
 
-  // $ref - follow once, mark schemaDef.
-  // The OUTER node's `description` (when the property carries its own
-  // narrowed description alongside `$ref`) takes priority over the $def's
-  // description: it speaks to this slot specifically, not to every reuse of
-  // the type.
   if (node.$ref) {
     const resolved = resolveRef(node.$ref, profile, core);
     if (!resolved) {
@@ -111,8 +110,6 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
     maxItems: typeof node.maxItems === "number" ? node.maxItems : null
   };
 
-  // A property with const is a fixed-value slot. Surface the const so the
-  // dictionary can render it. Infer "string" type when missing.
   if (node.const !== undefined) {
     out.constValue = node.const;
     if (!out.type && typeof node.const === "string") out.type = "string";
@@ -130,21 +127,13 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
     out.codelistConst = node.const;
   }
 
-  // allOf - merge each branch into out. When two branches contribute a
-  // property with the same key, wrap them together so the next flatten() pass
-  // merges both shapes - critical for profile schemas that overlay a $ref
-  // (e.g. CertificatePayload) with additional narrowings on the same key
-  // (e.g. exchangedDocument). Last-wins would silently drop the $ref'd shape.
   if (Array.isArray(node.allOf)) {
+    const excludedProperties = new Set();
     for (const branch of node.allOf) {
       const inner = flatten(branch, profile, core, depth + 1, seenRefs);
       if (inner.type) out.type = inner.type;
       for (const [k, v] of Object.entries(inner.properties)) {
-        if (out.properties[k]) {
-          out.properties[k] = { allOf: [out.properties[k], v] };
-        } else {
-          out.properties[k] = v;
-        }
+        mergeBranchProperty(out, k, v, excludedProperties);
       }
       if (inner.items) {
         out.items = out.items ? { allOf: [out.items, inner.items] } : inner.items;
@@ -152,23 +141,14 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
       for (const r of inner.required) {
         if (!out.required.includes(r)) out.required.push(r);
       }
-      // Last-wins on description: a profile narrowing (a later allOf branch)
-      // overrides the core/$ref description for that slot. Shape is still merged
-      // via the allOf-wrap above, so this only swaps the human description.
       if (inner.description) out.description = inner.description;
       if (inner.schemaDef && !out.schemaDef) out.schemaDef = inner.schemaDef;
       if (inner.constValue !== null && inner.constValue !== undefined && out.constValue === null) {
         out.constValue = inner.constValue;
       }
-      // A codelist URL pinned in any branch (e.g. a profile const on urlId over
-      // an open core urlId) must survive the merge, or the dictionary drops the
-      // slot's reference-data line.
       if (inner.codelistConst && !out.codelistConst) {
         out.codelistConst = inner.codelistConst;
       }
-      // Item-count constraints from an allOf branch: take the more restrictive
-      // bound (higher minimum, lower maximum), so a profile narrowing on top
-      // of a permissive core wins.
       if (typeof inner.minItems === "number") {
         out.minItems = out.minItems === null ? inner.minItems : Math.max(out.minItems, inner.minItems);
       }
@@ -178,11 +158,6 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
     }
   }
 
-  // oneOf - record branches at the leaf level; for compound-shape slots
-  // (e.g. oneOf [string, array of strings] on partyTypeCode, or oneOf
-  // [single object, array of object] on mainCarriageLogisticsTransportMovement)
-  // we surface both branch types as informational, plus merge their properties
-  // and items into out where applicable
   if (Array.isArray(node.oneOf)) {
     const branches = [];
     for (const branch of node.oneOf) {
@@ -194,20 +169,17 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
         schemaDef: inner.schemaDef,
         properties: inner.properties
       });
-      // Merge properties (useful when oneOf branches all describe object alternatives)
       for (const [k, v] of Object.entries(inner.properties)) {
         if (!out.properties[k]) out.properties[k] = v;
       }
       if (inner.items && !out.items) out.items = inner.items;
     }
     out.oneOfBranches = branches;
-    // If exactly one branch has a clear type, use it as the slot's type
     const types = [...new Set(branches.map(b => b.type).filter(Boolean))];
     if (types.length === 1) out.type = out.type || types[0];
     else if (types.length > 1) out.type = "oneOf";
   }
 
-  // anyOf - rarely used here; treat like oneOf (just merge for property visibility)
   if (Array.isArray(node.anyOf)) {
     for (const branch of node.anyOf) {
       const inner = flatten(branch, profile, core, depth + 1, seenRefs);
@@ -217,13 +189,8 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
     }
   }
 
-  // if/then - informational only; we surface "conditional shape" as a note but
-  // do not expand "then" branches into the main property tree to avoid implying
-  // they are always present
   if (node.then && typeof node.then === "object") {
     const inner = flatten(node.then, profile, core, depth + 1, seenRefs);
-    // Mark the slot as having a conditional shape via description suffix; do
-    // NOT merge then-branch properties into out
     if (inner.description || Object.keys(inner.properties).length > 0) {
       const note = "Carries an additional conditional clause when applicable.";
       out.description = out.description ? `${out.description} ${note}` : note;
@@ -233,10 +200,6 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
   return out;
 }
 
-// Build a Node from a flattened schema record at a given path.
-// requiredFromParent: list of property names the parent has marked required.
-// trackDef: function called for every $def encountered so the caller can
-// build the cross-cutting types inventory.
 function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef, depth = 0) {
   const required = requiredFromParent ? requiredFromParent.includes(name) : false;
 
@@ -260,13 +223,11 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
     trackDef(flat.schemaDef);
   }
 
-  // Recurse into properties
   if (depth < DEPTH_LIMIT) {
     for (const [propName, propSchema] of Object.entries(flat.properties || {})) {
       const propFlat = flatten(propSchema, profile, core, depth + 1);
       const childPath = path ? `${path}.${propName}` : propName;
       const child = buildNode(propFlat, propName, childPath, flat.required, profile, core, trackDef, depth + 1);
-      // Lift sibling urlId const onto the parent (e.g. identifier carries a sibling urlId const naming the codelist)
       if (propName === "urlId" && propFlat.codelistConst) {
         node.codelistConst = node.codelistConst || propFlat.codelistConst;
       }
@@ -274,7 +235,6 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
     }
   }
 
-  // Recurse into items
   if (flat.items && depth < DEPTH_LIMIT) {
     const itemsFlat = flatten(flat.items, profile, core, depth + 1);
     const itemsPath = `${path}[]`;
@@ -291,11 +251,9 @@ export function walkSchema({ profilePath, corePath }) {
   const referencedDefs = new Set();
   const trackDef = (name) => referencedDefs.add(name);
 
-  // Root: start from the profile (which has its own top-level allOf composing core's CertificatePayload + profile narrowings)
   const rootFlat = flatten(profile, profile, core, 0);
   const rootNode = buildNode(rootFlat, "(root)", "", [], profile, core, trackDef, 0);
 
-  // Walk each referenced $def into its own Node so cross-cutting types can be documented
   const defNodes = new Map();
   const visitedDefs = new Set();
   const queue = [...referencedDefs];

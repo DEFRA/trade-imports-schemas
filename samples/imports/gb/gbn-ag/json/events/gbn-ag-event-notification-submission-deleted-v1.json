@@ -17,23 +17,6 @@
       "notificationStatusCode": "DELETED",
       "versionId": 1,
       "issueDateTime": "2026-05-21T10:15:00.000Z",
-      "issuer": {
-        "name": "Kai Inc.",
-        "postalAddress": {
-          "lineOne": "UNCANNY COMICS",
-          "lineTwo": "3 TARRING ROAD",
-          "cityName": "WORTHING",
-          "postcodeCode": "BN11 4SS",
-          "countryId": "GB"
-        },
-        "definedContact": [
-          {
-            "personName": "Kai Atkinson",
-            "emailURIUniversalCommunication": "kaiatkinson@jourrapide.com",
-            "telephoneUniversalCommunication": "0123456788"
-          }
-        ]
-      },
       "firstSignatoryAuthentication": {
         "includedClause": [
           {

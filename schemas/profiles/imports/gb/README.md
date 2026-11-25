@@ -36,6 +36,16 @@ The D23B context and vocabulary are downloaded from `https://vocabulary.uncefact
 
 Run it after every change to `gbn-ag-v1.schema.json` or the canonical core; the dictionary is stale until you do.
 
+### How the generator merges `allOf`
+
+`scripts/data-dictionary/schema-walker.js` flattens a profile that overlays core `$defs` through `allOf`.
+
+- When two `allOf` branches give a property the same key, the generator wraps them in one `allOf` so the next pass merges both shapes. Keeping only the later one would drop the core `$ref` shape that a profile narrowing sits on top of.
+- A branch that gives a property the schema `false` forbids it. The property is removed and stays out when a later branch adds it again.
+- The later branch's description replaces the earlier one. The shape is still merged.
+- A codelist URL pinned by a `const` in any branch survives the merge, so a profile `const` on `urlId` over an open core `urlId` keeps the slot's reference-data line.
+- For `minItems` and `maxItems` the stricter bound wins: the higher minimum and the lower maximum.
+
 ## Events
 
 Each lifecycle event has its own schema in `events/`, named `gbn-ag-event-notification-<event>-v1.schema.json`, with a matching sample in `samples/imports/gb/gbn-ag/json/events/`. [`gbn-ag-state-transitions.md`](gbn-ag-state-transitions.md) documents which transition emits which event.
