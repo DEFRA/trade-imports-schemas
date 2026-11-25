@@ -20,7 +20,7 @@ The root of the payload is a `CertificatePayload`. Top-level properties:
 
 ## Document (`exchangedDocument`)
 
-Carried at the top of every GBN-AG payload. Identifies the pre-notification, who issued it, what authentication and reference documents accompany it. Fields such as functionCode are complementary to the event specification (see [state transitions](gbn-ag-state-transitions.md)).
+Carried at the top of every GBN-AG payload. Identifies the pre-notification, what authentication and reference documents accompany it. Fields such as functionCode are complementary to the event specification (see [state transitions](gbn-ag-state-transitions.md)).
 
 | Property | Type | Required | Description |
 |---|---|---|---|

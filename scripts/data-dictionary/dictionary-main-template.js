@@ -48,7 +48,7 @@ const GBN_AG = {
       heading: "Document",
       payloadPath: "exchangedDocument",
       descend: [{ kind: "prop", name: "exchangedDocument" }],
-      intro: "Carried at the top of every GBN-AG payload. Identifies the pre-notification, who issued it, what authentication and reference documents accompany it. Fields such as functionCode are complementary to the event specification (see [state transitions](gbn-ag-state-transitions.md))."
+      intro: "Carried at the top of every GBN-AG payload. Identifies the pre-notification, what authentication and reference documents accompany it. Fields such as functionCode are complementary to the event specification (see [state transitions](gbn-ag-state-transitions.md))."
     },
     {
       heading: "Consignment",
