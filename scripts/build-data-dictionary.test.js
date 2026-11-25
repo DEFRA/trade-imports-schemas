@@ -35,15 +35,10 @@ test('generator writes the dictionary to the expected path', () => {
     !body.includes('_Not present at this path in the schema._'),
     'dictionary has a "_Not present_" placeholder - a section descend path is stale'
   )
-  // Positive proof the deepest descend (Per-animal) reached bottom: an empty-but-
-  // present node emits a heading with no rows and no placeholder, which the guard
-  // above would not catch. Pin the per-animal permanentLocation row specifically.
   assert.ok(
     body.includes('| `permanentLocation` | `TradeParty`'),
-    'Per-animal table is missing its permanentLocation row - the descend did not resolve to the instance'
+    'Per-animal table is missing its permanentLocation row - an empty node would pass the placeholder check, so the descend did not resolve to the instance'
   )
-  // Transport movement section: the leg identifier row must carry the canonical
-  // single-home description from the core schema.
   assert.ok(body.includes('## Transport movement'), 'Transport movement section heading missing')
   assert.ok(
     body.includes('single home for the means-of-transport identification'),
@@ -71,10 +66,8 @@ test('profile schema descriptions are preferred over the generic vocab', () => {
 test('vocab fallback applies where the schema has no description', { skip: !existsSync(VOCAB_VENDORED) && 'vocabulary not cached yet (first-run fetch required)' }, () => {
   const body = readFileSync(OUTPUT, 'utf-8')
   const fallback = [
-    // D23B fallback for canonical slots the profile does not describe
     ['customsTransitAgentParty', 'The party acting as an agent for, or on behalf of, the consignor'],
     ['availabilityDueDateTime', 'when this supply chain consignment is due to be available'],
-    // Defra vocab fallback for a Defra-owned term with no schema description
     ['specifiedConsignment', 'The consignment carried by a Defra UNVTD certificate payload.']
   ]
   for (const [property, expected] of fallback) {
@@ -90,8 +83,6 @@ test('Defra-declared section splits concepts from TRACES-aligned aliases', () =>
   assert.ok(body.includes('### Defra concepts (no D23B equivalent)'), 'Defra concepts sub-heading missing')
   assert.ok(body.includes('### TRACES-aligned aliases (re-bind to canonical D23B IRI)'), 'TRACES aliases sub-heading missing')
 
-  // Concepts table rows end with "Defra concept; no D23B equivalent".
-  // Aliases table rows end with "Re-binds to canonical `unece:...`".
   const conceptsRow = /\| `isOrHasUnweanedAnimals` \| `[^`]+` \| Defra concept; no D23B equivalent \|/
   const aliasesRow = /\| `carrier` \| `[^`]+` \| Re-binds to canonical `unece:carrierParty` \|/
   assert.match(body, conceptsRow, 'isOrHasUnweanedAnimals should appear in the Defra concepts table row form')
@@ -99,9 +90,6 @@ test('Defra-declared section splits concepts from TRACES-aligned aliases', () =>
 })
 
 test('a profile const on urlId survives an allOf merge with a core urlId', () => {
-  // The core declares an open urlId on Doc; the profile overlays the same array
-  // with PinnedDoc, which pins urlId with const. The walker merges the two
-  // definitions, and the codelist URL must still reach the item node.
   const dir = mkdtempSync(join(tmpdir(), 'walker-codelist-'))
   try {
     const core = {
