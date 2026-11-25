@@ -270,7 +270,6 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
   // Recurse into properties
   if (depth < DEPTH_LIMIT) {
     for (const [propName, propSchema] of Object.entries(flat.properties || {})) {
-      if (propSchema === false) continue;
       const propFlat = flatten(propSchema, profile, core, depth + 1);
       const childPath = path ? `${path}.${propName}` : propName;
       const child = buildNode(propFlat, propName, childPath, flat.required, profile, core, trackDef, depth + 1);
