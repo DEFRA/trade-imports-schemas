@@ -177,6 +177,7 @@ test('a property the profile forbids with a false schema is left out of the tree
   ]
   assert.deepEqual([...exchangedDocument.properties.keys()].sort(), exchangedDocumentProperties)
 
+  runGenerator()
   const dictionary = readFileSync(OUTPUT, 'utf-8')
   const documentSection = dictionary.split('## Document (`exchangedDocument`)')[1].split('\n## ')[0]
   const documentRows = [...documentSection.matchAll(/^\| `([^`]+)` \|/gm)].map((match) => match[1])
