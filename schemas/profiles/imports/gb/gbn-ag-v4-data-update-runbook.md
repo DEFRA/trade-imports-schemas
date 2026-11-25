@@ -17,7 +17,7 @@ schema is still aligned with the current version.
 
 ## Prerequisites
 
-- Node 18+.
+- Node 26.13.1, the version in `.nvmrc`.
 - Confluence credentials in the environment for the fetch step only:
   `CONFLUENCE_URL`, `CONFLUENCE_USERNAME`, `CONFLUENCE_API_TOKEN`. The examples
   below load them from a local, untracked `.env` via `node --env-file=.env`.

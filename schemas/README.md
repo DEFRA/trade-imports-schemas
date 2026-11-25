@@ -89,7 +89,7 @@ Primary sample locations:
 - `samples/imports/eu/intra/json/unvtd-intra.json`
 - `samples/imports/eu/docom/json/DOCOM.ES.2026.0000001.json` (certificate; optional inline `followUp`) and `-followup.json` (standalone Part III payload)
 - `samples/imports/gb/gbn-ag/json/gbn-ag-v1-example.json`
-- `samples/imports/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
+- `samples/reference-data/node-detail/json/unvtd-reference-data-node-detail.json`
 
 ## Migration note
 

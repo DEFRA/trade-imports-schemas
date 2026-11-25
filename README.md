@@ -62,11 +62,10 @@ samples/
     international/ched/json/unvtd-ched.json
     eu/intra/json/unvtd-intra.json
     gb/gbn-ag/json/gbn-ag-v1-example.json
-    reference-data/node-detail/json/unvtd-reference-data-node-detail.json
+  reference-data/node-detail/json/unvtd-reference-data-node-detail.json
 
 docs/
   jsonld-mapping-notes.md
-  TIG-GBN-AG-Analysis.md
 ```
 
 ## Notes on context usage
@@ -77,12 +76,16 @@ docs/
 
 ## Validation tooling
 
-Validation scripts remain in `scripts/`:
+The scripts live in `scripts/`. Pull request checks run the first 4:
 
-- `npm run validate-schemas`
-- `npm run validate-samples`
+- `npm test` runs the unit tests for the converter, the data dictionary builder and the coherence check.
+- `npm run validate-schemas` compiles every schema under `schemas/`.
+- `npm run validate-samples` validates every JSON sample under `samples/` against the schema it declares.
+- `npm run validate-coherence` checks each profile's schema against its JSON-LD context. It fails on errors and reports warnings.
+- `npm run convert:traces -- <input>` converts a TRACES CHED, INTRA or DOCOM certificate to UNVTD JSON. Run `node scripts/traces-to-unvtd.js --help` to see its options.
+- `npm run build-dictionary:gbn-ag` rebuilds the GBN-AG data dictionary.
 
-Some validator wiring may still target legacy paths while migration completes; treat output accordingly and update script targets with each relocation/version bump.
+The first run of the validators fetches the UN/CEFACT D23B files into `build/vendor/uncefact/`, so it needs network access.
 
 ## Versioning
 
