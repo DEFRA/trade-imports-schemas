@@ -63,12 +63,19 @@ function resolveRef(ref, profile, core) {
   return null;
 }
 
+function mergeBranchProperty(out, key, schema, excludedProperties) {
+  if (schema === false) {
+    delete out.properties[key];
+    excludedProperties.add(key);
+    return;
+  }
+  if (excludedProperties.has(key)) return;
+  out.properties[key] = out.properties[key] ? { allOf: [out.properties[key], schema] } : schema;
+}
+
 // Flatten allOf/oneOf/anyOf/$ref into a single { properties, items, type,
-// description, required, oneOfBranches, schemaDef } record. Properties from
-// sibling allOf branches that share a key get merged (the later one wins on
-// scalar conflicts, deep keys union). schemaDef is set when the node started
-// from a $ref; downstream callers use it to decide whether to inline or
-// reference.
+// description, required, oneOfBranches, schemaDef } record. schemaDef is set
+// when the node started from a $ref.
 function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
   if (!node || typeof node !== "object" || depth > DEPTH_LIMIT) {
     return { type: null, properties: {}, items: null, required: [], description: null, oneOfBranches: null, schemaDef: null };
@@ -130,28 +137,13 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
     out.codelistConst = node.const;
   }
 
-  // allOf - merge each branch into out. When two branches contribute a
-  // property with the same key, wrap them together so the next flatten() pass
-  // merges both shapes - critical for profile schemas that overlay a $ref
-  // (e.g. CertificatePayload) with additional narrowings on the same key
-  // (e.g. exchangedDocument). Last-wins would silently drop the $ref'd shape.
   if (Array.isArray(node.allOf)) {
     const excludedProperties = new Set();
     for (const branch of node.allOf) {
       const inner = flatten(branch, profile, core, depth + 1, seenRefs);
       if (inner.type) out.type = inner.type;
       for (const [k, v] of Object.entries(inner.properties)) {
-        if (v === false) {
-          delete out.properties[k];
-          excludedProperties.add(k);
-          continue;
-        }
-        if (excludedProperties.has(k)) continue;
-        if (out.properties[k]) {
-          out.properties[k] = { allOf: [out.properties[k], v] };
-        } else {
-          out.properties[k] = v;
-        }
+        mergeBranchProperty(out, k, v, excludedProperties);
       }
       if (inner.items) {
         out.items = out.items ? { allOf: [out.items, inner.items] } : inner.items;
@@ -159,9 +151,6 @@ function flatten(node, profile, core, depth = 0, seenRefs = new Set()) {
       for (const r of inner.required) {
         if (!out.required.includes(r)) out.required.push(r);
       }
-      // Last-wins on description: a profile narrowing (a later allOf branch)
-      // overrides the core/$ref description for that slot. Shape is still merged
-      // via the allOf-wrap above, so this only swaps the human description.
       if (inner.description) out.description = inner.description;
       if (inner.schemaDef && !out.schemaDef) out.schemaDef = inner.schemaDef;
       if (inner.constValue !== null && inner.constValue !== undefined && out.constValue === null) {
@@ -267,7 +256,6 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
     trackDef(flat.schemaDef);
   }
 
-  // Recurse into properties
   if (depth < DEPTH_LIMIT) {
     for (const [propName, propSchema] of Object.entries(flat.properties || {})) {
       const propFlat = flatten(propSchema, profile, core, depth + 1);
@@ -281,7 +269,6 @@ function buildNode(flat, name, path, requiredFromParent, profile, core, trackDef
     }
   }
 
-  // Recurse into items
   if (flat.items && depth < DEPTH_LIMIT) {
     const itemsFlat = flatten(flat.items, profile, core, depth + 1);
     const itemsPath = `${path}[]`;
