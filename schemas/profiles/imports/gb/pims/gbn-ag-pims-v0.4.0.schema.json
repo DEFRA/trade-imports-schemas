@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "gbn-ag-pims-v0.4.0.schema.json",
   "title": "GBN-AG PIMS consumer schema (v0.4.0)",
-  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. v0.4.0 is v0.3.0 without exchangedDocument.issuer, because the live animals journey no longer collects a consignment contact address. Earlier PIMS schema versions remain published alongside. What changed and why is in gbn-ag-pims-v0.4.0-changes.md beside this file. Core envelope infrastructure is composed via event-envelope-v1.",
+  "description": "Consumer-specific schema published to PIMS for the GBN-AG event payload. What changed from the previous version, and why, is in gbn-ag-pims-v0.4.0-changes.md beside this file. Core envelope infrastructure is composed via event-envelope-v1.",
   "version": "0.4.0",
 
   "allOf": [
@@ -102,7 +102,7 @@
 
     "referencedDocument": {
       "type": "object",
-      "description": "A document reference: an accompanying document on `exchangedDocument.referenceDocument[]`, or a transport document on `transportContractRelatedReferencedDocument[]`. `urlId` names the list `typeCode` is drawn from. An accompanying document's `typeCode` is from https://refdata.tbc.defra.gov.uk/gbn-ag-document-types (schemas/codelists/gbn-ag-document-types.json). A link to open the stored file is not part of this version.",
+      "description": "A document reference: an accompanying document on `exchangedDocument.referenceDocument[]`, or a transport document on `transportContractRelatedReferencedDocument[]`. `urlId` names the list `typeCode` is drawn from. An accompanying document's `typeCode` is from https://refdata.tbc.defra.gov.uk/gbn-ag-document-types (schemas/codelists/gbn-ag-document-types.json). A link to open the stored file is not carried.",
       "properties": {
         "typeCode":      { "type": "string" },
         "urlId":         { "type": "string" },
@@ -167,7 +167,7 @@
 
     "tradeCountrySubDivision": {
       "type": "object",
-      "description": "The country subdivision the animals came from, such as the Canary Islands, as the `106` (UNCL3227 location function) entry a TRACES CHED uses. Described in v0.3.0, and already true of the v0.2.0 stream: `identifier` is the MDM subdivision code, such as `ES-CN`, and `urlId` names the MDM subdivision list, https://refdata.tbc.defra.gov.uk/country_subdivisions, because those codes are not all ISO 3166-2. The region of origin code is a separate field on `tradeCountry`. A single object, as in v0.2.0. Narrower than the generic schema's `TradeCountrySubDivision`: only the `106` case is sent, so the competent-authority and customs-office cases and their `activityAuthorizedParty` list are not modelled.",
+      "description": "The country subdivision the animals came from, such as the Canary Islands, as the `106` (UNCL3227 location function) entry a TRACES CHED uses. `identifier` is the MDM subdivision code, such as `ES-CN`, and `urlId` names the MDM subdivision list, https://refdata.tbc.defra.gov.uk/country_subdivisions, because those codes are not all ISO 3166-2. The region of origin code is a separate field on `tradeCountry`. A single object. Narrower than the generic schema's `TradeCountrySubDivision`: only the `106` case is sent, so the competent-authority and customs-office cases and their `activityAuthorizedParty` list are not modelled.",
       "required": ["functionTypeCode"],
       "properties": {
         "identifier": { "type": "string" },
